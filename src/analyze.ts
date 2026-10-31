@@ -60,7 +60,13 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
     list.push(`${t.file}:${t.line}`);
     testsByKey.set(t.key, list);
   }
-  const scope = { units, entities: surface.entities, ports: surface.ports, programTypeNames: host.programTypeNames() };
+  const scope = {
+    units,
+    entities: surface.entities,
+    ports: surface.ports,
+    programTypeNames: host.programTypeNames(),
+    externalOperation: (target: string, operation: string) => host.hasPublicMember(target, operation),
+  };
   for (const unit of units) {
     for (const g of unit.guarantees) {
       g.tests = testsByKey.get(g.key) ?? [];

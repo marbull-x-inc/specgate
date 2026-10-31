@@ -25,8 +25,8 @@ describe("generateTests adapters", () => {
     const place = file("application/place-order.test.ts");
     expect(place).toContain('import { describe, expect, test } from "vitest";');
     expect(place).toContain('import { PlaceOrderUseCase } from "../../src/application/place-order";');
-    expect(place).toContain('"PlaceOrderUseCase#placeOrder.err.empty ERR: items is empty; no state changes"');
-    expect(place).toContain('test.todo("PlaceOrderUseCase#placeOrder.ok.stored OK: ');
+    expect(place).toContain('"ERR: PlaceOrderUseCase#placeOrder.err.empty items is empty; no state changes"');
+    expect(place).toContain('"OK: PlaceOrderUseCase#placeOrder.ok.stored ');
   });
 
   test("jest with .js import extension (NodeNext projects)", async () => {
@@ -40,7 +40,7 @@ describe("generateTests adapters", () => {
     const period = file("domain/period.test.ts");
     expect(period).toContain('import { expect, test } from "@playwright/test";');
     expect(period).toContain('test.describe("isWithinPeriod", () => {');
-    expect(period).toMatch(/test\.fixme\("isWithinPeriod\.ok\.within .*", async \(\) => \{\}\);/);
+    expect(period).toMatch(/test\.fixme\("OK: isWithinPeriod\.ok\.within .*", async \(\) => \{\}\);/);
     expect(period).not.toContain("test.todo(");
   });
 
