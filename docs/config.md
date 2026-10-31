@@ -2,7 +2,8 @@
 
 `specgate.config.ts` default-exports `defineConfig({...})`. Presets are partial configs merged
 first; the repo's own values win. Objects are merged, arrays are replaced. Every option below is
-validated by Zod at load time (`src/config/schema.ts` is the source of truth).
+validated at load time with a clear error naming the offending path (`src/config/schema.ts` is the
+source of truth).
 
 ```ts
 import { dddTs, defineConfig } from "specgate";

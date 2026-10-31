@@ -2,8 +2,8 @@ import { beforeAll, describe, expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { cpSync, existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { zReport } from "../../scripts/ir-schema.zod.ts";
 import { main } from "../../src/cli.ts";
-import { zReport } from "../../src/ir/schema.ts";
 import { EXAMPLE_SHOP, workDir } from "../helpers/paths.ts";
 
 /**

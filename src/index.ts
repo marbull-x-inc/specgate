@@ -6,16 +6,9 @@ export {
   type ConfigInput,
   defineConfig,
   type Preset,
+  parseConfig,
   RULE_IDS,
   type RuleId,
   type RuleSeverity,
 } from "./config/schema.ts";
-export {
-  type Finding,
-  type Guarantee,
-  irJsonSchema,
-  type Report,
-  type TestCase,
-  type Unit,
-  zReport,
-} from "./ir/schema.ts";
+export { type Finding, type Guarantee, isReport, type Report, type TestCase, type Unit } from "./ir/schema.ts";

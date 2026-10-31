@@ -12,7 +12,9 @@ the gate stricter, faster or clearer without teaching the core about one company
 - **Deterministic.** `scaffold`, `gen`, `check` and `docs` must produce the same output for the
   same input. No network, no clocks except where the test injects one.
 - **No type assertions.** `as` (other than `as const`), `any` and non-null `!` are not used in
-  `src/`. Narrow with type guards or Zod.
+  `src/`. Narrow with type guards.
+- **Two runtime dependencies.** `typescript` and `@microsoft/tsdoc`. Anything else (Zod for the
+  JSON Schema, fast-check for property tests) stays a devDependency.
 - **Tests live in `tests/`**, mirroring `src/`. Unit tests under `tests/unit`, end-to-end flows
   under `tests/integration`.
 

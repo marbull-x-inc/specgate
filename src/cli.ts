@@ -132,8 +132,10 @@ export async function main(argv: string[]): Promise<number> {
 
 async function readBaseline(path: string) {
   const { readFileSync } = await import("node:fs");
-  const { zReport } = await import("./ir/schema.ts");
-  return zReport.parse(JSON.parse(readFileSync(path, "utf8")));
+  const { isReport } = await import("./ir/schema.ts");
+  const parsed: unknown = JSON.parse(readFileSync(path, "utf8"));
+  if (!isReport(parsed)) throw new Error(`${path} is not a specgate report`);
+  return parsed;
 }
 
 if (import.meta.main) {

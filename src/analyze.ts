@@ -5,7 +5,7 @@ import { createProgramHost, type ProgramHost } from "./extract/program.ts";
 import { type ExtractedUnit, extractSurface } from "./extract/surface.ts";
 import { extractTests } from "./extract/tests/index.ts";
 import { createTsdocParser } from "./extract/tsdoc-parser.ts";
-import { type Report, type Unit, zReport } from "./ir/schema.ts";
+import { isReport, type Report, type Unit } from "./ir/schema.ts";
 import { attachProvenance } from "./provenance/git.ts";
 import { resolveReferences } from "./resolve/identifiers.ts";
 import { evaluateRules } from "./rules/index.ts";
@@ -33,8 +33,8 @@ function loadBaseline(config: Config, explicit: Report | null | undefined): Repo
   if (explicit) return explicit;
   const path = resolve(config.root, config.output.baseline ?? `${config.output.dir}/report.json`);
   if (!fileExists(path)) return undefined;
-  const parsed = zReport.safeParse(JSON.parse(readFileSync(path, "utf8")));
-  return parsed.success ? parsed.data : undefined;
+  const parsed: unknown = JSON.parse(readFileSync(path, "utf8"));
+  return isReport(parsed) ? parsed : undefined;
 }
 
 /**

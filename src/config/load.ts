@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { fileExists } from "../util/paths.ts";
-import { type Config, zConfig } from "./schema.ts";
+import { type Config, parseConfig } from "./schema.ts";
 
 const CANDIDATES = [
   "specgate.config.ts",
@@ -32,7 +32,7 @@ export async function loadConfig(
     ? resolve(cwd, explicitPath)
     : CANDIDATES.map((c) => resolve(cwd, c)).find((candidate) => fileExists(candidate));
   if (!path) {
-    const config = zConfig.parse({});
+    const config = parseConfig(undefined);
     return { config: { ...config, root: resolve(cwd, config.root) }, path: undefined };
   }
   let raw: unknown;
@@ -43,6 +43,6 @@ export async function loadConfig(
     raw = isRecord(mod) && "default" in mod ? mod.default : mod;
   }
   if (!isRecord(raw)) throw new Error(`specgate config at ${path} must export a config object as default`);
-  const config = zConfig.parse(raw);
+  const config = parseConfig(raw);
   return { config: { ...config, root: resolve(cwd, config.root) }, path };
 }

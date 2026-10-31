@@ -46,7 +46,7 @@ function unit(id: string, guarantees: Guarantee[], implHash = "impl-a", extra: P
 function testCase(key: string, bodyHash: string, status: TestCase["status"] = "test"): TestCase {
   return {
     key,
-    unitId: key.split(".")[0],
+    unitId: key.split(".")[0] ?? key,
     guaranteeId: key.split(".").slice(1).join("."),
     file: "tests/a.test.ts",
     line: 5,

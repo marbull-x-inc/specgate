@@ -23,5 +23,6 @@ way a bundler executes its config; treat it like any other file in your reposito
 
 - Releases are published from GitHub Actions with npm provenance (`--provenance`) via npm
   Trusted Publishing; no long-lived npm token is stored.
-- Dependencies are pinned through `bun.lock` and updated by Dependabot.
+- The published package depends only on `typescript` and `@microsoft/tsdoc`. Development
+  dependencies are pinned through `bun.lock` and updated by Dependabot.
 - CodeQL and secret scanning run on every push and pull request.

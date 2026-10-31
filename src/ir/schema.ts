@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 /**
  * Intermediate representation (IR) of one consistency-gate run.
  *
@@ -8,162 +6,250 @@ import { z } from "zod";
  * document and never the TypeScript sources, so every field here is language-neutral:
  * nothing refers to TypeScript node kinds, tracker IDs or a particular test runner.
  * Extractors for other languages are expected to emit the same shape.
+ *
+ * The normative JSON Schema lives in `schema/ir.schema.json`; it is generated from
+ * `scripts/ir-schema.zod.ts` (a development-only Zod mirror of these types) and a test keeps
+ * the three in step. At runtime only the structural guard {@link isReport} is needed, so the
+ * published package carries no schema library.
  */
-export const zSeverity = z.enum(["fail", "warn", "info"]);
-export type Severity = z.infer<typeof zSeverity>;
+export type Severity = "fail" | "warn" | "info";
 
-export const zGuaranteeSource = z.enum(["guarantee", "throws", "returns", "invariant"]);
+export type GuaranteeSource = "guarantee" | "throws" | "returns" | "invariant";
 
-export const zProvenanceCommit = z.object({
-  commit: z.string(),
-  date: z.string().describe("ISO 8601 author date"),
-  pr: z.string().optional().describe("Pull request identifier parsed from the commit subject, opaque to the tool"),
-});
-export type ProvenanceCommit = z.infer<typeof zProvenanceCommit>;
+export interface ProvenanceCommit {
+  commit: string;
+  /** ISO 8601 author date */
+  date: string;
+  /** Pull request identifier parsed from the commit subject, opaque to the tool */
+  pr?: string;
+}
 
-export const zProvenance = z.object({
-  introduced: zProvenanceCommit.optional(),
-  lastChanged: zProvenanceCommit.optional(),
-});
+export interface Provenance {
+  introduced?: ProvenanceCommit;
+  lastChanged?: ProvenanceCommit;
+}
 
-export const zReference = z.object({
-  raw: z.string(),
-  kind: z.enum(["param", "result", "port", "entity", "operation", "type", "literal", "unresolved"]),
-  target: z.string().optional().describe("Unit id or declaration name the token resolved to"),
-});
-export type Reference = z.infer<typeof zReference>;
+export type ReferenceKind = "param" | "result" | "port" | "entity" | "operation" | "type" | "literal" | "unresolved";
 
-export const zGuarantee = z.object({
-  id: z.string().describe("Guarantee id inside its unit, e.g. ok.recorded"),
-  key: z.string().describe("Fully qualified key as tests name it, e.g. Quest#create.ok.recorded"),
-  kind: z.string().describe("First id segment (ok / err / atomic / frame / idempotent / other)"),
-  source: zGuaranteeSource,
-  text: z.string(),
-  textHash: z.string().describe("sha256 of the normalised text; drives change detection"),
-  throws: z.string().optional().describe("Error type for @throws guarantees"),
-  line: z.number().int(),
-  references: z.array(zReference),
-  tests: z.array(z.string()).describe("Keys of tests that name this guarantee"),
-  provenance: zProvenance.optional(),
-});
-export type Guarantee = z.infer<typeof zGuarantee>;
+export interface Reference {
+  raw: string;
+  kind: ReferenceKind;
+  /** Unit id or declaration name the token resolved to */
+  target?: string;
+}
 
-export const zParam = z.object({
-  name: z.string(),
-  type: z.string(),
-  optional: z.boolean(),
-  doc: z.string().optional(),
-});
+export interface Guarantee {
+  /** Guarantee id inside its unit, e.g. ok.recorded */
+  id: string;
+  /** Fully qualified key as tests name it, e.g. Quest#create.ok.recorded */
+  key: string;
+  /** First id segment (ok / err / atomic / frame / idempotent / other) */
+  kind: string;
+  source: GuaranteeSource;
+  text: string;
+  /** sha256 of the normalised text; drives change detection */
+  textHash: string;
+  /** Error type for @throws guarantees */
+  throws?: string;
+  line: number;
+  references: Reference[];
+  /** Keys of tests that name this guarantee */
+  tests: string[];
+  provenance?: Provenance;
+}
 
-export const zExample = z.object({ expression: z.string(), expected: z.string(), line: z.number().int() });
+export interface Param {
+  name: string;
+  type: string;
+  optional: boolean;
+  doc?: string;
+}
 
-export const zPortCall = z.object({ port: z.string(), member: z.string(), count: z.number().int() });
+export interface Example {
+  expression: string;
+  expected: string;
+  line: number;
+}
 
-export const zUnitKind = z.enum(["function", "method", "port"]);
-export type UnitKind = z.infer<typeof zUnitKind>;
+export interface PortCall {
+  port: string;
+  member: string;
+  count: number;
+}
 
-export const zUnit = z.object({
-  id: z.string().describe("Target#operation for methods, operation for functions, interface name for ports"),
-  kind: zUnitKind,
-  target: z.string().optional(),
-  operation: z.string(),
-  file: z.string().describe("Path relative to root, POSIX separators"),
-  line: z.number().int(),
-  endLine: z.number().int(),
-  referencedBy: z.array(z.string()).describe("Files outside the defining module that import this unit"),
-  summary: z.string(),
-  remarks: z.string().optional(),
-  params: z.array(zParam),
-  returns: z.string(),
-  uses: z.array(z.string()),
-  modifies: z.array(z.string()),
-  injectedPorts: z.array(z.object({ member: z.string(), type: z.string(), members: z.array(z.string()) })),
-  portCalls: z.array(zPortCall).describe("Ports actually called in the body, by injected member"),
-  operationCalls: z.array(z.string()).describe("Other surface units called from the body"),
-  envInputs: z.array(z.object({ expression: z.string(), line: z.number().int() })),
-  implHash: z.string().describe("sha256 of the implementation body text"),
-  guarantees: z.array(zGuarantee),
-  examples: z.array(zExample),
-  supersedes: z.string().optional(),
-  hasDoc: z.boolean(),
-});
-export type Unit = z.infer<typeof zUnit>;
+export type UnitKind = "function" | "method" | "port";
 
-export const zEntity = z.object({
-  name: z.string(),
-  file: z.string(),
-  line: z.number().int(),
-  properties: z.array(z.string()),
-  invariants: z.array(z.object({ text: z.string(), textHash: z.string() })),
-  description: z.string(),
-});
-export type Entity = z.infer<typeof zEntity>;
+export interface Unit {
+  /** Target#operation for methods, operation for functions, interface name for ports */
+  id: string;
+  kind: UnitKind;
+  target?: string;
+  operation: string;
+  /** Path relative to root, POSIX separators */
+  file: string;
+  line: number;
+  endLine: number;
+  /** Files outside the defining module that import this unit */
+  referencedBy: string[];
+  summary: string;
+  remarks?: string;
+  params: Param[];
+  returns: string;
+  uses: string[];
+  modifies: string[];
+  injectedPorts: Array<{ member: string; type: string; members: string[] }>;
+  /** Ports actually called in the body, by injected member */
+  portCalls: PortCall[];
+  /** Other surface units called from the body */
+  operationCalls: string[];
+  envInputs: Array<{ expression: string; line: number }>;
+  /** sha256 of the implementation body text */
+  implHash: string;
+  guarantees: Guarantee[];
+  examples: Example[];
+  supersedes?: string;
+  hasDoc: boolean;
+}
 
-export const zPortDecl = z.object({
-  name: z.string(),
-  file: z.string(),
-  line: z.number().int(),
-  members: z.array(z.string()),
+export interface Entity {
+  name: string;
+  file: string;
+  line: number;
+  properties: string[];
+  invariants: Array<{ text: string; textHash: string }>;
+  description: string;
+}
+
+export interface PortDecl {
+  name: string;
+  file: string;
+  line: number;
+  members: string[];
   /** Parameter names of the members; words a guarantee on this port may use. */
-  vocabulary: z.array(z.string()),
-  description: z.string(),
-});
-export type PortDecl = z.infer<typeof zPortDecl>;
+  vocabulary: string[];
+  description: string;
+}
 
-export const zTestStatus = z.enum(["test", "todo", "skip", "each"]);
+export type TestStatus = "test" | "todo" | "skip" | "each";
 
-export const zTestCase = z.object({
-  key: z.string().describe("Guarantee key the test names, e.g. Quest#create.ok.recorded"),
-  unitId: z.string().optional(),
-  guaranteeId: z.string().optional(),
-  file: z.string(),
-  line: z.number().int(),
-  title: z.string(),
-  status: zTestStatus,
-  bodyHash: z.string(),
-  requirementIds: z.array(z.string()).describe("Opaque frozen-requirement ids from the file header, if enabled"),
-});
-export type TestCase = z.infer<typeof zTestCase>;
+export interface TestCase {
+  /** Guarantee key the test names, e.g. Quest#create.ok.recorded */
+  key: string;
+  unitId?: string;
+  guaranteeId?: string;
+  file: string;
+  line: number;
+  title: string;
+  status: TestStatus;
+  bodyHash: string;
+  /** Opaque frozen-requirement ids from the file header, if enabled */
+  requirementIds: string[];
+}
 
-export const zFinding = z.object({
-  rule: z.string(),
-  severity: zSeverity,
-  message: z.string(),
-  file: z.string().optional(),
-  line: z.number().int().optional(),
-  unit: z.string().optional(),
-  guarantee: z.string().optional(),
-  test: z.string().optional(),
-});
-export type Finding = z.infer<typeof zFinding>;
+export interface Finding {
+  rule: string;
+  severity: Severity;
+  message: string;
+  file?: string;
+  line?: number;
+  unit?: string;
+  guarantee?: string;
+  test?: string;
+}
 
-export const zSummary = z.object({
-  units: z.number().int(),
-  unitsWithoutGuarantee: z.number().int(),
-  guarantees: z.number().int(),
-  guaranteesWithoutTest: z.number().int(),
-  tests: z.number().int(),
-  orphanTests: z.number().int(),
-  unlinkedTests: z.number().int().describe("Tests whose title names no guarantee key at all"),
-  findings: z.object({ fail: z.number().int(), warn: z.number().int(), info: z.number().int() }),
-});
+export interface Summary {
+  units: number;
+  unitsWithoutGuarantee: number;
+  guarantees: number;
+  guaranteesWithoutTest: number;
+  tests: number;
+  orphanTests: number;
+  /** Tests whose title names no guarantee key at all */
+  unlinkedTests: number;
+  findings: { fail: number; warn: number; info: number };
+}
 
-export const zReport = z.object({
-  $schema: z.string().optional(),
-  version: z.literal("1"),
-  tool: z.object({ name: z.string(), version: z.string() }),
-  generatedAt: z.string(),
-  root: z.string(),
-  mode: z.enum(["advisory", "blocking"]),
-  units: z.array(zUnit),
-  vocabulary: z.object({ entities: z.array(zEntity), ports: z.array(zPortDecl) }),
-  tests: z.array(zTestCase),
-  findings: z.array(zFinding),
-  summary: zSummary,
-});
-export type Report = z.infer<typeof zReport>;
+export interface Report {
+  $schema?: string;
+  version: "1";
+  tool: { name: string; version: string };
+  generatedAt: string;
+  root: string;
+  mode: "advisory" | "blocking";
+  units: Unit[];
+  vocabulary: { entities: Entity[]; ports: PortDecl[] };
+  tests: TestCase[];
+  findings: Finding[];
+  summary: Summary;
+}
 
-/** Emits the JSON Schema of the IR. Committed under schema/ir.schema.json and checked by a test. */
-export function irJsonSchema(): Record<string, unknown> {
-  return z.toJSONSchema(zReport, { target: "draft-2020-12", io: "output" });
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function isStringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every((v) => typeof v === "string");
+}
+
+function isGuarantee(value: unknown): value is Guarantee {
+  return (
+    isRecord(value) &&
+    typeof value["id"] === "string" &&
+    typeof value["key"] === "string" &&
+    typeof value["kind"] === "string" &&
+    typeof value["text"] === "string" &&
+    typeof value["textHash"] === "string" &&
+    typeof value["line"] === "number" &&
+    Array.isArray(value["references"]) &&
+    isStringArray(value["tests"])
+  );
+}
+
+function isUnit(value: unknown): value is Unit {
+  return (
+    isRecord(value) &&
+    typeof value["id"] === "string" &&
+    (value["kind"] === "function" || value["kind"] === "method" || value["kind"] === "port") &&
+    typeof value["operation"] === "string" &&
+    typeof value["file"] === "string" &&
+    typeof value["line"] === "number" &&
+    typeof value["implHash"] === "string" &&
+    Array.isArray(value["guarantees"]) &&
+    value["guarantees"].every(isGuarantee) &&
+    (value["supersedes"] === undefined || typeof value["supersedes"] === "string")
+  );
+}
+
+function isTestCase(value: unknown): value is TestCase {
+  return (
+    isRecord(value) &&
+    typeof value["key"] === "string" &&
+    typeof value["file"] === "string" &&
+    typeof value["line"] === "number" &&
+    typeof value["bodyHash"] === "string" &&
+    typeof value["title"] === "string"
+  );
+}
+
+/**
+ * Structural check for a report read back from disk (the baseline for change detection).
+ * It verifies the fields the rules depend on; a report that passes is safe to feed to the
+ * rule engine. Full validation against the JSON Schema is left to consumers.
+ */
+export function isReport(value: unknown): value is Report {
+  return (
+    isRecord(value) &&
+    value["version"] === "1" &&
+    isRecord(value["tool"]) &&
+    typeof value["generatedAt"] === "string" &&
+    typeof value["root"] === "string" &&
+    (value["mode"] === "advisory" || value["mode"] === "blocking") &&
+    Array.isArray(value["units"]) &&
+    value["units"].every(isUnit) &&
+    Array.isArray(value["tests"]) &&
+    value["tests"].every(isTestCase) &&
+    Array.isArray(value["findings"]) &&
+    isRecord(value["vocabulary"]) &&
+    isRecord(value["summary"])
+  );
 }
