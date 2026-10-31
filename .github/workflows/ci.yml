@@ -28,8 +28,9 @@ jobs:
       - run: bun run test
       - run: bun run build
       - name: Built CLI runs under Node
+        # Inside the package so that the fixture's `import "specgate"` resolves by self-reference.
         run: |
-          cp -R tests/fixtures/shop /tmp/shop
-          node bin/specgate.mjs check --cwd /tmp/shop --no-provenance
+          mkdir -p tests/fixtures/.work && cp -R tests/fixtures/shop tests/fixtures/.work/ci-shop
+          node bin/specgate.mjs check --cwd tests/fixtures/.work/ci-shop --no-provenance
       - name: IR schema is up to date
         run: bun run schema:emit && git diff --exit-code -- schema/
