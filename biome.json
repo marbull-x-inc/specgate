@@ -1,7 +1,13 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.6.4/schema.json",
   "files": {
-    "includes": ["**", "!tests/fixtures/.work", "!schema", "!node_modules"]
+    "includes": [
+      "**",
+      "!tests/fixtures/.work",
+      "!schema",
+      "!node_modules",
+      "!dist"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -34,7 +40,10 @@
   },
   "overrides": [
     {
-      "includes": ["src/cli.ts", "src/report/console.ts"],
+      "includes": [
+        "src/cli.ts",
+        "src/report/console.ts"
+      ],
       "linter": {
         "rules": {
           "suspicious": {
@@ -44,7 +53,9 @@
       }
     },
     {
-      "includes": ["tests/fixtures/**"],
+      "includes": [
+        "tests/fixtures/**"
+      ],
       "linter": {
         "rules": {
           "correctness": {
