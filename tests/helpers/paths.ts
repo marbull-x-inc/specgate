@@ -4,6 +4,8 @@ import { fileURLToPath } from "node:url";
 
 export const PACKAGE_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
 
+export const EXAMPLE_SHOP = join(PACKAGE_ROOT, "examples", "shop");
+
 /** A scratch directory inside the package so that `zod` and `specgate/*` resolve from node_modules. */
 export function workDir(prefix: string): string {
   const base = join(PACKAGE_ROOT, "tests", "fixtures", ".work");

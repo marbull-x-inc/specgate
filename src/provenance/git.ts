@@ -28,7 +28,7 @@ interface BlameLine {
   summary: string;
 }
 
-function parseBlame(porcelain: string): Map<number, BlameLine> {
+export function parseBlame(porcelain: string): Map<number, BlameLine> {
   const lines = porcelain.split("\n");
   const out = new Map<number, BlameLine>();
   const commits = new Map<string, Partial<BlameLine>>();

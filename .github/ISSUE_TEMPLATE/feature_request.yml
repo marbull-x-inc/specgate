@@ -1,0 +1,23 @@
+name: Feature request
+description: A new rule, adapter, generator branch or IR field.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What cannot be expressed or checked today
+      description: Describe the guarantee, test or workflow that does not fit, with an example.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Tag, config option, rule or command you have in mind. Say whether it is generic or belongs in a preset.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This does not require the core to know about a specific issue tracker, layer naming or test runner.
+          required: true

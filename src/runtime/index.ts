@@ -167,3 +167,182 @@ export function acceptsAgain(schema: { parse(value: unknown): unknown } & ZodLik
   if (!first.success) return true; // out of domain: nothing to assert
   return schema.safeParse(schema.parse(value)).success;
 }
+
+/**
+ * The subset of fast-check this module needs. Kept structural so that `specgate/runtime`
+ * does not depend on fast-check's types; the generated test passes its own `fc` in.
+ */
+export interface ArbitraryFactory<Arb> {
+  integer(constraints?: { min?: number; max?: number }): Arb;
+  double(constraints?: { min?: number; max?: number; noNaN?: boolean }): Arb;
+  string(constraints?: { minLength?: number; maxLength?: number }): Arb;
+  boolean(): Arb;
+  date(constraints?: { min?: Date; max?: Date }): Arb;
+  constant(value: unknown): Arb;
+  constantFrom(...values: unknown[]): Arb;
+  oneof(...arbitraries: Arb[]): Arb;
+  array(arbitrary: Arb, constraints?: { minLength?: number; maxLength?: number }): Arb;
+  record(shape: Record<string, Arb>): Arb;
+  option(arbitrary: Arb, constraints?: { nil?: unknown }): Arb;
+  anything(): Arb;
+}
+
+interface FilterableArb {
+  filter(predicate: (value: unknown) => boolean): unknown;
+}
+
+function isRecordValue(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+interface ZodDefLike {
+  type: string;
+  checks: Array<Record<string, unknown>>;
+  shape: Record<string, unknown> | undefined;
+  innerType: unknown;
+  element: unknown;
+  entries: Record<string, unknown> | undefined;
+  values: unknown[] | undefined;
+  options: unknown[] | undefined;
+}
+
+/** Reads a Zod 4 schema's internal definition without depending on zod's types. */
+function zodDef(schema: unknown): ZodDefLike | undefined {
+  if (!isRecordValue(schema)) return undefined;
+  const internals = schema["_zod"];
+  if (!isRecordValue(internals)) return undefined;
+  const def = internals["def"];
+  if (!isRecordValue(def) || typeof def["type"] !== "string") return undefined;
+  const checks: Array<Record<string, unknown>> = [];
+  if (Array.isArray(def["checks"])) {
+    for (const check of def["checks"]) {
+      if (!isRecordValue(check)) continue;
+      const inner = check["_zod"];
+      const checkDef = isRecordValue(inner) ? inner["def"] : undefined;
+      if (isRecordValue(checkDef)) checks.push(checkDef);
+    }
+  }
+  return {
+    type: def["type"],
+    checks,
+    shape: isRecordValue(def["shape"]) ? def["shape"] : undefined,
+    innerType: def["innerType"],
+    element: def["element"],
+    entries: isRecordValue(def["entries"]) ? def["entries"] : undefined,
+    values: Array.isArray(def["values"]) ? def["values"] : undefined,
+    options: Array.isArray(def["options"]) ? def["options"] : undefined,
+  };
+}
+
+function numberOf(value: unknown): number | undefined {
+  return typeof value === "number" && Number.isFinite(value) ? value : undefined;
+}
+
+/**
+ * Derives a fast-check arbitrary from a Zod 4 schema so that property tests generate values
+ * inside the schema's domain instead of filtering `fc.anything()` (which practically never
+ * hits an object shape). Structure, enums, literals, unions, optionals, nullables, arrays,
+ * string lengths and numeric bounds are honoured; refinements are applied as a final
+ * `safeParse` filter, so keep them likely to hold (for example `start <= end`).
+ */
+/** The arbitrary type a factory produces, taken from `anything()` so that inference is not pulled by parameter unions. */
+export type ArbitraryOf<F> = F extends { anything(): infer A } ? A : never;
+
+export function arbitraryFromZod<F extends ArbitraryFactory<ArbitraryOf<F>>>(fc: F, schema: unknown): ArbitraryOf<F> {
+  const built = build<ArbitraryOf<F>>(fc, schema, 0);
+  if (!isFilterable(built) || !isParser(schema)) return built;
+  const filtered = built.filter((value) => schema.safeParse(value).success === true);
+  return isArbOf(filtered, built) ? filtered : built;
+}
+
+function isFilterable(value: unknown): value is FilterableArb {
+  return isRecordValue(value) && typeof value["filter"] === "function";
+}
+
+function isParser(value: unknown): value is ZodLike {
+  return isRecordValue(value) && typeof value["safeParse"] === "function";
+}
+
+/** `filter` returns the same arbitrary type; this check stands in for an assertion. */
+function isArbOf<Arb>(value: unknown, sample: Arb): value is Arb {
+  return typeof value === typeof sample && value !== null;
+}
+
+function build<Arb>(fc: ArbitraryFactory<Arb>, schema: unknown, depth: number): Arb {
+  const def = zodDef(schema);
+  if (!def || depth > 6) return fc.anything();
+  switch (def.type) {
+    case "string": {
+      let minLength: number | undefined;
+      let maxLength: number | undefined;
+      for (const c of def.checks) {
+        if (c["check"] === "min_length") minLength = numberOf(c["minimum"]);
+        if (c["check"] === "max_length") maxLength = numberOf(c["maximum"]);
+        if (c["check"] === "length_equals") {
+          minLength = numberOf(c["length"]);
+          maxLength = minLength;
+        }
+      }
+      return fc.string({
+        ...(minLength !== undefined ? { minLength } : {}),
+        ...(maxLength !== undefined ? { maxLength } : {}),
+      });
+    }
+    case "number": {
+      let min: number | undefined;
+      let max: number | undefined;
+      let integer = false;
+      for (const c of def.checks) {
+        if (c["check"] === "number_format" && typeof c["format"] === "string" && /int/.test(c["format"]))
+          integer = true;
+        if (c["check"] === "greater_than") {
+          const v = numberOf(c["value"]);
+          if (v !== undefined) min = c["inclusive"] === true ? v : v + (integer ? 1 : Number.EPSILON);
+        }
+        if (c["check"] === "less_than") {
+          const v = numberOf(c["value"]);
+          if (v !== undefined) max = c["inclusive"] === true ? v : v - (integer ? 1 : Number.EPSILON);
+        }
+      }
+      const bounds = { ...(min !== undefined ? { min } : {}), ...(max !== undefined ? { max } : {}) };
+      return integer ? fc.integer(bounds) : fc.double({ ...bounds, noNaN: true });
+    }
+    case "boolean":
+      return fc.boolean();
+    case "date":
+      return fc.date({ min: new Date("1970-01-01T00:00:00Z"), max: new Date("2100-01-01T00:00:00Z") });
+    case "literal":
+      return fc.constantFrom(...(def.values ?? []));
+    case "enum":
+      return fc.constantFrom(...Object.values(def.entries ?? {}));
+    case "optional":
+      return fc.option(build(fc, def.innerType, depth + 1), { nil: undefined });
+    case "nullable":
+      return fc.option(build(fc, def.innerType, depth + 1), { nil: null });
+    case "default":
+    case "nonoptional":
+    case "readonly":
+    case "catch":
+      return build(fc, def.innerType, depth + 1);
+    case "array": {
+      let maxLength = 5;
+      let minLength = 0;
+      for (const c of def.checks) {
+        if (c["check"] === "max_length") maxLength = numberOf(c["maximum"]) ?? maxLength;
+        if (c["check"] === "min_length") minLength = numberOf(c["minimum"]) ?? minLength;
+      }
+      return fc.array(build(fc, def.element, depth + 1), { minLength, maxLength });
+    }
+    case "union": {
+      const options = (def.options ?? []).map((o) => build(fc, o, depth + 1));
+      return options.length > 0 ? fc.oneof(...options) : fc.anything();
+    }
+    case "object": {
+      const shape: Record<string, Arb> = {};
+      for (const [key, value] of Object.entries(def.shape ?? {})) shape[key] = build(fc, value, depth + 1);
+      return fc.record(shape);
+    }
+    default:
+      return fc.anything();
+  }
+}

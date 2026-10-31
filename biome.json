@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.6.4/schema.json",
   "files": {
-    "includes": ["**", "!tests/fixtures/.work", "!schema", "!node_modules", "!dist"]
+    "includes": ["**", "!tests/fixtures/.work", "!examples/shop-expected", "!schema", "!node_modules", "!dist"]
   },
   "formatter": {
     "enabled": true,
@@ -44,7 +44,7 @@
       }
     },
     {
-      "includes": ["tests/fixtures/**"],
+      "includes": ["examples/**"],
       "linter": {
         "rules": {
           "correctness": {

@@ -1,5 +1,10 @@
 # specgate
 
+[![ci](https://github.com/marbull-x-inc/specgate/actions/workflows/ci.yml/badge.svg)](https://github.com/marbull-x-inc/specgate/actions/workflows/ci.yml)
+[![release](https://github.com/marbull-x-inc/specgate/actions/workflows/release.yml/badge.svg)](https://github.com/marbull-x-inc/specgate/actions/workflows/release.yml)
+[![npm](https://img.shields.io/npm/v/specgate)](https://www.npmjs.com/package/specgate)
+[![license](https://img.shields.io/github/license/marbull-x-inc/specgate)](LICENSE)
+
 A consistency gate between **TSDoc guarantees**, **tests** and **implementation** for TypeScript
 codebases. It answers one question in CI: does every public operation say what it guarantees,
 does a test exist for each guarantee, and did the three move together?
@@ -137,14 +142,43 @@ Guarantees about repositories and gateways describe the **state of a declared po
 call**, never which methods were invoked. `@modifies` is the frame; `atomic` means "all or
 nothing under fault injection"; `idempotent` means "two calls leave the state of one". The
 stubs in `specgate/runtime` record calls so the frame can be asserted today; atomicity and
-idempotence need fakes that pass the port's own contract suite, which `gen` emits as the test
-skeleton for a `@port` interface.
+idempotence need fakes with real state that pass the port's own contract, so `gen` emits those
+two as skipped skeletons for you to finish. For a `@port` interface, `gen` currently emits one
+`test.todo` per guarantee; generating a contract suite that runs the same tests against the
+real implementation and an in-memory fake is planned.
 
 ## Writing TSDoc that parses
 
 TSDoc treats `@word` anywhere as a tag and `{` as the start of an inline tag. Put tag names and
 code in backticks (`` `@modifies` ``), and use fenced code blocks for `@example`. `<` and `>` in
 prose are fine.
+
+## Configuration
+
+Every option, with defaults, is in [docs/config.md](docs/config.md).
+
+## Example
+
+[`examples/shop`](examples/shop) is a small order-taking domain (flat `src/`, jest, English
+prose) with guarantees already written for some operations and none for others.
+[`examples/shop-expected`](examples/shop-expected) is what `scaffold → gen → check → docs`
+produce from it: the scaffolded TSDoc, the generated tests, the docs and the Step Summary.
+The integration tests regenerate it on every run, so it never drifts from the code.
+
+## Known limitations
+
+- `surface.mode: "referenced"` sees named, namespace and re-exported imports. A class resolved
+  only by a DI container through a string token, or loaded only by `import()`, is not counted as
+  referenced; use `mode: "exported"` or `classPattern` for such modules.
+- TSDoc parses `@word` anywhere as a tag and `{` as an inline tag. Put tag names and object
+  literals in backticks or fenced code.
+- Identifier resolution is lexical. A word that happens to be PascalCase and names a program
+  type resolves even when it was meant as prose; `resolve.ignore` and `allowProgramTypes: false`
+  tighten this.
+- Windows paths are normalised to POSIX in the IR but the tool has only been exercised on
+  macOS and Linux.
+- Performance has been measured on single files (a 967-line use case in a 1,200-file monorepo
+  checks in under 3 seconds). Whole-repository runs on large monorepos are not yet measured.
 
 ## IR
 
@@ -156,13 +190,15 @@ summary. Nothing in it refers to TypeScript syntax or to a tracker.
 
 ```bash
 bun install
-bun run test        # unit + integration (runs the full flow on tests/fixtures/shop)
-bun run typecheck
-bun run lint
+bun run verify          # lint + typecheck + test + build (what CI runs)
+bun run example:refresh # regenerate examples/shop-expected after changing scaffold / gen / docs
+bun run schema:emit     # regenerate schema/ir.schema.json after changing src/ir/schema.ts
 ```
 
-The fixture is a flat `src/` + jest project with English prose so that assumptions from any one
-company cannot hide in the core.
+The example is a flat `src/` + jest project with English prose so that assumptions from any one
+company cannot hide in the core. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Requires Node 24+ (Node 26 is used in CI) or Bun 1.2+.
 
 ## Status
 

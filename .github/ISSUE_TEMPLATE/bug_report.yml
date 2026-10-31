@@ -1,0 +1,41 @@
+name: Bug report
+description: Something specgate does is wrong (false finding, missed unit, bad generated test, crash).
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: specgate version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime
+      description: Bun or Node version, TypeScript version.
+      placeholder: "bun 1.4.3 / node 26.0.0 / typescript 5.9.3"
+    validations:
+      required: true
+  - type: dropdown
+    id: command
+    attributes:
+      label: Command
+      options: [init, scaffold, gen, check, docs, programmatic API]
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Minimal input
+      description: The smallest source file (with its TSDoc) and test file that reproduce it, plus the relevant part of `specgate.config.ts`.
+      render: ts
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+      description: What the finding / generated file / IR should have been, and what it was. Paste the relevant lines of `.specgate/report.json` if a finding is involved.
+    validations:
+      required: true

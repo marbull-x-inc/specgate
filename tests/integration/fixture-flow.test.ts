@@ -4,7 +4,7 @@ import { cpSync, existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { main } from "../../src/cli.ts";
 import { zReport } from "../../src/ir/schema.ts";
-import { PACKAGE_ROOT, workDir } from "../helpers/paths.ts";
+import { EXAMPLE_SHOP, workDir } from "../helpers/paths.ts";
 
 /**
  * The whole workflow on a repository that shares nothing with any particular company:
@@ -30,7 +30,7 @@ function read(rel: string): string {
 }
 
 beforeAll(() => {
-  cpSync(join(PACKAGE_ROOT, "tests", "fixtures", "shop"), repo, { recursive: true });
+  cpSync(EXAMPLE_SHOP, repo, { recursive: true });
   git(["init", "-q"]);
   git(["add", "-A"]);
   git(["commit", "-qm", "fixture: initial guarantees (#41)"]);
@@ -84,7 +84,7 @@ describe("init → scaffold → gen → check → docs", () => {
 
   test("gen for a class without a test file arranges stubs, a fault runner and a fake clock", async () => {
     const dir = workDir("gen-class");
-    cpSync(join(PACKAGE_ROOT, "tests", "fixtures", "shop"), dir, { recursive: true });
+    cpSync(EXAMPLE_SHOP, dir, { recursive: true });
     expect(await main(["gen", "--unit", "PlaceOrderUseCase", "--cwd", dir, "--dry-run"])).toBe(0);
     // The fixture ships a test file for placeOrder, so remove it from the copy to see the full skeleton.
     spawnSync("rm", [join(dir, "tests/application/place-order.test.ts")]);

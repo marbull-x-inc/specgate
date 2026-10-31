@@ -6,34 +6,56 @@ name: release
 # repository marbull-x-inc/specgate and workflow release.yml. No token is stored in GitHub.
 # For the very first publish, when the package does not exist on npm yet, set the NPM_TOKEN
 # secret (granular, publish-only) once; it is used only when present and can be deleted after.
+#
+# Verification is skipped when the tagged commit already carries a successful `verify` check
+# from the ci workflow; only the build runs again.
 on:
   push:
     tags: ["v*.*.*"]
 permissions:
   contents: write # GitHub Release
   id-token: write # npm provenance / trusted publishing
+  checks: read # look up the ci result of the tagged commit
 jobs:
   publish:
     runs-on: ubuntu-latest
     environment: npm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version-file: .bun-version
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 24
+          node-version: 26
           registry-url: https://registry.npmjs.org
+      - name: Cache bun packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
       - run: npm install -g npm@latest # trusted publishing needs npm >= 11.5
       - run: bun install --frozen-lockfile
       - name: Tag matches package.json version
         run: |
           test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}" \
             || { echo "tag ${GITHUB_REF_NAME} does not match package.json"; exit 1; }
-      - run: bun run verify
+      - name: Already verified by ci?
+        id: verified
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ok=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs?check_name=verify" \
+            --jq '[.check_runs[] | select(.conclusion == "success")] | length > 0')
+          echo "ok=${ok}" >> "$GITHUB_OUTPUT"
+          echo "verify already succeeded for ${GITHUB_SHA}: ${ok}"
+      - name: Verify (only when ci has not)
+        if: steps.verified.outputs.ok != 'true'
+        run: bun run lint && bun run typecheck && bun run test
+      - run: bun run build
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

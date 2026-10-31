@@ -39,6 +39,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "example:refresh": "bun run scripts/refresh-example-output.ts",
     "format": "biome format --write .",
     "lint": "biome check .",
     "prepublishOnly": "bun run clean && bun run build && bun run test && bun run lint && bun run typecheck",
@@ -52,8 +53,8 @@
     "version:patch": "npm version patch -m \"release: v%s\""
   },
   "engines": {
-    "bun": ">=1.2",
-    "node": ">=22"
+    "node": ">=24",
+    "bun": ">=1.2"
   },
   "dependencies": {
     "@microsoft/tsdoc": "^0.17.1",

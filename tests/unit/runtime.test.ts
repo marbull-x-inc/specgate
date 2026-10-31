@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import {
   acceptsAgain,
+  arbitraryFromZod,
   createFaultRunner,
   createStub,
   fakeClock,
@@ -71,5 +72,32 @@ describe("acceptsAgain", () => {
     const schema = { parse: (v: unknown) => v, safeParse: (v: unknown) => ({ success: typeof v === "number" }) };
     expect(acceptsAgain(schema, 1)).toBe(true);
     expect(acceptsAgain(schema, "x")).toBe(true);
+  });
+});
+
+describe("arbitraryFromZod", () => {
+  test("generates values inside the schema's domain, including refinements", async () => {
+    const fc = await import("fast-check");
+    const { z } = await import("zod");
+    const zMoney = z.object({ amount: z.number().int().nonnegative(), currency: z.string().length(3) });
+    const zPeriod = z.object({ start: z.date(), end: z.date() }).refine((p) => p.start.getTime() <= p.end.getTime());
+    const zMixed = z.object({
+      kind: z.enum(["A", "B"]),
+      tags: z.array(z.string().min(1)).max(3),
+      score: z.number().min(1).max(5),
+      note: z.string().nullable(),
+      when: z.date().optional(),
+      lit: z.literal("x"),
+      u: z.union([z.boolean(), z.number().int()]),
+    });
+    for (const schema of [zMoney, zPeriod, zMixed]) {
+      const samples = fc.sample(arbitraryFromZod(fc, schema), 30);
+      expect(samples).toHaveLength(30);
+      for (const s of samples) expect(schema.safeParse(s).success).toBe(true);
+    }
+  });
+  test("falls back to anything() for schemas it does not understand", async () => {
+    const fc = await import("fast-check");
+    expect(fc.sample(arbitraryFromZod(fc, { not: "a schema" }), 3)).toHaveLength(3);
   });
 });

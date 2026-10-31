@@ -1,36 +1,71 @@
 name: ci
+# Runs on pull-request pushes and on main. A base-branch update alone never triggers it:
+# `synchronize` fires only when the PR head moves, and the main ruleset does not require the
+# branch to be up to date. Docs-only changes skip the expensive job (a skipped required check
+# counts as passing).
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
 permissions:
   contents: read
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
+  changes:
+    name: changes
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - id: filter
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD: ${{ github.sha }}
+        run: |
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE" 2>/dev/null; then echo "code=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          changed=$(git diff --name-only "$BASE" "$HEAD")
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -vqE '^(docs/|examples/shop-expected/|[^/]+\.md$|LICENSE$|\.github/(ISSUE_TEMPLATE/|CODEOWNERS$|PULL_REQUEST_TEMPLATE\.md$|dependabot\.yml$))'; then
+            echo "code=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "code=false" >> "$GITHUB_OUTPUT"
+          fi
   verify:
     name: verify
+    needs: changes
+    if: needs.changes.outputs.code == 'true' && github.event.pull_request.draft != true
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0 # the integration test exercises git provenance
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version-file: .bun-version
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 24
+          node-version: 26
+      - name: Cache bun packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
       - run: bun install --frozen-lockfile
       - run: bun run lint
       - run: bun run typecheck
       - run: bun run test
       - run: bun run build
       - name: Built CLI runs under Node
-        # Inside the package so that the fixture's `import "specgate"` resolves by self-reference.
+        # Inside the package so that the example's `import "specgate"` resolves by self-reference.
         run: |
-          mkdir -p tests/fixtures/.work && cp -R tests/fixtures/shop tests/fixtures/.work/ci-shop
+          mkdir -p tests/fixtures/.work && cp -R examples/shop tests/fixtures/.work/ci-shop
           node bin/specgate.mjs check --cwd tests/fixtures/.work/ci-shop --no-provenance
       - name: IR schema is up to date
         run: bun run schema:emit && git diff --exit-code -- schema/
