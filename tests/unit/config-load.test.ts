@@ -45,7 +45,7 @@ describe("loadConfig", () => {
     const dir = workDir("cfg-ts");
     writeFileSync(
       join(dir, "specgate.config.ts"),
-      `import { defineConfig } from "specgate";\nexport default defineConfig({ ids: { pattern: "^G[1-9]\\\\d*$" } });\n`,
+      `import { defineConfig } from "@marbull-x-inc/specgate";\nexport default defineConfig({ ids: { pattern: "^G[1-9]\\\\d*$" } });\n`,
     );
     const { config } = await loadConfig(dir);
     expect(config.ids.pattern).toBe("^G[1-9]\\d*$");

@@ -39,7 +39,7 @@ beforeAll(() => {
 describe("init → scaffold → gen → check → docs", () => {
   test("init writes tsdoc.json and the CI workflow, keeps the existing config", async () => {
     expect(await run("init", "--ci", "--adapter", "jest")).toBe(0);
-    expect(JSON.parse(read("tsdoc.json")).extends).toEqual(["specgate/tsdoc.json"]);
+    expect(JSON.parse(read("tsdoc.json")).extends).toEqual(["@marbull-x-inc/specgate/tsdoc.json"]);
     expect(read(".github/workflows/specgate.yml")).toContain("specgate check");
     expect(read("specgate.config.ts")).toContain('adapter: "jest"'); // untouched fixture config
   });

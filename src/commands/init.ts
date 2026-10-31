@@ -20,7 +20,7 @@ export interface InitResult {
 
 const TSDOC_JSON = `{
   "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
-  "extends": ["specgate/tsdoc.json"]
+  "extends": ["@marbull-x-inc/specgate/tsdoc.json"]
 }
 `;
 
@@ -29,8 +29,8 @@ function configTs(options: InitOptions): string {
   const adapter = options.adapter ?? "vitest";
   const presetImport =
     preset === "ddd-ts"
-      ? 'import { dddTs, defineConfig } from "specgate";'
-      : 'import { defineConfig } from "specgate";';
+      ? 'import { dddTs, defineConfig } from "@marbull-x-inc/specgate";'
+      : 'import { defineConfig } from "@marbull-x-inc/specgate";';
   const presets = preset === "ddd-ts" ? "  presets: [dddTs],\n" : "";
   return `${presetImport}
 

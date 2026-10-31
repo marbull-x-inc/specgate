@@ -1,4 +1,4 @@
-import { defineConfig } from "specgate";
+import { defineConfig } from "@marbull-x-inc/specgate";
 
 export default defineConfig({
   surface: { include: ["src/**/*.ts"], exclude: ["src/main.ts"] },

@@ -1,5 +1,5 @@
 {
-  "name": "specgate",
+  "name": "@marbull-x-inc/specgate",
   "version": "0.1.0",
   "description": "Consistency gate between TSDoc guarantees, tests and implementation. Tracker-agnostic, framework-agnostic.",
   "license": "MIT",

@@ -1,5 +1,5 @@
 /**
- * Test-time helpers imported by generated tests (`specgate/runtime`).
+ * Test-time helpers imported by generated tests (`@marbull-x-inc/specgate/runtime`).
  *
  * @remarks
  * These are deliberately small and framework-free. A stub records calls so that frame
@@ -169,7 +169,7 @@ export function acceptsAgain(schema: { parse(value: unknown): unknown } & ZodLik
 }
 
 /**
- * The subset of fast-check this module needs. Kept structural so that `specgate/runtime`
+ * The subset of fast-check this module needs. Kept structural so that `@marbull-x-inc/specgate/runtime`
  * does not depend on fast-check's types; the generated test passes its own `fc` in.
  */
 export interface ArbitraryFactory<Arb> {

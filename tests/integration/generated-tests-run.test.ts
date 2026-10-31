@@ -7,7 +7,7 @@ import { EXAMPLE_SHOP, workDir } from "../helpers/paths.ts";
 
 /**
  * The generated files are not just text: with the bun adapter they must load, import
- * `specgate/runtime`, and behave as designed — doctest and property tests green, the
+ * `@marbull-x-inc/specgate/runtime`, and behave as designed — doctest and property tests green, the
  * `@throws` skeleton red until a person arranges the input, atomic/idempotent skipped.
  */
 describe("generated tests run under bun test", () => {
@@ -16,7 +16,7 @@ describe("generated tests run under bun test", () => {
     cpSync(EXAMPLE_SHOP, repo, { recursive: true });
     writeFileSync(
       join(repo, "specgate.config.ts"),
-      `import { defineConfig } from "specgate";
+      `import { defineConfig } from "@marbull-x-inc/specgate";
 export default defineConfig({
   surface: { include: ["src/**/*.ts"], exclude: ["src/main.ts"] },
   tests: { include: ["tests/**/*.test.ts"], adapter: "bun", importExtension: ".ts", mirror: { from: "src", to: "tests", suffix: ".test.ts" } },

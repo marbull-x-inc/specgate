@@ -2,7 +2,7 @@
 
 [![ci](https://github.com/marbull-x-inc/specgate/actions/workflows/ci.yml/badge.svg)](https://github.com/marbull-x-inc/specgate/actions/workflows/ci.yml)
 [![release](https://github.com/marbull-x-inc/specgate/actions/workflows/release.yml/badge.svg)](https://github.com/marbull-x-inc/specgate/actions/workflows/release.yml)
-[![npm](https://img.shields.io/npm/v/specgate)](https://www.npmjs.com/package/specgate)
+[![npm](https://img.shields.io/npm/v/%40marbull-x-inc%2Fspecgate)](https://www.npmjs.com/package/@marbull-x-inc/specgate)
 [![license](https://img.shields.io/github/license/marbull-x-inc/specgate)](LICENSE)
 
 A consistency gate between **TSDoc guarantees**, **tests** and **implementation** for TypeScript
@@ -56,16 +56,16 @@ test("PlaceOrderUseCase#placeOrder.ok.stored after the call OrderRepository hold
 ## Install
 
 ```bash
-bun add -d specgate
+bun add -d @marbull-x-inc/specgate
 bunx specgate init --adapter vitest --ci
 ```
 
-`init` writes `tsdoc.json` (extending `specgate/tsdoc.json`), `specgate.config.ts` and, with
+`init` writes `tsdoc.json` (extending `@marbull-x-inc/specgate/tsdoc.json`), `specgate.config.ts` and, with
 `--ci`, a GitHub Actions workflow that publishes the Step Summary and SARIF.
 
 ```ts
 // specgate.config.ts
-import { dddTs, defineConfig } from "specgate";
+import { dddTs, defineConfig } from "@marbull-x-inc/specgate";
 
 export default defineConfig({
   presets: [dddTs],
@@ -82,13 +82,13 @@ export default defineConfig({
 
 ## Commands
 
-| Command             | Does                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Deterministic |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `specgate init`     | tsdoc.json, config skeleton, CI workflow (`--ci`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | yes           |
-| `specgate scaffold` | For operations without guarantees: TSDoc skeleton filled from the signature (`@param`, `@returns`), the body (`@throws` from `throw new X`, `@uses` from the ports actually called) and a `@guarantee TODO` placeholder. Never writes prose.                                                                                                                                                                                                                                                                                                | yes           |
-| `specgate gen`      | One `test()` per guarantee in the mirror path. Fills what tags and types determine: `@throws` → `toThrow(X)` skeleton; `@uses` → stubs, a fake clock and a fault-injecting transaction runner (`specgate/runtime`); `frame` → untouched-port assertion; `atomic` / `idempotent` → skipped skeletons awaiting contract fakes; `@example // =>` → `*.doctest.test.ts`; `@entity` + `@invariant` → `*.property.test.ts` (fast-check). Everything else is `test.todo`. Hand-edited files are only appended to; generated files are overwritten. | yes           |
-| `specgate check`    | Rules below. Writes `.specgate/report.json` (IR), `summary.md` (GitHub Step Summary), `report.sarif`.                                                                                                                                                                                                                                                                                                                                                                                                                                       | yes           |
-| `specgate docs`     | Markdown per source file: what (guarantees ↔ tests), why (`@remarks`), how (ports and operations actually called, extracted from the implementation), plus `index.md` and `vocabulary.md`.                                                                                                                                                                                                                                                                                                                                                  | yes           |
+| Command             | Does                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Deterministic |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `specgate init`     | tsdoc.json, config skeleton, CI workflow (`--ci`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | yes           |
+| `specgate scaffold` | For operations without guarantees: TSDoc skeleton filled from the signature (`@param`, `@returns`), the body (`@throws` from `throw new X`, `@uses` from the ports actually called) and a `@guarantee TODO` placeholder. Never writes prose.                                                                                                                                                                                                                                                                                                               | yes           |
+| `specgate gen`      | One `test()` per guarantee in the mirror path. Fills what tags and types determine: `@throws` → `toThrow(X)` skeleton; `@uses` → stubs, a fake clock and a fault-injecting transaction runner (`@marbull-x-inc/specgate/runtime`); `frame` → untouched-port assertion; `atomic` / `idempotent` → skipped skeletons awaiting contract fakes; `@example // =>` → `*.doctest.test.ts`; `@entity` + `@invariant` → `*.property.test.ts` (fast-check). Everything else is `test.todo`. Hand-edited files are only appended to; generated files are overwritten. | yes           |
+| `specgate check`    | Rules below. Writes `.specgate/report.json` (IR), `summary.md` (GitHub Step Summary), `report.sarif`.                                                                                                                                                                                                                                                                                                                                                                                                                                                      | yes           |
+| `specgate docs`     | Markdown per source file: what (guarantees ↔ tests), why (`@remarks`), how (ports and operations actually called, extracted from the implementation), plus `index.md` and `vocabulary.md`.                                                                                                                                                                                                                                                                                                                                                                 | yes           |
 
 ### Rules
 
@@ -141,7 +141,7 @@ the tests follow. Removing a guarantee removes its tests, or `@supersedes` hands
 Guarantees about repositories and gateways describe the **state of a declared port after the
 call**, never which methods were invoked. `@modifies` is the frame; `atomic` means "all or
 nothing under fault injection"; `idempotent` means "two calls leave the state of one". The
-stubs in `specgate/runtime` record calls so the frame can be asserted today; atomicity and
+stubs in `@marbull-x-inc/specgate/runtime` record calls so the frame can be asserted today; atomicity and
 idempotence need fakes with real state that pass the port's own contract, so `gen` emits those
 two as skipped skeletons for you to finish. For a `@port` interface, `gen` currently emits one
 `test.todo` per guarantee; generating a contract suite that runs the same tests against the
@@ -202,7 +202,7 @@ Requires Node 24+ (Node 26 is used in CI) or Bun 1.2+.
 
 ## Status
 
-0.1.0. The public API (`analyze`, `defineConfig`, `dddTs`, `specgate/runtime`) and the IR are
+0.1.0. The public API (`analyze`, `defineConfig`, `dddTs`, `@marbull-x-inc/specgate/runtime`) and the IR are
 expected to change before 1.0.
 
 ## Releasing

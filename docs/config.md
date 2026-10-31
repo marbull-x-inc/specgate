@@ -6,7 +6,7 @@ validated at load time with a clear error naming the offending path (`src/config
 source of truth).
 
 ```ts
-import { dddTs, defineConfig } from "specgate";
+import { dddTs, defineConfig } from "@marbull-x-inc/specgate";
 export default defineConfig({ presets: [dddTs] /* overrides */ });
 ```
 
@@ -88,7 +88,7 @@ interfaces marked `@port`. Classes marked `@entity` become vocabulary instead.
 
 ## Presets
 
-`dddTs` (`import { dddTs } from "specgate"`): application and domain directories as the
+`dddTs` (`import { dddTs } from "@marbull-x-inc/specgate"`): application and domain directories as the
 surface (`src/{application,domain}/**`, `packages/{application,domain}/src/**`), DTOs and
 barrels excluded, tests mirrored to `tests/unit`, environment inputs extended with
 `crypto.randomUUID`. A preset is just an object; write your own and pass it in `presets`.

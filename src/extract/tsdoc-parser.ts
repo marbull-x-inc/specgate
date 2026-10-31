@@ -125,7 +125,7 @@ function resolveExtends(entry: string, fromDir: string): string {
     return createRequire(join(fromDir, "noop.js")).resolve(entry);
   } catch {
     // Inside this package (tests, fixtures) the package is not installed under node_modules.
-    if (entry === "specgate/tsdoc.json") return SHIPPED_TSDOC_JSON;
+    if (entry === "@marbull-x-inc/specgate/tsdoc.json") return SHIPPED_TSDOC_JSON;
     throw new Error(`Unable to resolve "extends" reference to "${entry}" from ${fromDir}`);
   }
 }
@@ -168,7 +168,7 @@ function applyTsdocJson(configuration: TSDocConfiguration, chain: TsdocJson[]): 
 
 /**
  * Builds the parser from `<root>/tsdoc.json` (with `extends` resolved through node resolution,
- * falling back to the shipped file for `specgate/tsdoc.json`) or from the built-in tags.
+ * falling back to the shipped file for `@marbull-x-inc/specgate/tsdoc.json`) or from the built-in tags.
  * @returns The parser and the messages produced while loading the config, if any. A broken
  *   tsdoc.json still yields a parser with the built-in tags so that `check` can report the error
  *   instead of flagging every tag as undefined.
