@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+// Entry point for the published package. `dist/` is emitted by `bun run build` (tsc).
 import { dirname, join } from "node:path";
-// Entry point. Bun executes TypeScript directly; under Node the user runs `bun run specgate` or compiles first.
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const { main } = await import(pathToFileURL(join(here, "..", "src", "cli.ts")).href);
+const { main } = await import(pathToFileURL(join(here, "..", "dist", "cli.js")).href);
 process.exitCode = await main(process.argv.slice(2));

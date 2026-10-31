@@ -8,14 +8,28 @@
     "specgate": "./bin/specgate.mjs"
   },
   "exports": {
-    ".": "./src/index.ts",
-    "./runtime": "./src/runtime/index.ts",
-    "./presets/ddd-ts": "./src/config/presets/ddd-ts.ts",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "bun": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "bun": "./src/runtime/index.ts",
+      "default": "./dist/runtime/index.js"
+    },
+    "./presets/ddd-ts": {
+      "types": "./dist/config/presets/ddd-ts.d.ts",
+      "bun": "./src/config/presets/ddd-ts.ts",
+      "default": "./dist/config/presets/ddd-ts.js"
+    },
     "./tsdoc.json": "./tsdoc.json",
-    "./schema/ir.schema.json": "./schema/ir.schema.json"
+    "./schema/ir.schema.json": "./schema/ir.schema.json",
+    "./package.json": "./package.json"
   },
   "files": [
     "bin",
+    "dist",
     "src",
     "schema",
     "tsdoc.json",
@@ -23,12 +37,19 @@
     "LICENSE"
   ],
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "format": "biome format --write .",
+    "lint": "biome check .",
+    "prepublishOnly": "bun run clean && bun run build && bun run test && bun run lint && bun run typecheck",
+    "schema:emit": "bun run scripts/emit-ir-schema.ts",
+    "specgate": "bun run src/cli.ts",
     "test": "bun test ./tests/unit ./tests/integration",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "biome check .",
-    "format": "biome format --write .",
-    "schema:emit": "bun run scripts/emit-ir-schema.ts",
-    "specgate": "bun run src/cli.ts"
+    "verify": "bun run lint && bun run typecheck && bun run test && bun run build",
+    "version:major": "npm version major -m \"release: v%s\"",
+    "version:minor": "npm version minor -m \"release: v%s\"",
+    "version:patch": "npm version patch -m \"release: v%s\""
   },
   "engines": {
     "bun": ">=1.2",
@@ -42,6 +63,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.4",
+    "@types/node": "^26.6.6",
     "bun-types": "^1.4.4",
     "fast-check": "^4.10.2"
   },
@@ -52,5 +74,20 @@
   "homepage": "https://github.com/marbull-x-inc/specgate#readme",
   "bugs": {
     "url": "https://github.com/marbull-x-inc/specgate/issues"
-  }
+  },
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "typescript",
+    "tsdoc",
+    "testing",
+    "specification",
+    "design-by-contract",
+    "sarif",
+    "ddd"
+  ],
+  "sideEffects": false
 }

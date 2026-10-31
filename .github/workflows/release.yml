@@ -1,0 +1,43 @@
+name: release
+# Publishes to npm when a version tag is pushed:
+#   bun run version:patch   (or minor / major) → commits package.json and creates the tag
+#   git push --follow-tags
+# Authentication is npm Trusted Publishing (OIDC): configure the package on npmjs.com with
+# repository marbull-x-inc/specgate and workflow release.yml. No token is stored in GitHub.
+# For the very first publish, when the package does not exist on npm yet, set the NPM_TOKEN
+# secret (granular, publish-only) once; it is used only when present and can be deleted after.
+on:
+  push:
+    tags: ["v*.*.*"]
+permissions:
+  contents: write # GitHub Release
+  id-token: write # npm provenance / trusted publishing
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: .bun-version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@latest # trusted publishing needs npm >= 11.5
+      - run: bun install --frozen-lockfile
+      - name: Tag matches package.json version
+        run: |
+          test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}" \
+            || { echo "tag ${GITHUB_REF_NAME} does not match package.json"; exit 1; }
+      - run: bun run verify
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: GitHub Release
+        run: gh release create "${GITHUB_REF_NAME}" --generate-notes --verify-tag
+        env:
+          GH_TOKEN: ${{ github.token }}

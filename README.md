@@ -168,3 +168,17 @@ company cannot hide in the core.
 
 0.1.0. The public API (`analyze`, `defineConfig`, `dddTs`, `specgate/runtime`) and the IR are
 expected to change before 1.0.
+
+## Releasing
+
+Releases are cut from `main` by a version tag; `.github/workflows/release.yml` verifies, builds,
+publishes to npm with provenance (npm Trusted Publishing, no stored token) and creates the GitHub
+Release.
+
+```bash
+bun run version:patch   # or version:minor / version:major — bumps package.json and tags vX.Y.Z
+git push --follow-tags
+```
+
+The package ships `dist/` (ESM + `.d.ts`, built by `tsc`) so that Node runs it without a
+TypeScript loader; under Bun the `bun` export condition points at `src/`.
