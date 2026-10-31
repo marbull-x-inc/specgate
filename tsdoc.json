@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+  "tagDefinitions": [
+    {
+      "tagName": "@guarantee",
+      "syntaxKind": "block",
+      "allowMultiple": true
+    },
+    {
+      "tagName": "@invariant",
+      "syntaxKind": "block",
+      "allowMultiple": true
+    },
+    {
+      "tagName": "@uses",
+      "syntaxKind": "block",
+      "allowMultiple": true
+    },
+    {
+      "tagName": "@modifies",
+      "syntaxKind": "block",
+      "allowMultiple": true
+    },
+    {
+      "tagName": "@supersedes",
+      "syntaxKind": "block",
+      "allowMultiple": false
+    },
+    {
+      "tagName": "@entity",
+      "syntaxKind": "modifier"
+    },
+    {
+      "tagName": "@port",
+      "syntaxKind": "modifier"
+    }
+  ]
+}

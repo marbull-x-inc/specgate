@@ -1,0 +1,722 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "const": "1"
+    },
+    "tool": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "generatedAt": {
+      "type": "string"
+    },
+    "root": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "advisory",
+        "blocking"
+      ]
+    },
+    "units": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Target#operation for methods, operation for functions, interface name for ports"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "function",
+              "method",
+              "port"
+            ]
+          },
+          "target": {
+            "type": "string"
+          },
+          "operation": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string",
+            "description": "Path relative to root, POSIX separators"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "endLine": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "referencedBy": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Files outside the defining module that import this unit"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "remarks": {
+            "type": "string"
+          },
+          "params": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "optional": {
+                  "type": "boolean"
+                },
+                "doc": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "type",
+                "optional"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "returns": {
+            "type": "string"
+          },
+          "uses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "modifies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "injectedPorts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "member": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "members": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "member",
+                "type",
+                "members"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "portCalls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "port": {
+                  "type": "string"
+                },
+                "member": {
+                  "type": "string"
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "port",
+                "member",
+                "count"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Ports actually called in the body, by injected member"
+          },
+          "operationCalls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Other surface units called from the body"
+          },
+          "envInputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "expression": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "expression",
+                "line"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "implHash": {
+            "type": "string",
+            "description": "sha256 of the implementation body text"
+          },
+          "guarantees": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Guarantee id inside its unit, e.g. ok.recorded"
+                },
+                "key": {
+                  "type": "string",
+                  "description": "Fully qualified key as tests name it, e.g. Quest#create.ok.recorded"
+                },
+                "kind": {
+                  "type": "string",
+                  "description": "First id segment (ok / err / atomic / frame / idempotent / other)"
+                },
+                "source": {
+                  "type": "string",
+                  "enum": [
+                    "guarantee",
+                    "throws",
+                    "returns",
+                    "invariant"
+                  ]
+                },
+                "text": {
+                  "type": "string"
+                },
+                "textHash": {
+                  "type": "string",
+                  "description": "sha256 of the normalised text; drives change detection"
+                },
+                "throws": {
+                  "description": "Error type for @throws guarantees",
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "references": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "raw": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "param",
+                          "result",
+                          "port",
+                          "entity",
+                          "operation",
+                          "type",
+                          "literal",
+                          "unresolved"
+                        ]
+                      },
+                      "target": {
+                        "description": "Unit id or declaration name the token resolved to",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "raw",
+                      "kind"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "tests": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Keys of tests that name this guarantee"
+                },
+                "provenance": {
+                  "type": "object",
+                  "properties": {
+                    "introduced": {
+                      "type": "object",
+                      "properties": {
+                        "commit": {
+                          "type": "string"
+                        },
+                        "date": {
+                          "type": "string",
+                          "description": "ISO 8601 author date"
+                        },
+                        "pr": {
+                          "description": "Pull request identifier parsed from the commit subject, opaque to the tool",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "commit",
+                        "date"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "lastChanged": {
+                      "type": "object",
+                      "properties": {
+                        "commit": {
+                          "type": "string"
+                        },
+                        "date": {
+                          "type": "string",
+                          "description": "ISO 8601 author date"
+                        },
+                        "pr": {
+                          "description": "Pull request identifier parsed from the commit subject, opaque to the tool",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "commit",
+                        "date"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "id",
+                "key",
+                "kind",
+                "source",
+                "text",
+                "textHash",
+                "line",
+                "references",
+                "tests"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "expression": {
+                  "type": "string"
+                },
+                "expected": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "expression",
+                "expected",
+                "line"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "supersedes": {
+            "type": "string"
+          },
+          "hasDoc": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "operation",
+          "file",
+          "line",
+          "endLine",
+          "referencedBy",
+          "summary",
+          "params",
+          "returns",
+          "uses",
+          "modifies",
+          "injectedPorts",
+          "portCalls",
+          "operationCalls",
+          "envInputs",
+          "implHash",
+          "guarantees",
+          "examples",
+          "hasDoc"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "vocabulary": {
+      "type": "object",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "file": {
+                "type": "string"
+              },
+              "line": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "properties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "invariants": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    },
+                    "textHash": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "text",
+                    "textHash"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "file",
+              "line",
+              "properties",
+              "invariants",
+              "description"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "file": {
+                "type": "string"
+              },
+              "line": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "members": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "vocabulary": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "file",
+              "line",
+              "members",
+              "vocabulary",
+              "description"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "entities",
+        "ports"
+      ],
+      "additionalProperties": false
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Guarantee key the test names, e.g. Quest#create.ok.recorded"
+          },
+          "unitId": {
+            "type": "string"
+          },
+          "guaranteeId": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "test",
+              "todo",
+              "skip",
+              "each"
+            ]
+          },
+          "bodyHash": {
+            "type": "string"
+          },
+          "requirementIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Opaque frozen-requirement ids from the file header, if enabled"
+          }
+        },
+        "required": [
+          "key",
+          "file",
+          "line",
+          "title",
+          "status",
+          "bodyHash",
+          "requirementIds"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rule": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "fail",
+              "warn",
+              "info"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "unit": {
+            "type": "string"
+          },
+          "guarantee": {
+            "type": "string"
+          },
+          "test": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "rule",
+          "severity",
+          "message"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "units": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "unitsWithoutGuarantee": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "guarantees": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "guaranteesWithoutTest": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "tests": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "orphanTests": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "unlinkedTests": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991,
+          "description": "Tests whose title names no guarantee key at all"
+        },
+        "findings": {
+          "type": "object",
+          "properties": {
+            "fail": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "warn": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "info": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "fail",
+            "warn",
+            "info"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "units",
+        "unitsWithoutGuarantee",
+        "guarantees",
+        "guaranteesWithoutTest",
+        "tests",
+        "orphanTests",
+        "unlinkedTests",
+        "findings"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "tool",
+    "generatedAt",
+    "root",
+    "mode",
+    "units",
+    "vocabulary",
+    "tests",
+    "findings",
+    "summary"
+  ],
+  "additionalProperties": false
+}

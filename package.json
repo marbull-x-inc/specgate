@@ -1,0 +1,47 @@
+{
+  "name": "specgate",
+  "version": "0.1.0",
+  "description": "Consistency gate between TSDoc guarantees, tests and implementation. Tracker-agnostic, framework-agnostic.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "specgate": "./bin/specgate.mjs"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./runtime": "./src/runtime/index.ts",
+    "./presets/ddd-ts": "./src/config/presets/ddd-ts.ts",
+    "./tsdoc.json": "./tsdoc.json",
+    "./schema/ir.schema.json": "./schema/ir.schema.json"
+  },
+  "files": [
+    "bin",
+    "src",
+    "schema",
+    "tsdoc.json",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "bun test ./tests/unit ./tests/integration",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "schema:emit": "bun run scripts/emit-ir-schema.ts",
+    "specgate": "bun run src/cli.ts"
+  },
+  "engines": {
+    "bun": ">=1.2",
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@microsoft/tsdoc": "^0.17.1",
+    "tinyglobby": "^0.2.17",
+    "typescript": "~5.9",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.4",
+    "bun-types": "^1.4.4",
+    "fast-check": "^4.10.2"
+  }
+}
