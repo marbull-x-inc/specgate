@@ -7,6 +7,10 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: development
+    ignore:
+      # TypeScript 7 is the native (Go) compiler without the JS compiler API this package uses.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
