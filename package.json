@@ -19,7 +19,8 @@
     "src",
     "schema",
     "tsdoc.json",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "test": "bun test ./tests/unit ./tests/integration",
@@ -43,5 +44,13 @@
     "@biomejs/biome": "^2.6.4",
     "bun-types": "^1.4.4",
     "fast-check": "^4.10.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marbull-x-inc/specgate.git"
+  },
+  "homepage": "https://github.com/marbull-x-inc/specgate#readme",
+  "bugs": {
+    "url": "https://github.com/marbull-x-inc/specgate/issues"
   }
 }

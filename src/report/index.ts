@@ -76,7 +76,7 @@ export function toSarif(report: Report): Record<string, unknown> {
           driver: {
             name: report.tool.name,
             version: report.tool.version,
-            informationUri: "https://github.com/Marbull-X/specgate",
+            informationUri: "https://github.com/marbull-x-inc/specgate",
             rules: ruleIds.map((id) => ({ id, name: id, shortDescription: { text: id } })),
           },
         },

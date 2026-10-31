@@ -86,7 +86,7 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
   const guarantees = units.flatMap((u) => u.guarantees);
   const guaranteeKeys = new Set(guarantees.map((g) => g.key));
   const report: Report = {
-    $schema: "https://raw.githubusercontent.com/Marbull-X/specgate/main/schema/ir.schema.json",
+    $schema: "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
     version: "1",
     tool: { ...TOOL },
     generatedAt: new Date().toISOString(),
