@@ -3,6 +3,7 @@ import type { Config } from "../config/schema.ts";
 import type { Entity, Guarantee, PortDecl, Unit } from "../ir/schema.ts";
 import { textHash } from "../util/hash.ts";
 import { relativeTo } from "../util/paths.ts";
+import { collectDecisions } from "./decisions.ts";
 import { docCommentOf, lineOf, type ProgramHost } from "./program.ts";
 import { type ParsedDoc, parseDocComment, type TSDocParser } from "./tsdoc-parser.ts";
 
@@ -418,6 +419,7 @@ export function extractSurface(
         ),
         operationCalls: [],
         envInputs: scan.envInputs,
+        decisions: body ? collectDecisions(body, sf, host) : [],
         implHash: textHash(body ? body.getText(sf) : ""),
         guarantees: doc ? buildGuarantees(unitId, doc, docLine) : [],
         examples: (doc?.examples ?? []).map((e) => ({
@@ -569,6 +571,7 @@ export function extractSurface(
             ),
             operationCalls: [],
             envInputs: scan.envInputs,
+            decisions: member.body ? collectDecisions(member.body, sf, host, helpers) : [],
             implHash: textHash(member.body ? member.body.getText(sf) : ""),
             guarantees: doc ? buildGuarantees(unitId, doc, docLine) : [],
             examples: (doc?.examples ?? []).map((e) => ({
@@ -634,6 +637,7 @@ export function extractSurface(
           portCalls: [],
           operationCalls: [],
           envInputs: [],
+          decisions: [],
           implHash: textHash(statement.getText(sf)),
           guarantees: buildGuarantees(name, doc, docLine),
           examples: [],

@@ -52,6 +52,8 @@ export interface Config {
   provenance: { enabled: boolean; prPattern: string };
   requirementHeader: { enabled: boolean; pattern: string };
   envInputs: { forbid: string[]; include?: string[] };
+  /** Values or constant names `decision-unspecified` treats as named by the contract. */
+  decisions: { ignore: string[] };
   resolve: { ignore: string[]; allowProgramTypes: boolean };
 }
 
@@ -68,6 +70,7 @@ export interface ConfigInput {
   provenance?: Partial<Config["provenance"]>;
   requirementHeader?: Partial<Config["requirementHeader"]>;
   envInputs?: Partial<Config["envInputs"]>;
+  decisions?: Partial<Config["decisions"]>;
   resolve?: Partial<Config["resolve"]>;
 }
 
@@ -105,6 +108,7 @@ export function defaultConfig(): Config {
     provenance: { enabled: true, prPattern: "\\(#(\\d+)\\)\\s*$" },
     requirementHeader: { enabled: false, pattern: "^\\s*(?:\\*|//)\\s*@requirement\\s+(\\S+)" },
     envInputs: { forbid: ["Date.now", "new Date", "Math.random", "fetch", "process.env"] },
+    decisions: { ignore: [] },
     resolve: { ignore: [], allowProgramTypes: true },
   };
 }
@@ -298,6 +302,11 @@ function applyInput(config: Config, input: unknown, label: string): void {
       config.envInputs.include = v;
     });
   });
+  r.object("decisions", (d) => {
+    d.strings("ignore", (v) => {
+      config.decisions.ignore = v;
+    });
+  });
   r.object("resolve", (x) => {
     x.strings("ignore", (v) => {
       config.resolve.ignore = v;
@@ -359,6 +368,7 @@ export const RULE_IDS = [
   "operation-removed",
   "uses-mismatch",
   "env-input-direct",
+  "decision-unspecified",
 ] as const;
 export type RuleId = (typeof RULE_IDS)[number];
 
@@ -377,6 +387,7 @@ export const DEFAULT_SEVERITIES: Record<RuleId, RuleSeverity> = {
   "operation-removed": "fail",
   "uses-mismatch": "warn",
   "env-input-direct": "warn",
+  "decision-unspecified": "warn",
 };
 
 export function severityOf(config: Config, rule: RuleId): RuleSeverity {

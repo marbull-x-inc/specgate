@@ -79,6 +79,23 @@ export interface PortCall {
 
 export type UnitKind = "function" | "method" | "port";
 
+/**
+ * Kind of a value the implementation commits to: a `boundary` it compares against, a
+ * `constant` it computes with, an `output` string it returns, a value it `match`es input to.
+ */
+export type DecisionKind = "boundary" | "constant" | "output" | "match";
+
+export interface Decision {
+  kind: DecisionKind;
+  /** Source text of the expression or declaration, on one line, shortened */
+  expression: string;
+  line: number;
+  /** The committed values, as text (numbers in JavaScript's `String(n)` form) */
+  values: string[];
+  /** Names of the constants involved, if any */
+  names: string[];
+}
+
 export interface Unit {
   /** Target#operation for methods, operation for functions, interface name for ports */
   id: string;
@@ -103,6 +120,8 @@ export interface Unit {
   /** Other surface units called from the body */
   operationCalls: string[];
   envInputs: Array<{ expression: string; line: number }>;
+  /** Values the implementation (and the helpers it reaches) commits to; see `decision-unspecified` */
+  decisions: Decision[];
   /** sha256 of the implementation body text */
   implHash: string;
   guarantees: Guarantee[];

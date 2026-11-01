@@ -81,6 +81,18 @@ interfaces marked `@port`. Classes marked `@entity` become vocabulary instead.
 | -------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `forbid` | `["Date.now", "new Date", "Math.random", "fetch", "process.env"]` | Expressions reported by `env-input-direct` when they appear in a unit's body (including private helpers reached from it). |
 
+## `decisions`
+
+| Option   | Default | Meaning                                                                                                                                                                         |
+| -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ignore` | `[]`    | Values (`"1000"`, `"__proto__"`) or constant names (`"RETRY_LIMIT"`) that `decision-unspecified` treats as named. Use it for values you deliberately leave out of the contract. |
+
+A decision counts as named when a guarantee or `@example` of the unit, or of a surface unit that
+calls it, contains one of its values (numbers compared by value, so `86_400_000` and `8.64e7`
+count; strings with no letter directly before or after them, a plural `s` allowed) or its
+constant name in a code span (names of three characters or more). `0`, `1`, `-1`, empty strings,
+`typeof` checks and thrown error messages are never decisions.
+
 ## `resolve`
 
 | Option              | Default | Meaning                                                                                                                                                         |

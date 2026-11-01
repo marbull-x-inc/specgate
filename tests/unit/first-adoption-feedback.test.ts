@@ -240,6 +240,7 @@ function baseUnit() {
     portCalls: [],
     operationCalls: [],
     envInputs: [],
+    decisions: [],
     implHash: "",
     guarantees: [],
     examples: [],

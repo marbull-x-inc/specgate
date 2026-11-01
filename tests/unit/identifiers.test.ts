@@ -30,6 +30,7 @@ function unit(overrides: Partial<Unit> = {}): Unit {
     portCalls: [],
     operationCalls: [],
     envInputs: [],
+    decisions: [],
     implHash: "x",
     guarantees: [],
     examples: [],
