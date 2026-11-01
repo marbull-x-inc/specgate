@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import type { Report, Unit } from "../ir/schema.ts";
+import { markdownTableCell } from "../util/markdown.ts";
 
 /**
  * Renders code-derived documentation from the IR.
@@ -15,9 +16,7 @@ export interface DocsResult {
   files: Array<{ path: string; content: string }>;
 }
 
-function cell(text: string): string {
-  return text.replace(/\|/g, "\\|").replace(/\n/g, " ");
-}
+const cell = markdownTableCell;
 
 function signature(unit: Unit): string {
   const params = unit.params.map((p) => `${p.name}${p.optional ? "?" : ""}: ${p.type}`).join(", ");

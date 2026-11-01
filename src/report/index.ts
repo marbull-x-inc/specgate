@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { Finding, Report, Severity } from "../ir/schema.ts";
+import { markdownTableCell } from "../util/markdown.ts";
 
 /**
  * Reporters. The IR JSON is the primary output; Step Summary and SARIF are projections of it
@@ -59,9 +60,7 @@ export function renderStepSummary(report: Report): string {
   return `${lines.join("\n")}\n`;
 }
 
-function escapeCell(text: string): string {
-  return text.replace(/\|/g, "\\|").replace(/\n/g, " ");
-}
+const escapeCell = markdownTableCell;
 
 const SARIF_LEVEL: Record<Severity, string> = { fail: "error", warn: "warning", info: "note" };
 
