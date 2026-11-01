@@ -29,9 +29,12 @@ export default defineConfig({ presets: [dddTs] /* overrides */ });
 | `classPattern`     | unset                                           | Regular expression; only classes whose name matches contribute methods (for example `"UseCase$                                                                | Service$"`). Unset means every exported class. |
 | `operationPattern` | unset                                           | Regular expression on the operation name (method or function). Lets a repository adopt one operation at a time, even with `mode: "blocking"`.                 |
 
-Units are: exported functions (declarations and arrow/function expressions), public methods of
-exported classes (static or instance; `private` / `protected` / `#name` excluded), and exported
-interfaces marked `@port`. Classes marked `@entity` become vocabulary instead.
+Units are: exported functions (declarations, arrow/function expressions, and constants whose
+value is callable, such as `export const defu = createDefu()`), public methods of exported
+classes (static or instance; `private` / `protected` / `#name` excluded), and exported
+interfaces marked `@port`. Overload signatures and their implementation are one unit; a
+`@guarantee` on any of the signatures belongs to it. Classes marked `@entity` become vocabulary
+instead. A `@guarantee` anywhere else is reported by `guarantee-on-non-unit`.
 
 ## `tests`
 

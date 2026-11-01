@@ -171,6 +171,11 @@ export function extractTests(
                 match.target ??
                 (context.target !== undefined && context.target !== operation ? context.target : undefined);
               const unitId = operation ? (target ? `${target}#${operation}` : operation) : target;
+              // A lone kind word ("ok", "err") with nothing to qualify it is ordinary prose, not a key.
+              if (unitId === undefined && !match.id.includes(".")) {
+                unlinked.push({ file: relFile, line, title });
+                return;
+              }
               tests.push({
                 key: unitId ? `${unitId}.${match.id}` : match.id,
                 ...(unitId ? { unitId } : {}),

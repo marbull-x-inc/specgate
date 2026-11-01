@@ -369,6 +369,8 @@ export const RULE_IDS = [
   "uses-mismatch",
   "env-input-direct",
   "decision-unspecified",
+  "guarantee-on-non-unit",
+  "surface-empty",
 ] as const;
 export type RuleId = (typeof RULE_IDS)[number];
 
@@ -388,6 +390,8 @@ export const DEFAULT_SEVERITIES: Record<RuleId, RuleSeverity> = {
   "uses-mismatch": "warn",
   "env-input-direct": "warn",
   "decision-unspecified": "warn",
+  "guarantee-on-non-unit": "fail",
+  "surface-empty": "warn",
 };
 
 export function severityOf(config: Config, rule: RuleId): RuleSeverity {
