@@ -110,9 +110,28 @@ export default defineConfig({
 | `uses-mismatch`                                   | warn    | Ports called (including through private helpers) differ from `@uses` / `@modifies`                 |
 | `env-input-direct`                                | warn    | `Date.now`, `new Date`, `Math.random`, `fetch`, … used directly instead of through a port          |
 | `test-todo`                                       | warn    | A linked test is still `test.todo`                                                                 |
+| `decision-unspecified`                            | warn    | The implementation commits to a value (boundary, constant, output, match) no guarantee names       |
 
 Severity per rule is configuration (`fail` / `warn` / `info` / `off`). In `mode: "advisory"` the
 exit code is always 0; `--strict` or `mode: "blocking"` exits 1 on any `fail`.
+
+### Linked is not the same as tested
+
+The other rules check that every guarantee has a test. They cannot tell whether the test pins
+down what the implementation decided: a test written from a contract that never says "a week is
+7 days" passes whether the code multiplies by 7 or by 8. `decision-unspecified` closes part of
+that gap statically. It collects the values an operation commits to (compared boundaries,
+computed constants, returned strings, values the input is matched against, following private
+helpers and non-exported functions of the module) and reports those that no guarantee or
+`@example` of the unit, or of a surface unit that calls it, names. Each finding is either a hole
+in the contract (write the guarantee, then the test) or a value you accept as unspecified
+(`decisions.ignore`).
+
+It matches by value, so it is a hint, not a proof: a value named for one purpose (`100` as an
+example result) also counts for another (`100` as the input length limit), and a value named in
+the contract may still be untested at a particular boundary. On `vercel/ms` with guarantees
+written from the README only, the 7 findings were all real holes (week and month conversion,
+their boundaries, the plural threshold) and covered 20 of the 44 mutants those tests missed.
 
 ## The coding procedure specgate assumes
 

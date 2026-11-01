@@ -37,6 +37,7 @@ const report: Report = {
       ],
       operationCalls: ["isWithinPeriod"],
       envInputs: [{ expression: "Math.random", line: 15 }],
+      decisions: [],
       implHash: "h",
       guarantees: [
         {

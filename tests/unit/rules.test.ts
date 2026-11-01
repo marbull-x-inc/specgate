@@ -35,6 +35,7 @@ function unit(id: string, guarantees: Guarantee[], implHash = "impl-a", extra: P
     portCalls: [],
     operationCalls: [],
     envInputs: [],
+    decisions: [],
     implHash,
     guarantees,
     examples: [],

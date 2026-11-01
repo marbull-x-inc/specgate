@@ -209,6 +209,51 @@
               "additionalProperties": false
             }
           },
+          "decisions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "boundary",
+                    "constant",
+                    "output",
+                    "match"
+                  ]
+                },
+                "expression": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "names": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "kind",
+                "expression",
+                "line",
+                "values",
+                "names"
+              ],
+              "additionalProperties": false
+            }
+          },
           "implHash": {
             "type": "string",
             "description": "sha256 of the implementation body text"
@@ -407,6 +452,7 @@
           "portCalls",
           "operationCalls",
           "envInputs",
+          "decisions",
           "implHash",
           "guarantees",
           "examples",

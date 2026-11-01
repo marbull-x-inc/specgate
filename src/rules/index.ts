@@ -1,4 +1,5 @@
 import { type Config, RULE_IDS, type RuleId, severityOf } from "../config/schema.ts";
+import { decisionMentioned } from "../extract/decisions.ts";
 import type { Finding, Report, Severity, TestCase, Unit } from "../ir/schema.ts";
 
 /**
@@ -34,6 +35,13 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
   const idPattern = new RegExp(ctx.config.ids.pattern);
   const placeholder = ctx.config.ids.placeholder;
   const guaranteeKeys = new Set<string>();
+  const ignoredDecisions = new Set(ctx.config.decisions.ignore);
+  // Several units may share an id (overload signatures); a decision may be named on any of them.
+  const unitsById = new Map<string, Unit[]>();
+  for (const u of ctx.units) unitsById.set(u.id, [...(unitsById.get(u.id) ?? []), u]);
+  const callersOf = new Map<string, string[]>();
+  for (const u of ctx.units)
+    for (const callee of u.operationCalls) callersOf.set(callee, [...(callersOf.get(callee) ?? []), u.id]);
 
   for (const m of ctx.docMessages) emit("tsdoc-syntax", { message: m.text, file: m.file, line: m.line });
 
@@ -135,6 +143,20 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
         line: env.line,
         unit: unit.id,
       });
+    }
+    // Only once the unit states something: a unit without guarantees is already reported.
+    if (real.length > 0) {
+      const corpus = contractCorpus(unit, unitsById, callersOf, placeholder);
+      for (const d of unit.decisions) {
+        if (decisionMentioned(d, corpus, ignoredDecisions)) continue;
+        const named = d.names.length > 0 ? ` (${d.names.join(", ")})` : "";
+        emit("decision-unspecified", {
+          message: `${unit.id} commits to ${d.kind} ${d.values.map((v) => JSON.stringify(v)).join(", ")}${named} in \`${d.expression}\`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right`,
+          file: unit.file,
+          line: d.line,
+          unit: unit.id,
+        });
+      }
     }
   }
 
@@ -240,3 +262,30 @@ function evaluateAgainstBaseline(
 }
 
 export const ALL_RULES: readonly RuleId[] = RULE_IDS;
+
+/**
+ * The contract text a unit's decisions may be named in: its own guarantees and examples, plus
+ * those of every surface unit that reaches it (transitively). A test of `ms("1d")` pins the
+ * decisions of the `parse` it delegates to, so a value named on the caller counts.
+ */
+function contractCorpus(
+  unit: Unit,
+  unitsById: ReadonlyMap<string, readonly Unit[]>,
+  callersOf: ReadonlyMap<string, string[]>,
+  placeholder: string,
+): string {
+  const parts: string[] = [];
+  const seen = new Set<string>();
+  const queue = [unit.id];
+  while (queue.length > 0) {
+    const id = queue.shift();
+    if (id === undefined || seen.has(id)) continue;
+    seen.add(id);
+    for (const u of unitsById.get(id) ?? []) {
+      for (const g of u.guarantees) if (g.id !== placeholder && g.id !== "") parts.push(`${g.text} ${g.throws ?? ""}`);
+      for (const e of u.examples) parts.push(`${e.expression} ${e.expected}`);
+    }
+    queue.push(...(callersOf.get(id) ?? []));
+  }
+  return parts.join("\n");
+}

@@ -85,6 +85,15 @@ export const zUnit = z.object({
   portCalls: z.array(zPortCall).describe("Ports actually called in the body, by injected member"),
   operationCalls: z.array(z.string()).describe("Other surface units called from the body"),
   envInputs: z.array(z.object({ expression: z.string(), line: z.number().int() })),
+  decisions: z.array(
+    z.object({
+      kind: z.enum(["boundary", "constant", "output", "match"]),
+      expression: z.string(),
+      line: z.number().int(),
+      values: z.array(z.string()),
+      names: z.array(z.string()),
+    }),
+  ),
   implHash: z.string().describe("sha256 of the implementation body text"),
   guarantees: z.array(zGuarantee),
   examples: z.array(zExample),
