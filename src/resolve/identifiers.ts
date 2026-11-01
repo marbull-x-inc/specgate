@@ -10,7 +10,8 @@ import type { Entity, PortDecl, Reference, Unit } from "../ir/schema.ts";
  * public operations. Anything else is an implementation detail leaking into the specification,
  * so it is reported as unresolved. Prose is not parsed; only tokens shaped like code are
  * examined: dotted paths (`period.start`, `Clock.now`), `Target#op.id` references, PascalCase
- * names and SCREAMING_CASE constants. Lowercase single words are treated as prose.
+ * names and SCREAMING_CASE constants. Lowercase single words are treated as prose, and so are
+ * all-caps words without an underscore (README, HTTP) unless the program declares them.
  */
 export interface ResolutionScope {
   units: readonly Unit[];
@@ -27,6 +28,7 @@ const DOTTED = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)+$/;
 const OPERATION_REF = /^(?<target>[A-Za-z_$][\w$]*)?#(?<operation>[A-Za-z_$][\w$]*)(?:\.(?<id>[A-Za-z0-9.\-_*]+))?$/;
 const PASCAL = /^[A-Z][a-z0-9]+(?:[A-Z][a-z0-9]*)+$|^I[A-Z][A-Za-z0-9]+$/;
 const SCREAMING = /^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+$|^[A-Z]{3,}$/;
+const ACRONYM = /^[A-Z][A-Z0-9]{2,}$/;
 
 function tokenize(text: string): string[] {
   // Quoted literals and code spans are not identifiers to resolve (a code span may quote a tag name such as `@modifies`).
@@ -152,6 +154,8 @@ export function resolveReferences(unit: Unit, text: string, scope: ResolutionSco
         pushRef(token, "type", token);
         continue;
       }
+      // An all-caps word without "_" (README, ESM, HTTP) is an acronym unless something declares it.
+      if (ACRONYM.test(token)) continue;
       pushRef(token, "unresolved");
       continue;
     }

@@ -75,7 +75,9 @@ export function createProgramHost(
       incremental: false,
       declaration: false,
     },
-    ...(parsed?.projectReferences ? { projectReferences: parsed.projectReferences } : {}),
+    // Project references are deliberately not passed: with them, a source file that belongs to a
+    // referenced project is replaced by that project's declaration output, and a solution-style
+    // tsconfig (`files: []` + `references`) yields no source file at all. specgate reads sources.
   });
   const checker = program.getTypeChecker();
   const files = program

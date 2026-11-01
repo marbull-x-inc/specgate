@@ -35,6 +35,16 @@ export interface SurfaceExtraction {
   entities: Entity[];
   ports: PortDecl[];
   docMessages: Array<{ file: string; line: number; text: string }>;
+  /** Declarations in surface files whose doc has `@guarantee` but that did not become a unit. */
+  strayGuarantees: StrayGuarantee[];
+}
+
+export interface StrayGuarantee {
+  file: string;
+  line: number;
+  name: string;
+  /** Best guess at why the declaration is not a unit, for the finding message. */
+  reason: string;
 }
 
 interface Context {
@@ -139,6 +149,8 @@ function envInputOf(node: ts.Node, sf: ts.SourceFile, forbid: readonly string[])
   }
   if (ts.isNewExpression(node)) {
     const text = `new ${node.expression.getText(sf)}`;
+    // `new Date(value)` converts its argument; only the argument-less form reads the clock.
+    if (text === "new Date" && (node.arguments?.length ?? 0) > 0) return undefined;
     return forbid.includes(text) ? text : undefined;
   }
   if (ts.isCallExpression(node) && ts.isIdentifier(node.expression)) {
@@ -358,6 +370,7 @@ export function extractSurface(
   const entities: Entity[] = [];
   const ports: PortDecl[] = [];
   const docMessages: SurfaceExtraction["docMessages"] = [];
+  const strayGuarantees: StrayGuarantee[] = [];
   const classPattern = config.surface.classPattern ? new RegExp(config.surface.classPattern) : undefined;
   const operationPattern = config.surface.operationPattern ? new RegExp(config.surface.operationPattern) : undefined;
   const operationIncluded = (name: string): boolean => operationPattern === undefined || operationPattern.test(name);
@@ -365,6 +378,8 @@ export function extractSurface(
   for (const fileName of surfaceFiles) {
     const sf = host.program.getSourceFile(fileName);
     if (!sf) continue;
+    // Declarations whose doc became part of a unit or port; any other `@guarantee` is stray.
+    const usedDocNodes = new Set<ts.Node>();
     const relFile = relativeTo(config.root, sf.fileName);
     const exported = host.exportsOf(sf);
     const importSources = importSourcesOf(sf);
@@ -382,37 +397,53 @@ export function extractSurface(
       for (const m of doc.messages) docMessages.push({ file: relFile, line: docLine + m.lineOffset, text: m.text });
     };
 
+    /**
+     * One unit per operation name. `docNodes` are every declaration that may carry its doc
+     * (overload signatures and the implementation, in source order); their guarantees and
+     * examples are concatenated. `fn` is the declaration with the body, or `undefined` for a
+     * callable produced by an expression (`export const defu = createDefu()`), whose signature
+     * then comes from the checker.
+     */
     const addFunctionUnit = (
       name: string,
-      fn: ts.SignatureDeclaration,
-      docNode: ts.Node,
+      fn: ts.SignatureDeclaration | undefined,
+      docNodes: readonly ts.Node[],
       nameNode: ts.Node,
       referencers: string[],
       target?: string,
     ): void => {
-      const { doc, comment, docLine } = describeExtraction(ctx, sf, docNode);
-      recordDocMessages(doc, docLine);
+      const docs = docNodes.map((n) => {
+        usedDocNodes.add(n);
+        return describeExtraction(ctx, sf, n);
+      });
+      for (const d of docs) recordDocMessages(d.doc, d.docLine);
+      const primary = docs.find((d) => d.doc !== undefined) ?? docs[0];
+      const doc = primary?.doc;
+      const comment = primary?.comment;
       const unitId = target ? `${target}#${name}` : name;
-      const body: ts.Node | undefined = "body" in fn && fn.body ? fn.body : undefined;
-      const portParams = new Set(fn.parameters.map((p) => p.name.getText()));
+      const body: ts.Node | undefined = fn && "body" in fn && fn.body ? fn.body : undefined;
+      const portParams = new Set((fn?.parameters ?? []).map((p) => p.name.getText()));
       const scan = body
         ? scanBody(body, sf, host, new Set(), portParams, new Map(), config.envInputs.forbid)
         : emptyScan();
+      const first = docNodes[0] ?? nameNode;
+      const last = fn ?? docNodes[docNodes.length - 1] ?? nameNode;
+      const allDocs = docs.flatMap((d) => (d.doc ? [{ doc: d.doc, docLine: d.docLine }] : []));
       const unit: Unit = {
         id: unitId,
         kind: target ? "method" : "function",
         ...(target ? { target } : {}),
         operation: name,
         file: relFile,
-        line: lineOf(sf, fn.getStart(sf)),
-        endLine: lineOf(sf, fn.getEnd()),
+        line: lineOf(sf, first.getStart(sf)),
+        endLine: lineOf(sf, last.getEnd()),
         referencedBy: referencers,
-        summary: doc?.summary ?? "",
+        summary: allDocs.find((d) => d.doc.summary !== "")?.doc.summary ?? "",
         ...(doc?.remarks ? { remarks: doc.remarks } : {}),
-        params: paramsOf(host, fn, doc),
-        returns: returnsOf(host, fn),
-        uses: doc?.uses ?? [],
-        modifies: doc?.modifies ?? [],
+        params: fn ? paramsOf(host, fn, doc) : callableParams(host, nameNode),
+        returns: fn ? returnsOf(host, fn) : callableReturns(host, nameNode),
+        uses: unique(allDocs.flatMap((d) => d.doc.uses)),
+        modifies: unique(allDocs.flatMap((d) => d.doc.modifies)),
         injectedPorts: [],
         portCalls: [...scan.portCalls].flatMap(([port, members]) =>
           [...members].map(([member, count]) => ({ port, member, count })),
@@ -420,13 +451,15 @@ export function extractSurface(
         operationCalls: [],
         envInputs: scan.envInputs,
         decisions: body ? collectDecisions(body, sf, host) : [],
-        implHash: textHash(body ? body.getText(sf) : ""),
-        guarantees: doc ? buildGuarantees(unitId, doc, docLine) : [],
-        examples: (doc?.examples ?? []).map((e) => ({
-          expression: e.expression,
-          expected: e.expected,
-          line: docLine + e.lineOffset,
-        })),
+        implHash: textHash(body ? body.getText(sf) : (last.getText(sf) ?? "")),
+        guarantees: allDocs.flatMap((d) => buildGuarantees(unitId, d.doc, d.docLine)),
+        examples: allDocs.flatMap((d) =>
+          d.doc.examples.map((e) => ({
+            expression: e.expression,
+            expected: e.expected,
+            line: d.docLine + e.lineOffset,
+          })),
+        ),
         ...(doc?.supersedes ? { supersedes: doc.supersedes } : {}),
         hasDoc: doc !== undefined,
       };
@@ -434,7 +467,7 @@ export function extractSurface(
         unit,
         doc,
         docComment: comment,
-        declaration: fn,
+        declaration: fn ?? last,
         nameNode,
         sourceFile: sf,
         calleeDeclarations: scan.calleeDeclarations,
@@ -443,11 +476,22 @@ export function extractSurface(
       });
     };
 
+    // Overload signatures and their implementation are one operation.
+    const functionGroups = new Map<string, ts.FunctionDeclaration[]>();
+    for (const statement of sf.statements) {
+      if (ts.isFunctionDeclaration(statement) && statement.name)
+        functionGroups.set(statement.name.text, [...(functionGroups.get(statement.name.text) ?? []), statement]);
+    }
+    const handledFunctions = new Set<string>();
     for (const statement of sf.statements) {
       if (ts.isFunctionDeclaration(statement) && statement.name) {
         const name = statement.name.text;
+        if (handledFunctions.has(name)) continue;
+        handledFunctions.add(name);
+        const group = functionGroups.get(name) ?? [statement];
+        const implementation = group.find((d) => d.body !== undefined) ?? group[group.length - 1] ?? statement;
         if (inSurface(name) && operationIncluded(name))
-          addFunctionUnit(name, statement, statement, statement.name, referencedBy(name));
+          addFunctionUnit(name, implementation, group, statement.name, referencedBy(name));
         continue;
       }
       if (ts.isVariableStatement(statement)) {
@@ -468,12 +512,13 @@ export function extractSurface(
             });
             continue;
           }
-          if (
-            (ts.isArrowFunction(init) || ts.isFunctionExpression(init)) &&
-            inSurface(name) &&
-            operationIncluded(name)
-          ) {
-            addFunctionUnit(name, init, statement, decl.name, referencedBy(name));
+          if (!inSurface(name) || !operationIncluded(name)) continue;
+          const fnInit = unwrapExpression(init);
+          if (ts.isArrowFunction(fnInit) || ts.isFunctionExpression(fnInit)) {
+            addFunctionUnit(name, fnInit, [statement], decl.name, referencedBy(name));
+          } else if (isCallable(host, decl.name)) {
+            // A function produced by an expression (`createDefu()`, `memoize(fn)`, `fn as T`).
+            addFunctionUnit(name, undefined, [statement], decl.name, referencedBy(name));
           }
         }
         continue;
@@ -540,12 +585,26 @@ export function extractSurface(
             helpers.set(member.name.getText(sf), member.initializer.body);
           }
         }
-        for (const member of statement.members) {
-          if (!isPublicMethod(member) || !member.name) continue;
-          const methodName = member.name.getText(sf);
-          if (!operationIncluded(methodName)) continue;
-          const { doc, comment, docLine } = describeExtraction(ctx, sf, member);
-          recordDocMessages(doc, docLine);
+        const methodGroups = new Map<string, ts.MethodDeclaration[]>();
+        for (const m of statement.members) {
+          if (!isPublicMethod(m) || !m.name) continue;
+          const key = m.name.getText(sf);
+          methodGroups.set(key, [...(methodGroups.get(key) ?? []), m]);
+        }
+        for (const [methodName, group] of methodGroups) {
+          // Overload signatures and the implementation are one operation.
+          const member = group.find((m) => m.body !== undefined) ?? group[group.length - 1];
+          if (!member?.name || !operationIncluded(methodName)) continue;
+          const docs = group.map((m) => {
+            usedDocNodes.add(m);
+            return describeExtraction(ctx, sf, m);
+          });
+          for (const d of docs) recordDocMessages(d.doc, d.docLine);
+          const primary = docs.find((d) => d.doc !== undefined);
+          const doc = primary?.doc;
+          const comment = primary?.comment;
+          const allDocs = docs.flatMap((d) => (d.doc ? [{ doc: d.doc, docLine: d.docLine }] : []));
+          const firstSignature = group[0] ?? member;
           const unitId = `${className}#${methodName}`;
           const scan = member.body
             ? scanBody(member.body, sf, host, portMembers, new Set(), helpers, config.envInputs.forbid)
@@ -556,15 +615,15 @@ export function extractSurface(
             target: className,
             operation: methodName,
             file: relFile,
-            line: lineOf(sf, member.getStart(sf)),
+            line: lineOf(sf, firstSignature.getStart(sf)),
             endLine: lineOf(sf, member.getEnd()),
             referencedBy: referencers,
-            summary: doc?.summary ?? "",
+            summary: allDocs.find((d) => d.doc.summary !== "")?.doc.summary ?? "",
             ...(doc?.remarks ? { remarks: doc.remarks } : {}),
             params: paramsOf(host, member, doc),
             returns: returnsOf(host, member),
-            uses: doc?.uses ?? [],
-            modifies: doc?.modifies ?? [],
+            uses: unique(allDocs.flatMap((d) => d.doc.uses)),
+            modifies: unique(allDocs.flatMap((d) => d.doc.modifies)),
             injectedPorts: injected,
             portCalls: [...scan.portCalls].flatMap(([port, members]) =>
               [...members].map(([m, count]) => ({ port, member: m, count })),
@@ -573,12 +632,14 @@ export function extractSurface(
             envInputs: scan.envInputs,
             decisions: member.body ? collectDecisions(member.body, sf, host, helpers) : [],
             implHash: textHash(member.body ? member.body.getText(sf) : ""),
-            guarantees: doc ? buildGuarantees(unitId, doc, docLine) : [],
-            examples: (doc?.examples ?? []).map((e) => ({
-              expression: e.expression,
-              expected: e.expected,
-              line: docLine + e.lineOffset,
-            })),
+            guarantees: allDocs.flatMap((d) => buildGuarantees(unitId, d.doc, d.docLine)),
+            examples: allDocs.flatMap((d) =>
+              d.doc.examples.map((e) => ({
+                expression: e.expression,
+                expected: e.expected,
+                line: d.docLine + e.lineOffset,
+              })),
+            ),
             ...(doc?.supersedes ? { supersedes: doc.supersedes } : {}),
             hasDoc: doc !== undefined,
           };
@@ -602,6 +663,7 @@ export function extractSurface(
         const { doc, comment, docLine } = describeExtraction(ctx, sf, statement);
         recordDocMessages(doc, docLine);
         if (!doc?.isPort) continue;
+        usedDocNodes.add(statement);
         const members = memberNames(statement, sf);
         const vocabulary = [
           ...new Set(
@@ -656,6 +718,15 @@ export function extractSurface(
         });
       }
     }
+    for (const stray of findStrayGuarantees(sf, usedDocNodes, exported)) {
+      const declared = stray.name.split("#")[0] ?? stray.name;
+      const reason = !exported.has(declared)
+        ? "it is not exported"
+        : config.surface.mode === "referenced" && referencedBy(declared).length === 0
+          ? 'no non-test module imports it (surface.mode "referenced")'
+          : stray.reason;
+      strayGuarantees.push({ file: relFile, line: stray.line, name: stray.name, reason });
+    }
   }
 
   // Second pass: callee declarations → surface unit ids ("how" for docs, composition for resolution).
@@ -669,5 +740,100 @@ export function extractSurface(
     }
     u.unit.operationCalls = [...calls].sort();
   }
-  return { units, entities, ports, docMessages };
+  return { units, entities, ports, docMessages, strayGuarantees };
+}
+
+/**
+ * Declarations (top level and class members) whose doc carries `@guarantee` but whose doc was
+ * not consumed by a unit or port. Such a guarantee would otherwise disappear without a trace.
+ */
+function findStrayGuarantees(
+  sf: ts.SourceFile,
+  used: ReadonlySet<ts.Node>,
+  exported: { has(name: string): boolean },
+): Array<{ line: number; name: string; reason: string }> {
+  const out: Array<{ line: number; name: string; reason: string }> = [];
+  const check = (node: ts.Node, name: string, reason: string): void => {
+    if (used.has(node)) return;
+    const comment = docCommentOf(sf, node);
+    if (!comment || !/@guarantee\b/.test(comment.text)) return;
+    out.push({ line: lineOf(sf, comment.pos), name, reason });
+  };
+  for (const statement of sf.statements) {
+    if (ts.isFunctionDeclaration(statement) && statement.name)
+      check(statement, statement.name.text, "it is excluded by surface.operationPattern");
+    else if (ts.isVariableStatement(statement)) {
+      const first = statement.declarationList.declarations[0];
+      if (first && ts.isIdentifier(first.name))
+        check(statement, first.name.text, "its value is not a function (or is excluded by surface.operationPattern)");
+    } else if (ts.isClassDeclaration(statement) && statement.name) {
+      const className = statement.name.text;
+      check(statement, className, "guarantees belong on its public methods, not on the class");
+      for (const member of statement.members) {
+        if (!member.name) continue;
+        const reason = isNonPublic(member)
+          ? "it is not public"
+          : exported.has(className)
+            ? "it is not a public method (or is excluded by surface.classPattern / operationPattern)"
+            : "its class is not exported";
+        check(member, `${className}#${member.name.getText(sf)}`, reason);
+      }
+    } else if (ts.isInterfaceDeclaration(statement)) check(statement, statement.name.text, "it is not marked @port");
+    else if (ts.isTypeAliasDeclaration(statement)) check(statement, statement.name.text, "type aliases are not units");
+  }
+  return out;
+}
+
+function unique(values: readonly string[]): string[] {
+  return [...new Set(values)];
+}
+
+/** Strips `as T`, `satisfies T`, `!` and parentheses around an initializer. */
+function unwrapExpression(node: ts.Expression): ts.Expression {
+  let current = node;
+  while (
+    ts.isAsExpression(current) ||
+    ts.isSatisfiesExpression(current) ||
+    ts.isParenthesizedExpression(current) ||
+    ts.isNonNullExpression(current)
+  )
+    current = current.expression;
+  return current;
+}
+
+function callSignatureOf(host: ProgramHost, nameNode: ts.Node): ts.Signature | undefined {
+  return host.checker.getTypeAtLocation(nameNode).getCallSignatures()[0];
+}
+
+function isCallable(host: ProgramHost, nameNode: ts.Node): boolean {
+  return callSignatureOf(host, nameNode) !== undefined;
+}
+
+function callableParams(host: ProgramHost, nameNode: ts.Node): Unit["params"] {
+  const signature = callSignatureOf(host, nameNode);
+  if (!signature) return [];
+  return signature.getParameters().map((symbol) => {
+    const declaration = symbol.valueDeclaration;
+    const optional =
+      declaration !== undefined &&
+      ts.isParameter(declaration) &&
+      (declaration.questionToken !== undefined ||
+        declaration.initializer !== undefined ||
+        declaration.dotDotDotToken !== undefined);
+    return {
+      name: symbol.getName(),
+      type: host.checker.typeToString(
+        host.checker.getTypeOfSymbolAtLocation(symbol, nameNode),
+        nameNode,
+        ts.TypeFormatFlags.NoTruncation,
+      ),
+      optional,
+    };
+  });
+}
+
+function callableReturns(host: ProgramHost, nameNode: ts.Node): string {
+  const signature = callSignatureOf(host, nameNode);
+  if (!signature) return "unknown";
+  return host.checker.typeToString(signature.getReturnType(), nameNode, ts.TypeFormatFlags.NoTruncation);
 }

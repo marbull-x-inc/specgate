@@ -87,6 +87,8 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
     unlinked: testExtraction.unlinked,
     docMessages,
     baseline,
+    strayGuarantees: surface.strayGuarantees,
+    surfaceFileCount: surfaceFiles.length,
   });
 
   const guarantees = units.flatMap((u) => u.guarantees);

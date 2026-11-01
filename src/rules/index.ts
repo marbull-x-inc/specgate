@@ -18,6 +18,10 @@ export interface RuleContext {
   unlinked: ReadonlyArray<{ file: string; line: number; title: string }>;
   docMessages: ReadonlyArray<{ file: string; line: number; text: string }>;
   baseline: Report | undefined;
+  /** `@guarantee` docs on declarations that did not become units. */
+  strayGuarantees?: ReadonlyArray<{ file: string; line: number; name: string; reason: string }>;
+  /** How many files `surface.include` / `exclude` selected (for `surface-empty`). */
+  surfaceFileCount?: number;
 }
 
 type Draft = Omit<Finding, "severity">;
@@ -44,6 +48,21 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
     for (const callee of u.operationCalls) callersOf.set(callee, [...(callersOf.get(callee) ?? []), u.id]);
 
   for (const m of ctx.docMessages) emit("tsdoc-syntax", { message: m.text, file: m.file, line: m.line });
+
+  for (const s of ctx.strayGuarantees ?? [])
+    emit("guarantee-on-non-unit", {
+      message: `${s.name} has @guarantee but is not a unit (${s.reason}); its guarantees are not checked`,
+      file: s.file,
+      line: s.line,
+    });
+
+  if (ctx.surfaceFileCount !== undefined && ctx.units.length === 0)
+    emit("surface-empty", {
+      message:
+        ctx.surfaceFileCount === 0
+          ? "surface.include / exclude matched no file"
+          : `${ctx.surfaceFileCount} surface file(s) matched but no unit was extracted; check surface.mode ("referenced" needs a non-test importer), surface.exclude (e.g. **/index.ts in a single-file library) and that tsconfig includes the sources`,
+    });
 
   for (const unit of ctx.units) {
     const real = unit.guarantees.filter((g) => g.id !== placeholder && g.id !== "");
