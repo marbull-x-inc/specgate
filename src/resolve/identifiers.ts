@@ -17,6 +17,8 @@ export interface ResolutionScope {
   entities: readonly Entity[];
   ports: readonly PortDecl[];
   programTypeNames: ReadonlySet<string>;
+  /** Public operations of classes and interfaces that are in the program but outside the surface. */
+  externalOperation?: (target: string, operation: string) => boolean;
 }
 
 const LITERALS = new Set(["true", "false", "null", "undefined", "NaN", "Infinity", "result", "this"]);
@@ -27,10 +29,9 @@ const PASCAL = /^[A-Z][a-z0-9]+(?:[A-Z][a-z0-9]*)+$|^I[A-Z][A-Za-z0-9]+$/;
 const SCREAMING = /^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+$|^[A-Z]{3,}$/;
 
 function tokenize(text: string): string[] {
-  // Strip quoted literals and code-span backticks, then split on whitespace and punctuation that cannot be part of a token.
-  const withoutQuotes = text.replace(/"[^"]*"|'[^']*'/g, " ");
+  // Quoted literals and code spans are not identifiers to resolve (a code span may quote a tag name such as `@modifies`).
+  const withoutQuotes = text.replace(/`[^`]*`|"[^"]*"|'[^']*'/g, " ");
   return withoutQuotes
-    .replace(/`/g, " ")
     .split(/[\s,;:()[\]{}=<>≤≥∈∉∧∨→+/!?|&^~%]+/)
     .map((t) => t.replace(/^[.]+|[.]+$/g, "").replace(/^\*+|(?<!\.)\*+$/g, ""))
     .filter((t) => t.length > 0 && /^[\x21-\x7e]+$/.test(t));
@@ -95,7 +96,9 @@ export function resolveReferences(unit: Unit, text: string, scope: ResolutionSco
           ? (unitIds.get(`${unit.target ?? ""}#${operation}`) ?? uniqueByOperation(scope.units, operation))
           : undefined);
       if (!other) {
-        pushRef(token, "unresolved");
+        // A public operation of a class outside the surface: recorded as an external operation, no id check possible.
+        if (target !== undefined && scope.externalOperation?.(target, operation)) pushRef(token, "operation", unitId);
+        else pushRef(token, "unresolved");
         continue;
       }
       if (id && id !== "*" && !id.endsWith(".*") && !other.guarantees.some((g) => g.id === id)) {

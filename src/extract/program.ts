@@ -27,6 +27,8 @@ export interface ProgramHost {
   programTypeNames(): ReadonlySet<string>;
   /** Property and method names of the type a node has. */
   membersOf(node: ts.Node): string[];
+  /** Whether a class or interface named `typeName` anywhere in the program declares a public member `member`. */
+  hasPublicMember(typeName: string, member: string): boolean;
 }
 
 function parseTsconfig(root: string, tsconfigPath: string): ts.ParsedCommandLine | undefined {
@@ -81,6 +83,30 @@ export function createProgramHost(
     .filter((sf) => !sf.isDeclarationFile && !sf.fileName.includes("/node_modules/"));
 
   let typeNames: Set<string> | undefined;
+  let publicMembers: Map<string, Set<string>> | undefined;
+  const collectPublicMembers = (): Map<string, Set<string>> => {
+    const map = new Map<string, Set<string>>();
+    for (const sf of files) {
+      const visit = (node: ts.Node): void => {
+        if ((ts.isClassDeclaration(node) || ts.isInterfaceDeclaration(node)) && node.name) {
+          const set = map.get(node.name.text) ?? new Set<string>();
+          for (const member of node.members) {
+            if (!member.name || ts.isPrivateIdentifier(member.name)) continue;
+            if (
+              ts.isClassElement(member) &&
+              (ts.getCombinedModifierFlags(member) & (ts.ModifierFlags.Private | ts.ModifierFlags.Protected)) !== 0
+            )
+              continue;
+            set.add(member.name.getText(sf));
+          }
+          map.set(node.name.text, set);
+        }
+        ts.forEachChild(node, visit);
+      };
+      visit(sf);
+    }
+    return map;
+  };
 
   const host: ProgramHost = {
     root,
@@ -145,6 +171,10 @@ export function createProgramHost(
       }
       typeNames = names;
       return names;
+    },
+    hasPublicMember(typeName, member) {
+      publicMembers ??= collectPublicMembers();
+      return publicMembers.get(typeName)?.has(member) ?? false;
     },
     membersOf(node) {
       const type = checker.getTypeAtLocation(node);

@@ -27,6 +27,8 @@ export interface Config {
     mode: "referenced" | "exported";
     /** Pattern for class names whose public methods are operations. Unset: every exported class. */
     classPattern?: string;
+    /** Pattern for operation names (methods and functions) to include. Unset: every operation. */
+    operationPattern?: string;
   };
   tests: {
     include: string[];
@@ -40,6 +42,8 @@ export interface Config {
     importExtension: ImportExtension;
     /** Files gen fully owns; regenerated each run and never linked to guarantees. */
     generatedSuffixes: string[];
+    /** gen wraps a generated `test.todo` line that would exceed this many characters. */
+    lineWidth: number;
   };
   ids: { pattern: string; placeholder: string };
   rules: Record<string, RuleSeverity>;
@@ -89,6 +93,7 @@ export function defaultConfig(): Config {
       prefixes: {},
       importExtension: "",
       generatedSuffixes: [".doctest.test.ts", ".property.test.ts"],
+      lineWidth: 120,
     },
     ids: {
       pattern: "^(ok|err|atomic|frame|idempotent)(\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
@@ -127,6 +132,12 @@ class Reader {
     const v = this.source[key];
     if (v === undefined) return;
     if (typeof v !== "string") throw new ConfigError(this.at(key), "a string", v);
+    apply(v);
+  }
+  number(key: string, apply: (v: number) => void): void {
+    const v = this.source[key];
+    if (v === undefined) return;
+    if (typeof v !== "number" || !Number.isFinite(v)) throw new ConfigError(this.at(key), "a number", v);
     apply(v);
   }
   boolean(key: string, apply: (v: boolean) => void): void {
@@ -197,6 +208,9 @@ function applyInput(config: Config, input: unknown, label: string): void {
     s.string("classPattern", (v) => {
       config.surface.classPattern = v;
     });
+    s.string("operationPattern", (v) => {
+      config.surface.operationPattern = v;
+    });
   });
   r.object("tests", (t) => {
     t.strings("include", (v) => {
@@ -227,6 +241,9 @@ function applyInput(config: Config, input: unknown, label: string): void {
     });
     t.strings("generatedSuffixes", (v) => {
       config.tests.generatedSuffixes = v;
+    });
+    t.number("lineWidth", (v) => {
+      config.tests.lineWidth = v;
     });
   });
   r.object("ids", (i) => {
@@ -291,6 +308,8 @@ function applyInput(config: Config, input: unknown, label: string): void {
   });
   // Patterns must compile; failing here is clearer than failing inside a rule.
   new RegExp(config.ids.pattern);
+  if (config.surface.classPattern !== undefined) new RegExp(config.surface.classPattern);
+  if (config.surface.operationPattern !== undefined) new RegExp(config.surface.operationPattern);
   new RegExp(config.provenance.prPattern);
   new RegExp(config.requirementHeader.pattern);
 }

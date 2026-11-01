@@ -115,34 +115,35 @@ function buildReferenceIndex(host: ProgramHost, testFiles: ReadonlySet<string>):
   return index;
 }
 
-function collectEnvInputs(
-  body: ts.Node,
-  sf: ts.SourceFile,
-  forbid: readonly string[],
-): Array<{ expression: string; line: number }> {
-  const out: Array<{ expression: string; line: number }> = [];
-  const visit = (node: ts.Node): void => {
-    let candidate: string | undefined;
-    if (ts.isPropertyAccessExpression(node)) candidate = node.getText(sf);
-    else if (ts.isNewExpression(node)) candidate = `new ${node.expression.getText(sf)}`;
-    else if (ts.isCallExpression(node) && ts.isIdentifier(node.expression)) candidate = node.expression.text;
-    if (candidate !== undefined) {
-      const hit = forbid.find((f) => candidate === f || candidate.startsWith(`${f}.`) || candidate.startsWith(`${f}(`));
-      if (hit) {
-        out.push({ expression: candidate, line: lineOf(sf, node.getStart(sf)) });
-        return;
-      }
-    }
-    ts.forEachChild(node, visit);
-  };
-  visit(body);
-  return out;
-}
-
 interface BodyScan {
   portCalls: Map<string, Map<string, number>>;
   calleeDeclarations: ts.Declaration[];
   thrownErrorTypes: string[];
+  envInputs: Array<{ expression: string; line: number }>;
+}
+
+const emptyScan = (): BodyScan => ({
+  portCalls: new Map(),
+  calleeDeclarations: [],
+  thrownErrorTypes: [],
+  envInputs: [],
+});
+
+function envInputOf(node: ts.Node, sf: ts.SourceFile, forbid: readonly string[]): string | undefined {
+  // Property chains match on a dotted prefix (`process.env.X`); constructor and plain calls on the
+  // exact name, so that `new Date().getTime()` is reported as `new Date`, at the innermost node.
+  if (ts.isPropertyAccessExpression(node)) {
+    const text = node.getText(sf);
+    return forbid.some((f) => text === f || text.startsWith(`${f}.`)) ? text : undefined;
+  }
+  if (ts.isNewExpression(node)) {
+    const text = `new ${node.expression.getText(sf)}`;
+    return forbid.includes(text) ? text : undefined;
+  }
+  if (ts.isCallExpression(node) && ts.isIdentifier(node.expression)) {
+    return forbid.includes(node.expression.text) ? node.expression.text : undefined;
+  }
+  return undefined;
 }
 
 /**
@@ -152,14 +153,17 @@ interface BodyScan {
  */
 function scanBody(
   body: ts.Node,
+  sf: ts.SourceFile,
   host: ProgramHost,
   portMembers: ReadonlySet<string>,
   portParams: ReadonlySet<string>,
-  helpers: ReadonlyMap<string, ts.Node> = new Map(),
+  helpers: ReadonlyMap<string, ts.Node>,
+  forbid: readonly string[],
 ): BodyScan {
   const portCalls = new Map<string, Map<string, number>>();
   const calleeDeclarations: ts.Declaration[] = [];
   const thrown = new Set<string>();
+  const envInputs: BodyScan["envInputs"] = [];
   const visitedHelpers = new Set<string>();
   const recordCall = (port: string, member: string): void => {
     let members = portCalls.get(port);
@@ -170,6 +174,11 @@ function scanBody(
     members.set(member, (members.get(member) ?? 0) + 1);
   };
   const visit = (node: ts.Node): void => {
+    const env = envInputOf(node, sf, forbid);
+    if (env !== undefined) {
+      envInputs.push({ expression: env, line: lineOf(sf, node.getStart(sf)) });
+      return;
+    }
     if (ts.isCallExpression(node)) {
       const callee = node.expression;
       if (ts.isPropertyAccessExpression(callee)) {
@@ -206,7 +215,7 @@ function scanBody(
     ts.forEachChild(node, visit);
   };
   visit(body);
-  return { portCalls, calleeDeclarations, thrownErrorTypes: [...thrown] };
+  return { portCalls, calleeDeclarations, thrownErrorTypes: [...thrown], envInputs };
 }
 
 function importSourcesOf(sf: ts.SourceFile): Map<string, string> {
@@ -349,6 +358,8 @@ export function extractSurface(
   const ports: PortDecl[] = [];
   const docMessages: SurfaceExtraction["docMessages"] = [];
   const classPattern = config.surface.classPattern ? new RegExp(config.surface.classPattern) : undefined;
+  const operationPattern = config.surface.operationPattern ? new RegExp(config.surface.operationPattern) : undefined;
+  const operationIncluded = (name: string): boolean => operationPattern === undefined || operationPattern.test(name);
 
   for (const fileName of surfaceFiles) {
     const sf = host.program.getSourceFile(fileName);
@@ -384,8 +395,8 @@ export function extractSurface(
       const body: ts.Node | undefined = "body" in fn && fn.body ? fn.body : undefined;
       const portParams = new Set(fn.parameters.map((p) => p.name.getText()));
       const scan = body
-        ? scanBody(body, host, new Set(), portParams)
-        : { portCalls: new Map<string, Map<string, number>>(), calleeDeclarations: [], thrownErrorTypes: [] };
+        ? scanBody(body, sf, host, new Set(), portParams, new Map(), config.envInputs.forbid)
+        : emptyScan();
       const unit: Unit = {
         id: unitId,
         kind: target ? "method" : "function",
@@ -406,7 +417,7 @@ export function extractSurface(
           [...members].map(([member, count]) => ({ port, member, count })),
         ),
         operationCalls: [],
-        envInputs: body ? collectEnvInputs(body, sf, config.envInputs.forbid) : [],
+        envInputs: scan.envInputs,
         implHash: textHash(body ? body.getText(sf) : ""),
         guarantees: doc ? buildGuarantees(unitId, doc, docLine) : [],
         examples: (doc?.examples ?? []).map((e) => ({
@@ -433,7 +444,8 @@ export function extractSurface(
     for (const statement of sf.statements) {
       if (ts.isFunctionDeclaration(statement) && statement.name) {
         const name = statement.name.text;
-        if (inSurface(name)) addFunctionUnit(name, statement, statement, statement.name, referencedBy(name));
+        if (inSurface(name) && operationIncluded(name))
+          addFunctionUnit(name, statement, statement, statement.name, referencedBy(name));
         continue;
       }
       if (ts.isVariableStatement(statement)) {
@@ -454,7 +466,11 @@ export function extractSurface(
             });
             continue;
           }
-          if ((ts.isArrowFunction(init) || ts.isFunctionExpression(init)) && inSurface(name)) {
+          if (
+            (ts.isArrowFunction(init) || ts.isFunctionExpression(init)) &&
+            inSurface(name) &&
+            operationIncluded(name)
+          ) {
             addFunctionUnit(name, init, statement, decl.name, referencedBy(name));
           }
         }
@@ -525,12 +541,13 @@ export function extractSurface(
         for (const member of statement.members) {
           if (!isPublicMethod(member) || !member.name) continue;
           const methodName = member.name.getText(sf);
+          if (!operationIncluded(methodName)) continue;
           const { doc, comment, docLine } = describeExtraction(ctx, sf, member);
           recordDocMessages(doc, docLine);
           const unitId = `${className}#${methodName}`;
           const scan = member.body
-            ? scanBody(member.body, host, portMembers, new Set(), helpers)
-            : { portCalls: new Map<string, Map<string, number>>(), calleeDeclarations: [], thrownErrorTypes: [] };
+            ? scanBody(member.body, sf, host, portMembers, new Set(), helpers, config.envInputs.forbid)
+            : emptyScan();
           const unit: Unit = {
             id: unitId,
             kind: "method",
@@ -551,7 +568,7 @@ export function extractSurface(
               [...members].map(([m, count]) => ({ port, member: m, count })),
             ),
             operationCalls: [],
-            envInputs: member.body ? collectEnvInputs(member.body, sf, config.envInputs.forbid) : [],
+            envInputs: scan.envInputs,
             implHash: textHash(member.body ? member.body.getText(sf) : ""),
             guarantees: doc ? buildGuarantees(unitId, doc, docLine) : [],
             examples: (doc?.examples ?? []).map((e) => ({

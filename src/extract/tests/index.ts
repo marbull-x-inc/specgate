@@ -50,6 +50,19 @@ export interface TitleMatch {
 }
 
 /** Parses "Target#op.ok.x rest", "op.ok.x rest", "#op.ok.x" or "ok.x rest" against the id pattern. */
+/**
+ * Removes a configured category prefix (`正常系:` …) from the start of a title so that the
+ * guarantee key may follow it. Repositories that enforce such prefixes keep their rule; the
+ * core only knows the strings from `tests.prefixes`.
+ */
+export function stripTitlePrefix(title: string, prefixes: readonly string[]): string {
+  const trimmed = title.trimStart();
+  for (const prefix of [...prefixes].filter((p) => p.length > 0).sort((a, b) => b.length - a.length)) {
+    if (trimmed.startsWith(prefix)) return trimmed.slice(prefix.length).trimStart();
+  }
+  return trimmed;
+}
+
 export function matchTitle(title: string, idPattern: RegExp): TitleMatch | undefined {
   const head = title.trim().split(/\s+/)[0] ?? "";
   // Longest-first: try to split head into [qualifier].[id] where id matches the pattern.
@@ -109,6 +122,7 @@ export function extractTests(
 ): TestExtraction {
   const idPattern = new RegExp(config.ids.pattern);
   const describePatterns = config.tests.describeOperationPatterns.map((p) => new RegExp(p));
+  const prefixes = Object.values(config.tests.prefixes);
   const tests: TestCase[] = [];
   const unlinked: TestExtraction["unlinked"] = [];
 
@@ -148,7 +162,7 @@ export function extractTests(
             const body = node.arguments.find((a) => ts.isArrowFunction(a) || ts.isFunctionExpression(a));
             const bodyHash = textHash(body ? body.getText(sf) : "");
             const line = sf.getLineAndCharacterOfPosition(node.getStart(sf)).line + 1;
-            const match = matchTitle(title, idPattern);
+            const match = matchTitle(stripTitlePrefix(title, prefixes), idPattern);
             if (match) {
               const context = describeContext(stack, describePatterns);
               // "op.id" names a free function unless an enclosing describe names a different target (a class).

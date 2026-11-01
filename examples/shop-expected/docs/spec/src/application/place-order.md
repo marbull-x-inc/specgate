@@ -24,11 +24,11 @@ The notification is sent after the order is stored so that a failed store never 
 
 | Id | Kind | Statement | Tests | Since |
 |---|---|---|---|---|
-| `ok.stored` | ok | after the call OrderRepository holds an order with status PLACED whose total is the sum of items prices | `tests/application/place-order.test.ts:5` |  |
-| `ok.notified` | ok | NotificationGateway recorded exactly one orderPlaced(accountId, result) | `tests/application/place-order.test.ts:14` |  |
-| `atomic` | atomic | when any port fails, OrderRepository and NotificationGateway are unchanged | `tests/application/place-order.test.ts:15` |  |
-| `frame` | frame | ports outside `@modifies` are unchanged | `tests/application/place-order.test.ts:16` |  |
-| `err.empty` | err | throws `EmptyOrderError` — items is empty; no state changes | `tests/application/place-order.test.ts:8` |  |
+| `ok.stored` | ok | after the call OrderRepository holds an order with status PLACED whose total is the sum of items prices | `tests/application/place-order.test.ts:12` |  |
+| `ok.notified` | ok | NotificationGateway recorded exactly one orderPlaced(accountId, result) | `tests/application/place-order.test.ts:27` |  |
+| `atomic` | atomic | when any port fails, OrderRepository and NotificationGateway are unchanged | `tests/application/place-order.test.ts:31` |  |
+| `frame` | frame | ports outside `@modifies` are unchanged | `tests/application/place-order.test.ts:41` |  |
+| `err.empty` | err | throws `EmptyOrderError` — items is empty; no state changes | `tests/application/place-order.test.ts:15` |  |
 
 ### How it runs (extracted from the implementation)
 
@@ -45,8 +45,8 @@ Referenced by: `src/main.ts`
 
 ### Tests
 
-- `PlaceOrderUseCase#placeOrder.ok.stored` — tests/application/place-order.test.ts:5
-- `PlaceOrderUseCase#placeOrder.err.empty` (todo) — tests/application/place-order.test.ts:8
-- `PlaceOrderUseCase#placeOrder.ok.notified` (todo) — tests/application/place-order.test.ts:14
-- `PlaceOrderUseCase#placeOrder.atomic` (todo) — tests/application/place-order.test.ts:15
-- `PlaceOrderUseCase#placeOrder.frame` (todo) — tests/application/place-order.test.ts:16
+- `PlaceOrderUseCase#placeOrder.ok.stored` — tests/application/place-order.test.ts:12
+- `PlaceOrderUseCase#placeOrder.err.empty` (todo) — tests/application/place-order.test.ts:15
+- `PlaceOrderUseCase#placeOrder.ok.notified` (todo) — tests/application/place-order.test.ts:27
+- `PlaceOrderUseCase#placeOrder.atomic` (skip) — tests/application/place-order.test.ts:31
+- `PlaceOrderUseCase#placeOrder.frame` (todo) — tests/application/place-order.test.ts:41

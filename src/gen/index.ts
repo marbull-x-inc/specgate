@@ -29,39 +29,50 @@ export interface GenResult {
 
 interface AdapterSyntax {
   imports: string;
+  /** Module the framework import comes from, to detect an existing import when appending. */
+  frameworkModule: string;
   describe: string;
   test: string;
   todo: (title: string) => string;
+  todoWrapped: (title: string) => string[];
   skip: string;
 }
 
 const ADAPTERS: Record<TestAdapter, AdapterSyntax> = {
   bun: {
     imports: 'import { describe, expect, test } from "bun:test";',
+    frameworkModule: "bun:test",
     describe: "describe",
     test: "test",
     todo: (t) => `test.todo(${t});`,
+    todoWrapped: (t) => ["test.todo(", `  ${t},`, ");"],
     skip: "test.skip",
   },
   vitest: {
     imports: 'import { describe, expect, test } from "vitest";',
+    frameworkModule: "vitest",
     describe: "describe",
     test: "test",
     todo: (t) => `test.todo(${t});`,
+    todoWrapped: (t) => ["test.todo(", `  ${t},`, ");"],
     skip: "test.skip",
   },
   jest: {
     imports: 'import { describe, expect, test } from "@jest/globals";',
+    frameworkModule: "@jest/globals",
     describe: "describe",
     test: "test",
     todo: (t) => `test.todo(${t});`,
+    todoWrapped: (t) => ["test.todo(", `  ${t},`, ");"],
     skip: "test.skip",
   },
   playwright: {
     imports: 'import { expect, test } from "@playwright/test";',
+    frameworkModule: "@playwright/test",
     describe: "test.describe",
     test: "test",
     todo: (t) => `test.fixme(${t}, async () => {});`,
+    todoWrapped: (t) => ["test.fixme(", `  ${t},`, "  async () => {},", ");"],
     skip: "test.skip",
   },
 };
@@ -92,9 +103,22 @@ function relativeImport(fromTestFile: string, targetAbs: string, config: Config)
   return rel;
 }
 
+/** `<prefix> <key> <statement>`: the configured category prefix first, so repository title rules still hold. */
 function title(config: Config, g: Unit["guarantees"][number]): string {
   const prefix = config.tests.prefixes[g.kind] ?? "";
-  return `${g.key} ${prefix ? `${prefix} ` : ""}${g.text}`.trim();
+  return `${prefix ? `${prefix} ` : ""}${g.key} ${g.text}`.trim();
+}
+
+/** A todo line, wrapped the way common formatters do when it would exceed `tests.lineWidth`. */
+function todoLines(syntax: AdapterSyntax, text: string, config: Config): string[] {
+  const single = `  ${syntax.todo(q(text))}`;
+  if (single.length <= config.tests.lineWidth) return [single];
+  return syntax.todoWrapped(q(text)).map((l) => `  ${l}`);
+}
+
+function localDate(now: Date): string {
+  const shifted = new Date(now.getTime() - now.getTimezoneOffset() * 60_000);
+  return shifted.toISOString().slice(0, 10);
 }
 
 function isClock(type: string): boolean {
@@ -250,13 +274,29 @@ function testBody(
   return undefined;
 }
 
-function renderNewFile(unit: Unit, ex: ExtractedUnit, testFile: string, config: Config): string {
+interface RenderedUnit {
+  /** Import lines (framework first, then packages, relative, types). */
+  imports: string[];
+  /** Arrangement lines (stubs, sut) to place at the top of the describe block. */
+  arrangeLines: string[];
+  /** One entry per guarantee: the test, skip or todo lines. */
+  tests: string[][];
+}
+
+/** Renders the tests for the given guarantees; shared by new files and appends. */
+function renderUnit(
+  unit: Unit,
+  ex: ExtractedUnit,
+  guarantees: readonly Unit["guarantees"][number][],
+  testFile: string,
+  config: Config,
+): RenderedUnit {
   const syntax = ADAPTERS[config.tests.adapter];
   const arr = arrange(unit, ex, testFile, config);
   const imports = new Set<string>([syntax.imports, ...arr.imports]);
-  const tests: string[] = [];
+  const tests: string[][] = [];
   let needsRuntime: string[] = [];
-  for (const g of unit.guarantees) {
+  for (const g of guarantees) {
     if (!g.id || g.id === config.ids.placeholder) continue;
     if (g.source === "throws" && g.throws) {
       const imp = errorImport(unit, ex, g.throws, testFile, config);
@@ -264,11 +304,11 @@ function renderNewFile(unit: Unit, ex: ExtractedUnit, testFile: string, config: 
     }
     const body = testBody(unit, g, arr, syntax, config);
     if (body) {
-      tests.push(body.code);
+      tests.push(body.code.split("\n"));
       if (/snapshotAll/.test(body.code)) needsRuntime.push("snapshotAll");
       if (/faultRunnerControl/.test(body.code)) needsRuntime.push("faultRunnerControl", "stubReset");
     } else {
-      tests.push(`  ${syntax.todo(q(title(config, g)))}`);
+      tests.push(todoLines(syntax, title(config, g), config));
     }
   }
   needsRuntime = [...new Set(needsRuntime)].sort();
@@ -283,32 +323,111 @@ function renderNewFile(unit: Unit, ex: ExtractedUnit, testFile: string, config: 
   }
   const rank = (i: string): number =>
     i === syntax.imports ? 0 : i.startsWith("import type") ? 3 : /from "\./.test(i) ? 2 : 1;
-  const sorted = [...imports].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
+  return {
+    imports: [...imports].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b)),
+    arrangeLines: arr.lines,
+    tests,
+  };
+}
+
+function renderNewFile(unit: Unit, ex: ExtractedUnit, testFile: string, config: Config): string {
+  const syntax = ADAPTERS[config.tests.adapter];
+  const rendered = renderUnit(unit, ex, unit.guarantees, testFile, config);
   const header = [
     "// Generated by specgate gen. Edit freely: existing tests are never rewritten, missing guarantees are appended.",
-    ...sorted,
+    ...rendered.imports,
     "",
     `${syntax.describe}(${q(unit.id)}, () => {`,
-    ...arr.lines.map((l) => `  ${l}`),
-    arr.lines.length > 0 ? "" : undefined,
-    ...tests,
+    ...rendered.arrangeLines.map((l) => `  ${l}`),
+    rendered.arrangeLines.length > 0 ? "" : undefined,
+    ...rendered.tests.flat(),
     "});",
     "",
   ].filter((l): l is string => l !== undefined);
   return header.join("\n");
 }
 
-function renderAppend(unit: Unit, missing: Unit["guarantees"], config: Config, now: Date): string {
+const IMPORT_STATEMENT = /^import\s[^;]*?from\s+"([^"]+)";?$/gm;
+
+/** Names already bound by import statements in `content`, and the modules imported from. */
+function existingImports(content: string): { names: Set<string>; modules: Set<string> } {
+  const names = new Set<string>();
+  const modules = new Set<string>();
+  for (const m of content.matchAll(IMPORT_STATEMENT)) {
+    modules.add(m[1] ?? "");
+    const clause = m[0].replace(/^import\s+(type\s+)?/, "").replace(/\s+from\s+"[^"]+";?$/, "");
+    const braces = /\{([^}]*)\}/.exec(clause);
+    if (braces?.[1]) {
+      for (const part of braces[1].split(",")) {
+        const name = part
+          .trim()
+          .replace(/^type\s+/, "")
+          .split(/\s+as\s+/)
+          .pop()
+          ?.trim();
+        if (name) names.add(name);
+      }
+    }
+    const defaultName = /^([A-Za-z_$][\w$]*)\s*(,|$)/.exec(clause.replace(/\{[^}]*\}/, ""));
+    if (defaultName?.[1]) names.add(defaultName[1]);
+  }
+  return { names, modules };
+}
+
+/** Reduces an import line to the names the file does not bind yet; `undefined` when none remain. */
+function missingImport(
+  line: string,
+  existing: { names: Set<string>; modules: Set<string> },
+  frameworkModule: string,
+): string | undefined {
+  const m = /^import (type )?\{ ([^}]+) \} from ("[^"]+");$/.exec(line);
+  if (!m) return existing.modules.size === 0 ? line : undefined;
+  const module = (m[3] ?? "").slice(1, -1);
+  if (module === frameworkModule && existing.modules.has(module)) return undefined;
+  const names = (m[2] ?? "").split(", ").filter((n) => !existing.names.has(n));
+  if (names.length === 0) return undefined;
+  return `import ${m[1] ?? ""}{ ${names.join(", ")} } from ${m[3]};`;
+}
+
+/**
+ * Appends the tests for `missing` guarantees to an existing file with the same skeletons a new
+ * file gets. Needed imports are inserted after the last import statement, minus the names the
+ * file already binds; the arrangement (stubs, sut) lives inside the appended describe block so
+ * it cannot clash with the file's own.
+ */
+function renderAppend(
+  content: string,
+  unit: Unit,
+  ex: ExtractedUnit,
+  missing: Unit["guarantees"],
+  testFile: string,
+  config: Config,
+  now: Date,
+): string {
   const syntax = ADAPTERS[config.tests.adapter];
+  const rendered = renderUnit(unit, ex, missing, testFile, config);
+  const existing = existingImports(content);
+  const imports = rendered.imports
+    .map((line) => missingImport(line, existing, syntax.frameworkModule))
+    .filter((line): line is string => line !== undefined);
+  let text = content.replace(/\s*$/, "\n");
+  if (imports.length > 0) {
+    let lastEnd = 0;
+    for (const m of text.matchAll(IMPORT_STATEMENT)) lastEnd = m.index + m[0].length;
+    const block = `${imports.join("\n")}\n`;
+    text = lastEnd > 0 ? `${text.slice(0, lastEnd)}\n${block}${text.slice(lastEnd)}` : `${block}${text}`;
+  }
   const lines = [
     "",
-    `// specgate gen (${now.toISOString().slice(0, 10)}): guarantees without a test. Move them into the describe above as you implement them.`,
+    `// specgate gen (${localDate(now)}): guarantees without a test. Move them into the describe above as you implement them.`,
     `${syntax.describe}(${q(`${unit.id} (specgate)`)}, () => {`,
-    ...missing.map((g) => `  ${syntax.todo(q(title(config, g)))}`),
+    ...rendered.arrangeLines.map((l) => `  ${l}`),
+    rendered.arrangeLines.length > 0 ? "" : undefined,
+    ...rendered.tests.flat(),
     "});",
     "",
-  ];
-  return lines.join("\n");
+  ].filter((l): l is string => l !== undefined);
+  return text + lines.join("\n");
 }
 
 function renderDoctest(
@@ -415,8 +534,11 @@ export function generateTests(
         record(testFile, "unchanged", readFileSync(testFile, "utf8"));
         continue;
       }
-      const content = readFileSync(testFile, "utf8").replace(/\s*$/, "\n") + renderAppend(unit, missing, config, now);
-      record(testFile, "appended", content);
+      record(
+        testFile,
+        "appended",
+        renderAppend(readFileSync(testFile, "utf8"), unit, ex, missing, testFile, config, now),
+      );
     }
     const doctestFile = mirrorPath(config, file, ".doctest.test.ts");
     const doctest = renderDoctest(units, doctestFile, config);
