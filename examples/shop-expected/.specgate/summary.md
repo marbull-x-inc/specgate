@@ -20,7 +20,7 @@ Findings: ❌ 10 fail · ⚠️ 10 warn · ℹ️ 0 info
 | ❌ | `test-orphan` | tests/domain/money.test.ts:14 | test names "addMoney.ok.nonexistent" but no guarantee with that key exists |
 | ⚠️ | `env-input-direct` | src/application/cancel-order.ts:26 | CancelOrderUseCase#cancelOrder reads an environment input directly (new Date); route it through a port |
 | ⚠️ | `test-todo` | tests/application/place-order.test.ts:22 | PlaceOrderUseCase#placeOrder.err.empty is still test.todo |
-| ⚠️ | `test-todo` | tests/application/place-order.test.ts:35 | PlaceOrderUseCase#placeOrder.ok.notified is still test.todo |
+| ⚠️ | `test-todo` | tests/application/place-order.test.ts:36 | PlaceOrderUseCase#placeOrder.ok.notified is still test.todo |
 | ⚠️ | `test-todo` | tests/application/place-order.test.ts:51 | PlaceOrderUseCase#placeOrder.frame is still test.todo |
 | ⚠️ | `test-todo` | tests/domain/money.test.ts:25 | addMoney.ok.pure is still test.todo |
 | ⚠️ | `test-todo` | tests/domain/period.test.ts:10 | isWithinPeriod.ok.within is still test.todo |

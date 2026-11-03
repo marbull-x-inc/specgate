@@ -5,6 +5,7 @@ import type { ExtractedUnit } from "../extract/surface.ts";
 import { extractTests } from "../extract/tests/index.ts";
 import type { Entity, Unit } from "../ir/schema.ts";
 import { toPosix } from "../util/paths.ts";
+import { applyQuote, type QuoteStyle, resolveQuote, shortTitle } from "./style.ts";
 
 /**
  * Generates test skeletons from guarantees.
@@ -105,10 +106,19 @@ function relativeImport(fromTestFile: string, targetAbs: string, config: Config)
   return bare + config.tests.importExtension;
 }
 
-/** `<prefix> <key> <statement>`: the configured category prefix first, so repository title rules still hold. */
-function title(config: Config, g: Unit["guarantees"][number]): string {
+/**
+ * `<prefix> <key> <statement>`: the configured category prefix first, so repository title rules
+ * still hold; the statement shortened to `tests.titleLength`, with the full text returned for a
+ * comment above the test.
+ */
+function titleOf(config: Config, g: Unit["guarantees"][number]): { title: string; full?: string } {
   const prefix = config.tests.prefixes[g.kind] ?? "";
-  return `${prefix ? `${prefix} ` : ""}${g.key} ${g.text}`.trim();
+  return shortTitle(`${prefix ? `${prefix} ` : ""}${g.key}`, g.text, config.tests.titleLength);
+}
+
+/** The comment line carrying the full statement of a shortened title, or nothing. */
+function fullStatementLines(t: { full?: string }): string[] {
+  return t.full === undefined ? [] : [`  // ${t.full.replace(/\s+/g, " ")}`];
 }
 
 /** A todo line, wrapped the way common formatters do when it would exceed `tests.lineWidth`. */
@@ -261,7 +271,8 @@ function testBody(
   // Computed before the call (never inside `expect(() => …)`), so its throw cannot satisfy toThrow.
   const argsDecl = argsLine(unit, arr.sutType);
   const args = argsDecl ? `\n    ${argsDecl}` : "";
-  const t = q(title(config, g));
+  const titled = titleOf(config, g);
+  const t = q(titled.title);
   if (g.source === "throws" && g.throws) {
     const expectation = isAsync(unit)
       ? `await expect(${call}).rejects.toThrow(${g.throws});`
@@ -335,13 +346,14 @@ function renderUnit(
       if (imp) imports.add(imp);
     }
     const body = testBody(unit, g, arr, syntax, config);
+    const titled = titleOf(config, g);
     if (body) {
-      tests.push(body.code.split("\n"));
+      tests.push([...fullStatementLines(titled), ...body.code.split("\n")]);
       if (/snapshotAll/.test(body.code)) needsRuntime.push("snapshotAll");
       if (/faultRunnerControl/.test(body.code)) needsRuntime.push("faultRunnerControl", "stubReset");
       if (/todoArgs</.test(body.code)) needsRuntime.push("todoArgs");
     } else {
-      tests.push(todoLines(syntax, title(config, g), config));
+      tests.push([...fullStatementLines(titled), ...todoLines(syntax, titled.title, config)]);
     }
   }
   needsRuntime = [...new Set(needsRuntime)].sort();
@@ -528,6 +540,7 @@ function renderAppend(
   testFile: string,
   config: Config,
   now: Date,
+  quote: QuoteStyle = "double",
 ): string {
   const syntax = ADAPTERS[config.tests.adapter];
   const rendered = renderUnit(unit, ex, missing, testFile, config);
@@ -549,8 +562,8 @@ function renderAppend(
     for (const m of text.matchAll(IMPORT_STATEMENT)) lastEnd = m.index + m[0].length;
     text =
       lastEnd > 0
-        ? `${text.slice(0, lastEnd)}\n${imports.map((l) => wrapImport(l, config)).join("\n")}${text.slice(lastEnd)}`
-        : `${imports.map((l) => wrapImport(l, config)).join("\n")}\n\n${text}`;
+        ? `${text.slice(0, lastEnd)}\n${applyQuote(imports.map((l) => wrapImport(l, config)).join("\n"), quote)}${text.slice(lastEnd)}`
+        : `${applyQuote(imports.map((l) => wrapImport(l, config)).join("\n"), quote)}\n\n${text}`;
   }
   const lines = [
     "",
@@ -563,7 +576,7 @@ function renderAppend(
     "});",
     "",
   ].filter((l): l is string => l !== undefined);
-  return text + lines.join("\n");
+  return text + applyQuote(lines.join("\n"), quote);
 }
 
 function renderDoctest(
@@ -637,6 +650,7 @@ export function generateTests(
   options: GenOptions = {},
 ): GenResult {
   const now = options.now ?? new Date();
+  const quote = resolveQuote(config);
   const result: GenResult = { written: [] };
   const record = (path: string, action: GenResult["written"][number]["action"], content: string): void => {
     result.written.push({ path, action, content });
@@ -671,19 +685,20 @@ export function generateTests(
       }))
       .filter((e) => e.guarantees.length > 0);
     if (!existsSync(testFile)) {
-      if (todo.length > 0) record(testFile, "created", renderNewFile(todo, testFile, config));
+      if (todo.length > 0) record(testFile, "created", applyQuote(renderNewFile(todo, testFile, config), quote));
     } else {
       let content = readFileSync(testFile, "utf8");
-      for (const e of todo) content = renderAppend(content, e.unit, e.ex, e.guarantees, testFile, config, now);
+      for (const e of todo) content = renderAppend(content, e.unit, e.ex, e.guarantees, testFile, config, now, quote);
       record(testFile, todo.length > 0 ? "appended" : "unchanged", content);
     }
     const doctestFile = mirrorPath(config, file, ".doctest.test.ts");
     const doctest = renderDoctest(units, doctestFile, config);
-    if (doctest) record(doctestFile, existsSync(doctestFile) ? "overwritten" : "created", doctest);
+    if (doctest) record(doctestFile, existsSync(doctestFile) ? "overwritten" : "created", applyQuote(doctest, quote));
     const fileEntities = entities.filter((e) => e.file === file);
     const propertyFile = mirrorPath(config, file, ".property.test.ts");
     const property = renderProperty(fileEntities, propertyFile, config);
-    if (property) record(propertyFile, existsSync(propertyFile) ? "overwritten" : "created", property);
+    if (property)
+      record(propertyFile, existsSync(propertyFile) ? "overwritten" : "created", applyQuote(property, quote));
   }
   // Entities in files without units still get a property file.
   for (const entity of entities) {
@@ -696,7 +711,7 @@ export function generateTests(
       config,
     );
     if (property && !result.written.some((w) => w.path === propertyFile))
-      record(propertyFile, existsSync(propertyFile) ? "overwritten" : "created", property);
+      record(propertyFile, existsSync(propertyFile) ? "overwritten" : "created", applyQuote(property, quote));
   }
   return result;
 }

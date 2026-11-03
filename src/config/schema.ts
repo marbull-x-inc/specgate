@@ -44,6 +44,16 @@ export interface Config {
     generatedSuffixes: string[];
     /** gen wraps a generated `test.todo` line that would exceed this many characters. */
     lineWidth: number;
+    /**
+     * Quote style of generated string literals. `"auto"` reads the formatter config in `root`
+     * (Biome `javascript.formatter.quoteStyle`, Prettier `singleQuote`) and falls back to double.
+     */
+    quote: "auto" | "double" | "single";
+    /**
+     * Longest generated test title. The key is always kept whole; the statement is cut at a word
+     * boundary with "…", and the full statement goes in a comment above the test. 0 never cuts.
+     */
+    titleLength: number;
   };
   ids: { pattern: string; placeholder: string };
   rules: Record<string, RuleSeverity>;
@@ -97,6 +107,8 @@ export function defaultConfig(): Config {
       importExtension: "",
       generatedSuffixes: [".doctest.test.ts", ".property.test.ts"],
       lineWidth: 120,
+      quote: "auto",
+      titleLength: 100,
     },
     ids: {
       pattern: "^(ok|err|atomic|frame|idempotent)(\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
@@ -248,6 +260,12 @@ function applyInput(config: Config, input: unknown, label: string): void {
     });
     t.number("lineWidth", (v) => {
       config.tests.lineWidth = v;
+    });
+    t.oneOf("quote", ["auto", "double", "single"] as const, (v) => {
+      config.tests.quote = v;
+    });
+    t.number("titleLength", (v) => {
+      config.tests.titleLength = v;
     });
   });
   r.object("ids", (i) => {

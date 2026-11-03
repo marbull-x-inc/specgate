@@ -32,12 +32,12 @@ describe("PlaceOrderUseCase#placeOrder (specgate)", () => {
   const clock = fakeClock();
   const sut = new PlaceOrderUseCase(tx, orders, notifications, clock);
 
-  test.todo(
-    "PlaceOrderUseCase#placeOrder.ok.notified NotificationGateway recorded exactly one orderPlaced(accountId, result)",
-  );
+  // NotificationGateway recorded exactly one orderPlaced(accountId, result)
+  test.todo("PlaceOrderUseCase#placeOrder.ok.notified NotificationGateway recorded exactly one…");
+  // when any port fails, OrderRepository and NotificationGateway are unchanged
   // atomicity needs contract-passing fakes with real state; stubs only record calls.
   // Replace the stubs, then un-skip.
-  test.skip("PlaceOrderUseCase#placeOrder.atomic when any port fails, OrderRepository and NotificationGateway are unchanged", async () => {
+  test.skip("PlaceOrderUseCase#placeOrder.atomic when any port fails, OrderRepository and NotificationGateway…", async () => {
     const args = todoArgs<Parameters<PlaceOrderUseCase["placeOrder"]>>(["accountId", "items"]);
     await sut.placeOrder(...args); // warm-up: counts transaction boundaries
     for (const k of faultRunnerControl(tx).failurePoints()) {
