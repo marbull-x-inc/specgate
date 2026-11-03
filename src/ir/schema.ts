@@ -174,6 +174,8 @@ export interface Finding {
   unit?: string;
   guarantee?: string;
   test?: string;
+  /** Recorded in the accepted-findings file; reported as `info` (see `check --accept-baseline`). */
+  accepted?: boolean;
 }
 
 export interface Summary {

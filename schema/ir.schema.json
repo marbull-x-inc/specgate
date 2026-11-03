@@ -663,6 +663,10 @@
           },
           "test": {
             "type": "string"
+          },
+          "accepted": {
+            "description": "Recorded in the accepted-findings file; reported as info",
+            "type": "boolean"
           }
         },
         "required": [

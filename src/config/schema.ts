@@ -47,10 +47,14 @@ export interface Config {
     /** gen wraps a generated `test.todo` line that would exceed this many characters. */
     lineWidth: number;
   };
-  ids: { pattern: string; placeholder: string };
+  /** `deriveThrows`: give `@throws` without an id one (`err.<error-type>`); see surface extraction. */
+  ids: { pattern: string; placeholder: string; deriveThrows: boolean };
+  /** `jsdoc`: accept JSDoc conventions (unknown block tags, `{type}` in `@param`, `{` in prose) silently. */
+  tsdoc: { jsdoc: boolean };
   rules: Record<string, RuleSeverity>;
   mode: "advisory" | "blocking";
-  output: { dir: string; docsDir: string; baseline?: string };
+  /** `accepted`: committed file of findings accepted at adoption, relative to root. */
+  output: { dir: string; docsDir: string; baseline?: string; accepted: string };
   provenance: { enabled: boolean; prPattern: string };
   requirementHeader: { enabled: boolean; pattern: string };
   envInputs: { forbid: string[]; include?: string[] };
@@ -66,6 +70,7 @@ export interface ConfigInput {
   surface?: Partial<Config["surface"]>;
   tests?: Partial<Omit<Config["tests"], "mirror">> & { mirror?: Partial<Config["tests"]["mirror"]> };
   ids?: Partial<Config["ids"]>;
+  tsdoc?: Partial<Config["tsdoc"]>;
   rules?: Record<string, RuleSeverity>;
   mode?: Config["mode"];
   output?: Partial<Config["output"]>;
@@ -103,10 +108,12 @@ export function defaultConfig(): Config {
     ids: {
       pattern: "^(ok|err|atomic|frame|idempotent)(\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
       placeholder: "TODO",
+      deriveThrows: true,
     },
+    tsdoc: { jsdoc: false },
     rules: {},
     mode: "advisory",
-    output: { dir: ".specgate", docsDir: "docs/spec" },
+    output: { dir: ".specgate", docsDir: "docs/spec", accepted: "specgate.accepted.json" },
     provenance: { enabled: true, prPattern: "\\(#(\\d+)\\)\\s*$" },
     requirementHeader: { enabled: false, pattern: "^\\s*(?:\\*|//)\\s*@requirement\\s+(\\S+)" },
     envInputs: { forbid: ["Date.now", "new Date", "Math.random", "fetch", "process.env"] },
@@ -259,6 +266,14 @@ function applyInput(config: Config, input: unknown, label: string): void {
     i.string("placeholder", (v) => {
       config.ids.placeholder = v;
     });
+    i.boolean("deriveThrows", (v) => {
+      config.ids.deriveThrows = v;
+    });
+  });
+  r.object("tsdoc", (t) => {
+    t.boolean("jsdoc", (v) => {
+      config.tsdoc.jsdoc = v;
+    });
   });
   const rules = input["rules"];
   if (rules !== undefined) {
@@ -278,6 +293,9 @@ function applyInput(config: Config, input: unknown, label: string): void {
     });
     o.string("baseline", (v) => {
       config.output.baseline = v;
+    });
+    o.string("accepted", (v) => {
+      config.output.accepted = v;
     });
   });
   r.object("provenance", (p) => {
@@ -389,7 +407,7 @@ export const RULE_IDS = [
 export type RuleId = (typeof RULE_IDS)[number];
 
 export const DEFAULT_SEVERITIES: Record<RuleId, RuleSeverity> = {
-  "tsdoc-syntax": "fail",
+  "tsdoc-syntax": "warn",
   "operation-no-guarantee": "fail",
   "guarantee-placeholder": "fail",
   "guarantee-id-invalid": "fail",

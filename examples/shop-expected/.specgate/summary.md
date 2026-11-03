@@ -33,8 +33,8 @@ Findings: ❌ 10 fail · ⚠️ 10 warn · ℹ️ 0 info
 
 | Unit | Guarantee | Kind | Tests |
 |---|---|---|---|
-| `CancelOrderUseCase#cancelOrder` | `TODO` what holds after a successful call, in terms of params, result and declared ports (replace TODO with an id; list the ports whose state changes in the modifies tag, or drop that tag) | other | — |
-| `CancelOrderUseCase#cancelOrder` | `TODO` condition under which OrderNotFoundError is thrown | other | — |
+| `CancelOrderUseCase#cancelOrder` | `TODO` what holds afterwards, in params, result and declared ports | other | — |
+| `CancelOrderUseCase#cancelOrder` | `TODO` when OrderNotFoundError is thrown | other | — |
 | `PlaceOrderUseCase#placeOrder` | `ok.stored` after the call OrderRepository holds an order with status PLACED whose total is the sum of items prices | ok | 1 |
 | `PlaceOrderUseCase#placeOrder` | `ok.notified` NotificationGateway recorded exactly one orderPlaced(accountId, result) | ok | 1 |
 | `PlaceOrderUseCase#placeOrder` | `atomic` when any port fails, OrderRepository and NotificationGateway are unchanged | atomic | 1 |
@@ -46,11 +46,11 @@ Findings: ❌ 10 fail · ⚠️ 10 warn · ℹ️ 0 info
 | `isWithinPeriod` | `ok.within` Clock.now ∈ [period.start, period.end] gives result = true | ok | 1 |
 | `isWithinPeriod` | `ok.outside` Clock.now outside the interval gives result = false | ok | 1 |
 | `isWithinPeriod` | `ok.unbounded` period = null (no limit) gives result = true | ok | 1 |
-| `Clock` | `TODO` what holds after a successful call, in terms of params, result and declared ports (replace TODO with an id; list the ports whose state changes in the modifies tag, or drop that tag) | other | — |
-| `NotificationGateway` | `TODO` what holds after a successful call, in terms of params, result and declared ports (replace TODO with an id; list the ports whose state changes in the modifies tag, or drop that tag) | other | — |
+| `Clock` | `TODO` what holds afterwards, in params and result | other | — |
+| `NotificationGateway` | `TODO` what holds afterwards, in params and result | other | — |
 | `OrderRepository` | `ok.not-found` findById with an unknown orderId gives result = null | ok | 1 |
 | `OrderRepository` | `ok.round-trip` after save(order), findById(order.orderId) is equal to order | ok | 1 |
-| `TransactionRunner` | `TODO` what holds after a successful call, in terms of params, result and declared ports (replace TODO with an id; list the ports whose state changes in the modifies tag, or drop that tag) | other | — |
+| `TransactionRunner` | `TODO` what holds afterwards, in params and result | other | — |
 
 </details>
 

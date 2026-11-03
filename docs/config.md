@@ -57,18 +57,26 @@ instead. A `@guarantee` anywhere else is reported by `guarantee-on-non-unit`.
 
 ## `ids`
 
-| Option        | Default                                                               | Meaning                                                                                                                                                      |
-| ------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `pattern`     | `^(ok\|err\|atomic\|frame\|idempotent)(\.[a-z0-9]+(?:-[a-z0-9]+)*)*$` | What a guarantee id may look like. The first segment is the _kind_ and drives `prefixes` and `gen`'s automatic branches. Use `^G[1-9]\d*$` for numbered ids. |
-| `placeholder` | `"TODO"`                                                              | The id `scaffold` writes; `check` reports it with `guarantee-placeholder`.                                                                                   |
+| Option         | Default                                                               | Meaning                                                                                                                                                                                                                                                                                              |
+| -------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pattern`      | `^(ok\|err\|atomic\|frame\|idempotent)(\.[a-z0-9]+(?:-[a-z0-9]+)*)*$` | What a guarantee id may look like. The first segment is the _kind_ and drives `prefixes` and `gen`'s automatic branches. Use `^G[1-9]\d*$` for numbered ids.                                                                                                                                         |
+| `placeholder`  | `"TODO"`                                                              | The id `scaffold` writes; `check` reports it with `guarantee-placeholder`.                                                                                                                                                                                                                           |
+| `deriveThrows` | `true`                                                                | Give `@throws` written without an id one: `err.<error type in kebab case>` (`-2`, `-3`, … when repeated). The type is the leading `{@link X}`, a leading error-shaped word or code span, else `Error`. Off, or when the derived id does not match `pattern`, the old `guarantee-id-invalid` applies. |
+
+## `tsdoc`
+
+| Option  | Default | Meaning                                                                                                                                                                                                      |
+| ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `jsdoc` | `false` | Accept JSDoc conventions silently: undefined block tags (`@name`, `@category`, `@summary`), `{type}` and `[optional]` in `@param`, a missing hyphen, `{` in prose and examples. The content is still parsed. |
 
 ## `output`
 
-| Option     | Default             | Meaning                                                                                                                             |
-| ---------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `dir`      | `".specgate"`       | Where `check` writes `report.json`, `summary.md`, `report.sarif`.                                                                   |
-| `docsDir`  | `"docs/spec"`       | Where `docs` writes Markdown.                                                                                                       |
-| `baseline` | `<dir>/report.json` | Previous report used for change detection (`guarantee-changed-test-unchanged`, `impl-changed-spec-unchanged`, `operation-removed`). |
+| Option     | Default                    | Meaning                                                                                                                                                        |
+| ---------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dir`      | `".specgate"`              | Where `check` writes `report.json`, `summary.md`, `report.sarif`.                                                                                              |
+| `docsDir`  | `"docs/spec"`              | Where `docs` writes Markdown.                                                                                                                                  |
+| `baseline` | `<dir>/report.json`        | Previous report used for change detection (`guarantee-changed-test-unchanged`, `impl-changed-spec-unchanged`, `operation-removed`).                            |
+| `accepted` | `"specgate.accepted.json"` | Findings accepted at adoption, written by `check --accept-baseline` and meant to be committed. Matching findings are reported as `info` with `accepted: true`. |
 
 ## `provenance`
 
