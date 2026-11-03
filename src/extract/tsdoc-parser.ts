@@ -306,14 +306,23 @@ function splitIdentifiers(text: string): string[] {
     .filter((t) => t.length > 0 && /^[A-Za-z_$][\w$]*$/.test(t));
 }
 
+const JSDOC_MESSAGE_PREFIXES = ["tsdoc-undefined-tag", "tsdoc-param-tag-", "tsdoc-malformed-inline-tag"];
+
 /**
  * Parses one doc comment.
  *
  * @param commentText - The full `/** ... *\/` text as it appears in the source.
+ * @param options - `jsdoc`: drop the messages that only say the comment follows JSDoc rather
+ *   than TSDoc (unknown block tags such as `@name` / `@category`, `{type}` and `[optional]` in
+ *   `@param`, a missing hyphen, `{` in prose and examples). The content is still parsed.
  * @returns Structured tags. `messages` holds TSDoc syntax problems and unknown tags; the
  *   caller decides their severity.
  */
-export function parseDocComment(parser: TSDocParser, commentText: string): ParsedDoc {
+export function parseDocComment(
+  parser: TSDocParser,
+  commentText: string,
+  options: { jsdoc?: boolean } = {},
+): ParsedDoc {
   const context = parser.parseString(commentText);
   const comment = context.docComment;
   const params = new Map<string, string>();
@@ -364,7 +373,12 @@ export function parseDocComment(parser: TSDocParser, commentText: string): Parse
     }
   }
   // HTML and escaping pedantry is noise for prose such as "end < start" or "// =>"; keep structural problems.
-  const IGNORED_MESSAGE_PREFIXES = ["tsdoc-html-", "tsdoc-malformed-html", "tsdoc-escape-"];
+  const IGNORED_MESSAGE_PREFIXES = [
+    "tsdoc-html-",
+    "tsdoc-malformed-html",
+    "tsdoc-escape-",
+    ...(options.jsdoc ? JSDOC_MESSAGE_PREFIXES : []),
+  ];
   const messages = context.log.messages
     .filter((m) => !IGNORED_MESSAGE_PREFIXES.some((prefix) => m.messageId.startsWith(prefix)))
     .map((m) => ({ text: m.unformattedText, lineOffset: lineOffsetAt(context, m.textRange.pos) }));

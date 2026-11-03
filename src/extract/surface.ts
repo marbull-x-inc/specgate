@@ -281,6 +281,61 @@ function buildGuarantees(unitId: string, doc: ParsedDoc, docStartLine: number): 
   return out;
 }
 
+const ERROR_TYPE = /^(?:[A-Z][A-Za-z0-9]*)?(?:Error|Exception)$/;
+
+function kebab(name: string): string {
+  return name
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
+    .toLowerCase();
+}
+
+/**
+ * Gives an id to `@throws` written without one, so that an existing contract counts as a
+ * guarantee instead of failing `guarantee-id-invalid`.
+ *
+ * @remarks
+ * Applies only when `ids.deriveThrows` is on and the derived id matches `ids.pattern` (a
+ * numbered pattern such as `^G\\d+$` keeps the old behaviour). The error type comes from the
+ * leading `{@link X}`, a leading word shaped like an error type (`@throws RangeError if …`) or a
+ * leading code span (`` @throws `TypeError` … ``); without one it is `Error`. The id is
+ * `err.<type in kebab case>`, suffixed `-2`, `-3`, … when the unit already has it. A leading word
+ * that was taken for an id but is prose is put back into the statement.
+ */
+function deriveThrowsIds(unitId: string, guarantees: Guarantee[], config: Config): Guarantee[] {
+  if (!config.ids.deriveThrows) return guarantees;
+  const pattern = new RegExp(config.ids.pattern);
+  const taken = new Set(guarantees.filter((g) => pattern.test(g.id)).map((g) => g.id));
+  return guarantees.map((g) => {
+    if (g.source !== "throws" || pattern.test(g.id) || g.id === config.ids.placeholder) return g;
+    let throws = g.throws;
+    let text = g.text;
+    if (!throws && ERROR_TYPE.test(g.id)) throws = g.id;
+    else if (g.id !== "") text = `${g.id} ${text}`.trim();
+    if (!throws) {
+      const span = /^`([A-Za-z][\w$]*)`\s*/.exec(text);
+      if (span?.[1] && ERROR_TYPE.test(span[1])) {
+        throws = span[1];
+        text = text.slice(span[0].length);
+      }
+    }
+    const base = `err.${kebab(throws ?? "Error")}`;
+    if (!pattern.test(base)) return g;
+    let id = base;
+    for (let n = 2; taken.has(id); n++) id = `${base}-${n}`;
+    taken.add(id);
+    return {
+      ...g,
+      id,
+      key: `${unitId}.${id}`,
+      kind: guaranteeKind(id),
+      text,
+      textHash: textHash(`${throws ?? ""}|${text}`),
+      ...(throws ? { throws } : {}),
+    };
+  });
+}
+
 function paramsOf(host: ProgramHost, fn: ts.SignatureDeclaration, doc: ParsedDoc | undefined): Unit["params"] {
   return fn.parameters
     .filter((p) => !(ts.isIdentifier(p.name) && p.name.text === "this"))
@@ -344,7 +399,7 @@ function describeExtraction(
 ): { doc: ParsedDoc | undefined; comment: ReturnType<typeof docCommentOf>; docLine: number } {
   const comment = docCommentOf(sf, node);
   if (!comment) return { doc: undefined, comment: undefined, docLine: 0 };
-  const doc = parseDocComment(ctx.parser, comment.text);
+  const doc = parseDocComment(ctx.parser, comment.text, { jsdoc: ctx.config.tsdoc.jsdoc });
   const docLine = lineOf(sf, comment.pos);
   return { doc, comment, docLine };
 }
@@ -455,7 +510,11 @@ export function extractSurface(
         envInputs: scan.envInputs,
         decisions: body ? collectDecisions(body, sf, host) : [],
         implHash: textHash(body ? body.getText(sf) : (last.getText(sf) ?? "")),
-        guarantees: allDocs.flatMap((d) => buildGuarantees(unitId, d.doc, d.docLine)),
+        guarantees: deriveThrowsIds(
+          unitId,
+          allDocs.flatMap((d) => buildGuarantees(unitId, d.doc, d.docLine)),
+          config,
+        ),
         examples: allDocs.flatMap((d) =>
           d.doc.examples.map((e) => ({
             expression: e.expression,
@@ -635,7 +694,11 @@ export function extractSurface(
             envInputs: scan.envInputs,
             decisions: member.body ? collectDecisions(member.body, sf, host, helpers) : [],
             implHash: textHash(member.body ? member.body.getText(sf) : ""),
-            guarantees: allDocs.flatMap((d) => buildGuarantees(unitId, d.doc, d.docLine)),
+            guarantees: deriveThrowsIds(
+              unitId,
+              allDocs.flatMap((d) => buildGuarantees(unitId, d.doc, d.docLine)),
+              config,
+            ),
             examples: allDocs.flatMap((d) =>
               d.doc.examples.map((e) => ({
                 expression: e.expression,
@@ -704,7 +767,7 @@ export function extractSurface(
           envInputs: [],
           decisions: [],
           implHash: textHash(statement.getText(sf)),
-          guarantees: buildGuarantees(name, doc, docLine),
+          guarantees: deriveThrowsIds(name, buildGuarantees(name, doc, docLine), config),
           examples: [],
           hasDoc: true,
         };

@@ -147,6 +147,7 @@ export const zFinding = z.object({
   unit: z.string().optional(),
   guarantee: z.string().optional(),
   test: z.string().optional(),
+  accepted: z.boolean().optional().describe("Recorded in the accepted-findings file; reported as info"),
 });
 export type Finding = z.infer<typeof zFinding>;
 

@@ -107,7 +107,7 @@ export default defineConfig({
 | `guarantee-no-test`                               | fail    | No test names the guarantee key                                                                    |
 | `test-orphan`                                     | fail    | A test names a key that no guarantee has                                                           |
 | `identifier-unresolved`                           | fail    | A code-shaped token in the statement is not a parameter, declared port, entity or public operation |
-| `tsdoc-syntax`                                    | fail    | Undefined tags or malformed TSDoc (HTML/escape pedantry is ignored)                                |
+| `tsdoc-syntax`                                    | warn    | Undefined tags or malformed TSDoc (HTML/escape pedantry is ignored; `tsdoc.jsdoc` accepts JSDoc)   |
 | `operation-removed`                               | fail    | An operation in the previous report is gone and nothing `@supersedes` it                           |
 | `guarantee-changed-test-unchanged`                | warn    | Statement hash changed, linked tests did not (needs a previous report)                             |
 | `impl-changed-spec-unchanged`                     | warn    | Implementation hash changed, guarantees and tests did not                                          |
@@ -120,6 +120,24 @@ export default defineConfig({
 
 Severity per rule is configuration (`fail` / `warn` / `info` / `off`). In `mode: "advisory"` the
 exit code is always 0; `--strict` or `mode: "blocking"` exits 1 on any `fail`.
+
+### Adopting in a repository with history
+
+On code that was not written for specgate, `check` starts with many findings. Three settings
+make the first run useful instead of red:
+
+- `tsdoc: { jsdoc: true }` accepts JSDoc conventions (`@name`, `@category`, `@param {type}`, `{`
+  in examples) without messages; `tsdoc-syntax` is `warn` by default anyway.
+- `@throws` written without an id gets one (`@throws RangeError if …` → `err.range-error`), so
+  the contracts already written count as guarantees (`ids.deriveThrows`, on by default).
+- `specgate check --accept-baseline` records the current `fail` / `warn` findings in
+  `specgate.accepted.json` (commit it). Later runs report those as `info` with `accepted: true`
+  and fail only on new ones, so `mode: "blocking"` can be switched on the same day. Findings are
+  matched by rule, file, unit, guarantee, test and message, not by line; rerun
+  `--accept-baseline` after fixing some to shrink the file.
+
+`scaffold` seeds the first guarantee from an existing `@returns` and does not repeat a
+documented `@throws`.
 
 ### Linked is not the same as tested
 

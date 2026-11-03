@@ -8,9 +8,11 @@ import type { ExtractedUnit } from "../extract/surface.ts";
  *
  * @remarks
  * Only signature-derived facts are filled in: parameter names and types, the return type,
- * error classes thrown in the body, and the ports the body calls. The wording of guarantees is
- * a design decision, so it is left as the configured placeholder for a person (or an AI
- * assistant outside this tool) to write. `check` reports the placeholders until they are.
+ * error classes thrown in the body (unless the doc already has `@throws` for them), and the
+ * ports the body calls. An existing `@returns` seeds the first guarantee's statement; the id
+ * stays the configured placeholder, because naming the guarantee is a design decision for a
+ * person (or an AI assistant outside this tool). `check` reports the placeholders until they are.
+ * Port wording appears only when the unit has ports.
  */
 export interface ScaffoldOptions {
   dryRun?: boolean;
@@ -32,13 +34,18 @@ function tagLines(ex: ExtractedUnit, placeholder: string): string[] {
   const lines: string[] = [];
   const memberToType = new Map(unit.injectedPorts.map((p) => [p.member, p.type] as const));
   const usedPorts = [...new Set(unit.portCalls.map((c) => memberToType.get(c.port) ?? c.port))];
+  const hasPorts = unit.injectedPorts.length > 0 || usedPorts.length > 0;
+  const documented = new Set(ex.doc?.throws.map((t) => t.errorType).filter((t) => t !== undefined));
   for (const err of ex.thrownErrorTypes)
-    lines.push(`@throws {@link ${err}} ${placeholder} condition under which ${err} is thrown`);
+    if (!documented.has(err)) lines.push(`@throws {@link ${err}} ${placeholder} when ${err} is thrown`);
   if (usedPorts.length > 0) lines.push(`@uses ${usedPorts.join(", ")}`);
   if (usedPorts.length > 0) lines.push(`@modifies ${placeholder}`);
-  lines.push(
-    `@guarantee ${placeholder} what holds after a successful call, in terms of params, result and declared ports (replace ${placeholder} with an id; list the ports whose state changes in the modifies tag, or drop that tag)`,
-  );
+  // The existing @returns is the best first draft of what holds after the call.
+  const returns = ex.doc?.returns?.replace(/\s+/g, " ").trim();
+  if (returns) lines.push(`@guarantee ${placeholder} returns ${returns}`);
+  else if (hasPorts)
+    lines.push(`@guarantee ${placeholder} what holds afterwards, in params, result and declared ports`);
+  else lines.push(`@guarantee ${placeholder} what holds afterwards, in params and result`);
   return lines;
 }
 
