@@ -44,8 +44,9 @@ const ADAPTERS: Record<TestAdapter, AdapterSyntax> = {
     frameworkModule: "bun:test",
     describe: "describe",
     test: "test",
-    todo: (t) => `test.todo(${t});`,
-    todoWrapped: (t) => ["test.todo(", `  ${t},`, ");"],
+    // bun-types before 1.4.4 type `test.todo` as requiring the callback.
+    todo: (t) => `test.todo(${t}, () => {});`,
+    todoWrapped: (t) => ["test.todo(", `  ${t},`, "  () => {},", ");"],
     skip: "test.skip",
   },
   vitest: {
@@ -77,8 +78,26 @@ const ADAPTERS: Record<TestAdapter, AdapterSyntax> = {
   },
 };
 
+/**
+ * A string literal for generated source. JSON escaping covers quotes, backslashes and control
+ * characters; U+2028 / U+2029 are escaped too, since they end a line for some tools and readers
+ * even where the language accepts them inside a string.
+ */
 function q(text: string): string {
-  return JSON.stringify(text);
+  return JSON.stringify(text)
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+}
+
+/**
+ * Text for a generated `//` comment: on one line (any line break, including U+2028 / U+2029,
+ * becomes a space), so text from a doc comment can never end the comment and become code.
+ */
+function commentText(text: string): string {
+  return text
+    .replace(/[\r\n\u2028\u2029]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 export function mirrorPath(config: Config, sourceFile: string, suffix = config.tests.mirror.suffix): string {
@@ -98,9 +117,10 @@ function importSpecifier(fromTestFile: string, sourceSpecifier: string, sourceFi
 function relativeImport(fromTestFile: string, targetAbs: string, config: Config): string {
   let rel = toPosix(relative(dirname(fromTestFile), targetAbs));
   if (!rel.startsWith(".")) rel = `./${rel}`;
-  const ext = config.tests.importExtension;
-  if (rel.endsWith(".ts")) return ext === "" ? rel.slice(0, -3) : rel.slice(0, -3) + ext;
-  return rel;
+  // The target may be a source path (`x.ts`) or an import specifier with or without an
+  // extension (`./x.service`, `./x.js`); either way the configured extension is applied.
+  const bare = rel.replace(/\.(?:[mc]?ts|[mc]?js|tsx|jsx)$/, "");
+  return bare + config.tests.importExtension;
 }
 
 /** `<prefix> <key> <statement>`: the configured category prefix first, so repository title rules still hold. */
@@ -125,17 +145,33 @@ function isClock(type: string): boolean {
   return /clock/i.test(type);
 }
 
-function isTxRunner(type: string, members: readonly string[]): boolean {
-  return (
-    /transaction|txrunner|unitofwork/i.test(type) ||
-    members.some((m) => /^(run|execute|transaction|withTransaction)/.test(m))
-  );
+const TX_TYPE = /transaction|txrunner|unitofwork/i;
+const TX_MEMBER = /^(run|transaction|withTransaction|runInTransaction)$/;
+
+/**
+ * The injected member that runs transactions: by type name first; by an exactly named public
+ * method only when no type name says so. At most one, so a service that merely depends on a
+ * runner (and has `execute`) is never taken for the runner.
+ */
+function txRunnerMember(ports: Unit["injectedPorts"]): string | undefined {
+  const byName = ports.find((p) => TX_TYPE.test(p.type.replace(/<.*$/, "")));
+  if (byName) return byName.member;
+  return ports.find((p) => p.members.some((m) => TX_MEMBER.test(m)))?.member;
+}
+
+/** `const name = call<T>([...]);`, broken one element per line when it exceeds the width. */
+function memberListLine(head: string, members: readonly string[], config: Config): string[] {
+  const single = `${head}[${members.map(q).join(", ")}]);`;
+  if (single.length + 4 <= config.tests.lineWidth || members.length === 0) return [single];
+  return [`${head}[`, ...members.map((m) => `  ${q(m)},`), "]);"];
 }
 
 interface Arrangement {
   imports: string[];
   lines: string[];
   sutExpr: string;
+  /** Type expression of the callable, for `Parameters<...>`. */
+  sutType: string;
   stubNames: string[];
   txName: string | undefined;
 }
@@ -152,6 +188,7 @@ function arrange(unit: Unit, ex: ExtractedUnit, testFile: string, config: Config
   if (unit.kind === "method" && unit.target) {
     imports.push(`import { ${unit.target} } from ${q(sutSpecifier)};`);
     const typeImports = new Map<string, Set<string>>();
+    const txMember = txRunnerMember(unit.injectedPorts);
     for (const port of unit.injectedPorts) {
       const typeName = port.type.replace(/<.*$/, "");
       const source = ex.importSources.get(typeName);
@@ -161,20 +198,20 @@ function arrange(unit: Unit, ex: ExtractedUnit, testFile: string, config: Config
       if (isClock(typeName)) {
         runtimeImports.add("fakeClock");
         lines.push(`const ${port.member} = fakeClock();`);
-      } else if (isTxRunner(typeName, port.members)) {
+      } else if (port.member === txMember) {
         runtimeImports.add("createFaultRunner");
-        lines.push(`const ${port.member} = createFaultRunner<${typeName}>([${port.members.map(q).join(", ")}]);`);
+        lines.push(...memberListLine(`const ${port.member} = createFaultRunner<${typeName}>(`, port.members, config));
         txName = port.member;
       } else {
         runtimeImports.add("createStub");
-        lines.push(`const ${port.member} = createStub<${typeName}>([${port.members.map(q).join(", ")}]);`);
+        lines.push(...memberListLine(`const ${port.member} = createStub<${typeName}>(`, port.members, config));
         stubNames.push(port.member);
       }
     }
     for (const [spec, names] of typeImports)
       imports.push(`import type { ${[...names].sort().join(", ")} } from ${q(spec)};`);
     lines.push(`const sut = new ${unit.target}(${unit.injectedPorts.map((p) => p.member).join(", ")});`);
-    return finish(`sut.${unit.operation}`);
+    return finish(`sut.${unit.operation}`, `${unit.target}[${q(unit.operation)}]`);
   }
   if (unit.kind === "function") {
     imports.push(`import { ${unit.operation} } from ${q(sutSpecifier)};`);
@@ -184,19 +221,29 @@ function arrange(unit: Unit, ex: ExtractedUnit, testFile: string, config: Config
         lines.push(`const ${p.name} = fakeClock();`);
       }
     }
-    return finish(unit.operation);
+    return finish(unit.operation, `typeof ${unit.operation}`);
   }
-  return finish(unit.operation);
+  return finish(unit.operation, `typeof ${unit.operation}`);
 
-  function finish(sutExpr: string): Arrangement {
+  function finish(sutExpr: string, sutType: string): Arrangement {
     if (runtimeImports.size > 0)
       imports.unshift(`import { ${[...runtimeImports].sort().join(", ")} } from "@marbull-x-inc/specgate/runtime";`);
-    return { imports, lines, sutExpr, stubNames, txName };
+    return { imports, lines, sutExpr, sutType, stubNames, txName };
   }
 }
 
+/**
+ * Arguments are left to the author, typed: `todoArgs` returns the operation's parameter tuple
+ * and throws when called, so the skeleton compiles under `strict` and a test fails with "fill in
+ * the arguments" until someone does, instead of passing `undefined` where a value is typed.
+ */
+function argsLine(unit: Unit, sutType: string): string | undefined {
+  if (unit.params.length === 0) return undefined;
+  return `const args = todoArgs<Parameters<${sutType}>>([${unit.params.map((p) => q(p.name)).join(", ")}]);`;
+}
+
 function callArgs(unit: Unit): string {
-  return unit.params.map((p) => `/* ${p.name}: ${p.type} */ undefined`).join(", ");
+  return unit.params.length === 0 ? "" : "...args";
 }
 
 function isAsync(unit: Unit): boolean {
@@ -229,6 +276,9 @@ function testBody(
 ): { code: string; kind: "test" | "skip" } | undefined {
   const asyncKw = isAsync(unit) ? "async " : "";
   const call = `${arr.sutExpr}(${callArgs(unit)})`;
+  // Computed before the call (never inside `expect(() => …)`), so its throw cannot satisfy toThrow.
+  const argsDecl = argsLine(unit, arr.sutType);
+  const args = argsDecl ? `\n    ${argsDecl}` : "";
   const t = q(title(config, g));
   if (g.source === "throws" && g.throws) {
     const expectation = isAsync(unit)
@@ -236,7 +286,7 @@ function testBody(
       : `expect(() => ${call}).toThrow(${g.throws});`;
     return {
       kind: "test",
-      code: `  ${syntax.test}(${t}, ${asyncKw}() => {\n    // arrange: TODO make the condition hold — ${g.text}\n    ${expectation}\n  });`,
+      code: `  ${syntax.test}(${t}, ${asyncKw}() => {${args}\n    // arrange: TODO make the condition hold — ${commentText(g.text)}\n    ${expectation}\n  });`,
     };
   }
   if (g.kind === "frame" && unit.kind === "method") {
@@ -253,7 +303,7 @@ function testBody(
     const names = untouched.map((p) => p.member);
     return {
       kind: "test",
-      code: `  ${syntax.test}(${t}, ${asyncKw}() => {\n    // arrange: TODO make a successful call possible\n    const before = snapshotAll({ ${names.join(", ")} });\n    ${isAsync(unit) ? "await " : ""}${call};\n    // ports outside @modifies must not have been written; with stubs this means "not called"\n    expect(snapshotAll({ ${names.join(", ")} })).toEqual(before);\n  });`,
+      code: `  ${syntax.test}(${t}, ${asyncKw}() => {${args}\n    // arrange: TODO make a successful call possible\n    const before = snapshotAll({ ${names.join(", ")} });\n    ${isAsync(unit) ? "await " : ""}${call};\n    // ports outside @modifies must not have been written; with stubs this means "not called"\n    expect(snapshotAll({ ${names.join(", ")} })).toEqual(before);\n  });`,
     };
   }
   if (g.kind === "atomic" && unit.kind === "method" && arr.txName) {
@@ -261,14 +311,14 @@ function testBody(
     if (observed.length === 0) return undefined;
     return {
       kind: "skip",
-      code: `  // atomicity needs contract-passing fakes with real state; stubs only record calls. Replace the stubs, then un-skip.\n  ${syntax.skip}(${t}, async () => {\n    await ${call}; // warm-up: counts transaction boundaries\n    for (const k of faultRunnerControl(${arr.txName}).failurePoints()) {\n      for (const s of [${observed.join(", ")}]) stubReset(s);\n      faultRunnerControl(${arr.txName}).failAt(k);\n      const before = snapshotAll({ ${observed.join(", ")} });\n      await expect(${call}).rejects.toThrow();\n      expect(snapshotAll({ ${observed.join(", ")} })).toEqual(before);\n    }\n  });`,
+      code: `  // atomicity needs contract-passing fakes with real state; stubs only record calls.\n  // Replace the stubs, then un-skip.\n  ${syntax.skip}(${t}, async () => {${args}\n    await ${call}; // warm-up: counts transaction boundaries\n    for (const k of faultRunnerControl(${arr.txName}).failurePoints()) {\n      for (const s of [${observed.join(", ")}]) stubReset(s);\n      faultRunnerControl(${arr.txName}).failAt(k);\n      const before = snapshotAll({ ${observed.join(", ")} });\n      await expect(${call}).rejects.toThrow();\n      expect(snapshotAll({ ${observed.join(", ")} })).toEqual(before);\n    }\n  });`,
     };
   }
   if (g.kind === "idempotent" && unit.kind === "method" && arr.stubNames.length > 0) {
     const names = arr.stubNames;
     return {
       kind: "skip",
-      code: `  // idempotence compares port state after one and two calls; needs contract-passing fakes. Replace the stubs, then un-skip.\n  ${syntax.skip}(${t}, async () => {\n    await ${call};\n    const once = snapshotAll({ ${names.join(", ")} });\n    await ${call};\n    expect(snapshotAll({ ${names.join(", ")} })).toEqual(once);\n  });`,
+      code: `  // idempotence compares port state after one and two calls; needs contract-passing fakes.\n  // Replace the stubs, then un-skip.\n  ${syntax.skip}(${t}, async () => {${args}\n    await ${call};\n    const once = snapshotAll({ ${names.join(", ")} });\n    await ${call};\n    expect(snapshotAll({ ${names.join(", ")} })).toEqual(once);\n  });`,
     };
   }
   return undefined;
@@ -307,6 +357,7 @@ function renderUnit(
       tests.push(body.code.split("\n"));
       if (/snapshotAll/.test(body.code)) needsRuntime.push("snapshotAll");
       if (/faultRunnerControl/.test(body.code)) needsRuntime.push("faultRunnerControl", "stubReset");
+      if (/todoArgs</.test(body.code)) needsRuntime.push("todoArgs");
     } else {
       tests.push(todoLines(syntax, title(config, g), config));
     }
@@ -343,8 +394,9 @@ function renderNewFile(
   const syntax = ADAPTERS[config.tests.adapter];
   const rendered = entries.map((e) => ({ unit: e.unit, r: renderUnit(e.unit, e.ex, e.guarantees, testFile, config) }));
   const lines: Array<string | undefined> = [
-    "// Generated by specgate gen. Edit freely: existing tests are never rewritten, missing guarantees are appended.",
-    ...mergeImports(rendered.flatMap(({ r }) => r.imports)),
+    "// Generated by specgate gen. Edit freely: existing tests are never rewritten,",
+    "// missing guarantees are appended.",
+    ...mergeImports(rendered.flatMap(({ r }) => r.imports)).map((line) => wrapImport(line, config)),
   ];
   for (const { unit, r } of rendered) {
     lines.push(
@@ -358,6 +410,15 @@ function renderNewFile(
   }
   lines.push("");
   return lines.filter((l): l is string => l !== undefined).join("\n");
+}
+
+/** An import statement, broken one name per line (as formatters do) when it exceeds the width. */
+function wrapImport(line: string, config: Config): string {
+  if (line.length <= config.tests.lineWidth) return line;
+  const m = /^import (type )?\{ ([^}]+) \} from ("[^"]+");$/.exec(line);
+  if (!m) return line;
+  const names = (m[2] ?? "").split(", ");
+  return [`import ${m[1] ?? ""}{`, ...names.map((n) => `  ${n},`), `} from ${m[3]};`].join("\n");
 }
 
 /** Merges `import { a } from "m"` lines that share a module (and `type`-ness); other lines are kept once. */
@@ -390,42 +451,83 @@ function mergeImports(lines: readonly string[]): string[] {
 // Either quote style: the file may have been reformatted by the project's formatter.
 const IMPORT_STATEMENT = /^import\s[^;]*?from\s+(["'])([^"']+)\1;?$/gm;
 
+interface ExistingImports {
+  /** Names bound as values (usable in `new X()` and `expect(...).toThrow(X)`). */
+  names: Set<string>;
+  /** Names bound only as types (`import type { X }` or `import { type X }`). */
+  typeOnly: Set<string>;
+  modules: Set<string>;
+}
+
 /** Names already bound by import statements in `content`, and the modules imported from. */
-function existingImports(content: string): { names: Set<string>; modules: Set<string> } {
+function existingImports(content: string): ExistingImports {
   const names = new Set<string>();
+  const typeOnly = new Set<string>();
   const modules = new Set<string>();
   for (const m of content.matchAll(IMPORT_STATEMENT)) {
     modules.add(m[2] ?? "");
+    const wholeType = /^import\s+type\s/.test(m[0]);
     const clause = m[0].replace(/^import\s+(type\s+)?/, "").replace(/\s+from\s+["'][^"']+["'];?$/, "");
     const braces = /\{([^}]*)\}/.exec(clause);
     if (braces?.[1]) {
       for (const part of braces[1].split(",")) {
-        const name = part
-          .trim()
+        const trimmed = part.trim();
+        const name = trimmed
           .replace(/^type\s+/, "")
           .split(/\s+as\s+/)
           .pop()
           ?.trim();
-        if (name) names.add(name);
+        if (!name) continue;
+        if (wholeType || /^type\s/.test(trimmed)) typeOnly.add(name);
+        else names.add(name);
       }
     }
     const defaultName = /^([A-Za-z_$][\w$]*)\s*(,|$)/.exec(clause.replace(/\{[^}]*\}/, ""));
-    if (defaultName?.[1]) names.add(defaultName[1]);
+    if (defaultName?.[1]) (wholeType ? typeOnly : names).add(defaultName[1]);
   }
-  return { names, modules };
+  for (const n of names) typeOnly.delete(n);
+  return { names, typeOnly, modules };
+}
+
+/**
+ * Removes `names` from type-only import statements, so that a value import of the same name can
+ * be added without a duplicate binding. A statement left empty is dropped.
+ */
+function dropTypeOnly(content: string, names: ReadonlySet<string>): string {
+  if (names.size === 0) return content;
+  return content.replace(IMPORT_STATEMENT, (statement) => {
+    const m = /^import(\s+type)?\s*\{([^}]*)\}(\s*from\s*.*)$/s.exec(statement);
+    if (!m) return statement;
+    const wholeType = m[1] !== undefined;
+    const parts = (m[2] ?? "")
+      .split(",")
+      .map((p) => p.trim())
+      .filter((p) => p !== "");
+    const kept = parts.filter((p) => {
+      const isType = wholeType || /^type\s/.test(p);
+      const local =
+        p
+          .replace(/^type\s+/, "")
+          .split(/\s+as\s+/)
+          .pop()
+          ?.trim() ?? "";
+      return !(isType && names.has(local));
+    });
+    if (kept.length === parts.length) return statement;
+    if (kept.length === 0) return "";
+    return `import${m[1] ?? ""} { ${kept.join(", ")} }${m[3] ?? ""}`;
+  });
 }
 
 /** Reduces an import line to the names the file does not bind yet; `undefined` when none remain. */
-function missingImport(
-  line: string,
-  existing: { names: Set<string>; modules: Set<string> },
-  frameworkModule: string,
-): string | undefined {
+function missingImport(line: string, existing: ExistingImports, frameworkModule: string): string | undefined {
   const m = /^import (type )?\{ ([^}]+) \} from ("[^"]+");$/.exec(line);
   if (!m) return existing.modules.size === 0 ? line : undefined;
   const module = (m[3] ?? "").slice(1, -1);
   if (module === frameworkModule && existing.modules.has(module)) return undefined;
-  const names = (m[2] ?? "").split(", ").filter((n) => !existing.names.has(n));
+  // A type import is satisfied by either kind of binding; a value import only by a value binding.
+  const isType = m[1] !== undefined;
+  const names = (m[2] ?? "").split(", ").filter((n) => !existing.names.has(n) && !(isType && existing.typeOnly.has(n)));
   if (names.length === 0) return undefined;
   return `import ${m[1] ?? ""}{ ${names.join(", ")} } from ${m[3]};`;
 }
@@ -451,16 +553,27 @@ function renderAppend(
   const imports = rendered.imports
     .map((line) => missingImport(line, existing, syntax.frameworkModule))
     .filter((line): line is string => line !== undefined);
-  let text = content.replace(/\s*$/, "\n");
+  // A name the file binds only as a type but the skeleton uses as a value moves to the value import.
+  const promoted = new Set<string>();
+  for (const line of imports) {
+    const m = /^import \{ ([^}]+) \} from /.exec(line);
+    for (const n of m?.[1]?.split(", ") ?? []) if (existing.typeOnly.has(n)) promoted.add(n);
+  }
+  let text = dropTypeOnly(content, promoted)
+    .replace(/\n{3,}/g, "\n\n")
+    .replace(/\s*$/, "\n");
   if (imports.length > 0) {
     let lastEnd = 0;
     for (const m of text.matchAll(IMPORT_STATEMENT)) lastEnd = m.index + m[0].length;
-    const block = `${imports.join("\n")}\n`;
-    text = lastEnd > 0 ? `${text.slice(0, lastEnd)}\n${block}${text.slice(lastEnd)}` : `${block}${text}`;
+    text =
+      lastEnd > 0
+        ? `${text.slice(0, lastEnd)}\n${imports.map((l) => wrapImport(l, config)).join("\n")}${text.slice(lastEnd)}`
+        : `${imports.map((l) => wrapImport(l, config)).join("\n")}\n\n${text}`;
   }
   const lines = [
     "",
-    `// specgate gen (${localDate(now)}): guarantees without a test. Move them into the describe above as you implement them.`,
+    `// specgate gen (${localDate(now)}): guarantees without a test.`,
+    "// Move them into the describe above as you implement them.",
     `${syntax.describe}(${q(`${unit.id} (specgate)`)}, () => {`,
     ...rendered.arrangeLines.map((l) => `  ${l}`),
     rendered.arrangeLines.length > 0 ? "" : undefined,
@@ -517,7 +630,7 @@ function renderProperty(entities: Entity[], testFile: string, config: Config): s
     "",
     `${syntax.describe}(${q(`${toPosix(first.file)} invariants`)}, () => {`,
     ...withInvariants.flatMap((e) => [
-      `  // ${e.name}: ${e.invariants.map((i) => i.text).join("; ")}`,
+      `  // ${e.name}: ${commentText(e.invariants.map((i) => i.text).join("; "))}`,
       `  ${syntax.test}(${q(`${e.name}.invariant parsed values satisfy the schema again (round-trip)`)}, () => {`,
       `    // Structure and bounds come from the schema; refinements (${e.invariants.length} invariant${e.invariants.length > 1 ? "s" : ""}) are applied as a final filter.`,
       `    const arb = arbitraryFromZod(fc, ${e.name});`,

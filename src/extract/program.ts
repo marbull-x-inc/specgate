@@ -179,9 +179,18 @@ export function createProgramHost(
       return publicMembers.get(typeName)?.has(member) ?? false;
     },
     membersOf(node) {
+      // Only what `keyof T` sees: a class type also lists its private / protected / `#` members
+      // (constructor parameter properties included), which a stub must not name.
       const type = checker.getTypeAtLocation(node);
       return type
         .getProperties()
+        .filter((p) =>
+          (p.declarations ?? []).every(
+            (d) =>
+              !(ts.getCombinedModifierFlags(d) & (ts.ModifierFlags.Private | ts.ModifierFlags.Protected)) &&
+              !(ts.isClassElement(d) && d.name !== undefined && ts.isPrivateIdentifier(d.name)),
+          ),
+        )
         .map((p) => p.name)
         .filter((n) => !n.startsWith("__"));
     },

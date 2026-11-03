@@ -19,7 +19,8 @@ describe("addMoney", () => {
   });
 });
 
-// specgate gen (2026-01-01): guarantees without a test. Move them into the describe above as you implement them.
+// specgate gen (2026-01-01): guarantees without a test.
+// Move them into the describe above as you implement them.
 describe("addMoney (specgate)", () => {
   test.todo("addMoney.ok.pure a and b are unchanged after the call");
 });

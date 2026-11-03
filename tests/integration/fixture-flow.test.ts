@@ -98,7 +98,7 @@ describe("init → scaffold → gen → check → docs", () => {
     expect(generated).toContain('import { EmptyOrderError } from "../../src/errors";');
     expect(generated).toContain("faultRunnerControl(tx).failurePoints()");
     expect(generated).toMatch(
-      /import \{ describe, expect, test \} from "@jest\/globals";\nimport \{ createFaultRunner/,
+      /import \{ describe, expect, test \} from "@jest\/globals";\nimport \{\n {2}createFaultRunner,/,
     );
   });
 
