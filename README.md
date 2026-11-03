@@ -264,7 +264,7 @@ Requires Node 24+ (Node 26 is used in CI) or Bun 1.2+.
 
 ## Status
 
-0.2.0. The public API (`analyze`, `defineConfig`, `dddTs`, `@marbull-x-inc/specgate/runtime`) and the IR are
+0.3.0. The public API (`analyze`, `defineConfig`, `dddTs`, `@marbull-x-inc/specgate/runtime`) and the IR are
 expected to change before 1.0.
 
 ## Releasing

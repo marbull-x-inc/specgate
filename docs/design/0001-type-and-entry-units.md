@@ -1,6 +1,6 @@
 # 0001 — Guarantees on types and package entries
 
-Status: accepted (implemented in 0.4.0) · Issue: #20 (item 3)
+Status: accepted (implemented in 0.3.0) · Issue: #20 (item 3)
 
 ## Problem
 
@@ -120,7 +120,7 @@ test.skip("entry#main.ok.esm exposes defu", () => {
 
 1. `type` units, `checkTypes`, the `gen` skeleton, and docs.
 2. `entry` units, `exports` resolution, `surface.entries`, `entry-unmapped`, `loadEntry`, and the skipped skeleton.
-3. Release notes for the IR enum change, then 0.4.0.
+3. Release notes for the IR enum change, then 0.3.0.
 
 ## Alternatives not taken
 
