@@ -154,11 +154,13 @@ export function extractTests(
             const status: TestCase["status"] =
               modifier === "todo"
                 ? "todo"
-                : modifier === "skip"
-                  ? "skip"
-                  : modifier === "each" || ts.isCallExpression(node.expression)
-                    ? "each"
-                    : "test";
+                : modifier === "failing" || modifier === "fails"
+                  ? "failing"
+                  : modifier === "skip"
+                    ? "skip"
+                    : modifier === "each" || ts.isCallExpression(node.expression)
+                      ? "each"
+                      : "test";
             const body = node.arguments.find((a) => ts.isArrowFunction(a) || ts.isFunctionExpression(a));
             const bodyHash = textHash(body ? body.getText(sf) : "");
             const line = sf.getLineAndCharacterOfPosition(node.getStart(sf)).line + 1;

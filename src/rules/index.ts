@@ -196,6 +196,15 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
         test: t.key,
         ...(t.unitId ? { unit: t.unitId } : {}),
       });
+    } else if (t.status === "failing" && guaranteeKeys.has(t.key)) {
+      // The test documents that the implementation does not keep the guarantee (yet).
+      emit("guarantee-known-violation", {
+        message: `${t.key} has a test expected to fail (test.failing / test.fails): the implementation is known not to keep it`,
+        file: t.file,
+        line: t.line,
+        test: t.key,
+        ...(t.unitId ? { unit: t.unitId } : {}),
+      });
     }
   }
 

@@ -483,6 +483,7 @@ export const RULE_IDS = [
   "decision-unspecified",
   "guarantee-on-non-unit",
   "surface-empty",
+  "guarantee-known-violation",
 ] as const;
 export type RuleId = (typeof RULE_IDS)[number];
 
@@ -504,6 +505,7 @@ export const DEFAULT_SEVERITIES: Record<RuleId, RuleSeverity> = {
   "decision-unspecified": "warn",
   "guarantee-on-non-unit": "fail",
   "surface-empty": "warn",
+  "guarantee-known-violation": "warn",
 };
 
 export function severityOf(config: Config, rule: RuleId): RuleSeverity {

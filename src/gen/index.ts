@@ -338,6 +338,13 @@ function testBody(
       code: `  ${syntax.test}(${t}, ${asyncKw}() => {${args}\n    // arrange: TODO make a successful call possible\n    const before = snapshotAll({ ${names.join(", ")} });\n    ${isAsync(unit) ? "await " : ""}${call};\n    // ports outside @modifies must not have been written; with stubs this means "not called"\n    expect(snapshotAll({ ${names.join(", ")} })).toEqual(before);\n  });`,
     };
   }
+  if (g.kind === "frame" && unit.kind === "function" && unit.params.length > 0) {
+    // Without ports, the frame of a function is its inputs: they must not be mutated.
+    return {
+      kind: "test",
+      code: `  ${syntax.test}(${t}, ${asyncKw}() => {${args}\n    // arrange: TODO make a successful call possible\n    const before = structuredClone(args);\n    ${isAsync(unit) ? "await " : ""}${call};\n    expect(args).toEqual(before);\n  });`,
+    };
+  }
   if (g.kind === "atomic" && unit.kind === "method" && arr.txName) {
     const observed = arr.stubNames;
     if (observed.length === 0) return undefined;
