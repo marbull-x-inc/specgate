@@ -10,6 +10,12 @@ import { dddTs, defineConfig } from "@marbull-x-inc/specgate";
 export default defineConfig({ presets: [dddTs] /* overrides */ });
 ```
 
+`specgate.config.json` takes the same shape; a built-in preset is named by string:
+
+```json
+{ "presets": ["ddd-ts"], "surface": { "include": ["src/**/*.ts"] } }
+```
+
 ## Top level
 
 | Option     | Default           | Meaning                                                                                                                                                                       |
@@ -21,13 +27,13 @@ export default defineConfig({ presets: [dddTs] /* overrides */ });
 
 ## `surface`
 
-| Option             | Default                                         | Meaning                                                                                                                                                       |
-| ------------------ | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `include`          | `["src/**/*.ts"]`                               | Globs of files whose exports may be units.                                                                                                                    |
-| `exclude`          | `["**/*.test.ts", "**/*.spec.ts", "**/*.d.ts"]` | Globs removed from `include`.                                                                                                                                 |
-| `mode`             | `"referenced"`                                  | `"referenced"`: an export is a unit only when a non-test module imports it (named import, namespace import, re-export). `"exported"`: every export is a unit. |
-| `classPattern`     | unset                                           | Regular expression; only classes whose name matches contribute methods (for example `"UseCase$                                                                | Service$"`). Unset means every exported class. |
-| `operationPattern` | unset                                           | Regular expression on the operation name (method or function). Lets a repository adopt one operation at a time, even with `mode: "blocking"`.                 |
+| Option             | Default                                         | Meaning                                                                                                                                                                                                                                                                                    |
+| ------------------ | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `include`          | `["src/**/*.ts"]`                               | Globs of files whose exports may be units.                                                                                                                                                                                                                                                 |
+| `exclude`          | `["**/*.test.ts", "**/*.spec.ts", "**/*.d.ts"]` | Globs removed from `include`.                                                                                                                                                                                                                                                              |
+| `mode`             | `"referenced"`                                  | `"referenced"`: an export is a unit only when a non-test module imports it (named import, namespace import, re-export). A module is a test when it is in `tests.include` or is shaped like one (`*.test.*`, `*.spec.*`, `__tests__/`, `__mocks__/`). `"exported"`: every export is a unit. |
+| `classPattern`     | unset                                           | Regular expression; only classes whose name matches contribute methods (for example `"UseCase$                                                                                                                                                                                             | Service$"`). Unset means every exported class. |
+| `operationPattern` | unset                                           | Regular expression on the operation name (method or function). Lets a repository adopt one operation at a time, even with `mode: "blocking"`.                                                                                                                                              |
 
 Units are: exported functions (declarations, arrow/function expressions, and constants whose
 value is callable, such as `export const defu = createDefu()`), public methods of exported
