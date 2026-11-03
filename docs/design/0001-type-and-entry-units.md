@@ -7,10 +7,10 @@ Status: proposed · Issue: #20 (item 3)
 Two kinds of promise have no unit to live on today. They are reported by
 `guarantee-on-non-unit`, or authors move them onto an unrelated function.
 
-| Promise | Example | Where it ended up in practice |
-|---|---|---|
+| Promise                             | Example                                                                                                                      | Where it ended up in practice                                 |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
 | A type accepts or rejects something | defu: `Defu<{ a: number }, [{ a: string }]>` keeps `a: number`. ms: `ms("1 lightyear")` is a type error under `StringValue`. | On `createDefu` and on the `ms` overloads, as `ok.type.*` ids |
-| A package entry exposes something | defu: `import { defu } from "defu"` and `require("defu")` both work. ms: the package has a single `"."` entry. | On `createDefu` / `ms`, as `ok.pkg.*` / `ok.module.*` ids |
+| A package entry exposes something   | defu: `import { defu } from "defu"` and `require("defu")` both work. ms: the package has a single `"."` entry.               | On `createDefu` / `ms`, as `ok.pkg.*` / `ok.module.*` ids     |
 
 In two sandbox runs (vercel/ms, unjs/defu) the tests for these were hand-written. Both authors
 independently built the same two helpers:
@@ -19,7 +19,7 @@ independently built the same two helpers:
   - ts-jest with `isolatedModules` does not.
   - bun does not.
   - vitest does only in `--typecheck` mode, on `*.test-d.ts` files.
-  So `// @ts-expect-error` inside a test proves nothing at run time. Both authors called the TypeScript compiler API from the test and matched diagnostics.
+    So `// @ts-expect-error` inside a test proves nothing at run time. Both authors called the TypeScript compiler API from the test and matched diagnostics.
 - **An entry loader.** A child Node process imports and requires the package by its own name (self-reference) from the repository root, after a build.
 
 ## Decision
@@ -28,14 +28,14 @@ Add two unit kinds and two helpers. Linking stays as it is: a test names a key, 
 
 ### Unit kinds
 
-| | `type` | `entry` |
-|---|---|---|
-| Declared by | An exported `type` alias or a non-`@port` `interface` whose doc has `@guarantee` | The `@packageDocumentation` comment of an entry module |
-| Unit id | The type name: `Defu` | `entry#<slug>`. The slug is `main` for `"."`, otherwise the subpath with `/` and `.` turned into `-`: `./runtime` → `entry#runtime`, `./presets/ddd-ts` → `entry#presets-ddd-ts` |
-| Key | `Defu.ok.left-wins` | `entry#runtime.ok.esm` |
-| `ok.*` means | The type expression in the statement compiles, and resolves as stated | The entry resolves under the stated condition and exposes the stated names |
-| `err.*` means | The type expression in the statement is a type error | Resolution fails (for example, `require` of an ESM-only entry) |
-| IR fields | `typeText`, the declared type, for docs | `entry: { subpath, source, conditions: Record<string, string> }` |
+|               | `type`                                                                           | `entry`                                                                                                                                                                          |
+| ------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Declared by   | An exported `type` alias or a non-`@port` `interface` whose doc has `@guarantee` | The `@packageDocumentation` comment of an entry module                                                                                                                           |
+| Unit id       | The type name: `Defu`                                                            | `entry#<slug>`. The slug is `main` for `"."`, otherwise the subpath with `/` and `.` turned into `-`: `./runtime` → `entry#runtime`, `./presets/ddd-ts` → `entry#presets-ddd-ts` |
+| Key           | `Defu.ok.left-wins`                                                              | `entry#runtime.ok.esm`                                                                                                                                                           |
+| `ok.*` means  | The type expression in the statement compiles, and resolves as stated            | The entry resolves under the stated condition and exposes the stated names                                                                                                       |
+| `err.*` means | The type expression in the statement is a type error                             | Resolution fails (for example, `require` of an ESM-only entry)                                                                                                                   |
+| IR fields     | `typeText`, the declared type, for docs                                          | `entry: { subpath, source, conditions: Record<string, string> }`                                                                                                                 |
 
 Choices behind the table:
 
@@ -53,7 +53,10 @@ This is kept out of `/runtime` so that tests which never check types do not load
 
 ```ts
 /** Type-checks `source` as a module next to `from` (paths and tsconfig as the repository's). */
-export function checkTypes(source: string, options: { from: string; tsconfig?: string }): {
+export function checkTypes(
+  source: string,
+  options: { from: string; tsconfig?: string },
+): {
   errors: Array<{ code: number; message: string; line: number }>;
 };
 ```
