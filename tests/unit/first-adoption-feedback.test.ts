@@ -139,8 +139,9 @@ describe("#8 appending emits skeletons and the imports they need", () => {
     // the file already imported describe/expect/test from @jest/globals: no second framework import
     expect(place.match(/from "@jest\/globals"/g)).toHaveLength(1);
     // imports the appended skeletons need, inserted after the existing imports, before the first describe
+    // over tests.lineWidth, so wrapped one name per line as formatters do
     expect(place).toContain(
-      'import { createFaultRunner, createStub, fakeClock, faultRunnerControl, snapshotAll, stubReset } from "@marbull-x-inc/specgate/runtime";',
+      'import {\n  createFaultRunner,\n  createStub,\n  fakeClock,\n  faultRunnerControl,\n  snapshotAll,\n  stubReset,\n  todoArgs,\n} from "@marbull-x-inc/specgate/runtime";',
     );
     expect(place).toContain('import { PlaceOrderUseCase } from "../../src/application/place-order";');
     expect(place.indexOf('from "@marbull-x-inc/specgate/runtime"')).toBeLessThan(
