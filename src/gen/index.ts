@@ -79,8 +79,26 @@ const ADAPTERS: Record<TestAdapter, AdapterSyntax> = {
   },
 };
 
+/**
+ * A string literal for generated source. JSON escaping covers quotes, backslashes and control
+ * characters; U+2028 / U+2029 are escaped too, since they end a line for some tools and readers
+ * even where the language accepts them inside a string.
+ */
 function q(text: string): string {
-  return JSON.stringify(text);
+  return JSON.stringify(text)
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+}
+
+/**
+ * Text for a generated `//` comment: on one line (any line break, including U+2028 / U+2029,
+ * becomes a space), so text from a doc comment can never end the comment and become code.
+ */
+function commentText(text: string): string {
+  return text
+    .replace(/[\r\n\u2028\u2029]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 export function mirrorPath(config: Config, sourceFile: string, suffix = config.tests.mirror.suffix): string {
@@ -279,7 +297,7 @@ function testBody(
       : `expect(() => ${call}).toThrow(${g.throws});`;
     return {
       kind: "test",
-      code: `  ${syntax.test}(${t}, ${asyncKw}() => {${args}\n    // arrange: TODO make the condition hold — ${g.text}\n    ${expectation}\n  });`,
+      code: `  ${syntax.test}(${t}, ${asyncKw}() => {${args}\n    // arrange: TODO make the condition hold — ${commentText(g.text)}\n    ${expectation}\n  });`,
     };
   }
   if (g.kind === "frame" && unit.kind === "method") {
@@ -625,7 +643,7 @@ function renderProperty(entities: Entity[], testFile: string, config: Config): s
     "",
     `${syntax.describe}(${q(`${toPosix(first.file)} invariants`)}, () => {`,
     ...withInvariants.flatMap((e) => [
-      `  // ${e.name}: ${e.invariants.map((i) => i.text).join("; ")}`,
+      `  // ${e.name}: ${commentText(e.invariants.map((i) => i.text).join("; "))}`,
       `  ${syntax.test}(${q(`${e.name}.invariant parsed values satisfy the schema again (round-trip)`)}, () => {`,
       `    // Structure and bounds come from the schema; refinements (${e.invariants.length} invariant${e.invariants.length > 1 ? "s" : ""}) are applied as a final filter.`,
       `    const arb = arbitraryFromZod(fc, ${e.name});`,
