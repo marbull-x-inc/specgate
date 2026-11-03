@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { applyAccepted, readAccepted } from "./accepted.ts";
 import type { Config } from "./config/schema.ts";
 import { createProgramHost, type ProgramHost } from "./extract/program.ts";
 import { type ExtractedUnit, extractSurface } from "./extract/surface.ts";
@@ -26,6 +27,8 @@ export interface AnalyzeOptions {
   provenance?: boolean;
   /** Previous report for change detection; defaults to `<output.dir>/report.json` when present. */
   baseline?: Report | null;
+  /** Apply the accepted-findings file (default true). */
+  accepted?: boolean;
 }
 
 function loadBaseline(config: Config, explicit: Report | null | undefined): Report | undefined {
@@ -80,16 +83,19 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
     ...configMessages.map((text) => ({ file: "tsdoc.json", line: 1, text })),
   ];
   const baseline = loadBaseline(config, options.baseline);
-  const findings = evaluateRules({
-    config,
-    units,
-    tests: testExtraction.tests,
-    unlinked: testExtraction.unlinked,
-    docMessages,
-    baseline,
-    strayGuarantees: surface.strayGuarantees,
-    surfaceFileCount: surfaceFiles.length,
-  });
+  const findings = applyAccepted(
+    evaluateRules({
+      config,
+      units,
+      tests: testExtraction.tests,
+      unlinked: testExtraction.unlinked,
+      docMessages,
+      baseline,
+      strayGuarantees: surface.strayGuarantees,
+      surfaceFileCount: surfaceFiles.length,
+    }),
+    options.accepted === false ? new Set() : readAccepted(config),
+  );
 
   const guarantees = units.flatMap((u) => u.guarantees);
   const guaranteeKeys = new Set(guarantees.map((g) => g.key));

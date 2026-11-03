@@ -12,10 +12,10 @@ export class CancelOrderUseCase {
    * TODO: one sentence on what cancelOrder does
    * @remarks TODO: why it is designed this way
    * @param orderId - TODO (string)
-   * @throws {@link OrderNotFoundError} TODO condition under which OrderNotFoundError is thrown
+   * @throws {@link OrderNotFoundError} TODO when OrderNotFoundError is thrown
    * @uses TransactionRunner, OrderRepository
    * @modifies TODO
-   * @guarantee TODO what holds after a successful call, in terms of params, result and declared ports (replace TODO with an id; list the ports whose state changes in the modifies tag, or drop that tag)
+   * @guarantee TODO what holds afterwards, in params, result and declared ports
    */
   async cancelOrder(orderId: string): Promise<void> {
     await this.tx.run(async () => {

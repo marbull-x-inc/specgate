@@ -23,8 +23,8 @@ TODO: why it is designed this way
 
 | Id | Kind | Statement | Tests | Since |
 |---|---|---|---|---|
-| `TODO` | other | what holds after a successful call, in terms of params, result and declared ports (replace TODO with an id; list the ports whose state changes in the modifies tag, or drop that tag) | — |  |
-| `TODO` | other | throws `OrderNotFoundError` — condition under which OrderNotFoundError is thrown | — |  |
+| `TODO` | other | what holds afterwards, in params, result and declared ports | — |  |
+| `TODO` | other | throws `OrderNotFoundError` — when OrderNotFoundError is thrown | — |  |
 
 ### How it runs (extracted from the implementation)
 
