@@ -24,9 +24,9 @@ Both ends are inclusive so that an action at exactly `end` still counts.
 
 | Id | Kind | Statement | Tests | Since |
 |---|---|---|---|---|
-| `ok.within` | ok | Clock.now ∈ [period.start, period.end] gives result = true | `tests/domain/period.test.ts:9` |  |
-| `ok.outside` | ok | Clock.now outside the interval gives result = false | `tests/domain/period.test.ts:10` |  |
-| `ok.unbounded` | ok | period = null (no limit) gives result = true | `tests/domain/period.test.ts:11` |  |
+| `ok.within` | ok | Clock.now ∈ [period.start, period.end] gives result = true | `tests/domain/period.test.ts:10` |  |
+| `ok.outside` | ok | Clock.now outside the interval gives result = false | `tests/domain/period.test.ts:11` |  |
+| `ok.unbounded` | ok | period = null (no limit) gives result = true | `tests/domain/period.test.ts:12` |  |
 
 ### Examples
 
@@ -44,6 +44,6 @@ Referenced by: `src/main.ts`
 
 ### Tests
 
-- `isWithinPeriod.ok.within` (todo) — tests/domain/period.test.ts:9
-- `isWithinPeriod.ok.outside` (todo) — tests/domain/period.test.ts:10
-- `isWithinPeriod.ok.unbounded` (todo) — tests/domain/period.test.ts:11
+- `isWithinPeriod.ok.within` (todo) — tests/domain/period.test.ts:10
+- `isWithinPeriod.ok.outside` (todo) — tests/domain/period.test.ts:11
+- `isWithinPeriod.ok.unbounded` (todo) — tests/domain/period.test.ts:12
