@@ -205,6 +205,17 @@ function stripAsConst(expr: ts.Expression): ts.Expression {
   return current;
 }
 
+/** The module's `/** … @packageDocumentation … *\/` comment, if any (before the first statement). */
+export function packageDocCommentOf(sf: ts.SourceFile): { pos: number; end: number; text: string } | undefined {
+  const first = sf.statements[0];
+  const ranges = ts.getLeadingCommentRanges(sf.text, first ? first.getFullStart() : 0) ?? [];
+  for (const range of ranges) {
+    const text = sf.text.slice(range.pos, range.end);
+    if (text.startsWith("/**") && /@packageDocumentation\b/.test(text)) return { pos: range.pos, end: range.end, text };
+  }
+  return undefined;
+}
+
 export function lineOf(sf: ts.SourceFile, pos: number): number {
   return sf.getLineAndCharacterOfPosition(pos).line + 1;
 }
@@ -216,6 +227,9 @@ export function docCommentOf(sf: ts.SourceFile, node: ts.Node): { pos: number; e
     const range = ranges[i];
     if (!range) continue;
     const text = sf.text.slice(range.pos, range.end);
+    // A module's @packageDocumentation comment precedes its first statement but documents the
+    // module (an entry unit), never that statement.
+    if (/@packageDocumentation\b/.test(text)) continue;
     if (text.startsWith("/**") && !text.startsWith("/***")) return { pos: range.pos, end: range.end, text };
   }
   return undefined;

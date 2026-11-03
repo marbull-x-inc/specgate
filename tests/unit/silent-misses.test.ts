@@ -113,11 +113,13 @@ export type Alias = string;
     });
     const { report } = await run(dir);
     const messages = rulesOf(report.findings, "guarantee-on-non-unit").map((f) => f.message);
-    expect(messages).toHaveLength(4);
+    expect(messages).toHaveLength(3);
     expect(messages.find((m) => m.startsWith("hidden "))).toContain("not exported");
     expect(messages.find((m) => m.startsWith("Box "))).toContain("public methods");
     expect(messages.find((m) => m.startsWith("Box#secret"))).toContain("not public");
-    expect(messages.find((m) => m.startsWith("Alias "))).toContain("type aliases");
+    // an exported type alias with a guarantee is a type unit, not a stray guarantee
+    expect(messages.some((m) => m.startsWith("Alias "))).toBe(false);
+    expect(report.units.find((u) => u.id === "Alias")?.kind).toBe("type");
     expect(rulesOf(report.findings, "guarantee-on-non-unit")[0]?.severity).toBe("fail");
     expect(report.units.find((u) => u.id === "Box#open")?.guarantees.map((g) => g.id)).toEqual(["ok.open"]);
   });

@@ -1,6 +1,6 @@
 # 0001 — Guarantees on types and package entries
 
-Status: proposed · Issue: #20 (item 3)
+Status: accepted (implemented in 0.4.0) · Issue: #20 (item 3)
 
 ## Problem
 
@@ -28,14 +28,14 @@ Add two unit kinds and two helpers. Linking stays as it is: a test names a key, 
 
 ### Unit kinds
 
-|               | `type`                                                                           | `entry`                                                                                                                                                                          |
-| ------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Declared by   | An exported `type` alias or a non-`@port` `interface` whose doc has `@guarantee` | The `@packageDocumentation` comment of an entry module                                                                                                                           |
-| Unit id       | The type name: `Defu`                                                            | `entry#<slug>`. The slug is `main` for `"."`, otherwise the subpath with `/` and `.` turned into `-`: `./runtime` → `entry#runtime`, `./presets/ddd-ts` → `entry#presets-ddd-ts` |
-| Key           | `Defu.ok.left-wins`                                                              | `entry#runtime.ok.esm`                                                                                                                                                           |
-| `ok.*` means  | The type expression in the statement compiles, and resolves as stated            | The entry resolves under the stated condition and exposes the stated names                                                                                                       |
-| `err.*` means | The type expression in the statement is a type error                             | Resolution fails (for example, `require` of an ESM-only entry)                                                                                                                   |
-| IR fields     | `typeText`, the declared type, for docs                                          | `entry: { subpath, source, conditions: Record<string, string> }`                                                                                                                 |
+|               | `type`                                                                           | `entry`                                                                                                                                                                                                                                                                  |
+| ------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Declared by   | An exported `type` alias or a non-`@port` `interface` whose doc has `@guarantee` | The `@packageDocumentation` comment of an entry module                                                                                                                                                                                                                   |
+| Unit id       | The type name: `Defu`                                                            | `entry#<slug>`. The slug is `main` for `"."`, otherwise the subpath with every non-identifier character turned into `_`: `./runtime` → `entry#runtime`, `./presets/ddd-ts` → `entry#presets_ddd_ts`. The key qualifier must be an identifier, so `-` cannot appear in it |
+| Key           | `Defu.ok.left-wins`                                                              | `entry#runtime.ok.esm`                                                                                                                                                                                                                                                   |
+| `ok.*` means  | The type expression in the statement compiles, and resolves as stated            | The entry resolves under the stated condition and exposes the stated names                                                                                                                                                                                               |
+| `err.*` means | The type expression in the statement is a type error                             | Resolution fails (for example, `require` of an ESM-only entry)                                                                                                                                                                                                           |
+| IR fields     | `typeText`, the declared type, for docs                                          | `entry: { subpath, source, conditions: Record<string, string> }`                                                                                                                                                                                                         |
 
 Choices behind the table:
 

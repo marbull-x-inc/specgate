@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { applyAccepted, readAccepted } from "./accepted.ts";
 import type { Config } from "./config/schema.ts";
+import { packageEntries } from "./extract/entries.ts";
 import { createProgramHost, type ProgramHost } from "./extract/program.ts";
 import { type ExtractedUnit, extractSurface } from "./extract/surface.ts";
 import { extractTests } from "./extract/tests/index.ts";
@@ -51,9 +52,11 @@ function loadBaseline(config: Config, explicit: Report | null | undefined): Repo
 export async function analyze(config: Config, options: AnalyzeOptions = {}): Promise<Analysis> {
   const surfaceFiles = await expandGlobs(config.root, config.surface.include, config.surface.exclude);
   const testFiles = await expandGlobs(config.root, config.tests.include);
-  const host = createProgramHost(config.root, config.tsconfig, [...surfaceFiles, ...testFiles]);
+  const entries = packageEntries(config);
+  const entrySources = entries.flatMap((e) => (e.source ? [e.source] : []));
+  const host = createProgramHost(config.root, config.tsconfig, [...surfaceFiles, ...testFiles, ...entrySources]);
   const { parser, configMessages } = createTsdocParser(config.root);
-  const surface = extractSurface(host, config, parser, surfaceFiles, testFiles);
+  const surface = extractSurface(host, config, parser, surfaceFiles, testFiles, entries);
   const testExtraction = extractTests(config, testFiles);
 
   const units: Unit[] = surface.units.map((u) => u.unit);
@@ -93,6 +96,7 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
       baseline,
       strayGuarantees: surface.strayGuarantees,
       surfaceFileCount: surfaceFiles.length,
+      unmappedEntries: entries.filter((e) => e.source === undefined).map((e) => e.subpath),
     }),
     options.accepted === false ? new Set() : readAccepted(config),
   );

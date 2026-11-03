@@ -63,7 +63,7 @@ export const zExample = z.object({ expression: z.string(), expected: z.string(),
 
 export const zPortCall = z.object({ port: z.string(), member: z.string(), count: z.number().int() });
 
-export const zUnitKind = z.enum(["function", "method", "port"]);
+export const zUnitKind = z.enum(["function", "method", "port", "type", "entry"]);
 export type UnitKind = z.infer<typeof zUnitKind>;
 
 export const zUnit = z.object({
@@ -99,6 +99,15 @@ export const zUnit = z.object({
   examples: z.array(zExample),
   supersedes: z.string().optional(),
   hasDoc: z.boolean(),
+  typeText: z.string().optional().describe("type units: the declared type text"),
+  entry: z
+    .object({
+      subpath: z.string(),
+      source: z.string(),
+      conditions: z.record(z.string(), z.string()),
+    })
+    .optional()
+    .describe("entry units: package.json#exports subpath and the module its guarantees are written in"),
 });
 export type Unit = z.infer<typeof zUnit>;
 

@@ -52,7 +52,9 @@
             "enum": [
               "function",
               "method",
-              "port"
+              "port",
+              "type",
+              "entry"
             ]
           },
           "target": {
@@ -433,6 +435,37 @@
           },
           "hasDoc": {
             "type": "boolean"
+          },
+          "typeText": {
+            "description": "type units: the declared type text",
+            "type": "string"
+          },
+          "entry": {
+            "description": "entry units: package.json#exports subpath and the module its guarantees are written in",
+            "type": "object",
+            "properties": {
+              "subpath": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "conditions": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "subpath",
+              "source",
+              "conditions"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [

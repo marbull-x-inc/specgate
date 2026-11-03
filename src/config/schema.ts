@@ -31,6 +31,8 @@ export interface Config {
     classPattern?: string;
     /** Pattern for operation names (methods and functions) to include. Unset: every operation. */
     operationPattern?: string;
+    /** `package.json#exports` subpath → source module, for entries whose targets are build output only. */
+    entries: Record<string, string>;
   };
   tests: {
     include: string[];
@@ -117,6 +119,7 @@ export function defaultConfig(): Config {
       include: ["src/**/*.ts"],
       exclude: ["**/*.test.ts", "**/*.spec.ts", "**/*.d.ts"],
       mode: "referenced",
+      entries: {},
     },
     tests: {
       include: ["tests/**/*.test.ts", "**/*.test.ts", "**/*.spec.ts"],
@@ -263,6 +266,9 @@ function applyInput(config: Config, input: unknown, label: string): void {
     });
     s.string("operationPattern", (v) => {
       config.surface.operationPattern = v;
+    });
+    s.stringRecord("entries", (v) => {
+      config.surface.entries = v;
     });
   });
   r.object("tests", (t) => {
@@ -484,6 +490,7 @@ export const RULE_IDS = [
   "guarantee-on-non-unit",
   "surface-empty",
   "guarantee-known-violation",
+  "entry-unmapped",
 ] as const;
 export type RuleId = (typeof RULE_IDS)[number];
 
@@ -506,6 +513,7 @@ export const DEFAULT_SEVERITIES: Record<RuleId, RuleSeverity> = {
   "guarantee-on-non-unit": "fail",
   "surface-empty": "warn",
   "guarantee-known-violation": "warn",
+  "entry-unmapped": "info",
 };
 
 export function severityOf(config: Config, rule: RuleId): RuleSeverity {

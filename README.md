@@ -116,6 +116,7 @@ export default defineConfig({
 | `test-todo`                                       | warn    | A linked test is still `test.todo`                                                                 |
 | `decision-unspecified`                            | warn    | The implementation commits to a value (boundary, constant, output, match) no guarantee names       |
 | `guarantee-known-violation`                       | warn    | A linked test is `test.failing` / `test.fails`: the implementation is known not to keep it         |
+| `entry-unmapped`                                  | info    | A `package.json#exports` subpath points only to build output; map it with `surface.entries`        |
 | `guarantee-on-non-unit`                           | fail    | A `@guarantee` sits on a declaration that is not a unit (not exported, private, a type, …)         |
 | `surface-empty`                                   | warn    | No unit was extracted (the message lists the usual causes)                                         |
 
@@ -139,6 +140,20 @@ make the first run useful instead of red:
 
 `scaffold` seeds the first guarantee from an existing `@returns` and does not repeat a
 documented `@throws`.
+
+### Guarantees on types and package entries
+
+Some promises are not about a call:
+
+- **What a type accepts or rejects.** An exported type alias or non-`@port` interface whose doc has `@guarantee` is a `type` unit (`Merge.ok.left-wins`). There, `ok.*` means the stated type expression compiles, and `err.*` means it is a type error.
+- **What a package entry exposes.** The `@packageDocumentation` comment of an entry module is an `entry` unit (`entry#main.ok.esm`, `entry#runtime.ok.esm`). Entry modules come from `package.json#exports`, through a condition that points to a source file (`bun`, `source`, …), or else from `surface.entries`.
+
+No test runner type-checks the tests themselves, so `gen` writes these tests with helpers from `@marbull-x-inc/specgate/typecheck`:
+
+- **`checkTypes(source, { from })`** runs the TypeScript checker on a snippet, with the repository's compiler options. Type guarantees go to `*.types.test.ts`. The snippet starts as `todoSnippet(…)`, which throws, so the test fails until the author writes the type expression.
+- **`loadEntry(subpath, { root, condition })`** imports or requires the built package by its own name, in a child Node process. Entry guarantees go to `*.entry.test.ts`, skipped until the build runs before the tests.
+
+Design: `docs/design/0001-type-and-entry-units.md`.
 
 ### Linked is not the same as tested
 

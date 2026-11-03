@@ -77,7 +77,21 @@ export interface PortCall {
   count: number;
 }
 
-export type UnitKind = "function" | "method" | "port";
+/**
+ * `type`: an exported type alias or non-port interface with guarantees (what it accepts or
+ * rejects). `entry`: a package entry (`package.json#exports` subpath) whose module has a
+ * `@packageDocumentation` comment with guarantees. See docs/design/0001-type-and-entry-units.md.
+ */
+export type UnitKind = "function" | "method" | "port" | "type" | "entry";
+
+export interface EntryInfo {
+  /** `package.json#exports` subpath, e.g. "." or "./runtime" */
+  subpath: string;
+  /** Source module the guarantees are written in, relative to root */
+  source: string;
+  /** Export conditions and their targets as written in package.json */
+  conditions: Record<string, string>;
+}
 
 /**
  * Kind of a value the implementation commits to: a `boundary` it compares against, a
@@ -128,6 +142,10 @@ export interface Unit {
   examples: Example[];
   supersedes?: string;
   hasDoc: boolean;
+  /** `type` units: the declared type text (not expanded) */
+  typeText?: string;
+  /** `entry` units */
+  entry?: EntryInfo;
 }
 
 export interface Entity {
@@ -231,7 +249,11 @@ function isUnit(value: unknown): value is Unit {
   return (
     isRecord(value) &&
     typeof value["id"] === "string" &&
-    (value["kind"] === "function" || value["kind"] === "method" || value["kind"] === "port") &&
+    (value["kind"] === "function" ||
+      value["kind"] === "method" ||
+      value["kind"] === "port" ||
+      value["kind"] === "type" ||
+      value["kind"] === "entry") &&
     typeof value["operation"] === "string" &&
     typeof value["file"] === "string" &&
     typeof value["line"] === "number" &&

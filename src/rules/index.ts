@@ -22,6 +22,8 @@ export interface RuleContext {
   strayGuarantees?: ReadonlyArray<{ file: string; line: number; name: string; reason: string }>;
   /** How many files `surface.include` / `exclude` selected (for `surface-empty`). */
   surfaceFileCount?: number;
+  /** `package.json#exports` subpaths with no source module to read guarantees from. */
+  unmappedEntries?: readonly string[];
 }
 
 type Draft = Omit<Finding, "severity">;
@@ -54,6 +56,12 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
       message: `${s.name} has @guarantee but is not a unit (${s.reason}); its guarantees are not checked`,
       file: s.file,
       line: s.line,
+    });
+
+  for (const subpath of ctx.unmappedEntries ?? [])
+    emit("entry-unmapped", {
+      message: `package.json#exports "${subpath}" points only to build output; map it to its source module with surface.entries to write guarantees on it`,
+      file: "package.json",
     });
 
   if (ctx.surfaceFileCount !== undefined && ctx.units.length === 0)
