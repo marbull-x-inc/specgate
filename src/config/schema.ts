@@ -56,6 +56,19 @@ export interface Config {
      * boundary with "…", and the full statement goes in a comment above the test. 0 never cuts.
      */
     titleLength: number;
+    /** More title prefixes to strip before reading the key (matching only; gen never writes them). */
+    titlePrefixes: string[];
+    /**
+     * Prefix rules for gen, tried in order before `prefixes[kind]`: the first whose `id` regular
+     * expression matches the guarantee id (and `throws`, if given, the error type) gives the prefix.
+     */
+    prefixRules: Array<{ id: string; throws?: string; prefix: string }>;
+    /**
+     * How gen obtains the unit and its ports, for projects whose tests take them from a container.
+     * `sut` replaces `new Target(ports…)`, `port` replaces the stub for every injected port;
+     * placeholders `{Target}`, `{operation}`, `{Port}`, `{member}`. `imports` are added as written.
+     */
+    arrange?: { sut?: string; port?: string; imports?: string[] };
   };
   ids: { pattern: string; placeholder: string };
   rules: Record<string, RuleSeverity>;
@@ -111,6 +124,8 @@ export function defaultConfig(): Config {
       lineWidth: 120,
       quote: "auto",
       titleLength: 100,
+      titlePrefixes: [],
+      prefixRules: [],
     },
     ids: {
       pattern: "^(ok|err|atomic|frame|idempotent)(\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
@@ -192,6 +207,19 @@ class Reader {
     }
     apply(out);
   }
+  /** An array of objects, each mapped (and validated) by `map`. */
+  records<T>(key: string, map: (value: Record<string, unknown>, path: string) => T, apply: (v: T[]) => void): void {
+    const v = this.source[key];
+    if (v === undefined) return;
+    if (!Array.isArray(v)) throw new ConfigError(this.at(key), "an array of objects", v);
+    apply(
+      v.map((item: unknown, i) => {
+        const path = `${this.at(key)}[${i}]`;
+        if (!isRecord(item)) throw new ConfigError(path, "an object", item);
+        return map(item, path);
+      }),
+    );
+  }
   object(key: string, apply: (reader: Reader) => void): void {
     const v = this.source[key];
     if (v === undefined) return;
@@ -268,6 +296,40 @@ function applyInput(config: Config, input: unknown, label: string): void {
     });
     t.number("titleLength", (v) => {
       config.tests.titleLength = v;
+    });
+    t.strings("titlePrefixes", (v) => {
+      config.tests.titlePrefixes = v;
+    });
+    t.records(
+      "prefixRules",
+      (rule, path) => {
+        const id = rule["id"];
+        const throws = rule["throws"];
+        const prefix = rule["prefix"];
+        if (typeof id !== "string") throw new ConfigError(`${path}.id`, "a regular expression string", id);
+        if (throws !== undefined && typeof throws !== "string")
+          throw new ConfigError(`${path}.throws`, "a regular expression string", throws);
+        if (typeof prefix !== "string") throw new ConfigError(`${path}.prefix`, "a string", prefix);
+        new RegExp(id);
+        if (throws !== undefined) new RegExp(throws);
+        return { id, prefix, ...(throws !== undefined ? { throws } : {}) };
+      },
+      (v) => {
+        config.tests.prefixRules = v;
+      },
+    );
+    t.object("arrange", (a) => {
+      const arrange: NonNullable<Config["tests"]["arrange"]> = { ...config.tests.arrange };
+      a.string("sut", (v) => {
+        arrange.sut = v;
+      });
+      a.string("port", (v) => {
+        arrange.port = v;
+      });
+      a.strings("imports", (v) => {
+        arrange.imports = v;
+      });
+      config.tests.arrange = arrange;
     });
   });
   r.object("ids", (i) => {
