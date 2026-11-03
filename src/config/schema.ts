@@ -1,3 +1,5 @@
+import { dddTs } from "./presets/ddd-ts.ts";
+
 /**
  * Configuration accepted from `specgate.config.ts`.
  *
@@ -325,7 +327,9 @@ function applyInput(config: Config, input: unknown, label: string): void {
 
 /**
  * Validates an untyped value (for example a parsed JSON file) into a complete config.
- * Presets listed under `presets` apply first, in order; the value's own fields apply last.
+ * Presets listed under `presets` apply first, in order; the value's own fields apply last. A
+ * preset is an object or, so that JSON configs can use them, the name of a built-in preset
+ * (`"ddd-ts"`).
  * @throws Error naming the offending path when a field has the wrong shape.
  */
 export function parseConfig(input: unknown): Config {
@@ -335,8 +339,16 @@ export function parseConfig(input: unknown): Config {
   const { presets, ...own } = input;
   if (presets !== undefined) {
     if (!Array.isArray(presets)) throw new ConfigError("presets", "an array of presets", presets);
-    presets.forEach((preset, index) => {
-      if (!isRecord(preset)) throw new ConfigError(`presets[${index}]`, "a preset object", preset);
+    presets.forEach((entry, index) => {
+      const preset = typeof entry === "string" ? BUILTIN_PRESETS[entry] : entry;
+      if (!isRecord(preset))
+        throw new ConfigError(
+          `presets[${index}]`,
+          `a preset object or one of ${Object.keys(BUILTIN_PRESETS)
+            .map((n) => JSON.stringify(n))
+            .join(", ")}`,
+          entry,
+        );
       const { name: _name, ...rest } = preset;
       applyInput(config, rest, `presets[${index}]`);
     });
@@ -352,6 +364,8 @@ export function parseConfig(input: unknown): Config {
 export function defineConfig(input: DefineConfigInput): Config {
   return parseConfig(input);
 }
+
+const BUILTIN_PRESETS: Readonly<Record<string, Preset>> = { "ddd-ts": dddTs };
 
 export const RULE_IDS = [
   "tsdoc-syntax",
