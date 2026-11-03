@@ -122,7 +122,7 @@ export function extractTests(
 ): TestExtraction {
   const idPattern = new RegExp(config.ids.pattern);
   const describePatterns = config.tests.describeOperationPatterns.map((p) => new RegExp(p));
-  const prefixes = Object.values(config.tests.prefixes);
+  const prefixes = [...Object.values(config.tests.prefixes), ...config.tests.titlePrefixes];
   const tests: TestCase[] = [];
   const unlinked: TestExtraction["unlinked"] = [];
 
