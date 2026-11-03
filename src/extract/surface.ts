@@ -80,6 +80,8 @@ function referenceKey(file: string, name: string): string {
  * Test files never count as referrers: a unit used only by its own tests is not part of a
  * module's public surface.
  */
+const TEST_FILE_SHAPE = /(?:\.(?:test|spec)\.[cm]?[jt]sx?$)|(?:\/(?:__tests__|__mocks__)\/)/;
+
 function buildReferenceIndex(host: ProgramHost, testFiles: ReadonlySet<string>): Map<string, Set<string>> {
   const index = new Map<string, Set<string>>();
   const add = (decl: ts.Declaration, fromFile: string): void => {
@@ -96,7 +98,8 @@ function buildReferenceIndex(host: ProgramHost, testFiles: ReadonlySet<string>):
     set.add(fromFile);
   };
   for (const sf of host.files) {
-    if (testFiles.has(sf.fileName)) continue;
+    // A file shaped like a test never makes an export public, even outside `tests.include`.
+    if (testFiles.has(sf.fileName) || TEST_FILE_SHAPE.test(sf.fileName)) continue;
     for (const statement of sf.statements) {
       if (ts.isImportDeclaration(statement) && statement.importClause) {
         const bindings = statement.importClause.namedBindings;

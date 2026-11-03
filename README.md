@@ -63,8 +63,12 @@ bun add -d @marbull-x-inc/specgate
 bunx specgate init --adapter vitest --ci
 ```
 
-`init` writes `tsdoc.json` (extending `@marbull-x-inc/specgate/tsdoc.json`), `specgate.config.ts` and, with
-`--ci`, a GitHub Actions workflow that publishes the Step Summary and SARIF.
+`init` writes `tsdoc.json` (extending `@marbull-x-inc/specgate/tsdoc.json`), a config and, with
+`--ci`, a GitHub Actions workflow that publishes the Step Summary and SARIF (every action pinned
+by SHA). The config is `specgate.config.ts` when the package is installed and
+`specgate.config.json` otherwise, so that trying specgate through `bunx` / `npx` before adding
+it works; `--format ts|json` chooses explicitly. When several config files exist, the first of
+`specgate.config.{ts,mts,js,mjs,json}` is used and the others are named on stderr.
 
 ```ts
 // specgate.config.ts

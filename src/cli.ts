@@ -32,6 +32,7 @@ Options
   --ci               init: also write .github/workflows/specgate.yml
   --force            init: overwrite existing files
   --adapter <name>   init: bun | vitest | jest | playwright
+  --format <ts|json> init: config file format (default: ts when the package is installed, else json)
   --no-preset        init: do not extend preset-ddd-ts
 `;
 
@@ -52,6 +53,7 @@ export async function main(argv: string[]): Promise<number> {
       ci: { type: "boolean", default: false },
       force: { type: "boolean", default: false },
       adapter: { type: "string" },
+      format: { type: "string" },
       "no-preset": { type: "boolean", default: false },
       help: { type: "boolean", short: "h", default: false },
     },
@@ -65,7 +67,13 @@ export async function main(argv: string[]): Promise<number> {
 
   if (command === "init") {
     const adapter = values.adapter;
+    const format = values.format;
+    if (format !== undefined && format !== "ts" && format !== "json") {
+      console.error(`specgate: --format must be "ts" or "json", got "${format}"`);
+      return 1;
+    }
     const result = initRepo(cwd, {
+      ...(format !== undefined ? { format } : {}),
       ci: values.ci,
       force: values.force,
       preset: values["no-preset"] ? "none" : "ddd-ts",
@@ -78,8 +86,10 @@ export async function main(argv: string[]): Promise<number> {
     return 0;
   }
 
-  const { config, path } = await loadConfig(cwd, values.config);
+  const { config, path, ignored } = await loadConfig(cwd, values.config);
   if (!path) console.error("specgate: no config file found, using defaults (run `specgate init`)");
+  else if (ignored.length > 0)
+    console.error(`specgate: using ${path}; ignoring ${ignored.join(", ")} (remove it, or pass --config)`);
 
   if (command === "check") {
     const baselineOption = values.baseline ? await readBaseline(resolve(cwd, values.baseline)) : undefined;
