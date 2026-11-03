@@ -18,6 +18,11 @@
       "bun": "./src/runtime/index.ts",
       "default": "./dist/runtime/index.js"
     },
+    "./typecheck": {
+      "types": "./dist/typecheck/index.d.ts",
+      "bun": "./src/typecheck/index.ts",
+      "default": "./dist/typecheck/index.js"
+    },
     "./presets/ddd-ts": {
       "types": "./dist/config/presets/ddd-ts.d.ts",
       "bun": "./src/config/presets/ddd-ts.ts",

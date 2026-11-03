@@ -21,6 +21,9 @@ const cell = markdownTableCell;
 function signature(unit: Unit): string {
   const params = unit.params.map((p) => `${p.name}${p.optional ? "?" : ""}: ${p.type}`).join(", ");
   if (unit.kind === "port") return `interface ${unit.operation}`;
+  if (unit.kind === "type") return unit.typeText ?? `type ${unit.operation}`;
+  if (unit.kind === "entry")
+    return `package entry "${unit.entry?.subpath ?? "."}" (${unit.entry?.source ?? unit.file})`;
   return `${unit.kind === "method" ? `${unit.target}#` : ""}${unit.operation}(${params}): ${unit.returns}`;
 }
 

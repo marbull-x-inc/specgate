@@ -372,6 +372,77 @@ interface RenderedUnit {
   tests: string[][];
 }
 
+/** `import.meta.url` where the adapter runs ESM; `__filename` under jest (CommonJS by default). */
+function selfLocation(config: Config): string {
+  return config.tests.adapter === "jest" ? "__filename" : "import.meta.url";
+}
+
+/**
+ * Skeletons for `type` and `entry` units (docs/design/0001-type-and-entry-units.md).
+ *
+ * @remarks
+ * A type guarantee is checked with `checkTypes` from `@marbull-x-inc/specgate/typecheck`, since
+ * no runner type-checks tests itself: `ok.*` expects no error, `err.*` at least one. The type
+ * expression comes from the statement and is left to the author: `todoSnippet()` throws until it
+ * is replaced, so neither kind passes before it states anything. An entry guarantee loads the
+ * built package with `loadEntry`; it needs a build, so the skeleton is skipped until the author
+ * has the build run before the tests. The condition is `require` when the id or statement says
+ * require / CommonJS / cjs and not import / ESM, otherwise `import`.
+ */
+function renderContractUnit(
+  unit: Unit,
+  guarantees: readonly Unit["guarantees"][number][],
+  testFile: string,
+  config: Config,
+): RenderedUnit {
+  const syntax = ADAPTERS[config.tests.adapter];
+  const imports = new Set<string>([syntax.imports]);
+  const tests: string[][] = [];
+  const sourceAbs = resolve(config.root, unit.file);
+  for (const g of guarantees) {
+    if (!g.id || g.id === config.ids.placeholder) continue;
+    const titled = titleOf(config, g);
+    const t = q(titled.title);
+    const expectsError = g.kind === "err";
+    if (unit.kind === "type") {
+      imports.add('import { checkTypes, todoSnippet } from "@marbull-x-inc/specgate/typecheck";');
+      const typeImport = `import type { ${unit.operation} } from ${q(relativeImport(testFile, sourceAbs, config))};`;
+      tests.push([
+        ...fullStatementLines(titled),
+        `  ${syntax.test}(${t}, () => {`,
+        "    const { errors } = checkTypes(",
+        "      [",
+        `        ${q(typeImport)},`,
+        "        // TODO: replace with source text that states the guarantee",
+        `        todoSnippet(${q(commentText(g.text))}),`,
+        '      ].join("\\n"),',
+        `      { from: ${selfLocation(config)} },`,
+        "    );",
+        expectsError ? "    expect(errors.length).toBeGreaterThan(0);" : "    expect(errors).toEqual([]);",
+        "  });",
+      ]);
+      continue;
+    }
+    const subpath = unit.entry?.subpath ?? ".";
+    const said = `${g.id} ${g.text}`;
+    const condition =
+      /require|commonjs|\bcjs\b/i.test(said) && !/\bimport\b|\besm\b/i.test(said) ? "require" : "import";
+    imports.add('import { loadEntry } from "@marbull-x-inc/specgate/typecheck";');
+    tests.push([
+      ...fullStatementLines(titled),
+      "  // Needs the package built: un-skip once the build runs before the tests.",
+      `  ${syntax.skip}(${t}, () => {`,
+      `    const result = loadEntry(${q(subpath)}, { root: process.cwd(), condition: ${q(condition)} });`,
+      expectsError
+        ? "    expect(result).toMatchObject({ ok: false });"
+        : "    expect(result).toMatchObject({ ok: true }); // TODO: and the names the statement promises",
+      "  });",
+    ]);
+  }
+  const rank = (i: string): number => (i === syntax.imports ? 0 : 1);
+  return { imports: [...imports].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b)), arrangeLines: [], tests };
+}
+
 /** Renders the tests for the given guarantees; shared by new files and appends. */
 function renderUnit(
   unit: Unit,
@@ -381,6 +452,7 @@ function renderUnit(
   config: Config,
 ): RenderedUnit {
   const syntax = ADAPTERS[config.tests.adapter];
+  if (unit.kind === "type" || unit.kind === "entry") return renderContractUnit(unit, guarantees, testFile, config);
   const arr = arrange(unit, ex, testFile, config);
   const imports = new Set<string>([syntax.imports, ...arr.imports]);
   const tests: string[][] = [];
@@ -631,7 +703,10 @@ function renderDoctest(
   config: Config,
 ): string | undefined {
   const syntax = ADAPTERS[config.tests.adapter];
-  const examples = units.flatMap(({ unit }) => unit.examples.map((e, i) => ({ unit, e, i })));
+  // Only callables can be evaluated; examples on type and entry units are documentation.
+  const examples = units
+    .filter(({ unit }) => unit.kind === "function" || unit.kind === "method")
+    .flatMap(({ unit }) => unit.examples.map((e, i) => ({ unit, e, i })));
   if (examples.length === 0) return undefined;
   const first = units[0];
   if (!first) return undefined;
@@ -705,17 +780,7 @@ export function generateTests(
     writeFileSync(path, content);
   };
 
-  const byFile = new Map<string, Array<{ unit: Unit; ex: ExtractedUnit }>>();
-  for (const ex of extracted) {
-    if (options.unitFilter && ex.unit.id !== options.unitFilter && !ex.unit.id.startsWith(`${options.unitFilter}#`))
-      continue;
-    const list = byFile.get(ex.unit.file) ?? [];
-    list.push({ unit: ex.unit, ex });
-    byFile.set(ex.unit.file, list);
-  }
-
-  for (const [file, units] of byFile) {
-    const testFile = mirrorPath(config, file);
+  function writeTestFile(testFile: string, units: Array<{ unit: Unit; ex: ExtractedUnit }>): void {
     // A guarantee is covered when any test file names it (analyze linked them across the whole
     // test set) or the mirror file already does; only the rest is generated.
     const inMirror = existsSync(testFile)
@@ -737,6 +802,30 @@ export function generateTests(
       for (const e of todo) content = renderAppend(content, e.unit, e.ex, e.guarantees, testFile, config, now, quote);
       record(testFile, todo.length > 0 ? "appended" : "unchanged", content);
     }
+  }
+
+  // type and entry guarantees go to their own mirror files (*.types.test.ts / *.entry.test.ts).
+  const testFileOf = (unit: Unit): string =>
+    unit.kind === "type"
+      ? mirrorPath(config, unit.file, ".types.test.ts")
+      : unit.kind === "entry"
+        ? mirrorPath(config, unit.file, ".entry.test.ts")
+        : mirrorPath(config, unit.file);
+  const byFile = new Map<string, Array<{ unit: Unit; ex: ExtractedUnit }>>();
+  for (const ex of extracted) {
+    if (options.unitFilter && ex.unit.id !== options.unitFilter && !ex.unit.id.startsWith(`${options.unitFilter}#`))
+      continue;
+    const list = byFile.get(ex.unit.file) ?? [];
+    list.push({ unit: ex.unit, ex });
+    byFile.set(ex.unit.file, list);
+  }
+
+  for (const [file, allUnits] of byFile) {
+    const groups = new Map<string, typeof allUnits>();
+    for (const e of allUnits) groups.set(testFileOf(e.unit), [...(groups.get(testFileOf(e.unit)) ?? []), e]);
+    for (const [testFile, units] of groups) writeTestFile(testFile, units);
+    const units = allUnits;
+
     const doctestFile = mirrorPath(config, file, ".doctest.test.ts");
     const doctest = renderDoctest(units, doctestFile, config);
     if (doctest) record(doctestFile, existsSync(doctestFile) ? "overwritten" : "created", applyQuote(doctest, quote));

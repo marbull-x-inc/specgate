@@ -4,7 +4,8 @@ import type { Entity, Guarantee, PortDecl, Unit } from "../ir/schema.ts";
 import { textHash } from "../util/hash.ts";
 import { relativeTo } from "../util/paths.ts";
 import { collectDecisions } from "./decisions.ts";
-import { docCommentOf, lineOf, type ProgramHost } from "./program.ts";
+import { entryUnitId, type PackageEntry } from "./entries.ts";
+import { docCommentOf, lineOf, type ProgramHost, packageDocCommentOf } from "./program.ts";
 import { type ParsedDoc, parseDocComment, type TSDocParser } from "./tsdoc-parser.ts";
 
 /**
@@ -421,6 +422,7 @@ export function extractSurface(
   parser: TSDocParser,
   surfaceFiles: readonly string[],
   testFiles: readonly string[],
+  entries: readonly PackageEntry[] = [],
 ): SurfaceExtraction {
   const testSet = new Set(testFiles);
   const ctx: Context = { host, config, parser, testFiles: testSet, referenceIndex: buildReferenceIndex(host, testSet) };
@@ -534,6 +536,62 @@ export function extractSurface(
         sourceFile: sf,
         calleeDeclarations: scan.calleeDeclarations,
         thrownErrorTypes: scan.thrownErrorTypes,
+        importSources,
+      });
+    };
+
+    /**
+     * A `type` unit: an exported type alias or non-port interface whose doc has `@guarantee`.
+     * Only declarations with guarantees become units, so adopting specgate does not demand a
+     * guarantee for every exported type.
+     */
+    const addTypeUnit = (
+      statement: ts.TypeAliasDeclaration | ts.InterfaceDeclaration,
+      doc: ParsedDoc,
+      comment: ReturnType<typeof docCommentOf>,
+      docLine: number,
+    ): void => {
+      const name = statement.name.text;
+      if (!inSurface(name)) return;
+      usedDocNodes.add(statement);
+      const unit: Unit = {
+        id: name,
+        kind: "type",
+        operation: name,
+        file: relFile,
+        line: lineOf(sf, statement.getStart(sf)),
+        endLine: lineOf(sf, statement.getEnd()),
+        referencedBy: referencedBy(name),
+        summary: doc.summary,
+        ...(doc.remarks ? { remarks: doc.remarks } : {}),
+        params: [],
+        returns: "",
+        uses: [],
+        modifies: [],
+        injectedPorts: [],
+        portCalls: [],
+        operationCalls: [],
+        envInputs: [],
+        decisions: [],
+        implHash: textHash(statement.getText(sf)),
+        guarantees: deriveThrowsIds(name, buildGuarantees(name, doc, docLine), config),
+        examples: doc.examples.map((e) => ({
+          expression: e.expression,
+          expected: e.expected,
+          line: docLine + e.lineOffset,
+        })),
+        hasDoc: true,
+        typeText: oneLineType(statement, sf),
+      };
+      units.push({
+        unit,
+        doc,
+        docComment: comment,
+        declaration: statement,
+        nameNode: statement.name,
+        sourceFile: sf,
+        calleeDeclarations: [],
+        thrownErrorTypes: [],
         importSources,
       });
     };
@@ -723,12 +781,22 @@ export function extractSurface(
         }
         continue;
       }
+      if (ts.isTypeAliasDeclaration(statement)) {
+        if (!exported.has(statement.name.text)) continue;
+        const { doc, comment, docLine } = describeExtraction(ctx, sf, statement);
+        recordDocMessages(doc, docLine);
+        if (doc && doc.guarantees.length > 0) addTypeUnit(statement, doc, comment, docLine);
+        continue;
+      }
       if (ts.isInterfaceDeclaration(statement)) {
         const name = statement.name.text;
         if (!exported.has(name)) continue;
         const { doc, comment, docLine } = describeExtraction(ctx, sf, statement);
         recordDocMessages(doc, docLine);
-        if (!doc?.isPort) continue;
+        if (!doc?.isPort) {
+          if (doc && doc.guarantees.length > 0) addTypeUnit(statement, doc, comment, docLine);
+          continue;
+        }
         usedDocNodes.add(statement);
         const members = memberNames(statement, sf);
         const vocabulary = [
@@ -795,6 +863,77 @@ export function extractSurface(
     }
   }
 
+  // Entry units: the @packageDocumentation comment of each mapped entry module.
+  const entrySources = new Set(entries.flatMap((e) => (e.source ? [e.source] : [])));
+  for (const entry of entries) {
+    if (!entry.source) continue;
+    const sf = host.program.getSourceFile(entry.source);
+    if (!sf) continue;
+    const comment = packageDocCommentOf(sf);
+    if (!comment) continue;
+    const doc = parseDocComment(parser, comment.text, { jsdoc: config.tsdoc.jsdoc });
+    const docLine = lineOf(sf, comment.pos);
+    const relFile = relativeTo(config.root, sf.fileName);
+    for (const m of doc.messages) docMessages.push({ file: relFile, line: docLine + m.lineOffset, text: m.text });
+    if (doc.guarantees.length === 0 && doc.throws.length === 0) continue;
+    const id = entryUnitId(entry.subpath);
+    const operation = id.slice("entry#".length);
+    const unit: Unit = {
+      id,
+      kind: "entry",
+      target: "entry",
+      operation,
+      file: relFile,
+      line: docLine,
+      endLine: lineOf(sf, comment.end),
+      referencedBy: [],
+      summary: doc.summary,
+      ...(doc.remarks ? { remarks: doc.remarks } : {}),
+      params: [],
+      returns: "",
+      uses: [],
+      modifies: [],
+      injectedPorts: [],
+      portCalls: [],
+      operationCalls: [],
+      envInputs: [],
+      decisions: [],
+      implHash: textHash(JSON.stringify(entry.conditions)),
+      guarantees: deriveThrowsIds(id, buildGuarantees(id, doc, docLine), config),
+      examples: doc.examples.map((e) => ({
+        expression: e.expression,
+        expected: e.expected,
+        line: docLine + e.lineOffset,
+      })),
+      hasDoc: true,
+      entry: { subpath: entry.subpath, source: relFile, conditions: entry.conditions },
+    };
+    units.push({
+      unit,
+      doc,
+      docComment: comment,
+      declaration: sf,
+      nameNode: sf,
+      sourceFile: sf,
+      calleeDeclarations: [],
+      thrownErrorTypes: [],
+      importSources: importSourcesOf(sf),
+    });
+  }
+  // A @packageDocumentation with guarantees in a module that is not an entry is stray.
+  for (const fileName of surfaceFiles) {
+    if (entrySources.has(fileName)) continue;
+    const sf = host.program.getSourceFile(fileName);
+    const comment = sf ? packageDocCommentOf(sf) : undefined;
+    if (!sf || !comment || !/@guarantee\b/.test(comment.text)) continue;
+    strayGuarantees.push({
+      file: relativeTo(config.root, sf.fileName),
+      line: lineOf(sf, comment.pos),
+      name: "@packageDocumentation",
+      reason: "the module is not a package.json#exports entry (map it with surface.entries)",
+    });
+  }
+
   // Second pass: callee declarations → surface unit ids ("how" for docs, composition for resolution).
   const byDeclaration = new Map<ts.Node, string>();
   for (const u of units) byDeclaration.set(u.declaration, u.unit.id);
@@ -844,8 +983,10 @@ function findStrayGuarantees(
             : "its class is not exported";
         check(member, `${className}#${member.name.getText(sf)}`, reason);
       }
-    } else if (ts.isInterfaceDeclaration(statement)) check(statement, statement.name.text, "it is not marked @port");
-    else if (ts.isTypeAliasDeclaration(statement)) check(statement, statement.name.text, "type aliases are not units");
+    } else if (ts.isInterfaceDeclaration(statement))
+      check(statement, statement.name.text, "it is excluded from the surface");
+    else if (ts.isTypeAliasDeclaration(statement))
+      check(statement, statement.name.text, "it is excluded from the surface");
   }
   return out;
 }
@@ -902,4 +1043,14 @@ function callableReturns(host: ProgramHost, nameNode: ts.Node): string {
   const signature = callSignatureOf(host, nameNode);
   if (!signature) return "unknown";
   return host.checker.typeToString(signature.getReturnType(), nameNode, ts.TypeFormatFlags.NoTruncation);
+}
+
+/** `type X<T> = …` / `interface X<T> { … }` on one line, shortened for docs. */
+function oneLineType(statement: ts.TypeAliasDeclaration | ts.InterfaceDeclaration, sf: ts.SourceFile): string {
+  const text = statement
+    .getText(sf)
+    .replace(/^export\s+(declare\s+)?/, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return text.length > 200 ? `${text.slice(0, 197)}...` : text;
 }
