@@ -141,3 +141,46 @@ describe("gen appends skeletons that compile and load", () => {
     expect(output).toMatch(/\n 1 skip\n/);
   }, 60_000);
 });
+
+describe("text from doc comments cannot become code", () => {
+  test("a multi-line statement stays inside the generated comment and string", async () => {
+    const repo = workDir("gen-injection");
+    mkdirSync(join(repo, "src"), { recursive: true });
+    writeFileSync(
+      join(repo, "src", "f.ts"),
+      `export class BadError extends Error {}
+/**
+ * @throws {@link BadError} err.bad first line
+ * globalThis.injected = true; second line   third
+ */
+export function f(x: number): number {
+  if (x < 0) throw new BadError("bad");
+  return x;
+}
+`,
+    );
+    writeFileSync(
+      join(repo, "specgate.config.json"),
+      JSON.stringify({
+        surface: { include: ["src/f.ts"], exclude: [], mode: "exported" },
+        tests: { include: ["tests/**/*.test.ts"], adapter: "bun", importExtension: ".ts" },
+      }),
+    );
+    expect(await main(["gen", "--cwd", repo, "--config", "specgate.config.json"])).toBe(0);
+    const content = readFileSync(join(repo, "tests", "f.test.ts"), "utf8");
+    // every line holding the statement is a comment or inside the title literal
+    for (const line of content.split("\n"))
+      if (line.includes("globalThis.injected"))
+        expect(line.trim().startsWith("//") || line.includes('test("')).toBe(true);
+    expect(content).not.toContain(" ");
+    const sf = ts.createSourceFile("f.test.ts", content, ts.ScriptTarget.Latest, true);
+    const assignments: string[] = [];
+    const visit = (n: ts.Node): void => {
+      if (ts.isBinaryExpression(n) && n.operatorToken.kind === ts.SyntaxKind.EqualsToken)
+        assignments.push(n.getText(sf));
+      ts.forEachChild(n, visit);
+    };
+    visit(sf);
+    expect(assignments).toEqual([]);
+  });
+});
