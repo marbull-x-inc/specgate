@@ -130,7 +130,10 @@ function relativeImport(fromTestFile: string, targetAbs: string, config: Config)
  * comment above the test.
  */
 function titleOf(config: Config, g: Unit["guarantees"][number]): { title: string; full?: string } {
-  const prefix = config.tests.prefixes[g.kind] ?? "";
+  const rule = config.tests.prefixRules.find(
+    (r) => new RegExp(r.id).test(g.id) && (r.throws === undefined || new RegExp(r.throws).test(g.throws ?? "")),
+  );
+  const prefix = rule?.prefix ?? config.tests.prefixes[g.kind] ?? "";
   return shortTitle(`${prefix ? `${prefix} ` : ""}${g.key}`, g.text, config.tests.titleLength);
 }
 
@@ -195,12 +198,26 @@ function arrange(unit: Unit, ex: ExtractedUnit, testFile: string, config: Config
   const sourceAbs = resolve(config.root, unit.file);
   const sutSpecifier = relativeImport(testFile, sourceAbs, config);
 
+  const custom = config.tests.arrange;
   if (unit.kind === "method" && unit.target) {
     imports.push(`import { ${unit.target} } from ${q(sutSpecifier)};`);
+    for (const line of custom?.imports ?? []) imports.push(line);
     const typeImports = new Map<string, Set<string>>();
-    const txMember = txRunnerMember(unit.injectedPorts);
+    const txMember = custom?.port ? undefined : txRunnerMember(unit.injectedPorts);
+    const fill = (template: string, port?: Unit["injectedPorts"][number]): string =>
+      template
+        .replace(/\{Target\}/g, unit.target ?? "")
+        .replace(/\{operation\}/g, unit.operation)
+        .replace(/\{Port\}/g, port ? port.type.replace(/<.*$/, "") : "")
+        .replace(/\{member\}/g, port?.member ?? "");
     for (const port of unit.injectedPorts) {
       const typeName = port.type.replace(/<.*$/, "");
+      if (custom?.port) {
+        // The project's own test setup provides the port; skeletons that need recording stubs
+        // (frame, atomic, idempotent) fall back to todo.
+        lines.push(`const ${port.member} = ${fill(custom.port, port)};`);
+        continue;
+      }
       const source = ex.importSources.get(typeName);
       const spec = source ? importSpecifier(testFile, source, sourceAbs, config) : sutSpecifier;
       if (!typeImports.has(spec)) typeImports.set(spec, new Set());
@@ -220,7 +237,11 @@ function arrange(unit: Unit, ex: ExtractedUnit, testFile: string, config: Config
     }
     for (const [spec, names] of typeImports)
       imports.push(`import type { ${[...names].sort().join(", ")} } from ${q(spec)};`);
-    lines.push(`const sut = new ${unit.target}(${unit.injectedPorts.map((p) => p.member).join(", ")});`);
+    lines.push(
+      custom?.sut
+        ? `const sut = ${fill(custom.sut)};`
+        : `const sut = new ${unit.target}(${unit.injectedPorts.map((p) => p.member).join(", ")});`,
+    );
     return finish(`sut.${unit.operation}`, `${unit.target}[${q(unit.operation)}]`);
   }
   if (unit.kind === "function") {
