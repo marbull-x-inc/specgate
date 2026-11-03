@@ -25,7 +25,7 @@ Mixing currencies is a programming error, not user input, so it throws instead o
 | Id | Kind | Statement | Tests | Since |
 |---|---|---|---|---|
 | `ok.sum` | ok | result.amount = a.amount + b.amount and result.currency = a.currency | `tests/domain/money.test.ts:5` |  |
-| `ok.pure` | ok | a and b are unchanged after the call | `tests/domain/money.test.ts:24` |  |
+| `ok.pure` | ok | a and b are unchanged after the call | `tests/domain/money.test.ts:25` |  |
 | `err.currency-mismatch` | err | throws `RangeError` — a.currency differs from b.currency | `tests/domain/money.test.ts:11` |  |
 
 ### Examples
@@ -45,4 +45,4 @@ Referenced by: `src/application/place-order.ts`, `src/main.ts`
 - `addMoney.ok.sum` — tests/domain/money.test.ts:5
 - `addMoney.err.currency-mismatch` — tests/domain/money.test.ts:11
 - `addMoney.ok.nonexistent` — tests/domain/money.test.ts:14
-- `addMoney.ok.pure` (todo) — tests/domain/money.test.ts:24
+- `addMoney.ok.pure` (todo) — tests/domain/money.test.ts:25

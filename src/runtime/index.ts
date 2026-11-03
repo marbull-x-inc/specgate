@@ -346,3 +346,14 @@ function build<Arb>(fc: ArbitraryFactory<Arb>, schema: unknown, depth: number): 
       return fc.anything();
   }
 }
+
+/**
+ * Placeholder for the arguments of a generated test. Typed as the operation's parameter tuple
+ * (`todoArgs<Parameters<typeof op>>([...names])`) so the skeleton compiles under `strict`; it
+ * always throws, so the test fails with a message naming the arguments until they are filled in.
+ *
+ * @throws Error always, naming the parameters to fill in.
+ */
+export function todoArgs<T extends readonly unknown[]>(names: readonly string[]): T {
+  throw new Error(`specgate: fill in the arguments (${names.join(", ")}) of this generated test`);
+}
