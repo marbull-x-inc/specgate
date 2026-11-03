@@ -149,7 +149,8 @@ export interface PortDecl {
   description: string;
 }
 
-export type TestStatus = "test" | "todo" | "skip" | "each";
+/** `failing`: `test.failing` (bun, jest) / `test.fails` (vitest), a test expected to fail. */
+export type TestStatus = "test" | "todo" | "skip" | "each" | "failing";
 
 export interface TestCase {
   /** Guarantee key the test names, e.g. Quest#create.ok.recorded */

@@ -46,6 +46,29 @@ export interface Config {
     generatedSuffixes: string[];
     /** gen wraps a generated `test.todo` line that would exceed this many characters. */
     lineWidth: number;
+    /**
+     * Quote style of generated string literals. `"auto"` reads the formatter config in `root`
+     * (Biome `javascript.formatter.quoteStyle`, Prettier `singleQuote`) and falls back to double.
+     */
+    quote: "auto" | "double" | "single";
+    /**
+     * Longest generated test title. The key is always kept whole; the statement is cut at a word
+     * boundary with "…", and the full statement goes in a comment above the test. 0 never cuts.
+     */
+    titleLength: number;
+    /** More title prefixes to strip before reading the key (matching only; gen never writes them). */
+    titlePrefixes: string[];
+    /**
+     * Prefix rules for gen, tried in order before `prefixes[kind]`: the first whose `id` regular
+     * expression matches the guarantee id (and `throws`, if given, the error type) gives the prefix.
+     */
+    prefixRules: Array<{ id: string; throws?: string; prefix: string }>;
+    /**
+     * How gen obtains the unit and its ports, for projects whose tests take them from a container.
+     * `sut` replaces `new Target(ports…)`, `port` replaces the stub for every injected port;
+     * placeholders `{Target}`, `{operation}`, `{Port}`, `{member}`. `imports` are added as written.
+     */
+    arrange?: { sut?: string; port?: string; imports?: string[] };
   };
   /** `deriveThrows`: give `@throws` without an id one (`err.<error-type>`); see surface extraction. */
   ids: { pattern: string; placeholder: string; deriveThrows: boolean };
@@ -104,6 +127,10 @@ export function defaultConfig(): Config {
       importExtension: "",
       generatedSuffixes: [".doctest.test.ts", ".property.test.ts"],
       lineWidth: 120,
+      quote: "auto",
+      titleLength: 100,
+      titlePrefixes: [],
+      prefixRules: [],
     },
     ids: {
       pattern: "^(ok|err|atomic|frame|idempotent)(\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
@@ -187,6 +214,19 @@ class Reader {
     }
     apply(out);
   }
+  /** An array of objects, each mapped (and validated) by `map`. */
+  records<T>(key: string, map: (value: Record<string, unknown>, path: string) => T, apply: (v: T[]) => void): void {
+    const v = this.source[key];
+    if (v === undefined) return;
+    if (!Array.isArray(v)) throw new ConfigError(this.at(key), "an array of objects", v);
+    apply(
+      v.map((item: unknown, i) => {
+        const path = `${this.at(key)}[${i}]`;
+        if (!isRecord(item)) throw new ConfigError(path, "an object", item);
+        return map(item, path);
+      }),
+    );
+  }
   object(key: string, apply: (reader: Reader) => void): void {
     const v = this.source[key];
     if (v === undefined) return;
@@ -257,6 +297,46 @@ function applyInput(config: Config, input: unknown, label: string): void {
     });
     t.number("lineWidth", (v) => {
       config.tests.lineWidth = v;
+    });
+    t.oneOf("quote", ["auto", "double", "single"] as const, (v) => {
+      config.tests.quote = v;
+    });
+    t.number("titleLength", (v) => {
+      config.tests.titleLength = v;
+    });
+    t.strings("titlePrefixes", (v) => {
+      config.tests.titlePrefixes = v;
+    });
+    t.records(
+      "prefixRules",
+      (rule, path) => {
+        const id = rule["id"];
+        const throws = rule["throws"];
+        const prefix = rule["prefix"];
+        if (typeof id !== "string") throw new ConfigError(`${path}.id`, "a regular expression string", id);
+        if (throws !== undefined && typeof throws !== "string")
+          throw new ConfigError(`${path}.throws`, "a regular expression string", throws);
+        if (typeof prefix !== "string") throw new ConfigError(`${path}.prefix`, "a string", prefix);
+        new RegExp(id);
+        if (throws !== undefined) new RegExp(throws);
+        return { id, prefix, ...(throws !== undefined ? { throws } : {}) };
+      },
+      (v) => {
+        config.tests.prefixRules = v;
+      },
+    );
+    t.object("arrange", (a) => {
+      const arrange: NonNullable<Config["tests"]["arrange"]> = { ...config.tests.arrange };
+      a.string("sut", (v) => {
+        arrange.sut = v;
+      });
+      a.string("port", (v) => {
+        arrange.port = v;
+      });
+      a.strings("imports", (v) => {
+        arrange.imports = v;
+      });
+      config.tests.arrange = arrange;
     });
   });
   r.object("ids", (i) => {
@@ -403,6 +483,7 @@ export const RULE_IDS = [
   "decision-unspecified",
   "guarantee-on-non-unit",
   "surface-empty",
+  "guarantee-known-violation",
 ] as const;
 export type RuleId = (typeof RULE_IDS)[number];
 
@@ -424,6 +505,7 @@ export const DEFAULT_SEVERITIES: Record<RuleId, RuleSeverity> = {
   "decision-unspecified": "warn",
   "guarantee-on-non-unit": "fail",
   "surface-empty": "warn",
+  "guarantee-known-violation": "warn",
 };
 
 export function severityOf(config: Config, rule: RuleId): RuleSeverity {

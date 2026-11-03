@@ -122,7 +122,7 @@ export function extractTests(
 ): TestExtraction {
   const idPattern = new RegExp(config.ids.pattern);
   const describePatterns = config.tests.describeOperationPatterns.map((p) => new RegExp(p));
-  const prefixes = Object.values(config.tests.prefixes);
+  const prefixes = [...Object.values(config.tests.prefixes), ...config.tests.titlePrefixes];
   const tests: TestCase[] = [];
   const unlinked: TestExtraction["unlinked"] = [];
 
@@ -154,11 +154,13 @@ export function extractTests(
             const status: TestCase["status"] =
               modifier === "todo"
                 ? "todo"
-                : modifier === "skip"
-                  ? "skip"
-                  : modifier === "each" || ts.isCallExpression(node.expression)
-                    ? "each"
-                    : "test";
+                : modifier === "failing" || modifier === "fails"
+                  ? "failing"
+                  : modifier === "skip"
+                    ? "skip"
+                    : modifier === "each" || ts.isCallExpression(node.expression)
+                      ? "each"
+                      : "test";
             const body = node.arguments.find((a) => ts.isArrowFunction(a) || ts.isFunctionExpression(a));
             const bodyHash = textHash(body ? body.getText(sf) : "");
             const line = sf.getLineAndCharacterOfPosition(node.getStart(sf)).line + 1;

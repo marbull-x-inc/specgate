@@ -25,7 +25,7 @@ The notification is sent after the order is stored so that a failed store never 
 | Id | Kind | Statement | Tests | Since |
 |---|---|---|---|---|
 | `ok.stored` | ok | after the call OrderRepository holds an order with status PLACED whose total is the sum of items prices | `tests/application/place-order.test.ts:19` |  |
-| `ok.notified` | ok | NotificationGateway recorded exactly one orderPlaced(accountId, result) | `tests/application/place-order.test.ts:35` |  |
+| `ok.notified` | ok | NotificationGateway recorded exactly one orderPlaced(accountId, result) | `tests/application/place-order.test.ts:36` |  |
 | `atomic` | atomic | when any port fails, OrderRepository and NotificationGateway are unchanged | `tests/application/place-order.test.ts:40` |  |
 | `frame` | frame | ports outside `@modifies` are unchanged | `tests/application/place-order.test.ts:51` |  |
 | `err.empty` | err | throws `EmptyOrderError` — items is empty; no state changes | `tests/application/place-order.test.ts:22` |  |
@@ -47,6 +47,6 @@ Referenced by: `src/main.ts`
 
 - `PlaceOrderUseCase#placeOrder.ok.stored` — tests/application/place-order.test.ts:19
 - `PlaceOrderUseCase#placeOrder.err.empty` (todo) — tests/application/place-order.test.ts:22
-- `PlaceOrderUseCase#placeOrder.ok.notified` (todo) — tests/application/place-order.test.ts:35
+- `PlaceOrderUseCase#placeOrder.ok.notified` (todo) — tests/application/place-order.test.ts:36
 - `PlaceOrderUseCase#placeOrder.atomic` (skip) — tests/application/place-order.test.ts:40
 - `PlaceOrderUseCase#placeOrder.frame` (todo) — tests/application/place-order.test.ts:51

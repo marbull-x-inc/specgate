@@ -151,7 +151,10 @@ describe("#8 appending emits skeletons and the imports they need", () => {
     const appended = place.slice(place.indexOf("(specgate)"));
     expect(appended).toContain("const sut = new PlaceOrderUseCase(tx, orders, notifications, clock);");
     expect(appended).toContain("faultRunnerControl(tx).failurePoints()");
-    expect(appended).toContain('test.todo(\n    "PlaceOrderUseCase#placeOrder.ok.notified ');
+    // the title is shortened to tests.titleLength; the full statement is the comment above it
+    expect(appended).toContain(
+      '  // NotificationGateway recorded exactly one orderPlaced(accountId, result)\n  test.todo("PlaceOrderUseCase#placeOrder.ok.notified ',
+    );
     // err.empty already had a test (todo) in the file, so it is not appended again
     expect(appended).not.toContain("rejects.toThrow(EmptyOrderError)");
   });
