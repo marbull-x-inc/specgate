@@ -1,5 +1,6 @@
 import { resolve } from "node:path";
 import { parseArgs } from "node:util";
+import { writeAccepted } from "./accepted.ts";
 import { analyze, exitCodeFor } from "./analyze.ts";
 import { initRepo } from "./commands/init.ts";
 import { scaffoldDocs } from "./commands/scaffold.ts";
@@ -23,6 +24,8 @@ Options
   --unit <id>        scaffold / gen: only this unit (Target#operation or Target)
   --dry-run          scaffold / gen: print instead of writing
   --strict           check: exit 1 on fail findings even in advisory mode
+  --accept-baseline  check: record the current fail / warn findings in output.accepted
+                     (default specgate.accepted.json); later runs report them as info
   --no-provenance    check: skip git blame / log
   --baseline <path>  check: previous report.json for change detection (default: .specgate/report.json)
   --out <dir>        check: output directory (default: .specgate); docs: docs directory
@@ -43,6 +46,7 @@ export async function main(argv: string[]): Promise<number> {
       unit: { type: "string" },
       "dry-run": { type: "boolean", default: false },
       strict: { type: "boolean", default: false },
+      "accept-baseline": { type: "boolean", default: false },
       "no-provenance": { type: "boolean", default: false },
       baseline: { type: "string" },
       out: { type: "string" },
@@ -89,10 +93,16 @@ export async function main(argv: string[]): Promise<number> {
 
   if (command === "check") {
     const baselineOption = values.baseline ? await readBaseline(resolve(cwd, values.baseline)) : undefined;
-    const { report } = await analyze(config, {
+    const analyzeOptions = {
       provenance: !values["no-provenance"],
       ...(baselineOption !== undefined ? { baseline: baselineOption } : {}),
-    });
+    };
+    let { report } = await analyze(config, analyzeOptions);
+    if (values["accept-baseline"]) {
+      const { path: acceptedFile, count } = writeAccepted(config, report.findings);
+      console.error(`specgate: accepted ${count} finding(s) in ${acceptedFile}; commit it`);
+      ({ report } = await analyze(config, analyzeOptions));
+    }
     const outDir = resolve(config.root, values.out ?? config.output.dir);
     const files = writeReportFiles(report, outDir);
     console.log(renderConsole(report));
