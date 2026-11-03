@@ -111,6 +111,7 @@ export default defineConfig({
 | `env-input-direct`                                | warn    | `Date.now`, `new Date`, `Math.random`, `fetch`, … used directly instead of through a port          |
 | `test-todo`                                       | warn    | A linked test is still `test.todo`                                                                 |
 | `decision-unspecified`                            | warn    | The implementation commits to a value (boundary, constant, output, match) no guarantee names       |
+| `guarantee-known-violation`                       | warn    | A linked test is `test.failing` / `test.fails`: the implementation is known not to keep it         |
 | `guarantee-on-non-unit`                           | fail    | A `@guarantee` sits on a declaration that is not a unit (not exported, private, a type, …)         |
 | `surface-empty`                                   | warn    | No unit was extracted (the message lists the usual causes)                                         |
 

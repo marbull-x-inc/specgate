@@ -123,7 +123,7 @@ export const zPortDecl = z.object({
 });
 export type PortDecl = z.infer<typeof zPortDecl>;
 
-export const zTestStatus = z.enum(["test", "todo", "skip", "each"]);
+export const zTestStatus = z.enum(["test", "todo", "skip", "each", "failing"]);
 
 export const zTestCase = z.object({
   key: z.string().describe("Guarantee key the test names, e.g. Quest#create.ok.recorded"),
