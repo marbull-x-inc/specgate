@@ -1,0 +1,546 @@
+{
+  "files": {
+    "src/policy.ts": {
+      "language": "typescript",
+      "mutants": [
+        {
+          "id": "10",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "status": "NoCoverage",
+          "static": false,
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 24
+            },
+            "start": {
+              "column": 45,
+              "line": 21
+            }
+          }
+        },
+        {
+          "id": "11",
+          "mutatorName": "StringLiteral",
+          "replacement": "``",
+          "status": "NoCoverage",
+          "static": false,
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 28,
+              "line": 22
+            },
+            "start": {
+              "column": 16,
+              "line": 22
+            }
+          }
+        },
+        {
+          "id": "3",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected undefined to be true // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 4.023290999999972,
+          "killedBy": ["0"],
+          "coveredBy": ["0"],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 9
+            },
+            "start": {
+              "column": 50,
+              "line": 7
+            }
+          }
+        },
+        {
+          "id": "4",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected undefined to be true // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 4.224458000000141,
+          "killedBy": ["1"],
+          "coveredBy": ["1"],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 14
+            },
+            "start": {
+              "column": 47,
+              "line": 12
+            }
+          }
+        },
+        {
+          "id": "5",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected undefined to be true // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 3.3926660000000766,
+          "killedBy": ["1"],
+          "coveredBy": ["1"],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 18
+            },
+            "start": {
+              "column": 38,
+              "line": 16
+            }
+          }
+        },
+        {
+          "id": "7",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected false to be true // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 4.180499999999938,
+          "killedBy": ["1"],
+          "coveredBy": ["1"],
+          "location": {
+            "end": {
+              "column": 19,
+              "line": 17
+            },
+            "start": {
+              "column": 10,
+              "line": 17
+            }
+          }
+        },
+        {
+          "id": "6",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 1.3254579999999123,
+          "coveredBy": ["1"],
+          "location": {
+            "end": {
+              "column": 19,
+              "line": 17
+            },
+            "start": {
+              "column": 10,
+              "line": 17
+            }
+          }
+        },
+        {
+          "id": "8",
+          "mutatorName": "EqualityOperator",
+          "replacement": "age > 18",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 1.138166999999953,
+          "coveredBy": ["1"],
+          "location": {
+            "end": {
+              "column": 19,
+              "line": 17
+            },
+            "start": {
+              "column": 10,
+              "line": 17
+            }
+          }
+        },
+        {
+          "id": "9",
+          "mutatorName": "EqualityOperator",
+          "replacement": "age < 18",
+          "statusReason": "expected false to be true // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 4.807416999999987,
+          "killedBy": ["1"],
+          "coveredBy": ["1"],
+          "location": {
+            "end": {
+              "column": 19,
+              "line": 17
+            },
+            "start": {
+              "column": 10,
+              "line": 17
+            }
+          }
+        },
+        {
+          "id": "12",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected undefined to be 190 // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 3.6831659999999147,
+          "killedBy": ["3"],
+          "coveredBy": ["3"],
+          "location": {
+            "end": {
+              "column": 4,
+              "line": 30
+            },
+            "start": {
+              "column": 33,
+              "line": 28
+            }
+          }
+        },
+        {
+          "id": "13",
+          "mutatorName": "BlockStatement",
+          "replacement": "{}",
+          "statusReason": "expected undefined to be 190 // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 3.386250000000018,
+          "killedBy": ["3"],
+          "coveredBy": ["3"],
+          "location": {
+            "end": {
+              "column": 4,
+              "line": 35
+            },
+            "start": {
+              "column": 46,
+              "line": 32
+            }
+          }
+        },
+        {
+          "id": "14",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "true",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 1.1977919999999358,
+          "coveredBy": ["3"],
+          "location": {
+            "end": {
+              "column": 22,
+              "line": 33
+            },
+            "start": {
+              "column": 9,
+              "line": 33
+            }
+          }
+        },
+        {
+          "id": "15",
+          "mutatorName": "ConditionalExpression",
+          "replacement": "false",
+          "statusReason": "expected 200 to be 190 // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 5.151166999999987,
+          "killedBy": ["3"],
+          "coveredBy": ["3"],
+          "location": {
+            "end": {
+              "column": 22,
+              "line": 33
+            },
+            "start": {
+              "column": 9,
+              "line": 33
+            }
+          }
+        },
+        {
+          "id": "16",
+          "mutatorName": "EqualityOperator",
+          "replacement": "amount > 100",
+          "status": "Survived",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 1.3160419999999249,
+          "coveredBy": ["3"],
+          "location": {
+            "end": {
+              "column": 22,
+              "line": 33
+            },
+            "start": {
+              "column": 9,
+              "line": 33
+            }
+          }
+        },
+        {
+          "id": "17",
+          "mutatorName": "EqualityOperator",
+          "replacement": "amount < 100",
+          "statusReason": "expected 200 to be 190 // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 4.966499999999996,
+          "killedBy": ["3"],
+          "coveredBy": ["3"],
+          "location": {
+            "end": {
+              "column": 22,
+              "line": 33
+            },
+            "start": {
+              "column": 9,
+              "line": 33
+            }
+          }
+        },
+        {
+          "id": "1",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "statusReason": "expected false to be true // Object.is equality",
+          "status": "Killed",
+          "static": true,
+          "testsCompleted": 1,
+          "duration": 4.794167000000016,
+          "killedBy": ["0"],
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 15,
+              "line": 2
+            },
+            "start": {
+              "column": 3,
+              "line": 2
+            }
+          }
+        },
+        {
+          "id": "18",
+          "mutatorName": "ArithmeticOperator",
+          "replacement": "amount + 10",
+          "statusReason": "expected 210 to be 190 // Object.is equality",
+          "status": "Killed",
+          "static": false,
+          "testsCompleted": 1,
+          "duration": 5.298167000000035,
+          "killedBy": ["3"],
+          "coveredBy": ["3"],
+          "location": {
+            "end": {
+              "column": 42,
+              "line": 33
+            },
+            "start": {
+              "column": 31,
+              "line": 33
+            }
+          }
+        },
+        {
+          "id": "0",
+          "mutatorName": "ArrayDeclaration",
+          "replacement": "[]",
+          "statusReason": "expected false to be true // Object.is equality",
+          "status": "Killed",
+          "static": true,
+          "testsCompleted": 1,
+          "duration": 5.569917000000032,
+          "killedBy": ["0"],
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 2,
+              "line": 4
+            },
+            "start": {
+              "column": 24,
+              "line": 1
+            }
+          }
+        },
+        {
+          "id": "2",
+          "mutatorName": "StringLiteral",
+          "replacement": "\"\"",
+          "status": "Survived",
+          "static": true,
+          "testsCompleted": 4,
+          "duration": 1.8319580000002134,
+          "coveredBy": [],
+          "location": {
+            "end": {
+              "column": 15,
+              "line": 3
+            },
+            "start": {
+              "column": 3,
+              "line": 3
+            }
+          }
+        }
+      ],
+      "source": "export const BLOCKED = [\n  \"/blocked/a\",\n  \"/blocked/b\",\n];\n\n/** @guarantee ok.blocked a `path` in `BLOCKED` is blocked */\nexport function isBlocked(path: string): boolean {\n  return BLOCKED.includes(path);\n}\n\n/** @guarantee ok.adult an `age` of 18 or more is adult */\nexport function isAdult(age: number): boolean {\n  return check(age);\n}\n\nfunction check(age: number): boolean {\n  return age >= 18;\n}\n\n/** @guarantee ok.greets returns a greeting */\nexport function greet(name: string): string {\n  const text = `hi ${name}`;\n  return text;\n}\n\nexport class Pricing {\n  /** @guarantee ok.discount an order of 100 or more gets 10 off */\n  total(amount: number): number {\n    return this.discounted(amount);\n  }\n\n  private discounted(amount: number): number {\n    if (amount >= 100) return amount - 10;\n    return amount;\n  }\n}\n"
+    }
+  },
+  "schemaVersion": "1.0",
+  "thresholds": {
+    "high": 80,
+    "low": 60,
+    "break": null
+  },
+  "testFiles": {
+    "tests/policy.test.ts": {
+      "tests": [
+        {
+          "id": "0",
+          "name": "isBlocked.ok.blocked",
+          "location": {
+            "start": {
+              "column": 1,
+              "line": 4
+            }
+          }
+        },
+        {
+          "id": "1",
+          "name": "isAdult.ok.adult",
+          "location": {
+            "start": {
+              "column": 1,
+              "line": 8
+            }
+          }
+        },
+        {
+          "id": "2",
+          "name": "greet.ok.greets",
+          "location": {
+            "start": {
+              "column": 1,
+              "line": 12
+            }
+          }
+        },
+        {
+          "id": "3",
+          "name": "Pricing#total.ok.discount",
+          "location": {
+            "start": {
+              "column": 1,
+              "line": 16
+            }
+          }
+        }
+      ],
+      "source": "import { expect, test } from \"vitest\";\nimport { Pricing, greet, isAdult, isBlocked } from \"../src/policy\";\n\ntest(\"isBlocked.ok.blocked\", () => {\n  expect(isBlocked(\"/blocked/a\")).toBe(true);\n});\n\ntest(\"isAdult.ok.adult\", () => {\n  expect(isAdult(30)).toBe(true);\n});\n\ntest(\"greet.ok.greets\", () => {\n  expect(typeof greet).toBe(\"function\");\n});\n\ntest(\"Pricing#total.ok.discount\", () => {\n  expect(new Pricing().total(200)).toBe(190);\n});\n"
+    }
+  },
+  "projectRoot": "/stryker/project",
+  "config": {
+    "testRunner": "vitest",
+    "reporters": ["json", "clear-text"],
+    "mutate": ["src/**/*.ts"],
+    "coverageAnalysis": "perTest",
+    "allowConsoleColors": true,
+    "checkers": [],
+    "checkerNodeArgs": [],
+    "commandRunner": {
+      "command": "npm test"
+    },
+    "clearTextReporter": {
+      "allowColor": true,
+      "allowEmojis": false,
+      "logTests": true,
+      "maxTestsToLog": 3,
+      "reportTests": true,
+      "reportMutants": true,
+      "reportScoreTable": true,
+      "skipFull": false
+    },
+    "dashboard": {
+      "baseUrl": "https://dashboard.stryker-mutator.io/api/reports",
+      "reportType": "full"
+    },
+    "dryRunOnly": false,
+    "eventReporter": {
+      "baseDir": "reports/mutation/events"
+    },
+    "ignorePatterns": [],
+    "ignoreStatic": false,
+    "incremental": false,
+    "incrementalFile": "reports/stryker-incremental.json",
+    "force": false,
+    "fileLogLevel": "off",
+    "inPlace": false,
+    "logLevel": "info",
+    "maxConcurrentTestRunners": 9007199254740991,
+    "maxTestRunnerReuse": 0,
+    "mutator": {
+      "plugins": null,
+      "excludedMutations": []
+    },
+    "plugins": ["@stryker-mutator/*"],
+    "appendPlugins": [],
+    "htmlReporter": {
+      "fileName": "reports/mutation/mutation.html"
+    },
+    "jsonReporter": {
+      "fileName": "reports/mutation/mutation.json"
+    },
+    "disableTypeChecks": true,
+    "symlinkNodeModules": true,
+    "tempDirName": ".stryker-tmp",
+    "cleanTempDir": true,
+    "testRunnerNodeArgs": [],
+    "thresholds": {
+      "high": 80,
+      "low": 60,
+      "break": null
+    },
+    "timeoutFactor": 1.5,
+    "timeoutMS": 5000,
+    "dryRunTimeoutMinutes": 5,
+    "tsconfigFile": "tsconfig.json",
+    "warnings": true,
+    "disableBail": false,
+    "allowEmpty": false,
+    "ignorers": [],
+    "testFiles": [],
+    "vitest": {
+      "related": true,
+      "pool": "threads"
+    }
+  },
+  "framework": {
+    "name": "StrykerJS",
+    "version": "10.1.1",
+    "dependencies": {
+      "typescript": "5.9.3"
+    }
+  }
+}

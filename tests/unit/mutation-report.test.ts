@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fingerprint } from "../../src/accepted.ts";
 import { analyze } from "../../src/analyze.ts";
@@ -138,7 +138,7 @@ describe("mutation report", () => {
       'isBlocked: StringLiteral mutant in BLOCKED: `""` survived; no linked test fails when the code changes like this',
     );
     expect(survived[1]?.message).toBe(
-      "isAdult: EqualityOperator mutant in a helper it calls: `age > 18` survived; no linked test fails when the code changes like this",
+      'isAdult: EqualityOperator mutant in a helper it calls (the boundary "18"): `age > 18` survived; no linked test fails when the code changes like this',
     );
     expect(survived[1]?.line).toBe(lineOf(POLICY, "age >= 18"));
 
@@ -280,5 +280,44 @@ describe("parseMutationReport", () => {
     expect(parseMutationReport({ files: { "a.ts": { mutants: [{ id: "1", status: "Killed" }] } } }, "/r")).toEqual({
       error: 'files["a.ts"].mutants[0].mutatorName is missing',
     });
+  });
+});
+
+describe("a report written by Stryker", () => {
+  // StrykerJS 10.1.1 with the vitest runner (schemaVersion "1.0", an absolute projectRoot, and
+  // keys the schema leaves open: testFiles, config, framework). Only projectRoot was replaced and
+  // the framework's branding removed.
+  test("maps every mutant and reports the survivors, helper and collection included", async () => {
+    const real = JSON.parse(readFileSync(join(import.meta.dir, "../fixtures/stryker-report/mutation.json"), "utf8"));
+    const source: string = real.files["src/policy.ts"].source;
+    const dir = project({
+      "src/policy.ts": source,
+      "tests/policy.test.ts": real.testFiles["tests/policy.test.ts"].source,
+    });
+    mkdirSync(join(dir, "reports"));
+    writeFileSync(join(dir, "reports/mutation.json"), JSON.stringify({ ...real, projectRoot: dir }));
+    const report = await reportOf(dir);
+
+    expect(report.findings.filter((f) => f.rule === "mutation-report-unreadable")).toEqual([]);
+    expect(Object.fromEntries(report.units.map((u) => [u.id, u.mutation]))).toEqual({
+      isBlocked: { killed: 3, survived: 1, noCoverage: 0, ignored: 0 },
+      isAdult: { killed: 4, survived: 2, noCoverage: 0, ignored: 0 },
+      greet: { killed: 0, survived: 0, noCoverage: 2, ignored: 0 },
+      "Pricing#total": { killed: 5, survived: 2, noCoverage: 0, ignored: 0 },
+    });
+    const mutationFindings = report.findings
+      .filter((f) => f.rule === "mutant-survived" || f.rule === "unit-not-executed")
+      .map((f) => [f.rule, f.unit, f.line, f.mutant?.replacement]);
+    expect(mutationFindings).toEqual([
+      ["mutant-survived", "isBlocked", lineOf(source, '"/blocked/b"'), '""'],
+      ["mutant-survived", "isAdult", lineOf(source, "age >= 18"), "true"],
+      ["mutant-survived", "isAdult", lineOf(source, "age >= 18"), "age > 18"],
+      ["unit-not-executed", "greet", lineOf(source, "export function greet"), undefined],
+      ["mutant-survived", "Pricing#total", lineOf(source, "amount >= 100"), "true"],
+      ["mutant-survived", "Pricing#total", lineOf(source, "amount >= 100"), "amount > 100"],
+    ]);
+    expect(report.findings.find((f) => f.mutant?.replacement === "amount > 100")?.message).toBe(
+      'Pricing#total: EqualityOperator mutant in a helper it calls (the boundary "100"): `amount > 100` survived; no linked test fails when the code changes like this',
+    );
   });
 });
