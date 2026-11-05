@@ -178,6 +178,15 @@ export function mapMutants(
   return out.sort((a, b) => a.mutant.file.localeCompare(b.mutant.file) || a.mutant.line - b.mutant.line);
 }
 
+/**
+ * Share of the counted mutants the tests caught, as a whole percentage: killed over killed,
+ * survived and no coverage (ignored ones are left out). `undefined` when nothing was counted.
+ */
+export function mutationScore(c: MutationCounts): number | undefined {
+  const counted = c.killed + c.survived + c.noCoverage;
+  return counted === 0 ? undefined : Math.floor((c.killed / counted) * 100);
+}
+
 /** Per-unit counts of the mapped mutants (every unit a mutant belongs to counts it). */
 export function countMutants(mapped: readonly MappedMutant[]): Map<Unit, MutationCounts> {
   const counts = new Map<Unit, MutationCounts>();

@@ -4,7 +4,9 @@ import { dirname, join } from "node:path";
 import { fingerprint } from "../../src/accepted.ts";
 import { analyze } from "../../src/analyze.ts";
 import { type ConfigInput, defineConfig } from "../../src/config/schema.ts";
+import { renderDocs } from "../../src/docs/index.ts";
 import { parseMutationReport } from "../../src/mutation/report.ts";
+import { renderStepSummary } from "../../src/report/index.ts";
 import { workDir } from "../helpers/paths.ts";
 
 function project(files: Record<string, string>): string {
@@ -283,20 +285,26 @@ describe("parseMutationReport", () => {
   });
 });
 
+/**
+ * StrykerJS 10.1.1 with the vitest runner (schemaVersion "1.0", an absolute projectRoot, and keys
+ * the schema leaves open: testFiles, config, framework). Only projectRoot was replaced and the
+ * framework's branding removed. The project is rebuilt from the report's own sources.
+ */
+async function strykerProject() {
+  const real = JSON.parse(readFileSync(join(import.meta.dir, "../fixtures/stryker-report/mutation.json"), "utf8"));
+  const source: string = real.files["src/policy.ts"].source;
+  const dir = project({
+    "src/policy.ts": source,
+    "tests/policy.test.ts": real.testFiles["tests/policy.test.ts"].source,
+  });
+  mkdirSync(join(dir, "reports"));
+  writeFileSync(join(dir, "reports/mutation.json"), JSON.stringify({ ...real, projectRoot: dir }));
+  return { source, report: await reportOf(dir) };
+}
+
 describe("a report written by Stryker", () => {
-  // StrykerJS 10.1.1 with the vitest runner (schemaVersion "1.0", an absolute projectRoot, and
-  // keys the schema leaves open: testFiles, config, framework). Only projectRoot was replaced and
-  // the framework's branding removed.
   test("maps every mutant and reports the survivors, helper and collection included", async () => {
-    const real = JSON.parse(readFileSync(join(import.meta.dir, "../fixtures/stryker-report/mutation.json"), "utf8"));
-    const source: string = real.files["src/policy.ts"].source;
-    const dir = project({
-      "src/policy.ts": source,
-      "tests/policy.test.ts": real.testFiles["tests/policy.test.ts"].source,
-    });
-    mkdirSync(join(dir, "reports"));
-    writeFileSync(join(dir, "reports/mutation.json"), JSON.stringify({ ...real, projectRoot: dir }));
-    const report = await reportOf(dir);
+    const { source, report } = await strykerProject();
 
     expect(report.findings.filter((f) => f.rule === "mutation-report-unreadable")).toEqual([]);
     expect(Object.fromEntries(report.units.map((u) => [u.id, u.mutation]))).toEqual({
@@ -319,5 +327,30 @@ describe("a report written by Stryker", () => {
     expect(report.findings.find((f) => f.mutant?.replacement === "amount > 100")?.message).toBe(
       'Pricing#total: EqualityOperator mutant in a helper it calls (the boundary "100"): `amount > 100` survived; no linked test fails when the code changes like this',
     );
+  });
+
+  test("the step summary and the docs show the counts per unit", async () => {
+    const { report } = await strykerProject();
+    const summary = renderStepSummary(report);
+    expect(summary).toContain("<details><summary>Mutants by unit</summary>");
+    expect(summary).toContain("| `isAdult` | 4 | 2 | 0 | 0 | 66% |");
+    expect(summary).toContain("| `greet` | 0 | 0 | 2 | 0 | 0% |");
+
+    const docs = renderDocs(report).files;
+    const page = docs.find((f) => f.path === "src/policy.md")?.content ?? "";
+    expect(page).toContain("5 killed, 2 survived, 0 not run by any test, 0 ignored (score 71%).");
+    const index = docs.find((f) => f.path === "index.md")?.content ?? "";
+    expect(index).toContain("| Unit | Guarantees | Without test | Mutant score | File |");
+    expect(index).toContain("| 1 | 0 | 75% | src/policy.ts |");
+  });
+
+  test("without a report, neither the summary nor the docs mention mutants", async () => {
+    const dir = project({ "src/policy.ts": POLICY, "tests/policy.test.ts": TESTS });
+    const report = await reportOf(dir, { mutation: {} });
+    expect(renderStepSummary(report)).not.toContain("Mutants");
+    const docs = renderDocs(report)
+      .files.map((f) => f.content)
+      .join("\n");
+    expect(docs).not.toContain("Mutant");
   });
 });

@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import type { Report, Unit } from "../ir/schema.ts";
+import { mutationScore } from "../mutation/report.ts";
 import { markdownTableCell } from "../util/markdown.ts";
 
 /**
@@ -106,7 +107,22 @@ function renderUnit(unit: Unit, report: Report): string {
       lines.push(`- \`${t.key}\` ${t.status === "test" ? "" : `(${t.status}) `}— ${t.file}:${t.line}`);
     lines.push("");
   }
+  if (unit.mutation) {
+    const c = unit.mutation;
+    const score = mutationScore(c);
+    lines.push(
+      "### Mutants (from the mutation report)",
+      "",
+      `${c.killed} killed, ${c.survived} survived, ${c.noCoverage} not run by any test, ${c.ignored} ignored${score === undefined ? "" : ` (score ${score}%)`}.`,
+      "",
+    );
+  }
   return lines.join("\n");
+}
+
+function scoreCell(unit: Unit): string {
+  const score = unit.mutation ? mutationScore(unit.mutation) : undefined;
+  return score === undefined ? "—" : `${score}%`;
 }
 
 function anchor(id: string): string {
@@ -137,10 +153,15 @@ export function renderDocs(report: Report): DocsResult {
     `_Generated ${report.generatedAt}. Units: ${report.summary.units}, guarantees: ${report.summary.guarantees}._`,
     "",
   ];
-  index.push("| Unit | Guarantees | Without test | File |", "|---|---:|---:|---|");
+  // The mutant score column appears only when a mutation report was read.
+  const scored = report.units.some((u) => u.mutation !== undefined);
+  index.push(
+    `| Unit | Guarantees | Without test |${scored ? " Mutant score |" : ""} File |`,
+    `|---|---:|---:|${scored ? "---:|" : ""}---|`,
+  );
   for (const u of report.units) {
     index.push(
-      `| [\`${u.id}\`](${u.file.replace(/\.tsx?$/, "")}.md#${anchor(u.id)}) | ${u.guarantees.length} | ${u.guarantees.filter((g) => g.tests.length === 0).length} | ${u.file} |`,
+      `| [\`${u.id}\`](${u.file.replace(/\.tsx?$/, "")}.md#${anchor(u.id)}) | ${u.guarantees.length} | ${u.guarantees.filter((g) => g.tests.length === 0).length} |${scored ? ` ${scoreCell(u)} |` : ""} ${u.file} |`,
     );
   }
   index.push("", "See [vocabulary.md](vocabulary.md) for entities and ports.", "");

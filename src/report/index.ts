@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { Finding, Report, Severity } from "../ir/schema.ts";
+import { mutationScore } from "../mutation/report.ts";
 import { markdownTableCell } from "../util/markdown.ts";
 
 /**
@@ -42,6 +43,19 @@ export function renderStepSummary(report: Report): string {
     }
     if (report.findings.length > 200) lines.push("", `… ${report.findings.length - 200} more in report.json`);
     lines.push("");
+  }
+  const mutated = report.units.flatMap((u) => (u.mutation ? [[u.id, u.mutation] as const] : []));
+  if (mutated.length > 0) {
+    // A mutant in a shared helper counts for every unit that reaches it, so there is no total row.
+    lines.push("<details><summary>Mutants by unit</summary>", "");
+    lines.push("| Unit | Killed | Survived | No coverage | Ignored | Score |", "|---|---:|---:|---:|---:|---:|");
+    for (const [id, c] of mutated) {
+      const score = mutationScore(c);
+      lines.push(
+        `| \`${id}\` | ${c.killed} | ${c.survived} | ${c.noCoverage} | ${c.ignored} | ${score === undefined ? "—" : `${score}%`} |`,
+      );
+    }
+    lines.push("", "</details>", "");
   }
   lines.push("<details><summary>Guarantee matrix</summary>", "");
   lines.push("| Unit | Guarantee | Kind | Tests |", "|---|---|---|---|");

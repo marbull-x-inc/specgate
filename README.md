@@ -206,7 +206,9 @@ npx specgate check                 # with mutation: { report: "reports/mutation/
 
 Each mutant is mapped to the unit whose lines it changed, to every unit that reaches it through a
 private helper or same-module function, and to every unit with a `member` decision on the
-collection it changed. `units[].mutation` holds the counts. `mutant-survived` reports each mutant
+collection it changed. `units[].mutation` holds the counts; the Step Summary shows them per unit
+with a score (killed over killed, survived and not covered), and `specgate docs` adds them to
+each unit's page and a score column to the index. `mutant-survived` reports each mutant
 the linked tests let through, and `unit-not-executed` a unit that its tests never run. An
 equivalent mutant (one no test can tell apart) is accepted with `check --accept-baseline`: the
 fingerprint holds the unit, the mutator and the replacement but not the line, so it stays
