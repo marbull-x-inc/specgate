@@ -45,13 +45,13 @@ collection, then constant).
 
 One mutant per change:
 
-| `kind`        | Site                                                                                         | Change                                       |
-| ------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| `number`      | a number literal (decimal, hex, …; not a bigint)                                             | `n` → `n + 1` (`-1` becomes `-2`)            |
-| `string`      | a non-empty string literal or template without substitutions                                 | `"s"` → `"s_x"`                              |
-| `element`     | one element of an array literal of two or more literals (strings, numbers, booleans, `null`) | the element and its comma removed            |
+| `kind`        | Site                                                                                                    | Change                             |
+| ------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| `number`      | a number literal (decimal, hex, …; not a bigint)                                                        | `n` → `n + 1` (`-1` becomes `-2`)  |
+| `string`      | a non-empty string literal or template without substitutions                                            | `"s"` → `"s_x"`                    |
+| `element`     | one element of an array literal of two or more literals (strings, numbers, booleans, `null`)            | the element and its comma removed  |
 | `entry`       | one single-line property of an object literal written in a module-level `const`, two or more properties | the property and its comma removed |
-| `alternative` | one word of a regex group whose alternatives are plain words (`(a\|an\|the)`, `(?:x\|y)`)     | the word and one `\|` removed                |
+| `alternative` | one word of a regex group whose alternatives are plain words (`(a\|an\|the)`, `(?:x\|y)`)               | the word and one `\|` removed      |
 
 An element of a literal list gets only the `element` change, not also `number` or `string`: for
 a list the code tests membership in, the two are the same hole, and the removal is the one a
@@ -111,8 +111,8 @@ It reads the same config as `check` and runs the same extraction; it never runs 
 - `line` / `column` / `endLine` / `endColumn` are 1-based, as in the mutation-testing-report-schema,
   and only for reporting.
 - `description` names the change in contract terms: `the default \`initialValue\` 0 → 1`,
-  `` `"."` removed from `STR_SPLITTERS` ``, `` `status: 413` removed from `DEFAULTS` ``,
-  `` `an` removed from the regex `/^(a|an|the)$/` ``.
+  `` `"."`removed from`STR_SPLITTERS` ``, `` `status: 413`removed from`DEFAULTS` ``,
+  `` `an`removed from the regex`/^(a|an|the)$/` ``.
 - `decision` is the unit's decision on the same line whose values hold the original value, when
   there is one.
 - Mutants are sorted by file and `start`; `id`s are `value-<n>` in that order. They are unique
@@ -160,7 +160,7 @@ selected, `coveredBy` (Stryker's test ids).
   are read together. Each path that cannot be used gives its own `mutation-report-unreadable`;
   then, as in 0003, the other mutation rules do not run.
 - `mutant-survived` for a `Value` mutant says what changed in contract terms:
-  `` useCounter: the default `initialValue` 0 → 1 survived; no linked test fails when the code changes like this ``.
+  ``useCounter: the default `initialValue` 0 → 1 survived; no linked test fails when the code changes like this``.
 - An equivalent value mutant is accepted with
   `@acceptFinding mutant-survived Value:"the default \`initialValue\` 0 → 1" <reason>`, as
   Stryker's are, or with `check --accept-baseline`.
