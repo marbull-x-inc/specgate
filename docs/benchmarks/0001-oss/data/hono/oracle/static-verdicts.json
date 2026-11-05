@@ -1,0 +1,168 @@
+[
+  {
+    "finding": 6,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "secureHeaders",
+    "file": "src/middleware/secure-headers/secure-headers.ts",
+    "line": 271,
+    "kind": "constant",
+    "value": "2",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "i * 2 + 2",
+        "to": "i * 3 + 2"
+      },
+      {
+        "from": "i * 2 + 2",
+        "to": "i * 2 + 3"
+      }
+    ],
+    "oracle": [
+      "RED",
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 7,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "secureHeaders",
+    "file": "src/middleware/secure-headers/secure-headers.ts",
+    "line": 337,
+    "kind": "output",
+    "value": "$1-$2",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'$1-$2'",
+        "to": "'$1-$2_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 84,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "cors",
+    "file": "src/middleware/cors/index.ts",
+    "line": 128,
+    "kind": "match",
+    "value": "OPTIONS",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'OPTIONS'",
+        "to": "'OPTIONS_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 85,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "cors",
+    "file": "src/middleware/cors/index.ts",
+    "line": 163,
+    "kind": "output",
+    "value": "No Content",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'No Content'",
+        "to": "'No Content_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 86,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "secureHeaders",
+    "file": "src/middleware/secure-headers/secure-headers.ts",
+    "line": 320,
+    "kind": "match",
+    "value": "*",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'*'",
+        "to": "'*_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 87,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "secureHeaders",
+    "file": "src/middleware/secure-headers/secure-headers.ts",
+    "line": 326,
+    "kind": "output",
+    "value": "self",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'self'",
+        "to": "'self_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 88,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "secureHeaders",
+    "file": "src/middleware/secure-headers/secure-headers.ts",
+    "line": 326,
+    "kind": "output",
+    "value": "src",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'src'",
+        "to": "'src_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  }
+]

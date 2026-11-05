@@ -1,0 +1,272 @@
+[
+  {
+    "id": "F2-parse-constant-86400000",
+    "verdict": "RED",
+    "detail": "FAIL src/format.test.ts |   ● format(number, { long: true }) › format.ok.long should support days |   ● format(number, { long: true }) › format.ok.long should support weeks"
+  },
+  {
+    "id": "F3-format-constant-86400000",
+    "verdict": "RED",
+    "detail": "FAIL src/format.test.ts |   ● format(number, { long: true }) › format.ok.long should support days |   ● format(number, { long: true }) › format.ok.long should support weeks"
+  },
+  {
+    "id": "F4-format-constant-2629800000",
+    "verdict": "RED",
+    "detail": "FAIL src/format.test.ts |   ● format(number, { long: true }) › format.ok.long should support months |   ● format(number) › format.ok.short should support months"
+  },
+  {
+    "id": "F5-parse-match-years",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should be case-insensitive | FAIL src/parse.test.ts"
+  },
+  {
+    "id": "F6-parse-match-year",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(long string) › parseStrict.ok.parse should convert years to ms | FAIL src/parse.test.ts"
+  },
+  {
+    "id": "F7-parse-match-yrs",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F8-parse-match-yr",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F9-parse-match-y",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should convert y to ms | FAIL src/index.test.ts"
+  },
+  {
+    "id": "F10-parse-match-months",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F11-parse-match-month",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(long string) › parseStrict.ok.parse should convert months to ms | FAIL src/parse.test.ts"
+  },
+  {
+    "id": "F12-parse-match-mo",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should convert mo to ms"
+  },
+  {
+    "id": "F13-parse-match-weeks",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should be case-insensitive | FAIL src/parse.test.ts"
+  },
+  {
+    "id": "F14-parse-match-week",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(long string) › parseStrict.ok.parse should convert weeks to ms | FAIL src/parse.test.ts"
+  },
+  {
+    "id": "F15-parse-match-w",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should convert w to ms | FAIL src/index.test.ts"
+  },
+  {
+    "id": "F16-parse-match-days",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should be case-insensitive |   ● parseStrict(long string) › parseStrict.ok.parse should convert days to ms"
+  },
+  {
+    "id": "F17-parse-match-day",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F18-parse-match-d",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should convert d to ms | FAIL src/index.test.ts"
+  },
+  {
+    "id": "F19-parse-match-hours",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should be case-insensitive |   ● parseStrict(long string) › parseStrict.ok.parse should work with decimals"
+  },
+  {
+    "id": "F20-parse-match-hour",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F21-parse-match-hrs",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F22-parse-match-hr",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(long string) › parseStrict.ok.parse should convert from hr to ms |   ● parseStrict(long string) › parseStrict.ok.parse should work with negative decimals starting with \".\""
+  },
+  {
+    "id": "F23-parse-match-h",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should convert from h to ms |   ● parseStrict(string) › parseStrict.ok.parse should work with ms"
+  },
+  {
+    "id": "F24-parse-match-minutes",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F25-parse-match-minute",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F26-parse-match-mins",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F27-parse-match-min",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(long string) › parseStrict.ok.parse should convert from min to ms | FAIL src/index.test.ts"
+  },
+  {
+    "id": "F28-parse-match-m",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should not throw an error |   ● parseStrict(string) › parseStrict.ok.parse should convert from m to ms"
+  },
+  {
+    "id": "F29-parse-match-seconds",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F30-parse-match-second",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F31-parse-match-secs",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F32-parse-match-sec",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(long string) › parseStrict.ok.parse should convert sec to ms | FAIL src/index.test.ts"
+  },
+  {
+    "id": "F33-parse-match-s",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should convert s to ms |   ● parseStrict(string) › parseStrict.ok.parse should work with multiple spaces"
+  },
+  {
+    "id": "F34-parse-match-milliseconds",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(string) › parseStrict.ok.parse should be case-insensitive |   ● parseStrict(long string) › parseStrict.ok.parse should not throw an error"
+  },
+  {
+    "id": "F35-parse-match-millisecond",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F36-parse-match-msecs",
+    "verdict": "RED",
+    "detail": "FAIL src/parse-strict.test.ts |   ● parseStrict(long string) › parseStrict.ok.parse should convert msecs to ms | FAIL src/index.test.ts"
+  },
+  {
+    "id": "F37-parse-match-msec",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F38-format-boundary-2629800000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support months | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F39-format-boundary-86400000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support days | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F40-format-constant-1.5",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support weeks | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F42-format-constant-1000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(string) › ms.ok.parse should convert from m to ms |   ● ms(string) › ms.ok.parse should convert from h to ms"
+  },
+  {
+    "id": "F43-format-constant-3600000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(string) › ms.ok.parse should convert from h to ms |   ● ms(string) › ms.ok.parse should convert d to ms"
+  },
+  {
+    "id": "F44-parse-constant-604800000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(string) › ms.ok.parse should convert w to ms |   ● ms(long string) › ms.ok.parse should convert weeks to ms"
+  },
+  {
+    "id": "F45-format-constant-604800000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(string) › ms.ok.parse should convert w to ms |   ● ms(long string) › ms.ok.parse should convert weeks to ms"
+  },
+  {
+    "id": "F46-parse-constant-2629800000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support months |   ● ms(number) › ms.ok.format should support months"
+  },
+  {
+    "id": "F47-format-output-mo",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number) › ms.ok.format should support months | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F48-format-output-w",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number) › ms.ok.format should support weeks | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F49-format-output-year",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support years | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F50-format-output-month",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support months | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F51-format-boundary-604800000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support weeks | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F52-format-output-week",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support weeks | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F53-format-boundary-3600000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support hours | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F54-format-boundary-1000",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support seconds | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F55-format-output-second",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support seconds | FAIL src/format.test.ts"
+  },
+  {
+    "id": "F56-format-output-ms",
+    "verdict": "RED",
+    "detail": "FAIL src/index.test.ts |   ● ms(number, { long: true }) › ms.ok.long should support milliseconds | FAIL src/format.test.ts"
+  }
+]

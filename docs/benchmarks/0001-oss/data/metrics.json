@@ -1,0 +1,395 @@
+{
+  "ahooks": {
+    "staticFindings": 0,
+    "precision": {},
+    "realStaticHoles": 0,
+    "unique": 0,
+    "uniqueByKind": {},
+    "mutants": 53,
+    "statusCounts": {
+      "Killed": 51,
+      "Survived": 2
+    },
+    "survivors": 2,
+    "equivalent": 2,
+    "nonEquivalentSurvivors": 0,
+    "converse": 0,
+    "pointedByStatic": 0,
+    "explainedByUnit": 0,
+    "explainedWithDecision": 0,
+    "mutantSurvivedFindings": 0,
+    "unitNotExecuted": 0,
+    "units": 0,
+    "unitsWithGuarantees": 0,
+    "guarantees": 0,
+    "decisions": 0,
+    "decisionsByKind": {},
+    "linkedTests": 7,
+    "unitsWithoutDecisions": [],
+    "strykerSeconds": 17.76,
+    "specgateStaticMedianSeconds": 2.38757,
+    "unexplainedSurvivorIds": []
+  },
+  "hono": {
+    "staticFindings": 7,
+    "precision": {
+      "decision-unspecified": {
+        "judged": 7,
+        "real": 0,
+        "pinned": 7,
+        "notApplicable": 0
+      }
+    },
+    "realStaticHoles": 0,
+    "unique": 0,
+    "uniqueByKind": {},
+    "mutants": 445,
+    "statusCounts": {
+      "NoCoverage": 8,
+      "Killed": 394,
+      "Survived": 37,
+      "Timeout": 6
+    },
+    "survivors": 45,
+    "equivalent": 13,
+    "nonEquivalentSurvivors": 32,
+    "converse": 32,
+    "pointedByStatic": 0,
+    "explainedByUnit": 31,
+    "explainedWithDecision": 4,
+    "mutantSurvivedFindings": 44,
+    "unitNotExecuted": 0,
+    "units": 5,
+    "unitsWithGuarantees": 5,
+    "guarantees": 28,
+    "decisions": 11,
+    "decisionsByKind": {
+      "match": 5,
+      "output": 5,
+      "constant": 1
+    },
+    "linkedTests": 72,
+    "unitsWithoutDecisions": [
+      "bodyLimit",
+      "requestId"
+    ],
+    "strykerSeconds": 13.05,
+    "specgateStaticMedianSeconds": 1.58969,
+    "unexplainedSurvivorIds": [
+      "256@src/middleware/secure-headers/secure-headers.ts:110"
+    ]
+  },
+  "mantine-hooks": {
+    "staticFindings": 0,
+    "precision": {},
+    "realStaticHoles": 0,
+    "unique": 0,
+    "uniqueByKind": {},
+    "mutants": 221,
+    "statusCounts": {
+      "NoCoverage": 55,
+      "Killed": 137,
+      "Survived": 29
+    },
+    "survivors": 84,
+    "equivalent": 6,
+    "nonEquivalentSurvivors": 78,
+    "converse": 78,
+    "pointedByStatic": 0,
+    "explainedByUnit": 28,
+    "explainedWithDecision": 4,
+    "mutantSurvivedFindings": 31,
+    "unitNotExecuted": 0,
+    "units": 6,
+    "unitsWithGuarantees": 6,
+    "guarantees": 26,
+    "decisions": 9,
+    "decisionsByKind": {
+      "output": 7,
+      "constant": 2
+    },
+    "linkedTests": 36,
+    "unitsWithoutDecisions": [
+      "useCounter",
+      "useDisclosure",
+      "useQueue",
+      "useToggle"
+    ],
+    "strykerSeconds": 17.72,
+    "specgateStaticMedianSeconds": 6.76773,
+    "unexplainedSurvivorIds": [
+      "43@packages/@mantine/hooks/src/use-os/use-os.ts:13",
+      "44@packages/@mantine/hooks/src/use-os/use-os.ts:19",
+      "45@packages/@mantine/hooks/src/use-os/use-os.ts:25",
+      "46@packages/@mantine/hooks/src/use-os/use-os.ts:31",
+      "47@packages/@mantine/hooks/src/use-os/use-os.ts:37",
+      "48@packages/@mantine/hooks/src/use-os/use-os.ts:43",
+      "49@packages/@mantine/hooks/src/use-os/use-os.ts:48",
+      "50@packages/@mantine/hooks/src/use-os/use-os.ts:49",
+      "51@packages/@mantine/hooks/src/use-os/use-os.ts:49",
+      "52@packages/@mantine/hooks/src/use-os/use-os.ts:49",
+      "53@packages/@mantine/hooks/src/use-os/use-os.ts:49",
+      "54@packages/@mantine/hooks/src/use-os/use-os.ts:49",
+      "55@packages/@mantine/hooks/src/use-os/use-os.ts:50",
+      "56@packages/@mantine/hooks/src/use-os/use-os.ts:55",
+      "57@packages/@mantine/hooks/src/use-os/use-os.ts:55",
+      "58@packages/@mantine/hooks/src/use-os/use-os.ts:55",
+      "59@packages/@mantine/hooks/src/use-os/use-os.ts:55",
+      "60@packages/@mantine/hooks/src/use-os/use-os.ts:55",
+      "61@packages/@mantine/hooks/src/use-os/use-os.ts:55",
+      "62@packages/@mantine/hooks/src/use-os/use-os.ts:55",
+      "63@packages/@mantine/hooks/src/use-os/use-os.ts:56",
+      "64@packages/@mantine/hooks/src/use-os/use-os.ts:58",
+      "65@packages/@mantine/hooks/src/use-os/use-os.ts:58",
+      "66@packages/@mantine/hooks/src/use-os/use-os.ts:58",
+      "67@packages/@mantine/hooks/src/use-os/use-os.ts:59",
+      "68@packages/@mantine/hooks/src/use-os/use-os.ts:61",
+      "69@packages/@mantine/hooks/src/use-os/use-os.ts:61",
+      "70@packages/@mantine/hooks/src/use-os/use-os.ts:61",
+      "71@packages/@mantine/hooks/src/use-os/use-os.ts:62",
+      "72@packages/@mantine/hooks/src/use-os/use-os.ts:64",
+      "73@packages/@mantine/hooks/src/use-os/use-os.ts:64",
+      "74@packages/@mantine/hooks/src/use-os/use-os.ts:64",
+      "75@packages/@mantine/hooks/src/use-os/use-os.ts:65",
+      "76@packages/@mantine/hooks/src/use-os/use-os.ts:67",
+      "77@packages/@mantine/hooks/src/use-os/use-os.ts:67",
+      "78@packages/@mantine/hooks/src/use-os/use-os.ts:67",
+      "79@packages/@mantine/hooks/src/use-os/use-os.ts:68",
+      "80@packages/@mantine/hooks/src/use-os/use-os.ts:70",
+      "81@packages/@mantine/hooks/src/use-os/use-os.ts:70",
+      "82@packages/@mantine/hooks/src/use-os/use-os.ts:70",
+      "83@packages/@mantine/hooks/src/use-os/use-os.ts:71",
+      "84@packages/@mantine/hooks/src/use-os/use-os.ts:74",
+      "85@packages/@mantine/hooks/src/use-os/use-os.ts:85",
+      "86@packages/@mantine/hooks/src/use-os/use-os.ts:85",
+      "87@packages/@mantine/hooks/src/use-os/use-os.ts:85",
+      "88@packages/@mantine/hooks/src/use-os/use-os.ts:87",
+      "90@packages/@mantine/hooks/src/use-os/use-os.ts:90",
+      "92@packages/@mantine/hooks/src/use-os/use-os.ts:91",
+      "93@packages/@mantine/hooks/src/use-os/use-os.ts:91",
+      "94@packages/@mantine/hooks/src/use-os/use-os.ts:92"
+    ]
+  },
+  "ms": {
+    "staticFindings": 54,
+    "precision": {
+      "decision-untested": {
+        "judged": 36,
+        "real": 14,
+        "pinned": 22,
+        "notApplicable": 0
+      },
+      "decision-unspecified": {
+        "judged": 18,
+        "real": 0,
+        "pinned": 18,
+        "notApplicable": 0
+      }
+    },
+    "realStaticHoles": 14,
+    "unique": 0,
+    "uniqueByKind": {},
+    "mutants": 227,
+    "statusCounts": {
+      "NoCoverage": 2,
+      "Survived": 31,
+      "Killed": 194
+    },
+    "survivors": 33,
+    "equivalent": 3,
+    "nonEquivalentSurvivors": 30,
+    "converse": 15,
+    "pointedByStatic": 15,
+    "explainedByUnit": 30,
+    "explainedWithDecision": 17,
+    "mutantSurvivedFindings": 33,
+    "unitNotExecuted": 0,
+    "units": 4,
+    "unitsWithGuarantees": 4,
+    "guarantees": 13,
+    "decisions": 72,
+    "decisionsByKind": {
+      "constant": 15,
+      "boundary": 8,
+      "match": 34,
+      "output": 15
+    },
+    "linkedTests": 167,
+    "unitsWithoutDecisions": [
+      "ms",
+      "parseStrict"
+    ],
+    "strykerSeconds": 11.62,
+    "specgateStaticMedianSeconds": 1.13464,
+    "unexplainedSurvivorIds": []
+  },
+  "scule": {
+    "staticFindings": 4,
+    "precision": {
+      "decision-untested": {
+        "judged": 3,
+        "real": 0,
+        "pinned": 0,
+        "notApplicable": 3
+      },
+      "decision-unspecified": {
+        "judged": 1,
+        "real": 0,
+        "pinned": 0,
+        "notApplicable": 1
+      }
+    },
+    "realStaticHoles": 0,
+    "unique": 0,
+    "uniqueByKind": {},
+    "mutants": 78,
+    "statusCounts": {
+      "NoCoverage": 1,
+      "Killed": 72,
+      "Survived": 5
+    },
+    "survivors": 6,
+    "equivalent": 1,
+    "nonEquivalentSurvivors": 5,
+    "converse": 5,
+    "pointedByStatic": 0,
+    "explainedByUnit": 4,
+    "explainedWithDecision": 0,
+    "mutantSurvivedFindings": 5,
+    "unitNotExecuted": 0,
+    "units": 11,
+    "unitsWithGuarantees": 10,
+    "guarantees": 20,
+    "decisions": 4,
+    "decisionsByKind": {
+      "output": 4
+    },
+    "linkedTests": 11,
+    "unitsWithoutDecisions": [
+      "isUppercase",
+      "splitByCase",
+      "upperFirst",
+      "lowerFirst",
+      "kebabCase",
+      "snakeCase",
+      "flatCase"
+    ],
+    "strykerSeconds": 4.35,
+    "specgateStaticMedianSeconds": 1.14498,
+    "unexplainedSurvivorIds": [
+      "76@src/index.ts:209"
+    ]
+  },
+  "ufo": {
+    "staticFindings": 4,
+    "precision": {
+      "decision-unspecified": {
+        "judged": 4,
+        "real": 2,
+        "pinned": 1,
+        "notApplicable": 1
+      }
+    },
+    "realStaticHoles": 2,
+    "unique": 0,
+    "uniqueByKind": {},
+    "mutants": 228,
+    "statusCounts": {
+      "NoCoverage": 17,
+      "Killed": 196,
+      "Survived": 15
+    },
+    "survivors": 32,
+    "equivalent": 11,
+    "nonEquivalentSurvivors": 21,
+    "converse": 15,
+    "pointedByStatic": 6,
+    "explainedByUnit": 17,
+    "explainedWithDecision": 7,
+    "mutantSurvivedFindings": 28,
+    "unitNotExecuted": 0,
+    "units": 9,
+    "unitsWithGuarantees": 9,
+    "guarantees": 16,
+    "decisions": 5,
+    "decisionsByKind": {
+      "match": 4,
+      "boundary": 1
+    },
+    "linkedTests": 5,
+    "unitsWithoutDecisions": [
+      "parsePath",
+      "parseAuth",
+      "parseHost",
+      "stringifyParsedURL",
+      "parseFilename",
+      "encodeQueryItem",
+      "stringifyQuery"
+    ],
+    "strykerSeconds": 8.2,
+    "specgateStaticMedianSeconds": 1.04347,
+    "unexplainedSurvivorIds": [
+      "87@src/parse.ts:138",
+      "0@src/parse.ts:4",
+      "150@src/query.ts:51",
+      "182@src/query.ts:65"
+    ]
+  },
+  "zustand": {
+    "staticFindings": 0,
+    "precision": {},
+    "realStaticHoles": 0,
+    "unique": 0,
+    "uniqueByKind": {},
+    "mutants": 245,
+    "statusCounts": {
+      "NoCoverage": 6,
+      "Killed": 214,
+      "Survived": 24,
+      "Timeout": 1
+    },
+    "survivors": 30,
+    "equivalent": 2,
+    "nonEquivalentSurvivors": 28,
+    "converse": 28,
+    "pointedByStatic": 0,
+    "explainedByUnit": 10,
+    "explainedWithDecision": 0,
+    "mutantSurvivedFindings": 10,
+    "unitNotExecuted": 0,
+    "units": 4,
+    "unitsWithGuarantees": 4,
+    "guarantees": 23,
+    "decisions": 0,
+    "decisionsByKind": {},
+    "linkedTests": 165,
+    "unitsWithoutDecisions": [
+      "createJSONStorage",
+      "persist",
+      "createStore",
+      "shallow"
+    ],
+    "strykerSeconds": 44.97,
+    "specgateStaticMedianSeconds": 1.41567,
+    "unexplainedSurvivorIds": [
+      "2@src/middleware/persist.ts:42",
+      "41@src/middleware/persist.ts:212",
+      "42@src/middleware/persist.ts:214",
+      "44@src/middleware/persist.ts:216",
+      "45@src/middleware/persist.ts:218",
+      "122@src/middleware/persist.ts:348",
+      "25@src/middleware/persist.ts:175",
+      "33@src/middleware/persist.ts:194",
+      "40@src/middleware/persist.ts:212",
+      "58@src/middleware/persist.ts:266",
+      "53@src/middleware/persist.ts:249",
+      "89@src/middleware/persist.ts:292",
+      "115@src/middleware/persist.ts:334",
+      "121@src/middleware/persist.ts:348",
+      "113@src/middleware/persist.ts:334",
+      "116@src/middleware/persist.ts:337",
+      "124@src/middleware/persist.ts:353",
+      "98@src/middleware/persist.ts:311"
+    ]
+  }
+}

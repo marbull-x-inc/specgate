@@ -1,0 +1,842 @@
+[
+  {
+    "id": "18",
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+    "line": 24,
+    "mutator": "BooleanLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "useDisclosure() with no argument starts opened (true) instead of false"
+  },
+  {
+    "id": "29",
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+    "line": 37,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "open has stale options: rerender with a new onOpen, then open() calls the first-render onOpen instead of the current one"
+  },
+  {
+    "id": "38",
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+    "line": 47,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "close has stale options: rerender with a new onClose, then close() calls the first-render onClose"
+  },
+  {
+    "id": "43",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 13,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "isMacOS returns undefined: a Macintosh UA gives 'undetermined' instead of 'macos'"
+  },
+  {
+    "id": "44",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 19,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "isIOS returns undefined: an iPhone UA gives 'undetermined' (or 'macos' path) instead of 'ios'"
+  },
+  {
+    "id": "45",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 25,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "isWindows returns undefined: a Windows UA gives 'undetermined' instead of 'windows'"
+  },
+  {
+    "id": "46",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 31,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "isAndroid returns undefined: an Android UA (contains Linux) gives 'linux' instead of 'android'"
+  },
+  {
+    "id": "47",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 37,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "isLinux returns undefined: a Linux UA gives 'undetermined' instead of 'linux'"
+  },
+  {
+    "id": "48",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 43,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "isChromeOS returns undefined: a CrOS UA (contains Linux) gives 'linux' instead of 'chromeos'"
+  },
+  {
+    "id": "49",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 48,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "getOS returns undefined: useOs() returns undefined after the effect for any UA"
+  },
+  {
+    "id": "50",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 49,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "getOS always returns 'undetermined' in a browser, e.g. Windows UA"
+  },
+  {
+    "id": "51",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 49,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "SSR with useOs({getValueInEffect:false}): window.navigator is read with no window and throws instead of returning 'undetermined'"
+  },
+  {
+    "id": "52",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 49,
+    "mutator": "EqualityOperator",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "in a browser getOS returns 'undetermined' for every UA; on the server it throws"
+  },
+  {
+    "id": "53",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 49,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "typeof window === '' is always false: SSR with getValueInEffect:false throws instead of returning 'undetermined'"
+  },
+  {
+    "id": "54",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 49,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "SSR with getValueInEffect:false falls through to window.navigator and throws"
+  },
+  {
+    "id": "55",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 50,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "SSR with getValueInEffect:false returns '' instead of 'undetermined'"
+  },
+  {
+    "id": "56",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 55,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "every UA (e.g. Windows) returns 'ios'"
+  },
+  {
+    "id": "57",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 55,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "an iPhone UA returns 'undetermined' (or other) instead of 'ios'"
+  },
+  {
+    "id": "58",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 55,
+    "mutator": "LogicalOperator",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "an iPhone UA (no Macintosh) returns 'undetermined' instead of 'ios'"
+  },
+  {
+    "id": "59",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 55,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "iPadOS desktop UA (Macintosh) with 'ontouchend' in document returns 'macos' instead of 'ios'"
+  },
+  {
+    "id": "60",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 55,
+    "mutator": "LogicalOperator",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "a Windows/any UA with 'ontouchend' in document returns 'ios'; or Macintosh without touch returns 'ios' instead of 'macos'"
+  },
+  {
+    "id": "61",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 55,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "'' in document is false: iPadOS desktop UA with touch returns 'macos' instead of 'ios'"
+  },
+  {
+    "id": "62",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 55,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "an iPhone UA falls through and returns 'undetermined' instead of 'ios'"
+  },
+  {
+    "id": "63",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 56,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "an iPhone UA returns '' instead of 'ios'"
+  },
+  {
+    "id": "64",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 58,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "a Windows UA returns 'macos'"
+  },
+  {
+    "id": "65",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 58,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "a Macintosh UA returns 'undetermined' instead of 'macos'"
+  },
+  {
+    "id": "66",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 58,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "a Macintosh UA falls through to 'undetermined' instead of 'macos'"
+  },
+  {
+    "id": "67",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 59,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "a Macintosh UA returns '' instead of 'macos'"
+  },
+  {
+    "id": "68",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 61,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "an Android/Linux UA returns 'windows'"
+  },
+  {
+    "id": "69",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 61,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "a Windows UA returns 'undetermined' instead of 'windows'"
+  },
+  {
+    "id": "70",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 61,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "a Windows UA falls through to 'undetermined'"
+  },
+  {
+    "id": "71",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 62,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "a Windows UA returns ''"
+  },
+  {
+    "id": "72",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 64,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "a Linux or CrOS UA returns 'android'"
+  },
+  {
+    "id": "73",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 64,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "an Android UA returns 'linux' instead of 'android'"
+  },
+  {
+    "id": "74",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 64,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "an Android UA falls through to 'linux'"
+  },
+  {
+    "id": "75",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 65,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "an Android UA returns ''"
+  },
+  {
+    "id": "76",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 67,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "a Linux UA returns 'chromeos'"
+  },
+  {
+    "id": "77",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 67,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "a CrOS UA returns 'linux' instead of 'chromeos'"
+  },
+  {
+    "id": "78",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 67,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "a CrOS UA falls through to 'linux'"
+  },
+  {
+    "id": "79",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 68,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "a CrOS UA returns ''"
+  },
+  {
+    "id": "80",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 70,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "an unknown UA returns 'linux' instead of 'undetermined'"
+  },
+  {
+    "id": "81",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 70,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "a Linux UA returns 'undetermined' instead of 'linux'"
+  },
+  {
+    "id": "82",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 70,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "a Linux UA falls through to 'undetermined'"
+  },
+  {
+    "id": "83",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 71,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "a Linux UA returns ''"
+  },
+  {
+    "id": "84",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 74,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "an unknown UA returns '' instead of 'undetermined'"
+  },
+  {
+    "id": "85",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 85,
+    "mutator": "ObjectLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "default options lose getValueInEffect: the first client render already returns the OS instead of 'undetermined' (hydration mismatch, observable by recording the first render)"
+  },
+  {
+    "id": "86",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 85,
+    "mutator": "BooleanLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "default getValueInEffect false: first client render returns the OS instead of 'undetermined'"
+  },
+  {
+    "id": "87",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 85,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "useOs returns undefined"
+  },
+  {
+    "id": "88",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 87,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "the first render (and SSR) returns '' instead of 'undetermined'"
+  },
+  {
+    "id": "90",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 90,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "with default options the value stays 'undetermined' after mount"
+  },
+  {
+    "id": "91",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 91,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "condition",
+    "reason": "with getValueInEffect false the effect calls setValue(getOS) right after the initial getOS(); same user agent within the same commit gives the same value, so React bails out (eager Object.is) with no re-render; on the server the effect does not run"
+  },
+  {
+    "id": "92",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 91,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "with default options the value stays 'undetermined' after mount"
+  },
+  {
+    "id": "93",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 91,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "with default options the value stays 'undetermined' after mount"
+  },
+  {
+    "id": "94",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 92,
+    "mutator": "CallExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "with default options the value stays 'undetermined' after mount"
+  },
+  {
+    "id": "95",
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "line": 94,
+    "mutator": "ArrayDeclaration",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "deps ['Stryker was here'] is a constant literal, Object.is-equal on every render, so the effect still runs only once on mount like []"
+  },
+  {
+    "id": "130",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 101,
+    "mutator": "ArithmeticOperator",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "previous() moves to activePage+1 instead of activePage-1"
+  },
+  {
+    "id": "106",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 77,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "_total shrinks by 2: total 8 (siblings 1, boundaries 1) returns [1..8] instead of [1,2,3,4,5,'dots',8]"
+  },
+  {
+    "id": "107",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 77,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "_total grows: total 7 page 1 returns [1,2,3,4,5,'dots',7] instead of [1..7]"
+  },
+  {
+    "id": "113",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 89,
+    "mutator": "EqualityOperator",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "boundary",
+    "reason": "pageNumber == _startValue: the mutated branch calls setActivePage(_startValue), identical to setActivePage(pageNumber)"
+  },
+  {
+    "id": "119",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 91,
+    "mutator": "EqualityOperator",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "boundary",
+    "reason": "pageNumber == _endValue: the mutated branch calls setActivePage(_endValue), identical to setActivePage(pageNumber)"
+  },
+  {
+    "id": "125",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 97,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "setPage has stale bounds: rerender with total 10 -> 20, setPage(15) clamps to 10"
+  },
+  {
+    "id": "129",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 101,
+    "mutator": "ArrowFunction",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "previous() does nothing"
+  },
+  {
+    "id": "128",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 100,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "next has stale activePage: calling next() in two separate renders from page 1 stays at 2 instead of 3"
+  },
+  {
+    "id": "131",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 101,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "previous has stale activePage: calling previous() twice across renders from page 5 stops at 4"
+  },
+  {
+    "id": "133",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 102,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "first has stale startValue/setPage: rerender startValue 1 -> 5, first() goes to 1 clamped by old bounds instead of 5"
+  },
+  {
+    "id": "135",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 103,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "last has stale _endValue: rerender total 10 -> 20, last() goes to 10 instead of 20"
+  },
+  {
+    "id": "137",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 106,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "totalPageNumbers 3 instead of 7: total 5 returns [1,2,3,4,5,'dots',5] instead of [1..5]"
+  },
+  {
+    "id": "138",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 106,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "totalPageNumbers 1 instead of 7: total 5 returns a dots range instead of [1..5]"
+  },
+  {
+    "id": "143",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 107,
+    "mutator": "EqualityOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "boundary",
+    "reason": "total exactly 7 (siblings 1, boundaries 1) page 1 returns [1,2,3,4,5,'dots',7] instead of [1..7]"
+  },
+  {
+    "id": "139",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 106,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "siblings/2: total 6 returns a dots range instead of [1..6]"
+  },
+  {
+    "id": "140",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 106,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "boundaries/2: total 6 returns a dots range instead of [1..6]"
+  },
+  {
+    "id": "148",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 111,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "leftSiblingIndex is only read when left dots are shown (a-s > S+b+1, where both bounds give a-s); the dots condition max(a-s,S+b+1) > S+b+1 equals max(a-s,S+b-1) > S+b+1 for any b, and the neither-dots fallthrough is unreachable (it implies _total <= totalPageNumbers)"
+  },
+  {
+    "id": "149",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 111,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "only with negative boundaries: boundaries -2 makes the left-dots lower bound S+1 > S-1 so left dots always show; equivalent for boundaries >= -1"
+  },
+  {
+    "id": "152",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 112,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "only with negative boundaries: boundaries -1 makes right dots always shown (min(a+s,E-1) < E) where original shows none near the end; equivalent for boundaries >= 0"
+  },
+  {
+    "id": "158",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 114,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "total 10 page 4: left dots threshold drops to 1, range [1,'dots',3,4,5,'dots',10] instead of [1,2,3,4,5,'dots',10]"
+  },
+  {
+    "id": "155",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 114,
+    "mutator": "EqualityOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "boundary",
+    "reason": "total 10 page 4 (leftSiblingIndex 3 == 3): range [1,'dots',3,4,5,'dots',10] instead of [1,2,3,4,5,'dots',10]"
+  },
+  {
+    "id": "157",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 114,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "total 10 page 4: threshold 1 instead of 3, range [1,'dots',3,4,5,'dots',10] instead of [1,2,3,4,5,'dots',10]"
+  },
+  {
+    "id": "176",
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "line": 122,
+    "mutator": "ArithmeticOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "identical only for boundaries 1; boundaries 2, total 20, page 1: tail range(21,20) is empty instead of [19,20]"
+  },
+  {
+    "id": "197",
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+    "line": 35,
+    "mutator": "ArrayDeclaration",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "useQueue({limit: 2}) without initialValues has state ['Stryker was here'] instead of []"
+  },
+  {
+    "id": "13",
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+    "line": 46,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "set has stale bounds: rerender with max 10 -> 5, set(8) yields 8 instead of 5"
+  },
+  {
+    "id": "7",
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+    "line": 38,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "increment has stale min/max/step: rerender with step 1 -> 5, increment() still adds 1"
+  },
+  {
+    "id": "11",
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+    "line": 43,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "decrement has stale min/max/step: rerender with step 1 -> 5, decrement() still subtracts 1"
+  },
+  {
+    "id": "15",
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+    "line": 50,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "reset has stale initialValue: rerender useCounter(5) -> useCounter(8), reset() goes to 5"
+  },
+  {
+    "id": "0",
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+    "line": 4,
+    "mutator": "ObjectLiteral",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "DEFAULT_OPTIONS -Infinity/Infinity vs undefined: clamp(v,-Inf,Inf), clamp(v,m,Inf), clamp(v,-Inf,M) give the same results as clamp with undefined bounds for every number (NaN and -0 included); explicit undefined in options overrides either way"
+  }
+]

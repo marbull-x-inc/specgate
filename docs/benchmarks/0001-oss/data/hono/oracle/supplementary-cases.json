@@ -1,0 +1,123 @@
+[
+ {
+  "id": "cors-allowMethods-delete-GET",
+  "file": "src/middleware/cors/index.ts",
+  "line": 76,
+  "from": "'GET', ",
+  "to": ""
+ },
+ {
+  "id": "cors-allowMethods-delete-HEAD",
+  "file": "src/middleware/cors/index.ts",
+  "line": 76,
+  "from": "'HEAD', ",
+  "to": ""
+ },
+ {
+  "id": "cors-allowMethods-delete-PUT",
+  "file": "src/middleware/cors/index.ts",
+  "line": 76,
+  "from": "'PUT', ",
+  "to": ""
+ },
+ {
+  "id": "cors-allowMethods-delete-POST",
+  "file": "src/middleware/cors/index.ts",
+  "line": 76,
+  "from": "'POST', ",
+  "to": ""
+ },
+ {
+  "id": "cors-allowMethods-delete-DELETE",
+  "file": "src/middleware/cors/index.ts",
+  "line": 76,
+  "from": "'DELETE', ",
+  "to": ""
+ },
+ {
+  "id": "cors-allowMethods-delete-PATCH",
+  "file": "src/middleware/cors/index.ts",
+  "line": 76,
+  "from": "'PATCH', ",
+  "to": ""
+ },
+ {
+  "id": "cors-allowMethods-delete-QUERY",
+  "file": "src/middleware/cors/index.ts",
+  "line": 76,
+  "from": ", 'QUERY'",
+  "to": ""
+ },
+ {
+  "id": "HEADERS_MAP-delete-crossOriginEmbedderPolicy",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 95,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-crossOriginResourcePolicy",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 96,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-crossOriginOpenerPolicy",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 97,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-originAgentCluster",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 98,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-referrerPolicy",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 99,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-strictTransportSecurity",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 100,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-xContentTypeOptions",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 101,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-xDnsPrefetchControl",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 102,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-xDownloadOptions",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 103,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-xFrameOptions",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 104,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-xPermittedCrossDomainPolicies",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 105,
+  "deleteLine": true
+ },
+ {
+  "id": "HEADERS_MAP-delete-xXssProtection",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 106,
+  "deleteLine": true
+ }
+]

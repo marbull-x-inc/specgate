@@ -1,0 +1,332 @@
+[
+  {
+    "id": "114",
+    "file": "src/index.ts",
+    "line": 149,
+    "mutator": "ConditionalExpression",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "removal",
+    "reason": "default branch is unreachable: the regex only captures units listed in the switch cases (lowercased), and unit defaults to 'ms', so matchUnit always hits a case"
+  },
+  {
+    "id": "116",
+    "file": "src/index.ts",
+    "line": 152,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "error message lives in the unreachable default branch (regex admits only units handled by cases), so it can never be thrown"
+  },
+  {
+    "id": "12",
+    "file": "src/index.ts",
+    "line": 59,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "ms(undefined) (or any non-string non-number from JS) now goes to format() and throws 'Value provided to ms.format() must be of type number.' instead of the ms() error message"
+  },
+  {
+    "id": "31",
+    "file": "src/index.ts",
+    "line": 80,
+    "mutator": "EqualityOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "boundary",
+    "reason": "parse() of a 100-character numeric string (e.g. '0'.repeat(99)+'1') returns 1 originally but throws under the mutant"
+  },
+  {
+    "id": "18",
+    "file": "src/index.ts",
+    "line": 63,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "ms(null) error message becomes empty instead of 'Value provided to ms() must be a string or number...'"
+  },
+  {
+    "id": "35",
+    "file": "src/index.ts",
+    "line": 82,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse('') error message becomes empty instead of 'Value provided to ms.parse() must be a string with length between 1 and 99...'"
+  },
+  {
+    "id": "42",
+    "file": "src/index.ts",
+    "line": 86,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "value part '\\d*\\.?\\d' cannot match multi-digit fractions: parse('1.25h') returns NaN instead of 4500000"
+  },
+  {
+    "id": "47",
+    "file": "src/index.ts",
+    "line": 86,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "'msecs?' -> 'msecs': parse('1msec') returns NaN instead of 1"
+  },
+  {
+    "id": "48",
+    "file": "src/index.ts",
+    "line": 86,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "'seconds?' -> 'seconds': parse('1 second') returns NaN instead of 1000"
+  },
+  {
+    "id": "50",
+    "file": "src/index.ts",
+    "line": 86,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "'minutes?' -> 'minutes': parse('1 minute') returns NaN instead of 60000"
+  },
+  {
+    "id": "52",
+    "file": "src/index.ts",
+    "line": 86,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "'hours?' -> 'hours': parse('1 hour') returns NaN instead of 3600000"
+  },
+  {
+    "id": "54",
+    "file": "src/index.ts",
+    "line": 86,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "'days?' -> 'days': parse('1 day') returns NaN instead of 86400000"
+  },
+  {
+    "id": "58",
+    "file": "src/index.ts",
+    "line": 86,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "'yrs?' -> 'yrs': parse('1yr') returns NaN instead of 31557600000"
+  },
+  {
+    "id": "67",
+    "file": "src/index.ts",
+    "line": 109,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1yrs')"
+  },
+  {
+    "id": "68",
+    "file": "src/index.ts",
+    "line": 110,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1yr')"
+  },
+  {
+    "id": "72",
+    "file": "src/index.ts",
+    "line": 113,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1 months')"
+  },
+  {
+    "id": "46",
+    "file": "src/index.ts",
+    "line": 86,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "'milliseconds?' -> 'milliseconds': parse('1 millisecond') returns NaN instead of 1"
+  },
+  {
+    "id": "83",
+    "file": "src/index.ts",
+    "line": 122,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1 day')"
+  },
+  {
+    "id": "89",
+    "file": "src/index.ts",
+    "line": 127,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1hrs')"
+  },
+  {
+    "id": "88",
+    "file": "src/index.ts",
+    "line": 126,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1 hour')"
+  },
+  {
+    "id": "96",
+    "file": "src/index.ts",
+    "line": 133,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1mins')"
+  },
+  {
+    "id": "94",
+    "file": "src/index.ts",
+    "line": 131,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1 minutes')"
+  },
+  {
+    "id": "95",
+    "file": "src/index.ts",
+    "line": 132,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1 minute')"
+  },
+  {
+    "id": "102",
+    "file": "src/index.ts",
+    "line": 138,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1 second')"
+  },
+  {
+    "id": "103",
+    "file": "src/index.ts",
+    "line": 139,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1secs')"
+  },
+  {
+    "id": "101",
+    "file": "src/index.ts",
+    "line": 137,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1 seconds')"
+  },
+  {
+    "id": "111",
+    "file": "src/index.ts",
+    "line": 146,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1msec')"
+  },
+  {
+    "id": "109",
+    "file": "src/index.ts",
+    "line": 144,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parse() switch case emptied so input with this unit falls to default and throws 'Unknown unit' instead of returning a number: parse('1 millisecond')"
+  },
+  {
+    "id": "121",
+    "file": "src/index.ts",
+    "line": 174,
+    "mutator": "EqualityOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "boundary",
+    "reason": "format(31557600000) (exactly one year) gives '12mo' instead of '1y'"
+  },
+  {
+    "id": "172",
+    "file": "src/index.ts",
+    "line": 203,
+    "mutator": "EqualityOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "boundary",
+    "reason": "format(31557600000, {long:true}) gives '12 months' instead of '1 year'"
+  },
+  {
+    "id": "223",
+    "file": "src/index.ts",
+    "line": 239,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "format(Infinity) throws with an empty message instead of 'Value provided to ms.format() must be of type number.'"
+  },
+  {
+    "id": "217",
+    "file": "src/index.ts",
+    "line": 238,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "condition",
+    "reason": "the remaining operand !Number.isFinite(ms) is already true for every non-number (Number.isFinite does not coerce), so the guard throws for exactly the same inputs with the same message"
+  },
+  {
+    "id": "228",
+    "file": "src/index.ts",
+    "line": 254,
+    "mutator": "EqualityOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "boundary",
+    "reason": "format(90000, {long:true}) gives '2 minute' instead of '2 minutes' (msAbs exactly 1.5 * unit)"
+  }
+]

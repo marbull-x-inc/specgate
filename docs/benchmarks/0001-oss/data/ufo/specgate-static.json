@@ -1,0 +1,888 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.0"
+  },
+  "generatedAt": "2026-11-05T19:03:11.387Z",
+  "root": "<work>/ufo",
+  "revision": "f06c800d0c59f2a4a1b9ba65eb6cb61a84419be6",
+  "configHash": "5ae648e6bb29118c",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "parseURL",
+      "kind": "function",
+      "operation": "parseURL",
+      "file": "src/parse.ts",
+      "line": 54,
+      "endLine": 98,
+      "referencedBy": [
+        "src/url.ts",
+        "src/utils.ts"
+      ],
+      "summary": "Takes a URL string and returns an object with the URL's `protocol`, `auth`, `host`, `pathname`, `search`, and `hash`.",
+      "params": [
+        {
+          "name": "input",
+          "type": "string",
+          "optional": true,
+          "doc": "The URL to parse."
+        },
+        {
+          "name": "defaultProto",
+          "type": "string",
+          "optional": true,
+          "doc": "The default protocol to use if the input doesn't have one."
+        }
+      ],
+      "returns": "ParsedURL",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "input",
+          "member": "match",
+          "count": 1
+        },
+        {
+          "port": "input",
+          "member": "replace",
+          "count": 1
+        }
+      ],
+      "operationCalls": [
+        "parsePath"
+      ],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "match",
+          "expression": "protocol === \"file:\"",
+          "line": 83,
+          "values": [
+            "file:"
+          ],
+          "names": []
+        }
+      ],
+      "implHash": "fd20ad776d968a4a",
+      "guarantees": [
+        {
+          "id": "ok.full",
+          "key": "parseURL.ok.full",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "for \"http://foo.com/foo?test=123#token\" returns protocol \"http:\", auth \"\", host \"foo.com\", pathname \"/foo\", search \"?test=123\" and hash \"#token\"",
+          "textHash": "91a74ae477ea3103",
+          "line": 50,
+          "references": [],
+          "tests": [
+            "test/parse.test.ts:180"
+          ]
+        },
+        {
+          "id": "ok.no-protocol",
+          "key": "parseURL.ok.no-protocol",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "for an input with no protocol (\"foo.com/foo?test=123#token\") returns only pathname \"foo.com/foo\", search and hash",
+          "textHash": "2ff287baaefb0c5d",
+          "line": 51,
+          "references": [
+            {
+              "raw": "input",
+              "kind": "param",
+              "target": "input"
+            }
+          ],
+          "tests": []
+        },
+        {
+          "id": "ok.default-proto",
+          "key": "parseURL.ok.default-proto",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `defaultProto` \"https://\" an input with no protocol is parsed as if it started with it: protocol \"https:\", host \"foo.com\", pathname \"/foo\"",
+          "textHash": "8fd42e429dc429a4",
+          "line": 52,
+          "references": [
+            {
+              "raw": "input",
+              "kind": "param",
+              "target": "input"
+            }
+          ],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "parsePath",
+      "kind": "function",
+      "operation": "parsePath",
+      "file": "src/parse.ts",
+      "line": 116,
+      "endLine": 126,
+      "referencedBy": [],
+      "summary": "Splits the input string into three parts, and returns an object with those three parts.",
+      "params": [
+        {
+          "name": "input",
+          "type": "string",
+          "optional": true,
+          "doc": "The URL to parse."
+        }
+      ],
+      "returns": "ParsedPath",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "input",
+          "member": "match",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "a20b62519b7247d3",
+      "guarantees": [
+        {
+          "id": "ok.split",
+          "key": "parsePath.ok.split",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "splits `input` at the first \"?\" and the first \"#\" into pathname, search (with \"?\") and hash (with \"#\"): \"http://foo.com/foo?test=123#token\" gives \"http://foo.com/foo\", \"?test=123\", \"#token\"",
+          "textHash": "443c0431bff6a787",
+          "line": 114,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "parseAuth",
+      "kind": "function",
+      "operation": "parseAuth",
+      "file": "src/parse.ts",
+      "line": 138,
+      "endLine": 144,
+      "referencedBy": [
+        "src/url.ts"
+      ],
+      "summary": "Takes a string of the form `username:password` and returns an object with the username and password decoded. parsing_utils",
+      "params": [
+        {
+          "name": "input",
+          "type": "string",
+          "optional": true,
+          "doc": "The URL to parse."
+        }
+      ],
+      "returns": "ParsedAuth",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "input",
+          "member": "split",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "882559e873c34a4d",
+      "guarantees": [
+        {
+          "id": "ok.split",
+          "key": "parseAuth.ok.split",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "for \"username:password\" returns username and password, each decoded",
+          "textHash": "d529b305694cdac7",
+          "line": 136,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "parseHost",
+      "kind": "function",
+      "operation": "parseHost",
+      "file": "src/parse.ts",
+      "line": 163,
+      "endLine": 169,
+      "referencedBy": [
+        "src/url.ts"
+      ],
+      "summary": "Takes a string, and returns an object with two properties: `hostname` and `port`.",
+      "params": [
+        {
+          "name": "input",
+          "type": "string",
+          "optional": true,
+          "doc": "The URL to parse."
+        }
+      ],
+      "returns": "ParsedHost",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "input",
+          "member": "match",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "48df97fe06002216",
+      "guarantees": [
+        {
+          "id": "ok.split",
+          "key": "parseHost.ok.split",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns hostname and port: \"foo.com:8080\" gives hostname \"foo.com\" and port \"8080\"",
+          "textHash": "4bb9f0d2ae3288b3",
+          "line": 161,
+          "references": [],
+          "tests": [
+            "test/parse.test.ts:193"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "stringifyParsedURL",
+      "kind": "function",
+      "operation": "stringifyParsedURL",
+      "file": "src/parse.ts",
+      "line": 189,
+      "endLine": 202,
+      "referencedBy": [
+        "src/utils.ts"
+      ],
+      "summary": "Takes a `ParsedURL` object and returns the stringified URL. parsing_utils",
+      "params": [
+        {
+          "name": "parsed",
+          "type": "Partial<ParsedURL>",
+          "optional": false,
+          "doc": "The parsed URL"
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "0fc4f71af95d4ef8",
+      "guarantees": [
+        {
+          "id": "ok.roundtrip",
+          "key": "stringifyParsedURL.ok.roundtrip",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "joins protocol, auth, host, pathname, search and hash back into a URL: after changing host to \"bar.com\" in the result of parseURL(\"http://foo.com/foo?test=123#token\") it returns \"http://bar.com/foo?test=123#token\"",
+          "textHash": "68f60dec44d3d6a8",
+          "line": 187,
+          "references": [
+            {
+              "raw": "parseURL",
+              "kind": "unresolved"
+            }
+          ],
+          "tests": [
+            "test/utilities.test.ts:128"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "parseFilename",
+      "kind": "function",
+      "operation": "parseFilename",
+      "file": "src/parse.ts",
+      "line": 229,
+      "endLine": 238,
+      "referencedBy": [],
+      "summary": "Parses a URL and returns last segment in path as filename. If `{ strict: true }` is passed as the second argument, it will only return the last segment only if ending with an extension. parsing_utils",
+      "params": [
+        {
+          "name": "input",
+          "type": "string",
+          "optional": true,
+          "doc": "The URL to parse."
+        },
+        {
+          "name": "opts",
+          "type": "{ strict?: boolean }",
+          "optional": true,
+          "doc": "Options to use while parsing"
+        }
+      ],
+      "returns": "string | undefined",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "parseURL"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "9e3b14a6d9544730",
+      "guarantees": [
+        {
+          "id": "ok.last-segment",
+          "key": "parseFilename.ok.last-segment",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns the last segment of the path of `input` (\"http://example.com/path/to/filename.ext\" gives \"filename.ext\")",
+          "textHash": "25716a4fad7c9201",
+          "line": 226,
+          "references": [],
+          "tests": [
+            "test/parse.test.ts:285"
+          ]
+        },
+        {
+          "id": "ok.strict",
+          "key": "parseFilename.ok.strict",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `strict` true, returns the last segment only when it ends with an extension, else undefined (\"/path/to/.hidden-file\" gives undefined)",
+          "textHash": "da0d08ada1e9a682",
+          "line": 227,
+          "references": [],
+          "tests": [
+            "test/parse.test.ts:290"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "parseQuery",
+      "kind": "function",
+      "operation": "parseQuery",
+      "file": "src/query.ts",
+      "line": 50,
+      "endLine": 78,
+      "referencedBy": [
+        "src/url.ts",
+        "src/utils.ts"
+      ],
+      "summary": "Parses and decodes a query string into an object. The input can be a query string with or without the leading `?`.",
+      "params": [
+        {
+          "name": "parametersString",
+          "type": "string",
+          "optional": true
+        }
+      ],
+      "returns": "T",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "parametersString",
+          "member": "slice",
+          "count": 1
+        },
+        {
+          "port": "parametersString",
+          "member": "split",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "match",
+          "expression": "parametersString[0] === \"?\"",
+          "line": 56,
+          "values": [
+            "?"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "s.length < 2",
+          "line": 61,
+          "values": [
+            "2"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "key === \"__proto__\"",
+          "line": 65,
+          "values": [
+            "__proto__"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "key === \"constructor\"",
+          "line": 65,
+          "values": [
+            "constructor"
+          ],
+          "names": []
+        }
+      ],
+      "implHash": "fa6c9e6bfa6caf89",
+      "guarantees": [
+        {
+          "id": "ok.pairs",
+          "key": "parseQuery.ok.pairs",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "parses and decodes \"key=value\" pairs separated by \"&\" into an object (\"?foo=bar&baz=qux\" gives foo \"bar\" and baz \"qux\")",
+          "textHash": "04f5719a88e1fd7e",
+          "line": 46,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.leading-question",
+          "key": "parseQuery.ok.leading-question",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "accepts the query with or without a leading \"?\"",
+          "textHash": "d02ca485199b4003",
+          "line": 47,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.repeated",
+          "key": "parseQuery.ok.repeated",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a key that appears several times gives an array of its values in order (\"tags=javascript&tags=web&tags=dev\" gives tags [\"javascript\", \"web\", \"dev\"])",
+          "textHash": "eac58482f01241c1",
+          "line": 48,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "encodeQueryItem",
+      "kind": "function",
+      "operation": "encodeQueryItem",
+      "file": "src/query.ts",
+      "line": 99,
+      "endLine": 120,
+      "referencedBy": [],
+      "summary": "Encodes a pair of key and value into a url query string value. If the value is an array, it will be encoded as multiple key-value pairs with the same key.",
+      "params": [
+        {
+          "name": "key",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "value",
+          "type": "QueryValue | QueryValue[]",
+          "optional": false
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "value",
+          "member": "map",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "6f8a15f7a98e6a65",
+      "guarantees": [
+        {
+          "id": "ok.pair",
+          "key": "encodeQueryItem.ok.pair",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "encodes `key` and `value` as \"key=value\", spaces in the value as \"+\" (\"message\", \"Hello World\" gives \"message=Hello+World\")",
+          "textHash": "4052db764488e584",
+          "line": 96,
+          "references": [
+            {
+              "raw": "value",
+              "kind": "param",
+              "target": "value"
+            }
+          ],
+          "tests": []
+        },
+        {
+          "id": "ok.array",
+          "key": "encodeQueryItem.ok.array",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "an array value gives one \"key=value\" pair per element joined by \"&\" (\"tags=javascript&tags=web&tags=dev\")",
+          "textHash": "a7d9441d31c14beb",
+          "line": 97,
+          "references": [
+            {
+              "raw": "value",
+              "kind": "param",
+              "target": "value"
+            }
+          ],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "stringifyQuery",
+      "kind": "function",
+      "operation": "stringifyQuery",
+      "file": "src/query.ts",
+      "line": 139,
+      "endLine": 145,
+      "referencedBy": [
+        "src/url.ts",
+        "src/utils.ts"
+      ],
+      "summary": "Stringfies and encodes a query object into a query string.",
+      "params": [
+        {
+          "name": "query",
+          "type": "QueryObject",
+          "optional": false
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "encodeQueryItem"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "aec2eebc2b534734",
+      "guarantees": [
+        {
+          "id": "ok.pairs",
+          "key": "stringifyQuery.ok.pairs",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "encodes each entry of `query` as a query item and joins them with \"&\" (foo \"bar\", baz \"qux\" gives \"foo=bar&baz=qux\")",
+          "textHash": "dd619a253b429584",
+          "line": 136,
+          "references": [
+            {
+              "raw": "query",
+              "kind": "param",
+              "target": "query"
+            }
+          ],
+          "tests": []
+        },
+        {
+          "id": "ok.undefined",
+          "key": "stringifyQuery.ok.undefined",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "an entry whose value is undefined is left out (foo \"bar\", baz undefined gives \"foo=bar\")",
+          "textHash": "28291757402c3632",
+          "line": 137,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "parseURL.ok.full",
+      "unitId": "parseURL",
+      "guaranteeId": "ok.full",
+      "file": "test/parse.test.ts",
+      "line": 180,
+      "title": "parseURL.ok.full ${}",
+      "status": "test",
+      "bodyHash": "bb9fa6cdbed8485b",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseHost.ok.split",
+      "unitId": "parseHost",
+      "guaranteeId": "ok.split",
+      "file": "test/parse.test.ts",
+      "line": 193,
+      "title": "parseHost.ok.split ${}",
+      "status": "test",
+      "bodyHash": "47e927c7cae31bce",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseFilename.ok.last-segment",
+      "unitId": "parseFilename",
+      "guaranteeId": "ok.last-segment",
+      "file": "test/parse.test.ts",
+      "line": 285,
+      "title": "parseFilename.ok.last-segment works",
+      "status": "test",
+      "bodyHash": "3718eb8fbff64f3b",
+      "literals": [
+        "/path/to/filename.ext",
+        "filename.ext"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseFilename.ok.strict",
+      "unitId": "parseFilename",
+      "guaranteeId": "ok.strict",
+      "file": "test/parse.test.ts",
+      "line": 290,
+      "title": "parseFilename.ok.strict ${}",
+      "status": "test",
+      "bodyHash": "7eaa786cbd4b04d0",
+      "literals": [],
+      "keys": [
+        "strict"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "stringifyParsedURL.ok.roundtrip",
+      "unitId": "stringifyParsedURL",
+      "guaranteeId": "ok.roundtrip",
+      "file": "test/utilities.test.ts",
+      "line": 128,
+      "title": "stringifyParsedURL.ok.roundtrip ${}",
+      "status": "test",
+      "bodyHash": "348a8c106b329630",
+      "literals": [
+        "string"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "guarantee-no-test",
+      "message": "parseURL.ok.no-protocol has no test naming it",
+      "file": "src/parse.ts",
+      "line": 51,
+      "unit": "parseURL",
+      "guarantee": "parseURL.ok.no-protocol",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "parseURL.ok.default-proto has no test naming it",
+      "file": "src/parse.ts",
+      "line": 52,
+      "unit": "parseURL",
+      "guarantee": "parseURL.ok.default-proto",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "parsePath.ok.split has no test naming it",
+      "file": "src/parse.ts",
+      "line": 114,
+      "unit": "parsePath",
+      "guarantee": "parsePath.ok.split",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "parseAuth.ok.split has no test naming it",
+      "file": "src/parse.ts",
+      "line": 136,
+      "unit": "parseAuth",
+      "guarantee": "parseAuth.ok.split",
+      "severity": "fail"
+    },
+    {
+      "rule": "identifier-unresolved",
+      "message": "stringifyParsedURL.ok.roundtrip: \"parseURL\" is not a parameter, declared port, entity or public operation",
+      "file": "src/parse.ts",
+      "line": 187,
+      "unit": "stringifyParsedURL",
+      "guarantee": "stringifyParsedURL.ok.roundtrip",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "parseQuery.ok.pairs has no test naming it",
+      "file": "src/query.ts",
+      "line": 46,
+      "unit": "parseQuery",
+      "guarantee": "parseQuery.ok.pairs",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "parseQuery.ok.leading-question has no test naming it",
+      "file": "src/query.ts",
+      "line": 47,
+      "unit": "parseQuery",
+      "guarantee": "parseQuery.ok.leading-question",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "parseQuery.ok.repeated has no test naming it",
+      "file": "src/query.ts",
+      "line": 48,
+      "unit": "parseQuery",
+      "guarantee": "parseQuery.ok.repeated",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "encodeQueryItem.ok.pair has no test naming it",
+      "file": "src/query.ts",
+      "line": 96,
+      "unit": "encodeQueryItem",
+      "guarantee": "encodeQueryItem.ok.pair",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "encodeQueryItem.ok.array has no test naming it",
+      "file": "src/query.ts",
+      "line": 97,
+      "unit": "encodeQueryItem",
+      "guarantee": "encodeQueryItem.ok.array",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "stringifyQuery.ok.pairs has no test naming it",
+      "file": "src/query.ts",
+      "line": 136,
+      "unit": "stringifyQuery",
+      "guarantee": "stringifyQuery.ok.pairs",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "stringifyQuery.ok.undefined has no test naming it",
+      "file": "src/query.ts",
+      "line": 137,
+      "unit": "stringifyQuery",
+      "guarantee": "stringifyQuery.ok.undefined",
+      "severity": "fail"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "parseURL commits to match \"file:\" in `protocol === \"file:\"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/parse.ts",
+      "line": 83,
+      "unit": "parseURL",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "parseQuery commits to boundary \"2\" in `s.length < 2`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/query.ts",
+      "line": 61,
+      "unit": "parseQuery",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "parseQuery commits to match \"__proto__\" in `key === \"__proto__\"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/query.ts",
+      "line": 65,
+      "unit": "parseQuery",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "parseQuery commits to match \"constructor\" in `key === \"constructor\"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/query.ts",
+      "line": 65,
+      "unit": "parseQuery",
+      "severity": "warn"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 9,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 16,
+    "guaranteesWithoutTest": 11,
+    "tests": 5,
+    "orphanTests": 0,
+    "unlinkedTests": 18,
+    "findings": {
+      "fail": 12,
+      "warn": 4,
+      "info": 1
+    }
+  }
+}

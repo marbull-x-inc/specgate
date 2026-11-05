@@ -1,0 +1,452 @@
+[
+ {
+  "id": "25",
+  "file": "src/middleware/body-limit/index.ts",
+  "line": 75,
+  "mutator": "StringLiteral",
+  "status": "NoCoverage",
+  "equivalent": false,
+  "kind": "value",
+  "reason": "Empty Content-Length header (\"\") with maxSize: -1: original parses '0' -> 0 > -1 -> onError (413); mutant parses '' -> NaN -> next()"
+ },
+ {
+  "id": "6",
+  "file": "src/middleware/body-limit/index.ts",
+  "line": 57,
+  "mutator": "ObjectLiteral",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "value",
+  "reason": "Default onError: the thrown HTTPException's res has status 200 instead of 413; an app.onError that returns err.res (public field) sees 200 (getResponse() still uses 413)"
+ },
+ {
+  "id": "20",
+  "file": "src/middleware/body-limit/index.ts",
+  "line": 73,
+  "mutator": "BlockStatement",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "removal",
+  "reason": "Content-Length-only path removed: request with Content-Length: 1000 but a 5-byte body and maxSize 100 is rejected originally without reading the body, mutant streams it and passes; also body is read/rewrapped even when within limit"
+ },
+ {
+  "id": "17",
+  "file": "src/middleware/body-limit/index.ts",
+  "line": 73,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "Same as 20: Content-Length larger than maxSize while actual body is smaller -> original 413 without reading, mutant reads the stream and passes"
+ },
+ {
+  "id": "104",
+  "file": "src/middleware/cors/index.ts",
+  "line": 105,
+  "mutator": "BlockStatement",
+  "status": "NoCoverage",
+  "equivalent": false,
+  "kind": "removal",
+  "reason": "cors({ allowMethods: undefined }) (explicit undefined overrides default): mutant leaves findAllowMethods undefined, so a preflight throws TypeError instead of returning 204 without Allow-Methods"
+ },
+ {
+  "id": "105",
+  "file": "src/middleware/cors/index.ts",
+  "line": 106,
+  "mutator": "ArrowFunction",
+  "status": "NoCoverage",
+  "equivalent": true,
+  "kind": "value",
+  "reason": "Fallback returns undefined instead of ''; both are falsy and the only use is `if (allowMethods)`, so no header is set either way"
+ },
+ {
+  "id": "106",
+  "file": "src/middleware/cors/index.ts",
+  "line": 106,
+  "mutator": "StringLiteral",
+  "status": "NoCoverage",
+  "equivalent": false,
+  "kind": "value",
+  "reason": "cors({ allowMethods: undefined }): preflight gets 'Access-Control-Allow-Methods: Stryker was here!' instead of no header"
+ },
+ {
+  "id": "114",
+  "file": "src/middleware/cors/index.ts",
+  "line": 115,
+  "mutator": "StringLiteral",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "value",
+  "reason": "Request without Origin and a function origin (e.g. o => o || 'fallback') or array containing '': the function receives 'Stryker was here!' instead of '', changing Allow-Origin"
+ },
+ {
+  "id": "126",
+  "file": "src/middleware/cors/index.ts",
+  "line": 124,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "Default options: every response gets 'Access-Control-Expose-Headers: undefined'"
+ },
+ {
+  "id": "120",
+  "file": "src/middleware/cors/index.ts",
+  "line": 120,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "Default options (credentials unset): response gets 'Access-Control-Allow-Credentials: true'"
+ },
+ {
+  "id": "136",
+  "file": "src/middleware/cors/index.ts",
+  "line": 129,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "Preflight with default origin '*': mutant appends 'Vary: Origin'"
+ },
+ {
+  "id": "154",
+  "file": "src/middleware/cors/index.ts",
+  "line": 137,
+  "mutator": "StringLiteral",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "value",
+  "reason": "Preflight without Origin and a function allowMethods: it receives 'Stryker was here!' instead of '' as origin, so a function that branches on origin returns different methods"
+ },
+ {
+  "id": "161",
+  "file": "src/middleware/cors/index.ts",
+  "line": 143,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "allowHeaders ['X-A'] and preflight with Access-Control-Request-Headers: X-B: mutant answers 'X-B' instead of 'X-A'"
+ },
+ {
+  "id": "139",
+  "file": "src/middleware/cors/index.ts",
+  "line": 129,
+  "mutator": "StringLiteral",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "value",
+  "reason": "Preflight with default origin '*': '*' !== '' is true so mutant appends 'Vary: Origin'"
+ },
+ {
+  "id": "172",
+  "file": "src/middleware/cors/index.ts",
+  "line": 152,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "Preflight with no allowHeaders and no Access-Control-Request-Headers: mutant sets 'Access-Control-Allow-Headers: undefined' and appends Vary"
+ },
+ {
+  "id": "62",
+  "file": "src/middleware/cors/index.ts",
+  "line": 78,
+  "mutator": "ArrayDeclaration",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "value",
+  "reason": "Default allowHeaders: preflight gets 'Access-Control-Allow-Headers: Stryker was here' instead of echoing the request headers / no header"
+ },
+ {
+  "id": "63",
+  "file": "src/middleware/cors/index.ts",
+  "line": 82,
+  "mutator": "OptionalChaining",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "other",
+  "reason": "cors({ exposeHeaders: undefined }) (allowed by the optional type): mutant throws TypeError reading .length at construction"
+ },
+ {
+  "id": "65",
+  "file": "src/middleware/cors/index.ts",
+  "line": 83,
+  "mutator": "OptionalChaining",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "other",
+  "reason": "cors({ allowHeaders: undefined }): mutant throws TypeError reading .length at construction"
+ },
+ {
+  "id": "99",
+  "file": "src/middleware/cors/index.ts",
+  "line": 102,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "cors({ allowMethods: undefined }): mutant calls undefined.join and throws at construction instead of yielding no Allow-Methods header"
+ },
+ {
+  "id": "376",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 280,
+  "mutator": "MethodExpression",
+  "status": "NoCoverage",
+  "equivalent": true,
+  "kind": "value",
+  "reason": "offset 0 branch runs only for a CSP directive key whose first char is uppercase; every key of ContentSecurityPolicyOptions starts lowercase, so unreachable through the typed API"
+ },
+ {
+  "id": "446",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 330,
+  "mutator": "StringLiteral",
+  "status": "NoCoverage",
+  "equivalent": false,
+  "kind": "value",
+  "reason": "permissionsPolicy: { camera: undefined, geolocation: true } (Partial allows undefined): original filters the '' out, mutant emits 'Stryker was here!' in Permissions-Policy"
+ },
+ {
+  "id": "454",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 341,
+  "mutator": "ArrayDeclaration",
+  "status": "NoCoverage",
+  "equivalent": true,
+  "kind": "value",
+  "reason": "Default parameter of getReportingEndpoints is never used: its only caller is guarded by `if (options.reportingEndpoints)`, so the argument is always truthy"
+ },
+ {
+  "id": "459",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 346,
+  "mutator": "ArrayDeclaration",
+  "status": "NoCoverage",
+  "equivalent": true,
+  "kind": "value",
+  "reason": "Default parameter of getReportToOptions is never used: its only caller is guarded by `if (options.reportTo)`, so the argument is always truthy"
+ },
+ {
+  "id": "269",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 131,
+  "mutator": "BlockStatement",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "removal",
+  "reason": "With a NONCE directive, generateNonce returns undefined -> CSP contains 'nonce-undefined' and secureHeadersNonce is undefined"
+ },
+ {
+  "id": "270",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 133,
+  "mutator": "CallExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "removal",
+  "reason": "Without getRandomValues the nonce is always the base64 of 16 zero bytes, identical across requests (predictable nonce)"
+ },
+ {
+  "id": "273",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 143,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "CSP with NONCE: header contains 'nonce-true' instead of a random nonce"
+ },
+ {
+  "id": "275",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 143,
+  "mutator": "LogicalOperator",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "CSP with NONCE and no preset nonce: init && ... yields undefined -> 'nonce-undefined'"
+ },
+ {
+  "id": "274",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 143,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "CSP with NONCE: header contains 'nonce-false' instead of a random nonce"
+ },
+ {
+  "id": "276",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 144,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "Handler sets c.set('secureHeadersNonce','') beforehand: original keeps '' on the context while emitting a generated nonce; mutant overwrites the context with the generated nonce"
+ },
+ {
+  "id": "317",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 226,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "Default options: mutant always sets an empty 'Reporting-Endpoints' header"
+ },
+ {
+  "id": "323",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 230,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "Default options: mutant always sets an empty 'Report-To' header"
+ },
+ {
+  "id": "337",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 244,
+  "mutator": "OptionalChaining",
+  "status": "Survived",
+  "equivalent": true,
+  "kind": "other",
+  "reason": "options is always an object built from spread of DEFAULT_OPTIONS, so ?. vs . on it never differs"
+ },
+ {
+  "id": "331",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 238,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": true,
+  "kind": "condition",
+  "reason": "callbacks.reduce over an empty array with initial value headersToSet returns headersToSet, same as the short-circuit branch"
+ },
+ {
+  "id": "368",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 279,
+  "mutator": "Regex",
+  "status": "Survived",
+  "equivalent": true,
+  "kind": "other",
+  "reason": "[A-Z]+ vs [A-Z] only differs for consecutive capitals in a CSP directive key; no key of ContentSecurityPolicyOptions has consecutive capitals, so kebab output is identical"
+ },
+ {
+  "id": "370",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 279,
+  "mutator": "Regex",
+  "status": "Survived",
+  "equivalent": true,
+  "kind": "other",
+  "reason": "Lookahead (?=[a-z]) vs (?![a-z]) only differs for a capital not followed by a lowercase letter; in every typed CSP key each capital is followed by a lowercase letter, and the [A-Z] alternative yields the same single-letter match"
+ },
+ {
+  "id": "371",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 279,
+  "mutator": "Regex",
+  "status": "Survived",
+  "equivalent": true,
+  "kind": "other",
+  "reason": "(?![^a-z]) only differs from (?![a-z]) at end of string or before a non-letter; every capital in typed CSP keys is followed by a lowercase letter, so matches and output are identical"
+ },
+ {
+  "id": "383",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 288,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": true,
+  "kind": "condition",
+  "reason": "Static CSP is returned as [callback, array] instead of [undefined, string]; the callback runs every request with no inner callbacks and joins the array to the same string, so emitted headers are identical"
+ },
+ {
+  "id": "401",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 308,
+  "mutator": "MethodExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "removal",
+  "reason": "permissionsPolicy with two directives: mutant drops .filter(Boolean).join(', ') so the header is the array stringified as 'camera=(),microphone=()' instead of 'camera=(), microphone=()'"
+ },
+ {
+  "id": "411",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 316,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "permissionsPolicy: { camera: undefined }: mutant reads undefined.length and throws at construction instead of omitting the directive"
+ },
+ {
+  "id": "415",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 317,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": true,
+  "kind": "condition",
+  "reason": "Empty array falls through to the allowlist branch which produces `${k}=()` from an empty join, same as the early return"
+ },
+ {
+  "id": "417",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 317,
+  "mutator": "BlockStatement",
+  "status": "Survived",
+  "equivalent": true,
+  "kind": "removal",
+  "reason": "Same as 415: removing the early return for [] leads to `${k}=(${''})` = `${k}=()`, identical output"
+ },
+ {
+  "id": "422",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 320,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "permissionsPolicy: { camera: ['*', 'self'] }: mutant returns 'camera=*' instead of 'camera=(\"*\" self)'"
+ },
+ {
+  "id": "432",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 323,
+  "mutator": "ConditionalExpression",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "condition",
+  "reason": "permissionsPolicy: { camera: ['none', 'self'] }: mutant returns 'camera=()' instead of 'camera=(\"none\" self)'"
+ },
+ {
+  "id": "451",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 337,
+  "mutator": "Regex",
+  "status": "Survived",
+  "equivalent": true,
+  "kind": "other",
+  "reason": "[a-z\\d] vs [a-z\\D] differs only for digit+capital (no match) or capital+capital (extra dash); no PermissionsPolicyDirective key has either (only digit key chUaWow64 ends in digits), so output is identical"
+ },
+ {
+  "id": "256",
+  "file": "src/middleware/secure-headers/secure-headers.ts",
+  "line": 110,
+  "mutator": "BooleanLiteral",
+  "status": "Survived",
+  "equivalent": false,
+  "kind": "value",
+  "reason": "secureHeaders() with defaults: mutant sets 'Cross-Origin-Embedder-Policy: require-corp', which must be absent by default"
+ }
+]

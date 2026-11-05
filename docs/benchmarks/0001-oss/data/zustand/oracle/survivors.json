@@ -1,0 +1,302 @@
+[
+  {
+    "id": "2",
+    "file": "src/middleware/persist.ts",
+    "line": 42,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "createJSONStorage(() => { throw new Error() }) returns a storage object instead of undefined."
+  },
+  {
+    "id": "41",
+    "file": "src/middleware/persist.ts",
+    "line": 212,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "persist with an unavailable storage (createJSONStorage getter throws) crashes on set() instead of warning and updating state."
+  },
+  {
+    "id": "42",
+    "file": "src/middleware/persist.ts",
+    "line": 214,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "With unavailable storage, set({a: 1}) no longer warns or updates the state."
+  },
+  {
+    "id": "44",
+    "file": "src/middleware/persist.ts",
+    "line": 216,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "With unavailable storage, console.warn is called with \"\" instead of the \"Unable to update item\" message."
+  },
+  {
+    "id": "45",
+    "file": "src/middleware/persist.ts",
+    "line": 218,
+    "mutator": "CallExpression",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "With unavailable storage, set({a: 1}) warns but the state does not change."
+  },
+  {
+    "id": "122",
+    "file": "src/middleware/persist.ts",
+    "line": 348,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "api.persist.setOptions({storage: s2}) keeps writing/reading the old storage instead of s2."
+  },
+  {
+    "id": "7",
+    "file": "src/middleware/persist.ts",
+    "line": 49,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "With a reviver (e.g. (k, v) => v ?? \"x\"), getItem on a missing key returns JSON.parse(\"null\", reviver) = \"x\" instead of null."
+  },
+  {
+    "id": "9",
+    "file": "src/middleware/persist.ts",
+    "line": 49,
+    "mutator": "BlockStatement",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "With a reviver (e.g. (k, v) => v ?? \"x\"), getItem on a missing key returns \"x\" instead of null."
+  },
+  {
+    "id": "25",
+    "file": "src/middleware/persist.ts",
+    "line": 175,
+    "mutator": "BlockStatement",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "With sync storage, api.persist.rehydrate() returns undefined instead of a thenable, so rehydrate().then(...) throws."
+  },
+  {
+    "id": "33",
+    "file": "src/middleware/persist.ts",
+    "line": 194,
+    "mutator": "ArrowFunction",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "persist without a storage option no longer writes to window.localStorage (getItem/setItem throw on undefined)."
+  },
+  {
+    "id": "40",
+    "file": "src/middleware/persist.ts",
+    "line": 212,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "With unavailable storage the guard is skipped and set() throws on storage.setItem instead of warning."
+  },
+  {
+    "id": "57",
+    "file": "src/middleware/persist.ts",
+    "line": 258,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "condition",
+    "reason": "hydrate is only reachable after the !storage early return, and setOptions only assigns a truthy storage, so storage is always truthy here."
+  },
+  {
+    "id": "58",
+    "file": "src/middleware/persist.ts",
+    "line": 266,
+    "mutator": "UpdateOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "Async storage: rehydrate() (v=-1), clearStorage() (v=0), rehydrate() (v=-1) lets the stale first hydration apply because versions collide."
+  },
+  {
+    "id": "53",
+    "file": "src/middleware/persist.ts",
+    "line": 249,
+    "mutator": "ArrowFunction",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "store.getInitialState() returns undefined instead of the initial state."
+  },
+  {
+    "id": "89",
+    "file": "src/middleware/persist.ts",
+    "line": 292,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "Stored version differs and no migrate: console.error gets \"\" instead of the explanatory message."
+  },
+  {
+    "id": "115",
+    "file": "src/middleware/persist.ts",
+    "line": 334,
+    "mutator": "BlockStatement",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "Async storage rejecting on a superseded rehydrate still calls onRehydrateStorage callback with the error."
+  },
+  {
+    "id": "121",
+    "file": "src/middleware/persist.ts",
+    "line": 348,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "api.persist.setOptions({storage: s2}) does not switch to s2."
+  },
+  {
+    "id": "113",
+    "file": "src/middleware/persist.ts",
+    "line": 334,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "A superseded hydration that errors still calls the post-rehydration callback with the error."
+  },
+  {
+    "id": "116",
+    "file": "src/middleware/persist.ts",
+    "line": 337,
+    "mutator": "OptionalChaining",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "Without onRehydrateStorage, a failing getItem makes the catch handler throw: rehydrate() never resolves (sync) or rejects (async)."
+  },
+  {
+    "id": "125",
+    "file": "src/middleware/persist.ts",
+    "line": 354,
+    "mutator": "OptionalChaining",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "other",
+    "reason": "persist API is only attached after the !storage early return and storage is never reset to falsy, so storage is always defined in clearStorage."
+  },
+  {
+    "id": "124",
+    "file": "src/middleware/persist.ts",
+    "line": 353,
+    "mutator": "UpdateOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "Async storage: rehydrate() (v=1), clearStorage() (v=0), rehydrate() (v=1) lets the first, stale hydration apply."
+  },
+  {
+    "id": "98",
+    "file": "src/middleware/persist.ts",
+    "line": 311,
+    "mutator": "BooleanLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "A custom merge that drops keys (merge: (p) => p) leaves old keys in state because set merges instead of replacing."
+  },
+  {
+    "id": "165",
+    "file": "src/vanilla/shallow.ts",
+    "line": 38,
+    "mutator": "LogicalOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "Two generator objects from the same function, one yielding nothing and one yielding undefined, compare true instead of false."
+  },
+  {
+    "id": "174",
+    "file": "src/vanilla/shallow.ts",
+    "line": 45,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "Generators yielding [1] and [1, 2] compare true instead of false."
+  },
+  {
+    "id": "176",
+    "file": "src/vanilla/shallow.ts",
+    "line": 45,
+    "mutator": "LogicalOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "Generators yielding [1] and [1, 2] compare true instead of false."
+  },
+  {
+    "id": "196",
+    "file": "src/vanilla/shallow.ts",
+    "line": 62,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "shallow(null, {}) throws TypeError from Object.getPrototypeOf(null) instead of returning false."
+  },
+  {
+    "id": "198",
+    "file": "src/vanilla/shallow.ts",
+    "line": 63,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "shallow({}, undefined) throws TypeError from Object.getPrototypeOf(undefined) instead of returning false."
+  },
+  {
+    "id": "201",
+    "file": "src/vanilla/shallow.ts",
+    "line": 64,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "shallow({}, null) throws TypeError from Object.getPrototypeOf(null) instead of returning false."
+  },
+  {
+    "id": "212",
+    "file": "src/vanilla/shallow.ts",
+    "line": 71,
+    "mutator": "LogicalOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "shallow({[Symbol.iterator]: f}, {}) throws (B is not iterable) instead of comparing as plain objects."
+  },
+  {
+    "id": "216",
+    "file": "src/vanilla/shallow.ts",
+    "line": 72,
+    "mutator": "LogicalOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "Two own-iterable objects where only A has an entries property: mutant calls B.entries() and throws."
+  }
+]

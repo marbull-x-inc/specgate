@@ -1,0 +1,576 @@
+03:59:45 (70466) INFO ProjectReader Found 4 of 588 file(s) to be mutated.
+03:59:46 (70466) INFO Instrumenter Instrumented 4 source file(s) with 445 mutant(s)
+03:59:46 (70466) INFO ConcurrencyTokenProvider Creating 15 test runner process(es).
+03:59:46 (70466) INFO DryRunExecutor Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+03:59:47 (70466) INFO DryRunExecutor Initial test run succeeded. Ran 79 tests in 0 seconds (net 68.34087699999992 ms, overhead 366.6591230000001 ms).
+03:59:47 (70466) WARN MutantTestPlanner Detected 105 static mutants (24% of total) that are estimated to take 77% of the time running the tests!
+  You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
+  For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants
+  (disable "warnings.slow" to ignore this warning)
+
+All tests
+  body-limit/index.test.ts
+    ✓ Body Limit Middleware > GET request > bodyLimit.ok.pass should return 200 response [line 36] (killed 5)
+    ✓ Body Limit Middleware > POST request > string body > bodyLimit.ok.pass should return 200 response [line 46] (killed 6)
+    ✓ Body Limit Middleware > POST request > string body > bodyLimit.ok.content-length should return 413 response [line 54] (killed 11)
+    ✓ Body Limit Middleware > POST request > ReadableStream body > bodyLimit.ok.pass should return 200 response [line 67] (killed 15)
+    ✓ Body Limit Middleware > POST request > ReadableStream body > bodyLimit.ok.stream should return 413 response [line 84] (killed 1)
+    ~ Body Limit Middleware > custom error handler > bodyLimit.ok.content-length should return the custom error handler [line 122] (covered 23)
+    ✓ Body Limit Middleware > Transfer-Encoding and Content-Length headers > bodyLimit.ok.stream should prioritize Transfer-Encoding over Content-Length [line 143] (killed 1)
+    ~ Body Limit Middleware > Transfer-Encoding and Content-Length headers > bodyLimit.ok.pass should handle only Content-Length header correctly [line 171] (covered 23)
+    ~ Body Limit Middleware > Transfer-Encoding and Content-Length headers > bodyLimit.ok.pass should handle only Transfer-Encoding header correctly [line 179] (covered 32)
+    ~ Body Limit Middleware > chunked body bypass scenarios > bodyLimit.ok.stream should reject when handler does not read the body [line 255] (covered 28)
+    ~ Body Limit Middleware > chunked body bypass scenarios > bodyLimit.ok.stream should reject when handler reads only the first chunk [line 261] (covered 28)
+    ~ Body Limit Middleware > chunked body bypass scenarios > bodyLimit.ok.stream should reject when handler swallows body read errors [line 267] (covered 28)
+  cors/index.test.ts
+    ✓ CORS by Middleware > cors.ok.origin-default GET default [line 139] (killed 24)
+    ✓ CORS by Middleware > cors.ok.methods-default Preflight default [line 147] (killed 42)
+    ~ CORS by Middleware > cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value [line 174] (covered 59)
+    ✓ CORS by Middleware > cors.ok.origin-string Preflight with options [line 181] (killed 25)
+    ✓ CORS by Middleware > cors.ok.origin-string Disallow an unmatched origin [line 207] (killed 3)
+    ✓ CORS by Middleware > cors.ok.origin-list Allow multiple origins [line 216] (killed 5)
+    ✓ CORS by Middleware > cors.ok.origin-list Set "Origin" to Vary header [line 244] (killed 4)
+    ~ CORS by Middleware > cors.ok.origin-default Keep original Vary header [line 256] (covered 23)
+    ✓ CORS by Middleware > cors.ok.origin-list Append "Origin" to Vary header, if response has some Vary header [line 268] (killed 2)
+    ✓ CORS by Middleware > cors.ok.origin-string Append "Origin" to Vary header on OPTIONS preflight, if response has some Vary header [line 280] (killed 1)
+    ✓ CORS by Middleware > cors.ok.origin-function Allow origins by function [line 308] (killed 3)
+    ~ CORS by Middleware > cors.ok.origin-function Allow origins by promise returning function [line 330] (covered 29)
+    ~ CORS by Middleware > cors.ok.origin-default With raw Response object [line 352] (covered 24)
+    ~ CORS by Middleware > cors.ok.origin-string Should not return duplicate header values [line 359] (covered 31)
+    ✓ CORS by Middleware > cors.ok.methods Allow methods by function [line 369] (killed 9)
+    ~ CORS by Middleware > cors.ok.methods Allow methods by promise returning function [line 391] (covered 52)
+    ✓ CORS by Middleware > cors.ok.methods Does not set allow methods when function returns an empty array [line 413] (killed 1)
+    ~ CORS by Middleware > cors.ok.origin-string Emits the wildcard, not the reflected origin, when credentials is true with wildcard origin [line 424] (covered 26)
+    ✓ CORS by Middleware > cors.ok.origin-string Preflight emits the wildcard, not the reflected origin, when credentials is true with wildcard origin [line 440] (killed 1)
+    ~ CORS by Middleware > cors.ok.origin-string Emits the wildcard with no Origin header when credentials is true with wildcard origin [line 454] (covered 27)
+    ~ CORS by Middleware > cors.ok.origin-string Emits the wildcard for every origin (never reflects) when credentials is true with wildcard origin [line 462] (covered 26)
+    ~ CORS by Middleware > cors.ok.origin-string Origin: null gets the wildcard, not a reflected null origin, with credentials [line 474] (covered 26)
+    ~ CORS by Middleware > cors.ok.origin-default Should not reflect an arbitrary Origin when credentials is true with default origin [line 483] (covered 63)
+    ~ CORS by Middleware > cors.ok.origin-default Preflight should not approve an arbitrary Origin when credentials is true with default origin [line 496] (covered 97)
+    ~ CORS by Middleware > cors.ok.origin-default Options without origin fall back to wildcard default [line 515] (covered 91)
+  request-id/index.test.ts
+    ✓ Request ID Middleware > requestId.ok.generate Should return random request id [line 12] (killed 14)
+    ✓ Request ID Middleware > requestId.ok.header-in Should return custom request id [line 20] (killed 4)
+    ~ Request ID Middleware > requestId.ok.header-in Should return custom request id with all valid characters [line 32] (covered 17)
+    ~ Request ID Middleware > requestId.ok.generate Should return random request id without using request header [line 45] (covered 18)
+    ~ Request ID Middleware with custom generator > requestId.ok.generate Should return custom request id [line 75] (covered 13)
+    ~ Request ID Middleware with custom generator > requestId.ok.generate Should return complex request id [line 83] (covered 13)
+    ✓ Request ID Middleware with limit length > requestId.ok.limit Should return custom request id [line 107] (killed 1)
+    ✓ Request ID Middleware with limit length > requestId.ok.limit Should return random request id without using request header [line 118] (killed 1)
+    ~ Request ID Middleware with limit length > requestId.ok.limit Should return custom request id with 256 characters [line 129] (covered 17)
+    ~ Request ID Middleware with custom header > requestId.ok.header-in Should return custom request id [line 149] (covered 17)
+    ✓ Request ID Middleware with custom header > requestId.ok.header-off Should not return request id [line 161] (killed 1)
+  secure-headers/index.test.ts
+    ✓ Secure Headers Middleware > secureHeaders.ok.defaults default middleware [line 14] (killed 67)
+    ✓ Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled [line 43] (killed 46)
+    ✓ Secure Headers Middleware > secureHeaders.ok.disable specific headers disabled [line 87] (killed 1)
+    ✓ Secure Headers Middleware > secureHeaders.ok.powered-by should remove x-powered-by header [line 114] (killed 3)
+    ~ Secure Headers Middleware > secureHeaders.ok.defaults should override Strict-Transport-Security header after middleware [line 130] (covered 38)
+    ✓ Secure Headers Middleware > secureHeaders.ok.override should use custom value when overridden [line 148] (killed 3)
+    ✓ Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly [line 167] (killed 36)
+    ✓ Secure Headers Middleware > secureHeaders.ok.powered-by Remove X-Powered-By [line 200] (killed 1)
+    ✓ Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting [line 236] (killed 1)
+    ~ Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting one only [line 268] (covered 72)
+    ~ Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp No CSP Setting [line 287] (covered 54)
+    ✓ Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.reporting CSP with reportTo [line 299] (killed 16)
+    ✓ Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src [line 411] (killed 35)
+    ✓ Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src and style-src [line 433] (killed 1)
+    ~ Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP nonce by app own function [line 457] (covered 90)
+    ~ Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.csp CSP Setting [line 236] (covered 72)
+    ~ Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.csp CSP Setting one only [line 268] (covered 72)
+    ~ Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.csp No CSP Setting [line 287] (covered 54)
+    ~ Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.reporting CSP with reportTo [line 299] (covered 86)
+    ✓ Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.nonce CSP nonce for script-src [line 411] (killed 4)
+    ~ Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.nonce CSP nonce for script-src and style-src [line 433] (covered 103)
+    ~ Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.csp CSP nonce by app own function [line 457] (covered 90)
+    ~ Secure Headers Middleware > CSP with combined modes > secureHeaders.ok.csp keeps the enforced policy when report-only uses a nonce [line 488] (covered 112)
+    ~ Secure Headers Middleware > CSP with combined modes > secureHeaders.ok.csp-report-only keeps the report-only policy when the enforced policy uses a nonce [line 512] (covered 112)
+    ~ Secure Headers Middleware > CSP with combined modes > secureHeaders.ok.nonce supports nonces in both policies [line 536] (covered 112)
+    ~ Secure Headers Middleware > CSP report-uri directive > secureHeaders.ok.csp should set report-uri with single endpoint [line 564] (covered 73)
+    ~ Secure Headers Middleware > CSP report-uri directive > secureHeaders.ok.csp should set report-uri with multiple endpoints [line 582] (covered 72)
+    ~ Secure Headers Middleware > CSP report-uri directive > secureHeaders.ok.csp should work with report-to and report-uri together [line 600] (covered 73)
+    ~ Secure Headers Middleware > CSP report-uri directive > secureHeaders.ok.csp-report-only should work with Content-Security-Policy-Report-Only [line 619] (covered 73)
+    ~ Secure Headers Middleware > CSP report-uri directive > secureHeaders.ok.csp should not output report-uri when reportUri is not set [line 639] (covered 72)
+    ~ Secure Headers Middleware > CSP report-uri directive > secureHeaders.ok.csp-report-only should not output report-uri in Report-Only when reportUri is not set [line 655] (covered 72)
+
+[NoCoverage] StringLiteral
+src/middleware/body-limit/index.ts:75:81
+-         const contentLength = parseInt(c.req.raw.headers.get('content-length') || '0', 10)
++         const contentLength = parseInt(c.req.raw.headers.get('content-length') || "", 10)
+
+[Survived] ObjectLiteral
+src/middleware/body-limit/index.ts:57:47
+-         const res = new Response(ERROR_MESSAGE, {
+-           status: 413,
+-         })
++         const res = new Response(ERROR_MESSAGE, {})
+Tests ran:
+    Body Limit Middleware > POST request > string body > bodyLimit.ok.content-length should return 413 response
+    Body Limit Middleware > POST request > ReadableStream body > bodyLimit.ok.stream should return 413 response
+    Body Limit Middleware > Transfer-Encoding and Content-Length headers > bodyLimit.ok.stream should prioritize Transfer-Encoding over Content-Length
+  and 3 more tests!
+
+
+[Survived] BlockStatement
+src/middleware/body-limit/index.ts:73:51
+-       if (hasContentLength && !hasTransferEncoding) {
+-         // Only Content-Length present - we can trust it
+-         const contentLength = parseInt(c.req.raw.headers.get('content-length') || '0', 10)
+-         return contentLength > maxSize ? onError(c) : next()
+-       }
++       if (hasContentLength && !hasTransferEncoding) {}
+Tests ran:
+    Body Limit Middleware > POST request > string body > bodyLimit.ok.pass should return 200 response
+    Body Limit Middleware > POST request > string body > bodyLimit.ok.content-length should return 413 response
+    Body Limit Middleware > custom error handler > bodyLimit.ok.content-length should return the custom error handler
+  and 1 more test!
+
+
+[Survived] ConditionalExpression
+src/middleware/body-limit/index.ts:73:9
+-       if (hasContentLength && !hasTransferEncoding) {
++       if (false) {
+Tests ran:
+    Body Limit Middleware > POST request > string body > bodyLimit.ok.pass should return 200 response
+    Body Limit Middleware > POST request > string body > bodyLimit.ok.content-length should return 413 response
+    Body Limit Middleware > POST request > ReadableStream body > bodyLimit.ok.pass should return 200 response
+  and 8 more tests!
+
+
+[NoCoverage] BlockStatement
+src/middleware/cors/index.ts:105:12
+-       } else {
+-         return () => ''
+-       }
++       } else {}
+
+[NoCoverage] ArrowFunction
+src/middleware/cors/index.ts:106:14
+-         return () => ''
++         return () => undefined
+
+[NoCoverage] StringLiteral
+src/middleware/cors/index.ts:106:20
+-         return () => ''
++         return () => "Stryker was here!"
+
+[Survived] StringLiteral
+src/middleware/cors/index.ts:115:73
+-       const allowOrigin = await findAllowOrigin(c.req.header('origin') || '', c)
++       const allowOrigin = await findAllowOrigin(c.req.header('origin') || "Stryker was here!", c)
+Tests ran:
+    CORS by Middleware > cors.ok.origin-default GET default
+    CORS by Middleware > cors.ok.methods-default Preflight default
+    CORS by Middleware > cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value
+  and 7 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/cors/index.ts:124:9
+-       if (exposeHeadersStr) {
++       if (true) {
+Tests ran:
+    CORS by Middleware > cors.ok.origin-default GET default
+    CORS by Middleware > cors.ok.methods-default Preflight default
+    CORS by Middleware > cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value
+  and 22 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/cors/index.ts:120:9
+-       if (opts.credentials) {
++       if (true) {
+Tests ran:
+    CORS by Middleware > cors.ok.origin-default GET default
+    CORS by Middleware > cors.ok.methods-default Preflight default
+    CORS by Middleware > cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value
+  and 22 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/cors/index.ts:129:11
+-         if (opts.origin !== '*') {
++         if (true) {
+Tests ran:
+    CORS by Middleware > cors.ok.methods-default Preflight default
+    CORS by Middleware > cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value
+    CORS by Middleware > cors.ok.origin-string Preflight with options
+  and 8 more tests!
+
+
+[Survived] StringLiteral
+src/middleware/cors/index.ts:137:77
+-         const allowMethods = await findAllowMethods(c.req.header('origin') || '', c)
++         const allowMethods = await findAllowMethods(c.req.header('origin') || "Stryker was here!", c)
+Tests ran:
+    CORS by Middleware > cors.ok.methods-default Preflight default
+    CORS by Middleware > cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value
+    CORS by Middleware > cors.ok.methods Does not set allow methods when function returns an empty array
+  and 1 more test!
+
+
+[Survived] ConditionalExpression
+src/middleware/cors/index.ts:143:11
+-         if (!headersStr) {
++         if (true) {
+Tests ran:
+    CORS by Middleware > cors.ok.methods-default Preflight default
+    CORS by Middleware > cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value
+    CORS by Middleware > cors.ok.origin-string Preflight with options
+  and 8 more tests!
+
+
+[Survived] StringLiteral
+src/middleware/cors/index.ts:129:27
+-         if (opts.origin !== '*') {
++         if (opts.origin !== "") {
+Tests ran:
+    CORS by Middleware > cors.ok.methods-default Preflight default
+    CORS by Middleware > cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value
+    CORS by Middleware > cors.ok.origin-string Preflight with options
+  and 8 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/cors/index.ts:152:11
+-         if (headersStr) {
++         if (true) {
+Tests ran:
+    CORS by Middleware > cors.ok.methods-default Preflight default
+    CORS by Middleware > cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value
+    CORS by Middleware > cors.ok.origin-string Preflight with options
+  and 8 more tests!
+
+
+[Survived] ArrayDeclaration
+src/middleware/cors/index.ts:78:20
+-       exposeHeaders: [],
++       exposeHeaders: ["Stryker was here"],
+Ran all tests for this mutant.
+
+[Survived] OptionalChaining
+src/middleware/cors/index.ts:82:28
+-     const exposeHeadersStr = opts.exposeHeaders?.length ? opts.exposeHeaders.join(',') : undefined
++     const exposeHeadersStr = opts.exposeHeaders.length ? opts.exposeHeaders.join(',') : undefined
+Ran all tests for this mutant.
+
+[Survived] OptionalChaining
+src/middleware/cors/index.ts:83:27
+-     const allowHeadersStr = opts.allowHeaders?.length ? opts.allowHeaders.join(',') : undefined
++     const allowHeadersStr = opts.allowHeaders.length ? opts.allowHeaders.join(',') : undefined
+Ran all tests for this mutant.
+
+[Survived] ConditionalExpression
+src/middleware/cors/index.ts:102:16
+-       } else if (Array.isArray(optsAllowMethods)) {
++       } else if (true) {
+Ran all tests for this mutant.
+
+[NoCoverage] MethodExpression
+src/middleware/secure-headers/secure-headers.ts:280:46
+-           offset ? '-' + match.toLowerCase() : match.toLowerCase()
++           offset ? '-' + match.toLowerCase() : match.toUpperCase()
+
+[NoCoverage] StringLiteral
+src/middleware/secure-headers/secure-headers.ts:330:14
+-         return ''
++         return "Stryker was here!"
+
+[NoCoverage] ArrayDeclaration
+src/middleware/secure-headers/secure-headers.ts:341:68
+-     reportingEndpoints: SecureHeadersOptions['reportingEndpoints'] = []
++     reportingEndpoints: SecureHeadersOptions['reportingEndpoints'] = ["Stryker was here"]
+
+[NoCoverage] ArrayDeclaration
+src/middleware/secure-headers/secure-headers.ts:346:74
+-   function getReportToOptions(reportTo: SecureHeadersOptions['reportTo'] = []): string {
++   function getReportToOptions(reportTo: SecureHeadersOptions['reportTo'] = ["Stryker was here"]): string {
+
+[Survived] BlockStatement
+src/middleware/secure-headers/secure-headers.ts:131:29
+-   const generateNonce = () => {
+-     const arrayBuffer = new Uint8Array(16)
+-     crypto.getRandomValues(arrayBuffer)
+-     return encodeBase64(arrayBuffer.buffer)
+-   }
++   const generateNonce = () => {}
+Tests ran:
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src and style-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.nonce CSP nonce for script-src
+  and 4 more tests!
+
+
+[Survived] CallExpression
+src/middleware/secure-headers/secure-headers.ts:133:3
+-     crypto.getRandomValues(arrayBuffer)
++     ;
+Tests ran:
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src and style-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.nonce CSP nonce for script-src
+  and 4 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:143:17
+-     const nonce = init || generateNonce()
++     const nonce = true
+Tests ran:
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src and style-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.nonce CSP nonce for script-src
+  and 4 more tests!
+
+
+[Survived] LogicalOperator
+src/middleware/secure-headers/secure-headers.ts:143:17
+-     const nonce = init || generateNonce()
++     const nonce = init && generateNonce()
+Tests ran:
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src and style-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.nonce CSP nonce for script-src
+  and 4 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:143:17
+-     const nonce = init || generateNonce()
++     const nonce = false
+Tests ran:
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src and style-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.nonce CSP nonce for script-src
+  and 4 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:144:7
+-     if (init == null) {
++     if (true) {
+Tests ran:
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.nonce CSP nonce for script-src and style-src
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicyReportOnly) > secureHeaders.ok.nonce CSP nonce for script-src
+  and 4 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:226:7
+-     if (options.reportingEndpoints) {
++     if (true) {
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.defaults default middleware
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > secureHeaders.ok.disable specific headers disabled
+  and 28 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:230:7
+-     if (options.reportTo) {
++     if (true) {
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.defaults default middleware
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > secureHeaders.ok.disable specific headers disabled
+  and 28 more tests!
+
+
+[Survived] OptionalChaining
+src/middleware/secure-headers/secure-headers.ts:244:9
+-       if (options?.removePoweredBy) {
++       if (options.removePoweredBy) {
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.defaults default middleware
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > secureHeaders.ok.disable specific headers disabled
+  and 28 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:238:7
+-         callbacks.length === 0
++         false
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.defaults default middleware
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > secureHeaders.ok.disable specific headers disabled
+  and 28 more tests!
+
+
+[Survived] Regex
+src/middleware/secure-headers/secure-headers.ts:279:25
+-         directive.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (match, offset) =>
++         directive.replace(/[A-Z](?![a-z])|[A-Z]/g, (match, offset) =>
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting one only
+  and 19 more tests!
+
+
+[Survived] Regex
+src/middleware/secure-headers/secure-headers.ts:279:25
+-         directive.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (match, offset) =>
++         directive.replace(/[A-Z]+(?=[a-z])|[A-Z]/g, (match, offset) =>
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting one only
+  and 19 more tests!
+
+
+[Survived] Regex
+src/middleware/secure-headers/secure-headers.ts:279:25
+-         directive.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (match, offset) =>
++         directive.replace(/[A-Z]+(?![^a-z])|[A-Z]/g, (match, offset) =>
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting one only
+  and 19 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:288:10
+-     return callbacks.length === 0
++     return false
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting
+    Secure Headers Middleware > CSP Setting (contentSecurityPolicy) > secureHeaders.ok.csp CSP Setting one only
+  and 21 more tests!
+
+
+[Survived] MethodExpression
+src/middleware/secure-headers/secure-headers.ts:308:10
+-     return Object.entries(policy)
+-       .map(([directive, value]) => {
+-         const kebabDirective = camelToKebab(directive)
+-         if (typeof value === 'boolean') {
+-           return `${kebabDirective}=${value ? '*' : '()'}`
+-         }
+-         if (Array.isArray(value)) {
+-           if (value.length === 0) {
+-             return `${kebabDirective}=()`
+-           }
+-           if (value.length === 1 && value[0] === '*') {
+-             return `${kebabDirective}=*`
+-           }
+-           if (value.length === 1 && value[0] === 'none') {
+-             return `${kebabDirective}=()`
+-           }
+-           const allowlist = value.map((item) => (['self', 'src'].includes(item) ? item : `"${item}"`))
+-           return `${kebabDirective}=(${allowlist.join(' ')})`
+-         }
+-         return ''
+-       })
+-       .filter(Boolean)
++     return Object.entries(policy).map(([directive, value]) => {
++     const kebabDirective = camelToKebab(directive);
++     if (typeof value === 'boolean') {
++       return `${kebabDirective}=${value ? '*' : '()'}`;
++     }
++     if (Array.isArray(value)) {
++       if (value.length === 0) {
++         return `${kebabDirective}=()`;
++       }
++       if (value.length === 1 && value[0] === '*') {
++         return `${kebabDirective}=*`;
++       }
++       if (value.length === 1 && value[0] === 'none') {
++         return `${kebabDirective}=()`;
++       }
++       const allowlist = value.map(item => ['self', 'src'].includes(item) ? item : `"${item}"`);
++       return `${kebabDirective}=(${allowlist.join(' ')})`;
++     }
++     return '';
++   })
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:316:11
+-         if (Array.isArray(value)) {
++         if (true) {
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:317:13
+-           if (value.length === 0) {
++           if (false) {
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly
+
+
+[Survived] BlockStatement
+src/middleware/secure-headers/secure-headers.ts:317:33
+-           if (value.length === 0) {
+-             return `${kebabDirective}=()`
+-           }
++           if (value.length === 0) {}
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:320:13
+-           if (value.length === 1 && value[0] === '*') {
++           if (true && value[0] === '*') {
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly
+
+
+[Survived] ConditionalExpression
+src/middleware/secure-headers/secure-headers.ts:323:13
+-           if (value.length === 1 && value[0] === 'none') {
++           if (true && value[0] === 'none') {
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly
+
+
+[Survived] Regex
+src/middleware/secure-headers/secure-headers.ts:337:22
+-     return str.replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase()
++     return str.replace(/([a-z\D])([A-Z])/g, '$1-$2').toLowerCase()
+Tests ran:
+    Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled
+    Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly
+
+
+[Survived] BooleanLiteral
+src/middleware/secure-headers/secure-headers.ts:110:30
+-     crossOriginEmbedderPolicy: false,
++     crossOriginEmbedderPolicy: true,
+Ran all tests for this mutant.
+
+Ran 2.94 tests per mutant on average.
+--------------------|------------------|----------|-----------|------------|----------|----------|
+                    | % Mutation score |          |           |            |          |          |
+File                |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+--------------------|--------|---------|----------|-----------|------------|----------|----------|
+All files           |  89.89 |   91.53 |      394 |         6 |         37 |        8 |        0 |
+ body-limit         |  91.84 |   93.75 |       39 |         6 |          3 |        1 |        0 |
+  index.ts          |  91.84 |   93.75 |       39 |         6 |          3 |        1 |        0 |
+ cors               |  88.89 |   90.91 |      120 |         0 |         12 |        3 |        0 |
+  index.ts          |  88.89 |   90.91 |      120 |         0 |         12 |        3 |        0 |
+ request-id         | 100.00 |  100.00 |       21 |         0 |          0 |        0 |        0 |
+  request-id.ts     | 100.00 |  100.00 |       21 |         0 |          0 |        0 |        0 |
+ secure-headers     |  89.17 |   90.68 |      214 |         0 |         22 |        4 |        0 |
+  secure-headers.ts |  89.17 |   90.68 |      214 |         0 |         22 |        4 |        0 |
+--------------------|--------|---------|----------|-----------|------------|----------|----------|
+03:59:57 (70466) INFO JsonReporter Your report can be found at: file://<work>/hono/reports/mutation/mutation.json
+03:59:57 (70466) INFO MutationTestExecutor Done in 11 seconds.
+real 13.05
+user 102.97
+sys 13.63
+exit 0

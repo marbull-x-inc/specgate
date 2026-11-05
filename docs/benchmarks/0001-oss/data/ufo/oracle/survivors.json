@@ -1,0 +1,322 @@
+[
+  {
+    "id": "1",
+    "file": "src/parse.ts",
+    "line": 54,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parseURL() with no argument returns pathname \"Stryker was here!\" instead of \"\"."
+  },
+  {
+    "id": "11",
+    "file": "src/parse.ts",
+    "line": 59,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "Unreachable default: group (.*) always participates in the match, so _pathname is never undefined."
+  },
+  {
+    "id": "25",
+    "file": "src/parse.ts",
+    "line": 72,
+    "mutator": "ArithmeticOperator",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "parseURL(\"foo.com/x\", \"https://\") would parse \"NaN\" instead of \"https://foo.com/x\"."
+  },
+  {
+    "id": "27",
+    "file": "src/parse.ts",
+    "line": 75,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "Protocol-relative input \"//foo.com/a\" leaves group 1 undefined, so protocol becomes \"stryker was here!\" instead of \"\"."
+  },
+  {
+    "id": "44",
+    "file": "src/parse.ts",
+    "line": 78,
+    "mutator": "ArrayDeclaration",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "Fallback array is only destructured from index 1 onward; [\"Stryker was here\"] and [] both yield undefined for protocol/auth/hostAndPath."
+  },
+  {
+    "id": "45",
+    "file": "src/parse.ts",
+    "line": 81,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "Unreachable default: group ([^#/?]*) always participates (possibly empty), so host is never undefined."
+  },
+  {
+    "id": "54",
+    "file": "src/parse.ts",
+    "line": 81,
+    "mutator": "ArrayDeclaration",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "hostAndPath.match(/([^#/?]*)(.*)?/) always succeeds (can match empty), and index 0 is skipped anyway, so the fallback is never observable."
+  },
+  {
+    "id": "70",
+    "file": "src/parse.ts",
+    "line": 116,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parsePath() with no argument returns pathname \"Stryker was here!\" instead of \"\"."
+  },
+  {
+    "id": "72",
+    "file": "src/parse.ts",
+    "line": 117,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "Unreachable default: group ([^#?]*) always participates in the match, so pathname is never undefined."
+  },
+  {
+    "id": "85",
+    "file": "src/parse.ts",
+    "line": 118,
+    "mutator": "ArrayDeclaration",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "The parsePath regex can match the empty string, so match() never returns null and the fallback is unreachable."
+  },
+  {
+    "id": "87",
+    "file": "src/parse.ts",
+    "line": 138,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parseAuth() with no argument returns username \"Stryker was here!\" instead of \"\"."
+  },
+  {
+    "id": "91",
+    "file": "src/parse.ts",
+    "line": 163,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parseHost() with no argument returns hostname \"Stryker was here!\" instead of \"\"."
+  },
+  {
+    "id": "102",
+    "file": "src/parse.ts",
+    "line": 164,
+    "mutator": "ArrayDeclaration",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "The parseHost regex /([^/:]*):?(\\d+)?/ can match the empty string, so match() never returns null and the fallback is unreachable."
+  },
+  {
+    "id": "131",
+    "file": "src/parse.ts",
+    "line": 199,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "stringifyParsedURL(parseURL(\"//foo.com/a\")) returns \"Stryker was here!//foo.com/a\" instead of \"//foo.com/a\"."
+  },
+  {
+    "id": "147",
+    "file": "src/parse.ts",
+    "line": 230,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "parseFilename() default \"Stryker was here!\" has no \"/\", so both FILENAME regexes fail and the result is undefined, same as for \"\"."
+  },
+  {
+    "id": "3",
+    "file": "src/parse.ts",
+    "line": 56,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "Unanchored: parseURL(\"http://a.com/?x=javascript:alert(1)\") is treated as a javascript: URL."
+  },
+  {
+    "id": "6",
+    "file": "src/parse.ts",
+    "line": 56,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "[\\S\\0]*: parseURL(\"xdata:foo\") matches as data: (and \" data:foo\" with leading space no longer matches)."
+  },
+  {
+    "id": "32",
+    "file": "src/parse.ts",
+    "line": 78,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "Unanchored: parseURL(\"mailto:a//b\") finds \"//b\" later in the string and returns host \"b\" instead of \"\"."
+  },
+  {
+    "id": "52",
+    "file": "src/parse.ts",
+    "line": 81,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "other",
+    "reason": "(.*)? vs (.*): the greedy optional group always participates (matching empty at worst), so group 2 is a string in both cases."
+  },
+  {
+    "id": "69",
+    "file": "src/parse.ts",
+    "line": 96,
+    "mutator": "BooleanLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "stringifyParsedURL(parseURL(\"//foo.com/a\")) loses the leading \"//\" (\"foo.com/a\") because protocolRelative becomes false."
+  },
+  {
+    "id": "0",
+    "file": "src/parse.ts",
+    "line": 4,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "The symbol key is global (Symbol.for); a caller reading parsed[Symbol.for(\"ufo:protocolRelative\")] (or another ufo copy) no longer sees the flag."
+  },
+  {
+    "id": "150",
+    "file": "src/query.ts",
+    "line": 51,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parseQuery() with no argument returns {\"Stryker was here!\": \"\"} instead of {}."
+  },
+  {
+    "id": "182",
+    "file": "src/query.ts",
+    "line": 65,
+    "mutator": "BlockStatement",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "parseQuery(\"__proto__=x\") returns an object with own key \"__proto__\" (null-prototype object) instead of ignoring it."
+  },
+  {
+    "id": "152",
+    "file": "src/query.ts",
+    "line": 56,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "parseQuery(\"foo=bar\") strips the first char and returns {oo: \"bar\"}."
+  },
+  {
+    "id": "167",
+    "file": "src/query.ts",
+    "line": 60,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "value",
+    "reason": "When the match fails, s=[\"Stryker was here\"] has length 1 < 2, so the parameter is skipped exactly as with []."
+  },
+  {
+    "id": "170",
+    "file": "src/query.ts",
+    "line": 61,
+    "mutator": "EqualityOperator",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "boundary",
+    "reason": "A successful match always has length 3 and a failed one 0, so s.length is never 2 and < 2 / <= 2 agree."
+  },
+  {
+    "id": "175",
+    "file": "src/query.ts",
+    "line": 65,
+    "mutator": "LogicalOperator",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "A key cannot equal both strings, so the guard is never taken: parseQuery(\"constructor=x\") returns {constructor: \"x\"}."
+  },
+  {
+    "id": "179",
+    "file": "src/query.ts",
+    "line": 65,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "parseQuery(\"constructor=x\") returns {constructor: \"x\"} instead of {}."
+  },
+  {
+    "id": "176",
+    "file": "src/query.ts",
+    "line": 65,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "parseQuery(\"__proto__=x\") returns an own \"__proto__\" key instead of {}."
+  },
+  {
+    "id": "181",
+    "file": "src/query.ts",
+    "line": 65,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parseQuery(\"constructor=x\") returns {constructor: \"x\"} (keys are never empty)."
+  },
+  {
+    "id": "178",
+    "file": "src/query.ts",
+    "line": 65,
+    "mutator": "StringLiteral",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "parseQuery(\"__proto__=x\") returns an own \"__proto__\" key (keys are never empty)."
+  },
+  {
+    "id": "174",
+    "file": "src/query.ts",
+    "line": 65,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "parseQuery(\"__proto__=1&constructor=2\") keeps both keys instead of ignoring them."
+  }
+]

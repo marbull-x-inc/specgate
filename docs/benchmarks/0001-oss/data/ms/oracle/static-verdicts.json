@@ -1,0 +1,1272 @@
+[
+  {
+    "finding": 2,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 4,
+    "kind": "constant",
+    "value": "86400000",
+    "category": "other",
+    "change": [
+      {
+        "from": "h * 24",
+        "to": "h * 25"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 3,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 4,
+    "kind": "constant",
+    "value": "86400000",
+    "category": "other",
+    "change": [
+      {
+        "from": "h * 24",
+        "to": "h * 25"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 4,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 7,
+    "kind": "constant",
+    "value": "2629800000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "y / 12",
+        "to": "y / 13"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 5,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 107,
+    "kind": "match",
+    "value": "years",
+    "category": "other",
+    "change": [
+      {
+        "from": "'years'",
+        "to": "'years_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 6,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 108,
+    "kind": "match",
+    "value": "year",
+    "category": "other",
+    "change": [
+      {
+        "from": "'year'",
+        "to": "'year_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 7,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 109,
+    "kind": "match",
+    "value": "yrs",
+    "category": "other",
+    "change": [
+      {
+        "from": "'yrs'",
+        "to": "'yrs_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "67"
+    ]
+  },
+  {
+    "finding": 8,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 110,
+    "kind": "match",
+    "value": "yr",
+    "category": "other",
+    "change": [
+      {
+        "from": "'yr'",
+        "to": "'yr_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "68"
+    ]
+  },
+  {
+    "finding": 9,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 111,
+    "kind": "match",
+    "value": "y",
+    "category": "other",
+    "change": [
+      {
+        "from": "'y'",
+        "to": "'y_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 10,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 113,
+    "kind": "match",
+    "value": "months",
+    "category": "other",
+    "change": [
+      {
+        "from": "'months'",
+        "to": "'months_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "72"
+    ]
+  },
+  {
+    "finding": 11,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 114,
+    "kind": "match",
+    "value": "month",
+    "category": "other",
+    "change": [
+      {
+        "from": "'month'",
+        "to": "'month_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 12,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 115,
+    "kind": "match",
+    "value": "mo",
+    "category": "other",
+    "change": [
+      {
+        "from": "'mo'",
+        "to": "'mo_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 13,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 117,
+    "kind": "match",
+    "value": "weeks",
+    "category": "other",
+    "change": [
+      {
+        "from": "'weeks'",
+        "to": "'weeks_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 14,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 118,
+    "kind": "match",
+    "value": "week",
+    "category": "other",
+    "change": [
+      {
+        "from": "'week'",
+        "to": "'week_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 15,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 119,
+    "kind": "match",
+    "value": "w",
+    "category": "other",
+    "change": [
+      {
+        "from": "'w'",
+        "to": "'w_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 16,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 121,
+    "kind": "match",
+    "value": "days",
+    "category": "other",
+    "change": [
+      {
+        "from": "'days'",
+        "to": "'days_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 17,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 122,
+    "kind": "match",
+    "value": "day",
+    "category": "other",
+    "change": [
+      {
+        "from": "'day'",
+        "to": "'day_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "83"
+    ]
+  },
+  {
+    "finding": 18,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 123,
+    "kind": "match",
+    "value": "d",
+    "category": "other",
+    "change": [
+      {
+        "from": "'d'",
+        "to": "'d_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 19,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 125,
+    "kind": "match",
+    "value": "hours",
+    "category": "other",
+    "change": [
+      {
+        "from": "'hours'",
+        "to": "'hours_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 20,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 126,
+    "kind": "match",
+    "value": "hour",
+    "category": "other",
+    "change": [
+      {
+        "from": "'hour'",
+        "to": "'hour_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "88"
+    ]
+  },
+  {
+    "finding": 21,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 127,
+    "kind": "match",
+    "value": "hrs",
+    "category": "other",
+    "change": [
+      {
+        "from": "'hrs'",
+        "to": "'hrs_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "89"
+    ]
+  },
+  {
+    "finding": 22,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 128,
+    "kind": "match",
+    "value": "hr",
+    "category": "other",
+    "change": [
+      {
+        "from": "'hr'",
+        "to": "'hr_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 23,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 129,
+    "kind": "match",
+    "value": "h",
+    "category": "other",
+    "change": [
+      {
+        "from": "'h'",
+        "to": "'h_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 24,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 131,
+    "kind": "match",
+    "value": "minutes",
+    "category": "other",
+    "change": [
+      {
+        "from": "'minutes'",
+        "to": "'minutes_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "94"
+    ]
+  },
+  {
+    "finding": 25,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 132,
+    "kind": "match",
+    "value": "minute",
+    "category": "other",
+    "change": [
+      {
+        "from": "'minute'",
+        "to": "'minute_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "95"
+    ]
+  },
+  {
+    "finding": 26,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 133,
+    "kind": "match",
+    "value": "mins",
+    "category": "other",
+    "change": [
+      {
+        "from": "'mins'",
+        "to": "'mins_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "96"
+    ]
+  },
+  {
+    "finding": 27,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 134,
+    "kind": "match",
+    "value": "min",
+    "category": "other",
+    "change": [
+      {
+        "from": "'min'",
+        "to": "'min_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 28,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 135,
+    "kind": "match",
+    "value": "m",
+    "category": "other",
+    "change": [
+      {
+        "from": "'m'",
+        "to": "'m_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 29,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 137,
+    "kind": "match",
+    "value": "seconds",
+    "category": "other",
+    "change": [
+      {
+        "from": "'seconds'",
+        "to": "'seconds_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "101"
+    ]
+  },
+  {
+    "finding": 30,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 138,
+    "kind": "match",
+    "value": "second",
+    "category": "other",
+    "change": [
+      {
+        "from": "'second'",
+        "to": "'second_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "102"
+    ]
+  },
+  {
+    "finding": 31,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 139,
+    "kind": "match",
+    "value": "secs",
+    "category": "other",
+    "change": [
+      {
+        "from": "'secs'",
+        "to": "'secs_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "103"
+    ]
+  },
+  {
+    "finding": 32,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 140,
+    "kind": "match",
+    "value": "sec",
+    "category": "other",
+    "change": [
+      {
+        "from": "'sec'",
+        "to": "'sec_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 33,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 141,
+    "kind": "match",
+    "value": "s",
+    "category": "other",
+    "change": [
+      {
+        "from": "'s'",
+        "to": "'s_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 34,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 143,
+    "kind": "match",
+    "value": "milliseconds",
+    "category": "other",
+    "change": [
+      {
+        "from": "'milliseconds'",
+        "to": "'milliseconds_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 35,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 144,
+    "kind": "match",
+    "value": "millisecond",
+    "category": "other",
+    "change": [
+      {
+        "from": "'millisecond'",
+        "to": "'millisecond_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "109"
+    ]
+  },
+  {
+    "finding": 36,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 145,
+    "kind": "match",
+    "value": "msecs",
+    "category": "other",
+    "change": [
+      {
+        "from": "'msecs'",
+        "to": "'msecs_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 37,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 146,
+    "kind": "match",
+    "value": "msec",
+    "category": "other",
+    "change": [
+      {
+        "from": "'msec'",
+        "to": "'msec_x'"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "111"
+    ]
+  },
+  {
+    "finding": 38,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 206,
+    "kind": "boundary",
+    "value": "2629800000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": ">=",
+        "to": ">"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 39,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 212,
+    "kind": "boundary",
+    "value": "86400000",
+    "category": "other",
+    "change": [
+      {
+        "from": ">=",
+        "to": ">"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 40,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 254,
+    "kind": "constant",
+    "value": "1.5",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "1.5",
+        "to": "2.5"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 42,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 1,
+    "kind": "constant",
+    "value": "1000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "1000",
+        "to": "1001"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 43,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 3,
+    "kind": "constant",
+    "value": "3600000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "m * 60",
+        "to": "m * 61"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 44,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 5,
+    "kind": "constant",
+    "value": "604800000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "d * 7",
+        "to": "d * 8"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 45,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 5,
+    "kind": "constant",
+    "value": "604800000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "d * 7",
+        "to": "d * 8"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 46,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "parse",
+    "file": "src/index.ts",
+    "line": 7,
+    "kind": "constant",
+    "value": "2629800000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "y / 12",
+        "to": "y / 13"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 47,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 178,
+    "kind": "output",
+    "value": "mo",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "}mo`",
+        "to": "}mo_x`"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 48,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 181,
+    "kind": "output",
+    "value": "w",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "}w`",
+        "to": "}w_x`"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 49,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 204,
+    "kind": "output",
+    "value": "year",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'year'",
+        "to": "'year_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 50,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 207,
+    "kind": "output",
+    "value": "month",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'month'",
+        "to": "'month_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 51,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 209,
+    "kind": "boundary",
+    "value": "604800000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": ">=",
+        "to": ">"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 52,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 210,
+    "kind": "output",
+    "value": "week",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'week'",
+        "to": "'week_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 53,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 215,
+    "kind": "boundary",
+    "value": "3600000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": ">=",
+        "to": ">"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 54,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 221,
+    "kind": "boundary",
+    "value": "1000",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": ">=",
+        "to": ">"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 55,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 222,
+    "kind": "output",
+    "value": "second",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "'second'",
+        "to": "'second_x'"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 56,
+    "rule": "decision-unspecified",
+    "severity": "info",
+    "unit": "format",
+    "file": "src/index.ts",
+    "line": 224,
+    "kind": "output",
+    "value": "ms",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "} ms`",
+        "to": "} ms_x`"
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  }
+]

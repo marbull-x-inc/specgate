@@ -1,0 +1,42 @@
+[
+  {
+    "id": "F6-secureHeaders-constant-2",
+    "verdict": "RED",
+    "detail": "       × secureHeaders.ok.nonce CSP nonce for script-src 4ms |        × secureHeaders.ok.nonce CSP nonce for script-src and style-src 1ms |        × secureHeaders.ok.csp CSP nonce by app own function 0ms"
+  },
+  {
+    "id": "F6b-secureHeaders-constant-2-second",
+    "verdict": "RED",
+    "detail": "       × secureHeaders.ok.nonce CSP nonce for script-src 5ms |        × secureHeaders.ok.nonce CSP nonce for script-src and style-src 1ms |        × secureHeaders.ok.csp CSP nonce by app own function 0ms"
+  },
+  {
+    "id": "F7-secureHeaders-output-$1-$2",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.permissions should set Permission-Policy header correctly 4ms |  FAIL  src/middleware/secure-headers/index.test.ts > Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly"
+  },
+  {
+    "id": "F84-cors-match-OPTIONS",
+    "verdict": "RED",
+    "detail": "     × cors.ok.methods-default Preflight default 4ms |      × cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value 1ms |      × cors.ok.origin-string Preflight with options 1ms"
+  },
+  {
+    "id": "F85-cors-output-No Content",
+    "verdict": "RED",
+    "detail": "     × cors.ok.methods-default Preflight default 3ms |  FAIL  src/middleware/cors/index.test.ts > CORS by Middleware > cors.ok.methods-default Preflight default"
+  },
+  {
+    "id": "F86-secureHeaders-match-*",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.permissions should set Permission-Policy header correctly 4ms |  FAIL  src/middleware/secure-headers/index.test.ts > Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly"
+  },
+  {
+    "id": "F87-secureHeaders-output-self",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.permissions should set Permission-Policy header correctly 4ms |  FAIL  src/middleware/secure-headers/index.test.ts > Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly"
+  },
+  {
+    "id": "F88-secureHeaders-output-src",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.permissions should set Permission-Policy header correctly 4ms |  FAIL  src/middleware/secure-headers/index.test.ts > Secure Headers Middleware > secureHeaders.ok.permissions should set Permission-Policy header correctly"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "STR_SPLITTERS-delete-dash",
+    "verdict": "RED",
+    "detail": "\u001b[31m\u001b[1m\u001b[7m FAIL \u001b[27m\u001b[22m\u001b[39m test/scule.test.ts\u001b[2m > \u001b[22msplitByCase\u001b[2m > \u001b[22msplitByCase.ok.case-change foo_bar-baz/qux => [ 'foo', 'bar', 'baz', 'qux' ] | \u001b[31m\u001b[1m\u001b[7m FAIL \u001b[27m\u001b[22m\u001b[39m test/scule.test.ts\u001b[2m > \u001b[22msplitByCase\u001b[2m > \u001b[22msplitByCase.ok.case-change foo--bar-Baz => [ 'foo', '', 'bar', 'Baz' ] | \u001b[31m\u001b[1m\u001b[7m FAIL \u001b[27m\u001b[22m\u001b[39m test/scule.test.ts\u001b[2m > \u001b[22msplitBy"
+  },
+  {
+    "id": "STR_SPLITTERS-delete-underscore",
+    "verdict": "RED",
+    "detail": "\u001b[31m\u001b[1m\u001b[7m FAIL \u001b[27m\u001b[22m\u001b[39m test/scule.test.ts\u001b[2m > \u001b[22msplitByCase\u001b[2m > \u001b[22msplitByCase.ok.case-change foo_bar-baz/qux => [ 'foo', 'bar', 'baz', 'qux' ] | \u001b[31m\u001b[1m\u001b[7m FAIL \u001b[27m\u001b[22m\u001b[39m test/scule.test.ts\u001b[2m > \u001b[22msplitByCase\u001b[2m > \u001b[22msplitByCase.ok.case-change FOO_BAR => [ 'FOO', 'BAR' ] | \u001b[31m\u001b[1m\u001b[7m FAIL \u001b[27m\u001b[22m\u001b[39m test/scule.test.ts\u001b[2m > \u001b[22mpascalCase\u001b[2m > \u001b[22mp"
+  },
+  {
+    "id": "STR_SPLITTERS-delete-slash",
+    "verdict": "RED",
+    "detail": "\u001b[31m\u001b[1m\u001b[7m FAIL \u001b[27m\u001b[22m\u001b[39m test/scule.test.ts\u001b[2m > \u001b[22msplitByCase\u001b[2m > \u001b[22msplitByCase.ok.case-change foo_bar-baz/qux => [ 'foo', 'bar', 'baz', 'qux' ] | \u001b[31m\u001b[1m\u001b[7m FAIL \u001b[27m\u001b[22m\u001b[39m test/scule.test.ts\u001b[2m > \u001b[22mpascalCase\u001b[2m > \u001b[22mpascalCase.ok.normalize foo_bar-baz/qux => FooBarBazQux | \u001b[31m\u001b[1m\u001b[7m FAIL \u001b[27m\u001b[22m\u001b[39m test/scule.test.ts\u001b[2m > \u001b[22mkebabCase\u001b[2m > \u001b[22mke"
+  },
+  {
+    "id": "STR_SPLITTERS-delete-dot",
+    "verdict": "GREEN",
+    "detail": ""
+  }
+]

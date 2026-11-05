@@ -1,0 +1,22 @@
+[
+  {
+    "id": "13",
+    "file": "src/useBoolean/index.ts",
+    "line": 27,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "other",
+    "reason": "useMemo deps [] -> ['Stryker was here']: a constant literal dep never changes between renders (Object.is equal), so the memo is computed once exactly as with []"
+  },
+  {
+    "id": "54",
+    "file": "src/useToggle/index.ts",
+    "line": 41,
+    "mutator": "ArrayDeclaration",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "other",
+    "reason": "useMemo deps [] -> ['Stryker was here']: a constant literal dep never changes between renders, so actions are computed once and stay identical, exactly as with []"
+  }
+]
