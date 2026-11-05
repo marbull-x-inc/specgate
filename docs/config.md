@@ -39,7 +39,11 @@ export default defineConfig({ presets: [dddTs] /* overrides */ });
 Units are also: exported type aliases and non-`@port` interfaces whose doc has `@guarantee` (`type`), and the `@packageDocumentation` comment of each `package.json#exports` entry module (`entry`, id `entry#main` / `entry#<subpath>`); see the README section on types and package entries.
 
 Units are: exported functions (declarations, arrow/function expressions, and constants whose
-value is callable, such as `export const defu = createDefu()`), public methods of exported
+value is callable, such as `export const defu = createDefu()`; when such a constant only renames a
+function of the same module, `export const persist = persistImpl as unknown as Persist`, that
+function's body is the unit's for decisions and mutants; a declaration exported only as the
+module's default, `const useCounter = …; export default useCounter` or `export default function
+useBoolean`, is a unit under its declared name), public methods of exported
 classes (static or instance; `private` / `protected` / `#name` excluded), and exported
 interfaces marked `@port`. Overload signatures and their implementation are one unit; a
 `@guarantee` on any of the signatures belongs to it. Classes marked `@entity` become vocabulary
@@ -52,7 +56,7 @@ instead. A `@guarantee` anywhere else is reported by `guarantee-on-non-unit`.
 | `include`                                     | `["tests/**/*.test.ts", "**/*.test.ts", "**/*.spec.ts"]`  | Test files to read. Also excluded from counting as referrers in `surface.mode: "referenced"`.                                                                                                                                                                                                                                                                                                         |
 | `adapter`                                     | `"vitest"`                                                | `"bun"`, `"vitest"`, `"jest"` or `"playwright"`. Affects what `gen` emits (imports, `test.describe`, `fixme`) and `test.describe` recognition.                                                                                                                                                                                                                                                        |
 | `mirror.from` / `mirror.to` / `mirror.suffix` | `"src"` / `"tests"` / `".test.ts"`                        | `src/a/b.ts` → `tests/a/b.test.ts`. Files outside `from` keep their full path under `to`.                                                                                                                                                                                                                                                                                                             |
-| `describeOperationPatterns`                   | `["^method (\\w+)\\(\\)$", "^(\\w+)\\(\\)$", "^(\\w+)$"]` | Regular expressions whose first group names the operation when a `describe` title is used to complete a bare `<id>` title. The target (class) is the first `describe` title that is a plain identifier.                                                                                                                                                                                               |
+| `describeOperationPatterns`                   | `["^method (\\w+)\\(\\)$", "^(\\w+)\\(\\)$", "^(\\w+)$"]` | Regular expressions whose first group names the operation when a `describe` title is used to complete a bare `<id>` title. The target (class) is the first `describe` title that is a plain identifier; when the test title names its operation (`isPosition.ok.x`), that title is the target only if the surface has such a target (a class or port).                                                |
 | `prefixes`                                    | `{}`                                                      | Category prefix per guarantee kind, e.g. `{ ok: "正常系:", err: "異常系:" }`. `gen` writes it **before** the key (`正常系: Quest#create.ok.recorded …`) and linking strips any configured prefix before reading the key, so a repository rule that wants the prefix first keeps working.                                                                                                              |
 | `importExtension`                             | `""`                                                      | Extension `gen` writes on relative imports: `""`, `".ts"` (Bun, `allowImportingTsExtensions`) or `".js"` (NodeNext).                                                                                                                                                                                                                                                                                  |
 | `generatedSuffixes`                           | `[".doctest.test.ts", ".property.test.ts"]`               | Files `gen` owns completely. They are rewritten every run and never linked to guarantees.                                                                                                                                                                                                                                                                                                             |
@@ -118,18 +122,23 @@ A decision counts as named when a guarantee or `@example` of the unit, or of a s
 calls it, contains one of its values (numbers compared by value, so `86_400_000` and `8.64e7`
 count; strings with no letter directly before or after them, a plural `s` allowed) or its
 constant name in a code span (names of three characters or more). `0`, `1`, `-1`, empty strings,
-`typeof` checks and thrown error messages are never decisions.
+`typeof` checks, thrown error messages, strings in type positions (`as T<O["normalize"]>`), the
+replacement pattern of `replace` / `replaceAll`, and arithmetic that only computes an array index
+(`out[i * 2 + 2]`) are never decisions.
 
 A `member` decision is one element of a module-level collection the unit tests membership in
-(`includes`, `has`, `in`, `some((p) => v.startsWith(p))`, …). It is named when the guarantee
-names the collection in a code span. Members the contract never names are reported once per
+(`includes`, `has`, `in`, `some((p) => v.startsWith(p))`, …), or of an array literal probed in
+place (`["self", "src"].includes(item)`, collection `inline list at line N`). It is named when the
+guarantee names the collection in a code span. Members the contract never names are reported once per
 collection, not per element.
 
 A decision counts as used by a test when a test linked to the unit, or to a surface unit that
 calls it, writes the value as a literal in its body, its `each` table or a module-level `const`
 of the same test file that they reference: numbers by value (a `boundary` also by value ± 1), an
 `output` inside a longer string, a `member` the way the unit probes it (a prefix list is pinned
-by a longer path that starts with the element), anything else by equality.
+by a longer path that starts with the element), anything else by equality. A `match` on a word
+also counts as used when one of the unit's own linked tests (not a caller's) writes a quantity
+with it as the unit, `"10 years"` for `case "years":`.
 
 ## `mutation`
 

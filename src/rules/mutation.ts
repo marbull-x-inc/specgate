@@ -63,15 +63,23 @@ function describeSurvivor(m: MappedMutant, unit: Unit, place: MutantPlace, other
             mutant.line >= d.collection.line &&
             mutant.line <= d.collection.endLine,
         )
-      : // The unit's decisions include those of the helpers it reaches, so a helper line is found too.
-        (unit.decisions.find((d) => d.line === mutant.line && d.kind !== "member") ??
-        unit.decisions.find((d) => d.line === mutant.line));
+      : place === "constant"
+        ? undefined
+        : // The unit's decisions include those of the helpers it reaches, so a helper line is found too.
+          (unit.decisions.find((d) => d.line === mutant.line && d.kind !== "member") ??
+          unit.decisions.find((d) => d.line === mutant.line));
+  const constant =
+    place === "constant"
+      ? unit.constantRanges?.find((c) => c.file === mutant.file && mutant.line >= c.line && mutant.line <= c.endLine)
+      : undefined;
   const where =
     place === "helper"
       ? " in a helper it calls"
       : place === "collection" && decision?.collection
         ? ` in ${decision.collection.name}`
-        : "";
+        : constant
+          ? ` in ${constant.name}`
+          : "";
   // On the probe line of a membership test, the mutant changes the test, not one element.
   const about =
     !decision || place === "collection"

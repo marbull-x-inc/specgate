@@ -415,3 +415,111 @@ describe("@acceptFinding on a mutant (#40)", () => {
     expect(report.findings.filter((f) => f.rule.startsWith("accept-tag"))).toEqual([]);
   });
 });
+
+describe("mutants in module-level constants a unit reads (#53)", () => {
+  const SOURCE = `const HEX = /^#[0-9a-f]{6}$/;
+const UNUSED = /^x$/;
+
+/** @guarantee ok.hex returns true only for \`#\` and 6 lowercase hex digits */
+export const isHex = (value: string): boolean => HEX.test(value);
+
+/** @guarantee ok.color returns true for a hex colour */
+export const isColor = (value: string): boolean => HEX.test(value.trim());
+`;
+  const TEST = `import { expect, it } from "bun:test";
+import { isColor, isHex } from "../src/hex";
+it("isHex.ok.hex", () => {
+  expect(isHex("#a0b1c2")).toBe(true);
+  expect(isHex("red")).toBe(false);
+});
+it("isColor.ok.color", () => {
+  expect(isColor(" #a0b1c2 ")).toBe(true);
+});
+`;
+  const json = JSON.stringify({
+    schemaVersion: "2",
+    files: {
+      "src/hex.ts": {
+        language: "typescript",
+        source: SOURCE,
+        mutants: [
+          mutant("1", "Regex", "/#[0-9a-f]{6}$/", "Survived", 1),
+          mutant("2", "Regex", "/^x/", "Survived", 2),
+          mutant("3", "BooleanLiteral", "true", "Killed", lineOf(SOURCE, "export const isHex")),
+        ],
+      },
+    },
+  });
+
+  test("count for every unit that reads the constant, name it, and count the rest as unmapped", async () => {
+    const dir = project({ "src/hex.ts": SOURCE, "tests/hex.test.ts": TEST, "reports/mutation.json": json });
+    const report = await reportOf(dir);
+    expect(report.units.find((u) => u.id === "isHex")?.mutation).toEqual({
+      killed: 1,
+      survived: 1,
+      noCoverage: 0,
+      ignored: 0,
+    });
+    expect(report.units.find((u) => u.id === "isColor")?.mutation).toEqual({
+      killed: 0,
+      survived: 1,
+      noCoverage: 0,
+      ignored: 0,
+    });
+    expect(report.findings.filter((f) => f.rule === "mutant-survived").map((f) => f.message)).toEqual([
+      "isColor: Regex mutant in HEX: `/#[0-9a-f]{6}$/` survived; no linked test fails when the code changes like this; also reached from isHex",
+    ]);
+    expect(report.summary.mutantsUnmapped).toBe(1);
+    expect(renderStepSummary(report)).toContain("1 mutant(s) in the report map to no unit, so no rule reads them.");
+  });
+});
+
+// #64: zustand exports `persist` as `persistImpl as unknown as Persist`.
+describe("callables exported through a cast", () => {
+  test("a callable exported through a cast takes its decisions and mutants from the implementation", async () => {
+    const source = `type Check = (age: number) => boolean;
+
+const checkImpl = (age: number): boolean => {
+  return age > 18;
+};
+
+function verifyImpl(age: number): boolean {
+  return age >= 21;
+}
+
+/** @guarantee ok.adult an \`age\` over 18 is adult */
+export const check = checkImpl as unknown as Check;
+
+/** @guarantee ok.verified an \`age\` of 21 or more is verified */
+export const verify = verifyImpl as Check;
+`;
+    const dir = project({
+      "src/cast.ts": source,
+      "tests/cast.test.ts": `import { test, expect } from "bun:test";
+import { check } from "../src/cast.ts";
+test("check.ok.adult 19 is adult", () => { expect(check(19)).toBe(true); });
+`,
+      "reports/mutation.json": JSON.stringify({
+        schemaVersion: "2",
+        thresholds: { high: 80, low: 60 },
+        files: {
+          "src/cast.ts": {
+            language: "typescript",
+            source,
+            mutants: [mutant("1", "EqualityOperator", "age >= 18", "Survived", lineOf(source, "age > 18"))],
+          },
+        },
+      }),
+    });
+    const report = await reportOf(dir);
+    const unit = (id: string) => report.units.find((u) => u.id === id);
+    expect(unit("check")?.decisions.map((d) => [d.kind, d.values])).toEqual([["boundary", ["18"]]]);
+    expect(unit("verify")?.decisions.map((d) => [d.kind, d.values])).toEqual([["boundary", ["21"]]]);
+    expect(unit("check")?.helperRanges).toEqual([
+      { line: lineOf(source, "const checkImpl"), endLine: lineOf(source, "const checkImpl") + 2 },
+    ]);
+    expect(unit("check")?.mutation).toEqual({ killed: 0, survived: 1, noCoverage: 0, ignored: 0 });
+    expect(report.findings.filter((f) => f.rule === "mutant-survived").map((f) => f.unit)).toEqual(["check"]);
+    expect(report.summary.mutantsUnmapped).toBe(0);
+  });
+});

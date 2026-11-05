@@ -16,7 +16,7 @@ import { evaluateRules } from "./rules/index.ts";
 import { sha256 } from "./util/hash.ts";
 import { expandGlobs, fileExists, globToRegExp } from "./util/paths.ts";
 
-export const TOOL = { name: "specgate", version: "0.5.0" } as const;
+export const TOOL = { name: "specgate", version: "0.5.3" } as const;
 
 export interface Analysis {
   report: Report;
@@ -91,7 +91,13 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
   const host = createProgramHost(config.root, config.tsconfig, [...surfaceFiles, ...testFiles, ...entrySources]);
   const { parser, configMessages } = createTsdocParser(config.root);
   const surface = extractSurface(host, config, parser, surfaceFiles, testFiles, entries);
-  const testExtraction = extractTests(config, testFiles);
+  const knownTargets = new Set(
+    surface.units.flatMap((e) => [
+      ...(e.unit.target ? [e.unit.target] : []),
+      ...(e.unit.kind === "port" ? [e.unit.id] : []),
+    ]),
+  );
+  const testExtraction = extractTests(config, testFiles, config.tests.adapter, knownTargets);
 
   const units: Unit[] = surface.units.map((u) => u.unit);
   const testsByKey = new Map<string, string[]>();
@@ -131,6 +137,11 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
         };
   if (mutation && "mapped" in mutation.result)
     for (const [unit, counts] of countMutants(mutation.result.mapped)) unit.mutation = counts;
+  // A gap in the mapping is shown, not silent (#53).
+  const mutantsUnmapped =
+    mutationRead && "mutants" in mutationRead && mutation && "mapped" in mutation.result
+      ? mutationRead.mutants.length - mutation.result.mapped.length
+      : undefined;
 
   const docMessages = [
     ...surface.docMessages,
@@ -186,6 +197,7 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
         warn: findings.filter((f) => f.severity === "warn").length,
         info: findings.filter((f) => f.severity === "info").length,
       },
+      ...(mutantsUnmapped !== undefined ? { mutantsUnmapped } : {}),
     },
   };
   return { report, extracted: surface.units, host, surfaceFiles, testFiles };

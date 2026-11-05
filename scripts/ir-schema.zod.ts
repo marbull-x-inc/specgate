@@ -107,13 +107,26 @@ export const zUnit = z.object({
         .enum(["exact", "prefix", "suffix", "contains"])
         .optional()
         .describe("member decisions: how the unit compares its input with the element"),
-      key: z.string().optional().describe("match decisions: the constant key the compared value is read with"),
+      length: z
+        .boolean()
+        .optional()
+        .describe("boundary and constant decisions: the value is compared with a .length or .size"),
+      key: z
+        .string()
+        .optional()
+        .describe(
+          "match and member decisions: the constant key the value is read with (a member's key is the string passed with the collection to a call)",
+        ),
     }),
   ),
   helperRanges: z
     .array(z.object({ line: z.number().int(), endLine: z.number().int() }))
     .optional()
     .describe("Lines of the private helpers and same-module functions the body reaches"),
+  constantRanges: z
+    .array(z.object({ name: z.string(), file: z.string(), line: z.number().int(), endLine: z.number().int() }))
+    .optional()
+    .describe("Module-level constants (not functions) the body and its helpers read"),
   mutation: zMutationCounts.optional().describe("Mutants of the unit in the mutation report, when one was read"),
   implHash: z.string().describe("sha256 of the implementation body text"),
   guarantees: z.array(zGuarantee),
@@ -178,9 +191,18 @@ export const zTestCase = z.object({
     .describe(
       "Identifier and string keys of the object literals the test body, its each tables and same-file fixtures write (capped at tests.literalLimit)",
     ),
+  lengths: z.array(z.number().int()).optional().describe("Lengths of the array literals the test writes"),
   iterates: z
     .array(z.object({ name: z.string(), from: z.string() }))
     .describe("Imported constants the test iterates, with the module they come from"),
+  builds: z
+    .array(z.object({ name: z.string(), from: z.string(), literals: z.array(z.string()) }))
+    .optional()
+    .describe("Functions of project modules the test calls to build its input, with the literals in their bodies"),
+  reads: z
+    .array(z.object({ name: z.string(), from: z.string() }))
+    .optional()
+    .describe("Values imported from project modules that the test reads without calling them"),
   requirementIds: z.array(z.string()).describe("Opaque frozen-requirement ids from the file header, if enabled"),
 });
 export type TestCase = z.infer<typeof zTestCase>;
@@ -221,6 +243,7 @@ export const zSummary = z.object({
   orphanTests: z.number().int(),
   unlinkedTests: z.number().int().describe("Tests whose title names no guarantee key at all"),
   findings: z.object({ fail: z.number().int(), warn: z.number().int(), info: z.number().int() }),
+  mutantsUnmapped: z.number().int().optional().describe("Mutants in the mutation report that map to no unit"),
 });
 
 export const zReport = z.object({

@@ -79,6 +79,27 @@ function referenceKey(file: string, name: string): string {
 }
 
 /**
+ * Adds, for a declaration of this module exported only as `default` (`const useCounter = …;
+ * export default useCounter`, `export default function useBoolean(…)`), its declared name, so
+ * that the unit is named after the declaration as test keys and default imports name it (#63).
+ * An anonymous default export has no name to add and stays out of the surface.
+ */
+function withDefaultExportNames(
+  exported: Map<string, ts.Declaration[]>,
+  sf: ts.SourceFile,
+): Map<string, ts.Declaration[]> {
+  const declarations = exported.get("default");
+  if (!declarations) return exported;
+  const out = new Map(exported);
+  for (const decl of declarations) {
+    if (decl.getSourceFile() !== sf) continue;
+    const name = ts.getNameOfDeclaration(decl);
+    if (name && ts.isIdentifier(name) && !out.has(name.text)) out.set(name.text, [decl]);
+  }
+  return out;
+}
+
+/**
  * Indexes which files import which exported declaration, following import aliases.
  * Test files never count as referrers: a unit used only by its own tests is not part of a
  * module's public surface.
@@ -175,17 +196,34 @@ function decisionsOf(
   host: ProgramHost,
   helpers: ReadonlyMap<string, ts.Node>,
   options: DecisionOptions,
-): Pick<Unit, "decisions" | "helperRanges"> {
+): Pick<Unit, "decisions" | "helperRanges" | "constantRanges"> {
   const ranges: Array<{ line: number; endLine: number }> = [];
+  const constants = new Map<ts.VariableDeclaration, NonNullable<Unit["constantRanges"]>[number]>();
   const decisions = collectDecisions(body, sf, host, helpers, {
     ...options,
     onFollow: (helper) => {
       const owner = ts.isBlock(helper) || ts.isExpression(helper) ? helper.parent : helper;
       ranges.push({ line: lineOf(sf, owner.getStart(sf)), endLine: lineOf(sf, owner.getEnd()) });
     },
+    onConstant: (decl) => {
+      if (constants.has(decl) || !ts.isIdentifier(decl.name)) return;
+      const declSf = decl.getSourceFile();
+      const statement = decl.parent.parent;
+      constants.set(decl, {
+        name: decl.name.text,
+        file: relativeTo(options.root, declSf.fileName),
+        line: lineOf(declSf, statement.getStart(declSf)),
+        endLine: lineOf(declSf, statement.getEnd()),
+      });
+    },
   });
   ranges.sort((x, y) => x.line - y.line || x.endLine - y.endLine);
-  return ranges.length > 0 ? { decisions, helperRanges: ranges } : { decisions };
+  const constantRanges = [...constants.values()].sort((x, y) => x.file.localeCompare(y.file) || x.line - y.line);
+  return {
+    decisions,
+    ...(ranges.length > 0 ? { helperRanges: ranges } : {}),
+    ...(constantRanges.length > 0 ? { constantRanges } : {}),
+  };
 }
 
 /**
@@ -472,7 +510,7 @@ export function extractSurface(
     // Declarations whose doc became part of a unit or port; any other `@guarantee` is stray.
     const usedDocNodes = new Set<ts.Node>();
     const relFile = relativeTo(config.root, sf.fileName);
-    const exported = host.exportsOf(sf);
+    const exported = withDefaultExportNames(host.exportsOf(sf), sf);
     const importSources = importSourcesOf(sf);
 
     const referencedBy = (name: string): string[] => {
@@ -502,6 +540,7 @@ export function extractSurface(
       nameNode: ts.Node,
       referencers: string[],
       target?: string,
+      impl?: ts.SignatureDeclaration,
     ): void => {
       const docs = docNodes.map((n) => {
         usedDocNodes.add(n);
@@ -512,8 +551,11 @@ export function extractSurface(
       const doc = primary?.doc;
       const comment = primary?.comment;
       const unitId = target ? `${target}#${name}` : name;
-      const body: ts.Node | undefined = fn && "body" in fn && fn.body ? fn.body : undefined;
-      const portParams = new Set((fn?.parameters ?? []).map((p) => p.name.getText()));
+      // `impl`: the function a cast-exported constant renames. Its body is walked, its lines count as
+      // a helper's, while the signature and the unit's position stay those of the export.
+      const bodyFn = fn ?? impl;
+      const body: ts.Node | undefined = bodyFn && "body" in bodyFn && bodyFn.body ? bodyFn.body : undefined;
+      const portParams = new Set((bodyFn?.parameters ?? []).map((p) => p.name.getText()));
       const scan = body
         ? scanBody(body, sf, host, new Set(), portParams, new Map(), config.envInputs.forbid)
         : emptyScan();
@@ -541,7 +583,9 @@ export function extractSurface(
         ),
         operationCalls: [],
         envInputs: scan.envInputs,
-        ...(body ? decisionsOf(body, sf, host, new Map(), decisionOptions) : { decisions: [] }),
+        ...(body
+          ? withImplRange(decisionsOf(body, sf, host, new Map(), decisionOptions), impl, sf)
+          : { decisions: [] }),
         implHash: textHash(body ? body.getText(sf) : (last.getText(sf) ?? "")),
         guarantees: deriveThrowsIds(
           unitId,
@@ -671,7 +715,10 @@ export function extractSurface(
             addFunctionUnit(name, fnInit, [statement], decl.name, referencedBy(name));
           } else if (isCallable(host, decl.name)) {
             // A function produced by an expression (`createDefu()`, `memoize(fn)`, `fn as T`).
-            addFunctionUnit(name, undefined, [statement], decl.name, referencedBy(name));
+            // When the expression only renames a function of this module (`impl as unknown as T`),
+            // that function's body belongs to the unit (#64).
+            const impl = ts.isIdentifier(fnInit) ? sameModuleFunction(host, fnInit, sf) : undefined;
+            addFunctionUnit(name, undefined, [statement], decl.name, referencedBy(name), undefined, impl);
           }
         }
         continue;
@@ -1039,6 +1086,42 @@ function unique(values: readonly string[]): string[] {
 }
 
 /** Strips `as T`, `satisfies T`, `!` and parentheses around an initializer. */
+/**
+ * The function of `sf` an identifier names: a function declaration with a body, or a `const`
+ * initialised with an arrow or function expression. Anything else (an import, a call result)
+ * gives `undefined`.
+ */
+function sameModuleFunction(
+  host: ProgramHost,
+  id: ts.Identifier,
+  sf: ts.SourceFile,
+): ts.SignatureDeclaration | undefined {
+  for (const decl of host.declarationsOf(id)) {
+    if (decl.getSourceFile() !== sf) continue;
+    if (ts.isFunctionDeclaration(decl) && decl.body) return decl;
+    if (ts.isVariableDeclaration(decl) && decl.initializer) {
+      const init = unwrapExpression(decl.initializer);
+      if (ts.isArrowFunction(init) || ts.isFunctionExpression(init)) return init;
+    }
+  }
+  return undefined;
+}
+
+/** Adds the lines of `impl`'s declaration to the unit's helper ranges, so mutants there map to it. */
+function withImplRange(
+  result: Pick<Unit, "decisions" | "helperRanges" | "constantRanges">,
+  impl: ts.SignatureDeclaration | undefined,
+  sf: ts.SourceFile,
+): Pick<Unit, "decisions" | "helperRanges" | "constantRanges"> {
+  if (!impl) return result;
+  let owner: ts.Node = impl;
+  while (!ts.isFunctionDeclaration(owner) && !ts.isVariableStatement(owner) && owner.parent && owner.parent !== sf)
+    owner = owner.parent;
+  const range = { line: lineOf(sf, owner.getStart(sf)), endLine: lineOf(sf, owner.getEnd()) };
+  const ranges = [...(result.helperRanges ?? []), range].sort((x, y) => x.line - y.line || x.endLine - y.endLine);
+  return { ...result, helperRanges: ranges };
+}
+
 function unwrapExpression(node: ts.Expression): ts.Expression {
   let current = node;
   while (

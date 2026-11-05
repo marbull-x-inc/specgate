@@ -161,7 +161,8 @@ make the first run useful instead of red:
   unit. The matching finding becomes `info` with `accepted: true` and `acceptedReason` (in SARIF,
   an in-source suppression). A tag with an unknown rule or no reason is `accept-tag-invalid`; one
   that no longer matches a finding is `accept-tag-unused`. `--accept-baseline` does not record
-  findings a tag accepts.
+  findings a tag accepts. The Step Summary lists every finding a tag accepted, with its reason, in
+  its own section.
 
 `scaffold` seeds the first guarantee from an existing `@returns` and does not repeat a
 documented `@throws`.
@@ -205,11 +206,24 @@ and naming that unit: removing it fails that test, but this unit's own tests do 
 test does write, the finding is one step lower and says so. A value also counts as written in two
 other forms: a `match` on a value read with a constant key (`params.get("popup") === "1"`) by a
 `key=value` pair in a literal (`"?popup=1"`), and an identifier-like `match` value by an object
-key the test writes (`sign({ iss: "…" })` pins `claim === "iss"`). A string passed as an option
-to a library call (`toJSONSchema(S, { io: "input" })`) configures the library and is not an
-`output` decision. When a finding fires, it names the closest linked-test literal that contains
-the value. Values a test builds at run time or reaches only through a lookup (a route table, a
-fixture in another file) are not seen, so treat these findings as hints too. Design: `docs/design/0002-decisions-pinned-by-tests.md`.
+key the test writes (`sign({ iss: "…" })` pins `claim === "iss"`). A collection the unit passes to
+a call together with a string (`readEnum(search, "view", VIEWS)`) is read with that key, so
+`"?view=grid"` pins the element `grid`. Literals count from the test body, its `each` tables, same-file
+constants it names (at module level or in an enclosing `describe` callback), and the factories of the file's module-level mocks (`vi.mock`, `jest.mock`,
+`mock.module`), which set up every test of the file. Imports through `paths` aliases and workspace
+packages resolve like the program's, to the source file in the repository. Object keys a test
+writes also pin an exact `member` (`{ default: … }` pins `"default"`), and a limit compared with a
+`.length` or `.size` is pinned by an array of that size (`tooMany(["a", "b", "c", "d"])`). A test
+that reads the unit's own constant (`"a".repeat(NAME_MAX)`) is named in the finding, like one
+that builds its input with a function of the unit's module. A string passed as an option to a library call
+(`toJSONSchema(S, { io: "input" })`) configures the library and is not an `output` decision. When
+a finding fires, it names the linked-test literal to look at: one with a `key=` pair for the
+value's key, else one holding the value as a whole token, else (for values longer than two
+characters) one containing it. When a linked test builds its input with another function of the
+unit's own module (`it.each([toTargetHref(APP, true)])`) and that function holds the value, the
+finding says so: the value changes with the implementation, so write it as a literal. Values a
+test builds at run time otherwise, or reaches only through a lookup (a route table, a fixture in
+another file), are not seen, so treat these findings as hints too. Design: `docs/design/0002-decisions-pinned-by-tests.md`.
 
 It matches by value, so it is a hint, not a proof: a value named for one purpose (`100` as an
 example result) also counts for another (`100` as the input length limit), and a value named in
@@ -233,7 +247,8 @@ npx specgate check                 # with mutation: { report: "reports/mutation/
 
 Each mutant is mapped to the unit whose lines it changed, to every unit that reaches it through a
 private helper or same-module function, and to every unit with a `member` decision on the
-collection it changed. `units[].mutation` holds the counts; the Step Summary shows them per unit
+collection it changed, or a module-level constant (a regex, a schema, an object) it reads.
+Mutants that map to no unit are counted in the Step Summary. `units[].mutation` holds the counts; the Step Summary shows them per unit
 with a score (killed over killed, survived and not covered), and `specgate docs` adds them to
 each unit's page and a score column to the index. `mutant-survived` reports each mutant
 the linked tests let through, and `unit-not-executed` a unit that its tests never run. An
@@ -343,7 +358,7 @@ Requires Node 24+ (Node 26 is used in CI) or Bun 1.2+.
 
 ## Status
 
-0.5.0. The public API (`analyze`, `defineConfig`, `dddTs`, `@marbull-x-inc/specgate/runtime`) and the IR are
+0.5.3. The public API (`analyze`, `defineConfig`, `dddTs`, `@marbull-x-inc/specgate/runtime`) and the IR are
 expected to change before 1.0.
 
 ## Releasing

@@ -123,10 +123,16 @@ export interface Decision {
   /** `member` decisions: how the unit compares its input with the element */
   probe?: MemberProbe;
   /**
-   * `match` decisions: the constant key the compared value is read with (`params.get("popup")`,
-   * `obj["popup"]`, `obj.popup`), so a test writing `"?popup=1"` uses the value `1`
+   * The constant key the value is read with, so a test writing `"?popup=1"` uses the value `1`:
+   * for `match`, `params.get("popup")`, `obj["popup"]` or `obj.popup`; for `member`, the string
+   * literal passed with the collection to a call (`useQueryEnum("view", VIEWS, …)`)
    */
   key?: string;
+  /**
+   * `boundary` and `constant` decisions: the value is compared with a `.length` or `.size`, so a
+   * test pins it with an array of that size (`TestCase.lengths`)
+   */
+  length?: boolean;
 }
 
 export interface Unit {
@@ -160,6 +166,11 @@ export interface Unit {
    * decision walk and mutant mapping treat them as part of the unit. Absent when there are none.
    */
   helperRanges?: Array<{ line: number; endLine: number }>;
+  /**
+   * Module-level constants (not functions) the body and its helpers read: a regex, a schema, an
+   * object. A mutant in one belongs to every unit that reads it. Absent when there are none.
+   */
+  constantRanges?: Array<{ name: string; file: string; line: number; endLine: number }>;
   /** Mutants of the unit in the mutation report (`mutation.report`), when one was read. */
   mutation?: MutationCounts;
   /** sha256 of the implementation body text */
@@ -245,7 +256,8 @@ export interface TestCase {
   bodyHash: string;
   /**
    * Literal values the test body and its `each` tables use, plus same-file module-level
-   * constants they reference by name (one hop): non-empty strings as written, template parts
+   * constants they reference by name (one hop) and the factories of the file's module-level mocks
+   * (`vi.mock`, `jest.mock`, `mock.module`): non-empty strings as written, template parts
    * with a word character, numbers other than 0, 1 and -1 as `String(n)`. Capped at
    * `tests.literalLimit`.
    */
@@ -257,12 +269,27 @@ export interface TestCase {
    */
   keys: string[];
   /**
+   * Lengths of the array literals the test writes (same sources as `literals`). Kept apart from
+   * `literals`; only decisions compared with a `.length` or `.size` read them. Absent when none.
+   */
+  lengths?: number[];
+  /**
    * Imported constants the test takes its cases from (`each` table argument, `for…of`, the
    * receiver of `forEach` / `map` / `every` / `some`, or `new Set(X)` / `[...X]` /
    * `Array.from(X)`), with the module they come from (relative to root when it resolves to a
    * file, the import specifier otherwise).
    */
   iterates: Array<{ name: string; from: string }>;
+  /**
+   * Functions of project modules the test calls to build its input (`toTargetHref(APP, true)`),
+   * with the literal values in their bodies. Absent when there are none.
+   */
+  builds?: Array<{ name: string; from: string; literals: string[] }>;
+  /**
+   * Values imported from project modules that the test reads without calling them
+   * (`"a".repeat(NAME_MAX)`), with the module they come from. Absent when there are none.
+   */
+  reads?: Array<{ name: string; from: string }>;
   /** Opaque frozen-requirement ids from the file header, if enabled */
   requirementIds: string[];
 }
@@ -297,6 +324,8 @@ export interface Summary {
   /** Tests whose title names no guarantee key at all */
   unlinkedTests: number;
   findings: { fail: number; warn: number; info: number };
+  /** Mutants in the mutation report that map to no unit; absent when no report was read */
+  mutantsUnmapped?: number;
 }
 
 export interface Report {

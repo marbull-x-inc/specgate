@@ -5,6 +5,7 @@ import type { Config, TestAdapter } from "../../config/schema.ts";
 import type { TestCase } from "../../ir/schema.ts";
 import { textHash } from "../../util/hash.ts";
 import { fileExists, relativeTo } from "../../util/paths.ts";
+import { compilerOptionsOf } from "../program.ts";
 
 /**
  * Reads test titles and maps them to guarantee keys.
@@ -128,7 +129,11 @@ export function extractTests(
   config: Config,
   files: readonly string[],
   adapter: TestAdapter = config.tests.adapter,
+  /** Targets (classes, ports) of the surface; a describe title that names none is not a target. */
+  knownTargets?: ReadonlySet<string>,
 ): TestExtraction {
+  moduleCache.clear();
+  const resolveImport = importResolver(config.root, compilerOptionsOf(config.root, config.tsconfig));
   const idPattern = new RegExp(config.ids.pattern);
   const describePatterns = config.tests.describeOperationPatterns.map((p) => new RegExp(p));
   const prefixes = [...Object.values(config.tests.prefixes), ...config.tests.titlePrefixes];
@@ -143,7 +148,8 @@ export function extractTests(
     const reqIds = requirementIds(text.slice(0, 2000), config);
     const stack: string[] = [];
     const describeTables: ts.Node[] = [];
-    const scope = testFileScope(sf, file, config.root);
+    const scope = testFileScope(sf, file, config.root, resolveImport);
+    const describeConsts: Array<ReadonlyMap<string, ts.Expression>> = [];
 
     const visit = (node: ts.Node): void => {
       if (ts.isCallExpression(node)) {
@@ -156,7 +162,9 @@ export function extractTests(
           stack.push(title ?? "");
           const tables = eachTables(node.expression);
           describeTables.push(...tables);
+          describeConsts.push(callback ? constsOf(callback.body) : new Map());
           if (callback) ts.forEachChild(callback, visit);
+          describeConsts.pop();
           describeTables.length -= tables.length;
           stack.pop();
           return;
@@ -178,16 +186,31 @@ export function extractTests(
             const body = node.arguments.find((a) => ts.isArrowFunction(a) || ts.isFunctionExpression(a));
             const bodyHash = textHash(body ? body.getText(sf) : "");
             const tables = [...eachTables(node.expression), ...describeTables];
-            const used = usedValues(scope, body ? [body, ...tables] : tables, tables, config.tests.literalLimit);
+            // Fixtures of the enclosing describe callbacks count like module-level ones; inner wins.
+            const consts = new Map(scope.consts);
+            for (const level of describeConsts) for (const [k, v] of level) consts.set(k, v);
+            const used = usedValues(
+              { ...scope, consts },
+              body ? [body, ...tables] : tables,
+              tables,
+              config.tests.literalLimit,
+            );
             const line = sf.getLineAndCharacterOfPosition(node.getStart(sf)).line + 1;
             const match = matchTitle(stripTitlePrefix(title, prefixes), idPattern);
             if (match) {
               const context = describeContext(stack, describePatterns);
               // "op.id" names a free function unless an enclosing describe names a different target (a class).
               const operation = match.operation ?? context.operation;
-              const target =
-                match.target ??
-                (context.target !== undefined && context.target !== operation ? context.target : undefined);
+              // A describe title names the target only when such a target exists, or when the title
+              // itself names no operation (#58): `describe("rules") > it("isPosition.ok.x")` is a
+              // group of free functions, not a class called rules.
+              const contextTarget =
+                context.target !== undefined &&
+                context.target !== operation &&
+                (match.operation === undefined || knownTargets === undefined || knownTargets.has(context.target))
+                  ? context.target
+                  : undefined;
+              const target = match.target ?? contextTarget;
               const unitId = operation ? (target ? `${target}#${operation}` : operation) : target;
               // A lone kind word ("ok", "err") with nothing to qualify it is ordinary prose, not a key.
               if (unitId === undefined && !match.id.includes(".")) {
@@ -206,6 +229,9 @@ export function extractTests(
                 literals: used.literals,
                 keys: used.keys,
                 iterates: used.iterates,
+                ...(used.builds.length > 0 ? { builds: used.builds } : {}),
+                ...(used.reads.length > 0 ? { reads: used.reads } : {}),
+                ...(used.lengths.length > 0 ? { lengths: used.lengths } : {}),
                 requirementIds: reqIds,
               });
             } else {
@@ -227,30 +253,87 @@ interface TestFileScope {
   consts: ReadonlyMap<string, ts.Expression>;
   /** Imported local name → exported name and the module it comes from */
   imports: ReadonlyMap<string, { name: string; from: string }>;
+  /** Repository root, to read the modules imports resolve to */
+  root: string;
+  /**
+   * Factories of the file's module-level mocks (`vi.mock("m", () => …)`): they set up the
+   * environment every test of the file runs in, so their literals count for each of them.
+   */
+  mocks: readonly ts.Node[];
 }
 
-function testFileScope(sf: ts.SourceFile, file: string, root: string): TestFileScope {
+/** `const` declarations directly in a callback body (a describe's shared fixtures). */
+function constsOf(body: ts.ConciseBody): Map<string, ts.Expression> {
+  const out = new Map<string, ts.Expression>();
+  if (!ts.isBlock(body)) return out;
+  for (const st of body.statements)
+    if (ts.isVariableStatement(st) && (st.declarationList.flags & ts.NodeFlags.Const) !== 0)
+      for (const d of st.declarationList.declarations)
+        if (ts.isIdentifier(d.name) && d.initializer) out.set(d.name.text, d.initializer);
+  return out;
+}
+
+const MOCK_CALLEES = new Set(["vi.mock", "vi.doMock", "jest.mock", "jest.doMock", "mock.module"]);
+
+function testFileScope(sf: ts.SourceFile, file: string, root: string, resolveImport: ImportResolver): TestFileScope {
   const consts = new Map<string, ts.Expression>();
   const imports = new Map<string, { name: string; from: string }>();
+  const mocks: ts.Node[] = [];
   for (const st of sf.statements) {
+    if (ts.isExpressionStatement(st) && ts.isCallExpression(st.expression)) {
+      const factory = st.expression.arguments[1];
+      if (
+        MOCK_CALLEES.has(calleeParts(st.expression.expression)?.join(".") ?? "") &&
+        factory &&
+        (ts.isArrowFunction(factory) || ts.isFunctionExpression(factory))
+      )
+        mocks.push(factory);
+    }
     if (ts.isVariableStatement(st) && (st.declarationList.flags & ts.NodeFlags.Const) !== 0) {
       for (const d of st.declarationList.declarations)
         if (ts.isIdentifier(d.name) && d.initializer) consts.set(d.name.text, d.initializer);
     }
     if (ts.isImportDeclaration(st) && st.importClause && ts.isStringLiteral(st.moduleSpecifier)) {
-      const from = moduleFile(st.moduleSpecifier.text, file, root);
+      const from = resolveImport(st.moduleSpecifier.text, file) ?? moduleFile(st.moduleSpecifier.text, file, root);
       const bindings = st.importClause.namedBindings;
       if (bindings && ts.isNamedImports(bindings))
         for (const el of bindings.elements)
           imports.set(el.name.text, { name: (el.propertyName ?? el.name).text, from });
     }
   }
-  return { consts, imports };
+  return { consts, imports, root, mocks };
+}
+
+type ImportResolver = (specifier: string, file: string) => string | undefined;
+
+/**
+ * Resolves a test's import the way the program does (`paths`, `baseUrl`, package `exports`,
+ * workspace links), to a source file of the repository relative to root. A declaration file, or a
+ * file outside root or under `node_modules` after following links, is a package: `undefined`.
+ */
+function importResolver(root: string, options: ts.CompilerOptions | undefined): ImportResolver {
+  if (!options) return () => undefined;
+  const absRoot = resolve(root);
+  const cache = new Map<string, string | undefined>();
+  return (specifier, file) => {
+    const key = `${dirname(file)}\0${specifier}`;
+    if (cache.has(key)) return cache.get(key);
+    let out: string | undefined;
+    const resolved = ts.resolveModuleName(specifier, file, options, ts.sys).resolvedModule;
+    if (resolved && !resolved.resolvedFileName.endsWith(".d.ts")) {
+      const real = ts.sys.realpath?.(resolved.resolvedFileName) ?? resolved.resolvedFileName;
+      const rel = relativeTo(absRoot, real);
+      if (!rel.startsWith("..") && !rel.split("/").includes("node_modules") && RESOLVED_MODULE.test(rel)) out = rel;
+    }
+    cache.set(key, out);
+    return out;
+  };
 }
 
 /**
  * The file a relative import resolves to (relative to root), tried with the extensions a
- * TypeScript project uses; a bare or aliased specifier is returned as written.
+ * TypeScript project uses; a bare or aliased specifier is returned as written. The fallback when
+ * the tsconfig cannot be read.
  */
 function moduleFile(specifier: string, file: string, root: string): string {
   if (!specifier.startsWith(".")) return specifier;
@@ -278,7 +361,9 @@ const ITERATING_METHODS = new Set(["forEach", "map", "flatMap", "every", "some",
  * @remarks
  * A value counts as used when it is written in the test body or its `each` tables, or in a
  * module-level `const` of the same test file that they reference by name (one hop, so a
- * fixture `const paths = [...]` counts). The test title is not a source: it describes the test,
+ * fixture `const paths = [...]` counts), or in the factory of a module-level mock of the file
+ * (`vi.mock("next/navigation", () => …)`), which sets up every test of the file. The test title
+ * is not a source: it describes the test,
  * it does not exercise anything. Iterating an imported constant (`it.each(LIST)`,
  * `for (const x of LIST)`) is recorded separately: such a test covers whatever the constant
  * holds, so it cannot fail when an element is removed.
@@ -288,15 +373,28 @@ function usedValues(
   roots: readonly ts.Node[],
   tables: readonly ts.Node[],
   limit: number,
-): { literals: string[]; keys: string[]; iterates: Array<{ name: string; from: string }> } {
+): {
+  literals: string[];
+  keys: string[];
+  iterates: Array<{ name: string; from: string }>;
+  builds: Array<{ name: string; from: string; literals: string[] }>;
+  reads: Array<{ name: string; from: string }>;
+  lengths: number[];
+} {
   const literals = new Set<string>();
+  const lengths = new Set<number>();
+  const reads = new Map<string, { name: string; from: string }>();
+  const builds = new Map<string, { name: string; from: string }>();
   const keys = new Set<string>();
   const iterates = new Map<string, { name: string; from: string }>();
   const followed = new Set<string>();
   const add = (value: string): void => {
     if (literals.size < limit) literals.add(value);
   };
+  // Off while walking mock factories: a mock is not the unit's module and iterates nothing.
+  let recording = true;
   const iterated = (expr: ts.Expression): void => {
+    if (!recording) return;
     let e = expr;
     // Object.keys(X) / Object.values(X) / Object.entries(X)
     if (
@@ -321,6 +419,24 @@ function usedValues(
       keys.size < limit
     )
       keys.add(n.name.text);
+    // A call to an imported function of the project builds an input (`toTargetHref(APP, true)`).
+    if (ts.isCallExpression(n) && ts.isIdentifier(n.expression)) {
+      const imported = scope.imports.get(n.expression.text);
+      if (recording && imported && RESOLVED_MODULE.test(imported.from))
+        builds.set(`${imported.from}#${imported.name}`, imported);
+    }
+    if (ts.isArrayLiteralExpression(n) && !n.elements.some(ts.isSpreadElement) && lengths.size < limit)
+      lengths.add(n.elements.length);
+    // An imported value of the project read, not called: `"a".repeat(NAME_MAX)` (#57).
+    if (
+      recording &&
+      ts.isIdentifier(n) &&
+      !(ts.isCallExpression(n.parent) && n.parent.expression === n) &&
+      !(ts.isPropertyAccessExpression(n.parent) && n.parent.name === n)
+    ) {
+      const imported = scope.imports.get(n.text);
+      if (imported && RESOLVED_MODULE.test(imported.from)) reads.set(`${imported.from}#${imported.name}`, imported);
+    }
     if ((ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) && n.text.length > 0) add(n.text);
     else if (ts.isTemplateExpression(n)) {
       for (const part of [n.head.text, ...n.templateSpans.map((t) => t.literal.text)])
@@ -370,5 +486,66 @@ function usedValues(
   };
   for (const root of roots) walk(root, true);
   for (const table of tables) if (ts.isExpression(table)) iterated(table);
-  return { literals: [...literals], keys: [...keys], iterates: [...iterates.values()] };
+  recording = false;
+  for (const factory of scope.mocks) walk(factory, true);
+  return {
+    literals: [...literals],
+    keys: [...keys],
+    iterates: [...iterates.values()],
+    builds: [...builds.values()].map((b) => ({ ...b, literals: functionLiterals(scope.root, b.from, b.name, limit) })),
+    reads: [...reads.values()],
+    lengths: [...lengths],
+  };
+}
+
+const RESOLVED_MODULE = /\.(?:m|c)?tsx?$/;
+const moduleCache = new Map<string, ts.SourceFile | undefined>();
+
+/**
+ * The string literals, template parts and non-trivial numbers in the body of a function exported
+ * by a project module (`export function f` or `export const f = () => …`). A test that builds its
+ * input with it gets these values from the implementation's side, not from its own text.
+ */
+function functionLiterals(root: string, from: string, name: string, limit: number): string[] {
+  const path = resolve(root, from);
+  if (!moduleCache.has(path)) {
+    let sf: ts.SourceFile | undefined;
+    try {
+      sf = ts.createSourceFile(path, readFileSync(path, "utf8"), ts.ScriptTarget.Latest, true);
+    } catch {
+      sf = undefined;
+    }
+    moduleCache.set(path, sf);
+  }
+  const sf = moduleCache.get(path);
+  if (!sf) return [];
+  let body: ts.Node | undefined;
+  for (const st of sf.statements) {
+    if (ts.isFunctionDeclaration(st) && st.name?.text === name) body = st.body;
+    if (ts.isVariableStatement(st))
+      for (const d of st.declarationList.declarations)
+        if (
+          ts.isIdentifier(d.name) &&
+          d.name.text === name &&
+          d.initializer &&
+          (ts.isArrowFunction(d.initializer) || ts.isFunctionExpression(d.initializer))
+        )
+          body = d.initializer.body;
+  }
+  if (!body) return [];
+  const out = new Set<string>();
+  const walk = (n: ts.Node): void => {
+    if (out.size >= limit) return;
+    if ((ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) && n.text.length > 0) out.add(n.text);
+    else if (ts.isTemplateExpression(n)) {
+      for (const part of [n.head.text, ...n.templateSpans.map((t) => t.literal.text)])
+        if (/[\p{L}\p{N}]/u.test(part)) out.add(part);
+    } else if (ts.isNumericLiteral(n)) {
+      const value = Number(n.text);
+      if (value !== 0 && value !== 1 && value !== -1) out.add(String(value));
+    }
+    ts.forEachChild(n, walk);
+  };
+  walk(body);
+  return [...out];
 }

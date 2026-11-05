@@ -122,4 +122,17 @@ describe("resolveReferences", () => {
     const cfg = defineConfig({ resolve: { ignore: ["clearCount"] } });
     expect(resolveReferences(unit(), "clearCount grows", scope, cfg)).toEqual([]);
   });
+  test("#70: a public free function's name resolves, the unit's own included; a method's bare name does not", () => {
+    const fn = (id: string): Unit => {
+      const { target: _target, ...base } = unit();
+      return { ...base, id, kind: "function", operation: id, params: [] };
+    };
+    const camelCase = fn("camelCase");
+    const fnScope = { ...scope, units: [unit(), camelCase, fn("kebabCase")] };
+    const refs = (u: Unit, text: string) =>
+      resolveReferences(u, text, fnScope, config).map((r) => `${r.raw}:${r.kind}:${r.target ?? ""}`);
+    expect(refs(camelCase, "joins the parts by camelCase")).toEqual(["camelCase:operation:camelCase"]);
+    expect(refs(unit(), "like kebabCase")).toEqual(["kebabCase:operation:kebabCase"]);
+    expect(refs(camelCase, "calls completeQuest")).toEqual(["completeQuest:unresolved:"]);
+  });
 });

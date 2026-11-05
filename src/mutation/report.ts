@@ -112,7 +112,7 @@ export function outcomeOf(status: string, detected: readonly string[]): MutantOu
  * `Unit.helperRanges`) or `collection` (the declaration of a collection the unit has `member`
  * decisions on).
  */
-export type MutantPlace = "body" | "helper" | "collection";
+export type MutantPlace = "body" | "helper" | "collection" | "constant";
 
 export interface MappedMutant {
   mutant: Mutant;
@@ -121,7 +121,7 @@ export interface MappedMutant {
   units: Array<{ unit: Unit; place: MutantPlace }>;
 }
 
-const PLACE_ORDER: Record<MutantPlace, number> = { body: 0, helper: 1, collection: 2 };
+const PLACE_ORDER: Record<MutantPlace, number> = { body: 0, helper: 1, collection: 2, constant: 3 };
 
 /**
  * Maps mutants to units by file and line. In a unit's own lines, the innermost unit wins (a
@@ -135,7 +135,10 @@ export function mapMutants(
 ): MappedMutant[] {
   const byFile = new Map<string, Unit[]>();
   const collectionUsers = new Map<string, Array<{ unit: Unit; line: number; endLine: number }>>();
+  const constantUsers = new Map<string, Array<{ unit: Unit; line: number; endLine: number }>>();
   for (const u of units) {
+    for (const c of u.constantRanges ?? [])
+      constantUsers.set(c.file, [...(constantUsers.get(c.file) ?? []), { unit: u, line: c.line, endLine: c.endLine }]);
     if (u.kind === "function" || u.kind === "method") byFile.set(u.file, [...(byFile.get(u.file) ?? []), u]);
     const seen = new Set<string>();
     for (const d of u.decisions) {
@@ -161,6 +164,8 @@ export function mapMutants(
       if (!places.has(u) && (u.helperRanges ?? []).some(within)) places.set(u, "helper");
     for (const c of collectionUsers.get(m.file) ?? [])
       if (!places.has(c.unit) && within(c)) places.set(c.unit, "collection");
+    for (const c of constantUsers.get(m.file) ?? [])
+      if (!places.has(c.unit) && within(c)) places.set(c.unit, "constant");
     if (places.size === 0) continue;
     out.push({
       mutant: m,

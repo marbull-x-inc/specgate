@@ -6,7 +6,7 @@ body:
     id: version
     attributes:
       label: specgate version
-      placeholder: "0.5.0"
+      placeholder: "0.5.3"
     validations:
       required: true
   - type: input
