@@ -1,0 +1,10 @@
+[32m05:56:48 (36998) INFO ProjectReader[39m Found 1 of 30 file(s) to be mutated.
+[32m05:56:48 (36998) INFO Instrumenter[39m Instrumented 1 source file(s) with 64 mutant(s)
+[32m05:56:48 (36998) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m05:56:49 (36998) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m05:56:50 (36998) INFO DryRunExecutor[39m Initial test run succeeded. Ran 117 tests in 0 seconds (net 31.274666000000366 ms, overhead 773.7253339999996 ms).
+[32m05:56:54 (36998) INFO JsonReporter[39m Your report can be found at: file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/neverthrow/reports/mutation/mutation.json
+[32m05:56:54 (36998) INFO MutationTestExecutor[39m Done in 6 seconds.
+real 8.17
+user 39.36
+sys 7.67

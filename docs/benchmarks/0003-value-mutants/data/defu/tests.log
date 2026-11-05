@@ -1,0 +1,10 @@
+
+ RUN  v4.1.6 /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu
+
+✔ isPlainObject (1.282542ms)
+
+ Test Files  2 passed (2)
+      Tests  23 passed (23)
+   Start at  05:56:33
+   Duration  226ms (transform 74ms, setup 0ms, import 110ms, tests 11ms, environment 0ms)
+

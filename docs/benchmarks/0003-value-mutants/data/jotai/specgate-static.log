@@ -1,0 +1,28 @@
+specgate check (advisory): 11 units, 29 guarantees, 78 linked tests
+  fail 3 · warn 12 · info 7
+  ❌ [guarantee-no-test] src/vanilla/utils/atomWithLazy.ts:6 atomWithLazy.ok.once-per-store has no test naming it
+  ❌ [operation-no-guarantee] src/vanilla/utils/atomWithStorage.ts:52 withStorageValidator has no guarantee (no doc comment)
+  ❌ [guarantee-on-non-unit] src/vanilla/utils/constants.ts:1 RESET has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked
+  ⚠️ [env-input-direct] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [env-input-direct] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [env-input-direct] src/vanilla/utils/atomWithRefresh.ts:46 atomWithRefresh reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [env-input-direct] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [env-input-direct] src/vanilla/utils/splitAtom.ts:151 splitAtom reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/splitAtom.ts:151 splitAtom commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [env-input-direct] src/vanilla/utils/unwrap.ts:64 unwrap reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/unwrap.ts:64 unwrap commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [env-input-direct] src/vanilla/utils/unwrap.ts:121 unwrap reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./utils" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./vanilla" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./vanilla/utils" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./vanilla/internals" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./react" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./react/utils" points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/.specgate-static/report.json
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/.specgate-static/summary.md
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/.specgate-static/report.sarif

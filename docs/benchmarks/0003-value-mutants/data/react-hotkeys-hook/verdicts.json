@@ -1,0 +1,32 @@
+[
+  {
+    "id": "value-1",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "without a HotkeysProvider, useHotkeysContext().hotkeys is undefined instead of []",
+    "expressedBy": [
+      "1"
+    ]
+  },
+  {
+    "id": "value-3",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "without a HotkeysProvider, useHotkeysContext().toggleScope is undefined, so calling it throws a TypeError instead of doing nothing",
+    "expressedBy": null
+  },
+  {
+    "id": "value-4",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "without a HotkeysProvider, useHotkeysContext().enableScope is undefined, so calling it throws a TypeError instead of doing nothing",
+    "expressedBy": null
+  },
+  {
+    "id": "value-5",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "without a HotkeysProvider, useHotkeysContext().disableScope is undefined, so calling it throws a TypeError instead of doing nothing",
+    "expressedBy": null
+  }
+]

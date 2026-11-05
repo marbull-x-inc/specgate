@@ -422,69 +422,6 @@
     "reason": "hook useForm"
   },
   {
-    "file": "src/__tests__/errorMessage.test.tsx",
-    "line": 245,
-    "title": "render correctly with no errors",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/errorMessage.test.tsx",
-    "line": 280,
-    "title": "render correctly with flat errors and as with component",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/errorMessage.test.tsx",
-    "line": 292,
-    "title": "render correctly with flat errors and as with component and render",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/errorMessage.test.tsx",
-    "line": 307,
-    "title": "render correctly with flat multiple errors and render",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/errorMessage.test.tsx",
-    "line": 330,
-    "title": "render correctly with flat multiple errors and as with element and render",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/errorMessage.test.tsx",
-    "line": 379,
-    "title": "render correctly with nested multiple errors and render",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/errorMessage.test.tsx",
-    "line": 402,
-    "title": "render correctly with nested multiple errors and as with element and render",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/errorMessage.test.tsx",
-    "line": 451,
-    "title": "render correctly with nested multiple errors array and render",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/errorMessage.test.tsx",
-    "line": 474,
-    "title": "render correctly with nested multiple errors array and as with element and render",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
     "file": "src/__tests__/form.test.tsx",
     "line": 15,
     "title": "support render with both form tag and headless",
@@ -2807,30 +2744,9 @@
   },
   {
     "file": "src/__tests__/useFieldArray.test.tsx",
-    "line": 3268,
-    "title": "allow append with deeply nested field array even with flat structure",
-    "key": "useFieldArray.ok.append",
-    "reason": "hook useFieldArray"
-  },
-  {
-    "file": "src/__tests__/useFieldArray.test.tsx",
     "line": 3347,
     "title": "not leave defaultValues as empty array",
     "key": "useFieldArray.ok.default-key-name",
-    "reason": "hook useFieldArray"
-  },
-  {
-    "file": "src/__tests__/useFieldArray.test.tsx",
-    "line": 3390,
-    "title": "custom register append, prepend and insert inputs with values",
-    "key": "useFieldArray.ok.prepend",
-    "reason": "hook useFieldArray"
-  },
-  {
-    "file": "src/__tests__/useFieldArray.test.tsx",
-    "line": 3645,
-    "title": "append multiple inputs correctly",
-    "key": "useFieldArray.ok.append",
     "reason": "hook useFieldArray"
   },
   {
@@ -4755,13 +4671,6 @@
   },
   {
     "file": "src/__tests__/useForm/register.test.tsx",
-    "line": 2187,
-    "title": "textbox",
-    "key": "useForm.ok.default-mode",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/useForm/register.test.tsx",
     "line": 2205,
     "title": "stop enforcing a validation rule removed at runtime",
     "key": "useForm.ok.default-mode",
@@ -5614,22 +5523,8 @@
   },
   {
     "file": "src/__tests__/useForm/resolver.test.tsx",
-    "line": 195,
-    "title": "test",
-    "key": "useForm.ok.resolver-skips-validate",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/useForm/resolver.test.tsx",
     "line": 226,
     "title": "avoid the problem of race condition",
-    "key": "useForm.ok.resolver-skips-validate",
-    "reason": "hook useForm"
-  },
-  {
-    "file": "src/__tests__/useForm/resolver.test.tsx",
-    "line": 241,
-    "title": "test",
     "key": "useForm.ok.resolver-skips-validate",
     "reason": "hook useForm"
   },
@@ -7201,13 +7096,6 @@
   },
   {
     "file": "src/__tests__/useForm/watch.test.tsx",
-    "line": 274,
-    "title": "watch correctly with useFieldArray with action and then fallback to onChange",
-    "key": "useFieldArray.ok.default-key-name",
-    "reason": "hook useFieldArray"
-  },
-  {
-    "file": "src/__tests__/useForm/watch.test.tsx",
     "line": 355,
     "title": "have dirty marked when watch is enabled",
     "key": "useForm.ok.default-mode",
@@ -8443,22 +8331,8 @@
   },
   {
     "file": "src/__tests__/useWatch.test.tsx",
-    "line": 1294,
-    "title": "watch correct input update with single field array input",
-    "key": "useWatch.ok.name-array",
-    "reason": "hook useWatch"
-  },
-  {
-    "file": "src/__tests__/useWatch.test.tsx",
     "line": 1390,
     "title": "return shallow merged watch values",
-    "key": "useWatch.ok.name-array",
-    "reason": "hook useWatch"
-  },
-  {
-    "file": "src/__tests__/useWatch.test.tsx",
-    "line": 1447,
-    "title": "watch correct input update with single field array input",
     "key": "useWatch.ok.name-array",
     "reason": "hook useWatch"
   },
@@ -8489,13 +8363,6 @@
     "title": "fallback to inline defaultValue with reset API",
     "key": "useWatch.ok.default-value",
     "reason": "hook useWatch"
-  },
-  {
-    "file": "src/__tests__/useWatch.test.tsx",
-    "line": 1866,
-    "title": "return current value with radio type",
-    "key": "useFieldArray.ok.default-key-name",
-    "reason": "hook useFieldArray"
   },
   {
     "file": "src/__tests__/useWatch.test.tsx",

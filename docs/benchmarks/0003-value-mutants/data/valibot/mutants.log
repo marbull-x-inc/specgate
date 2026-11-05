@@ -1,0 +1,5 @@
+mutants: 51 value change(s) in 15 file(s) (48 string, 3 number)
+wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/valibot/.specgate/mutants.json
+real 3.77
+user 6.78
+sys 0.58

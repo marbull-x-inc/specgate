@@ -1,0 +1,17 @@
+[32m06:17:30 (56074) INFO ProjectReader[39m Found 17 of 4909 file(s) to be mutated.
+Browserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[32m06:17:30 (56074) INFO Instrumenter[39m Instrumented 17 source file(s) with 306 mutant(s)
+[32m06:17:31 (56074) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m06:17:32 (56074) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m06:17:40 (56074) INFO DryRunExecutor[39m Initial test run succeeded. Ran 714 tests in 7 seconds (net 169.57675100000665 ms, overhead 7507.423248999993 ms).
+[33m06:17:40 (56074) WARN MutantTestPlanner[39m Detected 189 static mutants (62% of total) that are estimated to take 99% of the time running the tests!
+  You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
+  For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants
+  (disable "warnings.slow" to ignore this warning)
+[32m06:18:28 (56074) INFO JsonReporter[39m Your report can be found at: file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/es-toolkit/reports/mutation/mutation.json
+[32m06:18:28 (56074) INFO MutationTestExecutor[39m Done in 1 minute and 0 seconds.
+real 61.92
+user 374.83
+sys 257.64

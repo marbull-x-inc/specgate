@@ -1,0 +1,9 @@
+
+ RUN  v4.1.8 /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/valibot/library
+
+
+ Test Files  280 passed (280)
+      Tests  3232 passed (3232)
+   Start at  06:13:47
+   Duration  4.34s (transform 23.99s, setup 0ms, import 36.56s, tests 1.00s, environment 408.61s)
+

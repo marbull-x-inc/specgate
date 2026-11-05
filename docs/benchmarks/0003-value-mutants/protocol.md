@@ -222,3 +222,15 @@ from the harness, not from the code. The runner now runs whole-command runs one 
 of selected test files stay parallel. Selection and status rules are unchanged. es-toolkit's run
 was stopped and is repeated, and every project not yet run uses the fixed runner. defu,
 neverthrow and cac had no `Timeout` and are not repeated.
+
+### 6. react-hook-form: 19 links dropped to keep the suite green (2026-11-06, during the runs)
+
+With the links applied, 16 react-hook-form tests failed, so the run stopped at its first step.
+13 of them compare with `toMatchSnapshot()`, whose snapshot name is the test title: renaming the
+title makes the stored snapshot unmatched, and jest in CI mode does not write a new one. In 3,
+the applier had put the key into a string that was not a title (`getByRole('textbox')`,
+`register('test')`), because those link entries named a title that was not a title literal.
+The 19 entries behind these failures were dropped (1232 → 1213 links); one more test,
+`set value before custom onChange`, failed only through the wrong insertion and keeps its link.
+With the rest re-applied, all 1830 tests pass. The patch was refrozen. Other projects' suites
+passed at the first step and are unchanged.

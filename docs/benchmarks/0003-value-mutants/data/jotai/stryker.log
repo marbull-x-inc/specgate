@@ -1,0 +1,14 @@
+[32m06:58:38 (81255) INFO ProjectReader[39m Found 10 of 342 file(s) to be mutated.
+[32m06:58:38 (81255) INFO Instrumenter[39m Instrumented 10 source file(s) with 456 mutant(s)
+[32m06:58:39 (81255) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m06:58:39 (81255) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m06:58:52 (81255) INFO DryRunExecutor[39m Initial test run succeeded. Ran 130 tests in 13 seconds (net 747.4062130000029 ms, overhead 12521.593786999998 ms).
+[33m06:58:52 (81255) WARN MutantTestPlanner[39m Detected 40 static mutants (9% of total) that are estimated to take 66% of the time running the tests!
+  You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
+  For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants
+  (disable "warnings.slow" to ignore this warning)
+[32m07:00:38 (81255) INFO JsonReporter[39m Your report can be found at: file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/reports/mutation/mutation.json
+[32m07:00:38 (81255) INFO MutationTestExecutor[39m Done in 1 minute and 59 seconds.
+real 120.97
+user 791.40
+sys 287.81

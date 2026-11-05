@@ -1,0 +1,5 @@
+{
+  "node": "v24.3.0",
+  "specgateCommit": "35788972a46553ad14f4464c229b643807cb2c45",
+  "strykerCore": "10.1.1"
+}

@@ -1,0 +1,26 @@
+baseline run 18066 ms; timeout 90330 ms
+value-7 Killed     packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:45 `prev.includes('*')`: '*' → '*_x'
+value-10 Killed     packages/react-hotkeys-hook/src/lib/useHotkeys.ts:130 `memoisedOptions?.splitKey ?? '+'`: '+' → '+_x'
+value-8 Killed     packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:63 `prev.includes('*')`: '*' → '*_x'
+value-6 Killed     packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:39 `['*']`: '*' → '*_x'
+value-12 Killed     packages/react-hotkeys-hook/src/lib/useHotkeys.ts:150 `memoisedOptions?.sequenceTimeoutMs ?? 1…`: 1000 → 1001
+value-13 Killed     packages/react-hotkeys-hook/src/lib/useHotkeys.ts:161 `recordedKeys.length - 1`: 1 → 2
+value-11 Killed     packages/react-hotkeys-hook/src/lib/useHotkeys.ts:130 `memoisedOptions?.sequenceSplitKey ?? '>'`: '>' → '>_x'
+value-15 Killed     packages/react-hotkeys-hook/src/lib/useHotkeys.ts:241 `domNode.addEventListener('keyup', handl…`: 'keyup' → 'keyup_x'
+value-14 Killed     packages/react-hotkeys-hook/src/lib/useHotkeys.ts:183 `hotkey.keys?.includes('*')`: '*' → '*_x'
+value-19 Killed     packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:64 `document.addEventListener('keydown', ha…`: 'keydown' → 'keydown_x'
+value-18 Killed     packages/react-hotkeys-hook/src/lib/useHotkeys.ts:264 `domNode.removeEventListener('keydown', …`: 'keydown' → 'keydown_x'
+value-17 Killed     packages/react-hotkeys-hook/src/lib/useHotkeys.ts:262 `domNode.removeEventListener('keyup', ha…`: 'keyup' → 'keyup_x'
+value-20 Killed     packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:67 `document.removeEventListener('keydown',…`: 'keydown' → 'keydown_x'
+value-16 Killed     packages/react-hotkeys-hook/src/lib/useHotkeys.ts:243 `domNode.addEventListener('keydown', han…`: 'keydown' → 'keydown_x'
+value-1 Survived   packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:16 `hotkeys: []` removed from `HotkeysContext`
+value-2 Killed     packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:17 `activeScopes: []` removed from `HotkeysContext`
+value-3 Survived   packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:18 `toggleScope: () => {}` removed from `HotkeysContext`
+value-4 Survived   packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:19 `enableScope: () => {}` removed from `HotkeysContext`
+value-5 Survived   packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:19 `disableScope: () => {}` removed from `HotkeysContext`
+value-9 Killed     packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:59 the default `delimiter` ',' → ',_x'
+value-mutants: 20 mutant(s): 4 Survived, 16 Killed; 119370 ms (baseline run 18066 ms)
+wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/reports/value/value.json
+real 119.45
+user 82.23
+sys 21.06

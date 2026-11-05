@@ -470,7 +470,7 @@ index da8cf94..7032d65 100644
        const [disabled, setDisabled] = React.useState(false);
        const { register } = useForm<{ choice: string }>({ disabled });
 diff --git a/src/__tests__/errorMessage.test.tsx b/src/__tests__/errorMessage.test.tsx
-index 20a3d31..403bd5b 100644
+index 20a3d31..049ec4f 100644
 --- a/src/__tests__/errorMessage.test.tsx
 +++ b/src/__tests__/errorMessage.test.tsx
 @@ -37,7 +37,7 @@ function renderMessage(
@@ -554,87 +554,6 @@ index 20a3d31..403bd5b 100644
        const App = () => {
          const { control, setError } = useForm<SimpleForm>();
          return (
-@@ -242,7 +242,7 @@ describe('ErrorMessage', () => {
-   });
- 
-   describe('snapshot: prop matrix', () => {
--    it('render correctly with no errors', () => {
-+    it('useForm.ok.default-mode render correctly with no errors', () => {
-       const Fixture = () => {
-         const { control } = useForm();
-         return <ErrorMessage control={control} name={'test' as any} />;
-@@ -277,7 +277,7 @@ describe('ErrorMessage', () => {
-       expect(asFragment()).toMatchSnapshot();
-     });
- 
--    it('render correctly with flat errors and as with component', () => {
-+    it('useForm.ok.default-mode render correctly with flat errors and as with component', () => {
-       function CustErrComp({ children }: { children: React.ReactNode }) {
-         return <div>{children}</div>;
-       }
-@@ -289,7 +289,7 @@ describe('ErrorMessage', () => {
-       expect(asFragment()).toMatchSnapshot();
-     });
- 
--    it('render correctly with flat errors and as with component and render', () => {
-+    it('useForm.ok.default-mode render correctly with flat errors and as with component and render', () => {
-       function CustErrComp({ children }: { children: React.ReactNode }) {
-         return <div>{children}</div>;
-       }
-@@ -304,7 +304,7 @@ describe('ErrorMessage', () => {
-       expect(asFragment()).toMatchSnapshot();
-     });
- 
--    it('render correctly with flat multiple errors and render', () => {
-+    it('useForm.ok.default-mode render correctly with flat multiple errors and render', () => {
-       const { asFragment } = renderMessage(
-         'flat',
-         {
-@@ -327,7 +327,7 @@ describe('ErrorMessage', () => {
-       expect(asFragment()).toMatchSnapshot();
-     });
- 
--    it('render correctly with flat multiple errors and as with element and render', () => {
-+    it('useForm.ok.default-mode render correctly with flat multiple errors and as with element and render', () => {
-       const { asFragment } = renderMessage(
-         'flat',
-         {
-@@ -376,7 +376,7 @@ describe('ErrorMessage', () => {
-       expect(asFragment()).toMatchSnapshot();
-     });
- 
--    it('render correctly with nested multiple errors and render', () => {
-+    it('useForm.ok.default-mode render correctly with nested multiple errors and render', () => {
-       const { asFragment } = renderMessage(
-         'nested.object',
-         {
-@@ -399,7 +399,7 @@ describe('ErrorMessage', () => {
-       expect(asFragment()).toMatchSnapshot();
-     });
- 
--    it('render correctly with nested multiple errors and as with element and render', () => {
-+    it('useForm.ok.default-mode render correctly with nested multiple errors and as with element and render', () => {
-       const { asFragment } = renderMessage(
-         'nested.object',
-         {
-@@ -448,7 +448,7 @@ describe('ErrorMessage', () => {
-       expect(asFragment()).toMatchSnapshot();
-     });
- 
--    it('render correctly with nested multiple errors array and render', () => {
-+    it('useForm.ok.default-mode render correctly with nested multiple errors array and render', () => {
-       const { asFragment } = renderMessage(
-         'nested.0.array',
-         {
-@@ -471,7 +471,7 @@ describe('ErrorMessage', () => {
-       expect(asFragment()).toMatchSnapshot();
-     });
- 
--    it('render correctly with nested multiple errors array and as with element and render', () => {
-+    it('useForm.ok.default-mode render correctly with nested multiple errors array and as with element and render', () => {
-       const { asFragment } = renderMessage(
-         'nested.0.array',
-         {
 diff --git a/src/__tests__/form.test.tsx b/src/__tests__/form.test.tsx
 index 7161278..9ded7b8 100644
 --- a/src/__tests__/form.test.tsx
@@ -1821,7 +1740,7 @@ index b5bbb8d..f9b23b5 100644
  
      function App() {
 diff --git a/src/__tests__/useFieldArray.test.tsx b/src/__tests__/useFieldArray.test.tsx
-index 18cb1a3..99903d7 100644
+index 18cb1a3..3da2f50 100644
 --- a/src/__tests__/useFieldArray.test.tsx
 +++ b/src/__tests__/useFieldArray.test.tsx
 @@ -46,7 +46,7 @@ describe('useFieldArray', () => {
@@ -2256,15 +2175,6 @@ index 18cb1a3..99903d7 100644
        type FormValues = {
          nest: {
            value: string;
-@@ -3265,7 +3265,7 @@ describe('useFieldArray', () => {
-       expect(deepNestInput3).toHaveValue('test');
-     });
- 
--    it('allow append with deeply nested field array even with flat structure', async () => {
-+    it('useFieldArray.ok.append allow append with deeply nested field array even with flat structure', async () => {
-       const watchValue: unknown[] = [];
- 
-       const App = () => {
 @@ -3344,7 +3344,7 @@ describe('useFieldArray', () => {
    });
  
@@ -2274,24 +2184,6 @@ index 18cb1a3..99903d7 100644
        let submitData: any;
        type FormValues = {
          test: {
-@@ -3387,7 +3387,7 @@ describe('useFieldArray', () => {
-     });
-   });
- 
--  it('custom register append, prepend and insert inputs with values', () => {
-+  it('useFieldArray.ok.prepend custom register append, prepend and insert inputs with values', () => {
-     type FormValues = {
-       test: {
-         test: string;
-@@ -3642,7 +3642,7 @@ describe('useFieldArray', () => {
-     expect(watchValues).toMatchSnapshot();
-   });
- 
--  it('append multiple inputs correctly', () => {
-+  it('useFieldArray.ok.append append multiple inputs correctly', () => {
-     type FormValues = {
-       test: {
-         value: string;
 @@ -3711,7 +3711,7 @@ describe('useFieldArray', () => {
      expect(watchedValue).toMatchSnapshot();
    });
@@ -6627,7 +6519,7 @@ index ef857f8..f788439 100644
      const { result } = renderHook(() =>
        useForm({
 diff --git a/src/__tests__/useForm/register.test.tsx b/src/__tests__/useForm/register.test.tsx
-index ad0e612..6d5623c 100644
+index ad0e612..f7b7e9e 100644
 --- a/src/__tests__/useForm/register.test.tsx
 +++ b/src/__tests__/useForm/register.test.tsx
 @@ -28,7 +28,7 @@ import isString from '../../utils/isString';
@@ -7053,15 +6945,6 @@ index ad0e612..6d5623c 100644
      const test = jest.fn();
  
      const App = () => {
-@@ -2193,7 +2193,7 @@ describe('register', () => {
- 
-     render(<App />);
- 
--    fireEvent.change(screen.getByRole('textbox'), {
-+    fireEvent.change(screen.getByRole('useForm.ok.default-mode textbox'), {
-       target: { value: 'test' },
-     });
- 
 @@ -2202,7 +2202,7 @@ describe('register', () => {
      });
    });
@@ -8141,7 +8024,7 @@ index 8fcdcc3..8121dfe 100644
        const { result } = renderHook(() =>
          useForm<{ test: unknown }>({
 diff --git a/src/__tests__/useForm/resolver.test.tsx b/src/__tests__/useForm/resolver.test.tsx
-index df05d3a..d442d48 100644
+index df05d3a..7d318e8 100644
 --- a/src/__tests__/useForm/resolver.test.tsx
 +++ b/src/__tests__/useForm/resolver.test.tsx
 @@ -19,7 +19,7 @@ import noop from '../../utils/noop';
@@ -8171,15 +8054,6 @@ index df05d3a..d442d48 100644
      type FormValues = {
        test: string;
      };
-@@ -208,7 +208,7 @@ describe('resolver', () => {
- 
-       return (
-         <form onSubmit={handleSubmit(noop)}>
--          <input {...register('test')} />
-+          <input {...register('useForm.ok.resolver-skips-validate test')} />
-           <button>Submit</button>
-         </form>
-       );
 @@ -223,7 +223,7 @@ describe('resolver', () => {
      );
    });
@@ -8189,15 +8063,6 @@ index df05d3a..d442d48 100644
      jest.useFakeTimers();
  
      type FormValues = {
-@@ -271,7 +271,7 @@ describe('resolver', () => {
- 
-       return (
-         <form>
--          <input type="text" {...register('test')} />
-+          <input type="text" {...register('useForm.ok.resolver-skips-validate test')} />
-         </form>
-       );
-     };
 @@ -299,7 +299,7 @@ describe('resolver', () => {
      expect(errorsObject).toEqual({});
    });
@@ -10133,7 +9998,7 @@ index ead871b..1198dab 100644
  
      function App() {
 diff --git a/src/__tests__/useForm/watch.test.tsx b/src/__tests__/useForm/watch.test.tsx
-index bed050d..90c184c 100644
+index bed050d..f170b35 100644
 --- a/src/__tests__/useForm/watch.test.tsx
 +++ b/src/__tests__/useForm/watch.test.tsx
 @@ -18,7 +18,7 @@ import isFunction from '../../utils/isFunction';
@@ -10226,15 +10091,6 @@ index bed050d..90c184c 100644
      const output: any[] = [];
  
      const Component = () => {
-@@ -271,7 +271,7 @@ describe('watch', () => {
-     ]);
-   });
- 
--  it('watch correctly with useFieldArray with action and then fallback to onChange', () => {
-+  it('useFieldArray.ok.default-key-name watch correctly with useFieldArray with action and then fallback to onChange', () => {
-     type FormValues = {
-       names: {
-         name: string;
 @@ -352,7 +352,7 @@ describe('watch', () => {
      expect(output).toMatchSnapshot();
    });
@@ -10653,7 +10509,7 @@ index 872f754..69a74a4 100644
        const { control, reset } = useForm({
          defaultValues: { name: 'default' },
 diff --git a/src/__tests__/useWatch.test.tsx b/src/__tests__/useWatch.test.tsx
-index 9eb6080..fd74adc 100644
+index 9eb6080..a10ed88 100644
 --- a/src/__tests__/useWatch.test.tsx
 +++ b/src/__tests__/useWatch.test.tsx
 @@ -40,7 +40,7 @@ describe('useWatch', () => {
@@ -10953,15 +10809,6 @@ index 9eb6080..fd74adc 100644
        type FormValues = {
          name: string;
        };
-@@ -1291,7 +1291,7 @@ describe('useWatch', () => {
-   });
- 
-   describe('fieldArray', () => {
--    it('watch correct input update with single field array input', () => {
-+    it('useWatch.ok.name-array watch correct input update with single field array input', () => {
-       const inputValues: string[] = [];
- 
-       type FormValues = {
 @@ -1387,7 +1387,7 @@ describe('useWatch', () => {
        ]);
      });
@@ -10971,15 +10818,6 @@ index 9eb6080..fd74adc 100644
        const watchedValue: unknown[] = [];
  
        function App() {
-@@ -1444,7 +1444,7 @@ describe('useWatch', () => {
-   });
- 
-   describe('fieldArray with shouldUnregister true', () => {
--    it('watch correct input update with single field array input', async () => {
-+    it('useWatch.ok.name-array watch correct input update with single field array input', async () => {
-       const watchData: unknown[] = [];
- 
-       type Unpacked<T> = T extends (infer U)[] ? U : T;
 @@ -1732,7 +1732,7 @@ describe('useWatch', () => {
        },
      );
@@ -11016,15 +10854,6 @@ index 9eb6080..fd74adc 100644
        const App = () => {
          const { control, reset } = useForm();
          const value = useWatch({
-@@ -1863,7 +1863,7 @@ describe('useWatch', () => {
- 
-     describe('with useFieldArray', () => {
-       // issue: https://github.com/react-hook-form/react-hook-form/issues/2229
--      it('return current value with radio type', () => {
-+      it('useFieldArray.ok.default-key-name return current value with radio type', () => {
-         type FormValues = {
-           options: { option: string }[];
-         };
 @@ -1945,7 +1945,7 @@ describe('useWatch', () => {
          expect(watchedValue).toMatchSnapshot();
        });

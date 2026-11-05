@@ -1,0 +1,114 @@
+[
+  {
+    "id": "value-1",
+    "status": "NoCoverage",
+    "verdict": "real",
+    "reason": "the help flag is renamed (-h, --help no longer recognised as written)",
+    "expressedBy": [
+      "19",
+      "20"
+    ]
+  },
+  {
+    "id": "value-2",
+    "status": "NoCoverage",
+    "verdict": "real",
+    "reason": "the help description in the output changes",
+    "expressedBy": [
+      "19",
+      "20"
+    ]
+  },
+  {
+    "id": "value-3",
+    "status": "NoCoverage",
+    "verdict": "real",
+    "reason": "the default version flags change",
+    "expressedBy": [
+      "22"
+    ]
+  },
+  {
+    "id": "value-4",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "argv[2] decides whether the name is taken from the file: with no argv[2] the name is \"cli\"",
+    "expressedBy": [
+      "60"
+    ]
+  },
+  {
+    "id": "value-5",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the CLI name is taken from argv[2] instead of the script path",
+    "expressedBy": [
+      "60"
+    ]
+  },
+  {
+    "id": "value-6",
+    "status": "NoCoverage",
+    "verdict": "real",
+    "reason": "the fallback CLI name changes",
+    "expressedBy": [
+      "61"
+    ]
+  },
+  {
+    "id": "value-10",
+    "status": "NoCoverage",
+    "verdict": "real",
+    "reason": "the first user argument is dropped",
+    "expressedBy": [
+      "83",
+      "78",
+      "81"
+    ]
+  },
+  {
+    "id": "value-11",
+    "status": "NoCoverage",
+    "verdict": "real",
+    "reason": "the event name dispatched for the default command changes",
+    "expressedBy": [
+      "86"
+    ]
+  },
+  {
+    "id": "value-13",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the unknown-command check looks at the second argument",
+    "expressedBy": [
+      "116",
+      "117",
+      "118"
+    ]
+  },
+  {
+    "id": "value-14",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the event name dispatched for an unknown command changes",
+    "expressedBy": [
+      "122"
+    ]
+  },
+  {
+    "id": "value-15",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the unknown-command event carries the second argument",
+    "expressedBy": [
+      "123"
+    ]
+  },
+  {
+    "id": "value-20",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "an array option type [Number] no longer converts its values: type[1] is undefined, so transformFunction is unset",
+    "expressedBy": null
+  }
+]

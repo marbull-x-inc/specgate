@@ -1,0 +1,41 @@
+[
+  {
+    "id": "value-1",
+    "status": "NoCoverage",
+    "verdict": "real",
+    "reason": "the default namespace is passed to a custom merger (createDefu); a merger that reads it sees \"._x\"",
+    "expressedBy": [
+      "0"
+    ]
+  },
+  {
+    "id": "value-2",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the __proto__ guard stops matching, so a __proto__ key is merged (prototype pollution)",
+    "expressedBy": [
+      "13",
+      "16",
+      "9",
+      "10",
+      "11",
+      "14",
+      "17"
+    ]
+  },
+  {
+    "id": "value-3",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the constructor guard stops matching, so a constructor key is merged",
+    "expressedBy": [
+      "13",
+      "16",
+      "9",
+      "10",
+      "11",
+      "14",
+      "17"
+    ]
+  }
+]

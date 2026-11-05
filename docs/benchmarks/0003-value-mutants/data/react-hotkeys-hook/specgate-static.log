@@ -1,0 +1,12 @@
+specgate check (advisory): 8 units, 20 guarantees, 140 linked tests
+  fail 5 · warn 0 · info 1
+  ❌ [operation-no-guarantee] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:50 isReadonlyArray has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:56 isHotkeyPressed.ok.key-forms has no test naming it
+  ❌ [operation-no-guarantee] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:65 pushToCurrentlyPressedKeys has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:86 removeFromCurrentlyPressedKeys has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:6 useRecordHotkeys.ok.use-key-true has no test naming it
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/.specgate-static/report.json
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/.specgate-static/summary.md
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/.specgate-static/report.sarif

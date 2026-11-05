@@ -1,0 +1,9 @@
+baseline run 843 ms; timeout 30000 ms
+value-1 NoCoverage src/defu.ts:5 the default `namespace` "." → "._x"
+value-2 Survived   src/defu.ts:13 `key === "__proto__"`: "__proto__" → "__proto___x"
+value-3 Survived   src/defu.ts:13 `key === "constructor"`: "constructor" → "constructor_x"
+value-mutants: 3 mutant(s): 1 NoCoverage, 2 Survived; 1980 ms (baseline run 843 ms)
+wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/reports/value/value.json
+real 2.11
+user 2.55
+sys 0.98

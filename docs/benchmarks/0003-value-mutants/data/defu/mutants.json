@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "files": {
+    "src/defu.ts": {
+      "sha256": "369340c9c92a0e5f3a6d828f8e3af3db3f2b88db4abf5691b7bae62ad107f63c"
+    }
+  },
+  "mutants": [
+    {
+      "id": "value-1",
+      "unit": "createDefu",
+      "file": "src/defu.ts",
+      "line": 5,
+      "column": 61,
+      "endLine": 5,
+      "endColumn": 64,
+      "start": 215,
+      "end": 218,
+      "kind": "string",
+      "original": "\".\"",
+      "replacement": "\"._x\"",
+      "description": "the default `namespace` \".\" → \"._x\""
+    },
+    {
+      "id": "value-2",
+      "unit": "createDefu",
+      "file": "src/defu.ts",
+      "line": 13,
+      "column": 17,
+      "endLine": 13,
+      "endColumn": 28,
+      "start": 455,
+      "end": 466,
+      "kind": "string",
+      "original": "\"__proto__\"",
+      "replacement": "\"__proto___x\"",
+      "description": "`key === \"__proto__\"`: \"__proto__\" → \"__proto___x\"",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "__proto__"
+        ]
+      }
+    },
+    {
+      "id": "value-3",
+      "unit": "createDefu",
+      "file": "src/defu.ts",
+      "line": 13,
+      "column": 40,
+      "endLine": 13,
+      "endColumn": 53,
+      "start": 478,
+      "end": 491,
+      "kind": "string",
+      "original": "\"constructor\"",
+      "replacement": "\"constructor_x\"",
+      "description": "`key === \"constructor\"`: \"constructor\" → \"constructor_x\"",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "constructor"
+        ]
+      }
+    }
+  ]
+}

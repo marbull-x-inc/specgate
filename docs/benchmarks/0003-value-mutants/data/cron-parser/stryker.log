@@ -1,0 +1,4 @@
+[32m22:07:57 (25744) INFO ProjectReader[39m Found 4 of 62 file(s) to be mutated.
+[32m22:07:58 (25744) INFO Instrumenter[39m Instrumented 4 source file(s) with 1131 mutant(s)
+[32m22:07:58 (25744) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m22:07:58 (25744) INFO DryRunExecutor[39m Starting initial test run (jest test runner with "perTest" coverage analysis). This may take a while.

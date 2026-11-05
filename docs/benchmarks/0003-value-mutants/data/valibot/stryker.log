@@ -1,0 +1,18 @@
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[32m06:13:54 (38238) INFO ProjectReader[39m Found 15 of 1124 file(s) to be mutated.
+Browserslist: browsers data (caniuse-lite) is 12 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[32m06:13:54 (38238) INFO Instrumenter[39m Instrumented 15 source file(s) with 248 mutant(s)
+[32m06:13:54 (38238) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m06:13:56 (38238) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m06:14:04 (38238) INFO DryRunExecutor[39m Initial test run succeeded. Ran 519 tests in 7 seconds (net 135.45636999999988 ms, overhead 7801.54363 ms).
+[33m06:14:04 (38238) WARN MutantTestPlanner[39m Detected 54 static mutants (22% of total) that are estimated to take 86% of the time running the tests!
+  You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
+  For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants
+  (disable "warnings.slow" to ignore this warning)
+[32m06:15:19 (38238) INFO JsonReporter[39m Your report can be found at: file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/valibot/library/reports/mutation/mutation.json
+[32m06:15:19 (38238) INFO MutationTestExecutor[39m Done in 1 minute and 26 seconds.
+real 88.52
+user 305.42
+sys 108.97

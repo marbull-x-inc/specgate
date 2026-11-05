@@ -1,0 +1,145 @@
+specgate check (advisory): 11 units, 29 guarantees, 78 linked tests
+  fail 3 · warn 129 · info 7
+  ❌ [guarantee-no-test] src/vanilla/utils/atomWithLazy.ts:6 atomWithLazy.ok.once-per-store has no test naming it
+  ❌ [operation-no-guarantee] src/vanilla/utils/atomWithStorage.ts:52 withStorageValidator has no guarantee (no doc comment)
+  ❌ [guarantee-on-non-unit] src/vanilla/utils/constants.ts:1 RESET has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked
+  ⚠️ [mutant-survived] src/react/utils/useResetAtom.ts:18 useResetAtom: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [env-input-direct] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault: ConditionalExpression mutant (the match "production"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault: EqualityOperator mutant (the match "production"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault: ConditionalExpression mutant (the match "production"): `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault: StringLiteral mutant (the match "production"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault: BlockStatement mutant (the match "production"): `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithDefault.ts:25 atomWithDefault: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithDefault.ts:26 atomWithDefault: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:32 atomWithRefresh: `atom(0)`: 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [env-input-direct] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh: EqualityOperator mutant (the match "production"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh: ConditionalExpression mutant (the match "production"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh: StringLiteral mutant (the match "production"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh: BlockStatement mutant (the match "production"): `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh: ConditionalExpression mutant (the match "production"): `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:33 atomWithRefresh: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:34 atomWithRefresh: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:43 atomWithRefresh: ArithmeticOperator mutant: `c - 1` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:43 atomWithRefresh: `c + 1`: 1 → 2 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:44 atomWithRefresh: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [env-input-direct] src/vanilla/utils/atomWithRefresh.ts:46 atomWithRefresh reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:46 atomWithRefresh: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:46 atomWithRefresh: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:46 atomWithRefresh: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithRefresh.ts:47 atomWithRefresh: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:110 createJSONStorage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:111 createJSONStorage: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:111 createJSONStorage: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:111 createJSONStorage: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:111 createJSONStorage: EqualityOperator mutant: `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:111 createJSONStorage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:111 createJSONStorage: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:112 createJSONStorage: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:112 createJSONStorage: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:112 createJSONStorage: EqualityOperator mutant: `typeof window === 'undefined'` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:112 createJSONStorage: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:112 createJSONStorage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:113 createJSONStorage: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:127 createJSONStorage: StringLiteral mutant: `"Stryker was here!"` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:128 createJSONStorage: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:145 createJSONStorage: OptionalChaining mutant: `getStringStorage().setItem` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:149 createJSONStorage: OptionalChaining mutant: `getStringStorage().removeItem` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:158 createJSONStorage: StringLiteral mutant: `"Stryker was here!"` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:182 createJSONStorage: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:187 createJSONStorage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:188 createJSONStorage: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:188 createJSONStorage: `window.removeEventListener('storage', s…`: 'storage' → 'storage_x' survived; no linked test fails when the code changes like this
+  ⚠️ [env-input-direct] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage: ConditionalExpression mutant (the match "production"): `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage: EqualityOperator mutant (the match "production"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage: ConditionalExpression mutant (the match "production"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage: StringLiteral mutant (the match "production"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage: BlockStatement mutant (the match "production"): `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:242 atomWithStorage: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/atomWithStorage.ts:243 atomWithStorage: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/constants.ts:6 atomWithDefault: StringLiteral mutant in RESET: `"Stryker was here!"` is not run by any test; also reached from atomWithReset, atomWithStorage, useResetAtom
+  ⚠️ [mutant-survived] src/vanilla/utils/constants.ts:6 atomWithDefault: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this; also reached from atomWithReset, atomWithStorage, useResetAtom
+  ⚠️ [mutant-survived] src/vanilla/utils/constants.ts:6 atomWithDefault: `process.env.NODE_ENV !== 'production' ?…`: 'RESET' → 'RESET_x' survived; no linked test fails when the code changes like this; also reached from atomWithReset, atomWithStorage, useResetAtom
+  ⚠️ [mutant-survived] src/vanilla/utils/selectAtom.ts:41 selectAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/selectAtom.ts:41 selectAtom: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:71 splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:71 splitAtom: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:76 splitAtom: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:83 splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:85 splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:85 splitAtom: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:92 splitAtom: OptionalChaining mutant: `prev.arr` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:94 splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:94 splitAtom: EqualityOperator mutant: `index > currArr.length` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:97 splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:100 splitAtom: StringLiteral mutant: `""` is not run by any test
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:111 splitAtom: OptionalChaining mutant: `prev.arr` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:113 splitAtom: EqualityOperator mutant: `index > arr.length` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:113 splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:132 splitAtom: MethodExpression mutant: `prevMapping.keyList.some((x, i) => x === keyList[i])` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:132 splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [env-input-direct] src/vanilla/utils/splitAtom.ts:151 splitAtom reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/splitAtom.ts:151 splitAtom commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:151 splitAtom: ConditionalExpression mutant (the match "production"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:151 splitAtom: ConditionalExpression mutant (the match "production"): `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:151 splitAtom: EqualityOperator mutant (the match "production"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:151 splitAtom: BlockStatement mutant (the match "production"): `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:151 splitAtom: StringLiteral mutant (the match "production"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:151 splitAtom: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:152 splitAtom: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:164 splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:167 splitAtom: `arr.slice(0, index)`: 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:177 splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:192 splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:192 splitAtom: LogicalOperator mutant: `index1 >= 0 || index2 >= 0` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:192 splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:192 splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:192 splitAtom: EqualityOperator mutant: `index2 > 0` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:192 splitAtom: `index2 >= 0`: 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:194 splitAtom: EqualityOperator mutant: `index1 <= index2` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/splitAtom.ts:206 splitAtom: `index1 + 1`: 1 → 2 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:13 unwrap: OptionalChaining mutant in a helper it calls: `(p as PromiseLike<unknown>).then` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:56 unwrap: `atom(0)`: 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:60 unwrap: ArithmeticOperator mutant: `c - 1` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:60 unwrap: `c + 1`: 1 → 2 survived; no linked test fails when the code changes like this
+  ⚠️ [env-input-direct] src/vanilla/utils/unwrap.ts:64 unwrap reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [decision-unspecified] src/vanilla/utils/unwrap.ts:64 unwrap commits to match "production" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:64 unwrap: ConditionalExpression mutant (the match "production"): `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:64 unwrap: ConditionalExpression mutant (the match "production"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:64 unwrap: EqualityOperator mutant (the match "production"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:64 unwrap: BlockStatement mutant (the match "production"): `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:64 unwrap: StringLiteral mutant (the match "production"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:64 unwrap: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:65 unwrap: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:66 unwrap: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:98 unwrap: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:98 unwrap: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:98 unwrap: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:98 unwrap: EqualityOperator mutant: `prev.p !== promise` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:98 unwrap: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:102 unwrap: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:102 unwrap: LogicalOperator mutant: `prev || 'v' in prev` survived; no linked test fails when the code changes like this
+  ⚠️ [env-input-direct] src/vanilla/utils/unwrap.ts:121 unwrap reads an environment input directly (process.env.NODE_ENV); route it through a port
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:121 unwrap: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:121 unwrap: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:121 unwrap: EqualityOperator mutant: `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:121 unwrap: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:121 unwrap: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:121 unwrap: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/utils/unwrap.ts:122 unwrap: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./utils" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./vanilla" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./vanilla/utils" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./vanilla/internals" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./react" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./react/utils" points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/.specgate-mutation/report.json
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/.specgate-mutation/summary.md
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/.specgate-mutation/report.sarif

@@ -1,0 +1,31 @@
+specgate check (advisory): 4 units, 14 guarantees, 21 linked tests
+  fail 5 · warn 19 · info 1
+  ❌ [guarantee-no-test] src/defu.ts:60 defu.ok.no-mutation has no test naming it
+  ❌ [guarantee-no-test] src/defu.ts:69 defuFn.ok.function-called-with-default has no test naming it
+  ❌ [guarantee-no-test] src/defu.ts:71 defuFn.ok.fn-undefined-default has no test naming it
+  ❌ [guarantee-no-test] src/defu.ts:82 defuArrayFn.ok.array-only has no test naming it
+  ❌ [guarantee-no-test] src/defu.ts:84 defuArrayFn.ok.non-array-kept has no test naming it
+  ⚠️ [mutant-survived] src/defu.ts:5 createDefu: StringLiteral mutant in a helper it calls: `""` is not run by any test
+  ⚠️ [mutant-survived] src/defu.ts:5 createDefu: the default `namespace` "." → "._x" is not run by any test
+  ⚠️ [mutant-survived] src/defu.ts:6 createDefu: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:6 createDefu: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [decision-unspecified] src/defu.ts:13 createDefu commits to match "__proto__" in `key === "__proto__"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/defu.ts:13 createDefu commits to match "constructor" in `key === "constructor"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/defu.ts:13 createDefu: ConditionalExpression mutant in a helper it calls (the match "__proto__"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:13 createDefu: ConditionalExpression mutant in a helper it calls (the match "__proto__"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:13 createDefu: LogicalOperator mutant in a helper it calls (the match "__proto__"): `key === "__proto__" && key === "constructor"` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:13 createDefu: ConditionalExpression mutant in a helper it calls (the match "__proto__"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:13 createDefu: StringLiteral mutant in a helper it calls (the match "__proto__"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:13 createDefu: StringLiteral mutant in a helper it calls (the match "__proto__"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:13 createDefu: BlockStatement mutant in a helper it calls (the match "__proto__"): `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:13 createDefu: `key === "__proto__"`: "__proto__" → "__proto___x" survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:13 createDefu: `key === "constructor"`: "constructor" → "constructor_x" survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:19 createDefu: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:29 createDefu: LogicalOperator mutant in a helper it calls: `isPlainObject(value) || isPlainObject(object[key])` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:74 defuFn: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/defu.ts:87 defuArrayFn: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/.specgate-mutation/report.json
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/.specgate-mutation/summary.md
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/.specgate-mutation/report.sarif

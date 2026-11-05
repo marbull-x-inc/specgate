@@ -1,0 +1,10 @@
+npm warn Unknown project config "min-release-age". This will stop working in the next major version of npm.
+
+ RUN  v4.1.12 /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/packages/react-hotkeys-hook
+
+
+ Test Files  5 passed (5)
+      Tests  164 passed | 4 skipped (168)
+   Start at  07:02:02
+   Duration  19.67s (transform 813ms, setup 956ms, import 2.13s, tests 17.33s, environment 9.81s)
+

@@ -1,0 +1,6 @@
+baseline run 1188 ms; timeout 30000 ms
+value-mutants: 0 mutant(s): ; 1456 ms (baseline run 1188 ms)
+wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/neverthrow/reports/value/value.json
+real 1.56
+user 3.17
+sys 1.06
