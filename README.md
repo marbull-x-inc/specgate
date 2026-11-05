@@ -180,9 +180,14 @@ element of a module-level collection the unit checks membership in (`DENIED.incl
 `PREFIXES.some((p) => path.startsWith(p))`), so a deny list whose test lists 8 of its 26 paths
 gets 18 findings. A test that iterates the list itself (`it.each(DENIED)`) passes whatever the
 list holds; `test-tautology` reports it. When `decision-unspecified` fires for a value a linked
-test does write, the finding is one step lower and says so. Values a test reaches only through a
-lookup (a route table, a fixture in another file) are not seen, so treat these findings as
-hints too. Design: `docs/design/0002-decisions-pinned-by-tests.md`.
+test does write, the finding is one step lower and says so. A value also counts as written in two
+other forms: a `match` on a value read with a constant key (`params.get("popup") === "1"`) by a
+`key=value` pair in a literal (`"?popup=1"`), and an identifier-like `match` value by an object
+key the test writes (`sign({ iss: "…" })` pins `claim === "iss"`). A string passed as an option
+to a library call (`toJSONSchema(S, { io: "input" })`) configures the library and is not an
+`output` decision. When a finding fires, it names the closest linked-test literal that contains
+the value. Values a test builds at run time or reaches only through a lookup (a route table, a
+fixture in another file) are not seen, so treat these findings as hints too. Design: `docs/design/0002-decisions-pinned-by-tests.md`.
 
 It matches by value, so it is a hint, not a proof: a value named for one purpose (`100` as an
 example result) also counts for another (`100` as the input length limit), and a value named in
@@ -279,6 +284,8 @@ The integration tests regenerate it on every run, so it never drifts from the co
 - Identifier resolution is lexical. A word that happens to be PascalCase and names a program
   type resolves even when it was meant as prose; `resolve.ignore` and `allowProgramTypes: false`
   tighten this.
+- `decision-untested` reads values a test writes as literals, `key=value` pairs and object keys.
+  A value the test builds at run time, or reaches through a lookup table, does not count.
 - Windows paths are normalised to POSIX in the IR but the tool has only been exercised on
   macOS and Linux.
 - Performance has been measured on single files (a 967-line use case in a 1,200-file monorepo

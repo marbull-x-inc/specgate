@@ -107,6 +107,7 @@ export const zUnit = z.object({
         .enum(["exact", "prefix", "suffix", "contains"])
         .optional()
         .describe("member decisions: how the unit compares its input with the element"),
+      key: z.string().optional().describe("match decisions: the constant key the compared value is read with"),
     }),
   ),
   helperRanges: z
@@ -167,6 +168,11 @@ export const zTestCase = z.object({
     .array(z.string())
     .describe(
       "Literal values the test body, its each tables and same-file fixtures use (capped at tests.literalLimit)",
+    ),
+  keys: z
+    .array(z.string())
+    .describe(
+      "Identifier and string keys of the object literals the test body, its each tables and same-file fixtures write (capped at tests.literalLimit)",
     ),
   iterates: z
     .array(z.object({ name: z.string(), from: z.string() }))

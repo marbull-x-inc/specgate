@@ -96,6 +96,7 @@ const report: Report = {
       status: "todo",
       bodyHash: "b",
       literals: [],
+      keys: [],
       iterates: [],
       requirementIds: [],
     },

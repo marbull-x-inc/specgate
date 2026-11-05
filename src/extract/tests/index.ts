@@ -204,6 +204,7 @@ export function extractTests(
                 status,
                 bodyHash,
                 literals: used.literals,
+                keys: used.keys,
                 iterates: used.iterates,
                 requirementIds: reqIds,
               });
@@ -272,7 +273,7 @@ function moduleFile(specifier: string, file: string, root: string): string {
 const ITERATING_METHODS = new Set(["forEach", "map", "flatMap", "every", "some", "filter"]);
 
 /**
- * The literal values a test uses and the imported constants it iterates.
+ * The literal values and object keys a test uses, and the imported constants it iterates.
  *
  * @remarks
  * A value counts as used when it is written in the test body or its `each` tables, or in a
@@ -287,8 +288,9 @@ function usedValues(
   roots: readonly ts.Node[],
   tables: readonly ts.Node[],
   limit: number,
-): { literals: string[]; iterates: Array<{ name: string; from: string }> } {
+): { literals: string[]; keys: string[]; iterates: Array<{ name: string; from: string }> } {
   const literals = new Set<string>();
+  const keys = new Set<string>();
   const iterates = new Map<string, { name: string; from: string }>();
   const followed = new Set<string>();
   const add = (value: string): void => {
@@ -310,6 +312,15 @@ function usedValues(
     if (imported) iterates.set(`${imported.from}#${imported.name}`, imported);
   };
   const walk = (n: ts.Node, hop: boolean): void => {
+    // Object keys: a test pins `claim === "iss"` by writing `{ iss: … }`.
+    if (
+      (ts.isPropertyAssignment(n) || ts.isShorthandPropertyAssignment(n) || ts.isMethodDeclaration(n)) &&
+      ts.isObjectLiteralExpression(n.parent) &&
+      (ts.isIdentifier(n.name) || ts.isStringLiteral(n.name) || ts.isNoSubstitutionTemplateLiteral(n.name)) &&
+      n.name.text.length > 0 &&
+      keys.size < limit
+    )
+      keys.add(n.name.text);
     if ((ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) && n.text.length > 0) add(n.text);
     else if (ts.isTemplateExpression(n)) {
       for (const part of [n.head.text, ...n.templateSpans.map((t) => t.literal.text)])
@@ -359,5 +370,5 @@ function usedValues(
   };
   for (const root of roots) walk(root, true);
   for (const table of tables) if (ts.isExpression(table)) iterated(table);
-  return { literals: [...literals], iterates: [...iterates.values()] };
+  return { literals: [...literals], keys: [...keys], iterates: [...iterates.values()] };
 }

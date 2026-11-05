@@ -284,6 +284,10 @@
                     "suffix",
                     "contains"
                   ]
+                },
+                "key": {
+                  "description": "match decisions: the constant key the compared value is read with",
+                  "type": "string"
                 }
               },
               "required": [
@@ -746,6 +750,13 @@
             },
             "description": "Literal values the test body, its each tables and same-file fixtures use (capped at tests.literalLimit)"
           },
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Identifier and string keys of the object literals the test body, its each tables and same-file fixtures write (capped at tests.literalLimit)"
+          },
           "iterates": {
             "type": "array",
             "items": {
@@ -782,6 +793,7 @@
           "status",
           "bodyHash",
           "literals",
+          "keys",
           "iterates",
           "requirementIds"
         ],

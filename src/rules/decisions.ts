@@ -87,6 +87,8 @@ export function evaluateDecisionRules(
 ): void {
   const linkedTests = linkedTestsIndex(input.tests, input.callersOf);
   const literalsOf = (id: string): string[] => linkedTests(id).flatMap((t) => t.literals);
+  // Reports read from disk before `keys` existed have none.
+  const keysOf = (id: string): string[] => linkedTests(id).flatMap((t) => t.keys ?? []);
   const ignored = (d: Decision): boolean =>
     d.values.some((v) => input.ignore.has(v)) || d.names.some((n) => input.ignore.has(n));
 
@@ -112,11 +114,12 @@ export function evaluateDecisionRules(
     const corpus = input.corpusOf(unit);
     const hasLinkedTests = linkedTests(unit.id).length > 0;
     const literals = literalsOf(unit.id);
+    const keys = keysOf(unit.id);
     // Unnamed members are reported per collection, not per element.
     const unnamedMembers = new Map<string, { decisions: Decision[]; allUsed: boolean }>();
     for (const d of unit.decisions) {
       if (ignored(d)) continue;
-      const used = d.kind === "member" ? memberUsed.get(memberKey(d)) === true : valueUsed(d, literals);
+      const used = d.kind === "member" ? memberUsed.get(memberKey(d)) === true : valueUsed(d, literals, keys);
       if (!decisionMentioned(d, corpus, input.ignore)) {
         if (d.kind === "member") {
           const key = d.names[0] ?? d.collection?.name ?? "";
@@ -146,7 +149,7 @@ export function evaluateDecisionRules(
         continue;
       }
       emit("decision-untested", {
-        message: untestedMessage(unit, d),
+        message: untestedMessage(unit, d, literals),
         file: unit.file,
         line: d.line,
         unit: unit.id,
@@ -168,7 +171,7 @@ export function evaluateDecisionRules(
   }
   for (const { unit, decision } of untestedMembers.values())
     emit("decision-untested", {
-      message: untestedMessage(unit, decision),
+      message: untestedMessage(unit, decision, literalsOf(unit.id)),
       file: unit.file,
       line: decision.line,
       unit: unit.id,
@@ -216,9 +219,37 @@ export function evaluateDecisionRules(
     });
 }
 
-function untestedMessage(unit: Unit, d: Decision): string {
+function untestedMessage(unit: Unit, d: Decision, literals: readonly string[]): string {
   const named = d.names.length > 0 ? ` (${d.names.join(", ")})` : "";
-  return `${unit.id} commits to ${d.kind} ${d.values.map((v) => JSON.stringify(v)).join(", ")}${named} and the contract names it, but no linked test uses it; a test cannot fail when it changes`;
+  const near = closestLiteral(d, literals);
+  const closest = near !== undefined ? ` (closest: ${JSON.stringify(near)})` : "";
+  return `${unit.id} commits to ${d.kind} ${d.values.map((v) => JSON.stringify(v)).join(", ")}${named} and the contract names it, but no linked test uses it${closest}; a test cannot fail when it changes`;
+}
+
+const CLOSEST_LENGTH = 60;
+
+/**
+ * The shortest linked-test literal that contains one of the decision's values, for triage: it is
+ * often the place a test does pin the value in a form the rule does not read.
+ */
+function closestLiteral(d: Decision, literals: readonly string[]): string | undefined {
+  let best: string | undefined;
+  for (const l of literals)
+    if (d.values.some((v) => l !== v && l.includes(v)) && (best === undefined || l.length < best.length)) best = l;
+  if (best === undefined) return undefined;
+  return best.length > CLOSEST_LENGTH ? `${best.slice(0, CLOSEST_LENGTH - 1)}…` : best;
+}
+
+const IDENTIFIER = /^[A-Za-z_$][\w$]*$/;
+
+/**
+ * `key=value` as one pair of a query or cookie string: bounded by the start or `?` / `&` / `;`
+ * before, and by the end or `&` / `;` / `#` after. A bare substring would let `"1"` match
+ * almost any literal.
+ */
+function keyValuePair(key: string, value: string): RegExp {
+  const esc = (t: string): string => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(?:^|[?&;])${esc(key)}=${esc(value)}(?:$|[&;#])`);
 }
 
 function isNumberText(value: string): boolean {
@@ -229,10 +260,16 @@ function isNumberText(value: string): boolean {
  * Whether one of the test literals uses a decision's value: numbers by value (a boundary also
  * by value ± 1, the sides a test probes), an `output` inside a larger expected string, a
  * `member` by the collection's probe (a prefix list is pinned by a longer path that starts
- * with the element), anything else by equality.
+ * with the element), anything else by equality. A `match` on a value read with a key is also
+ * used by a `key=value` pair in a literal (`"?popup=1"`), and an identifier-like `match` value
+ * by an object key the test writes (`{ iss: … }`, see `TestCase.keys`).
  */
-export function valueUsed(d: Decision, literals: readonly string[]): boolean {
+export function valueUsed(d: Decision, literals: readonly string[], keys: readonly string[] = []): boolean {
   return d.values.some((v) => {
+    if (d.kind === "match") {
+      if (d.key !== undefined && literals.some((l) => keyValuePair(d.key ?? "", v).test(l))) return true;
+      if (IDENTIFIER.test(v) && keys.includes(v)) return true;
+    }
     if (isNumberText(v)) {
       const n = Number(v);
       return literals.some((l) => {

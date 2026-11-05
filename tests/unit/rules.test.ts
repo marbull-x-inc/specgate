@@ -55,6 +55,7 @@ function testCase(key: string, bodyHash: string, status: TestCase["status"] = "t
     status,
     bodyHash,
     literals: [],
+    keys: [],
     iterates: [],
     requirementIds: [],
   };

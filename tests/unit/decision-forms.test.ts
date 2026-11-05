@@ -1,0 +1,168 @@
+import { describe, expect, test } from "bun:test";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { analyze } from "../../src/analyze.ts";
+import { defineConfig } from "../../src/config/schema.ts";
+import type { Decision } from "../../src/ir/schema.ts";
+import { valueUsed } from "../../src/rules/decisions.ts";
+import { workDir } from "../helpers/paths.ts";
+
+/**
+ * #39: a test pins a value without writing it as a whole literal — as a `key=value` pair, as an
+ * object key — and a string that only configures a library call is not output.
+ */
+function project(files: Record<string, string>): string {
+  const dir = workDir("forms");
+  writeFileSync(
+    join(dir, "tsconfig.json"),
+    JSON.stringify({
+      compilerOptions: { strict: true, module: "ESNext", moduleResolution: "Bundler", target: "ES2022", types: [] },
+      include: ["src/**/*.ts", "tests/**/*.ts"],
+    }),
+  );
+  for (const [path, content] of Object.entries(files)) {
+    mkdirSync(dirname(join(dir, path)), { recursive: true });
+    writeFileSync(join(dir, path), content);
+  }
+  return dir;
+}
+
+async function untested(files: Record<string, string>) {
+  const dir = project(files);
+  const config = defineConfig({
+    root: dir,
+    surface: { include: ["src/**/*.ts"], exclude: [], mode: "exported" },
+    tests: { include: ["tests/**/*.test.ts"] },
+  });
+  const { report } = await analyze({ ...config, root: dir }, { provenance: false, baseline: null });
+  return { report, untested: report.findings.filter((f) => f.rule === "decision-untested") };
+}
+
+const POPUP = `const FLAG = "popup";
+
+/**
+ * Whether the page was opened in a popup.
+ *
+ * @guarantee ok.flag returns true only when the \`popup\` query parameter is \`1\`
+ */
+export const isPopup = (search: string): boolean => new URLSearchParams(search).get(FLAG) === "1";
+`;
+
+const CLAIMS = `/**
+ * @guarantee err.issuer returns \`bad_issuer\` when \`iss\` is not the expected issuer
+ * @guarantee err.audience returns \`bad_audience\` when \`aud\` is not the expected audience
+ */
+export const reasonOf = (e: { claim: string }): "bad_issuer" | "bad_audience" | "other" => {
+  if (e.claim === "iss") return "bad_issuer";
+  if (e.claim === "aud") return "bad_audience";
+  return "other";
+};
+
+/** @guarantee ok.reason returns the reason for the first claim that is wrong */
+export function verify(claims: Record<string, string>): string {
+  const claim = Object.keys(claims)[0] ?? "";
+  return reasonOf({ claim });
+}
+`;
+
+describe("decision-untested reads the forms a test pins a value in (#39)", () => {
+  test("a key=value pair pins a match on a value read with that key", async () => {
+    const { report, untested: found } = await untested({
+      "src/popup.ts": POPUP,
+      "tests/popup.test.ts": `import { expect, it } from "bun:test";
+import { isPopup } from "../src/popup";
+it("isPopup.ok.flag", () => {
+  expect(isPopup("?popup=1")).toBe(true);
+  expect(isPopup("?popup=0")).toBe(false);
+});
+`,
+    });
+    expect(report.units.find((u) => u.id === "isPopup")?.decisions.find((d) => d.kind === "match")?.key).toBe("popup");
+    expect(found).toEqual([]);
+  });
+
+  test("without the key, the same digit elsewhere does not count, and the closest literal is named", async () => {
+    const { untested: found } = await untested({
+      "src/popup.ts": POPUP,
+      "tests/popup.test.ts": `import { expect, it } from "bun:test";
+import { isPopup } from "../src/popup";
+it("isPopup.ok.flag", () => {
+  expect(isPopup("?other=1")).toBe(false);
+});
+`,
+    });
+    expect(found.map((f) => f.message)).toEqual([
+      'isPopup commits to match "1" and the contract names it, but no linked test uses it (closest: "?other=1"); a test cannot fail when it changes',
+    ]);
+  });
+
+  test("an object key pins an identifier-like match, reached through a caller's test", async () => {
+    const { untested: found } = await untested({
+      "src/claims.ts": CLAIMS,
+      "tests/claims.test.ts": `import { expect, it } from "bun:test";
+import { verify } from "../src/claims";
+const sign = (claims: { iss?: string; aud?: string } = {}) => ({ iss: "me", aud: "app", ...claims });
+it("verify.ok.reason", () => {
+  expect(verify(sign({ iss: "https://evil.example" }))).toBe("bad_issuer");
+  expect(verify({ aud: "other" })).toBe("bad_audience");
+});
+`,
+    });
+    expect(found).toEqual([]);
+  });
+
+  test("an object key pins only an identifier-like match value, and a key=value pair only with its key", () => {
+    const match = (value: string, key?: string): Decision => ({
+      kind: "match",
+      expression: "",
+      line: 1,
+      values: [value],
+      names: [],
+      ...(key ? { key } : {}),
+    });
+    expect(valueUsed(match("iss"), [], ["iss"])).toBe(true);
+    expect(valueUsed(match("/home"), [], ["/home"])).toBe(false);
+    expect(valueUsed({ ...match("iss"), kind: "output" }, [], ["iss"])).toBe(false);
+    expect(valueUsed(match("1", "popup"), ["/p?a=2&popup=1#top"])).toBe(true);
+    expect(valueUsed(match("1", "popup"), ["?popup=10"])).toBe(false);
+    expect(valueUsed(match("1", "popup"), ["?xpopup=1"])).toBe(false);
+    expect(valueUsed(match("1"), ["?popup=1"])).toBe(false);
+  });
+
+  test("a string passed as an option to a library call is not output; one returned or passed to project code is", async () => {
+    const { report, untested: found } = await untested({
+      "node_modules/schemalib/package.json": JSON.stringify({ name: "schemalib", types: "index.d.ts" }),
+      "node_modules/schemalib/index.d.ts":
+        "export declare function toJSONSchema(s: unknown, o: { io: string }): object;\n",
+      "src/schemas.ts": `import { toJSONSchema } from "schemalib";
+import { describeSchema } from "./local";
+
+/** @guarantee ok.lenient schemas for inputs are written with \`io\` = \`input\`, so they allow unknown keys */
+export const toSchemas = () => ({ request: toJSONSchema({}, { io: "input" }) });
+
+/** @guarantee ok.named the schema is described with \`mode\` = \`strict\` */
+export const described = () => describeSchema({ mode: "strict" });
+`,
+      "src/local.ts": "export const describeSchema = (o: { mode: string }): string => o.mode;\n",
+      "tests/schemas.test.ts": `import { expect, it } from "bun:test";
+import { described, toSchemas } from "../src/schemas";
+it("toSchemas.ok.lenient", () => {
+  expect(toSchemas().request).not.toHaveProperty("additionalProperties", false);
+});
+it("described.ok.named", () => {
+  expect(typeof described()).toBe("string");
+});
+`,
+    });
+    const outputs = (id: string) =>
+      report.units
+        .find((u) => u.id === id)
+        ?.decisions.filter((d) => d.kind === "output")
+        .flatMap((d) => d.values);
+    expect(outputs("toSchemas")).toEqual([]);
+    expect(outputs("described")).toEqual(["strict"]);
+    expect(found.map((f) => [f.unit, f.message.split(" and ")[0]])).toEqual([
+      ["described", 'described commits to output "strict"'],
+    ]);
+  });
+});

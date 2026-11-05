@@ -122,6 +122,11 @@ export interface Decision {
   collection?: { name: string; file: string; line: number; endLine: number };
   /** `member` decisions: how the unit compares its input with the element */
   probe?: MemberProbe;
+  /**
+   * `match` decisions: the constant key the compared value is read with (`params.get("popup")`,
+   * `obj["popup"]`, `obj.popup`), so a test writing `"?popup=1"` uses the value `1`
+   */
+  key?: string;
 }
 
 export interface Unit {
@@ -231,6 +236,12 @@ export interface TestCase {
    * `tests.literalLimit`.
    */
   literals: string[];
+  /**
+   * Identifier and string keys of the object literals the test body and its `each` tables write,
+   * plus those of same-file module-level constants they reference by name (one hop), e.g. `iss`
+   * in `sign({ iss: "https://evil.example" })`. Capped at `tests.literalLimit`.
+   */
+  keys: string[];
   /**
    * Imported constants the test takes its cases from (`each` table argument, `for…of`, the
    * receiver of `forEach` / `map` / `every` / `some`, or `new Set(X)` / `[...X]` /
