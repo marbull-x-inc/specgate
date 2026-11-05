@@ -212,3 +212,33 @@ Four ufo tests take their title from a loop variable (`test(t.input.toString(), 
 is no literal to prefix. Their title expression was rewritten as a template literal that starts
 with the key (`` test(`parseURL.ok.full ${t.input.toString()}`, …) ``). Only the title changes;
 the body does not. The four are marked `computedTitle: true` in `data/ufo/links.json`.
+
+### 2. Link keys without the kind segment (2026-11-06, during the runs)
+
+The links produced for mantine and ahooks wrote keys as `useCounter.initial` instead of
+`useCounter.ok.initial`. The first static `specgate check` on mantine reported 0 linked tests,
+which exposed it. The keys were corrected mechanically (the guarantee chosen for each test is
+unchanged), the titles re-applied, the patch regenerated, and every specgate run and the ahooks
+Stryker run were repeated. Stryker's results do not depend on titles.
+
+### 3. Stryker 8.7.1 for scule (2026-11-06, during the runs)
+
+scule pins vitest 1.5.3. `@stryker-mutator/vitest-runner` 9 and 10 require vitest 2 or later and
+fail to start (`this.ctx.provide is not a function`). scule uses Stryker 8.7.1, the last version
+whose runner accepts vitest 1. All other projects use 10.1.1.
+
+### 4. How the oracle runs the tests (2026-11-06, before judging any finding)
+
+"The project's tests" is the test runner command Stryker drives (`vitest run` or `jest`, scoped as
+in `projects.md`), not the project's full `test` script (lint, type check, coverage thresholds).
+As Stryker does, the oracle inserts `// @ts-nocheck` into the changed file, so a type error is
+not a failing test. Where the type checker would catch a change, the report says so. Sandboxes
+left by failed Stryker starts (`.stryker-tmp/`) are excluded from the jest runs.
+
+### 5. Runner harness settings (2026-11-06, during the runs)
+
+Stryker's `plugins` lists the runner explicitly (pnpm's layout hides it from Stryker's plugin
+discovery); jest runs with `watchman: false`; mantine's Stryker config ignores two symlinks that
+point outside the repository (`CONTEXT.md`, `docs`). specgate 0.5.0 was published about 30
+minutes before it was installed; ms's `minimumReleaseAge` setting was overridden for that install.
+Some Stryker runs overlapped with a few one-second specgate runs on the same machine.
