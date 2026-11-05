@@ -3,49 +3,49 @@
     "file": "packages/hooks/src/useCounter/__tests__/index.spec.ts",
     "line": 9,
     "title": "should init counter",
-    "key": "useCounter.initial",
+    "key": "useCounter.ok.initial",
     "reason": "value starts at initialValue 100"
   },
   {
     "file": "packages/hooks/src/useCounter/__tests__/index.spec.ts",
     "line": 15,
     "title": "should max, min, actions work",
-    "key": "useCounter.bounds",
+    "key": "useCounter.ok.bounds",
     "reason": "initial/inc/dec/set clamped to min 1 / max 10, plus reset and functional set"
   },
   {
     "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
     "line": 12,
     "title": "test on init",
-    "key": "useToggle.default",
+    "key": "useToggle.ok.default",
     "reason": "state starts false without defaultValue"
   },
   {
     "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
     "line": 17,
     "title": "test on methods",
-    "key": "useToggle.left-right",
+    "key": "useToggle.ok.left-right",
     "reason": "setLeft gives defaultValue, setRight gives reverse of defaultValue (also toggle)"
   },
   {
     "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
     "line": 32,
     "title": "test on optional",
-    "key": "useToggle.toggle",
+    "key": "useToggle.ok.toggle",
     "reason": "toggle switches between defaultValue and reverseValue"
   },
   {
     "file": "packages/hooks/src/useBoolean/__tests__/index.spec.ts",
     "line": 8,
     "title": "test on methods",
-    "key": "useBoolean.actions",
+    "key": "useBoolean.ok.actions",
     "reason": "setTrue/setFalse/toggle/set change state"
   },
   {
     "file": "packages/hooks/src/useBoolean/__tests__/index.spec.ts",
     "line": 47,
     "title": "test on default value",
-    "key": "useBoolean.default",
+    "key": "useBoolean.ok.default",
     "reason": "state starts at defaultValue, false when not given"
   }
 ]
