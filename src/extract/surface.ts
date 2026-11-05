@@ -3,7 +3,7 @@ import type { Config } from "../config/schema.ts";
 import type { Entity, Guarantee, PortDecl, Unit } from "../ir/schema.ts";
 import { textHash } from "../util/hash.ts";
 import { relativeTo } from "../util/paths.ts";
-import { collectDecisions } from "./decisions.ts";
+import { collectDecisions, type DecisionOptions, type TruncatedCollection } from "./decisions.ts";
 import { entryUnitId, type PackageEntry } from "./entries.ts";
 import { docCommentOf, lineOf, type ProgramHost, packageDocCommentOf } from "./program.ts";
 import { type ParsedDoc, parseDocComment, type TSDocParser } from "./tsdoc-parser.ts";
@@ -38,6 +38,8 @@ export interface SurfaceExtraction {
   docMessages: Array<{ file: string; line: number; text: string }>;
   /** Declarations in surface files whose doc has `@guarantee` but that did not become a unit. */
   strayGuarantees: StrayGuarantee[];
+  /** Collections whose `member` decisions were cut at `decisions.collectionLimit`. */
+  truncatedCollections: TruncatedCollection[];
 }
 
 export interface StrayGuarantee {
@@ -431,6 +433,12 @@ export function extractSurface(
   const ports: PortDecl[] = [];
   const docMessages: SurfaceExtraction["docMessages"] = [];
   const strayGuarantees: StrayGuarantee[] = [];
+  const truncatedCollections = new Map<string, TruncatedCollection>();
+  const decisionOptions: DecisionOptions = {
+    root: config.root,
+    collectionLimit: config.decisions.collectionLimit,
+    onTruncated: (c) => truncatedCollections.set(`${c.file}#${c.name}`, c),
+  };
   const classPattern = config.surface.classPattern ? new RegExp(config.surface.classPattern) : undefined;
   const operationPattern = config.surface.operationPattern ? new RegExp(config.surface.operationPattern) : undefined;
   const operationIncluded = (name: string): boolean => operationPattern === undefined || operationPattern.test(name);
@@ -510,7 +518,7 @@ export function extractSurface(
         ),
         operationCalls: [],
         envInputs: scan.envInputs,
-        decisions: body ? collectDecisions(body, sf, host) : [],
+        decisions: body ? collectDecisions(body, sf, host, new Map(), decisionOptions) : [],
         implHash: textHash(body ? body.getText(sf) : (last.getText(sf) ?? "")),
         guarantees: deriveThrowsIds(
           unitId,
@@ -750,7 +758,7 @@ export function extractSurface(
             ),
             operationCalls: [],
             envInputs: scan.envInputs,
-            decisions: member.body ? collectDecisions(member.body, sf, host, helpers) : [],
+            decisions: member.body ? collectDecisions(member.body, sf, host, helpers, decisionOptions) : [],
             implHash: textHash(member.body ? member.body.getText(sf) : ""),
             guarantees: deriveThrowsIds(
               unitId,
@@ -945,7 +953,16 @@ export function extractSurface(
     }
     u.unit.operationCalls = [...calls].sort();
   }
-  return { units, entities, ports, docMessages, strayGuarantees };
+  return {
+    units,
+    entities,
+    ports,
+    docMessages,
+    strayGuarantees,
+    truncatedCollections: [...truncatedCollections.values()].sort(
+      (a, b) => a.file.localeCompare(b.file) || a.name.localeCompare(b.name),
+    ),
+  };
 }
 
 /**

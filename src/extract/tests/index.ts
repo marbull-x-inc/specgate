@@ -1,9 +1,10 @@
 import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 import ts from "typescript";
 import type { Config, TestAdapter } from "../../config/schema.ts";
 import type { TestCase } from "../../ir/schema.ts";
 import { textHash } from "../../util/hash.ts";
-import { relativeTo } from "../../util/paths.ts";
+import { fileExists, relativeTo } from "../../util/paths.ts";
 
 /**
  * Reads test titles and maps them to guarantee keys.
@@ -32,7 +33,15 @@ function calleeParts(expr: ts.Expression): string[] | undefined {
     return inner ? [...inner, expr.name.text] : undefined;
   }
   if (ts.isCallExpression(expr)) return calleeParts(expr.expression); // test.each([...])(title, fn)
+  if (ts.isTaggedTemplateExpression(expr)) return calleeParts(expr.tag); // test.each`table`(title, fn)
   return undefined;
+}
+
+/** The table of `test.each([...])(…)` / `test.each\`…\`(…)`: what its rows are written in. */
+function eachTables(callee: ts.Expression): ts.Node[] {
+  if (ts.isCallExpression(callee)) return [...callee.arguments];
+  if (ts.isTaggedTemplateExpression(callee)) return [callee.template];
+  return [];
 }
 
 function titleOf(arg: ts.Expression | undefined): string | undefined {
@@ -133,6 +142,8 @@ export function extractTests(
     const relFile = relativeTo(config.root, file);
     const reqIds = requirementIds(text.slice(0, 2000), config);
     const stack: string[] = [];
+    const describeTables: ts.Node[] = [];
+    const scope = testFileScope(sf, file, config.root);
 
     const visit = (node: ts.Node): void => {
       if (ts.isCallExpression(node)) {
@@ -143,7 +154,10 @@ export function extractTests(
           const title = titleOf(node.arguments[0]);
           const callback = node.arguments.find((a) => ts.isArrowFunction(a) || ts.isFunctionExpression(a));
           stack.push(title ?? "");
+          const tables = eachTables(node.expression);
+          describeTables.push(...tables);
           if (callback) ts.forEachChild(callback, visit);
+          describeTables.length -= tables.length;
           stack.pop();
           return;
         }
@@ -163,6 +177,8 @@ export function extractTests(
                       : "test";
             const body = node.arguments.find((a) => ts.isArrowFunction(a) || ts.isFunctionExpression(a));
             const bodyHash = textHash(body ? body.getText(sf) : "");
+            const tables = [...eachTables(node.expression), ...describeTables];
+            const used = usedValues(scope, body ? [body, ...tables] : tables, tables, config.tests.literalLimit);
             const line = sf.getLineAndCharacterOfPosition(node.getStart(sf)).line + 1;
             const match = matchTitle(stripTitlePrefix(title, prefixes), idPattern);
             if (match) {
@@ -187,6 +203,8 @@ export function extractTests(
                 title,
                 status,
                 bodyHash,
+                literals: used.literals,
+                iterates: used.iterates,
                 requirementIds: reqIds,
               });
             } else {
@@ -201,4 +219,145 @@ export function extractTests(
     visit(sf);
   }
   return { tests, unlinked };
+}
+
+interface TestFileScope {
+  /** Module-level `const` initialisers of the test file, by name */
+  consts: ReadonlyMap<string, ts.Expression>;
+  /** Imported local name → exported name and the module it comes from */
+  imports: ReadonlyMap<string, { name: string; from: string }>;
+}
+
+function testFileScope(sf: ts.SourceFile, file: string, root: string): TestFileScope {
+  const consts = new Map<string, ts.Expression>();
+  const imports = new Map<string, { name: string; from: string }>();
+  for (const st of sf.statements) {
+    if (ts.isVariableStatement(st) && (st.declarationList.flags & ts.NodeFlags.Const) !== 0) {
+      for (const d of st.declarationList.declarations)
+        if (ts.isIdentifier(d.name) && d.initializer) consts.set(d.name.text, d.initializer);
+    }
+    if (ts.isImportDeclaration(st) && st.importClause && ts.isStringLiteral(st.moduleSpecifier)) {
+      const from = moduleFile(st.moduleSpecifier.text, file, root);
+      const bindings = st.importClause.namedBindings;
+      if (bindings && ts.isNamedImports(bindings))
+        for (const el of bindings.elements)
+          imports.set(el.name.text, { name: (el.propertyName ?? el.name).text, from });
+    }
+  }
+  return { consts, imports };
+}
+
+/**
+ * The file a relative import resolves to (relative to root), tried with the extensions a
+ * TypeScript project uses; a bare or aliased specifier is returned as written.
+ */
+function moduleFile(specifier: string, file: string, root: string): string {
+  if (!specifier.startsWith(".")) return specifier;
+  const base = resolve(dirname(file), specifier);
+  const stem = base.replace(/\.(?:m|c)?js$/, "");
+  for (const candidate of [
+    base,
+    `${stem}.ts`,
+    `${stem}.tsx`,
+    `${stem}.mts`,
+    `${stem}.cts`,
+    `${base}/index.ts`,
+    `${base}/index.tsx`,
+  ]) {
+    if (/\.(?:m|c)?tsx?$/.test(candidate) && fileExists(candidate)) return relativeTo(root, candidate);
+  }
+  return specifier;
+}
+
+const ITERATING_METHODS = new Set(["forEach", "map", "flatMap", "every", "some", "filter"]);
+
+/**
+ * The literal values a test uses and the imported constants it iterates.
+ *
+ * @remarks
+ * A value counts as used when it is written in the test body or its `each` tables, or in a
+ * module-level `const` of the same test file that they reference by name (one hop, so a
+ * fixture `const paths = [...]` counts). The test title is not a source: it describes the test,
+ * it does not exercise anything. Iterating an imported constant (`it.each(LIST)`,
+ * `for (const x of LIST)`) is recorded separately: such a test covers whatever the constant
+ * holds, so it cannot fail when an element is removed.
+ */
+function usedValues(
+  scope: TestFileScope,
+  roots: readonly ts.Node[],
+  tables: readonly ts.Node[],
+  limit: number,
+): { literals: string[]; iterates: Array<{ name: string; from: string }> } {
+  const literals = new Set<string>();
+  const iterates = new Map<string, { name: string; from: string }>();
+  const followed = new Set<string>();
+  const add = (value: string): void => {
+    if (literals.size < limit) literals.add(value);
+  };
+  const iterated = (expr: ts.Expression): void => {
+    let e = expr;
+    // Object.keys(X) / Object.values(X) / Object.entries(X)
+    if (
+      ts.isCallExpression(e) &&
+      ts.isPropertyAccessExpression(e.expression) &&
+      ts.isIdentifier(e.expression.expression) &&
+      e.expression.expression.text === "Object" &&
+      e.arguments[0]
+    )
+      e = e.arguments[0];
+    if (!ts.isIdentifier(e)) return;
+    const imported = scope.imports.get(e.text);
+    if (imported) iterates.set(`${imported.from}#${imported.name}`, imported);
+  };
+  const walk = (n: ts.Node, hop: boolean): void => {
+    if ((ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) && n.text.length > 0) add(n.text);
+    else if (ts.isTemplateExpression(n)) {
+      for (const part of [n.head.text, ...n.templateSpans.map((t) => t.literal.text)])
+        if (/[\p{L}\p{N}]/u.test(part)) add(part);
+    } else if (ts.isTemplateHead(n) || ts.isTemplateMiddle(n) || ts.isTemplateTail(n)) {
+      // parts are read from the enclosing template expression
+    } else if (ts.isNumericLiteral(n)) {
+      const value = Number(n.text);
+      if (value !== 0 && value !== 1 && value !== -1) add(String(value));
+    } else if (ts.isIdentifier(n) && hop && !followed.has(n.text)) {
+      const init = scope.consts.get(n.text);
+      if (init) {
+        followed.add(n.text);
+        walk(init, false);
+      }
+    }
+    if (ts.isPrefixUnaryExpression(n) && n.operator === ts.SyntaxKind.MinusToken && ts.isNumericLiteral(n.operand)) {
+      const value = -Number(n.operand.text);
+      if (value !== -1) add(String(value));
+    }
+    if (ts.isForOfStatement(n)) iterated(n.expression);
+    // Expected values derived from the constant: new Set(X), new Map(X), Array.from(X), [...X]
+    if (
+      ts.isNewExpression(n) &&
+      ts.isIdentifier(n.expression) &&
+      (n.expression.text === "Set" || n.expression.text === "Map") &&
+      n.arguments?.[0]
+    )
+      iterated(n.arguments[0]);
+    if (
+      ts.isCallExpression(n) &&
+      ts.isPropertyAccessExpression(n.expression) &&
+      ts.isIdentifier(n.expression.expression) &&
+      n.expression.expression.text === "Array" &&
+      n.expression.name.text === "from" &&
+      n.arguments[0]
+    )
+      iterated(n.arguments[0]);
+    if (ts.isSpreadElement(n) && ts.isArrayLiteralExpression(n.parent)) iterated(n.expression);
+    if (
+      ts.isCallExpression(n) &&
+      ts.isPropertyAccessExpression(n.expression) &&
+      ITERATING_METHODS.has(n.expression.name.text)
+    )
+      iterated(n.expression.expression);
+    ts.forEachChild(n, (c) => walk(c, hop));
+  };
+  for (const root of roots) walk(root, true);
+  for (const table of tables) if (ts.isExpression(table)) iterated(table);
+  return { literals: [...literals], iterates: [...iterates.values()] };
 }

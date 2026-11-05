@@ -1,6 +1,6 @@
 import { type Config, RULE_IDS, type RuleId, severityOf } from "../config/schema.ts";
-import { decisionMentioned } from "../extract/decisions.ts";
 import type { Finding, Report, Severity, TestCase, Unit } from "../ir/schema.ts";
+import { evaluateDecisionRules } from "./decisions.ts";
 
 /**
  * Deterministic judgement rules.
@@ -24,9 +24,12 @@ export interface RuleContext {
   surfaceFileCount?: number;
   /** `package.json#exports` subpaths with no source module to read guarantees from. */
   unmappedEntries?: readonly string[];
+  /** Collections whose `member` decisions were cut at `decisions.collectionLimit`. */
+  truncatedCollections?: ReadonlyArray<{ name: string; file: string; size: number }>;
 }
 
-type Draft = Omit<Finding, "severity">;
+/** `downgrade` lowers the configured severity one step (fail → warn, warn → info). */
+type Draft = Omit<Finding, "severity"> & { downgrade?: boolean };
 
 function toIrSeverity(config: Config, rule: RuleId): Severity | undefined {
   const s = severityOf(config, rule);
@@ -171,21 +174,21 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
         unit: unit.id,
       });
     }
-    // Only once the unit states something: a unit without guarantees is already reported.
-    if (real.length > 0) {
-      const corpus = contractCorpus(unit, unitsById, callersOf, placeholder);
-      for (const d of unit.decisions) {
-        if (decisionMentioned(d, corpus, ignoredDecisions)) continue;
-        const named = d.names.length > 0 ? ` (${d.names.join(", ")})` : "";
-        emit("decision-unspecified", {
-          message: `${unit.id} commits to ${d.kind} ${d.values.map((v) => JSON.stringify(v)).join(", ")}${named} in \`${d.expression}\`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right`,
-          file: unit.file,
-          line: d.line,
-          unit: unit.id,
-        });
-      }
-    }
   }
+
+  evaluateDecisionRules(
+    {
+      units: ctx.units,
+      tests: ctx.tests,
+      ignore: ignoredDecisions,
+      callersOf,
+      corpusOf: (unit) => contractCorpus(unit, unitsById, callersOf, placeholder),
+      stated: (unit) => unit.guarantees.some((g) => g.id !== placeholder && g.id !== ""),
+      truncatedCollections: ctx.truncatedCollections ?? [],
+      collectionLimit: ctx.config.decisions.collectionLimit,
+    },
+    emit,
+  );
 
   for (const t of ctx.tests) {
     if (!guaranteeKeys.has(t.key)) {
@@ -220,8 +223,10 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
 
   const findings: Finding[] = [];
   for (const { rule, draft } of drafts) {
-    const severity = toIrSeverity(ctx.config, rule);
-    if (severity) findings.push({ ...draft, severity });
+    const { downgrade, ...finding } = draft;
+    const configured = toIrSeverity(ctx.config, rule);
+    const severity = configured && downgrade ? lowered(configured) : configured;
+    if (severity) findings.push({ ...finding, severity });
   }
   const order: Record<Severity, number> = { fail: 0, warn: 1, info: 2 };
   return findings.sort(
@@ -230,6 +235,10 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
       (a.file ?? "").localeCompare(b.file ?? "") ||
       (a.line ?? 0) - (b.line ?? 0),
   );
+}
+
+function lowered(severity: Severity): Severity {
+  return severity === "fail" ? "warn" : "info";
 }
 
 function stripInterfacePrefix(name: string): string {

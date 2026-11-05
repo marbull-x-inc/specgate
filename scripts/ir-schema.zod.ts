@@ -87,11 +87,19 @@ export const zUnit = z.object({
   envInputs: z.array(z.object({ expression: z.string(), line: z.number().int() })),
   decisions: z.array(
     z.object({
-      kind: z.enum(["boundary", "constant", "output", "match"]),
+      kind: z.enum(["boundary", "constant", "output", "match", "member"]),
       expression: z.string(),
       line: z.number().int(),
       values: z.array(z.string()),
       names: z.array(z.string()),
+      collection: z
+        .object({ name: z.string(), file: z.string() })
+        .optional()
+        .describe("member decisions: the collection constant the element is declared in"),
+      probe: z
+        .enum(["exact", "prefix", "suffix", "contains"])
+        .optional()
+        .describe("member decisions: how the unit compares its input with the element"),
     }),
   ),
   implHash: z.string().describe("sha256 of the implementation body text"),
@@ -143,6 +151,14 @@ export const zTestCase = z.object({
   title: z.string(),
   status: zTestStatus,
   bodyHash: z.string(),
+  literals: z
+    .array(z.string())
+    .describe(
+      "Literal values the test body, its each tables and same-file fixtures use (capped at tests.literalLimit)",
+    ),
+  iterates: z
+    .array(z.object({ name: z.string(), from: z.string() }))
+    .describe("Imported constants the test iterates, with the module they come from"),
   requirementIds: z.array(z.string()).describe("Opaque frozen-requirement ids from the file header, if enabled"),
 });
 export type TestCase = z.infer<typeof zTestCase>;
