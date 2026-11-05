@@ -245,3 +245,22 @@ as react-hook-form already did, and their baselines were re-checked: cron-parser
 express-rate-limit passes 249 tests once `test/library/types-test.ts` is excluded, which reads
 the built `dist/index.d.ts` (the same kind of check as es-toolkit's `check-dist`, deviation 1).
 Both are run from the start; react-hook-form, not yet run, uses the same settings.
+
+### 8. Runner fix: a timed-out run is repeated alone; react-hook-form runs its web project (2026-11-06, during the runs)
+
+- In express-rate-limit, 59 of 61 value mutants were `Timeout` (30 s) with `--concurrency 15`:
+  fifteen jest runs on selected test files ran at once, each with its own pool of workers. Run on
+  its own, the first two finished in about 9 s each and were `Killed`. The runner now repeats,
+  after the parallel phase, every run that timed out, on its own (no other run competing); only a
+  second timeout is `Timeout`. express-rate-limit is run again. `Timeout` already counts as
+  detected, so the 3 `Timeout`s of es-toolkit (whole-suite runs, already one at a time) and the 1
+  of cron-parser cannot change C1 or C2; those two are not repeated, and their runner times are
+  as measured.
+- Stryker's jest runner does not run jest `projects` (react-hook-form's config has a `web` and a
+  `server` project; the jsdom environment was lost and the initial run failed with
+  `document is not defined`), and it resolves `rootDir: '.'` against the config file's
+  directory. Stryker uses `jest.stryker.config.js`, the `web` project as one flat config with
+  `rootDir` at the project root; the test command uses `TEST_ENV=web` as well. Both run the same
+  1820 tests; the 10 server-rendering tests (`*.server.test.tsx`) are left out of both.
+- express-rate-limit's Stryker config no longer ignores `/.stryker-tmp/`, which held Stryker's
+  own sandbox (its first run found no test).

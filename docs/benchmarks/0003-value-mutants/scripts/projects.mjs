@@ -33,9 +33,9 @@ export const PROJECTS = {
   "react-hook-form": {
     runner: "jest",
     cwd: ".",
-    test: "npx jest --config ./scripts/jest/jest.config.js --watchman=false",
+    test: "TEST_ENV=web npx jest --config ./scripts/jest/jest.config.js --watchman=false",
     tests: ["src/**/*.test.ts", "src/**/*.test.tsx"],
-    jestConfig: "scripts/jest/jest.config.js",
+    jestConfig: "jest.stryker.config.js",
   },
   "react-hotkeys-hook": {
     runner: "vitest",
@@ -50,7 +50,8 @@ export const PROJECTS = {
     test: "npx jest --watchman=false --testPathIgnorePatterns /node_modules/ /.stryker-tmp/ types-test",
     tests: ["test/library/**/*-test.ts"],
     jestConfig: "jest.config.json",
-    jestExtra: { testPathIgnorePatterns: ["/node_modules/", "/.stryker-tmp/", "types-test"] },
+    // Not "/.stryker-tmp/": Stryker's own sandbox is inside it.
+    jestExtra: { testPathIgnorePatterns: ["/node_modules/", "types-test"] },
   },
   cac: { runner: "vitest", cwd: ".", test: "npx vitest run", tests: ["tests/**/*.test.ts"] },
 };

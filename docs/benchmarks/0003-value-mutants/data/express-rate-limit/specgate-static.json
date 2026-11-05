@@ -1,0 +1,3921 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "generatedAt": "2026-11-05T22:19:36.052Z",
+  "root": "/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit",
+  "revision": "b0d0c1f7cfaf44b8c73d6f82cbff0ce09bb3dffb",
+  "configHash": "80b9a51a9b3c59b7",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "ipKeyGenerator",
+      "kind": "function",
+      "operation": "ipKeyGenerator",
+      "file": "source/ip-key-generator.ts",
+      "line": 28,
+      "endLine": 64,
+      "referencedBy": [
+        "source/index.ts",
+        "source/rate-limit.ts"
+      ],
+      "summary": "Returns the IP address itself for IPv4, or a CIDR-notation subnet for IPv6. If you write a custom keyGenerator that allows a fallback to IP address for unauthenticated users, return ipKeyGenerator(req.ip) rather than just req.ip. For more information, {@see Options.ipv6Subnet}.",
+      "params": [
+        {
+          "name": "ip",
+          "type": "string",
+          "optional": false,
+          "doc": "The IP address to process, usually request.ip."
+        },
+        {
+          "name": "ipv6Subnet",
+          "type": "number | false",
+          "optional": true,
+          "doc": "The subnet mask for IPv6 addresses."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "constantRanges": [
+        {
+          "name": "ipv4CompatibleSubnet",
+          "file": "source/ip-key-generator.ts",
+          "line": 7,
+          "endLine": 7
+        }
+      ],
+      "implHash": "db23540c6147ba25",
+      "guarantees": [
+        {
+          "id": "ok.ipv4-unchanged",
+          "key": "ipKeyGenerator.ok.ipv4-unchanged",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "An IPv4 address is returned unchanged.",
+          "textHash": "aa778222e3b00ba9",
+          "line": 23,
+          "references": [
+            {
+              "raw": "IPv4",
+              "kind": "unresolved"
+            }
+          ],
+          "tests": [
+            "test/library/ip-key-generator-test.ts:4",
+            "test/library/ip-key-generator-test.ts:64",
+            "test/library/ip-key-generator-test.ts:74"
+          ]
+        },
+        {
+          "id": "ok.default-ipv6-subnet-56",
+          "key": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "When `ipv6Subnet` is not given it defaults to 56, so an IPv6 address is returned as the network address of its /56 subnet in CIDR notation.",
+          "textHash": "8e5ab2616ce1b194",
+          "line": 24,
+          "references": [
+            {
+              "raw": "IPv6",
+              "kind": "unresolved"
+            }
+          ],
+          "tests": [
+            "test/library/ip-key-generator-test.ts:25",
+            "test/library/ip-key-generator-test.ts:41",
+            "test/library/ip-key-generator-test.ts:58",
+            "test/library/ip-key-generator-test.ts:70"
+          ]
+        },
+        {
+          "id": "ok.ipv6-subnet-false",
+          "key": "ipKeyGenerator.ok.ipv6-subnet-false",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "With `ipv6Subnet` set to `false`, an IPv6 address is also returned unchanged.",
+          "textHash": "321cd511fd881207",
+          "line": 25,
+          "references": [
+            {
+              "raw": "IPv6",
+              "kind": "unresolved"
+            }
+          ],
+          "tests": [
+            "test/library/ip-key-generator-test.ts:46"
+          ]
+        },
+        {
+          "id": "ok.ipv4-mapped-ipv6",
+          "key": "ipKeyGenerator.ok.ipv4-mapped-ipv6",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "An IPv4-mapped IPv6 address (the \"::ffff:0:0/96\" range) is returned as the IPv4 address it contains, whichever notation it arrives in.",
+          "textHash": "098405251163e0e2",
+          "line": 26,
+          "references": [
+            {
+              "raw": "IPv6",
+              "kind": "unresolved"
+            },
+            {
+              "raw": "IPv4",
+              "kind": "unresolved"
+            }
+          ],
+          "tests": [
+            "test/library/ip-key-generator-test.ts:9",
+            "test/library/ip-key-generator-test.ts:14",
+            "test/library/ip-key-generator-test.ts:52"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "rateLimit",
+      "kind": "function",
+      "operation": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 355,
+      "endLine": 651,
+      "referencedBy": [
+        "source/index.ts"
+      ],
+      "summary": "Create an instance of IP rate-limiting middleware for Express.",
+      "params": [
+        {
+          "name": "passedOptions",
+          "type": "Partial<Options>",
+          "optional": true,
+          "doc": "Options to configure the rate limiter."
+        }
+      ],
+      "returns": "RateLimitRequestHandler",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [
+        {
+          "expression": "Date.now",
+          "line": 562
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "constant",
+          "expression": "60 * 1000",
+          "line": 207,
+          "values": [
+            "60"
+          ],
+          "names": []
+        },
+        {
+          "kind": "constant",
+          "expression": "60 * 1000",
+          "line": 207,
+          "values": [
+            "1000"
+          ],
+          "names": []
+        },
+        {
+          "kind": "constant",
+          "expression": "1000 * 60 * 60 * 24",
+          "line": 220,
+          "values": [
+            "24"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "seconds < 60",
+          "line": 222,
+          "values": [
+            "60"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "hours < 24",
+          "line": 224,
+          "values": [
+            "24"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "`${limit}-in-${duration}`",
+          "line": 227,
+          "values": [
+            "-in-"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "response.statusCode < 400",
+          "line": 233,
+          "values": [
+            "400"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'express-rate-limit: async error during store initialization.'",
+          "line": 387,
+          "values": [
+            "express-rate-limit: async error during store initialization."
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'close'",
+          "line": 406,
+          "values": [
+            "close"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'finish'",
+          "line": 410,
+          "values": [
+            "finish"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'error'",
+          "line": 414,
+          "values": [
+            "error"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'draft-6'",
+          "line": 518,
+          "values": [
+            "draft-6"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'draft-7'",
+          "line": 524,
+          "values": [
+            "draft-7"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'draft-8'",
+          "line": 531,
+          "values": [
+            "draft-8"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "line": 556,
+          "endLine": 570
+        }
+      ],
+      "constantRanges": [
+        {
+          "name": "ConsoleLogger",
+          "file": "source/console-logger.ts",
+          "line": 3,
+          "endLine": 10
+        }
+      ],
+      "implHash": "d79f48102dc7f183",
+      "guarantees": [
+        {
+          "id": "ok.default-window-ms",
+          "key": "rateLimit.ok.default-window-ms",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`windowMs` defaults to 60000 milliseconds (1 minute).",
+          "textHash": "5ae6938751ec2655",
+          "line": 346,
+          "references": [],
+          "tests": [
+            "test/library/headers-test.ts:49",
+            "test/library/headers-test.ts:67",
+            "test/library/headers-test.ts:83",
+            "test/library/headers-test.ts:103",
+            "test/library/headers-test.ts:145",
+            "test/library/headers-test.ts:166",
+            "test/library/headers-test.ts:178",
+            "test/library/headers-test.ts:191",
+            "test/library/headers-test.ts:204",
+            "test/library/headers-test.ts:245",
+            "test/library/headers-test.ts:284",
+            "test/library/headers-test.ts:321",
+            "test/library/headers-test.ts:342",
+            "test/library/headers-test.ts:364",
+            "test/library/middleware-test.ts:176",
+            "test/library/middleware-test.ts:182",
+            "test/library/middleware-test.ts:220",
+            "test/library/middleware-test.ts:234",
+            "test/library/middleware-test.ts:251",
+            "test/library/middleware-test.ts:269",
+            "test/library/middleware-test.ts:327",
+            "test/library/middleware-test.ts:342",
+            "test/library/middleware-test.ts:354",
+            "test/library/middleware-test.ts:372",
+            "test/library/middleware-test.ts:384",
+            "test/library/middleware-test.ts:396",
+            "test/library/middleware-test.ts:410",
+            "test/library/middleware-test.ts:464",
+            "test/library/middleware-test.ts:483",
+            "test/library/middleware-test.ts:497",
+            "test/library/middleware-test.ts:510",
+            "test/library/middleware-test.ts:522",
+            "test/library/middleware-test.ts:534",
+            "test/library/middleware-test.ts:556",
+            "test/library/middleware-test.ts:571",
+            "test/library/middleware-test.ts:585",
+            "test/library/middleware-test.ts:599",
+            "test/library/middleware-test.ts:609",
+            "test/library/middleware-test.ts:626",
+            "test/library/middleware-test.ts:648",
+            "test/library/middleware-test.ts:670",
+            "test/library/middleware-test.ts:725",
+            "test/library/middleware-test.ts:742",
+            "test/library/middleware-test.ts:760",
+            "test/library/middleware-test.ts:780",
+            "test/library/middleware-test.ts:799",
+            "test/library/middleware-test.ts:818",
+            "test/library/middleware-test.ts:835",
+            "test/library/middleware-test.ts:852",
+            "test/library/middleware-test.ts:869",
+            "test/library/middleware-test.ts:938",
+            "test/library/middleware-test.ts:980",
+            "test/library/middleware-test.ts:997",
+            "test/library/middleware-test.ts:1017",
+            "test/library/middleware-test.ts:1053",
+            "test/library/middleware-test.ts:1130",
+            "test/library/middleware-test.ts:1170",
+            "test/library/middleware-test.ts:1244",
+            "test/library/middleware-test.ts:1254",
+            "test/library/middleware-test.ts:1271",
+            "test/library/middleware-test.ts:1303",
+            "test/library/middleware-test.ts:1315",
+            "test/library/options-test.ts:32",
+            "test/library/options-test.ts:36",
+            "test/library/options-test.ts:47",
+            "test/library/options-test.ts:57",
+            "test/library/options-test.ts:67",
+            "test/library/options-test.ts:77",
+            "test/library/options-test.ts:90",
+            "test/library/options-test.ts:114",
+            "test/library/options-test.ts:122"
+          ]
+        },
+        {
+          "id": "ok.default-limit",
+          "key": "rateLimit.ok.default-limit",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`limit` defaults to 5.",
+          "textHash": "22a67541a2efb418",
+          "line": 347,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.zero-limit-blocks-all",
+          "key": "rateLimit.ok.zero-limit-blocks-all",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "Setting `limit` to 0 blocks all requests instead of disabling the rate limiter.",
+          "textHash": "deadacf661237c5a",
+          "line": 348,
+          "references": [],
+          "tests": [
+            "test/library/middleware-test.ts:321"
+          ]
+        },
+        {
+          "id": "ok.default-message",
+          "key": "rateLimit.ok.default-message",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`message` defaults to \"Too many requests, please try again later.\".",
+          "textHash": "a60ba95ba5aaad26",
+          "line": 349,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.default-status-code",
+          "key": "rateLimit.ok.default-status-code",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`statusCode` defaults to 429.",
+          "textHash": "fad320bfab6d6bda",
+          "line": 350,
+          "references": [],
+          "tests": [
+            "test/library/middleware-test.ts:275",
+            "test/library/middleware-test.ts:287",
+            "test/library/middleware-test.ts:302"
+          ]
+        },
+        {
+          "id": "ok.default-legacy-headers",
+          "key": "rateLimit.ok.default-legacy-headers",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`legacyHeaders` defaults to true, which sends the \"X-RateLimit-Limit\", \"X-RateLimit-Remaining\" and (if the store provides it) \"X-RateLimit-Reset\" headers on all responses.",
+          "textHash": "86bd251af03387fd",
+          "line": 351,
+          "references": [],
+          "tests": [
+            "test/library/headers-test.ts:25",
+            "test/library/headers-test.ts:301"
+          ]
+        },
+        {
+          "id": "ok.default-standard-headers",
+          "key": "rateLimit.ok.default-standard-headers",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`standardHeaders` defaults to false.",
+          "textHash": "015605c592ccb10b",
+          "line": 352,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.default-request-property-name",
+          "key": "rateLimit.ok.default-request-property-name",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`requestPropertyName` defaults to \"rateLimit\", the name of the property on the request that holds the rate limit info.",
+          "textHash": "b4e5b634f0869ea6",
+          "line": 353,
+          "references": [],
+          "tests": [
+            "test/library/middleware-test.ts:1088"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "rateLimit.ok.default-legacy-headers",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-legacy-headers",
+      "file": "test/library/headers-test.ts",
+      "line": 25,
+      "title": "rateLimit.ok.default-legacy-headers should send correct `x-ratelimit-limit`, `x-ratelimit-remaining`, and `x-ratelimit-reset` headers",
+      "status": "test",
+      "bodyHash": "5fc38eba7efb82a4",
+      "literals": [
+        "60",
+        "1000",
+        "5",
+        "/",
+        "x-ratelimit-limit",
+        "x-ratelimit-remaining",
+        "4",
+        "200",
+        "Hi there!",
+        "x-ratelimit-reset"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "legacyHeaders"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 49,
+      "title": "rateLimit.ok.default-window-ms should send correct `ratelimit-*` headers for the standard headers draft 6",
+      "status": "test",
+      "bodyHash": "5df2d355ea5f941b",
+      "literals": [
+        "60",
+        "1000",
+        "5",
+        "/",
+        "ratelimit-policy",
+        "5;w=60",
+        "ratelimit-limit",
+        "ratelimit-remaining",
+        "4",
+        "ratelimit-reset",
+        "200",
+        "Hi there!"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "standardHeaders"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 67,
+      "title": "rateLimit.ok.default-window-ms should send policy and combined ratelimit headers for the standard draft 7",
+      "status": "test",
+      "bodyHash": "313195bffa822bf5",
+      "literals": [
+        "60",
+        "1000",
+        "5",
+        "draft-7",
+        "/",
+        "ratelimit-policy",
+        "5;w=60",
+        "ratelimit",
+        "limit=5, remaining=4, reset=60",
+        "200",
+        "Hi there!"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "standardHeaders"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 83,
+      "title": "rateLimit.ok.default-window-ms should send correct headers for the standard draft 8",
+      "status": "test",
+      "bodyHash": "2f6df626d0f00c1c",
+      "literals": [
+        "2",
+        "60",
+        "1000",
+        "5",
+        "draft-8",
+        "foo",
+        "\"5-in-2hrs\"; q=5; w=7200; pk=:MmMyNmI0NmI2OGZm:",
+        "\"5-in-2hrs\"; r=4; t=7200",
+        "/",
+        "ratelimit-policy",
+        "ratelimit",
+        "200",
+        "Hi there!"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "standardHeaders",
+        "keyGenerator"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 103,
+      "title": "rateLimit.ok.default-window-ms should send multiple headers correctly for the standard draft 8",
+      "status": "test",
+      "bodyHash": "69d0a826b196736c",
+      "literals": [
+        "5",
+        "1000",
+        "60",
+        "24",
+        "2",
+        "draft-8",
+        "foo",
+        "6",
+        "7",
+        "8",
+        "\"1-in-5sec\"; q=1; w=5; pk=:MmMyNmI0NmI2OGZm:",
+        "\"5-in-1min\"; q=5; w=60; pk=:MmMyNmI0NmI2OGZm:",
+        "\"6-in-1hr\"; q=6; w=3600; pk=:MmMyNmI0NmI2OGZm:",
+        "\"7-in-1day\"; q=7; w=86400; pk=:MmMyNmI0NmI2OGZm:",
+        "\"8-in-2days\"; q=8; w=172800; pk=:MmMyNmI0NmI2OGZm:",
+        "\"1-in-5sec\"; r=0; t=5",
+        "\"5-in-1min\"; r=4; t=60",
+        "\"6-in-1hr\"; r=5; t=3600",
+        "\"7-in-1day\"; r=6; t=86400",
+        "\"8-in-2days\"; r=7; t=172800",
+        "/",
+        "ratelimit-policy",
+        ", ",
+        "ratelimit",
+        "200",
+        "Hi there!"
+      ],
+      "keys": [
+        "standardHeaders",
+        "keyGenerator",
+        "windowMs",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "name": "Options",
+          "from": "source/types.ts"
+        }
+      ],
+      "lengths": [
+        5
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 145,
+      "title": "rateLimit.ok.default-window-ms should override the quota name if specified for the standard draft 8",
+      "status": "test",
+      "bodyHash": "727fea48ce3835ca",
+      "literals": [
+        "keep-kalm",
+        "2",
+        "60",
+        "1000",
+        "5",
+        "draft-8",
+        "foo",
+        "/",
+        "ratelimit-policy",
+        "\"keep-kalm\"; q=5; w=7200; pk=:MmMyNmI0NmI2OGZm:",
+        "ratelimit",
+        "\"keep-kalm\"; r=4; t=7200",
+        "200",
+        "Hi there!"
+      ],
+      "keys": [
+        "identifier",
+        "windowMs",
+        "limit",
+        "standardHeaders",
+        "keyGenerator"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 166,
+      "title": "rateLimit.ok.default-window-ms should return the `retry-after` header once IP has reached the max",
+      "status": "test",
+      "bodyHash": "40d2f33113d2f04e",
+      "literals": [
+        "60",
+        "1000",
+        "/",
+        "200",
+        "429",
+        "retry-after"
+      ],
+      "keys": [
+        "windowMs",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 178,
+      "title": "rateLimit.ok.default-window-ms should use the `retryAfter` option as the `retry-after` header value when set to a number",
+      "status": "test",
+      "bodyHash": "d574a49fe02b876a",
+      "literals": [
+        "60",
+        "1000",
+        "600",
+        "/",
+        "200",
+        "429",
+        "retry-after"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "retryAfter"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 191,
+      "title": "rateLimit.ok.default-window-ms should use the `retryAfter` option as the `retry-after` header value when set to a function",
+      "status": "test",
+      "bodyHash": "7e16145513afea37",
+      "literals": [
+        "60",
+        "1000",
+        "600",
+        "/",
+        "200",
+        "429",
+        "retry-after"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "retryAfter"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 204,
+      "title": "rateLimit.ok.default-window-ms should not set the `retry-after` header if all headers have been disabled",
+      "status": "test",
+      "bodyHash": "58a32e0fcb9018b3",
+      "literals": [
+        "60",
+        "1000",
+        "/",
+        "200",
+        "429",
+        "retry-after"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "legacyHeaders",
+        "standardHeaders"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 245,
+      "title": "rateLimit.ok.default-window-ms should not send headers for an incorrect draft number",
+      "status": "test",
+      "bodyHash": "26a174cae13b48f3",
+      "literals": [
+        "2",
+        "60",
+        "1000",
+        "5",
+        "invalid-draft",
+        "/",
+        "200",
+        "Hi there!",
+        "ratelimit",
+        "ratelimit-policy"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "standardHeaders",
+        "validate",
+        "headersDraftVersion"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 284,
+      "title": "rateLimit.ok.default-window-ms should set the `retry-after` header to the value of `windowMs` in seconds instead",
+      "status": "test",
+      "bodyHash": "71e0c0858c055895",
+      "literals": [
+        "60",
+        "1000",
+        "/",
+        "200",
+        "429",
+        "retry-after"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "store",
+        "legacyHeaders",
+        "standardHeaders"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-legacy-headers",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-legacy-headers",
+      "file": "test/library/headers-test.ts",
+      "line": 301,
+      "title": "rateLimit.ok.default-legacy-headers should emit legacy headers that ratelimit-header-parser can read",
+      "status": "test",
+      "bodyHash": "d0ef311bc8a1dc57",
+      "literals": [
+        "60",
+        "1000",
+        "5",
+        "/",
+        "200",
+        "4"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "legacyHeaders",
+        "standardHeaders",
+        "used",
+        "remaining",
+        "reset"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 321,
+      "title": "rateLimit.ok.default-window-ms should emit standard draft-6 headers that ratelimit-header-parser can read",
+      "status": "test",
+      "bodyHash": "9f9598da15a8bb48",
+      "literals": [
+        "60",
+        "1000",
+        "5",
+        "draft-6",
+        "/",
+        "200",
+        "4"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "legacyHeaders",
+        "standardHeaders",
+        "used",
+        "remaining",
+        "reset"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 342,
+      "title": "rateLimit.ok.default-window-ms should emit a standard draft 7 combined header that ratelimit-header-parser can parse",
+      "status": "test",
+      "bodyHash": "bdcbb6c149b23f42",
+      "literals": [
+        "60",
+        "1000",
+        "5",
+        "draft-7",
+        "/",
+        "200",
+        "4"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "legacyHeaders",
+        "standardHeaders",
+        "used",
+        "remaining",
+        "reset"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/headers-test.ts",
+      "line": 364,
+      "title": "rateLimit.ok.default-window-ms should send RateLimit-Reset header with value 0 when window has just expired for draft-6",
+      "status": "test",
+      "bodyHash": "ff065f10ee057e6f",
+      "literals": [
+        "60",
+        "1000",
+        "5",
+        "draft-6",
+        "/",
+        "ratelimit-policy",
+        "5;w=60",
+        "ratelimit-limit",
+        "ratelimit-remaining",
+        "4",
+        "ratelimit-reset",
+        "0",
+        "200",
+        "Hi there!"
+      ],
+      "keys": [
+        "totalHits",
+        "resetTime",
+        "windowMs",
+        "limit",
+        "store",
+        "standardHeaders"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "name": "Store",
+          "from": "source/types.ts"
+        },
+        {
+          "name": "ClientRateLimitInfo",
+          "from": "source/types.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.ipv4-unchanged",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.ipv4-unchanged",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 4,
+      "title": "ipKeyGenerator.ok.ipv4-unchanged should return an IPv4 address unchanged",
+      "status": "test",
+      "bodyHash": "e2a90ca6e084e94d",
+      "literals": [
+        "1.2.3.4",
+        "16"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.ipv4-mapped-ipv6",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.ipv4-mapped-ipv6",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 9,
+      "title": "ipKeyGenerator.ok.ipv4-mapped-ipv6 should return an IPv4 address mapped to IPv6 as an IPv4 address",
+      "status": "test",
+      "bodyHash": "c92a757f2fef85df",
+      "literals": [
+        "::ffff:1.2.3.4",
+        "1.2.3.4",
+        "::1.2.3.4"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.ipv4-mapped-ipv6",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.ipv4-mapped-ipv6",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 14,
+      "title": "ipKeyGenerator.ok.ipv4-mapped-ipv6 should return an IPv4 address mapped to IPv6 as an IPv4 address regardless of notation",
+      "status": "test",
+      "bodyHash": "9df2c950fa44dd13",
+      "literals": [
+        "::ffff:102:304",
+        "1.2.3.4",
+        "16",
+        "::ffff:1.2.3.4"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.default-ipv6-subnet-56",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 25,
+      "title": "ipKeyGenerator.ok.default-ipv6-subnet-56 should apply ipv6Subnet to an IPv6 address that merely ends in dotted-quad notation",
+      "status": "test",
+      "bodyHash": "f648de31eeb4e87c",
+      "literals": [
+        "2001:db8:1234:5678::1.2.3.4",
+        "2001:db8:1234:5600::/56",
+        "64:ff9b::1.2.3.4",
+        "64:ff9b::/56",
+        "2001:db8:1234:5678::102:304",
+        "2001:db8::1.2.3.4",
+        "1.2.3.4"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.default-ipv6-subnet-56",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 41,
+      "title": "ipKeyGenerator.ok.default-ipv6-subnet-56 should apply ipv6Subnet to addresses in the IPv4-compatible range that are not written in dotted-quad notation",
+      "status": "test",
+      "bodyHash": "061f80ecd3ca582d",
+      "literals": [
+        "::1",
+        "::/56",
+        "::"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.ipv6-subnet-false",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.ipv6-subnet-false",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 46,
+      "title": "ipKeyGenerator.ok.ipv6-subnet-false should return an IPv6 address unchanged with ipv6Subnet set to false",
+      "status": "test",
+      "bodyHash": "9d1ef6b0f9ca8761",
+      "literals": [
+        "0123:4567:89ab:cdef:0123:4567:89ab:cdef"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.ipv4-mapped-ipv6",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.ipv4-mapped-ipv6",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 52,
+      "title": "ipKeyGenerator.ok.ipv4-mapped-ipv6 should apply ipv6Subnet only a true IPv6 address",
+      "status": "test",
+      "bodyHash": "afa355b0c2032b69",
+      "literals": [
+        "::1.2.3.4",
+        "16",
+        "1.2.3.4",
+        "::ffff:1.2.3.4"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.default-ipv6-subnet-56",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 58,
+      "title": "ipKeyGenerator.ok.default-ipv6-subnet-56 should apply a default /56 netmask to an IPv6 address",
+      "status": "test",
+      "bodyHash": "06eeb72eeff04861",
+      "literals": [
+        "0123:4567:89ab:cdef:0123:4567:89ab:cdef",
+        "123:4567:89ab:cd00::/56"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.ipv4-unchanged",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.ipv4-unchanged",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 64,
+      "title": "ipKeyGenerator.ok.ipv4-unchanged should apply a /63 netmask to an IPv6 address",
+      "status": "test",
+      "bodyHash": "a2d66ea08b0ef0dc",
+      "literals": [
+        "0123:4567:89ab:cdef:0123:4567:89ab:cdef",
+        "63",
+        "123:4567:89ab:cdee::/63"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.default-ipv6-subnet-56",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 70,
+      "title": "ipKeyGenerator.ok.default-ipv6-subnet-56 should accept abbreviated IPv6 addresses",
+      "status": "test",
+      "bodyHash": "a5d357592632bd47",
+      "literals": [
+        "123:ABC::89",
+        "123:abc::/56"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ipKeyGenerator.ok.ipv4-unchanged",
+      "unitId": "ipKeyGenerator",
+      "guaranteeId": "ok.ipv4-unchanged",
+      "file": "test/library/ip-key-generator-test.ts",
+      "line": 74,
+      "title": "ipKeyGenerator.ok.ipv4-unchanged should return an IPv6 address normalized but otherwise unchanged with a /128 netmask",
+      "status": "test",
+      "bodyHash": "eef8e14c060e97e3",
+      "literals": [
+        "0123:4567:89ab:cdef:0123:4567:89ab:cdef",
+        "128",
+        "123:4567:89ab:cdef:123:4567:89ab:cdef/128"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ipKeyGenerator",
+          "from": "source/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 176,
+      "title": "rateLimit.ok.default-window-ms should not modify the options object passed",
+      "status": "test",
+      "bodyHash": "8ce7a45b294326a8",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 182,
+      "title": "rateLimit.ok.default-window-ms should call `init` even if no requests have come in",
+      "status": "test",
+      "bodyHash": "e6bae0a21b6f1613",
+      "literals": [],
+      "keys": [
+        "store"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 220,
+      "title": "rateLimit.ok.default-window-ms should handle resolving async init",
+      "status": "test",
+      "bodyHash": "aeb1c2e768386c4e",
+      "literals": [],
+      "keys": [
+        "store",
+        "logger"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 234,
+      "title": "rateLimit.ok.default-window-ms should handle rejecting async init and log error",
+      "status": "test",
+      "bodyHash": "33fb00b53ebc941b",
+      "literals": [
+        "express-rate-limit: async error during store initialization."
+      ],
+      "keys": [
+        "store",
+        "logger"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 251,
+      "title": "rateLimit.ok.default-window-ms should catch synchronous errors thrown from store.init()",
+      "status": "test",
+      "bodyHash": "7fc6115c41047a0a",
+      "literals": [
+        "init",
+        "test error",
+        "express-rate-limit: error during store initialization."
+      ],
+      "keys": [
+        "store",
+        "logger"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 269,
+      "title": "rateLimit.ok.default-window-ms should let the first request through",
+      "status": "test",
+      "bodyHash": "125a655e3313d100",
+      "literals": [
+        "/",
+        "200",
+        "Hi there!"
+      ],
+      "keys": [
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-status-code",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-status-code",
+      "file": "test/library/middleware-test.ts",
+      "line": 275,
+      "title": "rateLimit.ok.default-status-code should refuse additional connections once IP has reached the max",
+      "status": "test",
+      "bodyHash": "e2b8c13faa48a5a8",
+      "literals": [
+        "2",
+        "/",
+        "200",
+        "429"
+      ],
+      "keys": [
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-status-code",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-status-code",
+      "file": "test/library/middleware-test.ts",
+      "line": 287,
+      "title": "rateLimit.ok.default-status-code should (eventually) accept new connections from a blocked IP",
+      "status": "test",
+      "bodyHash": "ef1af9e127c0bfac",
+      "literals": [
+        "2",
+        "50",
+        "/",
+        "200",
+        "429",
+        "60"
+      ],
+      "keys": [
+        "limit",
+        "windowMs"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-status-code",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-status-code",
+      "file": "test/library/middleware-test.ts",
+      "line": 302,
+      "title": "rateLimit.ok.default-status-code should work repeatedly",
+      "status": "test",
+      "bodyHash": "869dbfaee6997f7a",
+      "literals": [
+        "2",
+        "50",
+        "/",
+        "200",
+        "429",
+        "60"
+      ],
+      "keys": [
+        "limit",
+        "windowMs"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.zero-limit-blocks-all",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.zero-limit-blocks-all",
+      "file": "test/library/middleware-test.ts",
+      "line": 321,
+      "title": "rateLimit.ok.zero-limit-blocks-all should block all requests if max is set to 0",
+      "status": "test",
+      "bodyHash": "a456b5fb98acd62c",
+      "literals": [
+        "/",
+        "429"
+      ],
+      "keys": [
+        "max",
+        "validate",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 327,
+      "title": "rateLimit.ok.default-window-ms should show the provided message instead of the default message when max connections are reached",
+      "status": "test",
+      "bodyHash": "d0f1ada4b0605bcc",
+      "literals": [
+        "Enhance your calm",
+        "1000",
+        "2",
+        "/",
+        "200",
+        "429"
+      ],
+      "keys": [
+        "windowMs",
+        "limit",
+        "message"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 342,
+      "title": "rateLimit.ok.default-window-ms should allow the error status code to be customized",
+      "status": "test",
+      "bodyHash": "f0f5533fec8b9e51",
+      "literals": [
+        "420",
+        "/",
+        "200"
+      ],
+      "keys": [
+        "limit",
+        "statusCode"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 354,
+      "title": "rateLimit.ok.default-window-ms should allow responding with a JSON message",
+      "status": "test",
+      "bodyHash": "b62b1c1bab276671",
+      "literals": [
+        "too-many-requests",
+        "Too many requests were attempted in a short span of time.",
+        "/",
+        "200",
+        "Hi there!",
+        "429"
+      ],
+      "keys": [
+        "error",
+        "code",
+        "message",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 372,
+      "title": "rateLimit.ok.default-window-ms should allow message to be a function",
+      "status": "test",
+      "bodyHash": "2b62f2b10dba8c0c",
+      "literals": [
+        "Too many requests.",
+        "/",
+        "200",
+        "Hi there!",
+        "429"
+      ],
+      "keys": [
+        "message",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 384,
+      "title": "rateLimit.ok.default-window-ms should allow message to be a function that returns a promise",
+      "status": "test",
+      "bodyHash": "a844fc837308a02d",
+      "literals": [
+        "Too many requests.",
+        "/",
+        "200",
+        "Hi there!",
+        "429"
+      ],
+      "keys": [
+        "message",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 396,
+      "title": "rateLimit.ok.default-window-ms should use a custom handler when specified",
+      "status": "test",
+      "bodyHash": "51c332a438bb9f8b",
+      "literals": [
+        "420",
+        "Enhance your calm",
+        "/",
+        "200"
+      ],
+      "keys": [
+        "limit",
+        "handler"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 410,
+      "title": "rateLimit.ok.default-window-ms should forward errors from %s using `next()`",
+      "status": "each",
+      "bodyHash": "3f08113ac67e59ed",
+      "literals": [
+        "Could not build the rate limit response",
+        "500",
+        "/",
+        "200",
+        "1000",
+        "async handler",
+        "synchronous message",
+        "async message"
+      ],
+      "keys": [
+        "limit",
+        "response",
+        "handler",
+        "message"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "name": "Options",
+          "from": "source/index.ts"
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 464,
+      "title": "rateLimit.ok.default-window-ms should allow custom key generators",
+      "status": "test",
+      "bodyHash": "d62fe932daa4b67d",
+      "literals": [
+        "2",
+        "/",
+        "200",
+        "429"
+      ],
+      "keys": [
+        "limit",
+        "keyGenerator",
+        "key"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 483,
+      "title": "rateLimit.ok.default-window-ms should allow custom skip function",
+      "status": "test",
+      "bodyHash": "9333dfb4e26dcb20",
+      "literals": [
+        "2",
+        "/",
+        "200"
+      ],
+      "keys": [
+        "limit",
+        "skip",
+        "key"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 497,
+      "title": "rateLimit.ok.default-window-ms should allow custom skip function that returns a promise",
+      "status": "test",
+      "bodyHash": "15408b72f9a32944",
+      "literals": [
+        "2",
+        "/",
+        "200"
+      ],
+      "keys": [
+        "limit",
+        "skip",
+        "key"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 510,
+      "title": "rateLimit.ok.default-window-ms should allow max to be a function",
+      "status": "test",
+      "bodyHash": "39b2b1f10279b0d0",
+      "literals": [
+        "2",
+        "/",
+        "200",
+        "429"
+      ],
+      "keys": [
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 522,
+      "title": "rateLimit.ok.default-window-ms should allow max to be a function that returns a promise",
+      "status": "test",
+      "bodyHash": "c34356a4e9b9364a",
+      "literals": [
+        "2",
+        "/",
+        "200",
+        "429"
+      ],
+      "keys": [
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 534,
+      "title": "rateLimit.ok.default-window-ms should calculate the remaining hits",
+      "status": "test",
+      "bodyHash": "dc4c9707f3e3131d",
+      "literals": [
+        "2",
+        "/",
+        "200",
+        "x-ratelimit-limit",
+        "x-ratelimit-remaining",
+        "1",
+        "retry-after",
+        "Expected no retry-after header, got ",
+        "Hi there!"
+      ],
+      "keys": [
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 556,
+      "title": "rateLimit.ok.default-window-ms should call `increment` on the store (%s store)",
+      "status": "each",
+      "bodyHash": "8aa60a463e7784a6",
+      "literals": [
+        "/",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 571,
+      "title": "rateLimit.ok.default-window-ms should call `resetKey` on the store (%s store)",
+      "status": "each",
+      "bodyHash": "558a3a7af8026aef",
+      "literals": [
+        "key",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "store"
+      ],
+      "iterates": [],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 585,
+      "title": "rateLimit.ok.default-window-ms should call `get` on the store (%s store)",
+      "status": "each",
+      "bodyHash": "1c2583a7a0445465",
+      "literals": [
+        "key",
+        "number",
+        "modern",
+        "compat"
+      ],
+      "keys": [
+        "store"
+      ],
+      "iterates": [],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 599,
+      "title": "rateLimit.ok.default-window-ms should throw an error if `get` does not exist on the store (%s store)",
+      "status": "each",
+      "bodyHash": "517b7790d1ed2bab",
+      "literals": [
+        "legacy"
+      ],
+      "keys": [
+        "store"
+      ],
+      "iterates": [],
+      "lengths": [
+        1,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 609,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when requests succeed and `skipSuccessfulRequests` is set to true (%s store)",
+      "status": "each",
+      "bodyHash": "b8e215dbd3f50576",
+      "literals": [
+        "/",
+        "200",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipSuccessfulRequests",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 626,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when request finishes before `resetTime` with `skipSuccessfulRequests`",
+      "status": "test",
+      "bodyHash": "a42902b08a666373",
+      "literals": [
+        "500",
+        "25",
+        "/",
+        "200"
+      ],
+      "keys": [
+        "skipSuccessfulRequests",
+        "windowMs",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 648,
+      "title": "rateLimit.ok.default-window-ms should not decrement hits when request finishes after `resetTime` with `skipSuccessfulRequests`",
+      "status": "test",
+      "bodyHash": "696f66bb8b944985",
+      "literals": [
+        "50",
+        "75",
+        "/",
+        "200"
+      ],
+      "keys": [
+        "skipSuccessfulRequests",
+        "windowMs",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 670,
+      "title": "rateLimit.ok.default-window-ms should not decrement hits when request finishes after window reset with real MemoryStore and skipFailedRequests",
+      "status": "test",
+      "bodyHash": "5b1ef02ae1cbe87e",
+      "literals": [
+        "100",
+        "200",
+        "50",
+        "/slow-fail",
+        "500",
+        "failed",
+        "/fast",
+        "ok",
+        "429"
+      ],
+      "keys": [
+        "skipFailedRequests",
+        "windowMs",
+        "limit",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "reads": [
+        {
+          "name": "MemoryStore",
+          "from": "source/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 725,
+      "title": "rateLimit.ok.default-window-ms should not decrement hits when requests fail and `skipSuccessfulRequests` is set to true (%s store)",
+      "status": "each",
+      "bodyHash": "7c49d9f36be0b9f0",
+      "literals": [
+        "/error",
+        "400",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipSuccessfulRequests",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 742,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when requests succeed, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)",
+      "status": "each",
+      "bodyHash": "057eae04e822612b",
+      "literals": [
+        "200",
+        "/",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipSuccessfulRequests",
+        "requestWasSuccessful",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 760,
+      "title": "rateLimit.ok.default-window-ms should not decrement hits when requests fail, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)",
+      "status": "each",
+      "bodyHash": "693170fda8968264",
+      "literals": [
+        "200",
+        "/error",
+        "400",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipSuccessfulRequests",
+        "requestWasSuccessful",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 780,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when requests succeed, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)",
+      "status": "each",
+      "bodyHash": "d9694c1a45592f41",
+      "literals": [
+        "1",
+        "/?success=1",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipSuccessfulRequests",
+        "requestWasSuccessful",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 799,
+      "title": "rateLimit.ok.default-window-ms should not decrement hits when requests fail, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)",
+      "status": "each",
+      "bodyHash": "6fd9735e53bb7739",
+      "literals": [
+        "1",
+        "/?success=0",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipSuccessfulRequests",
+        "requestWasSuccessful",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 818,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when requests fail and `skipFailedRequests` is set to true (%s store)",
+      "status": "each",
+      "bodyHash": "406bedd443dd0696",
+      "literals": [
+        "/error",
+        "400",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipFailedRequests",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 835,
+      "title": "rateLimit.ok.default-window-ms should not decrement hits when requests succeed and `skipFailedRequests` is set to true (%s store)",
+      "status": "each",
+      "bodyHash": "2db4ba703e74c567",
+      "literals": [
+        "/",
+        "200",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipFailedRequests",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 852,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when requests fail, `skipFailedRequests` is set to true and a custom `requestWasSuccessful` method used that returns a promise (%s store)",
+      "status": "each",
+      "bodyHash": "5914433a9a0d398a",
+      "literals": [
+        "/",
+        "200",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipFailedRequests",
+        "requestWasSuccessful",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 869,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when response closes and `skipFailedRequests` is set to true (%s store) (server)",
+      "status": "each",
+      "bodyHash": "8dbfb7f6a94b645e",
+      "literals": [
+        "/hang-server",
+        "close",
+        "Error starting server:",
+        "http://[",
+        "error",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipFailedRequests",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 938,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when response closes and `skipFailedRequests` is set to true (%s store)",
+      "status": "each",
+      "bodyHash": "c33181c82e83a946",
+      "literals": [
+        "127.0.0.1",
+        "GET",
+        "/",
+        "200",
+        "close",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipFailedRequests",
+        "store",
+        "ip",
+        "method",
+        "path",
+        "url",
+        "headers",
+        "app",
+        "get",
+        "statusCode",
+        "writableEnded",
+        "setHeader",
+        "getHeader",
+        "end"
+      ],
+      "iterates": [],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 980,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when response emits an error and `skipFailedRequests` is set to true (%s store)",
+      "status": "each",
+      "bodyHash": "418239f0342ec0b1",
+      "literals": [
+        "/crash",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "skipFailedRequests",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 997,
+      "title": "rateLimit.ok.default-window-ms should decrement hits when rate limit is reached and `skipFailedRequests` is set to true (%s store)",
+      "status": "each",
+      "bodyHash": "1bdf1e69f063253f",
+      "literals": [
+        "2",
+        "/",
+        "200",
+        "429",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "limit",
+        "store",
+        "skipFailedRequests"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 1017,
+      "title": "rateLimit.ok.default-window-ms should forward errors in the handler using `next()` (%s store)",
+      "status": "each",
+      "bodyHash": "de0254b6db2bc9a7",
+      "literals": [
+        "420: Enhance your calm",
+        "500",
+        "/",
+        "200",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "limit",
+        "store",
+        "handler"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 1053,
+      "title": "rateLimit.ok.default-window-ms should forward errors in `skip()` using `next()` (%s store)",
+      "status": "each",
+      "bodyHash": "8ae62b4d4a5c6f35",
+      "literals": [
+        "420: Enhance your calm",
+        "500",
+        "/",
+        "modern",
+        "legacy",
+        "compat"
+      ],
+      "keys": [
+        "limit",
+        "store",
+        "skip"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-request-property-name",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-request-property-name",
+      "file": "test/library/middleware-test.ts",
+      "line": 1088,
+      "title": "rateLimit.ok.default-request-property-name should pass the number of hits and the limit to the next request handler in the `request.rateLimit` property",
+      "status": "test",
+      "bodyHash": "82a1e388655b49b6",
+      "literals": [
+        "6",
+        "/",
+        "200",
+        "5",
+        "2",
+        "4"
+      ],
+      "keys": [
+        "legacyHeaders",
+        "limit",
+        "used",
+        "remaining",
+        "resetTime"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 1130,
+      "title": "rateLimit.ok.default-window-ms should pass the number of hits and the limit to the next request handler with a custom property",
+      "status": "test",
+      "bodyHash": "d89f6401f214e98a",
+      "literals": [
+        "rateLimitInfo",
+        "/",
+        "200",
+        "5",
+        "4",
+        "2",
+        "3"
+      ],
+      "keys": [
+        "legacyHeaders",
+        "requestPropertyName",
+        "limit",
+        "used",
+        "remaining",
+        "resetTime"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 1170,
+      "title": "rateLimit.ok.default-window-ms should handle two rate-limiters with different `requestPropertyNames` operating independently",
+      "status": "test",
+      "bodyHash": "97458b50f20d149c",
+      "literals": [
+        "2",
+        "rateLimitKey",
+        "420",
+        "Enhance your calm",
+        "5",
+        "rateLimitGlobal",
+        "global",
+        "429",
+        "Too many requests",
+        "/",
+        "200",
+        "4",
+        "3"
+      ],
+      "keys": [
+        "limit",
+        "requestPropertyName",
+        "keyGenerator",
+        "handler",
+        "key"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 1244,
+      "title": "rateLimit.ok.default-window-ms should not pass if the store throws an error by default",
+      "status": "test",
+      "bodyHash": "4f1c19ad8f30019b",
+      "literals": [
+        "/",
+        "500"
+      ],
+      "keys": [
+        "limit",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 1254,
+      "title": "rateLimit.ok.default-window-ms should pass if the store throws an error and passOnStoreError is true",
+      "status": "test",
+      "bodyHash": "e68f536ce8e99b0d",
+      "literals": [
+        "error",
+        "/",
+        "200",
+        "allowing"
+      ],
+      "keys": [
+        "limit",
+        "store",
+        "passOnStoreError"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createServer",
+          "from": "test/library/helpers/create-server.ts",
+          "literals": [
+            "/",
+            "Hi there!",
+            "/error",
+            "400",
+            "/crash",
+            "Oops!",
+            "error"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 1271,
+      "title": "rateLimit.ok.default-window-ms should only call next once when passOnStoreError causes it to skip limiting",
+      "status": "test",
+      "bodyHash": "674001b31776a2b0",
+      "literals": [
+        "error",
+        "allowing"
+      ],
+      "keys": [
+        "limit",
+        "store",
+        "passOnStoreError",
+        "validate"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 1303,
+      "title": "rateLimit.ok.default-window-ms should use the logger instead of the console on validation errors",
+      "status": "test",
+      "bodyHash": "f1e6204f7f923c69",
+      "literals": [
+        "48.5",
+        "ERR_ERL_IPV6_SUBNET"
+      ],
+      "keys": [
+        "logger",
+        "ipv6Subnet",
+        "code"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/middleware-test.ts",
+      "line": 1315,
+      "title": "rateLimit.ok.default-window-ms should use the logger instead of the console when the store throws an error and passOnStoreError is true",
+      "status": "test",
+      "bodyHash": "721990a05a74edf7",
+      "literals": [
+        "allowing"
+      ],
+      "keys": [
+        "limit",
+        "store",
+        "passOnStoreError",
+        "validate",
+        "logger"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/options-test.ts",
+      "line": 32,
+      "title": "rateLimit.ok.default-window-ms should allow an empty options object",
+      "status": "test",
+      "bodyHash": "230c73eface7003e",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/options-test.ts",
+      "line": 36,
+      "title": "rateLimit.ok.default-window-ms should ignore options that are set to `undefined`",
+      "status": "test",
+      "bodyHash": "04058ad79334cb5a",
+      "literals": [
+        "5"
+      ],
+      "keys": [
+        "store",
+        "limit"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/options-test.ts",
+      "line": 47,
+      "title": "rateLimit.ok.default-window-ms should allow the use of pre-6.x headers options",
+      "status": "test",
+      "bodyHash": "f30440f639eae34e",
+      "literals": [],
+      "keys": [
+        "store",
+        "headers"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/options-test.ts",
+      "line": 57,
+      "title": "rateLimit.ok.default-window-ms should allow the use of the `max` option",
+      "status": "test",
+      "bodyHash": "188588add5648e80",
+      "literals": [
+        "7"
+      ],
+      "keys": [
+        "store",
+        "max"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/options-test.ts",
+      "line": 67,
+      "title": "rateLimit.ok.default-window-ms should allow the use of the `limit` option",
+      "status": "test",
+      "bodyHash": "6479aaed33d67a96",
+      "literals": [
+        "7"
+      ],
+      "keys": [
+        "store",
+        "limit"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/options-test.ts",
+      "line": 77,
+      "title": "rateLimit.ok.default-window-ms should not allow the use of an invalid store",
+      "status": "test",
+      "bodyHash": "4e632d937645e973",
+      "literals": [],
+      "keys": [
+        "store"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/options-test.ts",
+      "line": 90,
+      "title": "rateLimit.ok.default-window-ms should not call `init` if it is not a function",
+      "status": "test",
+      "bodyHash": "0ae318f5ecf58c68",
+      "literals": [
+        "not-a-function"
+      ],
+      "keys": [
+        "totalHits",
+        "resetTime",
+        "store"
+      ],
+      "iterates": [],
+      "reads": [
+        {
+          "name": "Store",
+          "from": "source/index.ts"
+        },
+        {
+          "name": "Options",
+          "from": "source/index.ts"
+        },
+        {
+          "name": "ClientRateLimitInfo",
+          "from": "source/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/options-test.ts",
+      "line": 114,
+      "title": "rateLimit.ok.default-window-ms should not allow an invalid standardHeaders option",
+      "status": "test",
+      "bodyHash": "b6d584ae153b4032",
+      "literals": [
+        "not-a-valid-draft"
+      ],
+      "keys": [
+        "standardHeaders"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "rateLimit.ok.default-window-ms",
+      "unitId": "rateLimit",
+      "guaranteeId": "ok.default-window-ms",
+      "file": "test/library/options-test.ts",
+      "line": 122,
+      "title": "rateLimit.ok.default-window-ms should not allow an invalid logger implemenation to be provided",
+      "status": "test",
+      "bodyHash": "591e48ee6b19575f",
+      "literals": [
+        "invalid logger"
+      ],
+      "keys": [
+        "logger",
+        "error"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "identifier-unresolved",
+      "message": "ipKeyGenerator.ok.ipv4-unchanged: \"IPv4\" is not a parameter, declared port, entity or public operation",
+      "file": "source/ip-key-generator.ts",
+      "line": 23,
+      "unit": "ipKeyGenerator",
+      "guarantee": "ipKeyGenerator.ok.ipv4-unchanged",
+      "severity": "fail"
+    },
+    {
+      "rule": "identifier-unresolved",
+      "message": "ipKeyGenerator.ok.default-ipv6-subnet-56: \"IPv6\" is not a parameter, declared port, entity or public operation",
+      "file": "source/ip-key-generator.ts",
+      "line": 24,
+      "unit": "ipKeyGenerator",
+      "guarantee": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+      "severity": "fail"
+    },
+    {
+      "rule": "identifier-unresolved",
+      "message": "ipKeyGenerator.ok.ipv6-subnet-false: \"IPv6\" is not a parameter, declared port, entity or public operation",
+      "file": "source/ip-key-generator.ts",
+      "line": 25,
+      "unit": "ipKeyGenerator",
+      "guarantee": "ipKeyGenerator.ok.ipv6-subnet-false",
+      "severity": "fail"
+    },
+    {
+      "rule": "identifier-unresolved",
+      "message": "ipKeyGenerator.ok.ipv4-mapped-ipv6: \"IPv6\" is not a parameter, declared port, entity or public operation",
+      "file": "source/ip-key-generator.ts",
+      "line": 26,
+      "unit": "ipKeyGenerator",
+      "guarantee": "ipKeyGenerator.ok.ipv4-mapped-ipv6",
+      "severity": "fail"
+    },
+    {
+      "rule": "identifier-unresolved",
+      "message": "ipKeyGenerator.ok.ipv4-mapped-ipv6: \"IPv4\" is not a parameter, declared port, entity or public operation",
+      "file": "source/ip-key-generator.ts",
+      "line": 26,
+      "unit": "ipKeyGenerator",
+      "guarantee": "ipKeyGenerator.ok.ipv4-mapped-ipv6",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "rateLimit.ok.default-limit has no test naming it",
+      "file": "source/rate-limit.ts",
+      "line": 347,
+      "unit": "rateLimit",
+      "guarantee": "rateLimit.ok.default-limit",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "rateLimit.ok.default-message has no test naming it",
+      "file": "source/rate-limit.ts",
+      "line": 349,
+      "unit": "rateLimit",
+      "guarantee": "rateLimit.ok.default-message",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "rateLimit.ok.default-standard-headers has no test naming it",
+      "file": "source/rate-limit.ts",
+      "line": 352,
+      "unit": "rateLimit",
+      "guarantee": "rateLimit.ok.default-standard-headers",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-on-non-unit",
+      "message": "SECOND has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked",
+      "file": "source/time-constants.ts",
+      "line": 1,
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-on-non-unit",
+      "message": "MINUTE has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked",
+      "file": "source/time-constants.ts",
+      "line": 7,
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-on-non-unit",
+      "message": "HOUR has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked",
+      "file": "source/time-constants.ts",
+      "line": 13,
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-on-non-unit",
+      "message": "DAY has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked",
+      "file": "source/time-constants.ts",
+      "line": 19,
+      "severity": "fail"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The TSDoc tag \"@see\" is not an inline tag; it must not be enclosed in \"{ }\" braces",
+      "file": "source/ip-key-generator.ts",
+      "line": 15,
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to output \"finish\" in `'finish'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "source/rate-limit.ts",
+      "line": 410,
+      "unit": "rateLimit",
+      "severity": "warn"
+    },
+    {
+      "rule": "env-input-direct",
+      "message": "rateLimit reads an environment input directly (Date.now); route it through a port",
+      "file": "source/rate-limit.ts",
+      "line": 562,
+      "unit": "rateLimit",
+      "severity": "warn"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to constant \"60\" in `60 * 1000`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 207,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to constant \"1000\" in `60 * 1000`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 207,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to constant \"24\" in `1000 * 60 * 60 * 24`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 220,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to boundary \"60\" in `seconds < 60`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 222,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to boundary \"24\" in `hours < 24`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 224,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to output \"-in-\" in ``${limit}-in-${duration}``, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 227,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to boundary \"400\" in `response.statusCode < 400`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 233,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to output \"express-rate-limit: async error during store initialization.\" in `'express-rate-limit: async error during store initialization.'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 387,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to output \"close\" in `'close'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 406,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to output \"error\" in `'error'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 414,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to match \"draft-6\" in `'draft-6'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 518,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to match \"draft-7\" in `'draft-7'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 524,
+      "unit": "rateLimit",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "rateLimit commits to match \"draft-8\" in `'draft-8'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "source/rate-limit.ts",
+      "line": 531,
+      "unit": "rateLimit",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 2,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 12,
+    "guaranteesWithoutTest": 3,
+    "tests": 89,
+    "orphanTests": 0,
+    "unlinkedTests": 83,
+    "findings": {
+      "fail": 12,
+      "warn": 3,
+      "info": 14
+    }
+  }
+}

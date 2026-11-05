@@ -17,7 +17,7 @@ export CI=1 FORCE_COLOR=0
 mkdir -p "$data"
 cp "$cfg"/specgate*.json "$dir/"
 cp "$cfg/stryker.config.json" "$dir/$cwd/"
-for f in "$cfg"/vitest.stryker.config.*; do [ -e "$f" ] && cp "$f" "$dir/$cwd/"; done
+for f in "$cfg"/vitest.stryker.config.* "$cfg"/jest.stryker.config.*; do [ -e "$f" ] && cp "$f" "$dir/$cwd/"; done
 
 echo "== tests"
 (cd "$dir/$cwd" && sh -c "$test") > "$data/tests.log" 2>&1 || { echo "tests failed, see $data/tests.log"; exit 1; }

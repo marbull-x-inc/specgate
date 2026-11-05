@@ -23,7 +23,6 @@
       "watchman": false,
       "testPathIgnorePatterns": [
         "/node_modules/",
-        "/.stryker-tmp/",
         "types-test"
       ]
     }

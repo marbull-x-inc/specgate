@@ -1,0 +1,14 @@
+specgate check (advisory): 6 units, 33 guarantees, 1213 linked tests
+  fail 4 · warn 2 · info 2
+  ❌ [guarantee-no-test] src/useFormContext.tsx:24 useFormContext.ok.returns-methods has no test naming it
+  ❌ [guarantee-no-test] src/useFormContext.tsx:26 useFormContext.err.no-provider has no test naming it
+  ❌ [operation-no-guarantee] src/useFormContext.tsx:52 FormProvider has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/useWatch.ts:26 useWatch.ok.exact-false has no test naming it
+  ⚠️ [mutation-report-unreadable] reports/mutation/mutation.json mutation.report reports/mutation/mutation.json: file not found; the mutation rules did not run
+  ⚠️ [mutation-report-unreadable] reports/value/value.json mutation.report reports/value/value.json: file not found; the mutation rules did not run
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [decision-unspecified] src/useForm.ts:132 useForm commits to output "defaultValues" in `'defaultValues'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+
+wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.specgate-mutation/report.json
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.specgate-mutation/summary.md
+      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.specgate-mutation/report.sarif

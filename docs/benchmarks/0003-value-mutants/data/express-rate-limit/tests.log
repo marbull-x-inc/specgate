@@ -1,4 +1,19 @@
-2026-11-06T07:13:02,841: [] while computing sockname: failed to create /Users/yodai-hi/.local/state/watchman/yodai-hi-state: Permission denied
+---------------------|---------|----------|---------|---------|---------------------
+File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s   
+---------------------|---------|----------|---------|---------|---------------------
+All files            |   98.19 |    94.89 |    97.4 |   98.79 |                     
+ console-logger.ts   |     100 |      100 |     100 |     100 |                     
+ headers.ts          |     100 |    94.44 |     100 |     100 | 101                 
+ ip-key-generator.ts |     100 |      100 |     100 |     100 |                     
+ memory-store.ts     |     100 |      100 |     100 |     100 |                     
+ rate-limit.ts       |   97.08 |    92.36 |   96.42 |   97.46 | 259,333,488-489,596 
+ time-constants.ts   |     100 |      100 |     100 |     100 |                     
+ utils.ts            |     100 |      100 |     100 |     100 |                     
+ validations.ts      |   98.16 |       97 |   96.15 |     100 | 318,477,561         
+---------------------|---------|----------|---------|---------|---------------------
 
-Watchman:  watchman --no-pretty get-sockname returned with exit code=1, signal=null, stderr= 2026-11-06T07:13:02,841: [] while computing sockname: failed to create /Users/yodai-hi/.local/state/watchman/yodai-hi-state: Permission denied
-
+Test Suites: 7 passed, 7 total
+Tests:       249 passed, 249 total
+Snapshots:   0 total
+Time:        2.354 s
+Ran all test suites.

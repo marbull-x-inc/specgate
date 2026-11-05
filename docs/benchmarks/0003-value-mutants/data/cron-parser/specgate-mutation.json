@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-05T22:13:01.390Z",
+  "generatedAt": "2026-11-05T22:17:27.458Z",
   "root": "/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser",
   "revision": "ab3c04abb57d9c08646a96adf5b5e6c1422380ae",
   "configHash": "b8dd937430cda837",
@@ -50,7 +50,13 @@
       "implHash": "97d779f855218fd7",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 2,
+        "survived": 2,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#next",
@@ -203,7 +209,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 205,
+        "survived": 30,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#prev",
@@ -317,7 +329,13 @@
       "implHash": "dca40a6cf0c82813",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 206,
+        "survived": 30,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#hasNext",
@@ -431,7 +449,13 @@
       "implHash": "a61128e7fec24c94",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 211,
+        "survived": 30,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#hasPrev",
@@ -545,7 +569,13 @@
       "implHash": "c6d38b67b36e747c",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 211,
+        "survived": 30,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#take",
@@ -606,7 +636,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 23,
+        "survived": 4,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#reset",
@@ -641,7 +677,13 @@
       "implHash": "2045467d1efb250e",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 1,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#stringify",
@@ -723,7 +765,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 2,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#includesDate",
@@ -764,7 +812,13 @@
       "implHash": "48480b3149c57885",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 57,
+        "survived": 3,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#toString",
@@ -794,7 +848,13 @@
       "implHash": "9efd6f3ed84fc345",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 5,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpression#[Symbol.iterator]",
@@ -908,7 +968,13 @@
       "implHash": "0139826adb34acb5",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 213,
+        "survived": 30,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronExpressionParser#parse",
@@ -1254,7 +1320,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 26,
+        "survived": 6,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronFieldCollection#from",
@@ -1355,7 +1427,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 10,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronFieldCollection#compactField",
@@ -1419,7 +1497,13 @@
       "implHash": "094fa414924bde4c",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 62,
+        "survived": 12,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronFieldCollection#stringifyField",
@@ -1466,7 +1550,13 @@
       "implHash": "79ad7904ed282921",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 34,
+        "survived": 3,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronFieldCollection#stringify",
@@ -1503,7 +1593,13 @@
       "implHash": "cfe6213aefe286fd",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 9,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronFieldCollection#serialize",
@@ -1531,7 +1627,13 @@
       "implHash": "a49172fc63116e75",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 2,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronFileParser#parseFile",
@@ -1591,7 +1693,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 3,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "CronFileParser#parseFileSync",
@@ -1658,7 +1766,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 3,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     }
   ],
   "vocabulary": {
@@ -8945,15 +9059,63 @@
       "severity": "fail"
     },
     {
-      "rule": "mutation-report-unreadable",
-      "message": "mutation.report reports/mutation/mutation.json: file not found; the mutation rules did not run",
-      "file": "reports/mutation/mutation.json",
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: StringLiteral mutant in TIME_SPAN_OUT_OF_BOUNDS_ERROR_MESSAGE: `\"\"` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 18,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:0",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 18
+      },
       "severity": "warn"
     },
     {
-      "rule": "mutation-report-unreadable",
-      "message": "mutation.report reports/value/value.json: file not found; the mutation rules did not run",
-      "file": "reports/value/value.json",
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: `TIME_SPAN_OUT_OF_BOUNDS_ERROR_MESSAGE` 'Out of the time span range' → 'Out of the time span range_x' survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 18,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "2:value-1",
+        "mutator": "Value",
+        "replacement": "`TIME_SPAN_OUT_OF_BOUNDS_ERROR_MESSAGE` 'Out of the time sp…",
+        "status": "Survived",
+        "line": 18
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: StringLiteral mutant in LOOPS_LIMIT_EXCEEDED_ERROR_MESSAGE: `\"\"` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 23,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:1",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 23
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: `LOOPS_LIMIT_EXCEEDED_ERROR_MESSAGE` 'Invalid expression, loop limit exceeded' → 'Invalid expression, loop limit exceeded_x' survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 23,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "2:value-2",
+        "mutator": "Value",
+        "replacement": "`LOOPS_LIMIT_EXCEEDED_ERROR_MESSAGE` 'Invalid expression, l…",
+        "status": "Survived",
+        "line": 23
+      },
       "severity": "warn"
     },
     {
@@ -8965,11 +9127,506 @@
       "severity": "warn"
     },
     {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: `LOOP_LIMIT` 10000 → 10001 survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 28,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "2:value-3",
+        "mutator": "Value",
+        "replacement": "`LOOP_LIMIT` 10000 → 10001",
+        "status": "Survived",
+        "line": 28
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#fieldsToExpression: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpression.ts",
+      "line": 89,
+      "unit": "CronExpression#fieldsToExpression",
+      "mutant": {
+        "id": "1:31",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 89
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#fieldsToExpression: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpression.ts",
+      "line": 89,
+      "unit": "CronExpression#fieldsToExpression",
+      "mutant": {
+        "id": "1:32",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 89
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: ArithmeticOperator mutant in a helper it calls: `values.length + 1` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 113,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:41",
+        "mutator": "ArithmeticOperator",
+        "replacement": "values.length + 1",
+        "status": "Survived",
+        "line": 113
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: `values.length - 1`: 1 → 2 survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 113,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "2:value-4",
+        "mutator": "Value",
+        "replacement": "`values.length - 1`: 1 → 2",
+        "status": "Survived",
+        "line": 113
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: ArithmeticOperator mutant in a helper it calls: `currentDate.getMonth() - 1` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 129,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:44",
+        "mutator": "ArithmeticOperator",
+        "replacement": "currentDate.getMonth() - 1",
+        "status": "Survived",
+        "line": 129
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: `currentDate.getMonth() + 1`: 1 → 2 survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 129,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "2:value-6",
+        "mutator": "Value",
+        "replacement": "`currentDate.getMonth() + 1`: 1 → 2",
+        "status": "Survived",
+        "line": 129
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 130,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:48",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 130
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 130,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:46",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 130
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: CallExpression mutant in a helper it calls: `;` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 135,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:49",
+        "mutator": "CallExpression",
+        "replacement": ";",
+        "status": "Survived",
+        "line": 135
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: MethodExpression mutant in a helper it calls: `currentDate.setMilliseconds(this.#getMinOrMax(seconds, reve…` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 166,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:63",
+        "mutator": "MethodExpression",
+        "replacement": "currentDate.setMilliseconds(this.#getMinOrMax(seconds, reve…",
+        "status": "Survived",
+        "line": 166
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: MethodExpression mutant in a helper it calls: `currentDate.setMilliseconds(this.#getMinOrMax(seconds, reve…` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 195,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:77",
+        "mutator": "MethodExpression",
+        "replacement": "currentDate.setMilliseconds(this.#getMinOrMax(seconds, reve…",
+        "status": "Survived",
+        "line": 195
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#take: EqualityOperator mutant: `limit > 0` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpression.ts",
+      "line": 299,
+      "unit": "CronExpression#take",
+      "mutant": {
+        "id": "1:123",
+        "mutator": "EqualityOperator",
+        "replacement": "limit > 0",
+        "status": "Survived",
+        "line": 299
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#take: `limit >= 0`: 0 → 1 survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpression.ts",
+      "line": 299,
+      "unit": "CronExpression#take",
+      "mutant": {
+        "id": "2:value-7",
+        "mutator": "Value",
+        "replacement": "`limit >= 0`: 0 → 1",
+        "status": "Survived",
+        "line": 299
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#take: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpression.ts",
+      "line": 303,
+      "unit": "CronExpression#take",
+      "mutant": {
+        "id": "1:133",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 303
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#take: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpression.ts",
+      "line": 311,
+      "unit": "CronExpression#take",
+      "mutant": {
+        "id": "1:142",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 311
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#includesDate: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpression.ts",
+      "line": 352,
+      "unit": "CronExpression#includesDate",
+      "mutant": {
+        "id": "1:152",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 352
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#includesDate: LogicalOperator mutant: `!second.values.includes(<SixtyRange> dt.getSeconds()) && !m…` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpression.ts",
+      "line": 352,
+      "unit": "CronExpression#includesDate",
+      "mutant": {
+        "id": "1:153",
+        "mutator": "LogicalOperator",
+        "replacement": "!second.values.includes(<SixtyRange> dt.getSeconds()) && !m…",
+        "status": "Survived",
+        "line": 352
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: LogicalOperator mutant in a helper it calls: `isDayOfMonthWildcardMatch || !isDayOfWeekWildcardMatch` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#includesDate, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 421,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:206",
+        "mutator": "LogicalOperator",
+        "replacement": "isDayOfMonthWildcardMatch || !isDayOfWeekWildcardMatch",
+        "status": "Survived",
+        "line": 421
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: ConditionalExpression mutant in a helper it calls: `true` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 448,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:218",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 448
+      },
+      "severity": "warn"
+    },
+    {
       "rule": "decision-unspecified",
       "message": "CronExpression#next commits to constant \"24\" in `(skipped + 1) % 24`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
       "file": "src/CronExpression.ts",
       "line": 449,
       "unit": "CronExpression#next",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: `(skipped + 1) % 24`: 24 → 25 survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 449,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "2:value-11",
+        "mutator": "Value",
+        "replacement": "`(skipped + 1) % 24`: 24 → 25",
+        "status": "Survived",
+        "line": 449
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: ArithmeticOperator mutant in a helper it calls: `currentHour + nextHour` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 481,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:253",
+        "mutator": "ArithmeticOperator",
+        "replacement": "currentHour + nextHour",
+        "status": "Survived",
+        "line": 481
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: ArithmeticOperator mutant in a helper it calls: `nextHour + currentHour` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 481,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:254",
+        "mutator": "ArithmeticOperator",
+        "replacement": "nextHour + currentHour",
+        "status": "Survived",
+        "line": 481
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: EqualityOperator mutant in a helper it calls: `i <= steps` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 482,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:256",
+        "mutator": "EqualityOperator",
+        "replacement": "i <= steps",
+        "status": "Survived",
+        "line": 482
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: UpdateOperator mutant in a helper it calls: `i--` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 482,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:258",
+        "mutator": "UpdateOperator",
+        "replacement": "i--",
+        "status": "Survived",
+        "line": 482
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 486,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:269",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 486
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: ConditionalExpression mutant in a helper it calls: `true` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 486,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:271",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 486
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: EqualityOperator mutant in a helper it calls: `currentDate.getHours() < nextHour` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 486,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:272",
+        "mutator": "EqualityOperator",
+        "replacement": "currentDate.getHours() < nextHour",
+        "status": "Survived",
+        "line": 486
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: EqualityOperator mutant in a helper it calls: `currentDate.getHours() > nextHour` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 486,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:273",
+        "mutator": "EqualityOperator",
+        "replacement": "currentDate.getHours() > nextHour",
+        "status": "Survived",
+        "line": 486
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 505,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:284",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 505
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 505,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:288",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 505
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: `currentDate.getMilliseconds() > 0`: 0 → 1 survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 530,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "2:value-13",
+        "mutator": "Value",
+        "replacement": "`currentDate.getMilliseconds() > 0`: 0 → 1",
+        "status": "Survived",
+        "line": 530
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: `stepCount` 0 → 1 survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 537,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "2:value-15",
+        "mutator": "Value",
+        "replacement": "`stepCount` 0 → 1",
+        "status": "Survived",
+        "line": 537
+      },
       "severity": "warn"
     },
     {
@@ -8981,6 +9638,21 @@
       "severity": "warn"
     },
     {
+      "rule": "mutant-survived",
+      "message": "CronExpression#[Symbol.iterator]: EqualityOperator mutant in a helper it calls (the boundary \"10000\"): `++stepCount <= LOOP_LIMIT` survived; no linked test fails when the code changes like this; also reached from CronExpression#hasNext, CronExpression#hasPrev, CronExpression#next, CronExpression#prev",
+      "file": "src/CronExpression.ts",
+      "line": 538,
+      "unit": "CronExpression#[Symbol.iterator]",
+      "mutant": {
+        "id": "1:320",
+        "mutator": "EqualityOperator",
+        "replacement": "++stepCount <= LOOP_LIMIT",
+        "status": "Survived",
+        "line": 538
+      },
+      "severity": "warn"
+    },
+    {
       "rule": "tsdoc-syntax",
       "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
       "file": "src/CronExpressionParser.ts",
@@ -9041,6 +9713,321 @@
       "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
       "file": "src/CronExpressionParser.ts",
       "line": 105,
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpressionParser#parse: ConditionalExpression mutant (the match \"*\"): `false` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpressionParser.ts",
+      "line": 121,
+      "unit": "CronExpressionParser#parse",
+      "mutant": {
+        "id": "1:383",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpressionParser#parse: StringLiteral mutant (the match \"*\"): `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpressionParser.ts",
+      "line": 121,
+      "unit": "CronExpressionParser#parse",
+      "mutant": {
+        "id": "1:385",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpressionParser#parse: `rawFields.dayOfMonth === '*'`: '*' → '*_x' survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpressionParser.ts",
+      "line": 121,
+      "unit": "CronExpressionParser#parse",
+      "mutant": {
+        "id": "2:value-17",
+        "mutator": "Value",
+        "replacement": "`rawFields.dayOfMonth === '*'`: '*' → '*_x'",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpressionParser#parse: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpressionParser.ts",
+      "line": 122,
+      "unit": "CronExpressionParser#parse",
+      "mutant": {
+        "id": "1:392",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 122
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpressionParser#parse: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpressionParser.ts",
+      "line": 170,
+      "unit": "CronExpressionParser#parse",
+      "mutant": {
+        "id": "1:394",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 170
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronExpressionParser#parse: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/CronExpressionParser.ts",
+      "line": 174,
+      "unit": "CronExpressionParser#parse",
+      "mutant": {
+        "id": "1:398",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 174
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 235,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:896",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 235
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 235,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:894",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 235
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: LogicalOperator mutant: `arr[i - 1] && current.start` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 251,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:908",
+        "mutator": "LogicalOperator",
+        "replacement": "arr[i - 1] && current.start",
+        "status": "Survived",
+        "line": 251
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: ConditionalExpression mutant (the match \"L\"): `false` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 257,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:912",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 257
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: ConditionalExpression mutant (the match \"L\"): `false` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 257,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:914",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 257
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: LogicalOperator mutant (the match \"L\"): `item === 'L' && item === 'W'` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 257,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:913",
+        "mutator": "LogicalOperator",
+        "replacement": "item === 'L' && item === 'W'",
+        "status": "Survived",
+        "line": 257
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: StringLiteral mutant (the match \"L\"): `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 257,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:916",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 257
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: BlockStatement mutant (the match \"L\"): `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 257,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:920",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 257
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: ConditionalExpression mutant (the match \"L\"): `false` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 257,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:917",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 257
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: StringLiteral mutant (the match \"L\"): `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 257,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:919",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 257
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 266,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:929",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 266
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#compactField: LogicalOperator mutant: `current.end && /* istanbul ignore next - see above */prevIt…` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 295,
+      "unit": "CronFieldCollection#compactField",
+      "mutant": {
+        "id": "1:962",
+        "mutator": "LogicalOperator",
+        "replacement": "current.end && /* istanbul ignore next - see above */prevIt…",
+        "status": "Survived",
+        "line": 295
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#stringifyField: ArithmeticOperator mutant: `this.#month.values[0] + 1` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 397,
+      "unit": "CronFieldCollection#stringifyField",
+      "mutant": {
+        "id": "1:1092",
+        "mutator": "ArithmeticOperator",
+        "replacement": "this.#month.values[0] + 1",
+        "status": "Survived",
+        "line": 397
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#stringifyField: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 397,
+      "unit": "CronFieldCollection#stringifyField",
+      "mutant": {
+        "id": "1:1089",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 397
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "CronFieldCollection#stringifyField: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/CronFieldCollection.ts",
+      "line": 401,
+      "unit": "CronFieldCollection#stringifyField",
+      "mutant": {
+        "id": "1:1093",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 401
+      },
       "severity": "warn"
     },
     {
@@ -9060,8 +10047,9 @@
     "unlinkedTests": 102,
     "findings": {
       "fail": 16,
-      "warn": 14,
+      "warn": 71,
       "info": 1
-    }
+    },
+    "mutantsUnmapped": 661
   }
 }

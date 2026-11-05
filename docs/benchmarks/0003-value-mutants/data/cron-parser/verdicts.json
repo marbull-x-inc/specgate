@@ -1,0 +1,84 @@
+[
+  {
+    "id": "value-1",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the exported time-span error message changes",
+    "expressedBy": [
+      "0"
+    ]
+  },
+  {
+    "id": "value-2",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the exported loop-limit error message changes",
+    "expressedBy": [
+      "1"
+    ]
+  },
+  {
+    "id": "value-3",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "loop-limit",
+    "reason": "the iteration limit moves by one; only an expression needing exactly that many steps sees it",
+    "expressedBy": null
+  },
+  {
+    "id": "value-4",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "searching backwards picks the second-to-last value of a field instead of the last",
+    "expressedBy": [
+      "41"
+    ]
+  },
+  {
+    "id": "value-6",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "reason": "the value only builds a per-day cache key; month + 2 keeps the key unique per calendar day",
+    "expressedBy": null
+  },
+  {
+    "id": "value-7",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "take(0) behaves like an unlimited take",
+    "expressedBy": [
+      "123"
+    ]
+  },
+  {
+    "id": "value-11",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "reason": "the walk over skipped DST hours visits 24 as well, which no hour field contains, and still stops at the landing hour",
+    "expressedBy": null
+  },
+  {
+    "id": "value-13",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "a start date with exactly 1 ms is not rounded up, so next() can return the start second itself",
+    "expressedBy": null
+  },
+  {
+    "id": "value-15",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "loop-limit",
+    "reason": "the loop runs one step fewer before giving up; only an expression needing exactly that many steps sees it",
+    "expressedBy": null
+  },
+  {
+    "id": "value-17",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "in strict mode, an expression with day-of-month \"*\" and a specific day-of-week is rejected, although only setting both fields is an error",
+    "expressedBy": [
+      "385"
+    ]
+  }
+]

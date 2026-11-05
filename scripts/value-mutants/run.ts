@@ -322,7 +322,11 @@ export async function runValueMutants(
       log(`${m.id} ${result.status.padEnd(10)} ${m.file}:${m.line} ${m.description}`);
     }
   };
-  const runOne = async (m: ValueMutant, dir: string): Promise<Omit<RunResult, "mutant" | "durationMs">> => {
+  const runOne = async (
+    m: ValueMutant,
+    dir: string,
+    alone = false,
+  ): Promise<Omit<RunResult, "mutant" | "durationMs">> => {
     const reason = stale.get(m.file);
     if (reason) return { status: "Ignored", statusReason: reason };
     const text = texts.get(m.file);
@@ -339,9 +343,10 @@ export async function runValueMutants(
       writeFileSync(path, mutatedText(text, m));
       const run = (): Promise<{ code: number | null; timedOut: boolean }> =>
         runCommand(commandFor(options.command, files), dir, timeoutMs);
-      const { code, timedOut } = files.length === 0 ? await exclusive(run) : await run();
+      const { code, timedOut } = alone || files.length > 0 ? await run() : await exclusive(run);
       const coveredBy = "files" in selection ? { coveredBy: selection.tests } : {};
-      if (timedOut) return { status: "Timeout", ...coveredBy };
+      if (timedOut)
+        return { status: "Timeout", ...(alone ? { statusReason: "timed out on its own" } : {}), ...coveredBy };
       return code === 0
         ? { status: "Survived", ...coveredBy }
         : { status: "Killed", statusReason: `exit ${code}`, ...coveredBy };
@@ -353,6 +358,16 @@ export async function runValueMutants(
 
   try {
     await Promise.all(workers.map(work));
+    // A run that timed out while other runs shared the machine is run again on its own: only a
+    // second timeout, with no other run competing for the cores, is reported as Timeout.
+    if (concurrency > 1)
+      for (const [index, r] of results.entries()) {
+        if (r?.status !== "Timeout") continue;
+        const startedAt = Date.now();
+        const again = await runOne(r.mutant, workers[0] ?? root, true);
+        results[index] = { ...again, mutant: r.mutant, durationMs: Date.now() - startedAt };
+        log(`${r.mutant.id} ${again.status.padEnd(10)} (rerun alone) ${r.mutant.file}:${r.mutant.line}`);
+      }
   } finally {
     restoreAll();
     process.off("SIGINT", onSignal);
