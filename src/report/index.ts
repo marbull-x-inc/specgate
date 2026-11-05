@@ -73,6 +73,11 @@ export function renderStepSummary(report: Report): string {
         `| \`${id}\` | ${c.killed} | ${c.survived} | ${c.noCoverage} | ${c.ignored} | ${score === undefined ? "—" : `${score}%`} |`,
       );
     }
+    if (report.summary.mutantsUnmapped)
+      lines.push(
+        "",
+        `${report.summary.mutantsUnmapped} mutant(s) in the report map to no unit, so no rule reads them.`,
+      );
     lines.push("", "</details>", "");
   }
   lines.push("<details><summary>Guarantee matrix</summary>", "");

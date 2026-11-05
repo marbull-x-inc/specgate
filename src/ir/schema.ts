@@ -128,6 +128,11 @@ export interface Decision {
    * literal passed with the collection to a call (`useQueryEnum("view", VIEWS, …)`)
    */
   key?: string;
+  /**
+   * `boundary` and `constant` decisions: the value is compared with a `.length` or `.size`, so a
+   * test pins it with an array of that size (`TestCase.lengths`)
+   */
+  length?: boolean;
 }
 
 export interface Unit {
@@ -161,6 +166,11 @@ export interface Unit {
    * decision walk and mutant mapping treat them as part of the unit. Absent when there are none.
    */
   helperRanges?: Array<{ line: number; endLine: number }>;
+  /**
+   * Module-level constants (not functions) the body and its helpers read: a regex, a schema, an
+   * object. A mutant in one belongs to every unit that reads it. Absent when there are none.
+   */
+  constantRanges?: Array<{ name: string; file: string; line: number; endLine: number }>;
   /** Mutants of the unit in the mutation report (`mutation.report`), when one was read. */
   mutation?: MutationCounts;
   /** sha256 of the implementation body text */
@@ -259,6 +269,11 @@ export interface TestCase {
    */
   keys: string[];
   /**
+   * Lengths of the array literals the test writes (same sources as `literals`). Kept apart from
+   * `literals`; only decisions compared with a `.length` or `.size` read them. Absent when none.
+   */
+  lengths?: number[];
+  /**
    * Imported constants the test takes its cases from (`each` table argument, `for…of`, the
    * receiver of `forEach` / `map` / `every` / `some`, or `new Set(X)` / `[...X]` /
    * `Array.from(X)`), with the module they come from (relative to root when it resolves to a
@@ -270,6 +285,11 @@ export interface TestCase {
    * with the literal values in their bodies. Absent when there are none.
    */
   builds?: Array<{ name: string; from: string; literals: string[] }>;
+  /**
+   * Values imported from project modules that the test reads without calling them
+   * (`"a".repeat(NAME_MAX)`), with the module they come from. Absent when there are none.
+   */
+  reads?: Array<{ name: string; from: string }>;
   /** Opaque frozen-requirement ids from the file header, if enabled */
   requirementIds: string[];
 }
@@ -304,6 +324,8 @@ export interface Summary {
   /** Tests whose title names no guarantee key at all */
   unlinkedTests: number;
   findings: { fail: number; warn: number; info: number };
+  /** Mutants in the mutation report that map to no unit; absent when no report was read */
+  mutantsUnmapped?: number;
 }
 
 export interface Report {

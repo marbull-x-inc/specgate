@@ -293,6 +293,10 @@
                     "contains"
                   ]
                 },
+                "length": {
+                  "description": "boundary and constant decisions: the value is compared with a .length or .size",
+                  "type": "boolean"
+                },
                 "key": {
                   "description": "match and member decisions: the constant key the value is read with (a member's key is the string passed with the collection to a call)",
                   "type": "string"
@@ -326,6 +330,38 @@
                 }
               },
               "required": [
+                "line",
+                "endLine"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "constantRanges": {
+            "description": "Module-level constants (not functions) the body and its helpers read",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "file": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "endLine": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "name",
+                "file",
                 "line",
                 "endLine"
               ],
@@ -795,6 +831,15 @@
             },
             "description": "Identifier and string keys of the object literals the test body, its each tables and same-file fixtures write (capped at tests.literalLimit)"
           },
+          "lengths": {
+            "description": "Lengths of the array literals the test writes",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
           "iterates": {
             "type": "array",
             "items": {
@@ -838,6 +883,26 @@
                 "name",
                 "from",
                 "literals"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "reads": {
+            "description": "Values imported from project modules that the test reads without calling them",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "from"
               ],
               "additionalProperties": false
             }
@@ -1012,6 +1077,12 @@
             "info"
           ],
           "additionalProperties": false
+        },
+        "mutantsUnmapped": {
+          "description": "Mutants in the mutation report that map to no unit",
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
         }
       },
       "required": [
