@@ -178,4 +178,36 @@ No third-party source is committed beyond the patches.
 
 ## Deviations
 
-None yet.
+### 1. Harness settings found at the baseline run (2026-11-06, before Stryker ran on any project)
+
+- es-toolkit uses Yarn Plug'n'Play; it was installed with `YARN_NODE_LINKER=node-modules` (same
+  lockfile, scripts off). With a `node_modules` tree, its `vitest.config.mts` (whose `exclude`
+  replaces vitest's default) picks up test files inside `node_modules`, and
+  `tests/check-dist.spec.ts` packs the tarball, which needs a Yarn install state. The test command
+  excludes both (`--exclude '**/node_modules/**' --exclude tests/check-dist.spec.ts`), and Stryker
+  uses `vitest.stryker.config.mts` with the same exclusions.
+- react-hook-form's jest runs with `--watchman=false` (watchman cannot write its state directory
+  in the sandbox), as 0001's jest projects.
+- h3 and cac declare pnpm 12; pnpm 12.3.4 was installed with `--ignore-scripts` in the scratch
+  directory and used for both.
+
+### 2. h3 is not run (2026-11-06, baseline)
+
+h3's tests fail at the pin on this machine (Node 24.3.0): two assertions on `%5E` decoding in
+`test/unit/event.test.ts` and `test/unit/route-normalize.test.ts`, and a 5 s timeout in
+`test/body-limit.test.ts`. Per **Projects**, it stays in the report with the reason. Its
+guarantees were written and frozen before this was known; its tests were not linked.
+
+### 3. One link edited by hand (2026-11-06, linking)
+
+In cron-parser, one entry (`tests/CronExpression.test.ts:366`) was re-keyed after `apply-links.mjs`
+ran, by editing the title and `links.json` in the same way; both agree, and every key exists in
+`guarantees.json`.
+
+### 4. Runner fix: symlinked directories in sandboxes (2026-11-06, during the runs)
+
+With `--concurrency` above 1, the runner's sandbox copy failed on a symbolic link to a directory
+(`.claude/skills/` in valibot): `cpSync` refused to copy it. The runner now recreates symbolic
+links with `symlinkSync(readlinkSync(…))`. Site selection and statuses are unchanged. Affected:
+valibot (the runner crashed before any mutant ran); its runner step is repeated. defu, neverthrow
+and cac had no such link and are not repeated.

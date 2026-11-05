@@ -27,6 +27,7 @@ import {
   mkdtempSync,
   readdirSync,
   readFileSync,
+  readlinkSync,
   rmSync,
   symlinkSync,
   writeFileSync,
@@ -221,7 +222,7 @@ function makeSandbox(root: string, target: string): void {
       else if (entry.isDirectory()) {
         mkdirSync(dst);
         walk(src, dst);
-      } else if (entry.isSymbolicLink()) cpSync(src, dst, { verbatimSymlinks: true });
+      } else if (entry.isSymbolicLink()) symlinkSync(readlinkSync(src), dst);
       else cpSync(src, dst);
     }
   };
