@@ -1,14 +1,10 @@
 {
   "surface": {
-    "include": [
-      "src/index.ts"
-    ],
+    "include": ["src/index.ts"],
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "src/**/*.test.ts"
-    ],
+    "include": ["src/**/*.test.ts"],
     "adapter": "jest"
   },
   "tsdoc": {

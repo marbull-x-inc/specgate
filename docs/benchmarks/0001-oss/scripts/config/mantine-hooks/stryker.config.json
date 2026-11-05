@@ -10,10 +10,7 @@
     "packages/@mantine/hooks/src/use-queue/use-queue.ts",
     "packages/@mantine/hooks/src/use-os/use-os.ts"
   ],
-  "reporters": [
-    "json",
-    "clear-text"
-  ],
+  "reporters": ["json", "clear-text"],
   "jsonReporter": {
     "fileName": "reports/mutation/mutation.json"
   },
@@ -22,9 +19,10 @@
     "projectType": "custom",
     "configFile": "jest.config.ts",
     "config": {
-      "roots": [
-        "<rootDir>/packages/@mantine/hooks"
-      ]
+      "roots": ["<rootDir>/packages/@mantine/hooks"],
+      "watchman": false
     }
-  }
+  },
+  "plugins": ["@stryker-mutator/jest-runner"],
+  "ignorePatterns": ["CONTEXT.md", "docs", "apps"]
 }

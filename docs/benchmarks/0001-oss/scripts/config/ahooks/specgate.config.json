@@ -8,10 +8,7 @@
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "packages/hooks/src/**/__tests__/*.spec.ts",
-      "packages/hooks/src/**/__tests__/*.spec.tsx"
-    ],
+    "include": ["packages/hooks/src/**/__tests__/*.spec.ts", "packages/hooks/src/**/__tests__/*.spec.tsx"],
     "adapter": "vitest"
   },
   "tsdoc": {

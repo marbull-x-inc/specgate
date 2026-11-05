@@ -1,15 +1,10 @@
 {
   "surface": {
-    "include": [
-      "src/parse.ts",
-      "src/query.ts"
-    ],
+    "include": ["src/parse.ts", "src/query.ts"],
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "test/**/*.test.ts"
-    ],
+    "include": ["test/**/*.test.ts"],
     "adapter": "vitest"
   },
   "tsdoc": {

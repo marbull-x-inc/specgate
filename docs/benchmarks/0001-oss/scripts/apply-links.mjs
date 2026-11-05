@@ -12,7 +12,7 @@ import { join } from "node:path";
 
 const [root, spec] = process.argv.slice(2);
 if (!root || !spec) {
-  console.error("usage: apply-links.mjs <project-root> <links.json>");
+  process.stderr.write(`${"usage: apply-links.mjs <project-root> <links.json>"}\n`);
   process.exit(2);
 }
 const links = JSON.parse(readFileSync(spec, "utf8"));
@@ -29,7 +29,7 @@ for (const [file, list] of byFile) {
   for (const l of list) {
     const from = lineStarts[l.line - 1];
     if (from === undefined) {
-      console.error(`${file}:${l.line} no such line`);
+      process.stderr.write(`${`${file}:${l.line} no such line`}\n`);
       failed++;
       continue;
     }
@@ -39,7 +39,7 @@ for (const [file, list] of byFile) {
     const esc = l.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const m = new RegExp(`\\(\\s*(["'\`])${esc}`).exec(window);
     if (!m) {
-      console.error(`${file}:${l.line} title not found: ${JSON.stringify(l.title)}`);
+      process.stderr.write(`${`${file}:${l.line} title not found: ${JSON.stringify(l.title)}`}\n`);
       failed++;
       continue;
     }
@@ -49,6 +49,6 @@ for (const [file, list] of byFile) {
   edits.sort((a, b) => b.at - a.at);
   for (const e of edits) text = text.slice(0, e.at) + e.insert + text.slice(e.at);
   writeFileSync(path, text);
-  console.log(`${file}: ${edits.length} title(s) linked`);
+  process.stdout.write(`${`${file}: ${edits.length} title(s) linked`}\n`);
 }
 process.exit(failed ? 1 : 0);

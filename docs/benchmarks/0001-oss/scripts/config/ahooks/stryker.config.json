@@ -2,20 +2,14 @@
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "testRunner": "vitest",
   "coverageAnalysis": "perTest",
-  "mutate": [
-    "src/useCounter/index.ts",
-    "src/useToggle/index.ts",
-    "src/useBoolean/index.ts"
-  ],
-  "reporters": [
-    "json",
-    "clear-text"
-  ],
+  "mutate": ["src/useCounter/index.ts", "src/useToggle/index.ts", "src/useBoolean/index.ts"],
+  "reporters": ["json", "clear-text"],
   "jsonReporter": {
     "fileName": "reports/mutation/mutation.json"
   },
   "tempDirName": ".stryker-tmp",
   "vitest": {
     "configFile": "vitest.config.ts"
-  }
+  },
+  "plugins": ["@stryker-mutator/vitest-runner"]
 }

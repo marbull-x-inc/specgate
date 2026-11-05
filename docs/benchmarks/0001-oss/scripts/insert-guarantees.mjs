@@ -13,7 +13,7 @@ import { join } from "node:path";
 
 const [root, spec] = process.argv.slice(2);
 if (!root || !spec) {
-  console.error("usage: insert-guarantees.mjs <project-root> <guarantees.json>");
+  process.stderr.write(`${"usage: insert-guarantees.mjs <project-root> <guarantees.json>"}\n`);
   process.exit(2);
 }
 const entries = JSON.parse(readFileSync(spec, "utf8"));
@@ -54,7 +54,7 @@ for (const [file, list] of byFile) {
     const indent = lines[idx].match(/^\s*/)[0];
     const tagLines = e.tags.map((t) => `${indent} * ${t}`);
     // Existing doc comment directly above (allowing decorators / blank-free adjacency)?
-    let end = idx - 1;
+    const end = idx - 1;
     if (end >= 0 && /\*\/\s*$/.test(lines[end])) {
       let start = end;
       while (start >= 0 && !/^\s*\/\*\*/.test(lines[start])) start--;
@@ -66,12 +66,19 @@ for (const [file, list] of byFile) {
         } else {
           lines.splice(end, 0, ...tagLines);
         }
-        console.log(`${file}:${idx + 1} ${e.symbol} merged ${e.tags.length} tag(s)`);
+        process.stdout.write(`${`${file}:${idx + 1} ${e.symbol} merged ${e.tags.length} tag(s)`}\n`);
         continue;
       }
     }
-    lines.splice(idx, 0, `${indent}/**`, ...(e.summary ? [`${indent} * ${e.summary}`] : []), ...tagLines, `${indent} */`);
-    console.log(`${file}:${idx + 1} ${e.symbol} inserted ${e.tags.length} tag(s)`);
+    lines.splice(
+      idx,
+      0,
+      `${indent}/**`,
+      ...(e.summary ? [`${indent} * ${e.summary}`] : []),
+      ...tagLines,
+      `${indent} */`,
+    );
+    process.stdout.write(`${`${file}:${idx + 1} ${e.symbol} inserted ${e.tags.length} tag(s)`}\n`);
   }
   writeFileSync(path, lines.join("\n"));
 }

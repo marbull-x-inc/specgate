@@ -18,11 +18,11 @@ data="$bench/data/$project"
 
 repo=""; sha=""; pm="pnpm"; runner="vitest"; strykerVersion="10.1.1"; strykerCwd="."; testCmd=""
 case "$project" in
-  ms)            repo=vercel/ms;           sha=4ff48cec099f0514c3e9bbca18706c9c21122bfb; runner=jest;   testCmd="npx jest --env node" ;;
+  ms)            repo=vercel/ms;           sha=4ff48cec099f0514c3e9bbca18706c9c21122bfb; runner=jest;   testCmd="npx jest --no-watchman --env node --coverage=false" ;;
   scule)         repo=unjs/scule;          sha=5bc68048caad7c0e7de35842c83a510e8e1a7c4f; testCmd="npx vitest run" ;;
   ufo)           repo=unjs/ufo;            sha=f06c800d0c59f2a4a1b9ba65eb6cb61a84419be6; testCmd="npx vitest run" ;;
   zustand)       repo=pmndrs/zustand;      sha=382d29c485e67018c06e75ec7235130d0968522c; testCmd="npx vitest run" ;;
-  mantine-hooks) repo=mantinedev/mantine;  sha=82fb128c43f9927c1370a2732cd5aa9e6663ca11; pm=yarn; runner=jest; testCmd="npx jest packages/@mantine/hooks" ;;
+  mantine-hooks) repo=mantinedev/mantine;  sha=82fb128c43f9927c1370a2732cd5aa9e6663ca11; pm=yarn; runner=jest; testCmd="npx jest --no-watchman packages/@mantine/hooks" ;;
   ahooks)        repo=alibaba/hooks;       sha=a0c33c21caefda40753fe4b3cbb3b1efbabd1a79; strykerCwd=packages/hooks; testCmd="npx vitest run" ;;
   hono)          repo=honojs/hono;         sha=eb754bd5ef22c63f1634a4c374a86be086f85710; testCmd="npx vitest run --config vitest.stryker.config.ts" ;;
   *) echo "unknown project $project" >&2; exit 2 ;;
@@ -52,8 +52,9 @@ if [ "$pm" = yarn ]; then
 else
   # hono declares pnpm 12; use PNPM=<path to pnpm 12> for it.
   ${PNPM:-corepack pnpm} install --frozen-lockfile --ignore-scripts
-  ${PNPM:-corepack pnpm} add -D -w --ignore-scripts "${pkgs[@]}" 2>/dev/null \
-    || ${PNPM:-corepack pnpm} add -D --ignore-scripts "${pkgs[@]}"
+  # --config.minimum-release-age=0: ms rejects packages younger than two days (deviation 5).
+  ${PNPM:-corepack pnpm} add -D -w --ignore-scripts --config.minimum-release-age=0 "${pkgs[@]}" 2>/dev/null \
+    || ${PNPM:-corepack pnpm} add -D --ignore-scripts --config.minimum-release-age=0 "${pkgs[@]}"
 fi
 tools="$dir"
 specgate="$dir/node_modules/.bin/specgate"

@@ -11,10 +11,7 @@
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "packages/@mantine/hooks/src/**/*.test.ts",
-      "packages/@mantine/hooks/src/**/*.test.tsx"
-    ],
+    "include": ["packages/@mantine/hooks/src/**/*.test.ts", "packages/@mantine/hooks/src/**/*.test.tsx"],
     "adapter": "jest"
   },
   "tsdoc": {

@@ -9,9 +9,7 @@
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "src/middleware/{cors,secure-headers,body-limit,request-id}/*.test.ts"
-    ],
+    "include": ["src/middleware/{cors,secure-headers,body-limit,request-id}/*.test.ts"],
     "adapter": "vitest"
   },
   "tsdoc": {

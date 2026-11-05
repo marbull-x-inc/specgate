@@ -8,15 +8,13 @@
     "src/middleware/body-limit/index.ts",
     "src/middleware/request-id/request-id.ts"
   ],
-  "reporters": [
-    "json",
-    "clear-text"
-  ],
+  "reporters": ["json", "clear-text"],
   "jsonReporter": {
     "fileName": "reports/mutation/mutation.json"
   },
   "tempDirName": ".stryker-tmp",
   "vitest": {
     "configFile": "vitest.stryker.config.ts"
-  }
+  },
+  "plugins": ["@stryker-mutator/vitest-runner"]
 }
