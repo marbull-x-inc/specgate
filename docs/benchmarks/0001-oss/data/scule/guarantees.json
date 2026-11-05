@@ -1,0 +1,82 @@
+[
+  {
+    "file": "src/index.ts",
+    "symbol": "splitByCase",
+    "tags": [
+      "@guarantee ok.default-splitters without `splitters`, splits `str` at each of \"-\", \"_\", \"/\" and \".\" and leaves the splitters out of the result",
+      "@guarantee ok.case-change splits where the case changes from lower to upper or from upper to lower, and keeps the case of each part",
+      "@guarantee ok.numbers digits are not a case change",
+      "@guarantee ok.custom-splitters with `splitters`, splits at those characters instead of the defaults"
+    ]
+  },
+  {
+    "file": "src/index.ts",
+    "symbol": "upperFirst",
+    "tags": [
+      "@guarantee ok.first returns `str` with its first character in upper case and the rest unchanged (\"hello world!\" gives \"Hello world!\")"
+    ]
+  },
+  {
+    "file": "src/index.ts",
+    "symbol": "lowerFirst",
+    "tags": [
+      "@guarantee ok.first returns `str` with its first character in lower case and the rest unchanged (\"Hello world!\" gives \"hello world!\")"
+    ]
+  },
+  {
+    "file": "src/index.ts",
+    "symbol": "pascalCase",
+    "tags": [
+      "@guarantee ok.join splits `str` like `splitByCase` and joins the parts with the first letter of each in upper case (\"foo-bar_baz\" gives \"FooBarBaz\")",
+      "@guarantee ok.preserve an uppercase letter followed by other uppercase letters is kept (\"FooBAR\" keeps \"BAR\")",
+      "@guarantee ok.normalize with `normalize` true, each part has only its first letter in upper case"
+    ]
+  },
+  {
+    "file": "src/index.ts",
+    "symbol": "camelCase",
+    "tags": [
+      "@guarantee ok.join splits `str` and joins the parts by camelCase: the first part starts in lower case, every later part in upper case (\"foo-bar_baz\" gives \"fooBarBaz\")",
+      "@guarantee ok.normalize with `normalize` true, each part has only its first letter in upper case before the first letter of the result is lowered"
+    ]
+  },
+  {
+    "file": "src/index.ts",
+    "symbol": "kebabCase",
+    "tags": [
+      "@guarantee ok.join splits `str` and joins the parts in lower case with \"-\" (\"fooBar_Baz\" gives \"foo-bar-baz\")",
+      "@guarantee ok.lower the case of the input is not preserved"
+    ]
+  },
+  {
+    "file": "src/index.ts",
+    "symbol": "snakeCase",
+    "tags": [
+      "@guarantee ok.join splits `str` and joins the parts in lower case with \"_\" (\"foo-barBaz\" gives \"foo_bar_baz\")"
+    ]
+  },
+  {
+    "file": "src/index.ts",
+    "symbol": "flatCase",
+    "tags": [
+      "@guarantee ok.join splits `str` and joins the parts in lower case with no separator (\"foo-barBaz\" gives \"foobarbaz\")"
+    ]
+  },
+  {
+    "file": "src/index.ts",
+    "symbol": "trainCase",
+    "tags": [
+      "@guarantee ok.join splits `str` and joins the parts with \"-\", each starting in upper case (\"FooBARb\" gives \"Foo-Ba-Rb\")",
+      "@guarantee ok.preserve an uppercase letter followed by other uppercase letters is kept (\"WWWAuthenticate\" gives \"WWW-Authenticate\")",
+      "@guarantee ok.normalize with `normalize` true, each part has only its first letter in upper case"
+    ]
+  },
+  {
+    "file": "src/index.ts",
+    "symbol": "titleCase",
+    "tags": [
+      "@guarantee ok.join splits `str` and joins the parts with a space, each capitalised (\"this-IS-aTitle\" gives \"This is a Title\")",
+      "@guarantee ok.minor-words minor words such as \"a\", \"for\" and \"to\" stay in lower case"
+    ]
+  }
+]

@@ -1,0 +1,108 @@
+diff --git a/src/index.ts b/src/index.ts
+index f1983fd..d72cffd 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -19,6 +19,12 @@ export function isUppercase(char = ""): boolean | undefined {
+   return char !== char.toLowerCase();
+ }
+ 
++/**
++ * @guarantee ok.default-splitters without `splitters`, splits `str` at each of "-", "_", "/" and "." and leaves the splitters out of the result
++ * @guarantee ok.case-change splits where the case changes from lower to upper or from upper to lower, and keeps the case of each part
++ * @guarantee ok.numbers digits are not a case change
++ * @guarantee ok.custom-splitters with `splitters`, splits at those characters instead of the defaults
++ */
+ export function splitByCase<T extends string>(str: T): SplitByCase<T>;
+ export function splitByCase<
+   T extends string,
+@@ -80,14 +86,25 @@ export function splitByCase<
+   return parts as SplitByCase<T, Separator[number]>;
+ }
+ 
++/**
++ * @guarantee ok.first returns `str` with its first character in upper case and the rest unchanged ("hello world!" gives "Hello world!")
++ */
+ export function upperFirst<S extends string>(str: S): Capitalize<S> {
+   return (str ? str[0].toUpperCase() + str.slice(1) : "") as Capitalize<S>;
+ }
+ 
++/**
++ * @guarantee ok.first returns `str` with its first character in lower case and the rest unchanged ("Hello world!" gives "hello world!")
++ */
+ export function lowerFirst<S extends string>(str: S): Uncapitalize<S> {
+   return (str ? str[0].toLowerCase() + str.slice(1) : "") as Uncapitalize<S>;
+ }
+ 
++/**
++ * @guarantee ok.join splits `str` like `splitByCase` and joins the parts with the first letter of each in upper case ("foo-bar_baz" gives "FooBarBaz")
++ * @guarantee ok.preserve an uppercase letter followed by other uppercase letters is kept ("FooBAR" keeps "BAR")
++ * @guarantee ok.normalize with `normalize` true, each part has only its first letter in upper case
++ */
+ export function pascalCase(): "";
+ export function pascalCase<
+   T extends string | readonly string[],
+@@ -104,6 +121,10 @@ export function pascalCase<
+     : "";
+ }
+ 
++/**
++ * @guarantee ok.join splits `str` and joins the parts by camelCase: the first part starts in lower case, every later part in upper case ("foo-bar_baz" gives "fooBarBaz")
++ * @guarantee ok.normalize with `normalize` true, each part has only its first letter in upper case before the first letter of the result is lowered
++ */
+ export function camelCase(): "";
+ export function camelCase<
+   T extends string | readonly string[],
+@@ -119,6 +140,10 @@ export function camelCase<
+   >;
+ }
+ 
++/**
++ * @guarantee ok.join splits `str` and joins the parts in lower case with "-" ("fooBar_Baz" gives "foo-bar-baz")
++ * @guarantee ok.lower the case of the input is not preserved
++ */
+ export function kebabCase(): "";
+ export function kebabCase<T extends string | readonly string[]>(
+   str: T,
+@@ -138,6 +163,9 @@ export function kebabCase<
+     : "";
+ }
+ 
++/**
++ * @guarantee ok.join splits `str` and joins the parts in lower case with "_" ("foo-barBaz" gives "foo_bar_baz")
++ */
+ export function snakeCase(): "";
+ export function snakeCase<T extends string | readonly string[]>(
+   str: T,
+@@ -146,6 +174,9 @@ export function snakeCase<T extends string | readonly string[]>(str?: T) {
+   return kebabCase(str || "", "_") as SnakeCase<T>;
+ }
+ 
++/**
++ * @guarantee ok.join splits `str` and joins the parts in lower case with no separator ("foo-barBaz" gives "foobarbaz")
++ */
+ export function flatCase(): "";
+ export function flatCase<T extends string | readonly string[]>(
+   str: T,
+@@ -154,6 +185,11 @@ export function flatCase<T extends string | readonly string[]>(str?: T) {
+   return kebabCase(str || "", "") as FlatCase<T>;
+ }
+ 
++/**
++ * @guarantee ok.join splits `str` and joins the parts with "-", each starting in upper case ("FooBARb" gives "Foo-Ba-Rb")
++ * @guarantee ok.preserve an uppercase letter followed by other uppercase letters is kept ("WWWAuthenticate" gives "WWW-Authenticate")
++ * @guarantee ok.normalize with `normalize` true, each part has only its first letter in upper case
++ */
+ export function trainCase(): "";
+ export function trainCase<
+   T extends string | readonly string[],
+@@ -172,6 +208,10 @@ export function trainCase<
+ const titleCaseExceptions =
+   /^(a|an|and|as|at|but|by|for|if|in|is|nor|of|on|or|the|to|with)$/i;
+ 
++/**
++ * @guarantee ok.join splits `str` and joins the parts with a space, each capitalised ("this-IS-aTitle" gives "This is a Title")
++ * @guarantee ok.minor-words minor words such as "a", "for" and "to" stay in lower case
++ */
+ export function titleCase(): "";
+ export function titleCase<
+   T extends string | readonly string[],
