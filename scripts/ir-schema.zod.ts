@@ -107,7 +107,12 @@ export const zUnit = z.object({
         .enum(["exact", "prefix", "suffix", "contains"])
         .optional()
         .describe("member decisions: how the unit compares its input with the element"),
-      key: z.string().optional().describe("match decisions: the constant key the compared value is read with"),
+      key: z
+        .string()
+        .optional()
+        .describe(
+          "match and member decisions: the constant key the value is read with (a member's key is the string passed with the collection to a call)",
+        ),
     }),
   ),
   helperRanges: z
@@ -181,6 +186,10 @@ export const zTestCase = z.object({
   iterates: z
     .array(z.object({ name: z.string(), from: z.string() }))
     .describe("Imported constants the test iterates, with the module they come from"),
+  builds: z
+    .array(z.object({ name: z.string(), from: z.string(), literals: z.array(z.string()) }))
+    .optional()
+    .describe("Functions of project modules the test calls to build its input, with the literals in their bodies"),
   requirementIds: z.array(z.string()).describe("Opaque frozen-requirement ids from the file header, if enabled"),
 });
 export type TestCase = z.infer<typeof zTestCase>;

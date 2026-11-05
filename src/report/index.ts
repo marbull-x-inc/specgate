@@ -19,6 +19,9 @@ export function writeReportFiles(report: Report, outDir: string): { json: string
   return { json, summary, sarif };
 }
 
+/** Rows of the "Accepted in source" section; the rest are in report.json. */
+const ACCEPTED_LIMIT = 100;
+
 const ICON: Record<Severity, string> = { fail: "❌", warn: "⚠️", info: "ℹ️" };
 
 export function renderStepSummary(report: Report): string {
@@ -44,6 +47,20 @@ export function renderStepSummary(report: Report): string {
     }
     if (report.findings.length > 200) lines.push("", `… ${report.findings.length - 200} more in report.json`);
     lines.push("");
+  }
+  // Tag-accepted findings are info and rarely make the capped table above, but a reviewer of the
+  // pull request that adds a tag needs its reason (#48). The accepted-findings file stays out.
+  const acceptedInSource = report.findings.filter((f) => f.acceptedReason !== undefined);
+  if (acceptedInSource.length > 0) {
+    lines.push("<details><summary>Accepted in source (<code>@acceptFinding</code>)</summary>", "");
+    lines.push("| Rule | Where | Message | Reason |", "|---|---|---|---|");
+    for (const f of acceptedInSource.slice(0, ACCEPTED_LIMIT)) {
+      const where = f.file ? `${f.file}${f.line ? `:${f.line}` : ""}` : "";
+      lines.push(`| \`${f.rule}\` | ${where} | ${escapeCell(f.message)} | ${escapeCell(f.acceptedReason ?? "")} |`);
+    }
+    if (acceptedInSource.length > ACCEPTED_LIMIT)
+      lines.push("", `… ${acceptedInSource.length - ACCEPTED_LIMIT} more in report.json`);
+    lines.push("", "</details>", "");
   }
   const mutated = report.units.flatMap((u) => (u.mutation ? [[u.id, u.mutation] as const] : []));
   if (mutated.length > 0) {

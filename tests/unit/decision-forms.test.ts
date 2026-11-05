@@ -4,8 +4,8 @@ import { dirname, join } from "node:path";
 import { analyze } from "../../src/analyze.ts";
 import { defineConfig } from "../../src/config/schema.ts";
 import type { Decision } from "../../src/ir/schema.ts";
-import { toSarif } from "../../src/report/index.ts";
-import { valueUsed } from "../../src/rules/decisions.ts";
+import { renderStepSummary, toSarif } from "../../src/report/index.ts";
+import { untestedMessage, valueUsed } from "../../src/rules/decisions.ts";
 import { workDir } from "../helpers/paths.ts";
 
 /**
@@ -287,5 +287,180 @@ it("isAdult.ok.adult", () => {
     expect(report.findings.filter((x) => x.rule === "accept-tag-unused").map((x) => [x.severity, x.message])).toEqual([
       ["warn", '@acceptFinding decision-untested "21" on isAdult matches no finding any more; remove it'],
     ]);
+  });
+});
+
+describe("0.5.1: keys passed with a collection, the closest hint, built inputs (#45, #46, #47)", () => {
+  const VIEW = `import { readEnum } from "./read-enum";
+
+export const VIEWS = ["list", "grid"] as const;
+
+/** @guarantee ok.view opens the view that \`?view=\` names (\`VIEWS\`) */
+export function viewOf(search: string): string {
+  const view = readEnum(search, "view", VIEWS, "list");
+  return VIEWS.find((value) => value === view) ?? "list";
+}
+`;
+  const READ_ENUM = `export function readEnum(search: string, key: string, values: readonly string[], fallback: string): string {
+  const v = new URLSearchParams(search).get(key) ?? "";
+  return values.includes(v) ? v : fallback;
+}
+`;
+  const viewTest = (...searches: string[]) => `import { expect, it } from "bun:test";
+import { viewOf } from "../src/view";
+it("viewOf.ok.view", () => {
+${searches.map((s) => `  expect(viewOf("${s}")).not.toBeNull();`).join("\n")}
+});
+`;
+
+  test("#45: a member read with the key passed alongside the collection is pinned by key=value", async () => {
+    const { report, untested: found } = await untested({
+      "src/view.ts": VIEW,
+      "src/read-enum.ts": READ_ENUM,
+      "tests/view.test.ts": viewTest("?view=grid", "?a=1&view=list#top"),
+    });
+    expect(
+      report.units
+        .find((u) => u.id === "viewOf")
+        ?.decisions.filter((d) => d.kind === "member")
+        .map((d) => d.key),
+    ).toEqual(["view", "view"]);
+    expect(found).toEqual([]);
+  });
+
+  test("#45: another key does not pin it, and the hint is the literal with a whole token", async () => {
+    const { untested: found } = await untested({
+      "src/view.ts": VIEW,
+      "src/read-enum.ts": READ_ENUM,
+      "tests/view.test.ts": viewTest("mode=grid"),
+    });
+    expect(found.map((f) => f.message.match(/member "([^"]+)"/)?.[1]).sort()).toEqual(["grid", "list"]);
+    expect(found.find((f) => f.message.includes('"grid"'))?.message).toContain('(closest: "mode=grid")');
+  });
+
+  test("#45: a collection passed to a call without a string is unchanged", async () => {
+    const { report } = await untested({
+      "src/view.ts": VIEW.replace('readEnum(search, "view", VIEWS, "list")', "readEnum(search, search, VIEWS, search)"),
+      "src/read-enum.ts": READ_ENUM,
+      "tests/view.test.ts": viewTest("?view=grid"),
+    });
+    expect(
+      report.units
+        .find((u) => u.id === "viewOf")
+        ?.decisions.filter((d) => d.kind === "member")
+        .map((d) => d.key),
+    ).toEqual([undefined, undefined]);
+  });
+
+  test("#46: the hint prefers a key= pair, then a whole token, and skips a mere substring for short values", () => {
+    const d = (value: string, key?: string): Decision => ({
+      kind: "match",
+      expression: "",
+      line: 1,
+      values: [value],
+      names: [],
+      ...(key ? { key } : {}),
+    });
+    const unit = { id: "u" } as never;
+    const message = (decision: Decision, literals: string[]) =>
+      untestedMessage(unit, decision, literals).match(/\(closest: "([^"]*)"\)/)?.[1];
+    expect(message(d("1", "popup"), ["javascript:alert(1)", "https://app.example.com/done?popup=0"])).toBe(
+      "https://app.example.com/done?popup=0",
+    );
+    expect(message({ ...d("settings"), kind: "member" }, ["settings-panel", "tab=settings"])).toBe("tab=settings");
+    expect(message(d("1"), ["v1.2"])).toBeUndefined();
+    expect(message(d("week"), ["weekly"])).toBe("weekly");
+  });
+
+  const TARGET = `export const toTargetHref = (origin: string, inPopup: boolean): string =>
+  inPopup ? \`\${origin}/done?popup=1\` : \`\${origin}/done\`;
+
+/** @guarantee ok.only accepts \`<origin>/done\` with no query or \`?popup=1\` */
+export const parseTarget = (raw: string): string | null => {
+  const url = new URL(raw);
+  if (url.searchParams.has("popup") && url.searchParams.get("popup") !== "1") return null;
+  return raw;
+};
+`;
+
+  test("#47: a test that builds its input with a function of the unit's module is named", async () => {
+    const { untested: found } = await untested({
+      "src/target.ts": TARGET,
+      "tests/target.test.ts": `import { expect, it } from "bun:test";
+import { parseTarget, toTargetHref } from "../src/target";
+const APP = "https://app.example.com";
+it.each([toTargetHref(APP, true), toTargetHref(APP, false)])("parseTarget.ok.only %s", (href) => {
+  expect(parseTarget(href)).toBe(href);
+});
+`,
+    });
+    expect(found.map((f) => f.message)).toEqual([
+      'parseTarget commits to match "1" and the contract names it, but no linked test writes it; parseTarget.ok.only builds its input with toTargetHref from the unit\'s own module, so the value changes with the implementation. Write it as a literal',
+    ]);
+  });
+
+  test("#47: writing the value as a literal clears it; a helper from a test-support file does not change the message", async () => {
+    const cleared = await untested({
+      "src/target.ts": TARGET,
+      "tests/target.test.ts": `import { expect, it } from "bun:test";
+import { parseTarget, toTargetHref } from "../src/target";
+const APP = "https://app.example.com";
+it.each([toTargetHref(APP, true), "https://app.example.com/done?popup=1"])("parseTarget.ok.only %s", (href) => {
+  expect(parseTarget(href)).toBe(href);
+});
+`,
+    });
+    expect(cleared.untested).toEqual([]);
+    const support = await untested({
+      "src/target.ts": TARGET,
+      "tests/support.ts": "export const href = (o: string): string => o + '/done?popup=1';\n",
+      "tests/target.test.ts": `import { expect, it } from "bun:test";
+import { parseTarget } from "../src/target";
+import { href } from "./support";
+it("parseTarget.ok.only", () => {
+  expect(parseTarget(href("https://app.example.com"))).not.toBeNull();
+});
+`,
+    });
+    expect(support.untested.map((f) => f.message)).toEqual([
+      'parseTarget commits to match "1" and the contract names it, but no linked test uses it; a test cannot fail when it changes',
+    ]);
+  });
+});
+
+describe("Step Summary: accepted in source (#48)", () => {
+  test("lists tag-accepted findings with their reasons, even past 200 info findings", async () => {
+    const many = Array.from(
+      { length: 210 },
+      (_, i) => `export function op${i}(v: string): string {\n  return v;\n}\n`,
+    ).join("\n");
+    const { report } = await untested({
+      "src/many.ts": many,
+      "src/adult.ts": `/**
+ * @guarantee ok.adult an \`age\` of 18 or more is adult
+ * @acceptFinding decision-untested "18" checked by the caller's tests
+ */
+export function isAdult(age: number): boolean {
+  return age >= 18;
+}
+`,
+      "tests/adult.test.ts": `import { expect, it } from "bun:test";
+import { isAdult } from "../src/adult";
+it("isAdult.ok.adult", () => {
+  expect(isAdult(30)).toBe(true);
+});
+`,
+    });
+    const withInfo = {
+      ...report,
+      findings: report.findings.map((f) =>
+        f.rule === "operation-no-guarantee" ? { ...f, severity: "info" as const } : f,
+      ),
+    };
+    expect(withInfo.findings.filter((f) => f.severity === "info").length).toBeGreaterThan(200);
+    const summary = renderStepSummary(withInfo);
+    expect(summary).toContain("<summary>Accepted in source (<code>@acceptFinding</code>)</summary>");
+    expect(summary).toContain("| checked by the caller's tests |");
+    expect(renderStepSummary({ ...report, findings: [] })).not.toContain("Accepted in source");
   });
 });

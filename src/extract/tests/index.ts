@@ -129,6 +129,7 @@ export function extractTests(
   files: readonly string[],
   adapter: TestAdapter = config.tests.adapter,
 ): TestExtraction {
+  moduleCache.clear();
   const idPattern = new RegExp(config.ids.pattern);
   const describePatterns = config.tests.describeOperationPatterns.map((p) => new RegExp(p));
   const prefixes = [...Object.values(config.tests.prefixes), ...config.tests.titlePrefixes];
@@ -206,6 +207,7 @@ export function extractTests(
                 literals: used.literals,
                 keys: used.keys,
                 iterates: used.iterates,
+                ...(used.builds.length > 0 ? { builds: used.builds } : {}),
                 requirementIds: reqIds,
               });
             } else {
@@ -227,6 +229,8 @@ interface TestFileScope {
   consts: ReadonlyMap<string, ts.Expression>;
   /** Imported local name → exported name and the module it comes from */
   imports: ReadonlyMap<string, { name: string; from: string }>;
+  /** Repository root, to read the modules imports resolve to */
+  root: string;
 }
 
 function testFileScope(sf: ts.SourceFile, file: string, root: string): TestFileScope {
@@ -245,7 +249,7 @@ function testFileScope(sf: ts.SourceFile, file: string, root: string): TestFileS
           imports.set(el.name.text, { name: (el.propertyName ?? el.name).text, from });
     }
   }
-  return { consts, imports };
+  return { consts, imports, root };
 }
 
 /**
@@ -288,8 +292,14 @@ function usedValues(
   roots: readonly ts.Node[],
   tables: readonly ts.Node[],
   limit: number,
-): { literals: string[]; keys: string[]; iterates: Array<{ name: string; from: string }> } {
+): {
+  literals: string[];
+  keys: string[];
+  iterates: Array<{ name: string; from: string }>;
+  builds: Array<{ name: string; from: string; literals: string[] }>;
+} {
   const literals = new Set<string>();
+  const builds = new Map<string, { name: string; from: string }>();
   const keys = new Set<string>();
   const iterates = new Map<string, { name: string; from: string }>();
   const followed = new Set<string>();
@@ -321,6 +331,11 @@ function usedValues(
       keys.size < limit
     )
       keys.add(n.name.text);
+    // A call to an imported function of the project builds an input (`toTargetHref(APP, true)`).
+    if (ts.isCallExpression(n) && ts.isIdentifier(n.expression)) {
+      const imported = scope.imports.get(n.expression.text);
+      if (imported && RESOLVED_MODULE.test(imported.from)) builds.set(`${imported.from}#${imported.name}`, imported);
+    }
     if ((ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) && n.text.length > 0) add(n.text);
     else if (ts.isTemplateExpression(n)) {
       for (const part of [n.head.text, ...n.templateSpans.map((t) => t.literal.text)])
@@ -370,5 +385,62 @@ function usedValues(
   };
   for (const root of roots) walk(root, true);
   for (const table of tables) if (ts.isExpression(table)) iterated(table);
-  return { literals: [...literals], keys: [...keys], iterates: [...iterates.values()] };
+  return {
+    literals: [...literals],
+    keys: [...keys],
+    iterates: [...iterates.values()],
+    builds: [...builds.values()].map((b) => ({ ...b, literals: functionLiterals(scope.root, b.from, b.name, limit) })),
+  };
+}
+
+const RESOLVED_MODULE = /\.(?:m|c)?tsx?$/;
+const moduleCache = new Map<string, ts.SourceFile | undefined>();
+
+/**
+ * The string literals, template parts and non-trivial numbers in the body of a function exported
+ * by a project module (`export function f` or `export const f = () => …`). A test that builds its
+ * input with it gets these values from the implementation's side, not from its own text.
+ */
+function functionLiterals(root: string, from: string, name: string, limit: number): string[] {
+  const path = resolve(root, from);
+  if (!moduleCache.has(path)) {
+    let sf: ts.SourceFile | undefined;
+    try {
+      sf = ts.createSourceFile(path, readFileSync(path, "utf8"), ts.ScriptTarget.Latest, true);
+    } catch {
+      sf = undefined;
+    }
+    moduleCache.set(path, sf);
+  }
+  const sf = moduleCache.get(path);
+  if (!sf) return [];
+  let body: ts.Node | undefined;
+  for (const st of sf.statements) {
+    if (ts.isFunctionDeclaration(st) && st.name?.text === name) body = st.body;
+    if (ts.isVariableStatement(st))
+      for (const d of st.declarationList.declarations)
+        if (
+          ts.isIdentifier(d.name) &&
+          d.name.text === name &&
+          d.initializer &&
+          (ts.isArrowFunction(d.initializer) || ts.isFunctionExpression(d.initializer))
+        )
+          body = d.initializer.body;
+  }
+  if (!body) return [];
+  const out = new Set<string>();
+  const walk = (n: ts.Node): void => {
+    if (out.size >= limit) return;
+    if ((ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) && n.text.length > 0) out.add(n.text);
+    else if (ts.isTemplateExpression(n)) {
+      for (const part of [n.head.text, ...n.templateSpans.map((t) => t.literal.text)])
+        if (/[\p{L}\p{N}]/u.test(part)) out.add(part);
+    } else if (ts.isNumericLiteral(n)) {
+      const value = Number(n.text);
+      if (value !== 0 && value !== 1 && value !== -1) out.add(String(value));
+    }
+    ts.forEachChild(n, walk);
+  };
+  walk(body);
+  return [...out];
 }

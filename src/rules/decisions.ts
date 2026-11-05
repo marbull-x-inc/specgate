@@ -107,6 +107,15 @@ export function evaluateDecisionRules(
       memberUsedBy.set(key, by);
     }
   }
+  // A linked test that builds its input with another function of the unit's own module gets the
+  // value from the implementation's side: both change together, and the test stays green (#47).
+  const builtBy = (unit: Unit, d: Decision): { test: string; name: string } | undefined => {
+    for (const t of linkedTests(unit.id))
+      for (const b of t.builds ?? [])
+        if (b.from === unit.file && b.name !== unit.operation && b.name !== unit.target && valueUsed(d, b.literals))
+          return { test: t.key, name: b.name };
+    return undefined;
+  };
   const memberUsed = (d: Decision): boolean => (memberUsedBy.get(memberKey(d)) ?? []).length > 0;
 
   // decision-untested on a member is reported once, preferably on a unit in the collection's module.
@@ -157,7 +166,7 @@ export function evaluateDecisionRules(
       }
       if (used) continue;
       emit("decision-untested", {
-        message: untestedMessage(unit, d, literals),
+        message: untestedMessage(unit, d, literals, [], builtBy(unit, d)),
         file: unit.file,
         line: d.line,
         unit: unit.id,
@@ -180,7 +189,7 @@ export function evaluateDecisionRules(
   for (const { unit, decision } of untestedMembers.values()) {
     const others = (memberUsedBy.get(memberKey(decision)) ?? []).filter((id) => id !== unit.id);
     emit("decision-untested", {
-      message: untestedMessage(unit, decision, literalsOf(unit.id), others),
+      message: untestedMessage(unit, decision, literalsOf(unit.id), others, builtBy(unit, decision)),
       file: unit.file,
       line: decision.line,
       unit: unit.id,
@@ -230,14 +239,18 @@ export function evaluateDecisionRules(
     });
 }
 
-function untestedMessage(
+export function untestedMessage(
   unit: Unit,
   d: Decision,
   literals: readonly string[],
   pinnedBy: readonly string[] = [],
+  built?: { test: string; name: string },
 ): string {
   const named = d.names.length > 0 ? ` (${d.names.join(", ")})` : "";
-  const what = `${unit.id} commits to ${d.kind} ${d.values.map((v) => JSON.stringify(v)).join(", ")}${named} and the contract names it, but no linked test uses it`;
+  const head = `${unit.id} commits to ${d.kind} ${d.values.map((v) => JSON.stringify(v)).join(", ")}${named} and the contract names it`;
+  if (built)
+    return `${head}, but no linked test writes it; ${built.test} builds its input with ${built.name} from the unit's own module, so the value changes with the implementation. Write it as a literal`;
+  const what = `${head}, but no linked test uses it`;
   if (pinnedBy.length > 0)
     return `${what} (a test of ${pinnedBy.join(", ")} uses it); ${unit.id}'s own tests cannot fail when it changes`;
   const near = closestLiteral(d, literals);
@@ -248,15 +261,44 @@ function untestedMessage(
 const CLOSEST_LENGTH = 60;
 
 /**
- * The shortest linked-test literal that contains one of the decision's values, for triage: it is
- * often the place a test does pin the value in a form the rule does not read.
+ * The linked-test literal a reader should look at, for triage. Candidates are ranked, and the
+ * shortest of the best rank wins: (1) a literal holding a `key=` pair for the decision's key, (2) a
+ * literal holding the value as a whole token (bounded by the ends, whitespace or `= & ? ; / , :`;
+ * `-` and `_` are part of a word), (3) any literal containing the value. For values of one or two
+ * characters, rank 3 is skipped: almost every literal contains them, and a wrong hint costs more
+ * than none.
  */
 function closestLiteral(d: Decision, literals: readonly string[]): string | undefined {
-  let best: string | undefined;
-  for (const l of literals)
-    if (d.values.some((v) => l !== v && l.includes(v)) && (best === undefined || l.length < best.length)) best = l;
-  if (best === undefined) return undefined;
-  return best.length > CLOSEST_LENGTH ? `${best.slice(0, CLOSEST_LENGTH - 1)}…` : best;
+  const rankOf = (l: string): number | undefined => {
+    if (d.key !== undefined && keyPair(d.key).test(l)) return 1;
+    if (d.values.some((v) => l !== v && wholeToken(v).test(l))) return 2;
+    if (d.values.some((v) => v.length > 2 && l !== v && l.includes(v))) return 3;
+    return undefined;
+  };
+  let best: { literal: string; rank: number } | undefined;
+  for (const l of literals) {
+    const rank = rankOf(l);
+    if (rank === undefined) continue;
+    if (!best || rank < best.rank || (rank === best.rank && l.length < best.literal.length))
+      best = { literal: l, rank };
+  }
+  if (!best) return undefined;
+  const text = best.literal;
+  return text.length > CLOSEST_LENGTH ? `${text.slice(0, CLOSEST_LENGTH - 1)}…` : text;
+}
+
+const TOKEN_BOUNDARY = "\\s=&?;/,:";
+
+function wholeToken(value: string): RegExp {
+  return new RegExp(`(?:^|[${TOKEN_BOUNDARY}])${escapeRegExp(value)}(?:$|[${TOKEN_BOUNDARY}])`);
+}
+
+function keyPair(key: string): RegExp {
+  return new RegExp(`(?:^|[?&;])${escapeRegExp(key)}=`);
+}
+
+function escapeRegExp(text: string): string {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 const IDENTIFIER = /^[A-Za-z_$][\w$]*$/;
@@ -267,8 +309,7 @@ const IDENTIFIER = /^[A-Za-z_$][\w$]*$/;
  * almost any literal.
  */
 function keyValuePair(key: string, value: string): RegExp {
-  const esc = (t: string): string => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return new RegExp(`(?:^|[?&;])${esc(key)}=${esc(value)}(?:$|[&;#])`);
+  return new RegExp(`(?:^|[?&;])${escapeRegExp(key)}=${escapeRegExp(value)}(?:$|[&;#])`);
 }
 
 function isNumberText(value: string): boolean {
@@ -299,6 +340,7 @@ export function valueUsed(d: Decision, literals: readonly string[], keys: readon
     }
     if (d.kind === "output") return literals.some((l) => l.includes(v));
     if (d.kind === "member") {
+      if (d.key !== undefined && literals.some((l) => keyValuePair(d.key ?? "", v).test(l))) return true;
       switch (d.probe) {
         case "prefix":
           return literals.some((l) => l.startsWith(v));

@@ -123,8 +123,9 @@ export interface Decision {
   /** `member` decisions: how the unit compares its input with the element */
   probe?: MemberProbe;
   /**
-   * `match` decisions: the constant key the compared value is read with (`params.get("popup")`,
-   * `obj["popup"]`, `obj.popup`), so a test writing `"?popup=1"` uses the value `1`
+   * The constant key the value is read with, so a test writing `"?popup=1"` uses the value `1`:
+   * for `match`, `params.get("popup")`, `obj["popup"]` or `obj.popup`; for `member`, the string
+   * literal passed with the collection to a call (`useQueryEnum("view", VIEWS, …)`)
    */
   key?: string;
 }
@@ -263,6 +264,11 @@ export interface TestCase {
    * file, the import specifier otherwise).
    */
   iterates: Array<{ name: string; from: string }>;
+  /**
+   * Functions of project modules the test calls to build its input (`toTargetHref(APP, true)`),
+   * with the literal values in their bodies. Absent when there are none.
+   */
+  builds?: Array<{ name: string; from: string; literals: string[] }>;
   /** Opaque frozen-requirement ids from the file header, if enabled */
   requirementIds: string[];
 }

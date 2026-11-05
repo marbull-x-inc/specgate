@@ -294,7 +294,7 @@
                   ]
                 },
                 "key": {
-                  "description": "match decisions: the constant key the compared value is read with",
+                  "description": "match and member decisions: the constant key the value is read with (a member's key is the string passed with the collection to a call)",
                   "type": "string"
                 }
               },
@@ -814,6 +814,33 @@
               "additionalProperties": false
             },
             "description": "Imported constants the test iterates, with the module they come from"
+          },
+          "builds": {
+            "description": "Functions of project modules the test calls to build its input, with the literals in their bodies",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "literals": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "name",
+                "from",
+                "literals"
+              ],
+              "additionalProperties": false
+            }
           },
           "requirementIds": {
             "type": "array",
