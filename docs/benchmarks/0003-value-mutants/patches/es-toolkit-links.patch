@@ -1,0 +1,968 @@
+diff --git a/src/string/camelCase.spec.ts b/src/string/camelCase.spec.ts
+index 9b8b29a..c41c868 100644
+--- a/src/string/camelCase.spec.ts
++++ b/src/string/camelCase.spec.ts
+@@ -2,39 +2,39 @@ import { describe, expect, it } from 'vitest';
+ import { camelCase } from './camelCase';
+ 
+ describe('camelCase', () => {
+-  it('should change camel case to camel case', () => {
++  it('camelCase.ok.from-other-cases should change camel case to camel case', () => {
+     expect(camelCase('camelCase')).toEqual('camelCase');
+   });
+ 
+-  it('should change space to camel case', () => {
++  it('camelCase.ok.words-joined should change space to camel case', () => {
+     expect(camelCase('some whitespace')).toEqual('someWhitespace');
+   });
+ 
+-  it('should change hyphen to camel case', () => {
++  it('camelCase.ok.words-joined should change hyphen to camel case', () => {
+     expect(camelCase('hyphen-text')).toEqual('hyphenText');
+   });
+ 
+-  it('should change Acronyms to small letter', () => {
++  it('camelCase.ok.from-other-cases should change Acronyms to small letter', () => {
+     expect(camelCase('HTTPRequest')).toEqual('httpRequest');
+   });
+ 
+-  it('should handle leading and trailing whitespace', () => {
++  it('camelCase.ok.words-joined should handle leading and trailing whitespace', () => {
+     expect(camelCase('    leading and trailing whitespace    ')).toEqual('leadingAndTrailingWhitespace');
+   });
+ 
+-  it('should handle special characters correctly', () => {
++  it('camelCase.ok.words-joined should handle special characters correctly', () => {
+     expect(camelCase('special@characters!')).toEqual('specialCharacters');
+   });
+ 
+-  it('should work with an empty string', () => {
++  it('camelCase.ok.words-joined should work with an empty string', () => {
+     expect(camelCase('')).toEqual('');
+   });
+ 
+-  it('should work with screaming camel case', () => {
++  it('camelCase.ok.from-other-cases should work with screaming camel case', () => {
+     expect(camelCase('FOO_BAR')).toEqual('fooBar');
+   });
+ 
+-  it('should support emojis', () => {
++  it('camelCase.ok.unicode-kept should support emojis', () => {
+     expect(camelCase('Keep unicode 😅')).toEqual('keepUnicode😅');
+   });
+ });
+diff --git a/src/string/capitalize.spec.ts b/src/string/capitalize.spec.ts
+index 47db7e1..9d443c3 100644
+--- a/src/string/capitalize.spec.ts
++++ b/src/string/capitalize.spec.ts
+@@ -2,31 +2,31 @@ import { describe, expect, it } from 'vitest';
+ import { capitalize } from './capitalize';
+ 
+ describe('capitalize', () => {
+-  it('should converts the first character of string to upper case', () => {
++  it('capitalize.ok.first-upper-rest-lower should converts the first character of string to upper case', () => {
+     expect(capitalize('fred')).toEqual('Fred');
+   });
+ 
+-  it('should converts the first character of string to upper case and the remaining to lower case.', () => {
++  it('capitalize.ok.first-upper-rest-lower should converts the first character of string to upper case and the remaining to lower case.', () => {
+     expect(capitalize('FRED')).toEqual('Fred');
+   });
+ 
+-  it('should handle special characters correctly', () => {
++  it('capitalize.ok.first-upper-rest-lower should handle special characters correctly', () => {
+     expect(capitalize('special@characters!')).toEqual('Special@characters!');
+   });
+ 
+-  it('should handle hyphen correctly', () => {
++  it('capitalize.ok.first-upper-rest-lower should handle hyphen correctly', () => {
+     expect(capitalize('hyphen-text')).toEqual('Hyphen-text');
+   });
+ 
+-  it('should handle leading whitespace', () => {
++  it('capitalize.ok.first-upper-rest-lower should handle leading whitespace', () => {
+     expect(capitalize(' fred')).toEqual(' fred');
+   });
+ 
+-  it('should handle strings that are already in capitalize', () => {
++  it('capitalize.ok.short-strings should handle strings that are already in capitalize', () => {
+     expect(capitalize('Fred')).toEqual('Fred');
+   });
+ 
+-  it('should work with an empty string', () => {
++  it('capitalize.ok.short-strings should work with an empty string', () => {
+     expect(capitalize('')).toEqual('');
+   });
+ });
+diff --git a/src/string/constantCase.spec.ts b/src/string/constantCase.spec.ts
+index 973f732..5981e35 100644
+--- a/src/string/constantCase.spec.ts
++++ b/src/string/constantCase.spec.ts
+@@ -2,39 +2,39 @@ import { describe, expect, it } from 'vitest';
+ import { constantCase } from './constantCase';
+ 
+ describe('constantCase', () => {
+-  it('should change camel case to constant case', async () => {
++  it('constantCase.ok.from-camel-pascal-snake should change camel case to constant case', async () => {
+     expect(constantCase('camelCase')).toEqual('CAMEL_CASE');
+   });
+ 
+-  it('should change space to underscore', async () => {
++  it('constantCase.ok.upper-with-underscores should change space to underscore', async () => {
+     expect(constantCase('some whitespace')).toEqual('SOME_WHITESPACE');
+   });
+ 
+-  it('should change hyphen to underscore', async () => {
++  it('constantCase.ok.upper-with-underscores should change hyphen to underscore', async () => {
+     expect(constantCase('hyphen-text')).toEqual('HYPHEN_TEXT');
+   });
+ 
+-  it('should change Acronyms to small letter', async () => {
++  it('constantCase.ok.acronym-word should change Acronyms to small letter', async () => {
+     expect(constantCase('HTTPRequest')).toEqual('HTTP_REQUEST');
+   });
+ 
+-  it('should handle leading and trailing whitespace', async () => {
++  it('constantCase.ok.extra-spaces-dropped should handle leading and trailing whitespace', async () => {
+     expect(constantCase('    leading and trailing whitespace')).toEqual('LEADING_AND_TRAILING_WHITESPACE');
+   });
+ 
+-  it('should handle special characters correctly', async () => {
++  it('constantCase.ok.upper-with-underscores should handle special characters correctly', async () => {
+     expect(constantCase('special@characters!')).toEqual('SPECIAL_CHARACTERS');
+   });
+ 
+-  it('should handle strings that are already in CONSTANT_CASE', async () => {
++  it('constantCase.ok.from-camel-pascal-snake should handle strings that are already in CONSTANT_CASE', async () => {
+     expect(constantCase('CONSTANT_CASE')).toEqual('CONSTANT_CASE');
+   });
+ 
+-  it('should work with an empty string', async () => {
++  it('constantCase.ok.upper-with-underscores should work with an empty string', async () => {
+     expect(constantCase('')).toEqual('');
+   });
+ 
+-  it('should work with screaming constant case', async () => {
++  it('constantCase.ok.from-camel-pascal-snake should work with screaming constant case', async () => {
+     expect(constantCase('foo_bar')).toEqual('FOO_BAR');
+   });
+ });
+diff --git a/src/string/deburr.spec.ts b/src/string/deburr.spec.ts
+index 4620b82..08f5b2f 100644
+--- a/src/string/deburr.spec.ts
++++ b/src/string/deburr.spec.ts
+@@ -6,25 +6,25 @@ import { deburredLetters } from '../_internal/deburredLetters';
+ import { deburr as deburrCompat } from '../compat/string/deburr';
+ 
+ describe('deburr', () => {
+-  it('should convert examples correctly', () => {
++  it('deburr.ok.accents-removed should convert examples correctly', () => {
+     expect(deburr('Æthelred')).toBe('Aethelred');
+     expect(deburr('München')).toBe('Munchen');
+     expect(deburr('Crème brûlée')).toBe('Creme brulee');
+   });
+ 
+-  it('should convert Latin Unicode letters to basic Latin', () => {
++  it('deburr.ok.accents-removed should convert Latin Unicode letters to basic Latin', () => {
+     const actual = burredLetters.map(deburr);
+     expect(actual).toEqual(deburredLetters);
+   });
+ 
+-  it('should not deburr Latin mathematical operators', () => {
++  it('deburr.ok.accents-removed should not deburr Latin mathematical operators', () => {
+     const operators = ['\xd7', '\xf7'];
+     const actual = operators.map(deburr);
+ 
+     expect(actual).toEqual(operators);
+   });
+ 
+-  it('should deburr combining diacritical marks', () => {
++  it('deburr.ok.accents-removed should deburr combining diacritical marks', () => {
+     const expected = comboMarks.map(() => 'ei');
+ 
+     const actual = comboMarks.map(chr => deburr(`e${chr}i`));
+@@ -32,7 +32,7 @@ describe('deburr', () => {
+     expect(actual).toEqual(expected);
+   });
+ 
+-  it('should remove combining marks from every supported range', () => {
++  it('deburr.ok.accents-removed should remove combining marks from every supported range', () => {
+     // Combining Diacritical Marks (U+0300-U+036F).
+     expect(deburr('e\u0300i')).toBe('ei');
+     expect(deburr('e\u036fi')).toBe('ei');
+@@ -48,7 +48,7 @@ describe('deburr', () => {
+     expect(deburr('e\ufe2fi')).toBe('ei');
+   });
+ 
+-  it('should preserve characters just outside the combining mark ranges', () => {
++  it('deburr.ok.accents-removed should preserve characters just outside the combining mark ranges', () => {
+     expect(deburr('e\u02ffi')).toBe('e\u02ffi');
+     expect(deburr('e\u0370i')).toBe('e\u0370i');
+     expect(deburr('e\u20cfi')).toBe('e\u20cfi');
+@@ -57,55 +57,55 @@ describe('deburr', () => {
+     expect(deburr('e\ufe30i')).toBe('e\ufe30i');
+   });
+ 
+-  it('should remove consecutive marks spanning different ranges', () => {
++  it('deburr.ok.accents-removed should remove consecutive marks spanning different ranges', () => {
+     expect(deburr('a\u0301\u0327\u20d1')).toBe('a');
+     expect(deburr('\u00c6\u20dd')).toBe('Ae');
+   });
+ 
+-  it('should not decompose Hangul syllables', () => {
++  it('deburr.ok.non-latin-kept should not decompose Hangul syllables', () => {
+     expect(deburr('한국어')).toBe('한국어');
+     expect(deburr('한국어')).toHaveLength(3);
+     expect(deburr('한국어 테스트')).toBe('한국어 테스트');
+   });
+ 
+-  it('should keep letters of other scripts as they are, even with diacritical marks', () => {
++  it('deburr.ok.non-latin-kept should keep letters of other scripts as they are, even with diacritical marks', () => {
+     expect(deburr('йогурт')).toBe('йогурт');
+     expect(deburr('Мой край')).toBe('Мой край');
+     expect(deburr('Ελληνικά')).toBe('Ελληνικά');
+     expect(deburr('がぎぐ')).toBe('がぎぐ');
+   });
+ 
+-  it('should not decompose Indic and Arabic letters', () => {
++  it('deburr.ok.non-latin-kept should not decompose Indic and Arabic letters', () => {
+     expect(deburr('\u0958')).toBe('\u0958'); // Devanagari KA with nukta
+     expect(deburr('\u09cb')).toBe('\u09cb'); // Bengali vowel sign O
+     expect(deburr('\u0623')).toBe('\u0623'); // Arabic ALEF with hamza above
+   });
+ 
+-  it('should deburr Latin letters outside the Latin-1 Supplement and Latin Extended-A blocks', () => {
++  it('deburr.ok.accents-removed should deburr Latin letters outside the Latin-1 Supplement and Latin Extended-A blocks', () => {
+     expect(deburr('Tiếng Việt')).toBe('Tieng Viet');
+     expect(deburr('Ǎǎ')).toBe('Aa');
+     expect(deburr('Ǯǯ')).toBe('Ʒʒ');
+     expect(deburr('\u212a\u212b')).toBe('KA'); // Kelvin and Angstrom signs
+   });
+ 
+-  it('should deburr letters that decompose into a special Latin letter', () => {
++  it('deburr.ok.accents-removed should deburr letters that decompose into a special Latin letter', () => {
+     expect(deburr('ǢǣǼǽǾǿẛ')).toBe('AeaeAeaeOos');
+   });
+ 
+-  it('should keep non-letter symbols that decompose into ASCII', () => {
++  it('deburr.ok.accents-removed should keep non-letter symbols that decompose into ASCII', () => {
+     expect(deburr('≠')).toBe('≠');
+     expect(deburr('\u037e')).toBe('\u037e'); // Greek question mark
+   });
+ 
+-  it('should deburr only Latin letters in a mixed string', () => {
++  it('deburr.ok.mixed-scripts should deburr only Latin letters in a mixed string', () => {
+     expect(deburr('Café Москва 한국어')).toBe('Cafe Москва 한국어');
+   });
+ 
+-  it('should keep surrogate pairs', () => {
++  it('deburr.ok.accents-removed should keep surrogate pairs', () => {
+     expect(deburr('😀é')).toBe('😀e');
+   });
+ 
+-  it('should match the compat implementation for U+00C0 to U+017F', () => {
++  it('deburr.ok.accents-removed should match the compat implementation for U+00C0 to U+017F', () => {
+     for (let code = 0xc0; code <= 0x17f; code++) {
+       const char = String.fromCharCode(code);
+       expect(deburr(char)).toBe(deburrCompat(char));
+diff --git a/src/string/escape.spec.ts b/src/string/escape.spec.ts
+index f14f18b..dc8f707 100644
+--- a/src/string/escape.spec.ts
++++ b/src/string/escape.spec.ts
+@@ -9,20 +9,20 @@ describe('escape', () => {
+   escaped += escaped;
+   unescaped += unescaped;
+ 
+-  it('should escape values', () => {
++  it('escape.ok.tags-escaped should escape values', () => {
+     expect(escape(unescaped)).toBe(escaped);
+   });
+ 
+-  it('should handle strings with nothing to escape', () => {
++  it('escape.ok.tags-escaped should handle strings with nothing to escape', () => {
+     expect(escape('abc')).toBe('abc');
+   });
+ 
+-  it('should escape the same characters unescaped by `_.unescape`', () => {
++  it('escape.ok.tags-escaped should escape the same characters unescaped by `_.unescape`', () => {
+     expect(escape(unescape(escaped))).toBe(escaped);
+   });
+ 
+   ['`', '/'].forEach(chr => {
+-    it(`should not escape the "${chr}" character`, () => {
++    it(`escape.ok.tags-escaped should not escape the "${chr}" character`, () => {
+       expect(escape(chr)).toBe(chr);
+     });
+   });
+diff --git a/src/string/escapeRegExp.spec.ts b/src/string/escapeRegExp.spec.ts
+index bd7e8b9..5810e6d 100644
+--- a/src/string/escapeRegExp.spec.ts
++++ b/src/string/escapeRegExp.spec.ts
+@@ -5,11 +5,11 @@ describe('escapeRegExp', () => {
+   const escaped = '\\^\\$\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\\\';
+   const unescaped = '^$.*+?()[]{}|\\';
+ 
+-  it('should escape values', () => {
++  it('escapeRegExp.ok.dot-escaped should escape values', () => {
+     expect(escapeRegExp(unescaped + unescaped)).toBe(escaped + escaped);
+   });
+ 
+-  it('should handle strings with nothing to escape', () => {
++  it('escapeRegExp.ok.dot-escaped should handle strings with nothing to escape', () => {
+     expect(escapeRegExp('abc')).toBe('abc');
+   });
+ });
+diff --git a/src/string/kebabCase.spec.ts b/src/string/kebabCase.spec.ts
+index 9c9d50b..c3020a4 100644
+--- a/src/string/kebabCase.spec.ts
++++ b/src/string/kebabCase.spec.ts
+@@ -2,47 +2,47 @@ import { describe, expect, it } from 'vitest';
+ import { kebabCase } from './kebabCase';
+ 
+ describe('kebabCase', () => {
+-  it('should change camel case to kebab case', () => {
++  it('kebabCase.ok.camel-to-kebab should change camel case to kebab case', () => {
+     expect(kebabCase('camelCase')).toEqual('camel-case');
+   });
+ 
+-  it('should change space to dash', () => {
++  it('kebabCase.ok.whitespace-to-dash should change space to dash', () => {
+     expect(kebabCase('some whitespace')).toEqual('some-whitespace');
+   });
+ 
+-  it('should change hyphen to dash', () => {
++  it('kebabCase.ok.kebab-unchanged should change hyphen to dash', () => {
+     expect(kebabCase('hyphen-text')).toEqual('hyphen-text');
+   });
+ 
+-  it('should change Acronyms to small letter', () => {
++  it('kebabCase.ok.acronym-split should change Acronyms to small letter', () => {
+     expect(kebabCase('HTTPRequest')).toEqual('http-request');
+   });
+ 
+-  it('should handle leading and trailing whitespace', () => {
++  it('kebabCase.ok.whitespace-to-dash should handle leading and trailing whitespace', () => {
+     expect(kebabCase('    leading and trailing whitespace    ')).toEqual('leading-and-trailing-whitespace');
+   });
+ 
+-  it('should handle special characters correctly', () => {
++  it('kebabCase.ok.camel-to-kebab should handle special characters correctly', () => {
+     expect(kebabCase('special@characters!')).toEqual('special-characters');
+   });
+ 
+-  it('should handle strings that are already in snake_case', () => {
++  it('kebabCase.ok.kebab-unchanged should handle strings that are already in snake_case', () => {
+     expect(kebabCase('snake_case')).toEqual('snake-case');
+   });
+ 
+-  it('should work with an empty string', () => {
++  it('kebabCase.ok.camel-to-kebab should work with an empty string', () => {
+     expect(kebabCase('')).toEqual('');
+   });
+ 
+-  it('should work with an leading and trailing underscores', () => {
++  it('kebabCase.ok.camel-to-kebab should work with an leading and trailing underscores', () => {
+     expect(kebabCase('__foo_bar___')).toEqual('foo-bar');
+   });
+ 
+-  it('should work with screaming snake case', () => {
++  it('kebabCase.ok.camel-to-kebab should work with screaming snake case', () => {
+     expect(kebabCase('FOO_BAR')).toEqual('foo-bar');
+   });
+ 
+-  it('should work with capitalized words', () => {
++  it('kebabCase.ok.camel-to-kebab should work with capitalized words', () => {
+     expect(kebabCase('Foo Bar')).toEqual('foo-bar');
+   });
+ });
+diff --git a/src/string/lowerCase.spec.ts b/src/string/lowerCase.spec.ts
+index c0e1175..aedd791 100644
+--- a/src/string/lowerCase.spec.ts
++++ b/src/string/lowerCase.spec.ts
+@@ -2,39 +2,39 @@ import { describe, expect, it } from 'vitest';
+ import { lowerCase } from './lowerCase';
+ 
+ describe('lowerCase', () => {
+-  it('should change camel case to lower case', () => {
++  it('lowerCase.ok.lower-with-spaces should change camel case to lower case', () => {
+     expect(lowerCase('camelCase')).toEqual('camel case');
+   });
+ 
+-  it('should change space to space', () => {
++  it('lowerCase.ok.lower-with-spaces should change space to space', () => {
+     expect(lowerCase('some whitespace')).toEqual('some whitespace');
+   });
+ 
+-  it('should change hyphen to space', () => {
++  it('lowerCase.ok.from-other-cases should change hyphen to space', () => {
+     expect(lowerCase('hyphen-text')).toEqual('hyphen text');
+   });
+ 
+-  it('should change Acronyms to small letter', () => {
++  it('lowerCase.ok.acronym-split should change Acronyms to small letter', () => {
+     expect(lowerCase('HTTPRequest')).toEqual('http request');
+   });
+ 
+-  it('should handle leading and trailing whitespace', () => {
++  it('lowerCase.ok.mixed-separators should handle leading and trailing whitespace', () => {
+     expect(lowerCase('    leading and trailing whitespace    ')).toEqual('leading and trailing whitespace');
+   });
+ 
+-  it('should handle special characters correctly', () => {
++  it('lowerCase.ok.mixed-separators should handle special characters correctly', () => {
+     expect(lowerCase('special@characters!')).toEqual('special characters');
+   });
+ 
+-  it('should handle strings that are already in lower case', () => {
++  it('lowerCase.ok.lower-with-spaces should handle strings that are already in lower case', () => {
+     expect(lowerCase('lower_case')).toEqual('lower case');
+   });
+ 
+-  it('should work with an empty string', () => {
++  it('lowerCase.ok.lower-with-spaces should work with an empty string', () => {
+     expect(lowerCase('')).toEqual('');
+   });
+ 
+-  it('should work with screaming snake case', () => {
++  it('lowerCase.ok.from-other-cases should work with screaming snake case', () => {
+     expect(lowerCase('FOO_BAR')).toEqual('foo bar');
+   });
+ });
+diff --git a/src/string/pad.spec.ts b/src/string/pad.spec.ts
+index f76f575..12f804e 100644
+--- a/src/string/pad.spec.ts
++++ b/src/string/pad.spec.ts
+@@ -2,32 +2,32 @@ import { describe, expect, it } from 'vitest';
+ import { pad } from './pad';
+ 
+ describe('pad', () => {
+-  it('should pad a string on the left and right sides if it is shorter than the length', () => {
++  it('pad.ok.default-chars-space should pad a string on the left and right sides if it is shorter than the length', () => {
+     expect(pad('abc', 8)).toBe('  abc   ');
+   });
+ 
+-  it('should pad a string on the left and right sides with custom characters', () => {
++  it('pad.ok.custom-chars should pad a string on the left and right sides with custom characters', () => {
+     expect(pad('abc', 8, '_-')).toBe('_-abc_-_');
+   });
+ 
+-  it('should not pad a string if it has the same length', () => {
++  it('pad.ok.longer-or-equal-unchanged should not pad a string if it has the same length', () => {
+     expect(pad('abc', 3)).toBe('abc');
+   });
+ 
+-  it('should not pad a string if the length is less than the string length', () => {
++  it('pad.ok.longer-or-equal-unchanged should not pad a string if the length is less than the string length', () => {
+     expect(pad('abc', 2)).toBe('abc');
+     expect(pad('abc', 0)).toBe('abc');
+   });
+ 
+-  it('should not pad a string if the length is not a number', () => {
++  it('pad.ok.default-chars-space should not pad a string if the length is not a number', () => {
+     expect(pad('abc', NaN)).toBe('abc');
+   });
+ 
+-  it('should not pad a string if the length is not an integer', () => {
++  it('pad.ok.default-chars-space should not pad a string if the length is not an integer', () => {
+     expect(pad('abc', 3.5)).toBe('abc');
+   });
+ 
+-  it('should not pad a string if the length is negative', () => {
++  it('pad.ok.default-chars-space should not pad a string if the length is negative', () => {
+     expect(pad('abc', -3)).toBe('abc');
+   });
+ });
+diff --git a/src/string/pascalCase.spec.ts b/src/string/pascalCase.spec.ts
+index 84f75d1..a8f114c 100644
+--- a/src/string/pascalCase.spec.ts
++++ b/src/string/pascalCase.spec.ts
+@@ -2,35 +2,35 @@ import { describe, expect, it } from 'vitest';
+ import { pascalCase } from './pascalCase';
+ 
+ describe('pascalCase', () => {
+-  it('should change space to pascal case', () => {
++  it('pascalCase.ok.basic should change space to pascal case', () => {
+     expect(pascalCase('some whitespace')).toEqual('SomeWhitespace');
+   });
+ 
+-  it('should change hyphen to pascal case', () => {
++  it('pascalCase.ok.hyphen-underscore should change hyphen to pascal case', () => {
+     expect(pascalCase('hyphen-text')).toEqual('HyphenText');
+   });
+ 
+-  it('should change Acronyms to small letter', () => {
++  it('pascalCase.ok.consecutive-uppercase should change Acronyms to small letter', () => {
+     expect(pascalCase('HTTPRequest')).toEqual('HttpRequest');
+   });
+ 
+-  it('should handle leading and trailing whitespace', () => {
++  it('pascalCase.ok.basic should handle leading and trailing whitespace', () => {
+     expect(pascalCase('    leading and trailing whitespace    ')).toEqual('LeadingAndTrailingWhitespace');
+   });
+ 
+-  it('should handle special characters correctly', () => {
++  it('pascalCase.ok.numbers-and-symbols should handle special characters correctly', () => {
+     expect(pascalCase('special@characters!')).toEqual('SpecialCharacters');
+   });
+ 
+-  it('should handle strings that are already in PascalCase', () => {
++  it('pascalCase.ok.basic should handle strings that are already in PascalCase', () => {
+     expect(pascalCase('PascalCase')).toEqual('PascalCase');
+   });
+ 
+-  it('should work with an empty string', () => {
++  it('pascalCase.ok.basic should work with an empty string', () => {
+     expect(pascalCase('')).toEqual('');
+   });
+ 
+-  it('should work with screaming camel case', () => {
++  it('pascalCase.ok.basic should work with screaming camel case', () => {
+     expect(pascalCase('FOO_BAR')).toEqual('FooBar');
+   });
+ });
+diff --git a/src/string/reverseString.spec.ts b/src/string/reverseString.spec.ts
+index bf85247..37616ae 100644
+--- a/src/string/reverseString.spec.ts
++++ b/src/string/reverseString.spec.ts
+@@ -2,24 +2,24 @@ import { describe, expect, it } from 'vitest';
+ import { reverseString } from './reverseString';
+ 
+ describe('reverseString', () => {
+-  it('should reverse a simple string', () => {
++  it('reverseString.ok.basic should reverse a simple string', () => {
+     expect(reverseString('hello')).toBe('olleh');
+   });
+ 
+-  it('should reverse a string with spaces', () => {
++  it('reverseString.ok.basic should reverse a string with spaces', () => {
+     expect(reverseString('foo bar')).toBe('rab oof');
+   });
+ 
+-  it('should reverse a string with Unicode characters', () => {
++  it('reverseString.ok.hangul-and-symbols should reverse a string with Unicode characters', () => {
+     expect(reverseString('foo 😄 bar')).toBe('rab 😄 oof');
+     expect(reverseString('foo 𝌆 bar')).toBe('rab 𝌆 oof');
+   });
+ 
+-  it('should reverse an empty string', () => {
++  it('reverseString.ok.basic should reverse an empty string', () => {
+     expect(reverseString('')).toBe('');
+   });
+ 
+-  it('should reverse a numeric string', () => {
++  it('reverseString.ok.hangul-and-symbols should reverse a numeric string', () => {
+     expect(reverseString('12345')).toBe('54321');
+   });
+ });
+diff --git a/src/string/snakeCase.spec.ts b/src/string/snakeCase.spec.ts
+index 661fe7e..17eb55c 100644
+--- a/src/string/snakeCase.spec.ts
++++ b/src/string/snakeCase.spec.ts
+@@ -2,39 +2,39 @@ import { describe, expect, it } from 'vitest';
+ import { snakeCase } from './snakeCase';
+ 
+ describe('snakeCase', () => {
+-  it('should change camel case to snake case', () => {
++  it('snakeCase.ok.basic should change camel case to snake case', () => {
+     expect(snakeCase('camelCase')).toEqual('camel_case');
+   });
+ 
+-  it('should change space to underscore', () => {
++  it('snakeCase.ok.basic should change space to underscore', () => {
+     expect(snakeCase('some whitespace')).toEqual('some_whitespace');
+   });
+ 
+-  it('should change hyphen to underscore', () => {
++  it('snakeCase.ok.hyphen-pascal should change hyphen to underscore', () => {
+     expect(snakeCase('hyphen-text')).toEqual('hyphen_text');
+   });
+ 
+-  it('should change Acronyms to small letter', () => {
++  it('snakeCase.ok.consecutive-uppercase should change Acronyms to small letter', () => {
+     expect(snakeCase('HTTPRequest')).toEqual('http_request');
+   });
+ 
+-  it('should handle leading and trailing whitespace', () => {
++  it('snakeCase.ok.basic should handle leading and trailing whitespace', () => {
+     expect(snakeCase('    leading and trailing whitespace    ')).toEqual('leading_and_trailing_whitespace');
+   });
+ 
+-  it('should handle special characters correctly', () => {
++  it('snakeCase.ok.numbers-split should handle special characters correctly', () => {
+     expect(snakeCase('special@characters!')).toEqual('special_characters');
+   });
+ 
+-  it('should handle strings that are already in snake_case', () => {
++  it('snakeCase.ok.basic should handle strings that are already in snake_case', () => {
+     expect(snakeCase('snake_case')).toEqual('snake_case');
+   });
+ 
+-  it('should work with an empty string', () => {
++  it('snakeCase.ok.basic should work with an empty string', () => {
+     expect(snakeCase('')).toEqual('');
+   });
+ 
+-  it('should work with screaming snake case', () => {
++  it('snakeCase.ok.basic should work with screaming snake case', () => {
+     expect(snakeCase('FOO_BAR')).toEqual('foo_bar');
+   });
+ });
+diff --git a/src/string/startCase.spec.ts b/src/string/startCase.spec.ts
+index 6224164..a42681a 100644
+--- a/src/string/startCase.spec.ts
++++ b/src/string/startCase.spec.ts
+@@ -2,69 +2,69 @@ import { describe, expect, it } from 'vitest';
+ import { startCase } from './startCase';
+ 
+ describe('startCase', function () {
+-  it('should capitalize each word', function () {
++  it('startCase.ok.capitalized-words should capitalize each word', function () {
+     expect(startCase('--foo-bar--')).toBe('Foo Bar');
+     expect(startCase('fooBar')).toBe('Foo Bar');
+     expect(startCase('__FOO_BAR__')).toBe('Foo Bar');
+   });
+ 
+-  it('should handle compound words', function () {
++  it('startCase.ok.from-camel-pascal should handle compound words', function () {
+     expect(startCase('createElement')).toBe('Create Element');
+     expect(startCase('iPhone')).toBe('I Phone');
+     expect(startCase('XMLHttpRequest')).toBe('Xml Http Request');
+   });
+ 
+-  it('should handle various delimiters', function () {
++  it('startCase.ok.delimiters-trimmed should handle various delimiters', function () {
+     expect(startCase('_abc_123_def')).toBe('Abc 123 Def');
+     expect(startCase('__abc__123__def__')).toBe('Abc 123 Def');
+     expect(startCase('ABC-DEF')).toBe('Abc Def');
+     expect(startCase('ABC DEF')).toBe('Abc Def');
+   });
+ 
+-  it('should handle empty strings', function () {
++  it('startCase.ok.only-delimiters-empty should handle empty strings', function () {
+     expect(startCase('')).toBe('');
+   });
+ 
+-  it('should handle strings with only delimiters', function () {
++  it('startCase.ok.only-delimiters-empty should handle strings with only delimiters', function () {
+     expect(startCase('_-_-_-_')).toBe('');
+   });
+ 
+-  it('should work with numbers', function () {
++  it('startCase.ok.acronym-and-numbers should work with numbers', function () {
+     expect(startCase('12abc 12ABC')).toBe('12 Abc 12 Abc');
+   });
+ 
+-  it('should handle consecutive uppercase letters', function () {
++  it('startCase.ok.acronym-and-numbers should handle consecutive uppercase letters', function () {
+     expect(startCase('ABC')).toBe('Abc');
+     expect(startCase('ABCdef')).toBe('Ab Cdef');
+   });
+ 
+-  it('should handle combinations of numbers and letters', function () {
++  it('startCase.ok.acronym-and-numbers should handle combinations of numbers and letters', function () {
+     expect(startCase('123ABC')).toBe('123 Abc');
+     expect(startCase('a1B2c3')).toBe('A 1 B 2 C 3');
+   });
+ 
+-  it('should handle special characters', function () {
++  it('startCase.ok.capitalized-words should handle special characters', function () {
+     expect(startCase('foo@bar')).toBe('Foo Bar');
+     expect(startCase('test*case')).toBe('Test Case');
+   });
+ 
+-  it('should handle long strings', function () {
++  it('startCase.ok.capitalized-words should handle long strings', function () {
+     expect(startCase('thisIsAVeryLongStringWithManyWordsAndNumbers123')).toBe(
+       'This Is A Very Long String With Many Words And Numbers 123'
+     );
+   });
+ 
+-  it('should handle whitespace characters', function () {
++  it('startCase.ok.capitalized-words should handle whitespace characters', function () {
+     expect(startCase('  foo  bar  ')).toBe('Foo Bar');
+     expect(startCase('\tfoo\nbar')).toBe('Foo Bar');
+   });
+ 
+-  it('should convert the non-first characters to lowercase', function () {
++  it('startCase.ok.capitalized-words should convert the non-first characters to lowercase', function () {
+     expect(startCase('FOO BAR')).toBe('Foo Bar');
+     expect(startCase('FOO BAR BAZ')).toBe('Foo Bar Baz');
+   });
+ 
+-  it('should correctly handle accented letters', () => {
++  it('startCase.ok.capitalized-words should correctly handle accented letters', () => {
+     expect(startCase('lunedì 18 set')).toBe('Lunedì 18 Set');
+   });
+ });
+diff --git a/src/string/trim.spec.ts b/src/string/trim.spec.ts
+index 19f9378..254b2a1 100644
+--- a/src/string/trim.spec.ts
++++ b/src/string/trim.spec.ts
+@@ -2,47 +2,47 @@ import { describe, expect, it } from 'vitest';
+ import { trim } from './trim.ts';
+ 
+ describe('trim', () => {
+-  it('should return the string without the double quotes', () => {
++  it('trim.ok.single-char should return the string without the double quotes', () => {
+     expect(trim('"hello, world!"', '"')).toEqual('hello, world!');
+   });
+ 
+-  it('should return the string without special characters', () => {
++  it('trim.ok.default-whitespace should return the string without special characters', () => {
+     expect(trim('!@#$%^&*wow%#$', ['!', '@', '#', '$', '%', '^', '&', '*'])).toEqual('wow');
+   });
+ 
+-  it('should return the string unchanged when no matching characters are found', () => {
++  it('trim.ok.default-whitespace should return the string unchanged when no matching characters are found', () => {
+     expect(trim('hello', 'x')).toEqual('hello');
+   });
+ 
+-  it('should remove all occurrences of a single character', () => {
++  it('trim.ok.single-char should remove all occurrences of a single character', () => {
+     expect(trim('banana', 'a')).toEqual('banan');
+   });
+ 
+-  it('should remove all occurrences of multiple characters', () => {
++  it('trim.ok.array-chars should remove all occurrences of multiple characters', () => {
+     expect(trim('abracadabra', ['a', 'b'])).toEqual('racadabr');
+   });
+ 
+-  it('should handle an empty string', () => {
++  it('trim.ok.default-whitespace should handle an empty string', () => {
+     expect(trim('', 'a')).toEqual('');
+   });
+ 
+-  it('should remove spaces when specified', () => {
++  it('trim.ok.chars-and-space should remove spaces when specified', () => {
+     expect(trim('hello world', ' ')).toEqual('hello world');
+   });
+ 
+-  it('should handle a case where the string is already trimmed', () => {
++  it('trim.ok.default-whitespace should handle a case where the string is already trimmed', () => {
+     expect(trim('alreadyTrimmed', 'x')).toEqual('alreadyTrimmed');
+   });
+ 
+-  it('should return an empty string when all characters are removed', () => {
++  it('trim.ok.default-whitespace should return an empty string when all characters are removed', () => {
+     expect(trim('aaaaa', 'a')).toEqual('');
+   });
+ 
+-  it('should remove numbers from a string', () => {
++  it('trim.ok.default-whitespace should remove numbers from a string', () => {
+     expect(trim('123abc456', ['1', '2', '3', '4', '5', '6'])).toEqual('abc');
+   });
+ 
+-  it('should trim the string without giving the second parameter, which defaults to whitespace', () => {
++  it('trim.ok.default-whitespace should trim the string without giving the second parameter, which defaults to whitespace', () => {
+     expect(trim('  hello world  ')).toEqual('hello world');
+   });
+ });
+diff --git a/src/string/unescape.spec.ts b/src/string/unescape.spec.ts
+index 3ea1298..cfc2e0e 100644
+--- a/src/string/unescape.spec.ts
++++ b/src/string/unescape.spec.ts
+@@ -9,30 +9,30 @@ describe('unescape', () => {
+   escaped += escaped;
+   unescaped += unescaped;
+ 
+-  it('should unescape entities in order', () => {
++  it('unescape.ok.tags-restored should unescape entities in order', () => {
+     expect(unescape('&amp;lt;')).toBe('&lt;');
+   });
+ 
+-  it('should unescape the proper entities', () => {
++  it('unescape.ok.tags-restored should unescape the proper entities', () => {
+     expect(unescape(escaped)).toBe(unescaped);
+   });
+ 
+-  it('should handle strings with nothing to unescape', () => {
++  it('unescape.ok.tags-restored should handle strings with nothing to unescape', () => {
+     expect(unescape('abc')).toBe('abc');
+   });
+ 
+-  it('should unescape the same characters escaped by `_.escape`', () => {
++  it('unescape.ok.tags-restored should unescape the same characters escaped by `_.escape`', () => {
+     expect(unescape(escape(unescaped))).toBe(unescaped);
+   });
+ 
+-  it('should handle leading zeros in html entities', () => {
++  it('unescape.ok.tags-restored should handle leading zeros in html entities', () => {
+     expect(unescape('&#39;')).toBe("'");
+     expect(unescape('&#039;')).toBe("'");
+     expect(unescape('&#000039;')).toBe("'");
+   });
+ 
+   ['&#96;', '&#x2F;'].forEach(entity => {
+-    it(`should not unescape the "${entity}" entity`, () => {
++    it(`unescape.ok.tags-restored should not unescape the "${entity}" entity`, () => {
+       expect(unescape(entity)).toBe(entity);
+     });
+   });
+diff --git a/src/string/upperCase.spec.ts b/src/string/upperCase.spec.ts
+index 02eb9d8..1b7facd 100644
+--- a/src/string/upperCase.spec.ts
++++ b/src/string/upperCase.spec.ts
+@@ -2,39 +2,39 @@ import { describe, expect, it } from 'vitest';
+ import { upperCase } from './upperCase';
+ 
+ describe('upperCase', () => {
+-  it('should change camel case to upper case', () => {
++  it('upperCase.ok.upper-with-spaces should change camel case to upper case', () => {
+     expect(upperCase('camelCase')).toEqual('CAMEL CASE');
+   });
+ 
+-  it('should change space to space', () => {
++  it('upperCase.ok.upper-with-spaces should change space to space', () => {
+     expect(upperCase('some whitespace')).toEqual('SOME WHITESPACE');
+   });
+ 
+-  it('should change hyphen to space', () => {
++  it('upperCase.ok.kebab should change hyphen to space', () => {
+     expect(upperCase('hyphen-text')).toEqual('HYPHEN TEXT');
+   });
+ 
+-  it('should change Acronyms to small letter', () => {
++  it('upperCase.ok.acronym-split should change Acronyms to small letter', () => {
+     expect(upperCase('HTTPRequest')).toEqual('HTTP REQUEST');
+   });
+ 
+-  it('should handle leading and trailing whitespace', () => {
++  it('upperCase.ok.upper-with-spaces should handle leading and trailing whitespace', () => {
+     expect(upperCase('    leading and trailing whitespace    ')).toEqual('LEADING AND TRAILING WHITESPACE');
+   });
+ 
+-  it('should handle special characters correctly', () => {
++  it('upperCase.ok.upper-with-spaces should handle special characters correctly', () => {
+     expect(upperCase('special@characters!')).toEqual('SPECIAL CHARACTERS');
+   });
+ 
+-  it('should handle strings that are already in upper case', () => {
++  it('upperCase.ok.upper-with-spaces should handle strings that are already in upper case', () => {
+     expect(upperCase('upper_case')).toEqual('UPPER CASE');
+   });
+ 
+-  it('should work with an empty string', () => {
++  it('upperCase.ok.upper-with-spaces should work with an empty string', () => {
+     expect(upperCase('')).toEqual('');
+   });
+ 
+-  it('should work with screaming snake case', () => {
++  it('upperCase.ok.upper-with-spaces should work with screaming snake case', () => {
+     expect(upperCase('FOO_BAR')).toEqual('FOO BAR');
+   });
+ });
+diff --git a/src/string/words.spec.ts b/src/string/words.spec.ts
+index 50338ad..3f12d8b 100644
+--- a/src/string/words.spec.ts
++++ b/src/string/words.spec.ts
+@@ -2,93 +2,93 @@ import { describe, expect, it } from 'vitest';
+ import { words } from './words';
+ 
+ describe('words', () => {
+-  it('splits a simple ASCII comma-separated string into words', () => {
++  it('words.ok.punctuation-split splits a simple ASCII comma-separated string into words', () => {
+     const result = words('fred, barney, & pebbles');
+     expect(result).toEqual(['fred', 'barney', 'pebbles']);
+   });
+ 
+-  it('returns an empty array when input is an empty string', () => {
++  it('words.ok.punctuation-split returns an empty array when input is an empty string', () => {
+     const result = words('');
+     expect(result).toEqual([]);
+   });
+ 
+-  it('splits a space-separated string into individual words', () => {
++  it('words.ok.punctuation-split splits a space-separated string into individual words', () => {
+     const result = words('split these words');
+     expect(result).toEqual(['split', 'these', 'words']);
+   });
+ 
+-  it('splits Unicode emojis and special characters as separate words', () => {
++  it('words.ok.camel-acronym-emoji splits Unicode emojis and special characters as separate words', () => {
+     const result = words('example🚀with✨emojis💡and🔍special🌟characters');
+     expect(result).toEqual(['example', '🚀', 'with', '✨', 'emojis', '💡', 'and', '🔍', 'special', '🌟', 'characters']);
+   });
+ 
+-  it('should match camelCase', () => {
++  it('words.ok.camel-acronym-emoji should match camelCase', () => {
+     const str = 'camelCase';
+     const matches = words(str);
+     expect(matches).toEqual(['camel', 'Case']);
+   });
+ 
+-  it('should match snake_case', () => {
++  it('words.ok.camel-acronym-emoji should match snake_case', () => {
+     const str = 'snake_case';
+     const matches = words(str);
+     expect(matches).toEqual(['snake', 'case']);
+   });
+ 
+-  it('should match kebab-case', () => {
++  it('words.ok.punctuation-split should match kebab-case', () => {
+     const str = 'kebab-case';
+     const matches = words(str);
+     expect(matches).toEqual(['kebab', 'case']);
+   });
+ 
+-  it('should handle mixed formats', () => {
++  it('words.ok.punctuation-split should handle mixed formats', () => {
+     const str = 'camelCase_snake_case-kebabCase';
+     const matches = words(str);
+     expect(matches).toEqual(['camel', 'Case', 'snake', 'case', 'kebab', 'Case']);
+   });
+ 
+-  it('should match acronyms', () => {
++  it('words.ok.camel-acronym-emoji should match acronyms', () => {
+     const str = 'HTTPRequest';
+     const matches = words(str);
+     expect(matches).toEqual(['HTTP', 'Request']);
+   });
+ 
+-  it('should match special characters', () => {
++  it('words.ok.punctuation-split should match special characters', () => {
+     const str = 'special_characters@123';
+     const matches = words(str);
+     expect(matches).toEqual(['special', 'characters', '123']);
+   });
+ 
+-  it('should handle leading and trailing whitespace', () => {
++  it('words.ok.punctuation-split should handle leading and trailing whitespace', () => {
+     const str = '  leading_and_trailing_whitespace  ';
+     const matches = words(str);
+     expect(matches).toEqual(['leading', 'and', 'trailing', 'whitespace']);
+   });
+ 
+-  it('should handle underscores', () => {
++  it('words.ok.punctuation-split should handle underscores', () => {
+     const str = 'underscore_case_example';
+     const matches = words(str);
+     expect(matches).toEqual(['underscore', 'case', 'example']);
+   });
+ 
+-  it('should handle single character words', () => {
++  it('words.ok.punctuation-split should handle single character words', () => {
+     const str = 'aB';
+     const matches = words(str);
+     expect(matches).toEqual(['a', 'B']);
+   });
+ 
+-  it('should work with hyphens', () => {
++  it('words.ok.punctuation-split should work with hyphens', () => {
+     expect(words('--FOO-BAR--')).toEqual(['FOO', 'BAR']);
+   });
+ 
+-  it('should work with numbers', () => {
++  it('words.ok.unicode-and-numbers should work with numbers', () => {
+     expect(words('foo2bar')).toEqual(['foo', '2', 'bar']);
+   });
+ 
+-  it('should match emojis', () => {
++  it('words.ok.camel-acronym-emoji should match emojis', () => {
+     expect(words('camelCaseHTTPRequest🚀')).toEqual(['camel', 'Case', 'HTTP', 'Request', '🚀']);
+   });
+ 
+-  it('should match accented letters', () => {
++  it('words.ok.unicode-and-numbers should match accented letters', () => {
+     expect(words('Lunedì 18 Set')).toEqual(['Lunedì', '18', 'Set']);
+   });
+ });

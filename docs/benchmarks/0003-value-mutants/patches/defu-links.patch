@@ -1,0 +1,185 @@
+diff --git a/test/defu.test.ts b/test/defu.test.ts
+index 9e24791..f460f8e 100644
+--- a/test/defu.test.ts
++++ b/test/defu.test.ts
+@@ -7,13 +7,13 @@ import * as asteriskImport from "./fixtures/";
+ const nonObject = [null, undefined, [], false, true, 123];
+ 
+ describe("defu", () => {
+-  it("should copy only missing properties defaults", () => {
++  it("defu.ok.leftmost-priority should copy only missing properties defaults", () => {
+     const result = defu({ a: "c" }, { a: "bbb", d: "c" });
+     expect(result).toEqual({ a: "c", d: "c" });
+     expectTypeOf(result).toMatchTypeOf<{ a: string; d: string }>();
+   });
+ 
+-  it("should fill in values that are null", () => {
++  it("defu.ok.skip-nullish should fill in values that are null", () => {
+     const result1 = defu({ a: null as null }, { a: "c", d: "c" });
+     expect(result1).toEqual({ a: "c", d: "c" });
+     expectTypeOf(result1).toMatchTypeOf<{ a: string; d: string }>();
+@@ -23,7 +23,7 @@ describe("defu", () => {
+     expectTypeOf(result2).toMatchTypeOf<{ a: string; d: string }>();
+   });
+ 
+-  it("should copy nested values", () => {
++  it("defu.ok.nested-defaults should copy nested values", () => {
+     const result = defu({ a: { b: "c" } }, { a: { d: "e" } });
+     expect(result).toEqual({
+       a: { b: "c", d: "e" },
+@@ -31,7 +31,7 @@ describe("defu", () => {
+     expectTypeOf(result).toMatchTypeOf<{ a: { b: string; d: string } }>();
+   });
+ 
+-  it("should concat array values by default", () => {
++  it("defu.ok.array-concat should concat array values by default", () => {
+     const result = defu({ array: ["a", "b"] }, { array: ["c", "d"] });
+     expect(result).toEqual({
+       array: ["a", "b", "c", "d"],
+@@ -39,7 +39,7 @@ describe("defu", () => {
+     expectTypeOf(result).toMatchTypeOf<{ array: string[] }>();
+   });
+ 
+-  it("should correctly type differing array values", () => {
++  it("defu.ok.array-concat should correctly type differing array values", () => {
+     const item1 = { name: "Name", age: 21 };
+     const item2 = { name: "Name", age: "42" };
+     const result = defu({ items: [item1] }, { items: [item2] });
+@@ -49,7 +49,7 @@ describe("defu", () => {
+     }>();
+   });
+ 
+-  it("should avoid merging objects with custom constructor", () => {
++  it("defu.ok.nested-defaults should avoid merging objects with custom constructor", () => {
+     class Test {
+       // eslint-disable-next-line no-useless-constructor
+       constructor(public value: string) {}
+@@ -58,14 +58,14 @@ describe("defu", () => {
+     expect(result).toEqual({ test: new Test("a") });
+   });
+ 
+-  it("should assign date properly", () => {
++  it("defu.ok.nested-defaults should assign date properly", () => {
+     const date1 = new Date("2020-01-01");
+     const date2 = new Date("2020-01-02");
+     const result = defu({ date: date1 }, { date: date2 });
+     expect(result).toEqual({ date: date1 });
+   });
+ 
+-  it("should correctly merge different object types", () => {
++  it("defu.ok.nested-defaults should correctly merge different object types", () => {
+     // eslint-disable-next-line unicorn/consistent-function-scoping
+     const fn = () => 42;
+     const re = /test/i;
+@@ -75,19 +75,19 @@ describe("defu", () => {
+     expectTypeOf(result).toMatchTypeOf<{ a: (() => number) | RegExp }>();
+   });
+ 
+-  it("should handle non object first param", () => {
++  it("defu.ok.nested-defaults should handle non object first param", () => {
+     for (const val of nonObject) {
+       expect(defu(val, { d: true })).toEqual({ d: true });
+     }
+   });
+ 
+-  it("should handle non object second param", () => {
++  it("defu.ok.nested-defaults should handle non object second param", () => {
+     for (const val of nonObject) {
+       expect(defu({ d: true }, val)).toEqual({ d: true });
+     }
+   });
+ 
+-  it("multi defaults", () => {
++  it("defu.ok.leftmost-priority multi defaults", () => {
+     const result = defu({ a: 1 }, { b: 2, a: "x" }, { c: 3, a: "x", b: "x" });
+     expect(result).toEqual({
+       a: 1,
+@@ -101,7 +101,7 @@ describe("defu", () => {
+     }>();
+   });
+ 
+-  it("should not override Object prototype", () => {
++  it("defu.ok.skip-proto-keys should not override Object prototype", () => {
+     const payload = JSON.parse('{"constructor": {"prototype": {"isAdmin": true}}}');
+     defu({}, payload);
+     defu(payload, {});
+@@ -116,7 +116,7 @@ describe("defu", () => {
+     expect({}.isAdmin).toBe(undefined);
+   });
+ 
+-  it("should ignore inherited enumerable properties", () => {
++  it("defu.ok.nested-defaults should ignore inherited enumerable properties", () => {
+     Object.defineProperty(Object.prototype, "pollutedEnum", {
+       value: 123,
+       enumerable: true,
+@@ -135,14 +135,14 @@ describe("defu", () => {
+     }
+   });
+ 
+-  it("should ignore non-object arguments", () => {
++  it("defu.ok.nested-defaults should ignore non-object arguments", () => {
+     expect(defu(null, { foo: 1 }, false, 123, { bar: 2 })).toEqual({
+       foo: 1,
+       bar: 2,
+     });
+   });
+ 
+-  it("should merge types of more than two objects", () => {
++  it("defu.ok.nested-defaults should merge types of more than two objects", () => {
+     interface SomeConfig {
+       foo: string;
+     }
+@@ -162,7 +162,7 @@ describe("defu", () => {
+     ).toMatchTypeOf<ExpectedMergedType>();
+   });
+ 
+-  it("should allow partials within merge chain", () => {
++  it("defu.ok.nested-defaults should allow partials within merge chain", () => {
+     interface SomeConfig {
+       foo: string[];
+     }
+@@ -184,7 +184,7 @@ describe("defu", () => {
+     ).toMatchTypeOf<ExpectedMergedType>();
+   });
+ 
+-  it("custom merger", () => {
++  it("createDefu.ok.sum-example custom merger", () => {
+     const ext = createDefu((obj, key, val) => {
+       if (typeof val === "number") {
+         (obj as any)[key] += val;
+@@ -194,7 +194,7 @@ describe("defu", () => {
+     expect(ext({ cost: 15 }, { cost: 10 })).toEqual({ cost: 25 });
+   });
+ 
+-  it("defuFn()", () => {
++  it("defuFn.ok.fn-example defuFn()", () => {
+     // eslint-disable-next-line unicorn/consistent-function-scoping
+     const num = () => 20;
+     expect(
+@@ -216,7 +216,7 @@ describe("defu", () => {
+     });
+   });
+ 
+-  it("defuArrayFn()", () => {
++  it("defuArrayFn.ok.array-fn-example defuArrayFn()", () => {
+     // eslint-disable-next-line unicorn/consistent-function-scoping
+     const num = () => 20;
+     expect(
+@@ -236,7 +236,7 @@ describe("defu", () => {
+     });
+   });
+ 
+-  it("custom merger with namespace", () => {
++  it("createDefu.ok.custom-merger custom merger with namespace", () => {
+     const ext = createDefu((obj, key, val, namespace) => {
+       // console.log({ obj, key, val, namespace })
+       if (key === "modules") {
+@@ -255,7 +255,7 @@ describe("defu", () => {
+     });
+   });
+ 
+-  it("works with asterisk-import", () => {
++  it("defu.ok.nested-defaults works with asterisk-import", () => {
+     expect(
+       defu(asteriskImport, {
+         a: 2,

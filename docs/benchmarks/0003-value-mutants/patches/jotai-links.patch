@@ -1,0 +1,742 @@
+diff --git a/tests/react/utils/useResetAtom.test.tsx b/tests/react/utils/useResetAtom.test.tsx
+index 7f73f58..3402a32 100644
+--- a/tests/react/utils/useResetAtom.test.tsx
++++ b/tests/react/utils/useResetAtom.test.tsx
+@@ -6,7 +6,7 @@ import { useResetAtom } from 'jotai/react/utils'
+ import { atom } from 'jotai/vanilla'
+ import { RESET, atomWithReducer, atomWithReset } from 'jotai/vanilla/utils'
+ 
+-it('atomWithReset resets to its first value', () => {
++it('atomWithReset.ok.reset-to-initial atomWithReset resets to its first value', () => {
+   const countAtom = atomWithReset(0)
+ 
+   const Parent = () => {
+@@ -57,7 +57,7 @@ it('atomWithReset resets to its first value', () => {
+   expect(screen.getByText('count: 13')).toBeInTheDocument()
+ })
+ 
+-it('atomWithReset reset based on previous value', () => {
++it('atomWithReset.ok.reset-to-initial atomWithReset reset based on previous value', () => {
+   const countAtom = atomWithReset(0)
+ 
+   const Parent = () => {
+@@ -99,7 +99,7 @@ it('atomWithReset reset based on previous value', () => {
+   expect(screen.getByText('count: 0')).toBeInTheDocument()
+ })
+ 
+-it('atomWithReset through read-write atom', () => {
++it('atomWithReset.ok.reset-to-initial atomWithReset through read-write atom', () => {
+   const primitiveAtom = atomWithReset(0)
+   const countAtom = atom(
+     (get) => get(primitiveAtom),
+@@ -134,7 +134,7 @@ it('atomWithReset through read-write atom', () => {
+   expect(screen.getByText('count: 0')).toBeInTheDocument()
+ })
+ 
+-it('useResetAtom with custom atom', () => {
++it('useResetAtom.ok.returns-function useResetAtom with custom atom', () => {
+   const reducer = (state: number, action: 'INCREASE' | typeof RESET) => {
+     switch (action) {
+       case 'INCREASE':
+diff --git a/tests/react/vanilla-utils/atomWithDefault.test.tsx b/tests/react/vanilla-utils/atomWithDefault.test.tsx
+index ba2b6c8..9f6cc1e 100644
+--- a/tests/react/vanilla-utils/atomWithDefault.test.tsx
++++ b/tests/react/vanilla-utils/atomWithDefault.test.tsx
+@@ -14,7 +14,7 @@ afterEach(() => {
+   vi.useRealTimers()
+ })
+ 
+-it('simple sync get default', () => {
++it('atomWithDefault.ok.read-default simple sync get default', () => {
+   const count1Atom = atom(1)
+   const count2Atom = atomWithDefault((get) => get(count1Atom) * 2)
+ 
+@@ -50,7 +50,7 @@ it('simple sync get default', () => {
+   expect(screen.getByText('count1: 3, count2: 5')).toBeInTheDocument()
+ })
+ 
+-it('simple async get default', async () => {
++it('atomWithDefault.ok.read-default simple async get default', async () => {
+   const count1Atom = atom(1)
+   const count2Atom = atomWithDefault(async (get) => {
+     await sleep(100)
+@@ -101,7 +101,7 @@ it('simple async get default', async () => {
+   expect(screen.getByText('count1: 3, count2: 5')).toBeInTheDocument()
+ })
+ 
+-it('refresh sync atoms to default values', () => {
++it('atomWithDefault.ok.reset-restores refresh sync atoms to default values', () => {
+   const count1Atom = atom(1)
+   const count2Atom = atomWithDefault((get) => get(count1Atom) * 2)
+ 
+@@ -144,7 +144,7 @@ it('refresh sync atoms to default values', () => {
+   expect(screen.getByText('count1: 4, count2: 8')).toBeInTheDocument()
+ })
+ 
+-it('refresh async atoms to default values', async () => {
++it('atomWithDefault.ok.reset-restores refresh async atoms to default values', async () => {
+   const count1Atom = atom(1)
+   const count2Atom = atomWithDefault(async (get) => {
+     await new Promise<void>((resolve) => setTimeout(resolve, 100))
+@@ -206,7 +206,7 @@ it('refresh async atoms to default values', async () => {
+   expect(screen.getByText('count1: 4, count2: 8')).toBeInTheDocument()
+ })
+ 
+-it('can be set synchronously by passing value', () => {
++it('atomWithDefault.ok.overwritten-detaches can be set synchronously by passing value', () => {
+   const countAtom = atomWithDefault(() => 1)
+ 
+   const Counter = () => {
+diff --git a/tests/react/vanilla-utils/atomWithRefresh.test.tsx b/tests/react/vanilla-utils/atomWithRefresh.test.tsx
+index e24773e..08e172b 100644
+--- a/tests/react/vanilla-utils/atomWithRefresh.test.tsx
++++ b/tests/react/vanilla-utils/atomWithRefresh.test.tsx
+@@ -13,7 +13,7 @@ afterEach(() => {
+   vi.useRealTimers()
+ })
+ 
+-it('sync counter', () => {
++it('atomWithRefresh.ok.refresh-on-no-args sync counter', () => {
+   let counter = 0
+   const countAtom = atomWithRefresh(() => ++counter)
+ 
+@@ -44,7 +44,7 @@ it('sync counter', () => {
+   expect(counter).toBe(3)
+ })
+ 
+-it('async counter', async () => {
++it('atomWithRefresh.ok.refresh-on-no-args async counter', async () => {
+   let counter = 0
+   const countAtom = atomWithRefresh(async () => {
+     await sleep(100)
+@@ -88,7 +88,7 @@ it('async counter', async () => {
+   expect(counter).toBe(3)
+ })
+ 
+-it('writable counter', () => {
++it('atomWithRefresh.ok.write-on-args writable counter', () => {
+   let counter = 0
+   const countAtom = atomWithRefresh(
+     () => ++counter,
+diff --git a/tests/react/vanilla-utils/atomWithStorage.test.tsx b/tests/react/vanilla-utils/atomWithStorage.test.tsx
+index 9b0b5e5..5bf5214 100644
+--- a/tests/react/vanilla-utils/atomWithStorage.test.tsx
++++ b/tests/react/vanilla-utils/atomWithStorage.test.tsx
+@@ -70,7 +70,7 @@ describe('atomWithStorage (sync)', () => {
+     },
+   }
+ 
+-  it('simple count', () => {
++  it('atomWithStorage.ok.reset-deletes simple count', () => {
+     const countAtom = atomWithStorage('count', 1, dummyStorage)
+ 
+     const Counter = () => {
+@@ -101,7 +101,7 @@ describe('atomWithStorage (sync)', () => {
+     expect(storageData.count).toBeUndefined()
+   })
+ 
+-  it('storage updates before mount (#1079)', () => {
++  it('atomWithStorage.ok.cross-tab storage updates before mount (#1079)', () => {
+     dummyStorage.setItem('count', 10)
+     const countAtom = atomWithStorage('count', 1, dummyStorage)
+ 
+@@ -123,7 +123,7 @@ describe('atomWithStorage (sync)', () => {
+     expect(screen.getByText('count: 9')).toBeInTheDocument()
+   })
+ 
+-  it('should get stored value on init with getOnInit option', () => {
++  it('atomWithStorage.ok.get-on-init-true should get stored value on init with getOnInit option', () => {
+     const store = createStore()
+     const countAtom = atomWithStorage('count', 0, dummyStorage, {
+       getOnInit: true,
+@@ -171,7 +171,7 @@ describe('with sync string storage', () => {
+     return () => stringStorage.listeners.delete(listener)
+   }
+ 
+-  it('simple count', () => {
++  it('atomWithStorage.ok.reset-deletes simple count', () => {
+     const countAtom = atomWithStorage('count', 1, dummyStorage)
+ 
+     const Counter = () => {
+@@ -213,7 +213,7 @@ describe('with sync string storage', () => {
+     expect(storageData.count).toBeUndefined()
+   })
+ 
+-  it('no entry (#1086)', () => {
++  it('atomWithStorage.ok.get-on-init-default no entry (#1086)', () => {
+     const noentryAtom = atomWithStorage('noentry', -1, dummyStorage)
+ 
+     const Counter = () => {
+@@ -253,7 +253,7 @@ describe('atomWithStorage (async)', () => {
+     },
+   }
+ 
+-  it('async count', async () => {
++  it('atomWithStorage.ok.async-storage async count', async () => {
+     const countAtom = atomWithStorage('count', 1, asyncDummyStorage)
+ 
+     const Counter = () => {
+@@ -295,7 +295,7 @@ describe('atomWithStorage (async)', () => {
+     expect(asyncStorageData.count).toBeUndefined()
+   })
+ 
+-  it('async new count', async () => {
++  it('atomWithStorage.ok.async-storage async new count', async () => {
+     const countAtom = atomWithStorage('count2', 20, asyncDummyStorage)
+ 
+     const Counter = () => {
+@@ -331,7 +331,7 @@ describe('atomWithStorage (async)', () => {
+     expect(asyncStorageData.count2).toBe(21)
+   })
+ 
+-  it('createJSONStorage with async string storage', async () => {
++  it('createJSONStorage.ok.string-storage-getter createJSONStorage with async string storage', async () => {
+     const asyncStringStorage = {
+       getItem: async (key: string) => {
+         await sleep(100)
+@@ -372,7 +372,7 @@ describe('atomWithStorage (async)', () => {
+ })
+ 
+ describe('atomWithStorage (without localStorage) (#949)', () => {
+-  it('createJSONStorage without localStorage', () => {
++  it('createJSONStorage.ok.string-storage-getter createJSONStorage without localStorage', () => {
+     const countAtom = atomWithStorage(
+       'count',
+       1,
+@@ -464,17 +464,17 @@ describe('atomWithStorage (in non-browser environment)', () => {
+     })
+   })
+ 
+-  it('createJSONStorage with undefined window.addEventListener', () => {
++  it('createJSONStorage.ok.string-storage-getter createJSONStorage with undefined window.addEventListener', () => {
+     const storage = createJSONStorage(() => asyncDummyStorage)
+     expect(storage.subscribe).toBeUndefined()
+   })
+ 
+-  it('createJSONStorage with localStorage', () => {
++  it('createJSONStorage.ok.string-storage-getter createJSONStorage with localStorage', () => {
+     expect(() => createJSONStorage()).not.toThrow()
+     expect(() => createJSONStorage(() => window.localStorage)).not.toThrow()
+   })
+ 
+-  it('createJSONStorage with sessionStorage', () => {
++  it('createJSONStorage.ok.string-storage-getter createJSONStorage with sessionStorage', () => {
+     expect(() => createJSONStorage(() => window.sessionStorage)).not.toThrow()
+   })
+ })
+@@ -491,7 +491,7 @@ describe('atomWithStorage (with browser storage)', () => {
+     window.addEventListener = addEventListener
+   })
+ 
+-  it('createJSONStorage subscribes to specific window storage events', () => {
++  it('createJSONStorage.ok.json-serialization createJSONStorage subscribes to specific window storage events', () => {
+     const store = createStore()
+     const mockNativeStorage = Object.create(window.Storage.prototype)
+     mockNativeStorage.setItem = vi.fn() as Storage['setItem']
+@@ -562,7 +562,7 @@ describe('atomWithStorage (with browser storage)', () => {
+     expect(store.get(dummyAtom)).toBe(1)
+   })
+ 
+-  it("should recompute dependents' state after onMount (#2098)", () => {
++  it("atomWithStorage.ok.default-storage should recompute dependents' state after onMount (#2098)", () => {
+     const store = createStore()
+     let currentValue: string | null = 'true'
+     const mockNativeStorage = {
+@@ -638,7 +638,7 @@ describe('atomWithStorage (with disabled browser storage)', () => {
+     })
+   })
+ 
+-  it('initial value of atomWithStorage can be used when cookies are disabled', () => {
++  it('atomWithStorage.ok.default-storage initial value of atomWithStorage can be used when cookies are disabled', () => {
+     const countAtom = atomWithStorage<number>('counter', 4)
+ 
+     const Counter = () => {
+@@ -672,7 +672,7 @@ describe('atomWithStorage (with non-browser storage)', () => {
+     window.addEventListener = addEventListener
+   })
+ 
+-  it('createJSONStorage avoids attaching event handler for non-browser storage', () => {
++  it('createJSONStorage.ok.json-serialization createJSONStorage avoids attaching event handler for non-browser storage', () => {
+     const store = createStore()
+     const mockNonNativeStorage = {
+       setItem: vi.fn() as Storage['setItem'],
+@@ -711,7 +711,7 @@ describe('atomWithStorage (with non-browser storage)', () => {
+ describe('withStorageValidator', () => {
+   const isNumber = (v: unknown): v is number => typeof v === 'number'
+ 
+-  it('should use withStorageValidator with isNumber', () => {
++  it('createJSONStorage.ok.json-serialization should use withStorageValidator with isNumber', () => {
+     const store = createStore()
+     const storage = createJSONStorage()
+     const numAtom = atomWithStorage(
+@@ -723,7 +723,7 @@ describe('withStorageValidator', () => {
+     expect(store.get(numAtom)).toBe(0)
+   })
+ 
+-  it('should return initialValue when validator fails', () => {
++  it('createJSONStorage.ok.json-serialization should return initialValue when validator fails', () => {
+     const store = createStore()
+     const stringStorage: SyncStringStorage = {
+       getItem: () => JSON.stringify('not-a-number'),
+@@ -740,7 +740,7 @@ describe('withStorageValidator', () => {
+     expect(store.get(numAtom)).toBe(42)
+   })
+ 
+-  it('should return initialValue when sync validator fails with render', () => {
++  it('createJSONStorage.ok.json-serialization should return initialValue when sync validator fails with render', () => {
+     const stringStorage: SyncStringStorage = {
+       getItem: () => JSON.stringify('not-a-number'),
+       setItem: () => {},
+@@ -767,7 +767,7 @@ describe('withStorageValidator', () => {
+     expect(screen.getByText('count: 42')).toBeInTheDocument()
+   })
+ 
+-  it('should return stored value when async validator succeeds', async () => {
++  it('createJSONStorage.ok.json-serialization should return stored value when async validator succeeds', async () => {
+     const asyncStringStorage = {
+       getItem: async () => {
+         await sleep(100)
+@@ -803,7 +803,7 @@ describe('withStorageValidator', () => {
+     expect(screen.getByText('count: 99')).toBeInTheDocument()
+   })
+ 
+-  it('should return initialValue when async validator fails', async () => {
++  it('createJSONStorage.ok.json-serialization should return initialValue when async validator fails', async () => {
+     const asyncStringStorage = {
+       getItem: async () => {
+         await sleep(100)
+@@ -841,7 +841,7 @@ describe('withStorageValidator', () => {
+ })
+ 
+ describe('with subscribe method in string storage', () => {
+-  it('createJSONStorage subscriber is called correctly', () => {
++  it('createJSONStorage.ok.json-serialization createJSONStorage subscriber is called correctly', () => {
+     const store = createStore()
+ 
+     const subscribe = vi.fn()
+@@ -876,7 +876,7 @@ describe('with subscribe method in string storage', () => {
+     expect(subscribe).toHaveBeenCalledWith('dummy', expect.any(Function))
+   })
+ 
+-  it('createJSONStorage subscriber responds to events correctly', () => {
++  it('createJSONStorage.ok.json-serialization createJSONStorage subscriber responds to events correctly', () => {
+     const storageData: Record<string, string> = {
+       count: '10',
+     }
+@@ -937,7 +937,7 @@ describe('with subscribe method in string storage', () => {
+     // expect(storageData.count).toBe('11')
+   })
+ 
+-  it('createJSONStorage reviver is applied on subscription updates (#3101)', () => {
++  it('createJSONStorage.ok.replacer-reviver createJSONStorage reviver is applied on subscription updates (#3101)', () => {
+     const storageData: Record<string, string> = {
+       value: JSON.stringify({ n: 42 }),
+     }
+@@ -1028,7 +1028,7 @@ describe('with subscribe method in string storage', () => {
+ })
+ 
+ describe('with custom async storage', () => {
+-  it('does not infinite loop (#2931)', async () => {
++  it('atomWithStorage.ok.async-storage does not infinite loop (#2931)', async () => {
+     let storedValue = 0
+     let cachedPromise:
+       [typeof storedValue, Promise<typeof storedValue>] | null = null
+diff --git a/tests/react/vanilla-utils/selectAtom.test.tsx b/tests/react/vanilla-utils/selectAtom.test.tsx
+index 99730d9..3d3537b 100644
+--- a/tests/react/vanilla-utils/selectAtom.test.tsx
++++ b/tests/react/vanilla-utils/selectAtom.test.tsx
+@@ -6,7 +6,7 @@ import { atom } from 'jotai/vanilla'
+ import { selectAtom } from 'jotai/vanilla/utils'
+ import { useCommitCount } from '../../test-utils.js'
+ 
+-it('selectAtom works as expected', () => {
++it('selectAtom.ok.selector-runs-on-change selectAtom works as expected', () => {
+   const bigAtom = atom({ a: 0, b: 'othervalue' })
+   const littleAtom = selectAtom(bigAtom, (v) => v.a)
+ 
+@@ -53,7 +53,7 @@ it('selectAtom works as expected', () => {
+   expect(screen.getByText('a: 3')).toBeInTheDocument()
+ })
+ 
+-it('do not update unless equality function says value has changed', () => {
++it('selectAtom.ok.update-only-on-change do not update unless equality function says value has changed', () => {
+   const bigAtom = atom({ a: 0 })
+   const littleAtom = selectAtom(
+     bigAtom,
+@@ -129,7 +129,7 @@ it('do not update unless equality function says value has changed', () => {
+   expect(screen.getByText('commits: 4')).toBeInTheDocument()
+ })
+ 
+-it('creates fresh cache path when deps differ (memo3)', () => {
++it('selectAtom.ok.default-equality creates fresh cache path when deps differ (memo3)', () => {
+   const baseAtom = atom({ a: 0, b: 1 })
+ 
+   const derivedAtom1 = selectAtom(baseAtom, (v) => v)
+diff --git a/tests/react/vanilla-utils/splitAtom.test.tsx b/tests/react/vanilla-utils/splitAtom.test.tsx
+index ecd91fa..e6f01be 100644
+--- a/tests/react/vanilla-utils/splitAtom.test.tsx
++++ b/tests/react/vanilla-utils/splitAtom.test.tsx
+@@ -9,7 +9,7 @@ import { useCommitCount } from '../../test-utils.js'
+ 
+ type TodoItem = { task: string; checked?: boolean }
+ 
+-it('no unnecessary updates when updating atoms', () => {
++it('splitAtom.ok.list-of-atoms no unnecessary updates when updating atoms', () => {
+   const todosAtom = atom<TodoItem[]>([
+     { task: 'get cat food', checked: false },
+     { task: 'get dragon food', checked: false },
+@@ -88,7 +88,7 @@ it('no unnecessary updates when updating atoms', () => {
+   expect(dragonBox).toBeChecked()
+ })
+ 
+-it('removing atoms', () => {
++it('splitAtom.ok.dispatch-actions removing atoms', () => {
+   const todosAtom = atom<TodoItem[]>([
+     { task: 'get cat food', checked: false },
+     { task: 'get dragon food', checked: false },
+@@ -154,7 +154,7 @@ it('removing atoms', () => {
+   expect(screen.queryByText('help nana')).not.toBeInTheDocument()
+ })
+ 
+-it('inserting atoms', () => {
++it('splitAtom.ok.dispatch-actions inserting atoms', () => {
+   const todosAtom = atom<TodoItem[]>([
+     { task: 'get cat food' },
+     { task: 'get dragon food' },
+@@ -243,7 +243,7 @@ it('inserting atoms', () => {
+   )
+ })
+ 
+-it('moving atoms', () => {
++it('splitAtom.ok.dispatch-actions moving atoms', () => {
+   const todosAtom = atom<TodoItem[]>([
+     { task: 'get cat food' },
+     { task: 'get dragon food' },
+@@ -346,7 +346,7 @@ it('moving atoms', () => {
+   )
+ })
+ 
+-it('read-only array atom', () => {
++it('splitAtom.ok.list-of-atoms read-only array atom', () => {
+   const todosAtom = atom<TodoItem[]>(() => [
+     { task: 'get cat food', checked: false },
+     { task: 'get dragon food', checked: false },
+@@ -392,7 +392,7 @@ it('read-only array atom', () => {
+   expect(dragonBox).not.toBeChecked()
+ })
+ 
+-it('no error with cached atoms (fix 510)', () => {
++it('splitAtom.ok.key-extractor no error with cached atoms (fix 510)', () => {
+   const filterAtom = atom('all')
+   const numsAtom = atom<number[]>([0, 1, 2, 3, 4])
+   const filteredAtom = atom<number[]>((get) => {
+@@ -450,7 +450,7 @@ it('no error with cached atoms (fix 510)', () => {
+   expect(screen.getByText('01234')).toBeInTheDocument()
+ })
+ 
+-it('variable sized split atom', () => {
++it('splitAtom.ok.list-of-atoms variable sized split atom', () => {
+   const lengthAtom = atom(3)
+   const collectionAtom = atom<number[]>([])
+   const collectionAtomsAtom = splitAtom(collectionAtom)
+@@ -485,7 +485,7 @@ it('variable sized split atom', () => {
+   expect(screen.getByText('numbers: 1,2')).toBeInTheDocument()
+ })
+ 
+-it('should not update split atom when single item is set to identical value', () => {
++it('splitAtom.ok.list-of-atoms should not update split atom when single item is set to identical value', () => {
+   const initialCollection = [1, 2, 3]
+   const collectionAtom = atom<number[]>(initialCollection)
+   const collectionAtomsAtom = splitAtom(collectionAtom)
+@@ -514,7 +514,7 @@ it('should not update split atom when single item is set to identical value', ()
+   expect(screen.getByText('changed: false')).toBeInTheDocument()
+ })
+ 
+-it('should throw error when writing to a removed item atom', () => {
++it('splitAtom.ok.list-of-atoms should throw error when writing to a removed item atom', () => {
+   const store = createStore()
+   const arrAtom = atom([1, 2, 3])
+   const splittedAtom = splitAtom(arrAtom)
+diff --git a/tests/vanilla/utils/atomWithDefault.test.ts b/tests/vanilla/utils/atomWithDefault.test.ts
+index 50be424..9f52aa2 100644
+--- a/tests/vanilla/utils/atomWithDefault.test.ts
++++ b/tests/vanilla/utils/atomWithDefault.test.ts
+@@ -7,7 +7,7 @@ describe('atomWithDefault', () => {
+     vi.clearAllMocks()
+   })
+ 
+-  it('should reset to initial value using RESET', () => {
++  it('atomWithDefault.ok.reset-restores should reset to initial value using RESET', () => {
+     const initialValue = 10
+     const testAtom = atomWithDefault(() => initialValue)
+     const store = createStore()
+@@ -16,7 +16,7 @@ describe('atomWithDefault', () => {
+     expect(store.get(testAtom)).toBe(initialValue)
+   })
+ 
+-  it('should reset to initial value derived from another atom', () => {
++  it('atomWithDefault.ok.reset-restores should reset to initial value derived from another atom', () => {
+     const initialValueAtom = atom(10)
+     const testAtom = atomWithDefault((get) => get(initialValueAtom))
+     const store = createStore()
+@@ -27,7 +27,7 @@ describe('atomWithDefault', () => {
+     expect(store.get(testAtom)).toBe(20)
+   })
+ 
+-  it(`should reflect changes to the initial value atom when main atom hasn't been manually changed`, () => {
++  it(`atomWithDefault.ok.read-default should reflect changes to the initial value atom when main atom hasn't been manually changed`, () => {
+     const initialValueAtom = atom(10)
+     const testAtom = atomWithDefault((get) => get(initialValueAtom))
+     const store = createStore()
+@@ -35,7 +35,7 @@ describe('atomWithDefault', () => {
+     expect(store.get(testAtom)).toBe(20)
+   })
+ 
+-  it(`should reflect changes to the initial value atom when main atom has been manually changed but then RESET`, () => {
++  it(`atomWithDefault.ok.reset-restores should reflect changes to the initial value atom when main atom has been manually changed but then RESET`, () => {
+     const initialValueAtom = atom(10)
+     const testAtom = atomWithDefault((get) => get(initialValueAtom))
+     const store = createStore()
+@@ -46,7 +46,7 @@ describe('atomWithDefault', () => {
+     expect(store.get(testAtom)).toBe(20)
+   })
+ 
+-  it('should update atom with a new value', () => {
++  it('atomWithDefault.ok.overwritten-detaches should update atom with a new value', () => {
+     const initialValue = 10
+     const testAtom = atomWithDefault(() => initialValue)
+     const store = createStore()
+@@ -55,7 +55,7 @@ describe('atomWithDefault', () => {
+     expect(store.get(testAtom)).toBe(30)
+   })
+ 
+-  it('should update atom using a function', () => {
++  it('atomWithDefault.ok.overwritten-detaches should update atom using a function', () => {
+     const initialValue = 10
+     const testAtom = atomWithDefault(() => initialValue)
+     const store = createStore()
+@@ -64,7 +64,7 @@ describe('atomWithDefault', () => {
+     expect(store.get(testAtom)).toBe(133)
+   })
+ 
+-  it('should reset with a function', () => {
++  it('atomWithDefault.ok.reset-restores should reset with a function', () => {
+     const initialValue = 10
+     const testAtom = atomWithDefault(() => initialValue)
+     const store = createStore()
+diff --git a/tests/vanilla/utils/atomWithLazy.test.ts b/tests/vanilla/utils/atomWithLazy.test.ts
+index e290e7b..d1b1e04 100644
+--- a/tests/vanilla/utils/atomWithLazy.test.ts
++++ b/tests/vanilla/utils/atomWithLazy.test.ts
+@@ -2,7 +2,7 @@ import { expect, it, vi } from 'vitest'
+ import { createStore } from 'jotai/vanilla'
+ import { atomWithLazy } from 'jotai/vanilla/utils'
+ 
+-it('initializes on first store get', () => {
++it('atomWithLazy.ok.lazy-first-use initializes on first store get', () => {
+   const storeA = createStore()
+   const storeB = createStore()
+ 
+@@ -22,7 +22,7 @@ it('initializes on first store get', () => {
+   expect(initializer).toHaveBeenCalledTimes(2)
+ })
+ 
+-it('is writable', () => {
++it('atomWithLazy.ok.writable-after-init is writable', () => {
+   const store = createStore()
+   const anAtom = atomWithLazy(() => 0)
+ 
+@@ -31,7 +31,7 @@ it('is writable', () => {
+   expect(store.get(anAtom)).toEqual(123)
+ })
+ 
+-it('should work with a set state action', () => {
++it('atomWithLazy.ok.writable-after-init should work with a set state action', () => {
+   const store = createStore()
+   const anAtom = atomWithLazy(() => 4)
+ 
+diff --git a/tests/vanilla/utils/atomWithRefresh.test.ts b/tests/vanilla/utils/atomWithRefresh.test.ts
+index 9c3efa5..398869d 100644
+--- a/tests/vanilla/utils/atomWithRefresh.test.ts
++++ b/tests/vanilla/utils/atomWithRefresh.test.ts
+@@ -3,7 +3,7 @@ import { createStore } from 'jotai/vanilla'
+ import { atomWithRefresh } from 'jotai/vanilla/utils'
+ 
+ describe('atomWithRefresh', () => {
+-  it('[DEV-ONLY] throws when refresh is called with extra arguments', () => {
++  it('atomWithRefresh.ok.refresh-on-no-args [DEV-ONLY] throws when refresh is called with extra arguments', () => {
+     const atom = atomWithRefresh(() => {})
+     const store = createStore()
+     const args = ['some arg'] as unknown as []
+diff --git a/tests/vanilla/utils/atomWithReset.test.ts b/tests/vanilla/utils/atomWithReset.test.ts
+index bf7e955..142d36c 100644
+--- a/tests/vanilla/utils/atomWithReset.test.ts
++++ b/tests/vanilla/utils/atomWithReset.test.ts
+@@ -13,21 +13,21 @@ describe('atomWithReset', () => {
+     testAtom = atomWithReset(initialValue)
+   })
+ 
+-  it('should reset to initial value using RESET', () => {
++  it('atomWithReset.ok.reset-to-initial should reset to initial value using RESET', () => {
+     const store = createStore()
+     store.set(testAtom, 123)
+     store.set(testAtom, RESET)
+     expect(store.get(testAtom)).toBe(initialValue)
+   })
+ 
+-  it('should update atom with a new value', () => {
++  it('atomWithReset.ok.primitive-like should update atom with a new value', () => {
+     const store = createStore()
+     store.set(testAtom, 123)
+     store.set(testAtom, 30)
+     expect(store.get(testAtom)).toBe(30)
+   })
+ 
+-  it('should update atom using a function', () => {
++  it('atomWithReset.ok.primitive-like should update atom using a function', () => {
+     const store = createStore()
+     store.set(testAtom, 123)
+     store.set(testAtom, (prev: number) => prev + 10)
+diff --git a/tests/vanilla/utils/types.test.tsx b/tests/vanilla/utils/types.test.tsx
+index ab89437..5330b88 100644
+--- a/tests/vanilla/utils/types.test.tsx
++++ b/tests/vanilla/utils/types.test.tsx
+@@ -3,7 +3,7 @@ import { atom } from 'jotai/vanilla'
+ import type { Atom, SetStateAction, WritableAtom } from 'jotai/vanilla'
+ import { selectAtom, unwrap } from 'jotai/vanilla/utils'
+ 
+-it('selectAtom() should return the correct types', () => {
++it('selectAtom.ok.default-equality selectAtom() should return the correct types', () => {
+   const doubleCount = (x: number) => x * 2
+   const syncAtom = atom(0)
+   const syncSelectedAtom = selectAtom(syncAtom, doubleCount)
+@@ -12,7 +12,7 @@ it('selectAtom() should return the correct types', () => {
+   expectTypeOf(syncSelectedAtom).toEqualTypeOf<Atom<number>>()
+ })
+ 
+-it('unwrap() should return the correct types', () => {
++it('unwrap.ok.pending-undefined unwrap() should return the correct types', () => {
+   const getFallbackValue = () => -1
+   const syncAtom = atom(0)
+   const syncUnwrappedAtom = unwrap(syncAtom, getFallbackValue)
+diff --git a/tests/vanilla/utils/unwrap.test.ts b/tests/vanilla/utils/unwrap.test.ts
+index 833afe5..0e3bdf0 100644
+--- a/tests/vanilla/utils/unwrap.test.ts
++++ b/tests/vanilla/utils/unwrap.test.ts
+@@ -17,7 +17,7 @@ describe('unwrap', () => {
+     console.warn = savedConsoleWarn
+   })
+ 
+-  it('should unwrap a promise with no fallback function', async () => {
++  it('unwrap.ok.pending-undefined should unwrap a promise with no fallback function', async () => {
+     const store = createStore()
+     const countAtom = atom(1)
+     const asyncAtom = atom(async (get) => {
+@@ -42,7 +42,7 @@ describe('unwrap', () => {
+     expect(store.get(syncAtom)).toBe(6)
+   })
+ 
+-  it('should unwrap a promise with fallback function without prev', async () => {
++  it('unwrap.ok.fallback should unwrap a promise with fallback function without prev', async () => {
+     const store = createStore()
+     const countAtom = atom(1)
+     const asyncAtom = atom(async (get) => {
+@@ -67,7 +67,7 @@ describe('unwrap', () => {
+     expect(store.get(syncAtom)).toBe(6)
+   })
+ 
+-  it('should unwrap a promise with fallback function with prev', async () => {
++  it('unwrap.ok.fallback should unwrap a promise with fallback function with prev', async () => {
+     const store = createStore()
+     const countAtom = atom(1)
+     const asyncAtom = atom(async (get) => {
+@@ -99,7 +99,7 @@ describe('unwrap', () => {
+     expect(store.get(syncAtom)).toBe(10)
+   })
+ 
+-  it('should unwrap a sync atom which is noop', () => {
++  it('unwrap.ok.pending-undefined should unwrap a sync atom which is noop', () => {
+     const store = createStore()
+     const countAtom = atom(1)
+     const syncAtom = unwrap(countAtom)
+@@ -113,7 +113,7 @@ describe('unwrap', () => {
+     expect(store.get(syncAtom)).toBe(3)
+   })
+ 
+-  it('should unwrap an async writable atom', async () => {
++  it('unwrap.ok.fallback should unwrap an async writable atom', async () => {
+     const store = createStore()
+     const asyncAtom = atom(Promise.resolve(1))
+     const syncAtom = unwrap(asyncAtom, (prev?: number) => prev ?? 0)
+@@ -133,7 +133,7 @@ describe('unwrap', () => {
+     expect(store.get(syncAtom)).toBe(3)
+   })
+ 
+-  it('should unwrap to a fulfilled value of an already resolved async atom', async () => {
++  it('unwrap.ok.pending-undefined should unwrap to a fulfilled value of an already resolved async atom', async () => {
+     const store = createStore()
+     const asyncAtom = atom(Promise.resolve('concrete'))
+ 
+@@ -142,7 +142,7 @@ describe('unwrap', () => {
+     expect(store.get(unwrap(asyncAtom))).toEqual('concrete')
+   })
+ 
+-  it('should get a fulfilled value after the promise resolves', async () => {
++  it('unwrap.ok.pending-undefined should get a fulfilled value after the promise resolves', async () => {
+     const store = createStore()
+     const asyncAtom = atom(Promise.resolve('concrete'))
+     const syncAtom = unwrap(asyncAtom)
+@@ -152,7 +152,7 @@ describe('unwrap', () => {
+     expect(store.get(syncAtom)).toEqual('concrete')
+   })
+ 
+-  it('should throw an error if underlying promise is rejected', async () => {
++  it('unwrap.err.errors-thrown should throw an error if underlying promise is rejected', async () => {
+     const store = createStore()
+     const asyncAtom = atom(Promise.reject<number>('error'))
+     const syncAtom = unwrap(asyncAtom)
+@@ -168,7 +168,7 @@ describe('unwrap', () => {
+   })
+ 
+   // https://github.com/pmndrs/jotai/discussions/3362
+-  it('should not enter an infinite loop when a rejected source recomputes', async () => {
++  it('unwrap.err.errors-thrown should not enter an infinite loop when a rejected source recomputes', async () => {
+     const store = createStore()
+     const error = new Error('boom')
+ 
+@@ -196,7 +196,7 @@ describe('unwrap', () => {
+     expect(() => store.get(syncAtom)).toThrow('boom')
+   })
+ 
+-  it('should pass the last value to fallback after an error state', async () => {
++  it('unwrap.ok.fallback should pass the last value to fallback after an error state', async () => {
+     const store = createStore()
+ 
+     let resolveFirst: (v: number) => void
+@@ -235,7 +235,7 @@ describe('unwrap', () => {
+     expect(fallbackArgs).toEqual([undefined, 7, 7])
+   })
+ 
+-  it('should update dependents with the value of the unwrapped atom when the promise resolves', async () => {
++  it('unwrap.ok.pending-undefined should update dependents with the value of the unwrapped atom when the promise resolves', async () => {
+     const store = createStore()
+     const asyncTarget = atom(() => Promise.resolve('value'))
+     const target = unwrap(asyncTarget)
+@@ -252,7 +252,7 @@ describe('unwrap', () => {
+   })
+ 
+   // https://github.com/pmndrs/jotai/discussions/3208#discussioncomment-15431859
+-  it('[DEV-ONLY] should not call store.set during atom read', async () => {
++  it('unwrap.ok.pending-undefined [DEV-ONLY] should not call store.set during atom read', async () => {
+     const store = createStore()
+     const example = atom('Hello')
+     store.get(example)
+@@ -262,7 +262,7 @@ describe('unwrap', () => {
+     expect(console.warn).not.toHaveBeenCalled()
+   })
+ 
+-  it('should expose the latest value after a linked async read resolves (#3296)', async () => {
++  it('unwrap.ok.pending-undefined should expose the latest value after a linked async read resolves (#3296)', async () => {
+     const store = createStore()
+     const countAtom = atom(0)
+     const bumpAtom = atom(null, (_get, set) =>

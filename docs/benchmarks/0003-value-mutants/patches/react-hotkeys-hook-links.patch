@@ -1,0 +1,1280 @@
+diff --git a/packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx b/packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx
+index f657775..2e472db 100644
+--- a/packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx
++++ b/packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx
+@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
+ import type { HotkeysContextType } from '../lib/HotkeysProvider'
+ import {test, expect} from 'vitest'
+ 
+-test('should render children', () => {
++test('HotkeysProvider.ok.wildcard-default should render children', () => {
+   const { getByText } = render(
+     <HotkeysProvider>
+       <div>Hello</div>
+@@ -14,7 +14,7 @@ test('should render children', () => {
+   expect(getByText('Hello')).toBeInTheDocument()
+ })
+ 
+-test('should default to wildcard scope', () => {
++test('HotkeysProvider.ok.wildcard-default should default to wildcard scope', () => {
+   const { result } = renderHook(() => useHotkeysContext(), {
+     wrapper: HotkeysProvider,
+   })
+@@ -22,7 +22,7 @@ test('should default to wildcard scope', () => {
+   expect(result.current.activeScopes).toEqual(['*'])
+ })
+ 
+-test('should return active scopes and scope modifying functions', () => {
++test('useHotkeysContext.ok.scope-controls should return active scopes and scope modifying functions', () => {
+   const { result } = renderHook(() => useHotkeysContext(), {
+     wrapper: HotkeysProvider,
+   })
+@@ -33,7 +33,7 @@ test('should return active scopes and scope modifying functions', () => {
+   expect(result.current.toggleScope).toBeInstanceOf(Function)
+ })
+ 
+-test('should activate scope by calling enableScope', () => {
++test('useHotkeysContext.ok.scope-controls should activate scope by calling enableScope', () => {
+   const { result } = renderHook(() => useHotkeysContext(), {
+     wrapper: HotkeysProvider,
+   })
+@@ -45,7 +45,7 @@ test('should activate scope by calling enableScope', () => {
+   expect(result.current.activeScopes).toEqual(['foo'])
+ })
+ 
+-test('should return multiple scopes if different scopes are activated', () => {
++test('useHotkeysContext.ok.scope-controls should return multiple scopes if different scopes are activated', () => {
+   const { result } = renderHook(() => useHotkeysContext(), {
+     wrapper: HotkeysProvider,
+   })
+@@ -63,7 +63,7 @@ test('should return multiple scopes if different scopes are activated', () => {
+   expect(result.current.activeScopes).toEqual(['foo', 'bar'])
+ })
+ 
+-test('should deactivate scope by calling disableScope', () => {
++test('useHotkeysContext.ok.scope-controls should deactivate scope by calling disableScope', () => {
+   const { result } = renderHook(() => useHotkeysContext(), {
+     wrapper: HotkeysProvider,
+   })
+@@ -85,7 +85,7 @@ test('should deactivate scope by calling disableScope', () => {
+   expect(result.current.activeScopes).toEqual(['bar'])
+ })
+ 
+-test('should toggle scope by calling toggleScope', () => {
++test('useHotkeysContext.ok.scope-controls should toggle scope by calling toggleScope', () => {
+   const { result } = renderHook(() => useHotkeysContext(), {
+     wrapper: HotkeysProvider,
+   })
+@@ -109,7 +109,7 @@ test('should toggle scope by calling toggleScope', () => {
+   expect(result.current.activeScopes).toEqual(['foo'])
+ })
+ 
+-test('should be able to disable wildcard like any other scope', () => {
++test('useHotkeysContext.ok.scope-controls should be able to disable wildcard like any other scope', () => {
+   const { result } = renderHook(() => useHotkeysContext(), {
+     wrapper: HotkeysProvider,
+   })
+@@ -121,7 +121,7 @@ test('should be able to disable wildcard like any other scope', () => {
+   expect(result.current.activeScopes).toEqual([])
+ })
+ 
+-test('should return initially set scopes', () => {
++test('HotkeysProvider.ok.initially-active-scopes should return initially set scopes', () => {
+   const wrapper = ({ children }: { children: ReactNode }) => (
+     <HotkeysProvider initiallyActiveScopes={['foo', 'bar']}>{children}</HotkeysProvider>
+   )
+@@ -132,7 +132,7 @@ test('should return initially set scopes', () => {
+   expect(result.current.activeScopes).toEqual(['foo', 'bar'])
+ })
+ 
+-test('should return all bound hotkeys', () => {
++test('useHotkeys.ok.option-defaults should return all bound hotkeys', () => {
+   const useIntegratedHotkeys = () => {
+     useHotkeys('a', () => null, { scopes: ['foo'] })
+ 
+@@ -149,7 +149,7 @@ test('should return all bound hotkeys', () => {
+   expect(result.current.hotkeys).toHaveLength(1)
+ })
+ 
+-test('should update bound hotkeys when useHotkeys changes its scopes', () => {
++test('useHotkeys.ok.option-defaults should update bound hotkeys when useHotkeys changes its scopes', () => {
+   const useIntegratedHotkeys = (scopes: string[]) => {
+     useHotkeys('a', () => null, { scopes })
+ 
+@@ -177,7 +177,7 @@ test('should update bound hotkeys when useHotkeys changes its scopes', () => {
+   expect(result.current.hotkeys).toHaveLength(0)
+ })
+ 
+-test('should return bound hotkeys when defined as a string array', () => {
++test('useHotkeys.ok.option-defaults should return bound hotkeys when defined as a string array', () => {
+   const useIntegratedHotkeys = () => {
+     useHotkeys(['a+c', 'b'], () => null, { scopes: ['foo'] })
+ 
+@@ -194,7 +194,7 @@ test('should return bound hotkeys when defined as a string array', () => {
+   expect(result.current.hotkeys[1].keys).toEqual(['b'])
+ })
+ 
+-test('should return descriptions for bound hotkeys', () => {
++test('useHotkeys.ok.option-defaults should return descriptions for bound hotkeys', () => {
+   const useIntegratedHotkeys = () => {
+     useHotkeys('a', () => null, { scopes: ['foo'], description: 'bar' })
+ 
+@@ -211,7 +211,7 @@ test('should return descriptions for bound hotkeys', () => {
+   expect(result.current.hotkeys[0].description).toEqual('bar')
+ })
+ 
+-test('should have no active scopes after deactivating all current scopes', () => {
++test('useHotkeysContext.ok.scope-controls should have no active scopes after deactivating all current scopes', () => {
+   const { result } = renderHook(() => useHotkeysContext(), {
+     wrapper: HotkeysProvider,
+   })
+@@ -232,7 +232,7 @@ test('should have no active scopes after deactivating all current scopes', () =>
+   expect(result.current.activeScopes).toEqual([])
+ })
+ 
+-test('should not disable other scopes when enabling same scope twice', () => {
++test('useHotkeysContext.ok.scope-controls should not disable other scopes when enabling same scope twice', () => {
+   const { result } = renderHook(() => useHotkeysContext(), {
+     wrapper: HotkeysProvider,
+   })
+diff --git a/packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx b/packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx
+index 85e980b..0db1dad 100644
+--- a/packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx
++++ b/packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx
+@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event'
+ import { isHotkeyPressed } from '../lib'
+ import {test, expect} from 'vitest'
+ 
+-test('should return true if hotkey is currently pressed down', async () => {
++test('isHotkeyPressed.ok.all-keys-pressed should return true if hotkey is currently pressed down', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('{A>}')
+@@ -11,7 +11,7 @@ test('should return true if hotkey is currently pressed down', async () => {
+   expect(isHotkeyPressed('a')).toBe(true)
+ })
+ 
+-test('should return false if hotkey is not pressed down', async () => {
++test('isHotkeyPressed.ok.all-keys-pressed should return false if hotkey is not pressed down', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('{A>}')
+@@ -33,7 +33,7 @@ test.skip('should take modifiers into account', async () => {
+   expect(isHotkeyPressed('meta')).toBe(true)
+ })
+ 
+-test('should support multiple hotkeys', async () => {
++test('isHotkeyPressed.ok.all-keys-pressed should support multiple hotkeys', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('{B>}{A>}')
+@@ -49,7 +49,7 @@ test('should support multiple hotkeys', async () => {
+   expect(isHotkeyPressed(['b', 'a'])).toBe(false)
+ })
+ 
+-test('should support multiple hotkeys with modifiers', async () => {
++test('isHotkeyPressed.ok.all-keys-pressed should support multiple hotkeys with modifiers', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('{Shift>}{A>}')
+@@ -65,7 +65,7 @@ test('should support multiple hotkeys with modifiers', async () => {
+   expect(isHotkeyPressed(['shift', 'a'])).toBe(false)
+ })
+ 
+-test('should use , as delimiter as default', async () => {
++test('isHotkeyPressed.ok.default-delimiter should use , as delimiter as default', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('{B>}{A>}')
+@@ -105,7 +105,7 @@ test.skip('should respect the delimiter option', async () => {
+   expect(isHotkeyPressed(['b', ','])).toBe(false)
+ })
+ 
+-test('Should clear pressed hotkeys when window blurs', async () => {
++test('isHotkeyPressed.ok.all-keys-pressed Should clear pressed hotkeys when window blurs', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('{Meta>}')
+@@ -120,7 +120,7 @@ test('Should clear pressed hotkeys when window blurs', async () => {
+   expect(isHotkeyPressed('meta')).toBe(false)
+ })
+ 
+-test('Should clear pressed hotkeys when document becomes hidden via visibilitychange', async () => {
++test('isHotkeyPressed.ok.all-keys-pressed Should clear pressed hotkeys when document becomes hidden via visibilitychange', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('{Shift>}{W>}')
+@@ -140,7 +140,7 @@ test('Should clear pressed hotkeys when document becomes hidden via visibilitych
+   expect(isHotkeyPressed('w')).toBe(false)
+ })
+ 
+-test('Should clear pressed hotkeys when window regains focus', async () => {
++test('isHotkeyPressed.ok.all-keys-pressed Should clear pressed hotkeys when window regains focus', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('{Meta>}{A>}')
+@@ -154,7 +154,7 @@ test('Should clear pressed hotkeys when window regains focus', async () => {
+   expect(isHotkeyPressed('a')).toBe(false)
+ })
+ 
+-test('Should return true for shift and 1 if shift+1 is held down, but not for ! as it is a produced key', async () => {
++test('isHotkeyPressed.ok.all-keys-pressed Should return true for shift and 1 if shift+1 is held down, but not for ! as it is a produced key', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('[ShiftLeft>]{1>}')
+@@ -164,7 +164,7 @@ test('Should return true for shift and 1 if shift+1 is held down, but not for !
+   expect(isHotkeyPressed('!')).toBe(false)
+ })
+ 
+-test('Should clear pressed hotkeys when contextmenu opens', async () => {
++test('isHotkeyPressed.ok.all-keys-pressed Should clear pressed hotkeys when contextmenu opens', async () => {
+   const user = userEvent.setup()
+ 
+   await user.keyboard('{Meta>}')
+diff --git a/packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx b/packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx
+index 0a21eba..d178bd2 100644
+--- a/packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx
++++ b/packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx
+@@ -33,7 +33,7 @@ beforeEach(() => {
+   })
+ })
+ 
+-test('should listen to esc modifier for escape key', async () => {
++test('useHotkeys.ok.option-defaults should listen to esc modifier for escape key', async () => {
+   const user = userEvent.setup()
+ 
+   const callback = vi.fn()
+@@ -45,7 +45,7 @@ test('should listen to esc modifier for escape key', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should work without a wrapped context provider when not using scopes', async () => {
++test('useHotkeys.ok.option-defaults should work without a wrapped context provider when not using scopes', async () => {
+   const user = userEvent.setup()
+ 
+   const callback = vi.fn()
+@@ -57,7 +57,7 @@ test('should work without a wrapped context provider when not using scopes', asy
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should log a warning when trying to set a scope without a wrapped provider', async () => {
++test('useHotkeys.ok.option-defaults should log a warning when trying to set a scope without a wrapped provider', async () => {
+   console.warn = vi.fn()
+   const callback = vi.fn()
+ 
+@@ -66,7 +66,7 @@ test('should log a warning when trying to set a scope without a wrapped provider
+   expect(callback).not.toHaveBeenCalled()
+ })
+ 
+-test('should call hotkey when scopes are set but activatedScopes includes wildcard scope', async () => {
++test('useHotkeys.ok.option-defaults should call hotkey when scopes are set but activatedScopes includes wildcard scope', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -86,7 +86,7 @@ test('should call hotkey when scopes are set but activatedScopes includes wildca
+   expect(callback).toHaveBeenCalled()
+ })
+ 
+-test('should not call hotkey when scopes are set but activatedScopes does not include set scope', async () => {
++test('useHotkeys.ok.option-defaults should not call hotkey when scopes are set but activatedScopes does not include set scope', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -106,7 +106,7 @@ test('should not call hotkey when scopes are set but activatedScopes does not in
+   expect(callback).not.toHaveBeenCalled()
+ })
+ 
+-test('should call hotkey when scopes are set and activatedScopes does include some set scopes', async () => {
++test('useHotkeys.ok.option-defaults should call hotkey when scopes are set and activatedScopes does include some set scopes', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -126,7 +126,7 @@ test('should call hotkey when scopes are set and activatedScopes does include so
+   expect(callback).toHaveBeenCalled()
+ })
+ 
+-test('should handle multiple scopes', async () => {
++test('useHotkeys.ok.option-defaults should handle multiple scopes', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -146,7 +146,7 @@ test('should handle multiple scopes', async () => {
+   expect(callback).toHaveBeenCalled()
+ })
+ 
+-test('should update call behavior when set scopes change', async () => {
++test('useHotkeys.ok.option-defaults should update call behavior when set scopes change', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -172,7 +172,7 @@ test('should update call behavior when set scopes change', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('scope should take precedence over enabled flag/function', async () => {
++test('useHotkeys.ok.option-defaults scope should take precedence over enabled flag/function', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -198,7 +198,7 @@ test('scope should take precedence over enabled flag/function', async () => {
+   expect(callback).toHaveBeenCalled()
+ })
+ 
+-test('should listen to key presses', async () => {
++test('useHotkeys.ok.option-defaults should listen to key presses', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -209,7 +209,7 @@ test('should listen to key presses', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should ignore unregistered key events', async () => {
++test('useHotkeys.ok.option-defaults should ignore unregistered key events', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -220,7 +220,7 @@ test('should ignore unregistered key events', async () => {
+   expect(callback).not.toHaveBeenCalled()
+ })
+ 
+-test('should listen to multiple hotkeys', async () => {
++test('useHotkeys.ok.delimiters should listen to multiple hotkeys', async () => {
+   const user = userEvent.setup()
+ 
+   const callback = vi.fn()
+@@ -240,7 +240,7 @@ test('should listen to multiple hotkeys', async () => {
+   expect(callback).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('should be able to always output correct keys on multiple hotkeys', async () => {
++test('useHotkeys.ok.delimiters should be able to always output correct keys on multiple hotkeys', async () => {
+   const user = userEvent.setup()
+ 
+   const callbackA = vi.fn()
+@@ -271,7 +271,7 @@ test('should be able to always output correct keys on multiple hotkeys', async (
+   expect(callbackB).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('should be able to parse first argument as string, array or readonly array', async () => {
++test('useHotkeys.ok.delimiters should be able to parse first argument as string, array or readonly array', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -298,7 +298,7 @@ test('should be able to parse first argument as string, array or readonly array'
+   expect(callback).toHaveBeenCalledTimes(3)
+ })
+ 
+-test('should listen to combinations with modifiers', async () => {
++test('useHotkeys.ok.delimiters should listen to combinations with modifiers', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -326,7 +326,7 @@ test('should listen to combinations with modifiers', async () => {
+   expect(callback).toHaveBeenCalledTimes(3)
+ })
+ 
+-test('should not trigger when combinations are incomplete', async () => {
++test('useHotkeys.ok.delimiters should not trigger when combinations are incomplete', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -337,7 +337,7 @@ test('should not trigger when combinations are incomplete', async () => {
+   expect(callback).not.toHaveBeenCalled()
+ })
+ 
+-test('should trigger on combinations without modifiers', async () => {
++test('useHotkeys.ok.delimiters should trigger on combinations without modifiers', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -352,7 +352,7 @@ test('should trigger on combinations without modifiers', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should listen to multiple combinations with modifiers', async () => {
++test('useHotkeys.ok.delimiters should listen to multiple combinations with modifiers', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -382,7 +382,7 @@ test('should listen to multiple combinations with modifiers', async () => {
+   })
+ })
+ 
+-test('should listen to sequences', async () => {
++test('useHotkeys.ok.sequence-timeout should listen to sequences', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -417,7 +417,7 @@ test('should listen to sequences', async () => {
+   expect(callback).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('should not trigger when sequence is incomplete', async () => {
++test('useHotkeys.ok.sequence-timeout should not trigger when sequence is incomplete', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -433,7 +433,7 @@ test('should not trigger when sequence is incomplete', async () => {
+   expect(callback).not.toHaveBeenCalled()
+ })
+ 
+-test('should not trigger when sequence and combination are mixed', async () => {
++test('useHotkeys.ok.sequence-timeout should not trigger when sequence and combination are mixed', async () => {
+   console.warn = vi.fn()
+   const user = userEvent.setup()
+   const callback = vi.fn()
+@@ -455,7 +455,7 @@ test('should not trigger when sequence and combination are mixed', async () => {
+   expect(callback).not.toHaveBeenCalled()
+ })
+ 
+-test('should work with sequences and other hotkeys together', async () => {
++test('useHotkeys.ok.sequence-timeout should work with sequences and other hotkeys together', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -480,7 +480,7 @@ test('should work with sequences and other hotkeys together', async () => {
+   expect(callback).toHaveBeenCalledTimes(3)
+ })
+ 
+-test('should reset sequence when timeout occurs', async () => {
++test('useHotkeys.ok.sequence-timeout should reset sequence when timeout occurs', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -502,7 +502,7 @@ test('should reset sequence when timeout occurs', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should handle component unmount during sequence detection', async () => {
++test('useHotkeys.ok.sequence-timeout should handle component unmount during sequence detection', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -517,7 +517,7 @@ test('should handle component unmount during sequence detection', async () => {
+   vi.advanceTimersByTime(1100)
+ })
+ 
+-test('should reset sequence when incorrect key is pressed', async () => {
++test('useHotkeys.ok.sequence-timeout should reset sequence when incorrect key is pressed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -546,7 +546,7 @@ test('should reset sequence when incorrect key is pressed', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should trigger sequence with useKey', async () => {
++test('useHotkeys.ok.sequence-timeout should trigger sequence with useKey', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -559,7 +559,7 @@ test('should trigger sequence with useKey', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should not trigger sequence without useKey', async () => {
++test('useHotkeys.ok.sequence-timeout should not trigger sequence without useKey', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -572,7 +572,7 @@ test('should not trigger sequence without useKey', async () => {
+   expect(callback).toHaveBeenCalledTimes(0)
+ })
+ 
+-test('should reflect set delimiter character', async () => {
++test('useHotkeys.ok.delimiters should reflect set delimiter character', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -596,7 +596,7 @@ test('should reflect set delimiter character', async () => {
+   expect(callback).toHaveBeenCalledTimes(4)
+ })
+ 
+-test('should listen to + if the splitKey is set to something different then +', async () => {
++test('useHotkeys.ok.delimiters should listen to + if the splitKey is set to something different then +', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -607,7 +607,7 @@ test('should listen to + if the splitKey is set to something different then +',
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should default to keydown if neither keyup nor keydown is passed', async () => {
++test('useHotkeys.ok.option-defaults should default to keydown if neither keyup nor keydown is passed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -618,7 +618,7 @@ test('should default to keydown if neither keyup nor keydown is passed', async (
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should not listen to keyup if keydown is passed', async () => {
++test('useHotkeys.ok.option-defaults should not listen to keyup if keydown is passed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -633,7 +633,7 @@ test('should not listen to keyup if keydown is passed', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should not listen to keydown if keyup is passed', async () => {
++test('useHotkeys.ok.keyup-only should not listen to keydown if keyup is passed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -648,7 +648,7 @@ test('should not listen to keydown if keyup is passed', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should trigger on named keys when keyup is set to true', async () => {
++test('useHotkeys.ok.keyup-only should trigger on named keys when keyup is set to true', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -663,7 +663,7 @@ test('should trigger on named keys when keyup is set to true', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should trigger twice if keyup and keydown are passed', async () => {
++test('useHotkeys.ok.keyup-only should trigger twice if keyup and keydown are passed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -674,7 +674,7 @@ test('should trigger twice if keyup and keydown are passed', async () => {
+   expect(callback).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('should be disabled on form tags by default', async () => {
++test('useHotkeys.ok.option-defaults should be disabled on form tags by default', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb }: { cb: HotkeyCallback }) => {
+@@ -696,7 +696,7 @@ test('should be disabled on form tags by default', async () => {
+   expect(getByTestId('form-tag')).toHaveValue('A')
+ })
+ 
+-test('should be disabled on aria form roles by default', async () => {
++test('useHotkeys.ok.option-defaults should be disabled on aria form roles by default', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const formCallback = vi.fn()
+@@ -719,7 +719,7 @@ test('should be disabled on aria form roles by default', async () => {
+   expect(formCallback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should be enabled on given form tags', async () => {
++test('useHotkeys.ok.option-defaults should be enabled on given form tags', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb, enableOnFormTags }: { cb: HotkeyCallback; enableOnFormTags?: readonly FormTags[] }) => {
+@@ -741,7 +741,7 @@ test('should be enabled on given form tags', async () => {
+   expect(getByTestId('form-tag')).toHaveValue('A')
+ })
+ 
+-test('should ignore case of form tags', async () => {
++test('useHotkeys.ok.option-defaults should ignore case of form tags', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb, enableOnFormTags }: { cb: HotkeyCallback; enableOnFormTags?: FormTags[] }) => {
+@@ -763,7 +763,7 @@ test('should ignore case of form tags', async () => {
+   expect(getByTestId('form-tag')).toHaveValue('A')
+ })
+ 
+-test('should ignore event when ignoreEventWhen\'s condition matches', async () => {
++test('useHotkeys.ok.option-defaults should ignore event when ignoreEventWhen\'s condition matches', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb, ignoreEventWhen }: {
+@@ -793,7 +793,7 @@ test('should ignore event when ignoreEventWhen\'s condition matches', async () =
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('shouldn\'t ignore event when ignoreEventWhen\'s condition doesn\'t match', async () => {
++test('useHotkeys.ok.option-defaults shouldn\'t ignore event when ignoreEventWhen\'s condition doesn\'t match', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb, ignoreEventWhen }: {
+@@ -823,7 +823,7 @@ test('shouldn\'t ignore event when ignoreEventWhen\'s condition doesn\'t match',
+   expect(callback).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('should call ignoreEventWhen callback only when event is a hotkey match', async () => {
++test('useHotkeys.ok.option-defaults should call ignoreEventWhen callback only when event is a hotkey match', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb, ignoreEventWhen }: {
+@@ -847,7 +847,7 @@ test('should call ignoreEventWhen callback only when event is a hotkey match', a
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('enabledOnTags should accept boolean', async () => {
++test('useHotkeys.ok.option-defaults enabledOnTags should accept boolean', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb, enableOnFormTags }: { cb: HotkeyCallback; enableOnFormTags?: FormTags[] | boolean }) => {
+@@ -869,7 +869,7 @@ test('enabledOnTags should accept boolean', async () => {
+   expect(getByTestId('form-tag')).toHaveValue('A')
+ })
+ 
+-test('should prevent pressed down key propagate to input field when preventDefault is set to true and form tag is enabled', async () => {
++test('useHotkeys.ok.option-defaults should prevent pressed down key propagate to input field when preventDefault is set to true and form tag is enabled', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb, enableOnFormTags }: { cb: HotkeyCallback; enableOnFormTags?: FormTags[] }) => {
+@@ -891,7 +891,7 @@ test('should prevent pressed down key propagate to input field when preventDefau
+   expect(getByTestId('form-tag')).toHaveValue('')
+ })
+ 
+-test('should be disabled on all other tags by default', async () => {
++test('useHotkeys.ok.option-defaults should be disabled on all other tags by default', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb, enableOnFormTags }: { cb: HotkeyCallback; enableOnFormTags?: FormTags[] }) => {
+@@ -914,7 +914,7 @@ test('should be disabled on all other tags by default', async () => {
+   expect(getByTestId('form-tag')).toHaveValue('A')
+ })
+ 
+-test('should not bind the event if enabled is set to false', async () => {
++test('useHotkeys.ok.enabled-modes should not bind the event if enabled is set to false', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -925,7 +925,7 @@ test('should not bind the event if enabled is set to false', async () => {
+   expect(callback).toHaveBeenCalledTimes(0)
+ })
+ 
+-test('should bind the event and trigger if enabled is set to true', async () => {
++test('useHotkeys.ok.enabled-modes should bind the event and trigger if enabled is set to true', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -936,7 +936,7 @@ test('should bind the event and trigger if enabled is set to true', async () =>
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should bind the event and execute the callback if enabled is set to a function and returns true', async () => {
++test('useHotkeys.ok.enabled-modes should bind the event and execute the callback if enabled is set to a function and returns true', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -976,7 +976,7 @@ test('should bind the event and execute the callback if enabled is set to a func
+   expect(callback).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('should dynamically attach and detach listeners when enabled boolean changes', async () => {
++test('useHotkeys.ok.enabled-modes should dynamically attach and detach listeners when enabled boolean changes', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1016,7 +1016,7 @@ test('should dynamically attach and detach listeners when enabled boolean change
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should return a ref', async () => {
++test('useHotkeys.ok.returns-ref should return a ref', async () => {
+   const callback = vi.fn()
+ 
+   const { result } = renderHook(() => useHotkeys('a', callback))
+@@ -1024,7 +1024,7 @@ test('should return a ref', async () => {
+   expect(result.current).toBeDefined()
+ })
+ 
+-test('should only trigger when the element is focused if a ref is set', async () => {
++test('useHotkeys.ok.returns-ref should only trigger when the element is focused if a ref is set', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1080,7 +1080,7 @@ test.skip('should preventDefault and stop propagation when ref is not focused',
+   expect(callback).toHaveBeenCalled()
+ })
+ 
+-test('should trigger when the ref is re-attached to another element', async () => {
++test('useHotkeys.ok.returns-ref should trigger when the ref is re-attached to another element', async () => {
+   const callback = vi.fn()
+ 
+   const Component = ({ cb }: { cb: HotkeyCallback }) => {
+@@ -1126,7 +1126,7 @@ test('should trigger when the ref is re-attached to another element', async () =
+ 
+ })
+ 
+-test('should allow * as a wildcard', async () => {
++test('useHotkeys.ok.option-defaults should allow * as a wildcard', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1137,7 +1137,7 @@ test('should allow * as a wildcard', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should listen to function keys f1-f16', async () => {
++test('useHotkeys.ok.option-defaults should listen to function keys f1-f16', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1157,7 +1157,7 @@ test.each([
+   'space',
+   'enter',
+   'backspace',
+-])('should allow named key %s', async (key) => {
++])('useHotkeys.ok.option-defaults should allow named key %s', async (key) => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1171,7 +1171,7 @@ test.each([
+ test.skip('should trigger when used in portals', async () => {
+ })
+ 
+-test('should parse options and dependencies correctly no matter their position', async () => {
++test('useHotkeys.ok.option-defaults should parse options and dependencies correctly no matter their position', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1198,7 +1198,7 @@ test('should parse options and dependencies correctly no matter their position',
+   expect(callback).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('should pass keyboard event and hotkey object to callback', async () => {
++test('useHotkeys.ok.option-defaults should pass keyboard event and hotkey object to callback', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1220,7 +1220,7 @@ test('should pass keyboard event and hotkey object to callback', async () => {
+   })
+ })
+ 
+-test('should set shift to true in hotkey object if listening to shift', async () => {
++test('useHotkeys.ok.modifiers should set shift to true in hotkey object if listening to shift', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1242,7 +1242,7 @@ test('should set shift to true in hotkey object if listening to shift', async ()
+   })
+ })
+ 
+-test('should set ctrl to true in hotkey object if listening to ctrl', async () => {
++test('useHotkeys.ok.modifiers should set ctrl to true in hotkey object if listening to ctrl', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1264,7 +1264,7 @@ test('should set ctrl to true in hotkey object if listening to ctrl', async () =
+   })
+ })
+ 
+-test('should set alt to true in hotkey object if listening to alt', async () => {
++test('useHotkeys.ok.modifiers should set alt to true in hotkey object if listening to alt', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1286,7 +1286,7 @@ test('should set alt to true in hotkey object if listening to alt', async () =>
+   })
+ })
+ 
+-test('should set mod to true in hotkey object if listening to mod', async () => {
++test('useHotkeys.ok.modifiers should set mod to true in hotkey object if listening to mod', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1308,7 +1308,7 @@ test('should set mod to true in hotkey object if listening to mod', async () =>
+   })
+ })
+ 
+-test('should set meta to true in hotkey object if listening to meta', async () => {
++test('useHotkeys.ok.modifiers should set meta to true in hotkey object if listening to meta', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1330,7 +1330,7 @@ test('should set meta to true in hotkey object if listening to meta', async () =
+   })
+ })
+ 
+-test('should set multiple modifiers to true in hotkey object if listening to multiple modifiers', async () => {
++test('useHotkeys.ok.modifiers should set multiple modifiers to true in hotkey object if listening to multiple modifiers', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1352,7 +1352,7 @@ test('should set multiple modifiers to true in hotkey object if listening to mul
+   })
+ })
+ 
+-test('should not stop propagation when enabled function resolves to false', async () => {
++test('useHotkeys.ok.enabled-modes should not stop propagation when enabled function resolves to false', async () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('a', callback, { enabled: () => false }))
+@@ -1368,7 +1368,7 @@ test('should not stop propagation when enabled function resolves to false', asyn
+   expect(callback).not.toHaveBeenCalled()
+ })
+ 
+-test('should reflect preventDefault option when set', async () => {
++test('useHotkeys.ok.option-defaults should reflect preventDefault option when set', async () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('a', callback, { preventDefault: true }))
+@@ -1384,7 +1384,7 @@ test('should reflect preventDefault option when set', async () => {
+   expect(keyDownEvent.defaultPrevented).toBe(true)
+ })
+ 
+-test('should not prevent default behavior when preventDefault option is not set', async () => {
++test('useHotkeys.ok.option-defaults should not prevent default behavior when preventDefault option is not set', async () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('a', callback))
+@@ -1400,7 +1400,7 @@ test('should not prevent default behavior when preventDefault option is not set'
+   expect(keyDownEvent.defaultPrevented).toBe(false)
+ })
+ 
+-test('should prevent default behavior if preventDefault option is set to a function that returns true', async () => {
++test('useHotkeys.ok.option-defaults should prevent default behavior if preventDefault option is set to a function that returns true', async () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('a', callback, { preventDefault: () => true }))
+@@ -1416,7 +1416,7 @@ test('should prevent default behavior if preventDefault option is set to a funct
+   expect(keyDownEvent.defaultPrevented).toBe(true)
+ })
+ 
+-test('should not prevent default behavior if preventDefault option is set to a function that returns false', async () => {
++test('useHotkeys.ok.option-defaults should not prevent default behavior if preventDefault option is set to a function that returns false', async () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('a', callback, { preventDefault: () => false }))
+@@ -1432,7 +1432,7 @@ test('should not prevent default behavior if preventDefault option is set to a f
+   expect(keyDownEvent.defaultPrevented).toBe(false)
+ })
+ 
+-test('should call preventDefault option function with hotkey and keyboard event', async () => {
++test('useHotkeys.ok.option-defaults should call preventDefault option function with hotkey and keyboard event', async () => {
+   const user = userEvent.setup()
+   const preventDefault = vi.fn()
+ 
+@@ -1455,7 +1455,7 @@ test('should call preventDefault option function with hotkey and keyboard event'
+   })
+ })
+ 
+-test('Should listen to space key', async () => {
++test('useHotkeys.ok.option-defaults Should listen to space key', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1473,7 +1473,7 @@ test.each([
+   ['up', 'ArrowUp'],
+   ['right', 'ArrowRight'],
+   ['down', 'ArrowDown'],
+-])('Should map key %s to %s', async (hotkey, keyboardKey) => {
++])('useHotkeys.ok.option-defaults Should map key %s to %s', async (hotkey, keyboardKey) => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1484,7 +1484,7 @@ test.each([
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test.each(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])(`Should listen to number key %s`, async (key) => {
++test.each(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])(`useHotkeys.ok.option-defaults Should listen to number key %s`, async (key) => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1495,7 +1495,7 @@ test.each(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])(`Should listen to
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should not call callback if meta is held down but other key is not present in combination is pressed', async () => {
++test('useHotkeys.ok.modifiers should not call callback if meta is held down but other key is not present in combination is pressed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1514,7 +1514,7 @@ test('should not call callback if meta is held down but other key is not present
+   expect(callback).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('should listen to keydown permanently', async () => {
++test('useHotkeys.ok.option-defaults should listen to keydown permanently', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1526,7 +1526,7 @@ test('should listen to keydown permanently', async () => {
+   expect(callback).toHaveBeenCalledTimes(4)
+ })
+ 
+-test('Should test for modifiers by default', async () => {
++test('useHotkeys.ok.modifiers Should test for modifiers by default', async () => {
+   const user = userEvent.setup()
+ 
+   const callback = vi.fn()
+@@ -1542,7 +1542,7 @@ test('Should test for modifiers by default', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should not trigger a single-key hotkey while AltGraph is active', () => {
++test('useHotkeys.ok.modifiers should not trigger a single-key hotkey while AltGraph is active', () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('c', callback))
+@@ -1560,7 +1560,7 @@ test('should not trigger a single-key hotkey while AltGraph is active', () => {
+   expect(callback).not.toHaveBeenCalled()
+ })
+ 
+-test('should trigger a single-key hotkey with AltGraph when modifiers are ignored', () => {
++test('useHotkeys.ok.option-defaults should trigger a single-key hotkey with AltGraph when modifiers are ignored', () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('c', callback, { ignoreModifiers: true }))
+@@ -1578,7 +1578,7 @@ test('should trigger a single-key hotkey with AltGraph when modifiers are ignore
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('Should ignore modifiers if option is set', async () => {
++test('useHotkeys.ok.option-defaults Should ignore modifiers if option is set', async () => {
+   const user = userEvent.setup()
+ 
+   const callback = vi.fn()
+@@ -1594,7 +1594,7 @@ test('Should ignore modifiers if option is set', async () => {
+   expect(callback).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('should not trigger callback twice when pressing a key and then a modifier', async () => {
++test('useHotkeys.ok.modifiers should not trigger callback twice when pressing a key and then a modifier', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1607,7 +1607,7 @@ test('should not trigger callback twice when pressing a key and then a modifier'
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should not trigger callback when modifier is pressed while holding unrelated key', async () => {
++test('useHotkeys.ok.modifiers should not trigger callback when modifier is pressed while holding unrelated key', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1619,7 +1619,7 @@ test('should not trigger callback when modifier is pressed while holding unrelat
+   expect(callback).toHaveBeenCalledTimes(0)
+ })
+ 
+-test('should respect dependencies array if they are passed', async () => {
++test('useHotkeys.ok.option-defaults should respect dependencies array if they are passed', async () => {
+   function Fixture() {
+     const [count, setCount] = useState(0)
+ 
+@@ -1644,7 +1644,7 @@ test('should respect dependencies array if they are passed', async () => {
+   expect(getByText('1')).not.toBeNull()
+ })
+ 
+-test('should use updated callback if no dependencies are passed', async () => {
++test('useHotkeys.ok.option-defaults should use updated callback if no dependencies are passed', async () => {
+   function Fixture() {
+     const [count, setCount] = useState(0)
+ 
+@@ -1669,7 +1669,7 @@ test('should use updated callback if no dependencies are passed', async () => {
+   expect(getByText('2')).not.toBeNull()
+ })
+ 
+-test('Should trigger only callback for combination', async () => {
++test('useHotkeys.ok.delimiters Should trigger only callback for combination', async () => {
+   const user = userEvent.setup()
+ 
+   const combinationsCallback = vi.fn()
+@@ -1692,7 +1692,7 @@ test('Should trigger only callback for combination', async () => {
+   expect(keysCallback).toHaveBeenCalledTimes(0)
+ })
+ 
+-test.each(['Shift', 'Alt', 'Meta', 'Ctrl', 'Control'])('Should listen to %s on keyup', async (key) => {
++test.each(['Shift', 'Alt', 'Meta', 'Ctrl', 'Control'])('useHotkeys.ok.keyup-only Should listen to %s on keyup', async (key) => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1703,7 +1703,7 @@ test.each(['Shift', 'Alt', 'Meta', 'Ctrl', 'Control'])('Should listen to %s on k
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('Should listen to produced key and not to code', async () => {
++test('useHotkeys.ok.option-defaults Should listen to produced key and not to code', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1720,7 +1720,7 @@ test('Should listen to produced key and not to code', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('Should not check produced key if useKey is not set', async () => {
++test('useHotkeys.ok.option-defaults Should not check produced key if useKey is not set', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1731,7 +1731,7 @@ test('Should not check produced key if useKey is not set', async () => {
+   expect(callback).toHaveBeenCalledTimes(0)
+ })
+ 
+-test('Should check produced key if useKey is true', async () => {
++test('useHotkeys.ok.option-defaults Should check produced key if useKey is true', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1742,7 +1742,7 @@ test('Should check produced key if useKey is true', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('Should match mixed-case keys like PageUp with useKey option', async () => {
++test('useHotkeys.ok.case-insensitive Should match mixed-case keys like PageUp with useKey option', async () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('PageUp', callback, { useKey: true }))
+@@ -1758,7 +1758,7 @@ test('Should match mixed-case keys like PageUp with useKey option', async () =>
+   expect(callback).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('Should remove listener on AbortSignal', async () => {
++test('useHotkeys.ok.option-defaults Should remove listener on AbortSignal', async () => {
+   const abortController = new AbortController()
+   const { signal } = abortController
+ 
+@@ -1788,7 +1788,7 @@ test('Should remove listener on AbortSignal', async () => {
+   expect(getByText('2')).not.toBeNull()
+ })
+ 
+-test('should be disabled on form tags inside custom elements by default', async () => {
++test('useHotkeys.ok.option-defaults should be disabled on form tags inside custom elements by default', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1830,7 +1830,7 @@ test('should be disabled on form tags inside custom elements by default', async
+   expect(within(getByTestId('form-tag').shadowRoot).getByTestId('input')).toHaveValue('A')
+ })
+ 
+-test('should trigger Enter hotkey inside input with enableOnFormTags true', async () => {
++test('useHotkeys.ok.option-defaults should trigger Enter hotkey inside input with enableOnFormTags true', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb }: { cb: HotkeyCallback }) => {
+@@ -1847,7 +1847,7 @@ test('should trigger Enter hotkey inside input with enableOnFormTags true', asyn
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should trigger ctrl+s hotkey inside input with enableOnFormTags true', async () => {
++test('useHotkeys.ok.option-defaults should trigger ctrl+s hotkey inside input with enableOnFormTags true', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb }: { cb: HotkeyCallback }) => {
+@@ -1864,7 +1864,7 @@ test('should trigger ctrl+s hotkey inside input with enableOnFormTags true', asy
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('should trigger Enter hotkey inside form input with enableOnFormTags true', async () => {
++test('useHotkeys.ok.option-defaults should trigger Enter hotkey inside form input with enableOnFormTags true', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+   const Component = ({ cb }: { cb: HotkeyCallback }) => {
+@@ -1885,7 +1885,7 @@ test('should trigger Enter hotkey inside form input with enableOnFormTags true',
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('Should trigger only produced key hotkeys', async () => {
++test('useHotkeys.ok.option-defaults Should trigger only produced key hotkeys', async () => {
+   const user = userEvent.setup()
+ 
+   const callbackZ = vi.fn()
+@@ -1912,7 +1912,7 @@ test('Should trigger only produced key hotkeys', async () => {
+   expect(callbackY).toHaveBeenCalledTimes(2)
+ })
+ 
+-test('Should not fire useKey hotkey with modifiers when only the bare key is pressed', async () => {
++test('useHotkeys.ok.option-defaults Should not fire useKey hotkey with modifiers when only the bare key is pressed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1923,7 +1923,7 @@ test('Should not fire useKey hotkey with modifiers when only the bare key is pre
+   expect(callback).toHaveBeenCalledTimes(0)
+ })
+ 
+-test('Should fire useKey hotkey with modifiers only when all modifiers are pressed', async () => {
++test('useHotkeys.ok.option-defaults Should fire useKey hotkey with modifiers only when all modifiers are pressed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1934,7 +1934,7 @@ test('Should fire useKey hotkey with modifiers only when all modifiers are press
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('Should not fire useKey hotkey when only some modifiers are pressed', async () => {
++test('useHotkeys.ok.option-defaults Should not fire useKey hotkey when only some modifiers are pressed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1945,7 +1945,7 @@ test('Should not fire useKey hotkey when only some modifiers are pressed', async
+   expect(callback).toHaveBeenCalledTimes(0)
+ })
+ 
+-test('Should not fire useKey hotkey with alt modifier when alt is not pressed', async () => {
++test('useHotkeys.ok.option-defaults Should not fire useKey hotkey with alt modifier when alt is not pressed', async () => {
+   const user = userEvent.setup()
+   const callback = vi.fn()
+ 
+@@ -1956,7 +1956,7 @@ test('Should not fire useKey hotkey with alt modifier when alt is not pressed',
+   expect(callback).toHaveBeenCalledTimes(0)
+ })
+ 
+-test('Should not disable later-registered handlers when one uses enabled callback returning false', async () => {
++test('useHotkeys.ok.enabled-modes Should not disable later-registered handlers when one uses enabled callback returning false', async () => {
+   const user = userEvent.setup()
+ 
+   const callbackA = vi.fn()
+@@ -1974,7 +1974,7 @@ test('Should not disable later-registered handlers when one uses enabled callbac
+   expect(callbackC).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('Should work when both scopes and enabled callback are set', async () => {
++test('useHotkeys.ok.enabled-modes Should work when both scopes and enabled callback are set', async () => {
+   const user = userEvent.setup()
+ 
+   const callback = vi.fn()
+@@ -1988,7 +1988,7 @@ test('Should work when both scopes and enabled callback are set', async () => {
+   expect(callback).toHaveBeenCalledTimes(1)
+ })
+ 
+-test('Should not re-trigger combo hotkey after visibilitychange clears stuck keys', async () => {
++test('useHotkeys.ok.option-defaults Should not re-trigger combo hotkey after visibilitychange clears stuck keys', async () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('a+b', callback))
+@@ -2012,7 +2012,7 @@ test('Should not re-trigger combo hotkey after visibilitychange clears stuck key
+   window.document.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyA', bubbles: true }))
+ })
+ 
+-test('Should not re-trigger combo hotkey after window focus clears stuck keys', async () => {
++test('useHotkeys.ok.option-defaults Should not re-trigger combo hotkey after window focus clears stuck keys', async () => {
+   const callback = vi.fn()
+ 
+   renderHook(() => useHotkeys('a+b', callback))
+diff --git a/packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx b/packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx
+index 5391218..9f9da93 100644
+--- a/packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx
++++ b/packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx
+@@ -3,7 +3,7 @@ import { HotkeysProvider, useHotkeysContext, useHotkeys } from '../lib'
+ import type { ReactNode } from 'react'
+ import { test, expect } from 'vitest'
+ 
+-test('should return hotkey with correct keys', () => {
++test('useHotkeys.ok.option-defaults should return hotkey with correct keys', () => {
+   const useIntegratedHotkeys = () => {
+     useHotkeys('ctrl+a', () => null)
+ 
+@@ -22,7 +22,7 @@ test('should return hotkey with correct keys', () => {
+   expect(result.current.hotkeys[0].hotkey).toEqual('ctrl+a')
+ })
+ 
+-test('should return hotkey with correct scope', () => {
++test('useHotkeys.ok.option-defaults should return hotkey with correct scope', () => {
+   const useIntegratedHotkeys = () => {
+     useHotkeys('ctrl+b', () => null, { scopes: ['scope'] })
+ 
+@@ -41,7 +41,7 @@ test('should return hotkey with correct scope', () => {
+   expect(result.current.hotkeys[0].hotkey).toEqual('ctrl+b')
+ })
+ 
+-test('should not return hotkey with different scope', () => {
++test('useHotkeys.ok.option-defaults should not return hotkey with different scope', () => {
+   const useIntegratedHotkeys = () => {
+     useHotkeys('ctrl+b', () => null, { scopes: ['differentScope'] })
+ 
+@@ -60,7 +60,7 @@ test('should not return hotkey with different scope', () => {
+   expect(result.current.hotkeys).toHaveLength(0)
+ })
+ 
+-test('should return hotkey with correct description and metadata', () => {
++test('useHotkeys.ok.option-defaults should return hotkey with correct description and metadata', () => {
+   const useIntegratedHotkeys = () => {
+     useHotkeys('ctrl+c', () => null, {
+       description: 'Copy text',
+diff --git a/packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx b/packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx
+index 49e87fb..1211007 100644
+--- a/packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx
++++ b/packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx
+@@ -3,7 +3,7 @@ import useRecordHotkeys from '../lib/useRecordHotkeys'
+ import userEvent from '@testing-library/user-event'
+ import { test, expect } from 'vitest'
+ 
+-test('Should set record flag to true if recording is in progress', () => {
++test('useRecordHotkeys.ok.controls Should set record flag to true if recording is in progress', () => {
+   const { result } = renderHook(useRecordHotkeys)
+ 
+   expect(result.current[1].isRecording).toBe(false)
+@@ -21,7 +21,7 @@ test('Should set record flag to true if recording is in progress', () => {
+   expect(result.current[1].isRecording).toBe(false)
+ })
+ 
+-test('Should record keys', async () => {
++test('useRecordHotkeys.ok.keys-is-set Should record keys', async () => {
+   const user = userEvent.setup()
+   const { result } = renderHook(useRecordHotkeys)
+ 
+@@ -42,7 +42,7 @@ test('Should record keys', async () => {
+   expect(result.current[0]).toEqual(new Set(['a', 'b', 'c']))
+ })
+ 
+-test('Should record modifiers', async () => {
++test('useRecordHotkeys.ok.default-key-codes Should record modifiers', async () => {
+   const user = userEvent.setup()
+   const { result } = renderHook(useRecordHotkeys)
+ 
+@@ -61,7 +61,7 @@ test('Should record modifiers', async () => {
+   expect(result.current[0]).toEqual(new Set(['shift', 'a']))
+ })
+ 
+-test('Should record multiple keys only once', async () => {
++test('useRecordHotkeys.ok.keys-is-set Should record multiple keys only once', async () => {
+   const user = userEvent.setup()
+   const { result } = renderHook(useRecordHotkeys)
+ 
+@@ -81,7 +81,7 @@ test('Should record multiple keys only once', async () => {
+   expect(result.current[0]).toEqual(new Set(['a']))
+ })
+ 
+-test('Should not record keys if recording is not in progress', async () => {
++test('useRecordHotkeys.ok.controls Should not record keys if recording is not in progress', async () => {
+   const user = userEvent.setup()
+   const { result } = renderHook(useRecordHotkeys)
+ 
+@@ -92,7 +92,7 @@ test('Should not record keys if recording is not in progress', async () => {
+   expect(result.current[0]).toEqual(new Set())
+ })
+ 
+-test('Should reset keys if recording is restarted', async () => {
++test('useRecordHotkeys.ok.reset-keys Should reset keys if recording is restarted', async () => {
+   const user = userEvent.setup()
+   const { result } = renderHook(useRecordHotkeys)
+ 
+@@ -115,7 +115,7 @@ test('Should reset keys if recording is restarted', async () => {
+   expect(result.current[0]).toEqual(new Set())
+ })
+ 
+-test('Should stop recording if recording is in progress and stop is called', async () => {
++test('useRecordHotkeys.ok.controls Should stop recording if recording is in progress and stop is called', async () => {
+   const user = userEvent.setup()
+   const { result } = renderHook(useRecordHotkeys)
+ 
+@@ -138,7 +138,7 @@ test('Should stop recording if recording is in progress and stop is called', asy
+   expect(result.current[0]).toEqual(new Set(['a']))
+ })
+ 
+-test('Should record steps, no matter the produced key', async () => {
++test('useRecordHotkeys.ok.default-key-codes Should record steps, no matter the produced key', async () => {
+   const user = userEvent.setup()
+   const { result } = renderHook(useRecordHotkeys)
+ 
+@@ -157,7 +157,7 @@ test('Should record steps, no matter the produced key', async () => {
+   expect(result.current[0]).toEqual(new Set(['shift', '1']))
+ })
+ 
+-test('Should handle start being called multiple times', async () => {
++test('useRecordHotkeys.ok.controls Should handle start being called multiple times', async () => {
+   const user = userEvent.setup()
+   const { result } = renderHook(useRecordHotkeys)
+ 
+@@ -187,7 +187,7 @@ test('Should handle start being called multiple times', async () => {
+   expect(result.current[0]).toEqual(new Set(['b', 'c']))
+ })
+ 
+-test('Should ignore blacklisted keys while recording', async () => {
++test('useRecordHotkeys.ok.blacklist Should ignore blacklisted keys while recording', async () => {
+   const user = userEvent.setup()
+   const { result } = renderHook(() => useRecordHotkeys(false, ['tab', 'enter']))
+ 

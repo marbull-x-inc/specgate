@@ -1,0 +1,786 @@
+diff --git a/test/library/headers-test.ts b/test/library/headers-test.ts
+index 63d15dd..a265581 100644
+--- a/test/library/headers-test.ts
++++ b/test/library/headers-test.ts
+@@ -22,7 +22,7 @@ import type {
+ import { createServer } from './helpers/create-server.js'
+ 
+ describe('headers test', () => {
+-	it('should send correct `x-ratelimit-limit`, `x-ratelimit-remaining`, and `x-ratelimit-reset` headers', async () => {
++	it('rateLimit.ok.default-legacy-headers should send correct `x-ratelimit-limit`, `x-ratelimit-remaining`, and `x-ratelimit-reset` headers', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				windowMs: 60 * 1000,
+@@ -46,7 +46,7 @@ describe('headers test', () => {
+ 		expect(actualResetTimestamp).toBeLessThanOrEqual(expectedResetTimestamp + 1)
+ 	})
+ 
+-	it('should send correct `ratelimit-*` headers for the standard headers draft 6', async () => {
++	it('rateLimit.ok.default-window-ms should send correct `ratelimit-*` headers for the standard headers draft 6', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				windowMs: 60 * 1000,
+@@ -64,7 +64,7 @@ describe('headers test', () => {
+ 			.expect(200, 'Hi there!')
+ 	})
+ 
+-	it('should send policy and combined ratelimit headers for the standard draft 7', async () => {
++	it('rateLimit.ok.default-window-ms should send policy and combined ratelimit headers for the standard draft 7', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				windowMs: 60 * 1000,
+@@ -80,7 +80,7 @@ describe('headers test', () => {
+ 			.expect(200, 'Hi there!')
+ 	})
+ 
+-	it('should send correct headers for the standard draft 8', async () => {
++	it('rateLimit.ok.default-window-ms should send correct headers for the standard draft 8', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				windowMs: 2 * 60 * 60 * 1000,
+@@ -100,7 +100,7 @@ describe('headers test', () => {
+ 			.expect(200, 'Hi there!')
+ 	})
+ 
+-	it('should send multiple headers correctly for the standard draft 8', async () => {
++	it('rateLimit.ok.default-window-ms should send multiple headers correctly for the standard draft 8', async () => {
+ 		const fiveSeconds = 5 * 1000
+ 		const oneMinute = 60 * 1000
+ 		const oneHour = 60 * 60 * 1000
+@@ -142,7 +142,7 @@ describe('headers test', () => {
+ 			.expect(200, 'Hi there!')
+ 	})
+ 
+-	it('should override the quota name if specified for the standard draft 8', async () => {
++	it('rateLimit.ok.default-window-ms should override the quota name if specified for the standard draft 8', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				identifier: 'keep-kalm',
+@@ -163,7 +163,7 @@ describe('headers test', () => {
+ 			.expect(200, 'Hi there!')
+ 	})
+ 
+-	it('should return the `retry-after` header once IP has reached the max', async () => {
++	it('rateLimit.ok.default-window-ms should return the `retry-after` header once IP has reached the max', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				windowMs: 60 * 1000,
+@@ -175,7 +175,7 @@ describe('headers test', () => {
+ 		await request(app).get('/').expect(429).expect('retry-after', '60')
+ 	})
+ 
+-	it('should use the `retryAfter` option as the `retry-after` header value when set to a number', async () => {
++	it('rateLimit.ok.default-window-ms should use the `retryAfter` option as the `retry-after` header value when set to a number', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				windowMs: 60 * 1000,
+@@ -188,7 +188,7 @@ describe('headers test', () => {
+ 		await request(app).get('/').expect(429).expect('retry-after', '600')
+ 	})
+ 
+-	it('should use the `retryAfter` option as the `retry-after` header value when set to a function', async () => {
++	it('rateLimit.ok.default-window-ms should use the `retryAfter` option as the `retry-after` header value when set to a function', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				windowMs: 60 * 1000,
+@@ -201,7 +201,7 @@ describe('headers test', () => {
+ 		await request(app).get('/').expect(429).expect('retry-after', '600')
+ 	})
+ 
+-	it('should not set the `retry-after` header if all headers have been disabled', async () => {
++	it('rateLimit.ok.default-window-ms should not set the `retry-after` header if all headers have been disabled', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				windowMs: 60 * 1000,
+@@ -242,7 +242,7 @@ describe('headers test', () => {
+ 		expect(response.setHeader).not.toHaveBeenCalled()
+ 	})
+ 
+-	it('should not send headers for an incorrect draft number', async () => {
++	it('rateLimit.ok.default-window-ms should not send headers for an incorrect draft number', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				windowMs: 2 * 60 * 60 * 1000,
+@@ -281,7 +281,7 @@ describe('headers test', () => {
+ 			async resetKey(_key: string): Promise<void> {}
+ 		}
+ 
+-		it('should set the `retry-after` header to the value of `windowMs` in seconds instead', async () => {
++		it('rateLimit.ok.default-window-ms should set the `retry-after` header to the value of `windowMs` in seconds instead', async () => {
+ 			const app = createServer(
+ 				rateLimit({
+ 					windowMs: 60 * 1000,
+@@ -298,7 +298,7 @@ describe('headers test', () => {
+ 	})
+ 
+ 	describe('ratelimit-header-parser compatibility', () => {
+-		it('should emit legacy headers that ratelimit-header-parser can read', async () => {
++		it('rateLimit.ok.default-legacy-headers should emit legacy headers that ratelimit-header-parser can read', async () => {
+ 			const app = createServer(
+ 				rateLimit({
+ 					windowMs: 60 * 1000,
+@@ -318,7 +318,7 @@ describe('headers test', () => {
+ 				reset: expect.any(Date),
+ 			})
+ 		})
+-		it('should emit standard draft-6 headers that ratelimit-header-parser can read', async () => {
++		it('rateLimit.ok.default-window-ms should emit standard draft-6 headers that ratelimit-header-parser can read', async () => {
+ 			const app = createServer(
+ 				rateLimit({
+ 					windowMs: 60 * 1000,
+@@ -339,7 +339,7 @@ describe('headers test', () => {
+ 			})
+ 		})
+ 
+-		it('should emit a standard draft 7 combined header that ratelimit-header-parser can parse', async () => {
++		it('rateLimit.ok.default-window-ms should emit a standard draft 7 combined header that ratelimit-header-parser can parse', async () => {
+ 			const app = createServer(
+ 				rateLimit({
+ 					windowMs: 60 * 1000,
+@@ -361,7 +361,7 @@ describe('headers test', () => {
+ 		})
+ 	})
+ 
+-	it('should send RateLimit-Reset header with value 0 when window has just expired for draft-6', async () => {
++	it('rateLimit.ok.default-window-ms should send RateLimit-Reset header with value 0 when window has just expired for draft-6', async () => {
+ 		class MockStore implements Store {
+ 			hits: Map<string, number> = new Map()
+ 
+diff --git a/test/library/ip-key-generator-test.ts b/test/library/ip-key-generator-test.ts
+index d01f6a5..1fd750b 100644
+--- a/test/library/ip-key-generator-test.ts
++++ b/test/library/ip-key-generator-test.ts
+@@ -1,17 +1,17 @@
+ import { ipKeyGenerator } from '../../source/index.js'
+ 
+ describe('ipKeyGenerator', () => {
+-	it('should return an IPv4 address unchanged', () => {
++	it('ipKeyGenerator.ok.ipv4-unchanged should return an IPv4 address unchanged', () => {
+ 		expect(ipKeyGenerator('1.2.3.4')).toBe('1.2.3.4')
+ 		expect(ipKeyGenerator('1.2.3.4', 16)).toBe('1.2.3.4')
+ 	})
+ 
+-	it('should return an IPv4 address mapped to IPv6 as an IPv4 address', () => {
++	it('ipKeyGenerator.ok.ipv4-mapped-ipv6 should return an IPv4 address mapped to IPv6 as an IPv4 address', () => {
+ 		expect(ipKeyGenerator('::ffff:1.2.3.4')).toBe('1.2.3.4')
+ 		expect(ipKeyGenerator('::1.2.3.4')).toBe('1.2.3.4')
+ 	})
+ 
+-	it('should return an IPv4 address mapped to IPv6 as an IPv4 address regardless of notation', () => {
++	it('ipKeyGenerator.ok.ipv4-mapped-ipv6 should return an IPv4 address mapped to IPv6 as an IPv4 address regardless of notation', () => {
+ 		// `::ffff:102:304` and `::ffff:1.2.3.4` are one address written two ways, so
+ 		// they have to produce one key.
+ 		expect(ipKeyGenerator('::ffff:102:304')).toBe('1.2.3.4')
+@@ -22,7 +22,7 @@ describe('ipKeyGenerator', () => {
+ 		)
+ 	})
+ 
+-	it('should apply ipv6Subnet to an IPv6 address that merely ends in dotted-quad notation', () => {
++	it('ipKeyGenerator.ok.default-ipv6-subnet-56 should apply ipv6Subnet to an IPv6 address that merely ends in dotted-quad notation', () => {
+ 		// These are ordinary IPv6 addresses that only look IPv4-mapped. Extracting
+ 		// the trailing IPv4 address would key the client on the bits it controls
+ 		// itself, and put it in the same bucket as an unrelated IPv4 client.
+@@ -38,40 +38,40 @@ describe('ipKeyGenerator', () => {
+ 		)
+ 	})
+ 
+-	it('should apply ipv6Subnet to addresses in the IPv4-compatible range that are not written in dotted-quad notation', () => {
++	it('ipKeyGenerator.ok.default-ipv6-subnet-56 should apply ipv6Subnet to addresses in the IPv4-compatible range that are not written in dotted-quad notation', () => {
+ 		expect(ipKeyGenerator('::1')).toBe('::/56')
+ 		expect(ipKeyGenerator('::')).toBe('::/56')
+ 	})
+ 
+-	it('should return an IPv6 address unchanged with ipv6Subnet set to false', () => {
++	it('ipKeyGenerator.ok.ipv6-subnet-false should return an IPv6 address unchanged with ipv6Subnet set to false', () => {
+ 		expect(
+ 			ipKeyGenerator('0123:4567:89ab:cdef:0123:4567:89ab:cdef', false),
+ 		).toBe('0123:4567:89ab:cdef:0123:4567:89ab:cdef')
+ 	})
+ 
+-	it('should apply ipv6Subnet only a true IPv6 address', () => {
++	it('ipKeyGenerator.ok.ipv4-mapped-ipv6 should apply ipv6Subnet only a true IPv6 address', () => {
+ 		expect(ipKeyGenerator('::1.2.3.4', 16)).toBe('1.2.3.4')
+ 		expect(ipKeyGenerator('::ffff:1.2.3.4', 16)).toBe('1.2.3.4')
+ 		expect(ipKeyGenerator('::1.2.3.4', false)).toBe('1.2.3.4')
+ 	})
+ 
+-	it('should apply a default /56 netmask to an IPv6 address', () => {
++	it('ipKeyGenerator.ok.default-ipv6-subnet-56 should apply a default /56 netmask to an IPv6 address', () => {
+ 		expect(ipKeyGenerator('0123:4567:89ab:cdef:0123:4567:89ab:cdef')).toBe(
+ 			'123:4567:89ab:cd00::/56',
+ 		)
+ 	})
+ 
+-	it('should apply a /63 netmask to an IPv6 address', () => {
++	it('ipKeyGenerator.ok.ipv4-unchanged should apply a /63 netmask to an IPv6 address', () => {
+ 		expect(ipKeyGenerator('0123:4567:89ab:cdef:0123:4567:89ab:cdef', 63)).toBe(
+ 			'123:4567:89ab:cdee::/63',
+ 		)
+ 	})
+ 
+-	it('should accept abbreviated IPv6 addresses', () => {
++	it('ipKeyGenerator.ok.default-ipv6-subnet-56 should accept abbreviated IPv6 addresses', () => {
+ 		expect(ipKeyGenerator('123:ABC::89')).toBe('123:abc::/56')
+ 	})
+ 
+-	it('should return an IPv6 address normalized but otherwise unchanged with a /128 netmask', () => {
++	it('ipKeyGenerator.ok.ipv4-unchanged should return an IPv6 address normalized but otherwise unchanged with a /128 netmask', () => {
+ 		expect(ipKeyGenerator('0123:4567:89ab:cdef:0123:4567:89ab:cdef', 128)).toBe(
+ 			'123:4567:89ab:cdef:123:4567:89ab:cdef/128',
+ 		)
+diff --git a/test/library/middleware-test.ts b/test/library/middleware-test.ts
+index ff3c0c4..05d8597 100644
+--- a/test/library/middleware-test.ts
++++ b/test/library/middleware-test.ts
+@@ -173,13 +173,13 @@ describe('middleware test', () => {
+ 		async resetAll(): Promise<void> {}
+ 	}
+ 
+-	it('should not modify the options object passed', () => {
++	it('rateLimit.ok.default-window-ms should not modify the options object passed', () => {
+ 		const options = {}
+ 		rateLimit(options)
+ 		expect(options).toStrictEqual({})
+ 	})
+ 
+-	it('should call `init` even if no requests have come in', async () => {
++	it('rateLimit.ok.default-window-ms should call `init` even if no requests have come in', async () => {
+ 		const store = new MockStore()
+ 		rateLimit({
+ 			store,
+@@ -217,7 +217,7 @@ describe('middleware test', () => {
+ 			}
+ 		}
+ 
+-		it('should handle resolving async init', async () => {
++		it('rateLimit.ok.default-window-ms should handle resolving async init', async () => {
+ 			const store = new MockStoreAsyncInitResolving()
+ 			const limiter = rateLimit({
+ 				store,
+@@ -231,7 +231,7 @@ describe('middleware test', () => {
+ 			expect(logger.error).not.toHaveBeenCalled()
+ 		})
+ 
+-		it('should handle rejecting async init and log error', async () => {
++		it('rateLimit.ok.default-window-ms should handle rejecting async init and log error', async () => {
+ 			const store = new MockStoreAsyncInitRejecting()
+ 			const limiter = rateLimit({
+ 				store,
+@@ -248,7 +248,7 @@ describe('middleware test', () => {
+ 			)
+ 		})
+ 
+-		it('should catch synchronous errors thrown from store.init()', () => {
++		it('rateLimit.ok.default-window-ms should catch synchronous errors thrown from store.init()', () => {
+ 			const store = new MockStore()
+ 			jest.spyOn(store, 'init').mockImplementation(() => {
+ 				throw new Error('test error')
+@@ -266,13 +266,13 @@ describe('middleware test', () => {
+ 		})
+ 	})
+ 
+-	it('should let the first request through', async () => {
++	it('rateLimit.ok.default-window-ms should let the first request through', async () => {
+ 		const app = createServer(rateLimit({ limit: 1 }))
+ 
+ 		await request(app).get('/').expect(200).expect('Hi there!')
+ 	})
+ 
+-	it('should refuse additional connections once IP has reached the max', async () => {
++	it('rateLimit.ok.default-status-code should refuse additional connections once IP has reached the max', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: 2,
+@@ -284,7 +284,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(429)
+ 	})
+ 
+-	it('should (eventually) accept new connections from a blocked IP', async () => {
++	it('rateLimit.ok.default-status-code should (eventually) accept new connections from a blocked IP', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: 2,
+@@ -299,7 +299,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(200)
+ 	})
+ 
+-	it('should work repeatedly', async () => {
++	it('rateLimit.ok.default-status-code should work repeatedly', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: 2,
+@@ -318,13 +318,13 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(200)
+ 	})
+ 
+-	it('should block all requests if max is set to 0', async () => {
++	it('rateLimit.ok.zero-limit-blocks-all should block all requests if max is set to 0', async () => {
+ 		const app = createServer(rateLimit({ max: 0, validate: { limit: false } }))
+ 
+ 		await request(app).get('/').expect(429)
+ 	})
+ 
+-	it('should show the provided message instead of the default message when max connections are reached', async () => {
++	it('rateLimit.ok.default-window-ms should show the provided message instead of the default message when max connections are reached', async () => {
+ 		const message = 'Enhance your calm'
+ 		const app = createServer(
+ 			rateLimit({
+@@ -339,7 +339,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(429).expect(message)
+ 	})
+ 
+-	it('should allow the error status code to be customized', async () => {
++	it('rateLimit.ok.default-window-ms should allow the error status code to be customized', async () => {
+ 		const statusCode = 420
+ 		const app = createServer(
+ 			rateLimit({
+@@ -351,7 +351,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(statusCode)
+ 	})
+ 
+-	it('should allow responding with a JSON message', async () => {
++	it('rateLimit.ok.default-window-ms should allow responding with a JSON message', async () => {
+ 		const message = {
+ 			error: {
+ 				code: 'too-many-requests',
+@@ -369,7 +369,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(429, message)
+ 	})
+ 
+-	it('should allow message to be a function', async () => {
++	it('rateLimit.ok.default-window-ms should allow message to be a function', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				message: () => 'Too many requests.',
+@@ -381,7 +381,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(429, 'Too many requests.')
+ 	})
+ 
+-	it('should allow message to be a function that returns a promise', async () => {
++	it('rateLimit.ok.default-window-ms should allow message to be a function that returns a promise', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				message: async () => 'Too many requests.',
+@@ -393,7 +393,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(429, 'Too many requests.')
+ 	})
+ 
+-	it('should use a custom handler when specified', async () => {
++	it('rateLimit.ok.default-window-ms should use a custom handler when specified', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: 1,
+@@ -434,7 +434,7 @@ describe('middleware test', () => {
+ 				},
+ 			}),
+ 		],
+-	])('should forward errors from %s using `next()`', async (_name, getOptions) => {
++	])('rateLimit.ok.default-window-ms should forward errors from %s using `next()`', async (_name, getOptions) => {
+ 		jest.useRealTimers()
+ 		const error = new Error('Could not build the rate limit response')
+ 		const app = createServer(rateLimit({ limit: 1, ...getOptions(error) }))
+@@ -461,7 +461,7 @@ describe('middleware test', () => {
+ 		expect(errorHandler.mock.calls[0][0]).toBe(error)
+ 	})
+ 
+-	it('should allow custom key generators', async () => {
++	it('rateLimit.ok.default-window-ms should allow custom key generators', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: 2,
+@@ -480,7 +480,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').query({ key: 2 }).expect(429)
+ 	})
+ 
+-	it('should allow custom skip function', async () => {
++	it('rateLimit.ok.default-window-ms should allow custom skip function', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: 2,
+@@ -494,7 +494,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').query({ key: 1 }).expect(200)
+ 	})
+ 
+-	it('should allow custom skip function that returns a promise', async () => {
++	it('rateLimit.ok.default-window-ms should allow custom skip function that returns a promise', async () => {
+ 		const limiter = rateLimit({
+ 			limit: 2,
+ 			skip: async () => true,
+@@ -507,7 +507,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').query({ key: 1 }).expect(200)
+ 	})
+ 
+-	it('should allow max to be a function', async () => {
++	it('rateLimit.ok.default-window-ms should allow max to be a function', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: () => 2,
+@@ -519,7 +519,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(429)
+ 	})
+ 
+-	it('should allow max to be a function that returns a promise', async () => {
++	it('rateLimit.ok.default-window-ms should allow max to be a function that returns a promise', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: async () => 2,
+@@ -531,7 +531,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(429)
+ 	})
+ 
+-	it('should calculate the remaining hits', async () => {
++	it('rateLimit.ok.default-window-ms should calculate the remaining hits', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: async () => 2,
+@@ -557,7 +557,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should call `increment` on the store (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should call `increment` on the store (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				store,
+@@ -572,7 +572,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should call `resetKey` on the store (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should call `resetKey` on the store (%s store)', async (name, store) => {
+ 		const limiter = rateLimit({
+ 			store,
+ 		})
+@@ -585,7 +585,7 @@ describe('middleware test', () => {
+ 	it.each([
+ 		['modern', new MockStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should call `get` on the store (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should call `get` on the store (%s store)', async (name, store) => {
+ 		const limiter = rateLimit({
+ 			store,
+ 		})
+@@ -598,7 +598,7 @@ describe('middleware test', () => {
+ 
+ 	it.each([
+ 		['legacy', new MockLegacyStore()],
+-	])('should throw an error if `get` does not exist on the store (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should throw an error if `get` does not exist on the store (%s store)', async (name, store) => {
+ 		const limiter = rateLimit({
+ 			store,
+ 		})
+@@ -610,7 +610,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should decrement hits when requests succeed and `skipSuccessfulRequests` is set to true (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should decrement hits when requests succeed and `skipSuccessfulRequests` is set to true (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipSuccessfulRequests: true,
+@@ -623,7 +623,7 @@ describe('middleware test', () => {
+ 		expect(store.decrementWasCalled).toEqual(true)
+ 	})
+ 
+-	it('should decrement hits when request finishes before `resetTime` with `skipSuccessfulRequests`', async () => {
++	it('rateLimit.ok.default-window-ms should decrement hits when request finishes before `resetTime` with `skipSuccessfulRequests`', async () => {
+ 		const windowMs = 500
+ 		const requestDurationMs = 25
+ 		const store = new MockStore()
+@@ -645,7 +645,7 @@ describe('middleware test', () => {
+ 		expect(store.decrementWasCalled).toEqual(true)
+ 	})
+ 
+-	it('should not decrement hits when request finishes after `resetTime` with `skipSuccessfulRequests`', async () => {
++	it('rateLimit.ok.default-window-ms should not decrement hits when request finishes after `resetTime` with `skipSuccessfulRequests`', async () => {
+ 		const windowMs = 50
+ 		const requestDurationMs = 75
+ 		const store = new MockStore()
+@@ -667,7 +667,7 @@ describe('middleware test', () => {
+ 		expect(store.decrementWasCalled).toEqual(false)
+ 	})
+ 
+-	it('should not decrement hits when request finishes after window reset with real MemoryStore and skipFailedRequests', async () => {
++	it('rateLimit.ok.default-window-ms should not decrement hits when request finishes after window reset with real MemoryStore and skipFailedRequests', async () => {
+ 		// Real timers are required here because supertest's HTTP layer uses
+ 		// its own timers that are not affected by jest.useFakeTimers().
+ 		// With fake timers, requests hang indefinitely.
+@@ -726,7 +726,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should not decrement hits when requests fail and `skipSuccessfulRequests` is set to true (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should not decrement hits when requests fail and `skipSuccessfulRequests` is set to true (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipSuccessfulRequests: true,
+@@ -743,7 +743,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should decrement hits when requests succeed, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should decrement hits when requests succeed, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipSuccessfulRequests: true,
+@@ -761,7 +761,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should not decrement hits when requests fail, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should not decrement hits when requests fail, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipSuccessfulRequests: true,
+@@ -781,7 +781,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should decrement hits when requests succeed, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should decrement hits when requests succeed, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipSuccessfulRequests: true,
+@@ -800,7 +800,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should not decrement hits when requests fail, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should not decrement hits when requests fail, `skipSuccessfulRequests` is set to true and a custom `requestWasSuccessful` method used (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipSuccessfulRequests: true,
+@@ -819,7 +819,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should decrement hits when requests fail and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should decrement hits when requests fail and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipFailedRequests: true,
+@@ -836,7 +836,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should not decrement hits when requests succeed and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should not decrement hits when requests succeed and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipFailedRequests: true,
+@@ -853,7 +853,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should decrement hits when requests fail, `skipFailedRequests` is set to true and a custom `requestWasSuccessful` method used that returns a promise (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should decrement hits when requests fail, `skipFailedRequests` is set to true and a custom `requestWasSuccessful` method used that returns a promise (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipFailedRequests: true,
+@@ -870,7 +870,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should decrement hits when response closes and `skipFailedRequests` is set to true (%s store) (server)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should decrement hits when response closes and `skipFailedRequests` is set to true (%s store) (server)', async (name, store) => {
+ 		jest.useRealTimers()
+ 
+ 		const app = createServer(
+@@ -939,7 +939,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should decrement hits when response closes and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should decrement hits when response closes and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
+ 		const middleware = rateLimit({
+ 			skipFailedRequests: true,
+ 			store,
+@@ -981,7 +981,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should decrement hits when response emits an error and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should decrement hits when response emits an error and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				skipFailedRequests: true,
+@@ -998,7 +998,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should decrement hits when rate limit is reached and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should decrement hits when rate limit is reached and `skipFailedRequests` is set to true (%s store)', async (name, store) => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: 2,
+@@ -1018,7 +1018,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should forward errors in the handler using `next()` (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should forward errors in the handler using `next()` (%s store)', async (name, store) => {
+ 		let errorCaught = false
+ 
+ 		const app = createServer(
+@@ -1054,7 +1054,7 @@ describe('middleware test', () => {
+ 		['modern', new MockStore()],
+ 		['legacy', new MockLegacyStore()],
+ 		['compat', new MockBackwardCompatibleStore()],
+-	])('should forward errors in `skip()` using `next()` (%s store)', async (name, store) => {
++	])('rateLimit.ok.default-window-ms should forward errors in `skip()` using `next()` (%s store)', async (name, store) => {
+ 		let errorCaught = false
+ 
+ 		const app = createServer(
+@@ -1085,7 +1085,7 @@ describe('middleware test', () => {
+ 		expect(errorCaught).toEqual(true)
+ 	})
+ 
+-	it('should pass the number of hits and the limit to the next request handler in the `request.rateLimit` property', async () => {
++	it('rateLimit.ok.default-request-property-name should pass the number of hits and the limit to the next request handler in the `request.rateLimit` property', async () => {
+ 		let savedRequestObject: any
+ 		const saveRequestObject = (
+ 			request: Request,
+@@ -1127,7 +1127,7 @@ describe('middleware test', () => {
+ 		expect(savedRequestObject?.rateLimit.current).toBe(2)
+ 	})
+ 
+-	it('should pass the number of hits and the limit to the next request handler with a custom property', async () => {
++	it('rateLimit.ok.default-window-ms should pass the number of hits and the limit to the next request handler with a custom property', async () => {
+ 		let savedRequestObject: any
+ 		const saveRequestObject = (
+ 			request: Request,
+@@ -1167,7 +1167,7 @@ describe('middleware test', () => {
+ 		expect(savedRequestObject?.rateLimitInfo.current).toBe(2)
+ 	})
+ 
+-	it('should handle two rate-limiters with different `requestPropertyNames` operating independently', async () => {
++	it('rateLimit.ok.default-window-ms should handle two rate-limiters with different `requestPropertyNames` operating independently', async () => {
+ 		const keyLimiter = rateLimit({
+ 			limit: 2,
+ 			requestPropertyName: 'rateLimitKey',
+@@ -1241,7 +1241,7 @@ describe('middleware test', () => {
+ 		expect(savedRequestObject.rateLimitGlobal.remaining).toEqual(0)
+ 	})
+ 
+-	it('should not pass if the store throws an error by default', async () => {
++	it('rateLimit.ok.default-window-ms should not pass if the store throws an error by default', async () => {
+ 		const app = createServer(
+ 			rateLimit({
+ 				limit: 1,
+@@ -1251,7 +1251,7 @@ describe('middleware test', () => {
+ 		await request(app).get('/').expect(500)
+ 	})
+ 
+-	it('should pass if the store throws an error and passOnStoreError is true', async () => {
++	it('rateLimit.ok.default-window-ms should pass if the store throws an error and passOnStoreError is true', async () => {
+ 		jest.spyOn(console, 'error').mockImplementation(() => {})
+ 		const app = createServer(
+ 			rateLimit({
+@@ -1268,7 +1268,7 @@ describe('middleware test', () => {
+ 		)
+ 	})
+ 
+-	it('should only call next once when passOnStoreError causes it to skip limiting', async () => {
++	it('rateLimit.ok.default-window-ms should only call next once when passOnStoreError causes it to skip limiting', async () => {
+ 		jest.spyOn(console, 'error').mockImplementation(() => {})
+ 		const limiter = rateLimit({
+ 			limit: 1,
+@@ -1300,7 +1300,7 @@ describe('middleware test', () => {
+ 			jest.spyOn(console, 'error').mockImplementation(() => {})
+ 		})
+ 
+-		it('should use the logger instead of the console on validation errors', async () => {
++		it('rateLimit.ok.default-window-ms should use the logger instead of the console on validation errors', async () => {
+ 			rateLimit({
+ 				logger,
+ 				ipv6Subnet: 48.5,
+@@ -1312,7 +1312,7 @@ describe('middleware test', () => {
+ 			)
+ 		})
+ 
+-		it('should use the logger instead of the console when the store throws an error and passOnStoreError is true', async () => {
++		it('rateLimit.ok.default-window-ms should use the logger instead of the console when the store throws an error and passOnStoreError is true', async () => {
+ 			const limiter = rateLimit({
+ 				limit: 1,
+ 				store: new StoreThrowingErrors(),
+diff --git a/test/library/options-test.ts b/test/library/options-test.ts
+index 7178db5..6522dd2 100644
+--- a/test/library/options-test.ts
++++ b/test/library/options-test.ts
+@@ -29,11 +29,11 @@ describe('options test', () => {
+ 		async resetKey(_key: string): Promise<void> {}
+ 	}
+ 
+-	it('should allow an empty options object', async () => {
++	it('rateLimit.ok.default-window-ms should allow an empty options object', async () => {
+ 		expect(rateLimit).not.toThrow()
+ 	})
+ 
+-	it('should ignore options that are set to `undefined`', async () => {
++	it('rateLimit.ok.default-window-ms should ignore options that are set to `undefined`', async () => {
+ 		const store = new MockStore()
+ 		rateLimit({
+ 			store,
+@@ -44,7 +44,7 @@ describe('options test', () => {
+ 	})
+ 
+ 	// TODO: Update in v7.
+-	it('should allow the use of pre-6.x headers options', async () => {
++	it('rateLimit.ok.default-window-ms should allow the use of pre-6.x headers options', async () => {
+ 		const store = new MockStore()
+ 		rateLimit({
+ 			store,
+@@ -54,7 +54,7 @@ describe('options test', () => {
+ 		expect(store.options.headers).toEqual(false)
+ 	})
+ 
+-	it('should allow the use of the `max` option', async () => {
++	it('rateLimit.ok.default-window-ms should allow the use of the `max` option', async () => {
+ 		const store = new MockStore()
+ 		rateLimit({
+ 			store,
+@@ -64,7 +64,7 @@ describe('options test', () => {
+ 		expect(store.options.limit).toEqual(7)
+ 	})
+ 
+-	it('should allow the use of the `limit` option', async () => {
++	it('rateLimit.ok.default-window-ms should allow the use of the `limit` option', async () => {
+ 		const store = new MockStore()
+ 		rateLimit({
+ 			store,
+@@ -74,7 +74,7 @@ describe('options test', () => {
+ 		expect(store.options.limit).toEqual(7)
+ 	})
+ 
+-	it('should not allow the use of an invalid store', async () => {
++	it('rateLimit.ok.default-window-ms should not allow the use of an invalid store', async () => {
+ 		class InvalidStore {
+ 			invalid = true
+ 		}
+@@ -87,7 +87,7 @@ describe('options test', () => {
+ 		}).toThrow(/store/)
+ 	})
+ 
+-	it('should not call `init` if it is not a function', async () => {
++	it('rateLimit.ok.default-window-ms should not call `init` if it is not a function', async () => {
+ 		class InvalidStore implements Store {
+ 			options!: Options
+ 
+@@ -111,7 +111,7 @@ describe('options test', () => {
+ 		}).toThrow(/store/)
+ 	})
+ 
+-	it('should not allow an invalid standardHeaders option', async () => {
++	it('rateLimit.ok.default-window-ms should not allow an invalid standardHeaders option', async () => {
+ 		rateLimit({
+ 			// @ts-expect-error Check if TSC can detect an invalid value for this option. If not, it
+ 			// will report that this is an unnecessary annotation.
+@@ -119,7 +119,7 @@ describe('options test', () => {
+ 		})
+ 	})
+ 
+-	it('should not allow an invalid logger implemenation to be provided', async () => {
++	it('rateLimit.ok.default-window-ms should not allow an invalid logger implemenation to be provided', async () => {
+ 		expect(() => {
+ 			rateLimit({
+ 				// @ts-expect-error Check if the library can detect invalid stores without TSC's help

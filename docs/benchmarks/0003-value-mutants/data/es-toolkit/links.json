@@ -1,0 +1,1066 @@
+[
+  {
+    "file": "src/string/camelCase.spec.ts",
+    "line": 5,
+    "title": "should change camel case to camel case",
+    "key": "camelCase.ok.from-other-cases",
+    "reason": "title matches from-other-cases"
+  },
+  {
+    "file": "src/string/camelCase.spec.ts",
+    "line": 9,
+    "title": "should change space to camel case",
+    "key": "camelCase.ok.words-joined",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/camelCase.spec.ts",
+    "line": 13,
+    "title": "should change hyphen to camel case",
+    "key": "camelCase.ok.words-joined",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/camelCase.spec.ts",
+    "line": 17,
+    "title": "should change Acronyms to small letter",
+    "key": "camelCase.ok.from-other-cases",
+    "reason": "title matches from-other-cases"
+  },
+  {
+    "file": "src/string/camelCase.spec.ts",
+    "line": 21,
+    "title": "should handle leading and trailing whitespace",
+    "key": "camelCase.ok.words-joined",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/camelCase.spec.ts",
+    "line": 25,
+    "title": "should handle special characters correctly",
+    "key": "camelCase.ok.words-joined",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/camelCase.spec.ts",
+    "line": 29,
+    "title": "should work with an empty string",
+    "key": "camelCase.ok.words-joined",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/camelCase.spec.ts",
+    "line": 33,
+    "title": "should work with screaming camel case",
+    "key": "camelCase.ok.from-other-cases",
+    "reason": "title matches from-other-cases"
+  },
+  {
+    "file": "src/string/camelCase.spec.ts",
+    "line": 37,
+    "title": "should support emojis",
+    "key": "camelCase.ok.unicode-kept",
+    "reason": "title matches unicode-kept"
+  },
+  {
+    "file": "src/string/capitalize.spec.ts",
+    "line": 5,
+    "title": "should converts the first character of string to upper case",
+    "key": "capitalize.ok.first-upper-rest-lower",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/capitalize.spec.ts",
+    "line": 9,
+    "title": "should converts the first character of string to upper case and the remaining to lower case.",
+    "key": "capitalize.ok.first-upper-rest-lower",
+    "reason": "title matches first-upper-rest-lower"
+  },
+  {
+    "file": "src/string/capitalize.spec.ts",
+    "line": 13,
+    "title": "should handle special characters correctly",
+    "key": "capitalize.ok.first-upper-rest-lower",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/capitalize.spec.ts",
+    "line": 17,
+    "title": "should handle hyphen correctly",
+    "key": "capitalize.ok.first-upper-rest-lower",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/capitalize.spec.ts",
+    "line": 21,
+    "title": "should handle leading whitespace",
+    "key": "capitalize.ok.first-upper-rest-lower",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/capitalize.spec.ts",
+    "line": 25,
+    "title": "should handle strings that are already in capitalize",
+    "key": "capitalize.ok.short-strings",
+    "reason": "title matches short-strings"
+  },
+  {
+    "file": "src/string/capitalize.spec.ts",
+    "line": 29,
+    "title": "should work with an empty string",
+    "key": "capitalize.ok.short-strings",
+    "reason": "title matches short-strings"
+  },
+  {
+    "file": "src/string/constantCase.spec.ts",
+    "line": 5,
+    "title": "should change camel case to constant case",
+    "key": "constantCase.ok.from-camel-pascal-snake",
+    "reason": "title matches from-camel-pascal-snake"
+  },
+  {
+    "file": "src/string/constantCase.spec.ts",
+    "line": 9,
+    "title": "should change space to underscore",
+    "key": "constantCase.ok.upper-with-underscores",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/constantCase.spec.ts",
+    "line": 13,
+    "title": "should change hyphen to underscore",
+    "key": "constantCase.ok.upper-with-underscores",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/constantCase.spec.ts",
+    "line": 17,
+    "title": "should change Acronyms to small letter",
+    "key": "constantCase.ok.acronym-word",
+    "reason": "title matches acronym-word"
+  },
+  {
+    "file": "src/string/constantCase.spec.ts",
+    "line": 21,
+    "title": "should handle leading and trailing whitespace",
+    "key": "constantCase.ok.extra-spaces-dropped",
+    "reason": "title matches extra-spaces-dropped"
+  },
+  {
+    "file": "src/string/constantCase.spec.ts",
+    "line": 25,
+    "title": "should handle special characters correctly",
+    "key": "constantCase.ok.upper-with-underscores",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/constantCase.spec.ts",
+    "line": 29,
+    "title": "should handle strings that are already in CONSTANT_CASE",
+    "key": "constantCase.ok.from-camel-pascal-snake",
+    "reason": "title matches from-camel-pascal-snake"
+  },
+  {
+    "file": "src/string/constantCase.spec.ts",
+    "line": 33,
+    "title": "should work with an empty string",
+    "key": "constantCase.ok.upper-with-underscores",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/constantCase.spec.ts",
+    "line": 37,
+    "title": "should work with screaming constant case",
+    "key": "constantCase.ok.from-camel-pascal-snake",
+    "reason": "title matches from-camel-pascal-snake"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 9,
+    "title": "should convert examples correctly",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 15,
+    "title": "should convert Latin Unicode letters to basic Latin",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 20,
+    "title": "should not deburr Latin mathematical operators",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 27,
+    "title": "should deburr combining diacritical marks",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 35,
+    "title": "should remove combining marks from every supported range",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 51,
+    "title": "should preserve characters just outside the combining mark ranges",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 60,
+    "title": "should remove consecutive marks spanning different ranges",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 65,
+    "title": "should not decompose Hangul syllables",
+    "key": "deburr.ok.non-latin-kept",
+    "reason": "title matches non-latin-kept"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 71,
+    "title": "should keep letters of other scripts as they are, even with diacritical marks",
+    "key": "deburr.ok.non-latin-kept",
+    "reason": "title matches non-latin-kept"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 78,
+    "title": "should not decompose Indic and Arabic letters",
+    "key": "deburr.ok.non-latin-kept",
+    "reason": "title matches non-latin-kept"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 84,
+    "title": "should deburr Latin letters outside the Latin-1 Supplement and Latin Extended-A blocks",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 91,
+    "title": "should deburr letters that decompose into a special Latin letter",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 95,
+    "title": "should keep non-letter symbols that decompose into ASCII",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 100,
+    "title": "should deburr only Latin letters in a mixed string",
+    "key": "deburr.ok.mixed-scripts",
+    "reason": "title matches mixed-scripts"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 104,
+    "title": "should keep surrogate pairs",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/deburr.spec.ts",
+    "line": 108,
+    "title": "should match the compat implementation for U+00C0 to U+017F",
+    "key": "deburr.ok.accents-removed",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/escape.spec.ts",
+    "line": 12,
+    "title": "should escape values",
+    "key": "escape.ok.tags-escaped",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/escape.spec.ts",
+    "line": 16,
+    "title": "should handle strings with nothing to escape",
+    "key": "escape.ok.tags-escaped",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/escape.spec.ts",
+    "line": 20,
+    "title": "should escape the same characters unescaped by `_.unescape`",
+    "key": "escape.ok.tags-escaped",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/escape.spec.ts",
+    "line": 25,
+    "title": "should not escape the \"",
+    "key": "escape.ok.tags-escaped",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/escapeRegExp.spec.ts",
+    "line": 8,
+    "title": "should escape values",
+    "key": "escapeRegExp.ok.dot-escaped",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/escapeRegExp.spec.ts",
+    "line": 12,
+    "title": "should handle strings with nothing to escape",
+    "key": "escapeRegExp.ok.dot-escaped",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 5,
+    "title": "should change camel case to kebab case",
+    "key": "kebabCase.ok.camel-to-kebab",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 9,
+    "title": "should change space to dash",
+    "key": "kebabCase.ok.whitespace-to-dash",
+    "reason": "title matches whitespace-to-dash"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 13,
+    "title": "should change hyphen to dash",
+    "key": "kebabCase.ok.kebab-unchanged",
+    "reason": "title matches kebab-unchanged"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 17,
+    "title": "should change Acronyms to small letter",
+    "key": "kebabCase.ok.acronym-split",
+    "reason": "title matches acronym-split"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 21,
+    "title": "should handle leading and trailing whitespace",
+    "key": "kebabCase.ok.whitespace-to-dash",
+    "reason": "title matches whitespace-to-dash"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 25,
+    "title": "should handle special characters correctly",
+    "key": "kebabCase.ok.camel-to-kebab",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 29,
+    "title": "should handle strings that are already in snake_case",
+    "key": "kebabCase.ok.kebab-unchanged",
+    "reason": "title matches kebab-unchanged"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 33,
+    "title": "should work with an empty string",
+    "key": "kebabCase.ok.camel-to-kebab",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 37,
+    "title": "should work with an leading and trailing underscores",
+    "key": "kebabCase.ok.camel-to-kebab",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 41,
+    "title": "should work with screaming snake case",
+    "key": "kebabCase.ok.camel-to-kebab",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/kebabCase.spec.ts",
+    "line": 45,
+    "title": "should work with capitalized words",
+    "key": "kebabCase.ok.camel-to-kebab",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/lowerCase.spec.ts",
+    "line": 5,
+    "title": "should change camel case to lower case",
+    "key": "lowerCase.ok.lower-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/lowerCase.spec.ts",
+    "line": 9,
+    "title": "should change space to space",
+    "key": "lowerCase.ok.lower-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/lowerCase.spec.ts",
+    "line": 13,
+    "title": "should change hyphen to space",
+    "key": "lowerCase.ok.from-other-cases",
+    "reason": "title matches from-other-cases"
+  },
+  {
+    "file": "src/string/lowerCase.spec.ts",
+    "line": 17,
+    "title": "should change Acronyms to small letter",
+    "key": "lowerCase.ok.acronym-split",
+    "reason": "title matches acronym-split"
+  },
+  {
+    "file": "src/string/lowerCase.spec.ts",
+    "line": 21,
+    "title": "should handle leading and trailing whitespace",
+    "key": "lowerCase.ok.mixed-separators",
+    "reason": "title matches mixed-separators"
+  },
+  {
+    "file": "src/string/lowerCase.spec.ts",
+    "line": 25,
+    "title": "should handle special characters correctly",
+    "key": "lowerCase.ok.mixed-separators",
+    "reason": "title matches mixed-separators"
+  },
+  {
+    "file": "src/string/lowerCase.spec.ts",
+    "line": 29,
+    "title": "should handle strings that are already in lower case",
+    "key": "lowerCase.ok.lower-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/lowerCase.spec.ts",
+    "line": 33,
+    "title": "should work with an empty string",
+    "key": "lowerCase.ok.lower-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/lowerCase.spec.ts",
+    "line": 37,
+    "title": "should work with screaming snake case",
+    "key": "lowerCase.ok.from-other-cases",
+    "reason": "title matches from-other-cases"
+  },
+  {
+    "file": "src/string/pad.spec.ts",
+    "line": 5,
+    "title": "should pad a string on the left and right sides if it is shorter than the length",
+    "key": "pad.ok.default-chars-space",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/pad.spec.ts",
+    "line": 9,
+    "title": "should pad a string on the left and right sides with custom characters",
+    "key": "pad.ok.custom-chars",
+    "reason": "title matches custom-chars"
+  },
+  {
+    "file": "src/string/pad.spec.ts",
+    "line": 13,
+    "title": "should not pad a string if it has the same length",
+    "key": "pad.ok.longer-or-equal-unchanged",
+    "reason": "title matches longer-or-equal-unchanged"
+  },
+  {
+    "file": "src/string/pad.spec.ts",
+    "line": 17,
+    "title": "should not pad a string if the length is less than the string length",
+    "key": "pad.ok.longer-or-equal-unchanged",
+    "reason": "title matches longer-or-equal-unchanged"
+  },
+  {
+    "file": "src/string/pad.spec.ts",
+    "line": 22,
+    "title": "should not pad a string if the length is not a number",
+    "key": "pad.ok.default-chars-space",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/pad.spec.ts",
+    "line": 26,
+    "title": "should not pad a string if the length is not an integer",
+    "key": "pad.ok.default-chars-space",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/pad.spec.ts",
+    "line": 30,
+    "title": "should not pad a string if the length is negative",
+    "key": "pad.ok.default-chars-space",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/pascalCase.spec.ts",
+    "line": 5,
+    "title": "should change space to pascal case",
+    "key": "pascalCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/pascalCase.spec.ts",
+    "line": 9,
+    "title": "should change hyphen to pascal case",
+    "key": "pascalCase.ok.hyphen-underscore",
+    "reason": "title matches hyphen-underscore"
+  },
+  {
+    "file": "src/string/pascalCase.spec.ts",
+    "line": 13,
+    "title": "should change Acronyms to small letter",
+    "key": "pascalCase.ok.consecutive-uppercase",
+    "reason": "title matches consecutive-uppercase"
+  },
+  {
+    "file": "src/string/pascalCase.spec.ts",
+    "line": 17,
+    "title": "should handle leading and trailing whitespace",
+    "key": "pascalCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/pascalCase.spec.ts",
+    "line": 21,
+    "title": "should handle special characters correctly",
+    "key": "pascalCase.ok.numbers-and-symbols",
+    "reason": "title matches numbers-and-symbols"
+  },
+  {
+    "file": "src/string/pascalCase.spec.ts",
+    "line": 25,
+    "title": "should handle strings that are already in PascalCase",
+    "key": "pascalCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/pascalCase.spec.ts",
+    "line": 29,
+    "title": "should work with an empty string",
+    "key": "pascalCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/pascalCase.spec.ts",
+    "line": 33,
+    "title": "should work with screaming camel case",
+    "key": "pascalCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/reverseString.spec.ts",
+    "line": 5,
+    "title": "should reverse a simple string",
+    "key": "reverseString.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/reverseString.spec.ts",
+    "line": 9,
+    "title": "should reverse a string with spaces",
+    "key": "reverseString.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/reverseString.spec.ts",
+    "line": 13,
+    "title": "should reverse a string with Unicode characters",
+    "key": "reverseString.ok.hangul-and-symbols",
+    "reason": "title matches hangul-and-symbols"
+  },
+  {
+    "file": "src/string/reverseString.spec.ts",
+    "line": 18,
+    "title": "should reverse an empty string",
+    "key": "reverseString.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/reverseString.spec.ts",
+    "line": 22,
+    "title": "should reverse a numeric string",
+    "key": "reverseString.ok.hangul-and-symbols",
+    "reason": "title matches hangul-and-symbols"
+  },
+  {
+    "file": "src/string/snakeCase.spec.ts",
+    "line": 5,
+    "title": "should change camel case to snake case",
+    "key": "snakeCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/snakeCase.spec.ts",
+    "line": 9,
+    "title": "should change space to underscore",
+    "key": "snakeCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/snakeCase.spec.ts",
+    "line": 13,
+    "title": "should change hyphen to underscore",
+    "key": "snakeCase.ok.hyphen-pascal",
+    "reason": "title matches hyphen-pascal"
+  },
+  {
+    "file": "src/string/snakeCase.spec.ts",
+    "line": 17,
+    "title": "should change Acronyms to small letter",
+    "key": "snakeCase.ok.consecutive-uppercase",
+    "reason": "title matches consecutive-uppercase"
+  },
+  {
+    "file": "src/string/snakeCase.spec.ts",
+    "line": 21,
+    "title": "should handle leading and trailing whitespace",
+    "key": "snakeCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/snakeCase.spec.ts",
+    "line": 25,
+    "title": "should handle special characters correctly",
+    "key": "snakeCase.ok.numbers-split",
+    "reason": "title matches numbers-split"
+  },
+  {
+    "file": "src/string/snakeCase.spec.ts",
+    "line": 29,
+    "title": "should handle strings that are already in snake_case",
+    "key": "snakeCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/snakeCase.spec.ts",
+    "line": 33,
+    "title": "should work with an empty string",
+    "key": "snakeCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/snakeCase.spec.ts",
+    "line": 37,
+    "title": "should work with screaming snake case",
+    "key": "snakeCase.ok.basic",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 5,
+    "title": "should capitalize each word",
+    "key": "startCase.ok.capitalized-words",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 11,
+    "title": "should handle compound words",
+    "key": "startCase.ok.from-camel-pascal",
+    "reason": "title matches from-camel-pascal"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 17,
+    "title": "should handle various delimiters",
+    "key": "startCase.ok.delimiters-trimmed",
+    "reason": "title matches delimiters-trimmed"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 24,
+    "title": "should handle empty strings",
+    "key": "startCase.ok.only-delimiters-empty",
+    "reason": "title matches only-delimiters-empty"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 28,
+    "title": "should handle strings with only delimiters",
+    "key": "startCase.ok.only-delimiters-empty",
+    "reason": "title matches only-delimiters-empty"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 32,
+    "title": "should work with numbers",
+    "key": "startCase.ok.acronym-and-numbers",
+    "reason": "title matches acronym-and-numbers"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 36,
+    "title": "should handle consecutive uppercase letters",
+    "key": "startCase.ok.acronym-and-numbers",
+    "reason": "title matches acronym-and-numbers"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 41,
+    "title": "should handle combinations of numbers and letters",
+    "key": "startCase.ok.acronym-and-numbers",
+    "reason": "title matches acronym-and-numbers"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 46,
+    "title": "should handle special characters",
+    "key": "startCase.ok.capitalized-words",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 51,
+    "title": "should handle long strings",
+    "key": "startCase.ok.capitalized-words",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 57,
+    "title": "should handle whitespace characters",
+    "key": "startCase.ok.capitalized-words",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 62,
+    "title": "should convert the non-first characters to lowercase",
+    "key": "startCase.ok.capitalized-words",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/startCase.spec.ts",
+    "line": 67,
+    "title": "should correctly handle accented letters",
+    "key": "startCase.ok.capitalized-words",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 5,
+    "title": "should return the string without the double quotes",
+    "key": "trim.ok.single-char",
+    "reason": "title matches single-char"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 9,
+    "title": "should return the string without special characters",
+    "key": "trim.ok.default-whitespace",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 13,
+    "title": "should return the string unchanged when no matching characters are found",
+    "key": "trim.ok.default-whitespace",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 17,
+    "title": "should remove all occurrences of a single character",
+    "key": "trim.ok.single-char",
+    "reason": "title matches single-char"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 21,
+    "title": "should remove all occurrences of multiple characters",
+    "key": "trim.ok.array-chars",
+    "reason": "title matches array-chars"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 25,
+    "title": "should handle an empty string",
+    "key": "trim.ok.default-whitespace",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 29,
+    "title": "should remove spaces when specified",
+    "key": "trim.ok.chars-and-space",
+    "reason": "title matches chars-and-space"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 33,
+    "title": "should handle a case where the string is already trimmed",
+    "key": "trim.ok.default-whitespace",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 37,
+    "title": "should return an empty string when all characters are removed",
+    "key": "trim.ok.default-whitespace",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 41,
+    "title": "should remove numbers from a string",
+    "key": "trim.ok.default-whitespace",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/trim.spec.ts",
+    "line": 45,
+    "title": "should trim the string without giving the second parameter, which defaults to whitespace",
+    "key": "trim.ok.default-whitespace",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/unescape.spec.ts",
+    "line": 12,
+    "title": "should unescape entities in order",
+    "key": "unescape.ok.tags-restored",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/unescape.spec.ts",
+    "line": 16,
+    "title": "should unescape the proper entities",
+    "key": "unescape.ok.tags-restored",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/unescape.spec.ts",
+    "line": 20,
+    "title": "should handle strings with nothing to unescape",
+    "key": "unescape.ok.tags-restored",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/unescape.spec.ts",
+    "line": 24,
+    "title": "should unescape the same characters escaped by `_.escape`",
+    "key": "unescape.ok.tags-restored",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/unescape.spec.ts",
+    "line": 28,
+    "title": "should handle leading zeros in html entities",
+    "key": "unescape.ok.tags-restored",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/unescape.spec.ts",
+    "line": 35,
+    "title": "should not unescape the \"",
+    "key": "unescape.ok.tags-restored",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/upperCase.spec.ts",
+    "line": 5,
+    "title": "should change camel case to upper case",
+    "key": "upperCase.ok.upper-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/upperCase.spec.ts",
+    "line": 9,
+    "title": "should change space to space",
+    "key": "upperCase.ok.upper-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/upperCase.spec.ts",
+    "line": 13,
+    "title": "should change hyphen to space",
+    "key": "upperCase.ok.kebab",
+    "reason": "title matches kebab"
+  },
+  {
+    "file": "src/string/upperCase.spec.ts",
+    "line": 17,
+    "title": "should change Acronyms to small letter",
+    "key": "upperCase.ok.acronym-split",
+    "reason": "title matches acronym-split"
+  },
+  {
+    "file": "src/string/upperCase.spec.ts",
+    "line": 21,
+    "title": "should handle leading and trailing whitespace",
+    "key": "upperCase.ok.upper-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/upperCase.spec.ts",
+    "line": 25,
+    "title": "should handle special characters correctly",
+    "key": "upperCase.ok.upper-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/upperCase.spec.ts",
+    "line": 29,
+    "title": "should handle strings that are already in upper case",
+    "key": "upperCase.ok.upper-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/upperCase.spec.ts",
+    "line": 33,
+    "title": "should work with an empty string",
+    "key": "upperCase.ok.upper-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/upperCase.spec.ts",
+    "line": 37,
+    "title": "should work with screaming snake case",
+    "key": "upperCase.ok.upper-with-spaces",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 5,
+    "title": "splits a simple ASCII comma-separated string into words",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 10,
+    "title": "returns an empty array when input is an empty string",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 15,
+    "title": "splits a space-separated string into individual words",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 20,
+    "title": "splits Unicode emojis and special characters as separate words",
+    "key": "words.ok.camel-acronym-emoji",
+    "reason": "title matches camel-acronym-emoji"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 25,
+    "title": "should match camelCase",
+    "key": "words.ok.camel-acronym-emoji",
+    "reason": "title matches camel-acronym-emoji"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 31,
+    "title": "should match snake_case",
+    "key": "words.ok.camel-acronym-emoji",
+    "reason": "title matches camel-acronym-emoji"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 37,
+    "title": "should match kebab-case",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 43,
+    "title": "should handle mixed formats",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 49,
+    "title": "should match acronyms",
+    "key": "words.ok.camel-acronym-emoji",
+    "reason": "title matches camel-acronym-emoji"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 55,
+    "title": "should match special characters",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 61,
+    "title": "should handle leading and trailing whitespace",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 67,
+    "title": "should handle underscores",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 73,
+    "title": "should handle single character words",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 79,
+    "title": "should work with hyphens",
+    "key": "words.ok.punctuation-split",
+    "reason": "default first ok"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 83,
+    "title": "should work with numbers",
+    "key": "words.ok.unicode-and-numbers",
+    "reason": "title matches unicode-and-numbers"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 87,
+    "title": "should match emojis",
+    "key": "words.ok.camel-acronym-emoji",
+    "reason": "title matches camel-acronym-emoji"
+  },
+  {
+    "file": "src/string/words.spec.ts",
+    "line": 91,
+    "title": "should match accented letters",
+    "key": "words.ok.unicode-and-numbers",
+    "reason": "title matches unicode-and-numbers"
+  }
+]

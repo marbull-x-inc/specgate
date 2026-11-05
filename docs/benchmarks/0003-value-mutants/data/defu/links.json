@@ -1,0 +1,149 @@
+[
+  {
+    "file": "test/defu.test.ts",
+    "line": 10,
+    "title": "should copy only missing properties defaults",
+    "key": "defu.ok.leftmost-priority",
+    "reason": "priority"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 16,
+    "title": "should fill in values that are null",
+    "key": "defu.ok.skip-nullish",
+    "reason": "null filled"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 26,
+    "title": "should copy nested values",
+    "key": "defu.ok.nested-defaults",
+    "reason": "nested"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 34,
+    "title": "should concat array values by default",
+    "key": "defu.ok.array-concat",
+    "reason": "concat"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 42,
+    "title": "should correctly type differing array values",
+    "key": "defu.ok.array-concat",
+    "reason": "arrays"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 52,
+    "title": "should avoid merging objects with custom constructor",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 61,
+    "title": "should assign date properly",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 68,
+    "title": "should correctly merge different object types",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 78,
+    "title": "should handle non object first param",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 84,
+    "title": "should handle non object second param",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 90,
+    "title": "multi defaults",
+    "key": "defu.ok.leftmost-priority",
+    "reason": "multi defaults"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 104,
+    "title": "should not override Object prototype",
+    "key": "defu.ok.skip-proto-keys",
+    "reason": "proto"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 119,
+    "title": "should ignore inherited enumerable properties",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 138,
+    "title": "should ignore non-object arguments",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 145,
+    "title": "should merge types of more than two objects",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 165,
+    "title": "should allow partials within merge chain",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 187,
+    "title": "custom merger",
+    "key": "createDefu.ok.sum-example",
+    "reason": "cost sum"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 197,
+    "title": "defuFn()",
+    "key": "defuFn.ok.fn-example",
+    "reason": "example"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 219,
+    "title": "defuArrayFn()",
+    "key": "defuArrayFn.ok.array-fn-example",
+    "reason": "example"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 239,
+    "title": "custom merger with namespace",
+    "key": "createDefu.ok.custom-merger",
+    "reason": "merger"
+  },
+  {
+    "file": "test/defu.test.ts",
+    "line": 258,
+    "title": "works with asterisk-import",
+    "key": "defu.ok.nested-defaults",
+    "reason": "first ok"
+  }
+]

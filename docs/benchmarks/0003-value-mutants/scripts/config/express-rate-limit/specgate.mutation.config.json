@@ -1,0 +1,31 @@
+{
+  "surface": {
+    "include": [
+      "source/rate-limit.ts",
+      "source/ip-key-generator.ts",
+      "source/time-constants.ts"
+    ],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": [
+      "test/library/**/*-test.ts"
+    ],
+    "adapter": "jest"
+  },
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-mutation"
+  },
+  "mutation": {
+    "report": [
+      "reports/mutation/mutation.json",
+      "reports/value/value.json"
+    ]
+  }
+}

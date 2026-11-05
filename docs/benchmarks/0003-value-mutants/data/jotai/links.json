@@ -1,0 +1,548 @@
+[
+  {
+    "file": "tests/vanilla/utils/atomWithRefresh.test.ts",
+    "line": 6,
+    "title": "[DEV-ONLY] throws when",
+    "key": "atomWithRefresh.ok.refresh-on-no-args",
+    "reason": "describe atomWithRefresh; first ok"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithLazy.test.ts",
+    "line": 5,
+    "title": "initializes on first store get",
+    "key": "atomWithLazy.ok.lazy-first-use",
+    "reason": "lazy"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithLazy.test.ts",
+    "line": 25,
+    "title": "is writable",
+    "key": "atomWithLazy.ok.writable-after-init",
+    "reason": "lazy"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithLazy.test.ts",
+    "line": 34,
+    "title": "should work with a set state action",
+    "key": "atomWithLazy.ok.writable-after-init",
+    "reason": "lazy"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 20,
+    "title": "should unwrap a promise with no fallback",
+    "key": "unwrap.ok.pending-undefined",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 45,
+    "title": "should unwrap a promise with fallback function without prev",
+    "key": "unwrap.ok.fallback",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 70,
+    "title": "should unwrap a promise with fallback function with prev",
+    "key": "unwrap.ok.fallback",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 102,
+    "title": "should unwrap a sync atom",
+    "key": "unwrap.ok.pending-undefined",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 116,
+    "title": "should unwrap an async writable atom",
+    "key": "unwrap.ok.fallback",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 136,
+    "title": "should unwrap to a fulfilled",
+    "key": "unwrap.ok.pending-undefined",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 145,
+    "title": "should get a fulfilled value",
+    "key": "unwrap.ok.pending-undefined",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 155,
+    "title": "should throw an error if underlying",
+    "key": "unwrap.err.errors-thrown",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 171,
+    "title": "should not enter an infinite loop",
+    "key": "unwrap.err.errors-thrown",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 199,
+    "title": "should pass the last value to fallback",
+    "key": "unwrap.ok.fallback",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 238,
+    "title": "should update dependents",
+    "key": "unwrap.ok.pending-undefined",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 255,
+    "title": "[DEV-ONLY] should not call store.set",
+    "key": "unwrap.ok.pending-undefined",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/unwrap.test.ts",
+    "line": 265,
+    "title": "should expose the latest value",
+    "key": "unwrap.ok.pending-undefined",
+    "reason": "unwrap"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithReset.test.ts",
+    "line": 16,
+    "title": "should reset to initial value using RESET",
+    "key": "atomWithReset.ok.reset-to-initial",
+    "reason": "describe atomWithReset"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithReset.test.ts",
+    "line": 23,
+    "title": "should update atom with a new value",
+    "key": "atomWithReset.ok.primitive-like",
+    "reason": "describe atomWithReset"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithReset.test.ts",
+    "line": 30,
+    "title": "should update atom using a function",
+    "key": "atomWithReset.ok.primitive-like",
+    "reason": "describe atomWithReset"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+    "line": 10,
+    "title": "should reset to initial value using RESET",
+    "key": "atomWithDefault.ok.reset-restores",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+    "line": 19,
+    "title": "should reset to initial value derived",
+    "key": "atomWithDefault.ok.reset-restores",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+    "line": 30,
+    "title": "should reflect changes to the initial value atom when main atom hasn't",
+    "key": "atomWithDefault.ok.read-default",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+    "line": 38,
+    "title": "should reflect changes to the initial value atom when main atom has been",
+    "key": "atomWithDefault.ok.reset-restores",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+    "line": 49,
+    "title": "should update atom with a new value",
+    "key": "atomWithDefault.ok.overwritten-detaches",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+    "line": 58,
+    "title": "should update atom using a function",
+    "key": "atomWithDefault.ok.overwritten-detaches",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+    "line": 67,
+    "title": "should reset with a function",
+    "key": "atomWithDefault.ok.reset-restores",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/vanilla/utils/types.test.tsx",
+    "line": 6,
+    "title": "selectAtom() should",
+    "key": "selectAtom.ok.default-equality",
+    "reason": "type test; first ok"
+  },
+  {
+    "file": "tests/vanilla/utils/types.test.tsx",
+    "line": 15,
+    "title": "unwrap() should",
+    "key": "unwrap.ok.pending-undefined",
+    "reason": "type test; first ok"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+    "line": 17,
+    "title": "simple sync get default",
+    "key": "atomWithDefault.ok.read-default",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+    "line": 53,
+    "title": "simple async get default",
+    "key": "atomWithDefault.ok.read-default",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+    "line": 104,
+    "title": "refresh sync atoms",
+    "key": "atomWithDefault.ok.reset-restores",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+    "line": 147,
+    "title": "refresh async atoms",
+    "key": "atomWithDefault.ok.reset-restores",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+    "line": 209,
+    "title": "can be set synchronously",
+    "key": "atomWithDefault.ok.overwritten-detaches",
+    "reason": "atomWithDefault"
+  },
+  {
+    "file": "tests/react/vanilla-utils/selectAtom.test.tsx",
+    "line": 9,
+    "title": "selectAtom works as expected",
+    "key": "selectAtom.ok.selector-runs-on-change",
+    "reason": "selectAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/selectAtom.test.tsx",
+    "line": 56,
+    "title": "do not update unless",
+    "key": "selectAtom.ok.update-only-on-change",
+    "reason": "selectAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/selectAtom.test.tsx",
+    "line": 132,
+    "title": "creates fresh cache path",
+    "key": "selectAtom.ok.default-equality",
+    "reason": "selectAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+    "line": 16,
+    "title": "sync counter",
+    "key": "atomWithRefresh.ok.refresh-on-no-args",
+    "reason": "atomWithRefresh"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+    "line": 47,
+    "title": "async counter",
+    "key": "atomWithRefresh.ok.refresh-on-no-args",
+    "reason": "atomWithRefresh"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+    "line": 91,
+    "title": "writable counter",
+    "key": "atomWithRefresh.ok.write-on-args",
+    "reason": "atomWithRefresh"
+  },
+  {
+    "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+    "line": 12,
+    "title": "no unnecessary updates",
+    "key": "splitAtom.ok.list-of-atoms",
+    "reason": "splitAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+    "line": 91,
+    "title": "removing atoms",
+    "key": "splitAtom.ok.dispatch-actions",
+    "reason": "splitAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+    "line": 157,
+    "title": "inserting atoms",
+    "key": "splitAtom.ok.dispatch-actions",
+    "reason": "splitAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+    "line": 246,
+    "title": "moving atoms",
+    "key": "splitAtom.ok.dispatch-actions",
+    "reason": "splitAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+    "line": 349,
+    "title": "read-only array atom",
+    "key": "splitAtom.ok.list-of-atoms",
+    "reason": "splitAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+    "line": 395,
+    "title": "no error with cached atoms",
+    "key": "splitAtom.ok.key-extractor",
+    "reason": "splitAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+    "line": 453,
+    "title": "variable sized split atom",
+    "key": "splitAtom.ok.list-of-atoms",
+    "reason": "splitAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+    "line": 488,
+    "title": "should not update split atom",
+    "key": "splitAtom.ok.list-of-atoms",
+    "reason": "splitAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+    "line": 517,
+    "title": "should throw error when writing to a removed",
+    "key": "splitAtom.ok.list-of-atoms",
+    "reason": "splitAtom"
+  },
+  {
+    "file": "tests/react/utils/useResetAtom.test.tsx",
+    "line": 9,
+    "title": "atomWithReset resets to its first value",
+    "key": "atomWithReset.ok.reset-to-initial",
+    "reason": "title names atomWithReset"
+  },
+  {
+    "file": "tests/react/utils/useResetAtom.test.tsx",
+    "line": 60,
+    "title": "atomWithReset reset based on previous value",
+    "key": "atomWithReset.ok.reset-to-initial",
+    "reason": "title names atomWithReset"
+  },
+  {
+    "file": "tests/react/utils/useResetAtom.test.tsx",
+    "line": 102,
+    "title": "atomWithReset through read-write atom",
+    "key": "atomWithReset.ok.reset-to-initial",
+    "reason": "title names atomWithReset"
+  },
+  {
+    "file": "tests/react/utils/useResetAtom.test.tsx",
+    "line": 137,
+    "title": "useResetAtom with custom atom",
+    "key": "useResetAtom.ok.returns-function",
+    "reason": "title names useResetAtom"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 73,
+    "title": "simple count",
+    "key": "atomWithStorage.ok.reset-deletes",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 104,
+    "title": "storage updates before mount",
+    "key": "atomWithStorage.ok.cross-tab",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 126,
+    "title": "should get stored value on init",
+    "key": "atomWithStorage.ok.get-on-init-true",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 174,
+    "title": "simple count",
+    "key": "atomWithStorage.ok.reset-deletes",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 216,
+    "title": "no entry",
+    "key": "atomWithStorage.ok.get-on-init-default",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 256,
+    "title": "async count",
+    "key": "atomWithStorage.ok.async-storage",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 298,
+    "title": "async new count",
+    "key": "atomWithStorage.ok.async-storage",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 334,
+    "title": "createJSONStorage with async string storage",
+    "key": "createJSONStorage.ok.string-storage-getter",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 375,
+    "title": "createJSONStorage without localStorage",
+    "key": "createJSONStorage.ok.string-storage-getter",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 467,
+    "title": "createJSONStorage with undefined window.addEventListener",
+    "key": "createJSONStorage.ok.string-storage-getter",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 472,
+    "title": "createJSONStorage with localStorage",
+    "key": "createJSONStorage.ok.string-storage-getter",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 477,
+    "title": "createJSONStorage with sessionStorage",
+    "key": "createJSONStorage.ok.string-storage-getter",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 494,
+    "title": "createJSONStorage subscribes",
+    "key": "createJSONStorage.ok.json-serialization",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 565,
+    "title": "should recompute dependents",
+    "key": "atomWithStorage.ok.default-storage",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 641,
+    "title": "initial value of atomWithStorage",
+    "key": "atomWithStorage.ok.default-storage",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 675,
+    "title": "createJSONStorage avoids",
+    "key": "createJSONStorage.ok.json-serialization",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 714,
+    "title": "should use withStorageValidator with isNumber",
+    "key": "createJSONStorage.ok.json-serialization",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 726,
+    "title": "should return initialValue when validator fails",
+    "key": "createJSONStorage.ok.json-serialization",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 743,
+    "title": "should return initialValue when sync validator",
+    "key": "createJSONStorage.ok.json-serialization",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 770,
+    "title": "should return stored value when async",
+    "key": "createJSONStorage.ok.json-serialization",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 806,
+    "title": "should return initialValue when async",
+    "key": "createJSONStorage.ok.json-serialization",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 844,
+    "title": "createJSONStorage subscriber is called",
+    "key": "createJSONStorage.ok.json-serialization",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 879,
+    "title": "createJSONStorage subscriber responds",
+    "key": "createJSONStorage.ok.json-serialization",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 940,
+    "title": "createJSONStorage reviver is applied",
+    "key": "createJSONStorage.ok.replacer-reviver",
+    "reason": "storage"
+  },
+  {
+    "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+    "line": 1031,
+    "title": "does not infinite loop",
+    "key": "atomWithStorage.ok.async-storage",
+    "reason": "storage"
+  }
+]

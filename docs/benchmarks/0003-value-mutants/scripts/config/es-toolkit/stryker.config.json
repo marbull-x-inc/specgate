@@ -1,0 +1,37 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "vitest",
+  "coverageAnalysis": "perTest",
+  "mutate": [
+    "src/string/camelCase.ts",
+    "src/string/capitalize.ts",
+    "src/string/constantCase.ts",
+    "src/string/deburr.ts",
+    "src/string/escape.ts",
+    "src/string/escapeRegExp.ts",
+    "src/string/kebabCase.ts",
+    "src/string/lowerCase.ts",
+    "src/string/pad.ts",
+    "src/string/pascalCase.ts",
+    "src/string/reverseString.ts",
+    "src/string/snakeCase.ts",
+    "src/string/startCase.ts",
+    "src/string/trim.ts",
+    "src/string/unescape.ts",
+    "src/string/upperCase.ts",
+    "src/string/words.ts"
+  ],
+  "reporters": [
+    "json"
+  ],
+  "jsonReporter": {
+    "fileName": "reports/mutation/mutation.json"
+  },
+  "tempDirName": ".stryker-tmp",
+  "plugins": [
+    "@stryker-mutator/vitest-runner"
+  ],
+  "vitest": {
+    "configFile": "vitest.stryker.config.mts"
+  }
+}

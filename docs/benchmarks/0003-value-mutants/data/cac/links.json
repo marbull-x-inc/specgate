@@ -1,0 +1,86 @@
+[
+  {
+    "file": "tests/index.test.ts",
+    "line": 52,
+    "title": "negated option",
+    "key": "CAC#option.ok.negated-option",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 67,
+    "title": "double dashes",
+    "key": "CAC#parse.ok.parsed-argv",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 84,
+    "title": "default value for negated option",
+    "key": "CAC#option.ok.negated-option",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 95,
+    "title": "negated option validation",
+    "key": "CAC#option.ok.negated-option",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 107,
+    "title": "array types without transformFunction",
+    "key": "CAC#option.ok.config-type-array",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 137,
+    "title": "array types are left absent",
+    "key": "CAC#option.ok.config-type-array",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 157,
+    "title": "array types with transformFunction",
+    "key": "Command#option.ok.command-option",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 174,
+    "title": "throw on unknown options",
+    "key": "Command#option.ok.dash-camel-case",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 188,
+    "title": "throw on unused args",
+    "key": "CAC#command.ok.required-arguments",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 233,
+    "title": "ignore prototype polluting",
+    "key": "CAC#parse.ok.parsed-argv",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 247,
+    "title": "dot-nested option names",
+    "key": "CAC#parse.ok.parsed-argv",
+    "reason": "calls operation; closest guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 266,
+    "title": "reads process.argv",
+    "key": "CAC#parse.ok.default-argv",
+    "reason": "calls operation; closest guarantee"
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "surface": {
+    "include": [
+      "src/string/camelCase.ts",
+      "src/string/capitalize.ts",
+      "src/string/constantCase.ts",
+      "src/string/deburr.ts",
+      "src/string/escape.ts",
+      "src/string/escapeRegExp.ts",
+      "src/string/kebabCase.ts",
+      "src/string/lowerCase.ts",
+      "src/string/pad.ts",
+      "src/string/pascalCase.ts",
+      "src/string/reverseString.ts",
+      "src/string/snakeCase.ts",
+      "src/string/startCase.ts",
+      "src/string/trim.ts",
+      "src/string/unescape.ts",
+      "src/string/upperCase.ts",
+      "src/string/words.ts"
+    ],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": [
+      "src/**/*.spec.ts"
+    ],
+    "adapter": "vitest"
+  },
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-mutation"
+  },
+  "mutation": {
+    "report": [
+      "reports/mutation/mutation.json",
+      "reports/value/value.json"
+    ]
+  }
+}

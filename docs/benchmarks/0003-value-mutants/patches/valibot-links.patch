@@ -1,0 +1,1905 @@
+diff --git a/library/src/actions/bytes/bytes.test.ts b/library/src/actions/bytes/bytes.test.ts
+index 70ab327..1e2736b 100644
+--- a/library/src/actions/bytes/bytes.test.ts
++++ b/library/src/actions/bytes/bytes.test.ts
+@@ -15,7 +15,7 @@ describe('bytes', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('bytes.ok.exact-bytes with undefined message', () => {
+       const action: BytesAction<string, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -24,14 +24,14 @@ describe('bytes', () => {
+       expect(bytes(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('bytes.ok.exact-bytes with string message', () => {
+       expect(bytes(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies BytesAction<string, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('bytes.ok.exact-bytes with function message', () => {
+       const message = () => 'message';
+       expect(bytes(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -43,7 +43,7 @@ describe('bytes', () => {
+   describe('should return dataset without issues', () => {
+     const action = bytes(5);
+ 
+-    test('for untyped inputs', () => {
++    test('bytes.ok.exact-bytes for untyped inputs', () => {
+       const issues: [StringIssue] = [
+         {
+           kind: 'schema',
+@@ -63,11 +63,11 @@ describe('bytes', () => {
+       });
+     });
+ 
+-    test('for valid strings', () => {
++    test('bytes.ok.exact-bytes for valid strings', () => {
+       expectNoActionIssue(action, ['12345', 'abcde']);
+     });
+ 
+-    test('for valid chars', () => {
++    test('bytes.ok.exact-bytes for valid chars', () => {
+       expectNoActionIssue(action, [
+         '12あ', // 'あ' is 3 bytes
+         '🤖!', // '🤖' is 4 bytes
+@@ -88,7 +88,7 @@ describe('bytes', () => {
+     const getReceived = (value: string) =>
+       `${new TextEncoder().encode(value).length}`;
+ 
+-    test('for invalid strings', () => {
++    test('bytes.err.bytes-mismatch for invalid strings', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+@@ -97,7 +97,7 @@ describe('bytes', () => {
+       );
+     });
+ 
+-    test('for invalid chars', () => {
++    test('bytes.err.bytes-mismatch for invalid chars', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+diff --git a/library/src/actions/empty/empty.test.ts b/library/src/actions/empty/empty.test.ts
+index e60549f..659dc26 100644
+--- a/library/src/actions/empty/empty.test.ts
++++ b/library/src/actions/empty/empty.test.ts
+@@ -14,7 +14,7 @@ describe('empty', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('empty.ok.empty-string with undefined message', () => {
+       const action: EmptyAction<string, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -23,14 +23,14 @@ describe('empty', () => {
+       expect(empty(undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('empty.ok.empty-string with string message', () => {
+       expect(empty('message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies EmptyAction<string, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('empty.ok.empty-string with function message', () => {
+       const message = () => 'message';
+       expect(empty(message)).toStrictEqual({
+         ...baseAction,
+@@ -42,7 +42,7 @@ describe('empty', () => {
+   describe('should return dataset without issues', () => {
+     const action = empty();
+ 
+-    test('for untyped inputs', () => {
++    test('empty.ok.empty-string for untyped inputs', () => {
+       const issues: [StringIssue] = [
+         {
+           kind: 'schema',
+@@ -62,11 +62,11 @@ describe('empty', () => {
+       });
+     });
+ 
+-    test('for valid strings', () => {
++    test('empty.ok.empty-string for valid strings', () => {
+       expectNoActionIssue(action, ['']);
+     });
+ 
+-    test('for valid arrays', () => {
++    test('empty.ok.empty-array for valid arrays', () => {
+       expectNoActionIssue(action, [[]]);
+     });
+   });
+@@ -80,7 +80,7 @@ describe('empty', () => {
+       message: 'message',
+     };
+ 
+-    test('for invalid strings', () => {
++    test('empty.err.not-empty for invalid strings', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+@@ -89,7 +89,7 @@ describe('empty', () => {
+       );
+     });
+ 
+-    test('for invalid arrays', () => {
++    test('empty.err.not-empty for invalid arrays', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+diff --git a/library/src/actions/gtValue/gtValue.test.ts b/library/src/actions/gtValue/gtValue.test.ts
+index f5211b9..6cafeb0 100644
+--- a/library/src/actions/gtValue/gtValue.test.ts
++++ b/library/src/actions/gtValue/gtValue.test.ts
+@@ -16,7 +16,7 @@ describe('gtValue', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('gtValue.ok.greater-than-number with undefined message', () => {
+       const action: GtValueAction<number, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -25,14 +25,14 @@ describe('gtValue', () => {
+       expect(gtValue(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('gtValue.ok.greater-than-number with string message', () => {
+       expect(gtValue(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies GtValueAction<number, 5, 'message'>);
+     });
+ 
+-    test('with function message', () => {
++    test('gtValue.ok.greater-than-number with function message', () => {
+       const message = () => 'message';
+       expect(gtValue(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -42,7 +42,7 @@ describe('gtValue', () => {
+   });
+ 
+   describe('should return dataset without issues', () => {
+-    test('for untyped inputs', () => {
++    test('gtValue.ok.greater-than-number for untyped inputs', () => {
+       const issues: [NumberIssue] = [
+         {
+           kind: 'schema',
+@@ -58,11 +58,11 @@ describe('gtValue', () => {
+       ).toStrictEqual({ typed: false, value: null, issues });
+     });
+ 
+-    test('for valid bigints', () => {
++    test('gtValue.ok.greater-than-number for valid bigints', () => {
+       expectNoActionIssue(gtValue(1n), [2n, 9999n]);
+     });
+ 
+-    test('for valid non-bigints', () => {
++    test('gtValue.ok.greater-than-number for valid non-bigints', () => {
+       expectNoActionIssue(gtValue(10n), [
+         ' 11 ',
+         '+11',
+@@ -113,11 +113,11 @@ describe('gtValue', () => {
+       ]);
+     });
+ 
+-    test('for valid booleans', () => {
++    test('gtValue.ok.greater-than-number for valid booleans', () => {
+       expectNoActionIssue(gtValue(false), [true]);
+     });
+ 
+-    test('for valid non-booleans', () => {
++    test('gtValue.ok.greater-than-number for valid non-booleans', () => {
+       expectNoActionIssue(gtValue(true), [
+         '1.5',
+         '2',
+@@ -165,7 +165,7 @@ describe('gtValue', () => {
+       ]);
+     });
+ 
+-    test('for valid dates', () => {
++    test('gtValue.ok.greater-than-number for valid dates', () => {
+       const date = new Date();
+       expectNoActionIssue(gtValue(date), [
+         new Date(+date + 1),
+@@ -173,7 +173,7 @@ describe('gtValue', () => {
+       ]);
+     });
+ 
+-    test('for valid non-dates', () => {
++    test('gtValue.ok.greater-than-number for valid non-dates', () => {
+       expectNoActionIssue(gtValue(new Date(10)), [
+         ' 10.5 ',
+         '+10.5',
+@@ -241,11 +241,11 @@ describe('gtValue', () => {
+       ]);
+     });
+ 
+-    test('for valid numbers', () => {
++    test('gtValue.ok.greater-than-number for valid numbers', () => {
+       expectNoActionIssue(gtValue(10), [10.5, 11, 9999, Number.MAX_VALUE]);
+     });
+ 
+-    test('for valid non-numbers', () => {
++    test('gtValue.ok.greater-than-number for valid non-numbers', () => {
+       expectNoActionIssue(gtValue(10), [
+         ' 10.5 ',
+         '+10.5',
+@@ -298,11 +298,11 @@ describe('gtValue', () => {
+       ]);
+     });
+ 
+-    test('for valid strings', () => {
++    test('gtValue.ok.greater-than-number for valid strings', () => {
+       expectNoActionIssue(gtValue('2024'), ['2024.', '2025', '9999', 'XYZ']);
+     });
+ 
+-    test('for valid non-strings', () => {
++    test('gtValue.ok.greater-than-number for valid non-strings', () => {
+       expectNoActionIssue(gtValue('10'), [
+         10.5,
+         11,
+@@ -356,7 +356,7 @@ describe('gtValue', () => {
+     const getReceived = (value: unknown): string =>
+       value instanceof Date ? value.toJSON() : _stringify(value);
+ 
+-    test('for invalid bigints', () => {
++    test('gtValue.ok.greater-than-number for invalid bigints', () => {
+       expectActionIssue(
+         gtValue(10n, 'message'),
+         { ...baseInfo, expected: '>10', requirement: 10n },
+@@ -364,7 +364,7 @@ describe('gtValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-bigints', () => {
++    test('gtValue.ok.greater-than-number for invalid non-bigints', () => {
+       expectActionIssue(
+         gtValue(123n, 'message'),
+         { ...baseInfo, expected: '>123', requirement: 123n },
+@@ -443,7 +443,7 @@ describe('gtValue', () => {
+       );
+     });
+ 
+-    test('for invalid booleans', () => {
++    test('gtValue.ok.greater-than-number for invalid booleans', () => {
+       expectActionIssue(
+         gtValue(false, 'message'),
+         { ...baseInfo, expected: '>false', requirement: false },
+@@ -457,7 +457,7 @@ describe('gtValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-booleans', () => {
++    test('gtValue.ok.greater-than-number for invalid non-booleans', () => {
+       expectActionIssue(
+         gtValue(false, 'message'),
+         { ...baseInfo, expected: '>false', requirement: false },
+@@ -508,7 +508,7 @@ describe('gtValue', () => {
+       );
+     });
+ 
+-    test('for invalid dates', () => {
++    test('gtValue.ok.greater-than-number for invalid dates', () => {
+       const date = new Date();
+       expectActionIssue(
+         gtValue<Date, Date, 'message'>(date, 'message'),
+@@ -518,7 +518,7 @@ describe('gtValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-dates', () => {
++    test('gtValue.ok.greater-than-number for invalid non-dates', () => {
+       const date1 = new Date(123);
+       expectActionIssue(
+         gtValue(date1, 'message'),
+@@ -595,7 +595,7 @@ describe('gtValue', () => {
+       );
+     });
+ 
+-    test('for invalid numbers', () => {
++    test('gtValue.err.not-greater for invalid numbers', () => {
+       expectActionIssue(
+         gtValue(10, 'message'),
+         { ...baseInfo, expected: '>10', requirement: 10 },
+@@ -603,7 +603,7 @@ describe('gtValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-numbers', () => {
++    test('gtValue.ok.greater-than-number for invalid non-numbers', () => {
+       expectActionIssue(
+         gtValue(123, 'message'),
+         { ...baseInfo, expected: '>123', requirement: 123 },
+@@ -673,7 +673,7 @@ describe('gtValue', () => {
+       );
+     });
+ 
+-    test('for invalid strings', () => {
++    test('gtValue.ok.greater-than-number for invalid strings', () => {
+       expectActionIssue(
+         gtValue('2024', 'message'),
+         { ...baseInfo, expected: '>"2024"', requirement: '2024' },
+@@ -681,7 +681,7 @@ describe('gtValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-strings', () => {
++    test('gtValue.ok.greater-than-number for invalid non-strings', () => {
+       expectActionIssue(
+         gtValue('123', 'message'),
+         { ...baseInfo, expected: '>"123"', requirement: '123' },
+diff --git a/library/src/actions/length/length.test.ts b/library/src/actions/length/length.test.ts
+index 87d3ff8..630e0ae 100644
+--- a/library/src/actions/length/length.test.ts
++++ b/library/src/actions/length/length.test.ts
+@@ -15,7 +15,7 @@ describe('length', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('length.ok.string-length with undefined message', () => {
+       const action: LengthAction<string, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -24,14 +24,14 @@ describe('length', () => {
+       expect(length(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('length.ok.string-length with string message', () => {
+       expect(length(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies LengthAction<string, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('length.ok.string-length with function message', () => {
+       const message = () => 'message';
+       expect(length(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -43,7 +43,7 @@ describe('length', () => {
+   describe('should return dataset without issues', () => {
+     const action = length(3);
+ 
+-    test('for untyped inputs', () => {
++    test('length.ok.string-length for untyped inputs', () => {
+       const issues: [StringIssue] = [
+         {
+           kind: 'schema',
+@@ -63,7 +63,7 @@ describe('length', () => {
+       });
+     });
+ 
+-    test('for valid strings', () => {
++    test('length.ok.string-length for valid strings', () => {
+       expectNoActionIssue(action, [
+         '   ',
+         ' \n\n',
+@@ -77,7 +77,7 @@ describe('length', () => {
+       ]);
+     });
+ 
+-    test('for valid arrays', () => {
++    test('length.ok.array-length for valid arrays', () => {
+       expectNoActionIssue(action, [
+         [1, 2, 3],
+         ['foo', 'bar', 'baz'],
+@@ -99,7 +99,7 @@ describe('length', () => {
+       requirement: 3,
+     };
+ 
+-    test('for invalid strings', () => {
++    test('length.err.length-mismatch for invalid strings', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+@@ -127,7 +127,7 @@ describe('length', () => {
+       );
+     });
+ 
+-    test('for invalid arrays', () => {
++    test('length.err.length-mismatch for invalid arrays', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+diff --git a/library/src/actions/ltValue/ltValue.test.ts b/library/src/actions/ltValue/ltValue.test.ts
+index e28513a..00e4200 100644
+--- a/library/src/actions/ltValue/ltValue.test.ts
++++ b/library/src/actions/ltValue/ltValue.test.ts
+@@ -16,7 +16,7 @@ describe('ltValue', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('ltValue.ok.less-than-number with undefined message', () => {
+       const action: LtValueAction<number, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -25,14 +25,14 @@ describe('ltValue', () => {
+       expect(ltValue(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('ltValue.ok.less-than-number with string message', () => {
+       expect(ltValue(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies LtValueAction<number, 5, 'message'>);
+     });
+ 
+-    test('with function message', () => {
++    test('ltValue.ok.less-than-number with function message', () => {
+       const message = () => 'message';
+       expect(ltValue(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -42,7 +42,7 @@ describe('ltValue', () => {
+   });
+ 
+   describe('should return dataset without issues', () => {
+-    test('for untyped inputs', () => {
++    test('ltValue.ok.less-than-number for untyped inputs', () => {
+       const issues: [NumberIssue] = [
+         {
+           kind: 'schema',
+@@ -58,11 +58,11 @@ describe('ltValue', () => {
+       ).toStrictEqual({ typed: false, value: null, issues });
+     });
+ 
+-    test('for valid bigints', () => {
++    test('ltValue.ok.less-than-number for valid bigints', () => {
+       expectNoActionIssue(ltValue(10n), [-9999n, 0n, 9n]);
+     });
+ 
+-    test('for valid non-bigints', () => {
++    test('ltValue.ok.less-than-number for valid non-bigints', () => {
+       expectNoActionIssue(ltValue(10n), [
+         '-10',
+         '',
+@@ -112,11 +112,11 @@ describe('ltValue', () => {
+       ]);
+     });
+ 
+-    test('for valid booleans', () => {
++    test('ltValue.ok.less-than-number for valid booleans', () => {
+       expectNoActionIssue(ltValue(true), [false]);
+     });
+ 
+-    test('for valid non-booleans', () => {
++    test('ltValue.ok.less-than-number for valid non-booleans', () => {
+       expectNoActionIssue(ltValue(true), [
+         '-1',
+         ' 0 ',
+@@ -146,7 +146,7 @@ describe('ltValue', () => {
+       ]);
+     });
+ 
+-    test('for valid dates', () => {
++    test('ltValue.ok.less-than-number for valid dates', () => {
+       const date = new Date();
+       expectNoActionIssue(ltValue(date), [
+         new Date(0),
+@@ -155,7 +155,7 @@ describe('ltValue', () => {
+       ]);
+     });
+ 
+-    test('for valid non-dates', () => {
++    test('ltValue.ok.less-than-number for valid non-dates', () => {
+       const date1 = new Date(10);
+       expectNoActionIssue(ltValue(date1), [
+         '-10',
+@@ -204,11 +204,11 @@ describe('ltValue', () => {
+       ]);
+     });
+ 
+-    test('for valid numbers', () => {
++    test('ltValue.ok.less-than-number for valid numbers', () => {
+       expectNoActionIssue(ltValue(10), [Number.MIN_VALUE, 0, 9, 9.5]);
+     });
+ 
+-    test('for valid non-numbers', () => {
++    test('ltValue.ok.less-than-number for valid non-numbers', () => {
+       expectNoActionIssue(ltValue(10), [
+         '-10',
+         ' 9 ',
+@@ -249,11 +249,11 @@ describe('ltValue', () => {
+       ]);
+     });
+ 
+-    test('for valid strings', () => {
++    test('ltValue.ok.less-than-number for valid strings', () => {
+       expectNoActionIssue(ltValue('2024'), ['', '1234', '2023']);
+     });
+ 
+-    test('for valid non-strings', () => {
++    test('ltValue.ok.less-than-number for valid non-strings', () => {
+       expectNoActionIssue(ltValue('10'), [
+         -10,
+         0,
+@@ -304,7 +304,7 @@ describe('ltValue', () => {
+     const getReceived = (value: unknown): string =>
+       value instanceof Date ? value.toJSON() : _stringify(value);
+ 
+-    test('for invalid bigints', () => {
++    test('ltValue.ok.less-than-number for invalid bigints', () => {
+       expectActionIssue(
+         ltValue(10n, 'message'),
+         { ...baseInfo, expected: '<10', requirement: 10n },
+@@ -312,7 +312,7 @@ describe('ltValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-bigints', () => {
++    test('ltValue.ok.less-than-number for invalid non-bigints', () => {
+       expectActionIssue(
+         ltValue(123n, 'message'),
+         { ...baseInfo, expected: '<123', requirement: 123n },
+@@ -379,7 +379,7 @@ describe('ltValue', () => {
+       );
+     });
+ 
+-    test('for invalid booleans', () => {
++    test('ltValue.ok.less-than-number for invalid booleans', () => {
+       expectActionIssue(
+         ltValue(false, 'message'),
+         { ...baseInfo, expected: '<false', requirement: false },
+@@ -393,7 +393,7 @@ describe('ltValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-booleans', () => {
++    test('ltValue.ok.less-than-number for invalid non-booleans', () => {
+       expectActionIssue(
+         ltValue(false, 'message'),
+         { ...baseInfo, expected: '<false', requirement: false },
+@@ -440,7 +440,7 @@ describe('ltValue', () => {
+       );
+     });
+ 
+-    test('for invalid dates', () => {
++    test('ltValue.ok.less-than-number for invalid dates', () => {
+       const date = new Date();
+       expectActionIssue(
+         ltValue<Date, Date, 'message'>(date, 'message'),
+@@ -450,7 +450,7 @@ describe('ltValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-dates', () => {
++    test('ltValue.ok.less-than-number for invalid non-dates', () => {
+       const date1 = new Date(123);
+       expectActionIssue(
+         ltValue(date1, 'message'),
+@@ -519,7 +519,7 @@ describe('ltValue', () => {
+       );
+     });
+ 
+-    test('for invalid numbers', () => {
++    test('ltValue.err.not-less for invalid numbers', () => {
+       expectActionIssue(
+         ltValue(10, 'message'),
+         { ...baseInfo, expected: '<10', requirement: 10 },
+@@ -527,7 +527,7 @@ describe('ltValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-numbers', () => {
++    test('ltValue.ok.less-than-number for invalid non-numbers', () => {
+       expectActionIssue(
+         ltValue(123, 'message'),
+         { ...baseInfo, expected: '<123', requirement: 123 },
+@@ -584,7 +584,7 @@ describe('ltValue', () => {
+       );
+     });
+ 
+-    test('for invalid strings', () => {
++    test('ltValue.ok.less-than-number for invalid strings', () => {
+       expectActionIssue(
+         ltValue('2024', 'message'),
+         { ...baseInfo, expected: '<"2024"', requirement: '2024' },
+@@ -592,7 +592,7 @@ describe('ltValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-strings', () => {
++    test('ltValue.ok.less-than-number for invalid non-strings', () => {
+       expectActionIssue(
+         ltValue('123', 'message'),
+         { ...baseInfo, expected: '<"123"', requirement: '123' },
+diff --git a/library/src/actions/maxLength/maxLength.test.ts b/library/src/actions/maxLength/maxLength.test.ts
+index 0b4abe4..476a280 100644
+--- a/library/src/actions/maxLength/maxLength.test.ts
++++ b/library/src/actions/maxLength/maxLength.test.ts
+@@ -19,7 +19,7 @@ describe('maxLength', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('maxLength.ok.max-string with undefined message', () => {
+       const action: MaxLengthAction<string, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -28,14 +28,14 @@ describe('maxLength', () => {
+       expect(maxLength(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('maxLength.ok.max-string with string message', () => {
+       expect(maxLength(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies MaxLengthAction<string, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('maxLength.ok.max-string with function message', () => {
+       const message = () => 'message';
+       expect(maxLength(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -47,7 +47,7 @@ describe('maxLength', () => {
+   describe('should return dataset without issues', () => {
+     const action = maxLength(5);
+ 
+-    test('for untyped inputs', () => {
++    test('maxLength.ok.max-string for untyped inputs', () => {
+       const issues: [StringIssue] = [
+         {
+           kind: 'schema',
+@@ -67,11 +67,11 @@ describe('maxLength', () => {
+       });
+     });
+ 
+-    test('for valid strings', () => {
++    test('maxLength.ok.max-string for valid strings', () => {
+       expectNoActionIssue(action, ['', 'foo', '12345', '😀😀']);
+     });
+ 
+-    test('for valid arrays', () => {
++    test('maxLength.ok.max-array for valid arrays', () => {
+       expectNoActionIssue(action, [[], ['foo', 'bar'], [1, 2, 3, 4, 5]]);
+     });
+   });
+@@ -86,7 +86,7 @@ describe('maxLength', () => {
+       requirement: 5,
+     };
+ 
+-    test('for invalid strings', () => {
++    test('maxLength.err.max-string-long for invalid strings', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+@@ -95,7 +95,7 @@ describe('maxLength', () => {
+       );
+     });
+ 
+-    test('for invalid arrays', () => {
++    test('maxLength.err.max-string-long for invalid arrays', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+diff --git a/library/src/actions/maxValue/maxValue.test.ts b/library/src/actions/maxValue/maxValue.test.ts
+index 062389a..17f1c5f 100644
+--- a/library/src/actions/maxValue/maxValue.test.ts
++++ b/library/src/actions/maxValue/maxValue.test.ts
+@@ -16,7 +16,7 @@ describe('maxValue', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('maxValue.ok.max-number with undefined message', () => {
+       const action: MaxValueAction<number, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -25,14 +25,14 @@ describe('maxValue', () => {
+       expect(maxValue(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('maxValue.ok.max-number with string message', () => {
+       expect(maxValue(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies MaxValueAction<number, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('maxValue.ok.max-number with function message', () => {
+       const message = () => 'message';
+       expect(maxValue(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -42,7 +42,7 @@ describe('maxValue', () => {
+   });
+ 
+   describe('should return dataset without issues', () => {
+-    test('for untyped inputs', () => {
++    test('maxValue.ok.max-number for untyped inputs', () => {
+       const issues: [NumberIssue] = [
+         {
+           kind: 'schema',
+@@ -58,11 +58,11 @@ describe('maxValue', () => {
+       ).toStrictEqual({ typed: false, value: null, issues });
+     });
+ 
+-    test('for valid bigints', () => {
++    test('maxValue.ok.max-number for valid bigints', () => {
+       expectNoActionIssue(maxValue(10n), [-9999n, 0n, 10n]);
+     });
+ 
+-    test('for valid non-bigints', () => {
++    test('maxValue.ok.max-number for valid non-bigints', () => {
+       expectNoActionIssue(maxValue(10n), [
+         '-10',
+         '',
+@@ -121,12 +121,12 @@ describe('maxValue', () => {
+       ]);
+     });
+ 
+-    test('for valid booleans', () => {
++    test('maxValue.ok.max-number for valid booleans', () => {
+       expectNoActionIssue(maxValue(true), [true, false]);
+       expectNoActionIssue(maxValue(false), [false]);
+     });
+ 
+-    test('for valid non-booleans', () => {
++    test('maxValue.ok.max-number for valid non-booleans', () => {
+       expectNoActionIssue(maxValue(true), [
+         '-1',
+         '-1.0',
+@@ -169,7 +169,7 @@ describe('maxValue', () => {
+       ]);
+     });
+ 
+-    test('for valid dates', () => {
++    test('maxValue.ok.max-number for valid dates', () => {
+       const date = new Date();
+       expectNoActionIssue(maxValue(date), [
+         new Date(0),
+@@ -178,7 +178,7 @@ describe('maxValue', () => {
+       ]);
+     });
+ 
+-    test('for valid non-dates', () => {
++    test('maxValue.ok.max-number for valid non-dates', () => {
+       const date1 = new Date(10);
+       expectNoActionIssue(maxValue(date1), [
+         '-10',
+@@ -246,11 +246,11 @@ describe('maxValue', () => {
+       ]);
+     });
+ 
+-    test('for valid numbers', () => {
++    test('maxValue.ok.max-number for valid numbers', () => {
+       expectNoActionIssue(maxValue(10), [Number.MIN_VALUE, 0, 10]);
+     });
+ 
+-    test('for valid non-numbers', () => {
++    test('maxValue.ok.max-number for valid non-numbers', () => {
+       expectNoActionIssue(maxValue(10), [
+         '-10',
+         '-10.0',
+@@ -306,11 +306,11 @@ describe('maxValue', () => {
+       ]);
+     });
+ 
+-    test('for valid strings', () => {
++    test('maxValue.ok.max-number for valid strings', () => {
+       expectNoActionIssue(maxValue('2024'), ['', '1234', '2024']);
+     });
+ 
+-    test('for valid non-strings', () => {
++    test('maxValue.ok.max-number for valid non-strings', () => {
+       expectNoActionIssue(maxValue('10'), [
+         -10,
+         0,
+@@ -370,7 +370,7 @@ describe('maxValue', () => {
+     const getReceived = (value: unknown): string =>
+       value instanceof Date ? value.toJSON() : _stringify(value);
+ 
+-    test('for invalid bigints', () => {
++    test('maxValue.ok.max-number for invalid bigints', () => {
+       expectActionIssue(
+         maxValue(10n, 'message'),
+         { ...baseInfo, expected: '<=10', requirement: 10n },
+@@ -378,7 +378,7 @@ describe('maxValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-bigints', () => {
++    test('maxValue.ok.max-number for invalid non-bigints', () => {
+       expectActionIssue(
+         maxValue(123n, 'message'),
+         { ...baseInfo, expected: '<=123', requirement: 123n },
+@@ -425,7 +425,7 @@ describe('maxValue', () => {
+       );
+     });
+ 
+-    test('for invalid booleans', () => {
++    test('maxValue.ok.max-number for invalid booleans', () => {
+       expectActionIssue(
+         maxValue(false, 'message'),
+         { ...baseInfo, expected: '<=false', requirement: false },
+@@ -433,7 +433,7 @@ describe('maxValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-booleans', () => {
++    test('maxValue.ok.max-number for invalid non-booleans', () => {
+       expectActionIssue(
+         maxValue(false, 'message'),
+         { ...baseInfo, expected: '<=false', requirement: false },
+@@ -449,7 +449,7 @@ describe('maxValue', () => {
+       );
+     });
+ 
+-    test('for invalid dates', () => {
++    test('maxValue.ok.max-number for invalid dates', () => {
+       const date = new Date();
+       expectActionIssue(
+         maxValue<Date, Date, 'message'>(date, 'message'),
+@@ -459,7 +459,7 @@ describe('maxValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-dates', () => {
++    test('maxValue.ok.max-number for invalid non-dates', () => {
+       const date1 = new Date(123);
+       expectActionIssue(
+         maxValue(date1, 'message'),
+@@ -496,7 +496,7 @@ describe('maxValue', () => {
+       );
+     });
+ 
+-    test('for invalid numbers', () => {
++    test('maxValue.err.max-number-above for invalid numbers', () => {
+       expectActionIssue(
+         maxValue(10, 'message'),
+         { ...baseInfo, expected: '<=10', requirement: 10 },
+@@ -504,7 +504,7 @@ describe('maxValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-numbers', () => {
++    test('maxValue.ok.max-number for invalid non-numbers', () => {
+       expectActionIssue(
+         maxValue(123, 'message'),
+         { ...baseInfo, expected: '<=123', requirement: 123 },
+@@ -527,7 +527,7 @@ describe('maxValue', () => {
+       );
+     });
+ 
+-    test('for invalid strings', () => {
++    test('maxValue.ok.max-number for invalid strings', () => {
+       expectActionIssue(
+         maxValue('2024', 'message'),
+         { ...baseInfo, expected: '<="2024"', requirement: '2024' },
+@@ -535,7 +535,7 @@ describe('maxValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-strings', () => {
++    test('maxValue.ok.max-number for invalid non-strings', () => {
+       expectActionIssue(
+         maxValue('123', 'message'),
+         { ...baseInfo, expected: '<="123"', requirement: '123' },
+diff --git a/library/src/actions/minBytes/minBytes.test.ts b/library/src/actions/minBytes/minBytes.test.ts
+index c0040ce..1fdec18 100644
+--- a/library/src/actions/minBytes/minBytes.test.ts
++++ b/library/src/actions/minBytes/minBytes.test.ts
+@@ -19,7 +19,7 @@ describe('minBytes', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('minBytes.ok.min-bytes with undefined message', () => {
+       const action: MinBytesAction<string, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -28,14 +28,14 @@ describe('minBytes', () => {
+       expect(minBytes(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('minBytes.ok.min-bytes with string message', () => {
+       expect(minBytes(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies MinBytesAction<string, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('minBytes.ok.min-bytes with function message', () => {
+       const message = () => 'message';
+       expect(minBytes(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -47,7 +47,7 @@ describe('minBytes', () => {
+   describe('should return dataset without issues', () => {
+     const action = minBytes(5);
+ 
+-    test('for untyped inputs', () => {
++    test('minBytes.ok.min-bytes for untyped inputs', () => {
+       const issues: [StringIssue] = [
+         {
+           kind: 'schema',
+@@ -67,11 +67,11 @@ describe('minBytes', () => {
+       });
+     });
+ 
+-    test('for valid strings', () => {
++    test('minBytes.ok.min-bytes for valid strings', () => {
+       expectNoActionIssue(action, ['12345', '123456', 'foobarbaz123']);
+     });
+ 
+-    test('for valid chars', () => {
++    test('minBytes.ok.min-bytes for valid chars', () => {
+       expectNoActionIssue(action, [
+         '🤖!', // '🤖' is 4 bytes
+         'あい', // 'あい' is 6 bytes
+@@ -92,11 +92,11 @@ describe('minBytes', () => {
+     const getReceived = (value: string) =>
+       `${new TextEncoder().encode(value).length}`;
+ 
+-    test('for invalid strings', () => {
++    test('minBytes.err.too-few-bytes for invalid strings', () => {
+       expectActionIssue(action, baseIssue, ['', '1', '1234'], getReceived);
+     });
+ 
+-    test('for invalid chars', () => {
++    test('minBytes.err.too-few-bytes for invalid chars', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+diff --git a/library/src/actions/minLength/minLength.test.ts b/library/src/actions/minLength/minLength.test.ts
+index 8fc746a..879ebd7 100644
+--- a/library/src/actions/minLength/minLength.test.ts
++++ b/library/src/actions/minLength/minLength.test.ts
+@@ -19,7 +19,7 @@ describe('minLength', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('minLength.ok.min-string with undefined message', () => {
+       const action: MinLengthAction<string, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -28,14 +28,14 @@ describe('minLength', () => {
+       expect(minLength(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('minLength.ok.min-string with string message', () => {
+       expect(minLength(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies MinLengthAction<string, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('minLength.ok.min-string with function message', () => {
+       const message = () => 'message';
+       expect(minLength(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -47,7 +47,7 @@ describe('minLength', () => {
+   describe('should return dataset without issues', () => {
+     const action = minLength(5);
+ 
+-    test('for untyped inputs', () => {
++    test('minLength.ok.min-string for untyped inputs', () => {
+       const issues: [StringIssue] = [
+         {
+           kind: 'schema',
+@@ -67,7 +67,7 @@ describe('minLength', () => {
+       });
+     });
+ 
+-    test('for valid strings', () => {
++    test('minLength.ok.min-string for valid strings', () => {
+       expectNoActionIssue(action, [
+         '12345',
+         '123456',
+@@ -76,7 +76,7 @@ describe('minLength', () => {
+       ]);
+     });
+ 
+-    test('for valid arrays', () => {
++    test('minLength.ok.min-array for valid arrays', () => {
+       expectNoActionIssue(action, [[1, 2, 3, 4, 5], Array(6), Array(999)]);
+     });
+   });
+@@ -91,7 +91,7 @@ describe('minLength', () => {
+       requirement: 5,
+     };
+ 
+-    test('for invalid strings', () => {
++    test('minLength.err.min-string-short for invalid strings', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+@@ -100,7 +100,7 @@ describe('minLength', () => {
+       );
+     });
+ 
+-    test('for invalid arrays', () => {
++    test('minLength.err.min-string-short for invalid arrays', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+diff --git a/library/src/actions/minValue/minValue.test.ts b/library/src/actions/minValue/minValue.test.ts
+index 30ac77d..6074d3f 100644
+--- a/library/src/actions/minValue/minValue.test.ts
++++ b/library/src/actions/minValue/minValue.test.ts
+@@ -16,7 +16,7 @@ describe('minValue', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('minValue.ok.min-number with undefined message', () => {
+       const action: MinValueAction<number, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -25,14 +25,14 @@ describe('minValue', () => {
+       expect(minValue(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('minValue.ok.min-number with string message', () => {
+       expect(minValue(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies MinValueAction<number, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('minValue.ok.min-number with function message', () => {
+       const message = () => 'message';
+       expect(minValue(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -42,7 +42,7 @@ describe('minValue', () => {
+   });
+ 
+   describe('should return dataset without issues', () => {
+-    test('for untyped inputs', () => {
++    test('minValue.ok.min-number for untyped inputs', () => {
+       const issues: [NumberIssue] = [
+         {
+           kind: 'schema',
+@@ -58,11 +58,11 @@ describe('minValue', () => {
+       ).toStrictEqual({ typed: false, value: null, issues });
+     });
+ 
+-    test('for valid bigints', () => {
++    test('minValue.ok.min-number for valid bigints', () => {
+       expectNoActionIssue(minValue(10n), [10n, 11n, 9999n]);
+     });
+ 
+-    test('for valid non-bigints', () => {
++    test('minValue.ok.min-number for valid non-bigints', () => {
+       expectNoActionIssue(minValue(10n), [
+         '10',
+         '+10',
+@@ -103,12 +103,12 @@ describe('minValue', () => {
+       ]);
+     });
+ 
+-    test('for valid booleans', () => {
++    test('minValue.ok.min-number for valid booleans', () => {
+       expectNoActionIssue(minValue(false), [false, true]);
+       expectNoActionIssue(minValue(true), [true]);
+     });
+ 
+-    test('for valid non-booleans', () => {
++    test('minValue.ok.min-number for valid non-booleans', () => {
+       expectNoActionIssue(minValue(true), [
+         '1',
+         '99',
+@@ -160,7 +160,7 @@ describe('minValue', () => {
+       ]);
+     });
+ 
+-    test('for valid dates', () => {
++    test('minValue.ok.min-number for valid dates', () => {
+       const date = new Date();
+       expectNoActionIssue(minValue(date), [
+         date,
+@@ -169,7 +169,7 @@ describe('minValue', () => {
+       ]);
+     });
+ 
+-    test('for valid non-dates', () => {
++    test('minValue.ok.min-number for valid non-dates', () => {
+       expectNoActionIssue(minValue(new Date(10)), [
+         '+10',
+         '10.0',
+@@ -219,11 +219,11 @@ describe('minValue', () => {
+       ]);
+     });
+ 
+-    test('for valid numbers', () => {
++    test('minValue.ok.min-number for valid numbers', () => {
+       expectNoActionIssue(minValue(10), [10, 11, 9999, Number.MAX_VALUE]);
+     });
+ 
+-    test('for valid non-numbers', () => {
++    test('minValue.ok.min-number for valid non-numbers', () => {
+       expectNoActionIssue(minValue(10), [
+         '+10',
+         '10.0',
+@@ -267,11 +267,11 @@ describe('minValue', () => {
+       ]);
+     });
+ 
+-    test('for valid strings', () => {
++    test('minValue.ok.min-number for valid strings', () => {
+       expectNoActionIssue(minValue('2024'), ['2024', '2025', '9999', 'XYZ']);
+     });
+ 
+-    test('for valid non-strings', () => {
++    test('minValue.ok.min-number for valid non-strings', () => {
+       expectNoActionIssue(minValue('10'), [
+         10,
+         10.0,
+@@ -320,7 +320,7 @@ describe('minValue', () => {
+     const getReceived = (value: unknown): string =>
+       value instanceof Date ? value.toJSON() : _stringify(value);
+ 
+-    test('for invalid bigints', () => {
++    test('minValue.ok.min-number for invalid bigints', () => {
+       expectActionIssue(
+         minValue(10n, 'message'),
+         { ...baseInfo, expected: '>=10', requirement: 10n },
+@@ -328,7 +328,7 @@ describe('minValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-bigints', () => {
++    test('minValue.ok.min-number for invalid non-bigints', () => {
+       expectActionIssue(
+         minValue(123n, 'message'),
+         { ...baseInfo, expected: '>=123', requirement: 123n },
+@@ -404,7 +404,7 @@ describe('minValue', () => {
+       );
+     });
+ 
+-    test('for invalid booleans', () => {
++    test('minValue.ok.min-number for invalid booleans', () => {
+       expectActionIssue(
+         minValue(true, 'message'),
+         { ...baseInfo, expected: '>=true', requirement: true },
+@@ -412,7 +412,7 @@ describe('minValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-booleans', () => {
++    test('minValue.ok.min-number for invalid non-booleans', () => {
+       expectActionIssue(
+         minValue(false, 'message'),
+         { ...baseInfo, expected: '>=false', requirement: false },
+@@ -461,7 +461,7 @@ describe('minValue', () => {
+       );
+     });
+ 
+-    test('for invalid dates', () => {
++    test('minValue.ok.min-number for invalid dates', () => {
+       const date = new Date();
+       expectActionIssue(
+         minValue<Date, Date, 'message'>(date, 'message'),
+@@ -471,7 +471,7 @@ describe('minValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-dates', () => {
++    test('minValue.ok.min-number for invalid non-dates', () => {
+       const date1 = new Date(123);
+       expectActionIssue(
+         minValue(date1, 'message'),
+@@ -536,7 +536,7 @@ describe('minValue', () => {
+       );
+     });
+ 
+-    test('for invalid numbers', () => {
++    test('minValue.err.min-number-below for invalid numbers', () => {
+       expectActionIssue(
+         minValue(10, 'message'),
+         { ...baseInfo, expected: '>=10', requirement: 10 },
+@@ -544,7 +544,7 @@ describe('minValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-numbers', () => {
++    test('minValue.ok.min-number for invalid non-numbers', () => {
+       expectActionIssue(
+         minValue(123, 'message'),
+         { ...baseInfo, expected: '>=123', requirement: 123 },
+@@ -602,7 +602,7 @@ describe('minValue', () => {
+       );
+     });
+ 
+-    test('for invalid strings', () => {
++    test('minValue.ok.min-number for invalid strings', () => {
+       expectActionIssue(
+         minValue('2024', 'message'),
+         { ...baseInfo, expected: '>="2024"', requirement: '2024' },
+@@ -610,7 +610,7 @@ describe('minValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-strings', () => {
++    test('minValue.ok.min-number for invalid non-strings', () => {
+       expectActionIssue(
+         minValue('123', 'message'),
+         { ...baseInfo, expected: '>="123"', requirement: '123' },
+diff --git a/library/src/actions/multipleOf/multipleOf.test.ts b/library/src/actions/multipleOf/multipleOf.test.ts
+index 6d18736..b113263 100644
+--- a/library/src/actions/multipleOf/multipleOf.test.ts
++++ b/library/src/actions/multipleOf/multipleOf.test.ts
+@@ -15,7 +15,7 @@ describe('multipleOf', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('multipleOf.ok.even-number with undefined message', () => {
+       const action: MultipleOfAction<number, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -24,14 +24,14 @@ describe('multipleOf', () => {
+       expect(multipleOf(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('multipleOf.ok.even-number with string message', () => {
+       expect(multipleOf(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies MultipleOfAction<number, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('multipleOf.ok.even-number with function message', () => {
+       const message = () => 'message';
+       expect(multipleOf(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -41,7 +41,7 @@ describe('multipleOf', () => {
+   });
+ 
+   describe('should return dataset without issues', () => {
+-    test('for untyped inputs', () => {
++    test('multipleOf.ok.even-number for untyped inputs', () => {
+       const issues: [NumberIssue] = [
+         {
+           kind: 'schema',
+@@ -61,11 +61,11 @@ describe('multipleOf', () => {
+       });
+     });
+ 
+-    test('for valid numbers', () => {
++    test('multipleOf.ok.even-number for valid numbers', () => {
+       expectNoActionIssue(multipleOf(5), [-15, -10, -5, 0, 5, 10, 15]);
+     });
+ 
+-    test('for valid bigints', () => {
++    test('multipleOf.ok.even-number for valid bigints', () => {
+       expectNoActionIssue(multipleOf(5n), [-15n, -10n, -5n, 0n, 5n, 10n, 15n]);
+     });
+   });
+@@ -78,7 +78,7 @@ describe('multipleOf', () => {
+       message: 'message',
+     } as const;
+ 
+-    test('for invalid numbers', () => {
++    test('multipleOf.err.not-multiple for invalid numbers', () => {
+       expectActionIssue(
+         multipleOf(5, 'message'),
+         { ...baseIssue, requirement: 5 },
+@@ -86,7 +86,7 @@ describe('multipleOf', () => {
+       );
+     });
+ 
+-    test('for infinity', () => {
++    test('multipleOf.ok.even-number for infinity', () => {
+       expectActionIssue(
+         multipleOf(5, 'message'),
+         { ...baseIssue, requirement: 5 },
+@@ -94,7 +94,7 @@ describe('multipleOf', () => {
+       );
+     });
+ 
+-    test('for NaN', () => {
++    test('multipleOf.ok.even-number for NaN', () => {
+       expectActionIssue(
+         multipleOf(5, 'message'),
+         { ...baseIssue, requirement: 5 },
+@@ -102,7 +102,7 @@ describe('multipleOf', () => {
+       );
+     });
+ 
+-    test('for invalid bigints', () => {
++    test('multipleOf.ok.even-number for invalid bigints', () => {
+       expectActionIssue(
+         multipleOf(5n, 'message'),
+         { ...baseIssue, requirement: 5n },
+diff --git a/library/src/actions/nonEmpty/nonEmpty.test.ts b/library/src/actions/nonEmpty/nonEmpty.test.ts
+index d019a7b..e17595e 100644
+--- a/library/src/actions/nonEmpty/nonEmpty.test.ts
++++ b/library/src/actions/nonEmpty/nonEmpty.test.ts
+@@ -18,7 +18,7 @@ describe('nonEmpty', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('nonEmpty.ok.non-empty-string with undefined message', () => {
+       const action: NonEmptyAction<string, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -27,14 +27,14 @@ describe('nonEmpty', () => {
+       expect(nonEmpty(undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('nonEmpty.ok.non-empty-string with string message', () => {
+       expect(nonEmpty('message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies NonEmptyAction<string, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('nonEmpty.ok.non-empty-string with function message', () => {
+       const message = () => 'message';
+       expect(nonEmpty(message)).toStrictEqual({
+         ...baseAction,
+@@ -46,7 +46,7 @@ describe('nonEmpty', () => {
+   describe('should return dataset without issues', () => {
+     const action = nonEmpty();
+ 
+-    test('for untyped inputs', () => {
++    test('nonEmpty.ok.non-empty-string for untyped inputs', () => {
+       const issues: [StringIssue] = [
+         {
+           kind: 'schema',
+@@ -66,11 +66,11 @@ describe('nonEmpty', () => {
+       });
+     });
+ 
+-    test('for valid strings', () => {
++    test('nonEmpty.ok.non-empty-string for valid strings', () => {
+       expectNoActionIssue(action, [' ', '\n', 'foo', 'foobarbaz123']);
+     });
+ 
+-    test('for valid arrays', () => {
++    test('nonEmpty.ok.non-empty-array for valid arrays', () => {
+       expectNoActionIssue(action, [[null], [1, 2, 3, 4, 6], Array(999)]);
+     });
+   });
+@@ -84,11 +84,11 @@ describe('nonEmpty', () => {
+       message: 'message',
+     };
+ 
+-    test('for invalid strings', () => {
++    test('nonEmpty.err.empty-input for invalid strings', () => {
+       expectActionIssue(action, baseIssue, [''], () => '0');
+     });
+ 
+-    test('for invalid arrays', () => {
++    test('nonEmpty.err.empty-input for invalid arrays', () => {
+       expectActionIssue(action, baseIssue, [[]], () => '0');
+     });
+   });
+diff --git a/library/src/actions/notLength/notLength.test.ts b/library/src/actions/notLength/notLength.test.ts
+index 91d9d48..f0fb70c 100644
+--- a/library/src/actions/notLength/notLength.test.ts
++++ b/library/src/actions/notLength/notLength.test.ts
+@@ -19,7 +19,7 @@ describe('notLength', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('notLength.ok.string-not-length with undefined message', () => {
+       const action: NotLengthAction<string, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -28,14 +28,14 @@ describe('notLength', () => {
+       expect(notLength(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('notLength.ok.string-not-length with string message', () => {
+       expect(notLength(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies NotLengthAction<string, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('notLength.ok.string-not-length with function message', () => {
+       const message = () => 'message';
+       expect(notLength(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -47,7 +47,7 @@ describe('notLength', () => {
+   describe('should return dataset without issues', () => {
+     const action = notLength(3);
+ 
+-    test('for untyped inputs', () => {
++    test('notLength.ok.string-not-length for untyped inputs', () => {
+       const issues: [StringIssue] = [
+         {
+           kind: 'schema',
+@@ -67,7 +67,7 @@ describe('notLength', () => {
+       });
+     });
+ 
+-    test('for valid strings', () => {
++    test('notLength.ok.string-not-length for valid strings', () => {
+       expectNoActionIssue(action, [
+         '',
+         ' ',
+@@ -86,7 +86,7 @@ describe('notLength', () => {
+       ]);
+     });
+ 
+-    test('for valid arrays', () => {
++    test('notLength.ok.array-not-length for valid arrays', () => {
+       expectNoActionIssue(action, [
+         [],
+         [1],
+@@ -110,7 +110,7 @@ describe('notLength', () => {
+       requirement: 3,
+     };
+ 
+-    test('for invalid strings', () => {
++    test('notLength.err.length-equal for invalid strings', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+@@ -128,7 +128,7 @@ describe('notLength', () => {
+       );
+     });
+ 
+-    test('for invalid arrays', () => {
++    test('notLength.err.length-equal for invalid arrays', () => {
+       expectActionIssue(
+         action,
+         baseIssue,
+diff --git a/library/src/actions/notValue/notValue.test.ts b/library/src/actions/notValue/notValue.test.ts
+index d47e87a..a0dcb73 100644
+--- a/library/src/actions/notValue/notValue.test.ts
++++ b/library/src/actions/notValue/notValue.test.ts
+@@ -16,7 +16,7 @@ describe('notValue', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('notValue.ok.not-number with undefined message', () => {
+       const action: NotValueAction<number, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -25,14 +25,14 @@ describe('notValue', () => {
+       expect(notValue(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('notValue.ok.not-number with string message', () => {
+       expect(notValue(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies NotValueAction<number, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('notValue.ok.not-number with function message', () => {
+       const message = () => 'message';
+       expect(notValue(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -42,7 +42,7 @@ describe('notValue', () => {
+   });
+ 
+   describe('should return dataset with issues', () => {
+-    test('for untyped inputs', () => {
++    test('notValue.ok.not-number for untyped inputs', () => {
+       const issues: [NumberIssue] = [
+         {
+           kind: 'schema',
+@@ -62,11 +62,11 @@ describe('notValue', () => {
+       });
+     });
+ 
+-    test('for valid bigints', () => {
++    test('notValue.ok.not-number for valid bigints', () => {
+       expectNoActionIssue(notValue(10n), [-123n, 0n, 9n, 11n, 123n]);
+     });
+ 
+-    test('for valid non-bigints', () => {
++    test('notValue.ok.not-number for valid non-bigints', () => {
+       expectNoActionIssue(notValue(10n), [
+         9,
+         11,
+@@ -103,12 +103,12 @@ describe('notValue', () => {
+       ]);
+     });
+ 
+-    test('for valid booleans', () => {
++    test('notValue.ok.not-number for valid booleans', () => {
+       expectNoActionIssue(notValue(true), [false]);
+       expectNoActionIssue(notValue(false), [true]);
+     });
+ 
+-    test('for valid non-booleans', () => {
++    test('notValue.ok.not-number for valid non-booleans', () => {
+       expectNoActionIssue(notValue(true), [
+         0n,
+         0,
+@@ -151,7 +151,7 @@ describe('notValue', () => {
+       ]);
+     });
+ 
+-    test('for valid dates', () => {
++    test('notValue.ok.not-number for valid dates', () => {
+       const date = new Date();
+       const nextDate = new Date(+date + 1);
+       expectNoActionIssue(notValue(date), [
+@@ -172,7 +172,7 @@ describe('notValue', () => {
+       ]);
+     });
+ 
+-    test('for valid non-dates', () => {
++    test('notValue.ok.not-number for valid non-dates', () => {
+       expectNoActionIssue(notValue(new Date(10)), [
+         9n,
+         11n,
+@@ -211,7 +211,7 @@ describe('notValue', () => {
+       ]);
+     });
+ 
+-    test('for valid numbers', () => {
++    test('notValue.ok.not-number for valid numbers', () => {
+       expectNoActionIssue(notValue(10), [
+         -Infinity,
+         Number.MIN_VALUE,
+@@ -226,7 +226,7 @@ describe('notValue', () => {
+       ]);
+     });
+ 
+-    test('for valid non-numbers', () => {
++    test('notValue.ok.not-number for valid non-numbers', () => {
+       expectNoActionIssue(notValue(10), [
+         9n,
+         11n,
+@@ -260,7 +260,7 @@ describe('notValue', () => {
+       ]);
+     });
+ 
+-    test('for valid strings', () => {
++    test('notValue.ok.not-number for valid strings', () => {
+       expectNoActionIssue(notValue('2024'), [
+         '202',
+         '024',
+@@ -275,7 +275,7 @@ describe('notValue', () => {
+       ]);
+     });
+ 
+-    test('for valid non-strings', () => {
++    test('notValue.ok.not-number for valid non-strings', () => {
+       expectNoActionIssue(notValue('10'), [
+         9n,
+         11n,
+@@ -303,7 +303,7 @@ describe('notValue', () => {
+     const getReceived = (value: unknown): string =>
+       value instanceof Date ? value.toJSON() : _stringify(value);
+ 
+-    test('for invalid bigints', () => {
++    test('notValue.ok.not-number for invalid bigints', () => {
+       expectActionIssue(
+         notValue(123n, 'message'),
+         { ...baseInfo, expected: '!123', requirement: 123n },
+@@ -311,7 +311,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-bigints', () => {
++    test('notValue.ok.not-number for invalid non-bigints', () => {
+       expectActionIssue(
+         notValue(123n, 'message'),
+         { ...baseInfo, expected: '!123', requirement: 123n },
+@@ -332,7 +332,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid booleans', () => {
++    test('notValue.ok.not-number for invalid booleans', () => {
+       expectActionIssue(
+         notValue(true, 'message'),
+         { ...baseInfo, expected: '!true', requirement: true },
+@@ -345,7 +345,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-booleans', () => {
++    test('notValue.ok.not-number for invalid non-booleans', () => {
+       expectActionIssue(
+         notValue(true, 'message'),
+         { ...baseInfo, expected: '!true', requirement: true },
+@@ -360,7 +360,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid dates', () => {
++    test('notValue.ok.not-number for invalid dates', () => {
+       const date = new Date();
+       expectActionIssue(
+         notValue(date, 'message'),
+@@ -383,7 +383,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-dates', () => {
++    test('notValue.ok.not-number for invalid non-dates', () => {
+       const date1 = new Date(123);
+       expectActionIssue(
+         notValue(date1, 'message'),
+@@ -407,7 +407,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid numbers', () => {
++    test('notValue.err.value-equal for invalid numbers', () => {
+       expectActionIssue(
+         notValue(123, 'message'),
+         { ...baseInfo, expected: '!123', requirement: 123 },
+@@ -415,7 +415,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid NaN', () => {
++    test('notValue.ok.not-number for invalid NaN', () => {
+       expectActionIssue(
+         notValue(NaN, 'message'),
+         { ...baseInfo, expected: '!NaN', requirement: NaN },
+@@ -423,7 +423,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-numbers', () => {
++    test('notValue.ok.not-number for invalid non-numbers', () => {
+       expectActionIssue(
+         notValue(123, 'message'),
+         { ...baseInfo, expected: '!123', requirement: 123 },
+@@ -444,7 +444,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid strings', () => {
++    test('notValue.ok.not-number for invalid strings', () => {
+       expectActionIssue(
+         notValue('2024', 'message'),
+         { ...baseInfo, expected: '!"2024"', requirement: '2024' },
+@@ -452,7 +452,7 @@ describe('notValue', () => {
+       );
+     });
+ 
+-    test('for invalid non-strings', () => {
++    test('notValue.ok.not-number for invalid non-strings', () => {
+       expectActionIssue(
+         notValue('123', 'message'),
+         { ...baseInfo, expected: '!"123"', requirement: '123' },
+diff --git a/library/src/actions/value/value.test.ts b/library/src/actions/value/value.test.ts
+index cef4056..6dad729 100644
+--- a/library/src/actions/value/value.test.ts
++++ b/library/src/actions/value/value.test.ts
+@@ -16,7 +16,7 @@ describe('value', () => {
+       '~run': expect.any(Function),
+     };
+ 
+-    test('with undefined message', () => {
++    test('value.ok.exact-number with undefined message', () => {
+       const action: ValueAction<number, 5, undefined> = {
+         ...baseAction,
+         message: undefined,
+@@ -25,14 +25,14 @@ describe('value', () => {
+       expect(value(5, undefined)).toStrictEqual(action);
+     });
+ 
+-    test('with string message', () => {
++    test('value.ok.exact-number with string message', () => {
+       expect(value(5, 'message')).toStrictEqual({
+         ...baseAction,
+         message: 'message',
+       } satisfies ValueAction<number, 5, string>);
+     });
+ 
+-    test('with function message', () => {
++    test('value.ok.exact-number with function message', () => {
+       const message = () => 'message';
+       expect(value(5, message)).toStrictEqual({
+         ...baseAction,
+@@ -42,7 +42,7 @@ describe('value', () => {
+   });
+ 
+   describe('should return dataset without issues', () => {
+-    test('for untyped inputs', () => {
++    test('value.ok.exact-number for untyped inputs', () => {
+       const issues: [NumberIssue] = [
+         {
+           kind: 'schema',
+@@ -62,11 +62,11 @@ describe('value', () => {
+       });
+     });
+ 
+-    test('for valid bigints', () => {
++    test('value.ok.exact-number for valid bigints', () => {
+       expectNoActionIssue(value(123n), [123n, BigInt(123), BigInt('123')]);
+     });
+ 
+-    test('for valid non-bigints', () => {
++    test('value.ok.exact-number for valid non-bigints', () => {
+       expectNoActionIssue(value(123n), [
+         123,
+         123.0,
+@@ -87,12 +87,12 @@ describe('value', () => {
+       ]);
+     });
+ 
+-    test('for valid booleans', () => {
++    test('value.ok.exact-number for valid booleans', () => {
+       expectNoActionIssue(value(true), [true]);
+       expectNoActionIssue(value(false), [false]);
+     });
+ 
+-    test('for valid non-booleans', () => {
++    test('value.ok.exact-number for valid non-booleans', () => {
+       expectNoActionIssue(value(true), [
+         1,
+         1.0,
+@@ -115,7 +115,7 @@ describe('value', () => {
+       ]);
+     });
+ 
+-    test('for valid dates', () => {
++    test('value.ok.exact-number for valid dates', () => {
+       const date = new Date();
+       expectNoActionIssue(value(date), [
+         date,
+@@ -133,7 +133,7 @@ describe('value', () => {
+       ]);
+     });
+ 
+-    test('for valid non-dates', () => {
++    test('value.ok.exact-number for valid non-dates', () => {
+       expectNoActionIssue(value(new Date(123)), [
+         123,
+         123.0,
+@@ -164,15 +164,15 @@ describe('value', () => {
+       ]);
+     });
+ 
+-    test('for valid numbers', () => {
++    test('value.ok.exact-number for valid numbers', () => {
+       expectNoActionIssue(value(123), [123, 123.0, Number('123')]);
+     });
+ 
+-    test('for valid NaN', () => {
++    test('value.ok.exact-number for valid NaN', () => {
+       expectNoActionIssue(value(NaN), [NaN, Number.NaN]);
+     });
+ 
+-    test('for valid non-numbers', () => {
++    test('value.ok.exact-number for valid non-numbers', () => {
+       expectNoActionIssue(value(123), [
+         123n,
+         '123',
+@@ -193,11 +193,11 @@ describe('value', () => {
+       ]);
+     });
+ 
+-    test('for valid strings', () => {
++    test('value.ok.exact-number for valid strings', () => {
+       expectNoActionIssue(value('2024'), ['2024']);
+     });
+ 
+-    test('for valid non-strings', () => {
++    test('value.ok.exact-number for valid non-strings', () => {
+       expectNoActionIssue(value('1'), [1n, 1, 1.0, true, new Date(1)]);
+       expectNoActionIssue(value('0'), [0n, 0, 0.0, false, new Date(0)]);
+     });
+@@ -213,7 +213,7 @@ describe('value', () => {
+     const getReceived = (value: unknown): string =>
+       value instanceof Date ? value.toJSON() : _stringify(value);
+ 
+-    test('for invalid bigints', () => {
++    test('value.ok.exact-number for invalid bigints', () => {
+       expectActionIssue(
+         value(10n, 'message'),
+         { ...baseInfo, expected: '10', requirement: 10n },
+@@ -221,7 +221,7 @@ describe('value', () => {
+       );
+     });
+ 
+-    test('for invalid non-bigints', () => {
++    test('value.ok.exact-number for invalid non-bigints', () => {
+       expectActionIssue(
+         value(10n, 'message'),
+         { ...baseInfo, expected: '10', requirement: 10n },
+@@ -257,7 +257,7 @@ describe('value', () => {
+       );
+     });
+ 
+-    test('for invalid booleans', () => {
++    test('value.ok.exact-number for invalid booleans', () => {
+       expectActionIssue(
+         value(true, 'message'),
+         { ...baseInfo, expected: 'true', requirement: true },
+@@ -270,7 +270,7 @@ describe('value', () => {
+       );
+     });
+ 
+-    test('for invalid non-booleans', () => {
++    test('value.ok.exact-number for invalid non-booleans', () => {
+       expectActionIssue(
+         value(true, 'message'),
+         { ...baseInfo, expected: 'true', requirement: true },
+@@ -297,7 +297,7 @@ describe('value', () => {
+       );
+     });
+ 
+-    test('for invalid dates', () => {
++    test('value.ok.exact-number for invalid dates', () => {
+       const date = new Date();
+       expectActionIssue(
+         value<Date, Date, 'message'>(date, 'message'),
+@@ -307,7 +307,7 @@ describe('value', () => {
+       );
+     });
+ 
+-    test('for invalid non-dates', () => {
++    test('value.ok.exact-number for invalid non-dates', () => {
+       const date1 = new Date(10);
+       expectActionIssue(
+         value(date1, 'message'),
+@@ -346,7 +346,7 @@ describe('value', () => {
+       );
+     });
+ 
+-    test('for invalid numbers', () => {
++    test('value.err.value-differs for invalid numbers', () => {
+       expectActionIssue(
+         value(10, 'message'),
+         { ...baseInfo, expected: '10', requirement: 10 },
+@@ -365,7 +365,7 @@ describe('value', () => {
+       );
+     });
+ 
+-    test('for invalid non-numbers', () => {
++    test('value.ok.exact-number for invalid non-numbers', () => {
+       expectActionIssue(
+         value(10, 'message'),
+         { ...baseInfo, expected: '10', requirement: 10 },
+@@ -386,7 +386,7 @@ describe('value', () => {
+       );
+     });
+ 
+-    test('for invalid strings', () => {
++    test('value.ok.exact-number for invalid strings', () => {
+       expectActionIssue(
+         value('2024', 'message'),
+         { ...baseInfo, expected: '"2024"', requirement: '2024' },
+@@ -405,7 +405,7 @@ describe('value', () => {
+       );
+     });
+ 
+-    test('for invalid non-strings', () => {
++    test('value.ok.exact-number for invalid non-strings', () => {
+       expectActionIssue(
+         value('10', 'message'),
+         { ...baseInfo, expected: '"10"', requirement: '10' },
