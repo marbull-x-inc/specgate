@@ -798,3 +798,85 @@ it("tooManyRetries.err.retries", () => {
     expect(found.map((f) => f.unit)).toEqual(["tooManyRetries", "tooManyRetries"]);
   });
 });
+
+describe("benchmark 0001 false positives (#65, #66, #68, #69)", () => {
+  const decisionsOf = (report: Awaited<ReturnType<typeof untested>>["report"], id: string) =>
+    report.units.find((u) => u.id === id)?.decisions.map((d) => `${d.kind}:${d.values.join("|")}`);
+
+  test("#65: a string in a type position is not a decision; the same string returned still is", async () => {
+    const { report } = await untested({
+      "src/join.ts": `type Opts = { normalize?: boolean };
+type Cased<T, N> = T extends string ? (N extends true ? Lowercase<T> : T) : never;
+/** @guarantee ok.join joins the parts */
+export function join<T extends string, O extends Opts>(parts: T[], opts?: O): Cased<T, O["normalize"]> {
+  return parts.join("") as Cased<T, O["normalize"]>;
+}
+/** @guarantee ok.name returns a name */
+export function name(): string {
+  return "normalize";
+}
+`,
+    });
+    expect(decisionsOf(report, "join")).toEqual([]);
+    expect(decisionsOf(report, "name")).toEqual(["output:normalize"]);
+  });
+
+  test("#66: a test that parses '10 years' pins case 'years'; '1 year' does not pin 'years'", async () => {
+    const source = `/** @guarantee ok.units accepts "years" and "hours" as units */
+export function parse(str: string): number {
+  const m = /^(\\d+) *(years|hours)$/.exec(str);
+  switch (m?.[2] ?? "") {
+    case "years": return Number(m?.[1]) * 365;
+    case "hours": return Number(m?.[1]) / 24;
+    default: return NaN;
+  }
+}
+`;
+    const { untested: found } = await untested({
+      "src/parse.ts": source,
+      "tests/parse.test.ts": `import { test, expect } from "bun:test";
+import { parse } from "../src/parse.ts";
+test("parse.ok.units parses", () => { expect(parse("10 years")).toBe(3650); expect(parse("1 hour")).toBeNaN(); });
+`,
+    });
+    expect(found.map((f) => f.message.match(/match "(\w+)"/)?.[1])).toEqual(["hours"]);
+  });
+
+  test("#68: a replacement pattern and index arithmetic are not decisions; other arithmetic is", async () => {
+    const { report } = await untested({
+      "src/forms.ts": `/** @guarantee ok.kebab converts to kebab case */
+export function kebab(str: string): string {
+  return str.replace(/([a-z\\d])([A-Z])/g, "$1-$2").toLowerCase();
+}
+/** @guarantee ok.slots fills every second slot */
+export function slots(values: string[]): string[] {
+  const out: string[] = [];
+  values.forEach((v, i) => { const index = i * 2 + 2; out[index] = v; out[i * 3 + 4] = v; });
+  return out;
+}
+/** @guarantee ok.days returns days */
+export function days(hours: number): number {
+  const n = hours / 24;
+  return n;
+}
+`,
+    });
+    expect(decisionsOf(report, "kebab")).toEqual([]);
+    expect(decisionsOf(report, "slots")).toEqual([]);
+    expect(decisionsOf(report, "days")).toEqual(["constant:24"]);
+  });
+
+  test("#69: an array literal probed in place gives member decisions, not output", async () => {
+    const { report } = await untested({
+      "src/quote.ts": `/** @guarantee ok.quote quotes everything except keywords */
+export function quote(item: string): string {
+  return ["self", "src"].includes(item) ? item : \`"\${item}"\`;
+}
+`,
+    });
+    const quote = report.units.find((u) => u.id === "quote");
+    expect(decisionsOf(report, "quote")).toEqual(["member:self", "member:src"]);
+    expect(quote?.decisions[0]?.collection?.name).toBe("inline list at line 3");
+    expect(quote?.decisions[0]?.probe).toBe("exact");
+  });
+});
