@@ -550,6 +550,7 @@ export const RULE_IDS = [
   "mutation-report-unreadable",
   "accept-tag-invalid",
   "accept-tag-unused",
+  "baseline-stale",
 ] as const;
 export type RuleId = (typeof RULE_IDS)[number];
 
@@ -581,6 +582,7 @@ export const DEFAULT_SEVERITIES: Record<RuleId, RuleSeverity> = {
   "mutation-report-unreadable": "warn",
   "accept-tag-invalid": "fail",
   "accept-tag-unused": "warn",
+  "baseline-stale": "info",
 };
 
 export function severityOf(config: Config, rule: RuleId): RuleSeverity {

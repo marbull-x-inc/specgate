@@ -305,6 +305,13 @@ export interface Report {
   tool: { name: string; version: string };
   generatedAt: string;
   root: string;
+  /**
+   * The commit the analysed checkout was on, read from `.git` (absent outside a git checkout).
+   * A baseline from another revision may come from another branch; see `baseline-stale`.
+   */
+  revision?: string;
+  /** Hash of the resolved config (without `root`); a baseline under another config is stale too. */
+  configHash?: string;
   mode: "advisory" | "blocking";
   units: Unit[];
   vocabulary: { entities: Entity[]; ports: PortDecl[] };

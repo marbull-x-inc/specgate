@@ -229,6 +229,8 @@ export const zReport = z.object({
   tool: z.object({ name: z.string(), version: z.string() }),
   generatedAt: z.string(),
   root: z.string(),
+  revision: z.string().optional().describe("The commit the analysed checkout was on, read from .git"),
+  configHash: z.string().optional().describe("Hash of the resolved config, without root"),
   mode: z.enum(["advisory", "blocking"]),
   units: z.array(zUnit),
   vocabulary: z.object({ entities: z.array(zEntity), ports: z.array(zPortDecl) }),

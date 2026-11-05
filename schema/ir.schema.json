@@ -31,6 +31,14 @@
     "root": {
       "type": "string"
     },
+    "revision": {
+      "description": "The commit the analysed checkout was on, read from .git",
+      "type": "string"
+    },
+    "configHash": {
+      "description": "Hash of the resolved config, without root",
+      "type": "string"
+    },
     "mode": {
       "type": "string",
       "enum": [
