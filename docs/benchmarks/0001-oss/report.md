@@ -150,8 +150,10 @@ Where the 74 unexplained survivors are:
 - **zustand, 18:** all in `persistImpl`. `persist` is exported as
   `persistImpl as unknown as Persist`; specgate makes a unit with no body, so neither decisions
   nor mutants reach it (issue candidate 2).
-- **ufo, 4:** two default parameter values (`input = ""`) outside the unit's line range, one
-  module-level `Symbol.for` key, one NoCoverage block counted on the unit without a finding.
+- **ufo, 4:** three NoCoverage mutants in `parseAuth` and `parseQuery`, which have no linked test
+  that specgate read, so 0003 counts them on the unit and leaves them to `guarantee-no-test`; one
+  module-level `Symbol.for` key. (`parseQuery`'s one link is in `test/types.test-d.ts`, which the
+  config's `tests.include: ["test/**/*.test.ts"]` does not read.)
 - **hono, 1; scule, 1:** module-level constants (`DEFAULT_OPTIONS`, the `titleCase` minor-word
   regex). Documented limit of 0003.
 
@@ -241,15 +243,17 @@ Found during the benchmark, not fixed (protocol: the released tool is not change
    `match` decisions taken from a parsed input would remove them.
 6. **A plain-identifier `describe` is read as the target class.** `describe("cleanup", …)` turned
    `createStore.ok.api …` into the key `cleanup#createStore.ok.api` and a `test-orphan`.
-7. **Mutants in parameter defaults are not mapped.** `parseURL(input = "")`: the default is outside
-   the unit's line range.
-8. **Implementation arithmetic as `decision-unspecified`.** `i * 2 + 2` (an array index) and
+7. **Implementation arithmetic as `decision-unspecified`.** `i * 2 + 2` (an array index) and
    `'$1-$2'` (a regex replacement) are reported as unnamed values a contract should state; both were
    pinned and neither is something a caller can observe directly.
-9. **An inline array probe is an `output`.** `['self', 'src'].includes(item)` gives two `output`
+8. **An inline array probe is an `output`.** `['self', 'src'].includes(item)` gives two `output`
    decisions rather than `member` decisions.
-10. **An operation's own name in prose is unresolved.** "joins the parts by camelCase" in
-    `camelCase`'s guarantee gives `identifier-unresolved`.
+9. **An operation's own name in prose is unresolved.** "joins the parts by camelCase" in
+   `camelCase`'s guarantee gives `identifier-unresolved`.
+
+An earlier version of this list had a tenth candidate, "mutants in parameter defaults are not
+mapped". It was wrong: those mutants are inside the unit's range, in units with no linked test
+(see section 4).
 
 ## Reproducing
 
