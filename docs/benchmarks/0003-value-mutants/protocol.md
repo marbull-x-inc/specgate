@@ -211,3 +211,14 @@ With `--concurrency` above 1, the runner's sandbox copy failed on a symbolic lin
 links with `symlinkSync(readlinkSync(…))`. Site selection and statuses are unchanged. Affected:
 valibot (the runner crashed before any mutant ran); its runner step is repeated. defu, neverthrow
 and cac had no such link and are not repeated.
+
+### 5. Runner fix: whole-suite runs one at a time (2026-11-06, during the runs)
+
+In es-toolkit, 89 of 113 value mutants have no Stryker mutant whose `coveredBy` narrows the tests
+(sites in module-level constants, whose mutants are static), so the runner runs the whole command
+for them, as designed. With `--concurrency 15`, fifteen whole-suite vitest runs ran at once; each
+vitest already uses every core, and 85 of them passed the timeout. Those `Timeout` statuses came
+from the harness, not from the code. The runner now runs whole-command runs one at a time; runs
+of selected test files stay parallel. Selection and status rules are unchanged. es-toolkit's run
+was stopped and is repeated, and every project not yet run uses the fixed runner. defu,
+neverthrow and cac had no `Timeout` and are not repeated.

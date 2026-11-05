@@ -294,6 +294,23 @@ export async function runValueMutants(
 
   const results: RunResult[] = new Array(list.mutants.length);
   let next = 0;
+  // Runs of the whole command go one at a time: a test runner already spreads one run over every
+  // core, so several at once only make each slower (and past the timeout). Runs of selected test
+  // files stay parallel.
+  let wholeRun: Promise<void> = Promise.resolve();
+  const exclusive = async <T>(task: () => Promise<T>): Promise<T> => {
+    const previous = wholeRun;
+    let release = (): void => {};
+    wholeRun = new Promise((r) => {
+      release = r;
+    });
+    await previous;
+    try {
+      return await task();
+    } finally {
+      release();
+    }
+  };
   const work = async (dir: string): Promise<void> => {
     for (;;) {
       const index = next++;
@@ -320,7 +337,9 @@ export async function runValueMutants(
     dirty.set(path, original);
     try {
       writeFileSync(path, mutatedText(text, m));
-      const { code, timedOut } = await runCommand(commandFor(options.command, files), dir, timeoutMs);
+      const run = (): Promise<{ code: number | null; timedOut: boolean }> =>
+        runCommand(commandFor(options.command, files), dir, timeoutMs);
+      const { code, timedOut } = files.length === 0 ? await exclusive(run) : await run();
       const coveredBy = "files" in selection ? { coveredBy: selection.tests } : {};
       if (timedOut) return { status: "Timeout", ...coveredBy };
       return code === 0
