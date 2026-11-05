@@ -99,4 +99,44 @@ export class Uc {
     expect(run?.injectedPorts).toEqual([{ member: "repo", type: "Repo", members: ["save", "load"] }]);
     expect(report.findings.filter((f) => f.rule === "uses-mismatch")).toEqual([]);
   });
+
+  // #63: hooks libraries export each operation as the module's default.
+  const DEFAULTS = {
+    "counter.ts": `
+/** @guarantee ok.initial the value starts at initialValue */
+const useCounter = (initialValue = 0): number => (initialValue > 10 ? 10 : initialValue);
+export default useCounter;
+`,
+    "bool.ts": `
+/** @guarantee ok.default the state starts at defaultValue */
+export default function useBoolean(defaultValue = false): boolean { return defaultValue; }
+`,
+  };
+
+  test("a declaration exported only as default is a unit named after the declaration", async () => {
+    const dir = project(DEFAULTS);
+    const report = await unitsOf(dir, { surface: { include: ["src/**/*.ts"], exclude: [], mode: "exported" } });
+    expect(report.units.map((u) => u.id).sort()).toEqual(["useBoolean", "useCounter"]);
+    expect(report.units.find((u) => u.id === "useCounter")?.decisions.map((d) => d.values)).toContainEqual(["10"]);
+    const misplaced = report.findings.filter((f) => f.rule === "guarantee-on-non-unit" || f.rule === "surface-empty");
+    expect(misplaced).toEqual([]);
+  });
+
+  test("a default import counts as a reference, and test keys name the declaration", async () => {
+    const dir = project({
+      ...DEFAULTS,
+      "main.ts": `import useCounter from "./counter.ts";\nimport useBoolean from "./bool.ts";\nexport const r = [useCounter(1), useBoolean()];\n`,
+    });
+    mkdirSync(join(dir, "tests"), { recursive: true });
+    writeFileSync(
+      join(dir, "tests", "counter.test.ts"),
+      `import { test, expect } from "bun:test";\nimport useCounter from "../src/counter.ts";\ntest("useCounter.ok.initial starts at the given value", () => { expect(useCounter(3)).toBe(3); });\n`,
+    );
+    const report = await unitsOf(dir);
+    expect(report.units.map((u) => u.id).sort()).toEqual(["useBoolean", "useCounter"]);
+    expect(report.units.find((u) => u.id === "useCounter")?.referencedBy).toEqual(["src/main.ts"]);
+    const found = report.findings.map((f) => `${f.rule} ${f.guarantee ?? ""}`);
+    expect(found).not.toContain("guarantee-no-test useCounter.ok.initial");
+    expect(found.filter((f) => f.startsWith("test-orphan"))).toEqual([]);
+  });
 });
