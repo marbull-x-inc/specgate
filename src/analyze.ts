@@ -16,7 +16,7 @@ import { evaluateRules } from "./rules/index.ts";
 import { sha256 } from "./util/hash.ts";
 import { expandGlobs, fileExists, globToRegExp } from "./util/paths.ts";
 
-export const TOOL = { name: "specgate", version: "0.5.0" } as const;
+export const TOOL = { name: "specgate", version: "0.5.1" } as const;
 
 export interface Analysis {
   report: Report;
