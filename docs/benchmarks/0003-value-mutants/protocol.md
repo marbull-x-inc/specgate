@@ -234,3 +234,14 @@ The 19 entries behind these failures were dropped (1232 → 1213 links); one mor
 `set value before custom onChange`, failed only through the wrong insertion and keeps its link.
 With the rest re-applied, all 1830 tests pass. The patch was refrozen. Other projects' suites
 passed at the first step and are unchanged.
+
+### 7. jest projects: watchman off, built-package test excluded (2026-11-06, during the runs)
+
+The baseline check of cron-parser and express-rate-limit was wrong: jest could not start watchman
+(it cannot write its state directory in the sandbox), printed the error and exited 0 without
+running a test, and that exit code was read as green. Stryker's initial test run then timed out
+on cron-parser. Both now run with `--watchman=false` (Stryker: `jest.config.watchman: false`),
+as react-hook-form already did, and their baselines were re-checked: cron-parser 798 tests pass;
+express-rate-limit passes 249 tests once `test/library/types-test.ts` is excluded, which reads
+the built `dist/index.d.ts` (the same kind of check as es-toolkit's `check-dist`, deviation 1).
+Both are run from the start; react-hook-form, not yet run, uses the same settings.

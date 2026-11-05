@@ -18,6 +18,14 @@
     "@stryker-mutator/jest-runner"
   ],
   "jest": {
-    "configFile": "jest.config.json"
+    "configFile": "jest.config.json",
+    "config": {
+      "watchman": false,
+      "testPathIgnorePatterns": [
+        "/node_modules/",
+        "/.stryker-tmp/",
+        "types-test"
+      ]
+    }
   }
 }

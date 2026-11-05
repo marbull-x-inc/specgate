@@ -27,7 +27,7 @@ export const PROJECTS = {
     tests: ["library/src/**/*.test.ts"],
     tsconfig: "library/tsconfig.json",
   },
-  "cron-parser": { runner: "jest", cwd: ".", test: "TZ=UTC npx jest", tests: ["tests/**/*.test.ts"], env: { TZ: "UTC" } },
+  "cron-parser": { runner: "jest", cwd: ".", test: "TZ=UTC npx jest --watchman=false", tests: ["tests/**/*.test.ts"], env: { TZ: "UTC" } },
   neverthrow: { runner: "vitest", cwd: ".", test: "npx vitest run", tests: ["tests/**/*.test.ts"] },
   jotai: { runner: "vitest", cwd: ".", test: "npx vitest run", tests: ["tests/**/*.test.ts", "tests/**/*.test.tsx"] },
   "react-hook-form": {
@@ -47,9 +47,10 @@ export const PROJECTS = {
   "express-rate-limit": {
     runner: "jest",
     cwd: ".",
-    test: "npx jest",
+    test: "npx jest --watchman=false --testPathIgnorePatterns /node_modules/ /.stryker-tmp/ types-test",
     tests: ["test/library/**/*-test.ts"],
     jestConfig: "jest.config.json",
+    jestExtra: { testPathIgnorePatterns: ["/node_modules/", "/.stryker-tmp/", "types-test"] },
   },
   cac: { runner: "vitest", cwd: ".", test: "npx vitest run", tests: ["tests/**/*.test.ts"] },
 };
@@ -67,7 +68,9 @@ function configs(name, p) {
     tempDirName: ".stryker-tmp",
     plugins: [`@stryker-mutator/${p.runner}-runner`],
     ...(p.vitestConfig ? { vitest: { configFile: p.vitestConfig } } : {}),
-    ...(p.jestConfig ? { jest: { configFile: p.jestConfig } } : {}),
+    ...(p.runner === "jest"
+      ? { jest: { ...(p.jestConfig ? { configFile: p.jestConfig } : {}), config: { watchman: false, ...(p.jestExtra ?? {}) } } }
+      : {}),
   };
   const specgate = (out, report) => ({
     surface: { include: scope.files, mode: "exported" },

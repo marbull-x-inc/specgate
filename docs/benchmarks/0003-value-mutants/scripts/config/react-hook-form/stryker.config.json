@@ -20,6 +20,9 @@
     "@stryker-mutator/jest-runner"
   ],
   "jest": {
-    "configFile": "scripts/jest/jest.config.js"
+    "configFile": "scripts/jest/jest.config.js",
+    "config": {
+      "watchman": false
+    }
   }
 }

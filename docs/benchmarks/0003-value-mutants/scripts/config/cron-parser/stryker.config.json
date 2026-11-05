@@ -17,5 +17,10 @@
   "tempDirName": ".stryker-tmp",
   "plugins": [
     "@stryker-mutator/jest-runner"
-  ]
+  ],
+  "jest": {
+    "config": {
+      "watchman": false
+    }
+  }
 }

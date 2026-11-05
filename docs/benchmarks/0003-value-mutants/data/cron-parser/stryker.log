@@ -2,3 +2,28 @@
 [32m22:07:58 (25744) INFO Instrumenter[39m Instrumented 4 source file(s) with 1131 mutant(s)
 [32m22:07:58 (25744) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
 [32m22:07:58 (25744) INFO DryRunExecutor[39m Starting initial test run (jest test runner with "perTest" coverage analysis). This may take a while.
+[91m22:12:58 (25744) ERROR DryRunExecutor[39m Initial test run timed out!
+[91m22:12:58 (25744) ERROR Stryker[39m Unexpected error occurred while running Stryker Error: Something went wrong in the initial test run
+    at DryRunExecutor.validateResultCompleted (file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/node_modules/@stryker-mutator/core/dist/src/process/3-dry-run-executor.js:76:15)
+    at DryRunExecutor.executeDryRun (file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/node_modules/@stryker-mutator/core/dist/src/process/3-dry-run-executor.js:100:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async WorkItem.execute (file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/node_modules/@stryker-mutator/core/dist/src/concurrent/pool.js:34:28)
+    at async file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/node_modules/@stryker-mutator/core/dist/src/concurrent/pool.js:71:13
+[32m22:12:58 (25744) INFO Stryker[39m This might be a known problem with a solution documented in our troubleshooting guide.
+[32m22:12:58 (25744) INFO Stryker[39m You can find it at https://stryker-mutator.io/docs/stryker-js/troubleshooting/
+[32m22:12:58 (25744) INFO Stryker[39m Still having trouble figuring out what went wrong? Try `npx stryker run --fileLogLevel trace --logLevel debug` to get some more info.
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+Error: Something went wrong in the initial test run
+    at DryRunExecutor.validateResultCompleted (file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/node_modules/@stryker-mutator/core/dist/src/process/3-dry-run-executor.js:76:15)
+    at DryRunExecutor.executeDryRun (file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/node_modules/@stryker-mutator/core/dist/src/process/3-dry-run-executor.js:100:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async WorkItem.execute (file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/node_modules/@stryker-mutator/core/dist/src/concurrent/pool.js:34:28)
+    at async file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/node_modules/@stryker-mutator/core/dist/src/concurrent/pool.js:71:13
+
+Node.js v24.3.0
+real 302.36
+user 5.57
+sys 1.14

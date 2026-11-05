@@ -1,0 +1,22 @@
+node:fs:434
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open '/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/reports/mutation/mutation.json'
+    at readFileSync (node:fs:434:20)
+    at readStrykerCoverage (file:///Users/yodai-hi/Dev/6_marbullX/specgate/.claude/worktrees/value-mutants-c94b04/scripts/value-mutants/run.ts:102:38)
+    at main (file:///Users/yodai-hi/Dev/6_marbullX/specgate/.claude/worktrees/value-mutants-c94b04/scripts/value-mutants/run.ts:419:37)
+    at file:///Users/yodai-hi/Dev/6_marbullX/specgate/.claude/worktrees/value-mutants-c94b04/scripts/value-mutants/run.ts:442:28
+    at ModuleJob.run (node:internal/modules/esm/module_job:365:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:99:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/reports/mutation/mutation.json'
+}
+
+Node.js v24.3.0
+real 0.06
+user 0.09
+sys 0.01

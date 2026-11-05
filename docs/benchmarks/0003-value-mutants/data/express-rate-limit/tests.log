@@ -1,0 +1,4 @@
+2026-11-06T07:13:02,841: [] while computing sockname: failed to create /Users/yodai-hi/.local/state/watchman/yodai-hi-state: Permission denied
+
+Watchman:  watchman --no-pretty get-sockname returned with exit code=1, signal=null, stderr= 2026-11-06T07:13:02,841: [] while computing sockname: failed to create /Users/yodai-hi/.local/state/watchman/yodai-hi-state: Permission denied
+
