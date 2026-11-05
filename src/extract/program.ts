@@ -44,6 +44,18 @@ function parseTsconfig(root: string, tsconfigPath: string): ts.ParsedCommandLine
 }
 
 /**
+ * The compiler options of the repo's tsconfig, for module resolution outside the program (test
+ * files' imports). `undefined` without a tsconfig.
+ */
+export function compilerOptionsOf(root: string, tsconfigPath: string): ts.CompilerOptions | undefined {
+  try {
+    return parseTsconfig(root, tsconfigPath)?.options;
+  } catch {
+    return undefined;
+  }
+}
+
+/**
  * Creates a program from the repo's tsconfig, adding `extraRootFiles` (surface and test files)
  * so that files outside the tsconfig's `include` still take part. Without a tsconfig a
  * permissive default is used so that `check` can run on an unconfigured repo.

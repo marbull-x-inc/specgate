@@ -5,6 +5,7 @@ import type { Config, TestAdapter } from "../../config/schema.ts";
 import type { TestCase } from "../../ir/schema.ts";
 import { textHash } from "../../util/hash.ts";
 import { fileExists, relativeTo } from "../../util/paths.ts";
+import { compilerOptionsOf } from "../program.ts";
 
 /**
  * Reads test titles and maps them to guarantee keys.
@@ -130,6 +131,7 @@ export function extractTests(
   adapter: TestAdapter = config.tests.adapter,
 ): TestExtraction {
   moduleCache.clear();
+  const resolveImport = importResolver(config.root, compilerOptionsOf(config.root, config.tsconfig));
   const idPattern = new RegExp(config.ids.pattern);
   const describePatterns = config.tests.describeOperationPatterns.map((p) => new RegExp(p));
   const prefixes = [...Object.values(config.tests.prefixes), ...config.tests.titlePrefixes];
@@ -144,7 +146,7 @@ export function extractTests(
     const reqIds = requirementIds(text.slice(0, 2000), config);
     const stack: string[] = [];
     const describeTables: ts.Node[] = [];
-    const scope = testFileScope(sf, file, config.root);
+    const scope = testFileScope(sf, file, config.root, resolveImport);
 
     const visit = (node: ts.Node): void => {
       if (ts.isCallExpression(node)) {
@@ -231,30 +233,74 @@ interface TestFileScope {
   imports: ReadonlyMap<string, { name: string; from: string }>;
   /** Repository root, to read the modules imports resolve to */
   root: string;
+  /**
+   * Factories of the file's module-level mocks (`vi.mock("m", () => …)`): they set up the
+   * environment every test of the file runs in, so their literals count for each of them.
+   */
+  mocks: readonly ts.Node[];
 }
 
-function testFileScope(sf: ts.SourceFile, file: string, root: string): TestFileScope {
+const MOCK_CALLEES = new Set(["vi.mock", "vi.doMock", "jest.mock", "jest.doMock", "mock.module"]);
+
+function testFileScope(sf: ts.SourceFile, file: string, root: string, resolveImport: ImportResolver): TestFileScope {
   const consts = new Map<string, ts.Expression>();
   const imports = new Map<string, { name: string; from: string }>();
+  const mocks: ts.Node[] = [];
   for (const st of sf.statements) {
+    if (ts.isExpressionStatement(st) && ts.isCallExpression(st.expression)) {
+      const factory = st.expression.arguments[1];
+      if (
+        MOCK_CALLEES.has(calleeParts(st.expression.expression)?.join(".") ?? "") &&
+        factory &&
+        (ts.isArrowFunction(factory) || ts.isFunctionExpression(factory))
+      )
+        mocks.push(factory);
+    }
     if (ts.isVariableStatement(st) && (st.declarationList.flags & ts.NodeFlags.Const) !== 0) {
       for (const d of st.declarationList.declarations)
         if (ts.isIdentifier(d.name) && d.initializer) consts.set(d.name.text, d.initializer);
     }
     if (ts.isImportDeclaration(st) && st.importClause && ts.isStringLiteral(st.moduleSpecifier)) {
-      const from = moduleFile(st.moduleSpecifier.text, file, root);
+      const from = resolveImport(st.moduleSpecifier.text, file) ?? moduleFile(st.moduleSpecifier.text, file, root);
       const bindings = st.importClause.namedBindings;
       if (bindings && ts.isNamedImports(bindings))
         for (const el of bindings.elements)
           imports.set(el.name.text, { name: (el.propertyName ?? el.name).text, from });
     }
   }
-  return { consts, imports, root };
+  return { consts, imports, root, mocks };
+}
+
+type ImportResolver = (specifier: string, file: string) => string | undefined;
+
+/**
+ * Resolves a test's import the way the program does (`paths`, `baseUrl`, package `exports`,
+ * workspace links), to a source file of the repository relative to root. A declaration file, or a
+ * file outside root or under `node_modules` after following links, is a package: `undefined`.
+ */
+function importResolver(root: string, options: ts.CompilerOptions | undefined): ImportResolver {
+  if (!options) return () => undefined;
+  const absRoot = resolve(root);
+  const cache = new Map<string, string | undefined>();
+  return (specifier, file) => {
+    const key = `${dirname(file)}\0${specifier}`;
+    if (cache.has(key)) return cache.get(key);
+    let out: string | undefined;
+    const resolved = ts.resolveModuleName(specifier, file, options, ts.sys).resolvedModule;
+    if (resolved && !resolved.resolvedFileName.endsWith(".d.ts")) {
+      const real = ts.sys.realpath?.(resolved.resolvedFileName) ?? resolved.resolvedFileName;
+      const rel = relativeTo(absRoot, real);
+      if (!rel.startsWith("..") && !rel.split("/").includes("node_modules") && RESOLVED_MODULE.test(rel)) out = rel;
+    }
+    cache.set(key, out);
+    return out;
+  };
 }
 
 /**
  * The file a relative import resolves to (relative to root), tried with the extensions a
- * TypeScript project uses; a bare or aliased specifier is returned as written.
+ * TypeScript project uses; a bare or aliased specifier is returned as written. The fallback when
+ * the tsconfig cannot be read.
  */
 function moduleFile(specifier: string, file: string, root: string): string {
   if (!specifier.startsWith(".")) return specifier;
@@ -282,7 +328,9 @@ const ITERATING_METHODS = new Set(["forEach", "map", "flatMap", "every", "some",
  * @remarks
  * A value counts as used when it is written in the test body or its `each` tables, or in a
  * module-level `const` of the same test file that they reference by name (one hop, so a
- * fixture `const paths = [...]` counts). The test title is not a source: it describes the test,
+ * fixture `const paths = [...]` counts), or in the factory of a module-level mock of the file
+ * (`vi.mock("next/navigation", () => …)`), which sets up every test of the file. The test title
+ * is not a source: it describes the test,
  * it does not exercise anything. Iterating an imported constant (`it.each(LIST)`,
  * `for (const x of LIST)`) is recorded separately: such a test covers whatever the constant
  * holds, so it cannot fail when an element is removed.
@@ -306,7 +354,10 @@ function usedValues(
   const add = (value: string): void => {
     if (literals.size < limit) literals.add(value);
   };
+  // Off while walking mock factories: a mock is not the unit's module and iterates nothing.
+  let recording = true;
   const iterated = (expr: ts.Expression): void => {
+    if (!recording) return;
     let e = expr;
     // Object.keys(X) / Object.values(X) / Object.entries(X)
     if (
@@ -334,7 +385,8 @@ function usedValues(
     // A call to an imported function of the project builds an input (`toTargetHref(APP, true)`).
     if (ts.isCallExpression(n) && ts.isIdentifier(n.expression)) {
       const imported = scope.imports.get(n.expression.text);
-      if (imported && RESOLVED_MODULE.test(imported.from)) builds.set(`${imported.from}#${imported.name}`, imported);
+      if (recording && imported && RESOLVED_MODULE.test(imported.from))
+        builds.set(`${imported.from}#${imported.name}`, imported);
     }
     if ((ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) && n.text.length > 0) add(n.text);
     else if (ts.isTemplateExpression(n)) {
@@ -385,6 +437,8 @@ function usedValues(
   };
   for (const root of roots) walk(root, true);
   for (const table of tables) if (ts.isExpression(table)) iterated(table);
+  recording = false;
+  for (const factory of scope.mocks) walk(factory, true);
   return {
     literals: [...literals],
     keys: [...keys],

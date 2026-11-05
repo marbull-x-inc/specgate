@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { analyze } from "../../src/analyze.ts";
 import { defineConfig } from "../../src/config/schema.ts";
@@ -462,5 +463,148 @@ it("isAdult.ok.adult", () => {
     expect(summary).toContain("<summary>Accepted in source (<code>@acceptFinding</code>)</summary>");
     expect(summary).toContain("| checked by the caller's tests |");
     expect(renderStepSummary({ ...report, findings: [] })).not.toContain("Accepted in source");
+  });
+});
+
+describe("0.5.2: imports through aliases and workspace links, mock factories (#50, #51)", () => {
+  const TARGET = `/** @guarantee ok.href builds \`<origin>/done\`, with the popup flag when \`popup\` */
+export const toHref = (origin: string, popup: boolean): string => (popup ? \`\${origin}/done?popup=1\` : \`\${origin}/done\`);
+
+/** @guarantee ok.popup returns true only when \`popup\` is \`1\` */
+export const isPopup = (href: string): boolean => new URL(href).searchParams.get("popup") === "1";
+`;
+  const TSCONFIG = JSON.stringify({
+    compilerOptions: {
+      strict: true,
+      module: "ESNext",
+      moduleResolution: "Bundler",
+      target: "ES2022",
+      types: [],
+      baseUrl: ".",
+      paths: { "@/*": ["src/*"] },
+    },
+    include: ["src/**/*.ts", "tests/**/*.ts"],
+  });
+  const popupTest = (from: string) => `import { expect, it } from "bun:test";
+import { isPopup, toHref } from "${from}";
+it("isPopup.ok.popup", () => {
+  expect(isPopup(toHref("https://a.example", true))).toBe(true);
+});
+`;
+  const BUILT =
+    'isPopup commits to match "1" and the contract names it, but no linked test writes it; isPopup.ok.popup builds its input with toHref from the unit\'s own module, so the value changes with the implementation. Write it as a literal';
+
+  test("#51: a paths alias resolves like a relative import", async () => {
+    for (const from of ["../src/target", "@/target"]) {
+      const { untested: found } = await untested({
+        "tsconfig.json": TSCONFIG,
+        "src/target.ts": TARGET,
+        "tests/target.test.ts": popupTest(from),
+      });
+      expect(found.find((f) => f.unit === "isPopup")?.message).toBe(BUILT);
+    }
+  });
+
+  test("#51: a workspace package linked into node_modules resolves to its source; one outside the repository does not", async () => {
+    const dir = project({
+      "src/shared/target.ts": TARGET,
+      "tests/target.test.ts": popupTest("@acme/shared/target"),
+    });
+    mkdirSync(join(dir, "node_modules/@acme"), { recursive: true });
+    symlinkSync(join(dir, "src/shared"), join(dir, "node_modules/@acme/shared"));
+    const config = defineConfig({
+      root: dir,
+      surface: { include: ["src/**/*.ts"], exclude: [], mode: "exported" },
+      tests: { include: ["tests/**/*.test.ts"] },
+    });
+    const linked = (await analyze({ ...config, root: dir }, { provenance: false, baseline: null })).report;
+    expect(linked.findings.find((f) => f.rule === "decision-untested" && f.unit === "isPopup")?.message).toBe(BUILT);
+    expect(linked.tests[0]?.builds?.map((b) => [b.name, b.from])).toContainEqual(["toHref", "src/shared/target.ts"]);
+
+    const outside = mkdtempSync(join(tmpdir(), "specgate-pkg-"));
+    writeFileSync(join(outside, "target.ts"), TARGET);
+    rmSync(join(dir, "node_modules/@acme/shared"));
+    symlinkSync(outside, join(dir, "node_modules/@acme/shared"));
+    const external = (await analyze({ ...config, root: dir }, { provenance: false, baseline: null })).report;
+    expect(external.tests[0]?.builds).toBeUndefined();
+  });
+
+  const VIEW = `import { readEnum } from "./read-enum";
+
+export const VIEWS = ["list", "grid"] as const;
+
+/** @guarantee ok.view opens the view that \`?view=\` names (\`VIEWS\`) */
+export function viewOf(): string {
+  const view = readEnum("view", VIEWS, "list");
+  return VIEWS.find((value) => value === view) ?? "list";
+}
+`;
+  const READ_ENUM = `import { useSearchParams } from "./nav";
+export function readEnum(key: string, values: readonly string[], fallback: string): string {
+  const v = useSearchParams().get(key) ?? "";
+  return values.includes(v) ? v : fallback;
+}
+`;
+  const NAV = "export const useSearchParams = (): URLSearchParams => new URLSearchParams(location.search);\n";
+  const mockedTest = (mock: string) => `import { expect, it, mock, vi, jest } from "bun:test";
+${mock}("../src/nav", () => ({
+  useSearchParams: () => new URLSearchParams("view=grid&view=list"),
+}));
+import { viewOf } from "../src/view";
+it("viewOf.ok.view", () => {
+  expect(viewOf()).not.toBeNull();
+});
+`;
+
+  test("#50: literals in a module-level vi.mock, jest.mock or mock.module factory count for the file's tests", async () => {
+    for (const mock of ["vi.mock", "jest.mock", "mock.module"]) {
+      const { report, untested: found } = await untested({
+        "src/view.ts": VIEW,
+        "src/read-enum.ts": READ_ENUM,
+        "src/nav.ts": NAV,
+        "tests/view.test.ts": mockedTest(mock),
+      });
+      expect(report.units.find((u) => u.id === "viewOf")?.decisions.filter((d) => d.kind === "member")).toHaveLength(2);
+      expect([mock, found]).toEqual([mock, []]);
+      // The mocked module's function is not a build; only the unit the test calls is.
+      expect(report.tests[0]?.builds?.map((b) => b.name)).toEqual(["viewOf"]);
+    }
+  });
+
+  test("#50: a mock in another test file does not count", async () => {
+    const { untested: found } = await untested({
+      "src/view.ts": VIEW,
+      "src/read-enum.ts": READ_ENUM,
+      "src/nav.ts": NAV,
+      "tests/other.test.ts": mockedTest("vi.mock").replace("viewOf.ok.view", "other unlinked test"),
+      "tests/view.test.ts": `import { expect, it } from "bun:test";
+import { viewOf } from "../src/view";
+it("viewOf.ok.view", () => {
+  expect(viewOf()).not.toBeNull();
+});
+`,
+    });
+    expect(
+      found
+        .map((f) => f.message.match(/member "([^"]+)"/)?.[1])
+        .filter((v) => v !== undefined)
+        .sort(),
+    ).toEqual(["grid", "list"]);
+  });
+
+  test("#50: a vi.hoisted constant is read through the one-hop rule", async () => {
+    const { untested: found } = await untested({
+      "src/view.ts": VIEW,
+      "src/read-enum.ts": READ_ENUM,
+      "src/nav.ts": NAV,
+      "tests/view.test.ts": `import { expect, it, vi } from "bun:test";
+const search = vi.hoisted(() => "view=grid&view=list");
+import { viewOf } from "../src/view";
+it("viewOf.ok.view", () => {
+  expect(viewOf(search)).not.toBeNull();
+});
+`,
+    });
+    expect(found).toEqual([]);
   });
 });
