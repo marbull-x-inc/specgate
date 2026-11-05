@@ -161,7 +161,8 @@ make the first run useful instead of red:
   unit. The matching finding becomes `info` with `accepted: true` and `acceptedReason` (in SARIF,
   an in-source suppression). A tag with an unknown rule or no reason is `accept-tag-invalid`; one
   that no longer matches a finding is `accept-tag-unused`. `--accept-baseline` does not record
-  findings a tag accepts.
+  findings a tag accepts. The Step Summary lists every finding a tag accepted, with its reason, in
+  its own section.
 
 `scaffold` seeds the first guarantee from an existing `@returns` and does not repeat a
 documented `@throws`.
@@ -205,11 +206,17 @@ and naming that unit: removing it fails that test, but this unit's own tests do 
 test does write, the finding is one step lower and says so. A value also counts as written in two
 other forms: a `match` on a value read with a constant key (`params.get("popup") === "1"`) by a
 `key=value` pair in a literal (`"?popup=1"`), and an identifier-like `match` value by an object
-key the test writes (`sign({ iss: "…" })` pins `claim === "iss"`). A string passed as an option
-to a library call (`toJSONSchema(S, { io: "input" })`) configures the library and is not an
-`output` decision. When a finding fires, it names the closest linked-test literal that contains
-the value. Values a test builds at run time or reaches only through a lookup (a route table, a
-fixture in another file) are not seen, so treat these findings as hints too. Design: `docs/design/0002-decisions-pinned-by-tests.md`.
+key the test writes (`sign({ iss: "…" })` pins `claim === "iss"`). A collection the unit passes to
+a call together with a string (`readEnum(search, "view", VIEWS)`) is read with that key, so
+`"?view=grid"` pins the element `grid`. A string passed as an option to a library call
+(`toJSONSchema(S, { io: "input" })`) configures the library and is not an `output` decision. When
+a finding fires, it names the linked-test literal to look at: one with a `key=` pair for the
+value's key, else one holding the value as a whole token, else (for values longer than two
+characters) one containing it. When a linked test builds its input with another function of the
+unit's own module (`it.each([toTargetHref(APP, true)])`) and that function holds the value, the
+finding says so: the value changes with the implementation, so write it as a literal. Values a
+test builds at run time otherwise, or reaches only through a lookup (a route table, a fixture in
+another file), are not seen, so treat these findings as hints too. Design: `docs/design/0002-decisions-pinned-by-tests.md`.
 
 It matches by value, so it is a hint, not a proof: a value named for one purpose (`100` as an
 example result) also counts for another (`100` as the input length limit), and a value named in

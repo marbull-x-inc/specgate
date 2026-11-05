@@ -285,11 +285,40 @@ export function collectDecisions(
     return out;
   };
 
+  /**
+   * The key a collection is read with, when the operation passes the collection to a call together
+   * with a string literal: `useQueryEnum("view", VIEWS, "list")`, `parseEnum(params, "view", VIEWS)`.
+   * The first string literal argument is the key. Only the operation's own body is searched.
+   */
+  let collectionKeys: Map<ts.VariableDeclaration, string> | undefined;
+  const collectionKeyOf = (receiver: ts.Expression): string | undefined => {
+    const decl = moduleConstOf(receiver);
+    if (!decl) return undefined;
+    if (!collectionKeys) {
+      const found = new Map<ts.VariableDeclaration, string>();
+      const scan = (n: ts.Node): void => {
+        if (ts.isCallExpression(n)) {
+          const literal = n.arguments.map(unwrapExpression).find(isStringLike);
+          if (literal && literal.text.length > 0)
+            for (const arg of n.arguments) {
+              const d = moduleConstOf(unwrapExpression(arg));
+              if (d && !found.has(d)) found.set(d, literal.text);
+            }
+        }
+        ts.forEachChild(n, scan);
+      };
+      scan(body);
+      collectionKeys = found;
+    }
+    return collectionKeys.get(decl);
+  };
+
   /** Records one `member` decision per element of the collection `receiver`, up to the limit. */
   const addMembers = (usage: ts.Node, receiver: ts.Expression, probe: MemberProbe, keys: boolean): void => {
     const elements = collectionElements(receiver, keys);
     if (!elements) return;
     const receiverName = ts.isIdentifier(receiver) ? receiver.text : undefined;
+    const readKey = keys ? undefined : collectionKeyOf(receiver);
     const sizes = new Map<string, number>();
     for (const e of elements) sizes.set(`${e.file}#${e.name}`, (sizes.get(`${e.file}#${e.name}`) ?? 0) + 1);
     for (const e of elements) {
@@ -314,6 +343,7 @@ export function collectDecisions(
         names: unique([...(receiverName ? [receiverName] : []), e.name]),
         collection: { name: e.name, file: e.file, line: e.line, endLine: e.endLine },
         probe,
+        ...(readKey !== undefined ? { key: readKey } : {}),
       });
     }
   };
