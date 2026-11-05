@@ -13,8 +13,11 @@ import type { MappedMutant, MutantPlace } from "../mutation/report.ts";
 export interface MutationRuleInput {
   /** `mutation.report` as configured */
   path: string;
-  /** Mutants mapped to units, or why the report could not be read */
-  result: { mapped: readonly MappedMutant[] } | { error: string };
+  /** Mutants mapped to units, or why the report (or, per path, each report) could not be read */
+  result:
+    | { mapped: readonly MappedMutant[] }
+    | { error: string }
+    | { errors: ReadonlyArray<{ path: string; error: string }> };
   linkedTests: (unitId: string) => readonly TestCase[];
   /** `mutation.findings`: one `mutant-survived` per mutant (default) or one per unit */
   findings?: "mutant" | "unit";
@@ -35,6 +38,8 @@ export interface MutationDraft {
 }
 
 const REPLACEMENT_LENGTH = 60;
+/** `mutatorName` of the value mutants a runner applies from `specgate mutants` (#60) */
+const VALUE_MUTATOR = "Value";
 const DEFAULT_LIST_LIMIT = 5;
 
 function shortened(text: string): string {
@@ -87,6 +92,9 @@ function describeSurvivor(m: MappedMutant, unit: Unit, place: MutantPlace, other
       : decision.kind === "member"
         ? ` (membership in ${decision.collection?.name ?? decision.names[0] ?? "a collection"})`
         : ` (the ${decision.kind} ${decision.values.map((v) => JSON.stringify(v)).join(", ")})`;
+  // A value mutant (#60) names its change in contract terms: "the default `initialValue` 0 → 1".
+  if (mutant.mutator === VALUE_MUTATOR && mutant.description !== undefined)
+    return { mapped: m, unit, what: mutant.description, others };
   const replaced = mutant.replacement !== undefined ? `: \`${shortened(mutant.replacement)}\`` : "";
   return { mapped: m, unit, what: `${mutant.mutator} mutant${where}${about}${replaced}`, others };
 }
@@ -95,11 +103,13 @@ export function evaluateMutationRules(
   input: MutationRuleInput,
   emit: (rule: MutationRuleId, draft: MutationDraft) => void,
 ): void {
-  if ("error" in input.result) {
-    emit("mutation-report-unreadable", {
-      message: `mutation.report ${input.path}: ${input.result.error}; the mutation rules did not run`,
-      file: input.path,
-    });
+  if ("error" in input.result || "errors" in input.result) {
+    const errors = "error" in input.result ? [{ path: input.path, error: input.result.error }] : input.result.errors;
+    for (const e of errors)
+      emit("mutation-report-unreadable", {
+        message: `mutation.report ${e.path}: ${e.error}; the mutation rules did not run`,
+        file: e.path,
+      });
     return;
   }
   const mapped = input.result.mapped;

@@ -93,13 +93,14 @@ export interface Config {
   decisions: { ignore: string[]; collectionLimit: number };
   /**
    * `report`: a mutation-testing-report-schema JSON (Stryker's `mutation.json`) another tool
-   * wrote, relative to root; unset turns the mutation rules off. `detected`: mutant statuses that
+   * wrote, relative to root, or a list of them (Stryker's and a value-mutant runner's, read
+   * together); unset turns the mutation rules off. `detected`: mutant statuses that
    * count as caught by the tests. `findings`: one `mutant-survived` per mutant, or one per unit
    * listing up to `listLimit` survivors. `exclude`: unit ids or file globs whose mutants are
    * counted but give no findings (code tested outside this config).
    */
   mutation: {
-    report?: string;
+    report?: string | string[];
     detected: string[];
     findings: "mutant" | "unit";
     listLimit: number;
@@ -224,6 +225,13 @@ class Reader {
       throw new ConfigError(this.at(key), "an array of strings", v);
     }
     apply([...v]);
+  }
+  stringOrStrings(key: string, apply: (v: string | string[]) => void): void {
+    const v = this.source[key];
+    if (v === undefined) return;
+    if (typeof v === "string") apply(v);
+    else if (Array.isArray(v) && v.every((x): x is string => typeof x === "string")) apply([...v]);
+    else throw new ConfigError(this.at(key), "a string or an array of strings", v);
   }
   oneOf<T extends string>(key: string, allowed: readonly T[], apply: (v: T) => void): void {
     const v = this.source[key];
@@ -448,7 +456,7 @@ function applyInput(config: Config, input: unknown, label: string): void {
     });
   });
   r.object("mutation", (m) => {
-    m.string("report", (v) => {
+    m.stringOrStrings("report", (v) => {
       config.mutation.report = v;
     });
     m.strings("detected", (v) => {

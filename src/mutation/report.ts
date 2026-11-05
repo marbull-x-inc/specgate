@@ -18,6 +18,8 @@ export interface Mutant {
   id: string;
   mutator: string;
   replacement?: string;
+  /** The report's `description`; a value mutant (#60) names its change in contract terms there */
+  description?: string;
   status: string;
   /** Module relative to root, POSIX separators */
   file: string;
@@ -26,6 +28,12 @@ export interface Mutant {
 }
 
 export type MutationReadResult = { mutants: Mutant[] } | { error: string };
+
+/** `mutation.report` as a list of paths (one string is a list of one). */
+export function reportPaths(config: Config): string[] {
+  const r = config.mutation.report;
+  return r === undefined ? [] : typeof r === "string" ? [r] : r;
+}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -65,10 +73,12 @@ export function parseMutationReport(value: unknown, root: string): MutationReadR
       if (typeof status !== "string") return { error: `${at}.status is missing` };
       if (start === undefined) return { error: `${at}.location.start.line is missing` };
       const replacement = m["replacement"];
+      const description = m["description"];
       mutants.push({
         id: String(id),
         mutator,
         ...(typeof replacement === "string" ? { replacement } : {}),
+        ...(typeof description === "string" && description !== "" ? { description } : {}),
         status,
         file,
         line: start,
@@ -79,14 +89,40 @@ export function parseMutationReport(value: unknown, root: string): MutationReadR
   return { mutants };
 }
 
+/** The mutants of every report in `mutation.report`, or, per path that could not be used, why. */
+export type MutationReadAll = { mutants: Mutant[] } | { errors: Array<{ path: string; error: string }> };
+
 /**
- * Reads `mutation.report`.
+ * Reads every path of `mutation.report` (Stryker's report and a value-mutant report, #60).
+ * Mutant ids are prefixed with the report's index when there are several, so they stay unique.
+ * @returns `undefined` when no report is configured; the mutants of all reports; or, when any
+ *   report could not be used, why for each such path. Never throws.
+ */
+export function readMutationReports(config: Config): MutationReadAll | undefined {
+  const paths = reportPaths(config);
+  if (paths.length === 0) return undefined;
+  const mutants: Mutant[] = [];
+  const errors: Array<{ path: string; error: string }> = [];
+  paths.forEach((path, index) => {
+    const result = readOneReport(config, path);
+    if ("error" in result) errors.push({ path, error: result.error });
+    else mutants.push(...result.mutants.map((m) => (paths.length > 1 ? { ...m, id: `${index + 1}:${m.id}` } : m)));
+  });
+  return errors.length > 0 ? { errors } : { mutants };
+}
+
+/**
+ * Reads the first path of `mutation.report`.
  * @returns `undefined` when no report is configured; otherwise the mutants or why the file
  *   could not be used (missing, not JSON, not a report). Never throws.
  */
 export function readMutationReport(config: Config): MutationReadResult | undefined {
-  if (config.mutation.report === undefined) return undefined;
-  const path = resolve(config.root, config.mutation.report);
+  const path = reportPaths(config)[0];
+  return path === undefined ? undefined : readOneReport(config, path);
+}
+
+function readOneReport(config: Config, relativePath: string): MutationReadResult {
+  const path = resolve(config.root, relativePath);
   if (!fileExists(path)) return { error: "file not found" };
   let parsed: unknown;
   try {
