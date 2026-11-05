@@ -94,9 +94,17 @@ export interface Config {
   /**
    * `report`: a mutation-testing-report-schema JSON (Stryker's `mutation.json`) another tool
    * wrote, relative to root; unset turns the mutation rules off. `detected`: mutant statuses that
-   * count as caught by the tests.
+   * count as caught by the tests. `findings`: one `mutant-survived` per mutant, or one per unit
+   * listing up to `listLimit` survivors. `exclude`: unit ids or file globs whose mutants are
+   * counted but give no findings (code tested outside this config).
    */
-  mutation: { report?: string; detected: string[] };
+  mutation: {
+    report?: string;
+    detected: string[];
+    findings: "mutant" | "unit";
+    listLimit: number;
+    exclude: string[];
+  };
   resolve: { ignore: string[]; allowProgramTypes: boolean };
 }
 
@@ -162,7 +170,12 @@ export function defaultConfig(): Config {
     requirementHeader: { enabled: false, pattern: "^\\s*(?:\\*|//)\\s*@requirement\\s+(\\S+)" },
     envInputs: { forbid: ["Date.now", "new Date", "Math.random", "fetch", "process.env"] },
     decisions: { ignore: [], collectionLimit: 500 },
-    mutation: { detected: ["Killed", "Timeout", "RuntimeError", "CompileError"] },
+    mutation: {
+      detected: ["Killed", "Timeout", "RuntimeError", "CompileError"],
+      findings: "mutant",
+      listLimit: 5,
+      exclude: [],
+    },
     resolve: { ignore: [], allowProgramTypes: true },
   };
 }
@@ -440,6 +453,15 @@ function applyInput(config: Config, input: unknown, label: string): void {
     });
     m.strings("detected", (v) => {
       config.mutation.detected = v;
+    });
+    m.oneOf("findings", ["mutant", "unit"] as const, (v) => {
+      config.mutation.findings = v;
+    });
+    m.number("listLimit", (v) => {
+      config.mutation.listLimit = v;
+    });
+    m.strings("exclude", (v) => {
+      config.mutation.exclude = v;
     });
   });
   r.object("resolve", (x) => {

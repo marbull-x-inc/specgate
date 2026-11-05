@@ -12,7 +12,7 @@ import { countMutants, mapMutants, readMutationReport } from "./mutation/report.
 import { attachProvenance } from "./provenance/git.ts";
 import { resolveReferences } from "./resolve/identifiers.ts";
 import { evaluateRules } from "./rules/index.ts";
-import { expandGlobs, fileExists } from "./util/paths.ts";
+import { expandGlobs, fileExists, globToRegExp } from "./util/paths.ts";
 
 export const TOOL = { name: "specgate", version: "0.4.0" } as const;
 
@@ -92,6 +92,9 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
             "error" in mutationRead
               ? mutationRead
               : { mapped: mapMutants(units, mutationRead.mutants, config.mutation.detected) },
+          findings: config.mutation.findings,
+          listLimit: config.mutation.listLimit,
+          excluded: unitMatcher(config.mutation.exclude),
         };
   if (mutation && "mapped" in mutation.result)
     for (const [unit, counts] of countMutants(mutation.result.mapped)) unit.mutation = counts;
@@ -153,4 +156,11 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
 export function exitCodeFor(report: Report, strict = false): number {
   if (report.mode === "advisory" && !strict) return 0;
   return report.summary.findings.fail > 0 ? 1 : 0;
+}
+
+/** `mutation.exclude`: an entry is a unit id, or a glob over the unit's file. */
+function unitMatcher(entries: readonly string[]): (unit: Unit) => boolean {
+  const ids = new Set(entries);
+  const globs = entries.map(globToRegExp);
+  return (unit) => ids.has(unit.id) || globs.some((g) => g.test(unit.file));
 }

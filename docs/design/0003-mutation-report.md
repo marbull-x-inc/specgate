@@ -22,6 +22,10 @@ CI job, in the
 - `mutation.detected`: statuses that count as caught. Default `Killed`, `Timeout`,
   `RuntimeError`, `CompileError`. `Survived` and `NoCoverage` are counted as such, every other
   status (`Ignored`, `Pending`, a status from a later schema) as `ignored`.
+- Since 0.5.0 (#41): `mutation.findings` (`"mutant"`, or `"unit"` for one finding per unit
+  listing up to `mutation.listLimit` survivors) and `mutation.exclude` (unit ids or file globs
+  whose mutants are counted but give no findings). In a pilot, 68 of 99 findings were in one
+  client that tests in another workspace exercise; per-mutant findings buried the other 31.
 
 ### Reading
 

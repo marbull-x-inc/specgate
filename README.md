@@ -220,7 +220,14 @@ each unit's page and a score column to the index. `mutant-survived` reports each
 the linked tests let through, and `unit-not-executed` a unit that its tests never run. An
 equivalent mutant (one no test can tell apart) is accepted with `check --accept-baseline`: the
 fingerprint holds the unit, the mutator and the replacement but not the line, so it stays
-accepted when code moves. specgate does not check that the report is newer than the sources.
+accepted when code moves. `mutation.findings: "unit"` gives one finding per unit instead of one per
+mutant, and `mutation.exclude` keeps code tested outside this config out of the findings. specgate
+does not check that the report is newer than the sources.
+
+A mutation report does not replace the `member` checks. Removing one element of an array is not a
+mutant in common tools (Stryker replaces an element with `""`, which any test that checks the
+list's elements kills), so a deny list missing from its tests keeps the same mutation score;
+`decision-untested` and `test-tautology` stay the check for collections.
 Design: `docs/design/0003-mutation-report.md`.
 
 ## The coding procedure specgate assumes
