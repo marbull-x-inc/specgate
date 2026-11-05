@@ -86,10 +86,9 @@ export function evaluateMutationRules(
               mutant.line >= d.collection.line &&
               mutant.line <= d.collection.endLine,
           )
-        : place === "body"
-          ? (unit.decisions.find((d) => d.line === mutant.line && d.kind !== "member") ??
-            unit.decisions.find((d) => d.line === mutant.line))
-          : undefined;
+        : // The unit's decisions include those of the helpers it reaches, so a helper line is found too.
+          (unit.decisions.find((d) => d.line === mutant.line && d.kind !== "member") ??
+          unit.decisions.find((d) => d.line === mutant.line));
     const where =
       place === "helper"
         ? " in a helper it calls"
