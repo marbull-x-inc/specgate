@@ -1,6 +1,6 @@
 # 0003 — Reading a mutation report
 
-Status: accepted · Issue: #32 · Follows: 0002 (phase 1)
+Status: accepted (implemented in 0.4.0) · Issue: #32 · Follows: 0002 (phase 1)
 
 ## Problem
 
