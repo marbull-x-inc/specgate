@@ -96,6 +96,7 @@ export default defineConfig({
 | `specgate gen`      | One `test()` per guarantee in the mirror path. Fills what tags and types determine: `@throws` → `toThrow(X)` skeleton; `@uses` → stubs, a fake clock and a fault-injecting transaction runner (`@marbull-x-inc/specgate/runtime`); `frame` → untouched-port assertion; `atomic` / `idempotent` → skipped skeletons awaiting contract fakes; `@example // =>` → `*.doctest.test.ts`; `@entity` + `@invariant` → `*.property.test.ts` (fast-check). Everything else is `test.todo`. Hand-edited files are only appended to (with the same skeletons and the imports they need); generated files are overwritten. Run the project formatter after `gen` for lines longer than `tests.lineWidth`. | yes           |
 | `specgate check`    | Rules below. Writes `.specgate/report.json` (IR), `summary.md` (GitHub Step Summary), `report.sarif`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | yes           |
 | `specgate docs`     | Markdown per source file: what (guarantees ↔ tests), why (`@remarks`), how (ports and operations actually called, extracted from the implementation), plus `index.md` and `vocabulary.md`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | yes           |
+| `specgate mutants`  | Value changes Stryker never makes, at the code units with guarantees own: a number `n` → `n + 1`, a string with a suffix, one element of a literal list, one entry of a module-level object, one word of a regex group removed. Writes `.specgate/mutants.json` for a runner; runs no test. See [Value mutants](#value-mutants).                                                                                                                                                                                                                                                                                                                                                              | yes           |
 
 ### Rules
 
@@ -264,6 +265,32 @@ mutant in common tools (Stryker replaces an element with `""`, which any test th
 list's elements kills), so a deny list missing from its tests keeps the same mutation score;
 `decision-untested` and `test-tautology` stay the check for collections.
 Design: `docs/design/0003-mutation-report.md`.
+
+### Value mutants
+
+Stryker never changes a number literal, never changes a non-empty string into another non-empty
+string, and never removes one element of a list, one entry of an object or one word of a regex
+group. Those are the values a contract states (a default of `0`, a status `413`, the default
+splitters). `specgate mutants` lists one such change per value site in the code that units with
+guarantees own (their lines, the helpers they reach, the constants and collections they read),
+skipping type positions, imports, `typeof` checks, thrown messages and property keys. specgate
+still runs no test: a runner outside the package applies each change, runs the tests and writes a
+mutation-testing-report-schema report with `mutatorName: "Value"`. This repository has one in
+`scripts/value-mutants/run.ts`. With Stryker's report it runs only the test files that cover the
+changed line (`coveredBy`).
+
+```bash
+npx stryker run --reporters json                       # reports/mutation/mutation.json
+npx specgate mutants                                   # .specgate/mutants.json
+node scripts/value-mutants/run.ts --command "npx vitest run {files}" \
+  --stryker reports/mutation/mutation.json --out reports/mutation/value.json
+npx specgate check  # mutation: { report: ["reports/mutation/mutation.json", "reports/mutation/value.json"] }
+```
+
+`mutant-survived` names a value change in contract terms (``useCounter: the default
+`initialValue` 0 → 1 survived``), and an equivalent one is accepted with
+`@acceptFinding mutant-survived Value:"the default \`initialValue\` 0 → 1" <reason>`. The
+feature is on its branch until benchmark 0003 decides. Design: `docs/design/0004-value-mutants.md`.
 
 ## The coding procedure specgate assumes
 

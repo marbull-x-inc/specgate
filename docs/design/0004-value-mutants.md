@@ -111,8 +111,8 @@ It reads the same config as `check` and runs the same extraction; it never runs 
 - `line` / `column` / `endLine` / `endColumn` are 1-based, as in the mutation-testing-report-schema,
   and only for reporting.
 - `description` names the change in contract terms: `the default \`initialValue\` 0 → 1`,
-  `` `"."`removed from`STR_SPLITTERS` ``, `` `status: 413`removed from`DEFAULTS` ``,
-  `` `an`removed from the regex`/^(a|an|the)$/` ``.
+`` `"."`removed from`STR_SPLITTERS` ``, `` `status: 413`removed from`DEFAULTS` ``,
+`` `an`removed from the regex`/^(a|an|the)$/` ``.
 - `decision` is the unit's decision on the same line whose values hold the original value, when
   there is one.
 - Mutants are sorted by file and `start`; `id`s are `value-<n>` in that order. They are unique
@@ -163,7 +163,7 @@ selected, `coveredBy` (Stryker's test ids).
   ``useCounter: the default `initialValue` 0 → 1 survived; no linked test fails when the code changes like this``.
 - An equivalent value mutant is accepted with
   `@acceptFinding mutant-survived Value:"the default \`initialValue\` 0 → 1" <reason>`, as
-  Stryker's are, or with `check --accept-baseline`.
+Stryker's are, or with `check --accept-baseline`.
 
 ## Measurement before merge
 
