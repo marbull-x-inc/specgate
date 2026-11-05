@@ -1,7 +1,15 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.6.4/schema.json",
   "files": {
-    "includes": ["**", "!tests/fixtures/.work", "!examples/shop-expected", "!schema", "!node_modules", "!dist"]
+    "includes": [
+      "**",
+      "!docs/benchmarks/*/data",
+      "!tests/fixtures/.work",
+      "!examples/shop-expected",
+      "!schema",
+      "!node_modules",
+      "!dist"
+    ]
   },
   "formatter": {
     "enabled": true,
