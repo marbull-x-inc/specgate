@@ -556,6 +556,7 @@ export function extractSurface(
           })),
         ),
         ...(doc?.supersedes ? { supersedes: doc.supersedes } : {}),
+        ...acceptsOf(allDocs),
         hasDoc: doc !== undefined,
       };
       units.push({
@@ -611,6 +612,7 @@ export function extractSurface(
           expected: e.expected,
           line: docLine + e.lineOffset,
         })),
+        ...acceptsOf([{ doc, docLine }]),
         hasDoc: true,
         typeText: oneLineType(statement, sf),
       };
@@ -796,6 +798,7 @@ export function extractSurface(
               })),
             ),
             ...(doc?.supersedes ? { supersedes: doc.supersedes } : {}),
+            ...acceptsOf(allDocs),
             hasDoc: doc !== undefined,
           };
           units.push({
@@ -1093,4 +1096,17 @@ function oneLineType(statement: ts.TypeAliasDeclaration | ts.InterfaceDeclaratio
     .replace(/\s+/g, " ")
     .trim();
   return text.length > 200 ? `${text.slice(0, 197)}...` : text;
+}
+
+/** `@acceptFinding` tags of a unit's doc comments, with their source lines. */
+function acceptsOf(docs: ReadonlyArray<{ doc: ParsedDoc; docLine: number }>): Pick<Unit, "accepts"> {
+  const accepts = docs.flatMap((d) =>
+    d.doc.acceptFindings.map((a) => ({
+      rule: a.rule,
+      target: a.target,
+      reason: a.reason,
+      line: d.docLine + a.lineOffset,
+    })),
+  );
+  return accepts.length > 0 ? { accepts } : {};
 }

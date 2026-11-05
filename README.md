@@ -121,6 +121,9 @@ export default defineConfig({
 | `mutant-survived`                                 | warn    | With `mutation.report`: a mutant no linked test failed on (Survived), or one no test ran in a unit the tests do run (NoCoverage). Names the decision on that line                         |
 | `unit-not-executed`                               | warn    | With `mutation.report`: a unit has linked tests, yet every mutant in it is NoCoverage (the tests stub it or call another implementation)                                                  |
 | `mutation-report-unreadable`                      | warn    | `mutation.report` is missing, not JSON, or not a mutation-testing-report-schema report; the mutation rules did not run                                                                    |
+| `accept-tag-invalid`                              | fail    | An `@acceptFinding` tag names an unknown rule, or gives no value or no reason                                                                                                             |
+| `accept-tag-unused`                               | warn    | An `@acceptFinding` tag no longer matches a finding on its unit; remove it                                                                                                                |
+| `baseline-stale`                                  | info    | The default baseline (`.specgate/report.json`) was written on another revision or config; the change-detection findings are one step lower. `--baseline` compares on purpose              |
 | `guarantee-known-violation`                       | warn    | A linked test is `test.failing` / `test.fails`: the implementation is known not to keep it                                                                                                |
 | `entry-unmapped`                                  | info    | A `package.json#exports` subpath points only to build output; map it with `surface.entries`                                                                                               |
 | `guarantee-on-non-unit`                           | fail    | A `@guarantee` sits on a declaration that is not a unit (not exported, private, a type, …)                                                                                                |
@@ -143,6 +146,22 @@ make the first run useful instead of red:
   and fail only on new ones, so `mode: "blocking"` can be switched on the same day. Findings are
   matched by rule, file, unit, guarantee, test and message, not by line; rerun
   `--accept-baseline` after fixing some to shrink the file.
+- For a single finding you have reviewed and know to be wrong, prefer a tag on the unit, next to
+  the code and with the reason:
+
+  ```ts
+  /**
+   * @guarantee err.issuer returns `bad_issuer` when `iss` is not the expected issuer
+   * @acceptFinding decision-untested "iss" the test sets `iss` as an object key; swapping the claims fails it
+   */
+  ```
+
+  `@acceptFinding <rule-id> <value> <reason>`: the value as the finding quotes it, `Mutator` or
+  `Mutator:"replacement"` for `mutant-survived`, or `*` for every finding of the rule on the
+  unit. The matching finding becomes `info` with `accepted: true` and `acceptedReason` (in SARIF,
+  an in-source suppression). A tag with an unknown rule or no reason is `accept-tag-invalid`; one
+  that no longer matches a finding is `accept-tag-unused`. `--accept-baseline` does not record
+  findings a tag accepts.
 
 `scaffold` seeds the first guarantee from an existing `@returns` and does not repeat a
 documented `@throws`.
@@ -179,10 +198,18 @@ test linked to the unit (or to a unit that calls it) write it as a literal? That
 element of a module-level collection the unit checks membership in (`DENIED.includes(path)`,
 `PREFIXES.some((p) => path.startsWith(p))`), so a deny list whose test lists 8 of its 26 paths
 gets 18 findings. A test that iterates the list itself (`it.each(DENIED)`) passes whatever the
-list holds; `test-tautology` reports it. When `decision-unspecified` fires for a value a linked
-test does write, the finding is one step lower and says so. Values a test reaches only through a
-lookup (a route table, a fixture in another file) are not seen, so treat these findings as
-hints too. Design: `docs/design/0002-decisions-pinned-by-tests.md`.
+list holds; `test-tautology` reports it. An element that only the tests of another unit checking
+the same collection use (a collection spread into another one) is still reported, one step lower
+and naming that unit: removing it fails that test, but this unit's own tests do not pin it. When
+`decision-unspecified` fires for a value a linked
+test does write, the finding is one step lower and says so. A value also counts as written in two
+other forms: a `match` on a value read with a constant key (`params.get("popup") === "1"`) by a
+`key=value` pair in a literal (`"?popup=1"`), and an identifier-like `match` value by an object
+key the test writes (`sign({ iss: "…" })` pins `claim === "iss"`). A string passed as an option
+to a library call (`toJSONSchema(S, { io: "input" })`) configures the library and is not an
+`output` decision. When a finding fires, it names the closest linked-test literal that contains
+the value. Values a test builds at run time or reaches only through a lookup (a route table, a
+fixture in another file) are not seen, so treat these findings as hints too. Design: `docs/design/0002-decisions-pinned-by-tests.md`.
 
 It matches by value, so it is a hint, not a proof: a value named for one purpose (`100` as an
 example result) also counts for another (`100` as the input length limit), and a value named in
@@ -210,9 +237,17 @@ collection it changed. `units[].mutation` holds the counts; the Step Summary sho
 with a score (killed over killed, survived and not covered), and `specgate docs` adds them to
 each unit's page and a score column to the index. `mutant-survived` reports each mutant
 the linked tests let through, and `unit-not-executed` a unit that its tests never run. An
-equivalent mutant (one no test can tell apart) is accepted with `check --accept-baseline`: the
-fingerprint holds the unit, the mutator and the replacement but not the line, so it stays
-accepted when code moves. specgate does not check that the report is newer than the sources.
+equivalent mutant (one no test can tell apart) is accepted next to the code with
+`@acceptFinding mutant-survived EqualityOperator:"age > 18" <reason>`, or with
+`check --accept-baseline`: the fingerprint holds the unit, the mutator and the replacement but not
+the line, so it stays accepted when code moves. `mutation.findings: "unit"` gives one finding per unit instead of one per
+mutant, and `mutation.exclude` keeps code tested outside this config out of the findings. specgate
+does not check that the report is newer than the sources.
+
+A mutation report does not replace the `member` checks. Removing one element of an array is not a
+mutant in common tools (Stryker replaces an element with `""`, which any test that checks the
+list's elements kills), so a deny list missing from its tests keeps the same mutation score;
+`decision-untested` and `test-tautology` stay the check for collections.
 Design: `docs/design/0003-mutation-report.md`.
 
 ## The coding procedure specgate assumes
@@ -279,6 +314,8 @@ The integration tests regenerate it on every run, so it never drifts from the co
 - Identifier resolution is lexical. A word that happens to be PascalCase and names a program
   type resolves even when it was meant as prose; `resolve.ignore` and `allowProgramTypes: false`
   tighten this.
+- `decision-untested` reads values a test writes as literals, `key=value` pairs and object keys.
+  A value the test builds at run time, or reaches through a lookup table, does not count.
 - Windows paths are normalised to POSIX in the IR but the tool has only been exercised on
   macOS and Linux.
 - Performance has been measured on single files (a 967-line use case in a 1,200-file monorepo

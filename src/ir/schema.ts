@@ -122,6 +122,11 @@ export interface Decision {
   collection?: { name: string; file: string; line: number; endLine: number };
   /** `member` decisions: how the unit compares its input with the element */
   probe?: MemberProbe;
+  /**
+   * `match` decisions: the constant key the compared value is read with (`params.get("popup")`,
+   * `obj["popup"]`, `obj.popup`), so a test writing `"?popup=1"` uses the value `1`
+   */
+  key?: string;
 }
 
 export interface Unit {
@@ -162,11 +167,25 @@ export interface Unit {
   guarantees: Guarantee[];
   examples: Example[];
   supersedes?: string;
+  /**
+   * `@acceptFinding` tags: findings on this unit accepted in the source, with the reason. A field
+   * is empty when the tag leaves it out (reported by `accept-tag-invalid`).
+   */
+  accepts?: AcceptTag[];
   hasDoc: boolean;
   /** `type` units: the declared type text (not expanded) */
   typeText?: string;
   /** `entry` units */
   entry?: EntryInfo;
+}
+
+/** One `@acceptFinding <rule> <target> <reason>` tag. */
+export interface AcceptTag {
+  rule: string;
+  /** The value the finding quotes, `Mutator` / `Mutator:"replacement"` for a mutant, or `*` */
+  target: string;
+  reason: string;
+  line: number;
 }
 
 /**
@@ -232,6 +251,12 @@ export interface TestCase {
    */
   literals: string[];
   /**
+   * Identifier and string keys of the object literals the test body and its `each` tables write,
+   * plus those of same-file module-level constants they reference by name (one hop), e.g. `iss`
+   * in `sign({ iss: "https://evil.example" })`. Capped at `tests.literalLimit`.
+   */
+  keys: string[];
+  /**
    * Imported constants the test takes its cases from (`each` table argument, `for…of`, the
    * receiver of `forEach` / `map` / `every` / `some`, or `new Set(X)` / `[...X]` /
    * `Array.from(X)`), with the module they come from (relative to root when it resolves to a
@@ -251,8 +276,13 @@ export interface Finding {
   unit?: string;
   guarantee?: string;
   test?: string;
-  /** Recorded in the accepted-findings file; reported as `info` (see `check --accept-baseline`). */
+  /**
+   * Accepted: recorded in the accepted-findings file (`check --accept-baseline`) or by an
+   * `@acceptFinding` tag; reported as `info`.
+   */
   accepted?: boolean;
+  /** The reason an `@acceptFinding` tag gives; absent for the accepted-findings file. */
+  acceptedReason?: string;
   /** `mutant-survived`: the mutant the finding is about */
   mutant?: FindingMutant;
 }
@@ -275,6 +305,13 @@ export interface Report {
   tool: { name: string; version: string };
   generatedAt: string;
   root: string;
+  /**
+   * The commit the analysed checkout was on, read from `.git` (absent outside a git checkout).
+   * A baseline from another revision may come from another branch; see `baseline-stale`.
+   */
+  revision?: string;
+  /** Hash of the resolved config (without `root`); a baseline under another config is stale too. */
+  configHash?: string;
   mode: "advisory" | "blocking";
   units: Unit[];
   vocabulary: { entities: Entity[]; ports: PortDecl[] };

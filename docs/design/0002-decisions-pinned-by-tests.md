@@ -94,8 +94,9 @@ Matching a value against literals:
 - anything else: equality
 
 `decision-untested` does not fire where `decision-unspecified` fires. A `member` element reached
-from several units (through a spread) counts as used when a test of any of them uses it, and is
-reported once, on a unit in the collection's own module when there is one.
+from several units (through a spread) is reported once, on a unit in the collection's own module
+when there is one. Since 0.5.0 (#38), an element that only another of those units' tests use is
+still reported, one step lower and naming that unit; before, it counted as used for all of them.
 
 `test-tautology` looks at the linked tests of a unit that checks membership in the collection. A
 test keyed to another unit may walk the list to check a property of the list itself ("every

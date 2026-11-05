@@ -27,6 +27,11 @@
       "allowMultiple": false
     },
     {
+      "tagName": "@acceptFinding",
+      "syntaxKind": "block",
+      "allowMultiple": true
+    },
+    {
       "tagName": "@entity",
       "syntaxKind": "modifier"
     },

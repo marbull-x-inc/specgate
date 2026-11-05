@@ -1,5 +1,6 @@
 import { type Config, RULE_IDS, type RuleId, severityOf } from "../config/schema.ts";
 import type { Finding, Report, Severity, TestCase, Unit } from "../ir/schema.ts";
+import { applyAcceptTags } from "./accept-tags.ts";
 import { evaluateDecisionRules, linkedTestsIndex } from "./decisions.ts";
 import { evaluateMutationRules, type MutationRuleInput } from "./mutation.ts";
 
@@ -27,6 +28,8 @@ export interface RuleContext {
   unmappedEntries?: readonly string[];
   /** Collections whose `member` decisions were cut at `decisions.collectionLimit`. */
   truncatedCollections?: ReadonlyArray<{ name: string; file: string; size: number }>;
+  /** The default baseline came from another revision or config (see `baseline-stale`). */
+  baselineStale?: { baseline: string; current: string };
   /** The mutation report (`mutation.report`), mapped to units; absent when none is configured. */
   mutation?: Omit<MutationRuleInput, "linkedTests">;
 }
@@ -225,15 +228,28 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
     }
   }
 
-  if (ctx.baseline) evaluateAgainstBaseline(ctx, ctx.baseline, emit);
+  if (ctx.baseline) {
+    const stale = ctx.baselineStale;
+    if (stale)
+      emit("baseline-stale", {
+        message: `the baseline report was written on ${stale.baseline}, this run is on ${stale.current}; it may come from another branch, so the change-detection findings are one step lower. Pass --baseline to compare on purpose`,
+        file: `${ctx.config.output.dir}/report.json`,
+      });
+    evaluateAgainstBaseline(
+      ctx,
+      ctx.baseline,
+      stale ? (rule, draft) => emit(rule, { ...draft, downgrade: true }) : emit,
+    );
+  }
 
-  const findings: Finding[] = [];
+  const raw: Finding[] = [];
   for (const { rule, draft } of drafts) {
     const { downgrade, ...finding } = draft;
     const configured = toIrSeverity(ctx.config, rule);
     const severity = configured && downgrade ? lowered(configured) : configured;
-    if (severity) findings.push({ ...finding, severity });
+    if (severity) raw.push({ ...finding, severity });
   }
+  const findings = applyAcceptTags(ctx.units, raw, (rule) => toIrSeverity(ctx.config, rule));
   const order: Record<Severity, number> = { fail: 0, warn: 1, info: 2 };
   return findings.sort(
     (a, b) =>

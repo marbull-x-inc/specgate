@@ -10,9 +10,11 @@ import { createTsdocParser } from "./extract/tsdoc-parser.ts";
 import { isReport, type Report, type Unit } from "./ir/schema.ts";
 import { countMutants, mapMutants, readMutationReport } from "./mutation/report.ts";
 import { attachProvenance } from "./provenance/git.ts";
+import { readRevision } from "./provenance/revision.ts";
 import { resolveReferences } from "./resolve/identifiers.ts";
 import { evaluateRules } from "./rules/index.ts";
-import { expandGlobs, fileExists } from "./util/paths.ts";
+import { sha256 } from "./util/hash.ts";
+import { expandGlobs, fileExists, globToRegExp } from "./util/paths.ts";
 
 export const TOOL = { name: "specgate", version: "0.4.0" } as const;
 
@@ -33,13 +35,44 @@ export interface AnalyzeOptions {
   accepted?: boolean;
 }
 
-function loadBaseline(config: Config, explicit: Report | null | undefined): Report | undefined {
+/**
+ * The previous report for change detection. `chosen` is true when someone picked it (`--baseline`,
+ * `output.baseline`), false for the default `<output.dir>/report.json` a previous local run left.
+ */
+function loadBaseline(
+  config: Config,
+  explicit: Report | null | undefined,
+): { report: Report; chosen: boolean } | undefined {
   if (explicit === null) return undefined;
-  if (explicit) return explicit;
+  if (explicit) return { report: explicit, chosen: true };
   const path = resolve(config.root, config.output.baseline ?? `${config.output.dir}/report.json`);
   if (!fileExists(path)) return undefined;
   const parsed: unknown = JSON.parse(readFileSync(path, "utf8"));
-  return isReport(parsed) ? parsed : undefined;
+  return isReport(parsed) ? { report: parsed, chosen: config.output.baseline !== undefined } : undefined;
+}
+
+/** Hash of the resolved config without `root`, which differs between checkouts of the same code. */
+function configHashOf(config: Config): string {
+  const { root: _root, ...rest } = config;
+  return sha256(JSON.stringify(rest)).slice(0, 16);
+}
+
+/**
+ * A default baseline written on another revision or under another config: the comparison may be
+ * across branches, so the change-detection findings are lowered and `baseline-stale` says why.
+ */
+function staleness(
+  baseline: { report: Report; chosen: boolean } | undefined,
+  revision: string | undefined,
+  configHash: string,
+): { baseline: string; current: string } | undefined {
+  if (!baseline || baseline.chosen) return undefined;
+  const b = baseline.report;
+  if (b.revision !== undefined && revision !== undefined && b.revision !== revision)
+    return { baseline: `revision ${b.revision.slice(0, 12)}`, current: `revision ${revision.slice(0, 12)}` };
+  if (b.configHash !== undefined && b.configHash !== configHash)
+    return { baseline: `config ${b.configHash}`, current: `config ${configHash}` };
+  return undefined;
 }
 
 /**
@@ -92,6 +125,9 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
             "error" in mutationRead
               ? mutationRead
               : { mapped: mapMutants(units, mutationRead.mutants, config.mutation.detected) },
+          findings: config.mutation.findings,
+          listLimit: config.mutation.listLimit,
+          excluded: unitMatcher(config.mutation.exclude),
         };
   if (mutation && "mapped" in mutation.result)
     for (const [unit, counts] of countMutants(mutation.result.mapped)) unit.mutation = counts;
@@ -101,6 +137,9 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
     ...configMessages.map((text) => ({ file: "tsdoc.json", line: 1, text })),
   ];
   const baseline = loadBaseline(config, options.baseline);
+  const revision = readRevision(config.root);
+  const configHash = configHashOf(config);
+  const stale = staleness(baseline, revision, configHash);
   const findings = applyAccepted(
     evaluateRules({
       config,
@@ -108,7 +147,8 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
       tests: testExtraction.tests,
       unlinked: testExtraction.unlinked,
       docMessages,
-      baseline,
+      baseline: baseline?.report,
+      ...(stale ? { baselineStale: stale } : {}),
       strayGuarantees: surface.strayGuarantees,
       surfaceFileCount: surfaceFiles.length,
       unmappedEntries: entries.filter((e) => e.source === undefined).map((e) => e.subpath),
@@ -126,6 +166,8 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
     tool: { ...TOOL },
     generatedAt: new Date().toISOString(),
     root: config.root,
+    ...(revision !== undefined ? { revision } : {}),
+    configHash,
     mode: config.mode,
     units: units.sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line),
     vocabulary: { entities: surface.entities, ports: surface.ports },
@@ -153,4 +195,11 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
 export function exitCodeFor(report: Report, strict = false): number {
   if (report.mode === "advisory" && !strict) return 0;
   return report.summary.findings.fail > 0 ? 1 : 0;
+}
+
+/** `mutation.exclude`: an entry is a unit id, or a glob over the unit's file. */
+function unitMatcher(entries: readonly string[]): (unit: Unit) => boolean {
+  const ids = new Set(entries);
+  const globs = entries.map(globToRegExp);
+  return (unit) => ids.has(unit.id) || globs.some((g) => g.test(unit.file));
 }

@@ -63,7 +63,12 @@ export function applyAccepted(findings: readonly Finding[], accepted: ReadonlySe
  */
 export function writeAccepted(config: Config, findings: readonly Finding[]): { path: string; count: number } {
   const keep = [
-    ...new Set(findings.filter((f) => f.severity !== "info" || f.accepted === true).map(fingerprint)),
+    ...new Set(
+      findings
+        // A finding accepted by an @acceptFinding tag stays accepted in the source, not in the file.
+        .filter((f) => f.acceptedReason === undefined && (f.severity !== "info" || f.accepted === true))
+        .map(fingerprint),
+    ),
   ].sort();
   const path = acceptedPath(config);
   const file: AcceptedFile = { version: 1, findings: keep };

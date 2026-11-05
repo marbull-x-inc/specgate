@@ -77,12 +77,64 @@ export function collectDecisions(
   const visitedBodies = new Set<ts.Node>();
   const recordedConstants = new Set<ts.Node>();
 
-  const add = (kind: DecisionKind, node: ts.Node, values: string[], names: string[]): void => {
+  const add = (kind: DecisionKind, node: ts.Node, values: string[], names: string[], readKey?: string): void => {
     if (values.length === 0) return;
-    const key = `${kind}|${values.join("|")}|${names.join("|")}`;
+    const key = `${kind}|${values.join("|")}|${names.join("|")}|${readKey ?? ""}`;
     if (seen.has(key)) return;
     seen.add(key);
-    out.push({ kind, expression: oneLine(node.getText(sf)), line: lineOf(sf, node.getStart(sf)), values, names });
+    out.push({
+      kind,
+      expression: oneLine(node.getText(sf)),
+      line: lineOf(sf, node.getStart(sf)),
+      values,
+      names,
+      ...(readKey !== undefined ? { key: readKey } : {}),
+    });
+  };
+
+  /** A string literal, or a `const` initialised with one (any module). */
+  const stringValue = (node: ts.Expression): string | undefined => {
+    const e = unwrapExpression(node);
+    if (isStringLike(e)) return e.text;
+    const decl = constDeclarationOf(e);
+    if (!decl?.initializer) return undefined;
+    const init = unwrapExpression(decl.initializer);
+    return isStringLike(init) ? init.text : undefined;
+  };
+
+  /** The constant key a value is read with: `params.get(K)`, `obj[K]`, `obj.K`. */
+  const readKeyOf = (side: ts.Expression): string | undefined => {
+    const e = unwrapExpression(side);
+    if (ts.isCallExpression(e) && ts.isPropertyAccessExpression(e.expression) && e.expression.name.text === "get") {
+      const arg = e.arguments[0];
+      return e.arguments.length === 1 && arg ? stringValue(arg) : undefined;
+    }
+    if (ts.isElementAccessExpression(e)) return stringValue(e.argumentExpression);
+    if (ts.isPropertyAccessExpression(e)) return e.name.text;
+    return undefined;
+  };
+
+  /**
+   * A string configuring a library call: a property value of an object literal passed straight to
+   * a function declared only outside the project (`z.toJSONSchema(S, { io: "input" })`). It is
+   * not observable output of the unit.
+   */
+  const isLibraryOption = (node: ts.Node): boolean => {
+    const prop = node.parent;
+    if (!ts.isPropertyAssignment(prop) || prop.initializer !== node) return false;
+    let obj: ts.Node = prop.parent;
+    while (
+      ts.isParenthesizedExpression(obj.parent) ||
+      ts.isAsExpression(obj.parent) ||
+      ts.isSatisfiesExpression(obj.parent)
+    )
+      obj = obj.parent;
+    const call = obj.parent;
+    if (!ts.isObjectLiteralExpression(prop.parent) || !ts.isCallExpression(call)) return false;
+    if (!call.arguments.some((a) => a === obj)) return false;
+    const callee = ts.isPropertyAccessExpression(call.expression) ? call.expression.name : call.expression;
+    const decls = host.declarationsOf(callee);
+    return decls.length > 0 && decls.every((d) => isOutsideProject(d.getSourceFile().fileName));
   };
 
   const constDeclarationOf = (node: ts.Expression): ts.VariableDeclaration | undefined => {
@@ -322,10 +374,12 @@ export function collectDecisions(
       ) {
         if (!isTypeofSide(node.left) && !isTypeofSide(node.right)) {
           for (const side of [node.left, node.right]) {
-            if (isStringLike(side) && side.text.length > 0) add("match", node, [side.text], []);
+            const other = side === node.left ? node.right : node.left;
+            const readKey = readKeyOf(other);
+            if (isStringLike(side) && side.text.length > 0) add("match", node, [side.text], [], readKey);
             else {
               const v = sideValue(side);
-              if (v && !isTrivialNumber(v.value)) add("match", node, [numberText(v.value)], v.names);
+              if (v && !isTrivialNumber(v.value)) add("match", node, [numberText(v.value)], v.names, readKey);
             }
           }
         }
@@ -350,7 +404,7 @@ export function collectDecisions(
         add("match", node.expression, [numberText(Number(e.text))], []);
     }
 
-    if (inReturn && !isPropertyKey(node) && !isOperandOfTest(node) && !isErrorMessage(node)) {
+    if (inReturn && !isPropertyKey(node) && !isOperandOfTest(node) && !isErrorMessage(node) && !isLibraryOption(node)) {
       if (isStringLike(node) && hasWordCharacter(node.text)) add("output", node, [node.text], []);
       if (ts.isTemplateExpression(node)) {
         const parts = [node.head.text, ...node.templateSpans.map((s) => s.literal.text)]
@@ -535,6 +589,11 @@ function isErrorMessage(node: ts.Node): boolean {
     /(?:Error|Exception)$/.test(p.expression.getText()) &&
     (p.arguments ?? []).some((a) => a === node)
   );
+}
+
+/** A declaration file or an installed package: code the project does not own. */
+function isOutsideProject(fileName: string): boolean {
+  return fileName.endsWith(".d.ts") || /[\\/]node_modules[\\/]/.test(fileName);
 }
 
 function isPropertyKey(node: ts.Node): boolean {

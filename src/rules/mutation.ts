@@ -1,5 +1,5 @@
 import type { TestCase, Unit } from "../ir/schema.ts";
-import type { MappedMutant } from "../mutation/report.ts";
+import type { MappedMutant, MutantPlace } from "../mutation/report.ts";
 
 /**
  * Rules over a mutation report: which mutants the linked tests let through, and which units
@@ -16,6 +16,12 @@ export interface MutationRuleInput {
   /** Mutants mapped to units, or why the report could not be read */
   result: { mapped: readonly MappedMutant[] } | { error: string };
   linkedTests: (unitId: string) => readonly TestCase[];
+  /** `mutation.findings`: one `mutant-survived` per mutant (default) or one per unit */
+  findings?: "mutant" | "unit";
+  /** `mutation.listLimit`: survivors listed in a per-unit finding */
+  listLimit?: number;
+  /** `mutation.exclude`: units whose mutants are counted but give no findings */
+  excluded?: (unit: Unit) => boolean;
 }
 
 export type MutationRuleId = "mutant-survived" | "unit-not-executed" | "mutation-report-unreadable";
@@ -29,10 +35,52 @@ export interface MutationDraft {
 }
 
 const REPLACEMENT_LENGTH = 60;
+const DEFAULT_LIST_LIMIT = 5;
 
 function shortened(text: string): string {
   const one = text.replace(/\s+/g, " ").trim();
   return one.length > REPLACEMENT_LENGTH ? `${one.slice(0, REPLACEMENT_LENGTH - 1)}…` : one;
+}
+
+/** A mutant the linked tests let through, described for the unit it is reported on. */
+interface Survivor {
+  mapped: MappedMutant;
+  unit: Unit;
+  /** `StringLiteral mutant in BLOCKED: \`""\`` */
+  what: string;
+  /** Other units that reach the mutant */
+  others: string[];
+}
+
+function describeSurvivor(m: MappedMutant, unit: Unit, place: MutantPlace, others: string[]): Survivor {
+  const mutant = m.mutant;
+  const decision =
+    place === "collection"
+      ? unit.decisions.find(
+          (d) =>
+            d.kind === "member" &&
+            d.collection?.file === mutant.file &&
+            mutant.line >= d.collection.line &&
+            mutant.line <= d.collection.endLine,
+        )
+      : // The unit's decisions include those of the helpers it reaches, so a helper line is found too.
+        (unit.decisions.find((d) => d.line === mutant.line && d.kind !== "member") ??
+        unit.decisions.find((d) => d.line === mutant.line));
+  const where =
+    place === "helper"
+      ? " in a helper it calls"
+      : place === "collection" && decision?.collection
+        ? ` in ${decision.collection.name}`
+        : "";
+  // On the probe line of a membership test, the mutant changes the test, not one element.
+  const about =
+    !decision || place === "collection"
+      ? ""
+      : decision.kind === "member"
+        ? ` (membership in ${decision.collection?.name ?? decision.names[0] ?? "a collection"})`
+        : ` (the ${decision.kind} ${decision.values.map((v) => JSON.stringify(v)).join(", ")})`;
+  const replaced = mutant.replacement !== undefined ? `: \`${shortened(mutant.replacement)}\`` : "";
+  return { mapped: m, unit, what: `${mutant.mutator} mutant${where}${about}${replaced}`, others };
 }
 
 export function evaluateMutationRules(
@@ -47,6 +95,7 @@ export function evaluateMutationRules(
     return;
   }
   const mapped = input.result.mapped;
+  const excluded = input.excluded ?? (() => false);
 
   // unit-not-executed: a unit with linked tests whose own lines no test ran.
   const bodyOutcomes = new Map<Unit, string[]>();
@@ -60,6 +109,7 @@ export function evaluateMutationRules(
     const tests = input.linkedTests(unit.id);
     if (tests.length === 0) continue;
     notExecuted.add(unit);
+    if (excluded(unit)) continue;
     emit("unit-not-executed", {
       message: `${unit.id} has ${tests.length} linked test(s), but none of them runs its code: all ${counted.length} mutant(s) in it are NoCoverage. The tests may replace it with a stub or call another implementation`,
       file: unit.file,
@@ -68,52 +118,36 @@ export function evaluateMutationRules(
     });
   }
 
-  // mutant-survived: one finding per mutant the tests let through, on the unit it belongs to first.
+  // The mutants the tests let through, each on the first unit it belongs to that is not excluded.
+  const survivors: Survivor[] = [];
   for (const m of mapped) {
     if (m.outcome !== "survived" && m.outcome !== "noCoverage") continue;
-    const first = m.units[0];
+    const reaching = m.units.filter((u) => !excluded(u.unit));
+    const first = reaching[0];
     if (!first) continue;
     const { unit, place } = first;
     // An unexecuted unit is reported once, and a unit with no linked test is not expected to be run.
     if (m.outcome === "noCoverage" && (notExecuted.has(unit) || input.linkedTests(unit.id).length === 0)) continue;
-    const mutant = m.mutant;
-    const decision =
-      place === "collection"
-        ? unit.decisions.find(
-            (d) =>
-              d.kind === "member" &&
-              d.collection?.file === mutant.file &&
-              mutant.line >= d.collection.line &&
-              mutant.line <= d.collection.endLine,
-          )
-        : // The unit's decisions include those of the helpers it reaches, so a helper line is found too.
-          (unit.decisions.find((d) => d.line === mutant.line && d.kind !== "member") ??
-          unit.decisions.find((d) => d.line === mutant.line));
-    const where =
-      place === "helper"
-        ? " in a helper it calls"
-        : place === "collection" && decision?.collection
-          ? ` in ${decision.collection.name}`
-          : "";
-    // On the probe line of a membership test, the mutant changes the test, not one element.
-    const about =
-      !decision || place === "collection"
-        ? ""
-        : decision.kind === "member"
-          ? ` (membership in ${decision.collection?.name ?? decision.names[0] ?? "a collection"})`
-          : ` (the ${decision.kind} ${decision.values.map((v) => JSON.stringify(v)).join(", ")})`;
-    const replaced = mutant.replacement !== undefined ? `: \`${shortened(mutant.replacement)}\`` : "";
-    const others = m.units.slice(1).map((u) => u.unit.id);
-    const also = others.length > 0 ? `; also reached from ${[...new Set(others)].join(", ")}` : "";
+    const others = [...new Set(reaching.slice(1).map((u) => u.unit.id))];
+    survivors.push(describeSurvivor(m, unit, place, others));
+  }
+
+  if (input.findings === "unit") {
+    emitPerUnit(survivors, input.listLimit ?? DEFAULT_LIST_LIMIT, emit);
+    return;
+  }
+  for (const s of survivors) {
+    const mutant = s.mapped.mutant;
+    const also = s.others.length > 0 ? `; also reached from ${s.others.join(", ")}` : "";
     const outcome =
-      m.outcome === "survived"
+      s.mapped.outcome === "survived"
         ? "survived; no linked test fails when the code changes like this"
         : "is not run by any test";
     emit("mutant-survived", {
-      message: `${unit.id}: ${mutant.mutator} mutant${where}${about}${replaced} ${outcome}${also}`,
+      message: `${s.unit.id}: ${s.what} ${outcome}${also}`,
       file: mutant.file,
       line: mutant.line,
-      unit: unit.id,
+      unit: s.unit.id,
       mutant: {
         id: mutant.id,
         mutator: mutant.mutator,
@@ -121,6 +155,35 @@ export function evaluateMutationRules(
         status: mutant.status,
         line: mutant.line,
       },
+    });
+  }
+}
+
+/** `mutation.findings: "unit"`: one `mutant-survived` per unit, listing its first survivors by line. */
+function emitPerUnit(
+  survivors: readonly Survivor[],
+  listLimit: number,
+  emit: (rule: MutationRuleId, draft: MutationDraft) => void,
+): void {
+  const byUnit = new Map<Unit, Survivor[]>();
+  for (const s of survivors) byUnit.set(s.unit, [...(byUnit.get(s.unit) ?? []), s]);
+  for (const [unit, list] of byUnit) {
+    const sorted = [...list].sort((a, b) => a.mapped.mutant.line - b.mapped.mutant.line);
+    const survived = sorted.filter((s) => s.mapped.outcome === "survived").length;
+    const notRun = sorted.length - survived;
+    const counts = [
+      ...(survived > 0 ? [`${survived} survived`] : []),
+      ...(notRun > 0 ? [`${notRun} not run by any test`] : []),
+    ].join(", ");
+    const shown = sorted
+      .slice(0, Math.max(0, listLimit))
+      .map((s) => `line ${s.mapped.mutant.line} ${s.what}${s.mapped.outcome === "noCoverage" ? " (not run)" : ""}`);
+    const more = sorted.length > shown.length ? `; and ${sorted.length - shown.length} more` : "";
+    const first = sorted[0];
+    emit("mutant-survived", {
+      message: `${unit.id}: ${sorted.length} mutant(s) the linked tests let through (${counts})${shown.length > 0 ? `: ${shown.join("; ")}` : ""}${more}`,
+      ...(first ? { file: first.mapped.mutant.file, line: first.mapped.mutant.line } : { file: unit.file }),
+      unit: unit.id,
     });
   }
 }

@@ -290,7 +290,7 @@ describe("parseMutationReport", () => {
  * the schema leaves open: testFiles, config, framework). Only projectRoot was replaced and the
  * framework's branding removed. The project is rebuilt from the report's own sources.
  */
-async function strykerProject() {
+async function strykerProject(mutation: ConfigInput["mutation"] = {}) {
   const real = JSON.parse(readFileSync(join(import.meta.dir, "../fixtures/stryker-report/mutation.json"), "utf8"));
   const source: string = real.files["src/policy.ts"].source;
   const dir = project({
@@ -299,7 +299,10 @@ async function strykerProject() {
   });
   mkdirSync(join(dir, "reports"));
   writeFileSync(join(dir, "reports/mutation.json"), JSON.stringify({ ...real, projectRoot: dir }));
-  return { source, report: await reportOf(dir) };
+  return {
+    source,
+    report: await reportOf(dir, { mutation: { report: "reports/mutation.json", ...mutation } }),
+  };
 }
 
 describe("a report written by Stryker", () => {
@@ -352,5 +355,63 @@ describe("a report written by Stryker", () => {
       .files.map((f) => f.content)
       .join("\n");
     expect(docs).not.toContain("Mutant");
+  });
+});
+
+describe("mutation.findings, listLimit and exclude (#41)", () => {
+  test('findings: "unit" gives one finding per unit with survivors, listing at most listLimit', async () => {
+    const { source, report } = await strykerProject({ findings: "unit", listLimit: 1 });
+    const survived = report.findings.filter((f) => f.rule === "mutant-survived");
+    expect(survived.map((f) => [f.unit, f.line]).sort()).toEqual([
+      ["Pricing#total", lineOf(source, "amount >= 100")],
+      ["isAdult", lineOf(source, "age >= 18")],
+      ["isBlocked", lineOf(source, '"/blocked/b"')],
+    ]);
+    expect(survived.find((f) => f.unit === "isAdult")?.message).toBe(
+      `isAdult: 2 mutant(s) the linked tests let through (2 survived): line ${lineOf(source, "age >= 18")} ConditionalExpression mutant in a helper it calls (the boundary "18"): \`true\`; and 1 more`,
+    );
+    expect(survived.every((f) => f.mutant === undefined)).toBe(true);
+    // The counts and unit-not-executed do not change.
+    expect(report.units.find((u) => u.id === "isAdult")?.mutation?.survived).toBe(2);
+    expect(report.findings.filter((f) => f.rule === "unit-not-executed").map((f) => f.unit)).toEqual(["greet"]);
+  });
+
+  test("exclude by unit id or file glob keeps the counts and drops the findings", async () => {
+    const byId = await strykerProject({ exclude: ["Pricing#total", "greet"] });
+    expect(byId.report.findings.filter((f) => f.rule === "mutant-survived").map((f) => f.unit)).toEqual([
+      "isBlocked",
+      "isAdult",
+      "isAdult",
+    ]);
+    expect(byId.report.findings.filter((f) => f.rule === "unit-not-executed")).toEqual([]);
+    expect(byId.report.units.find((u) => u.id === "Pricing#total")?.mutation?.survived).toBe(2);
+
+    const byGlob = await strykerProject({ exclude: ["src/**/policy.ts"] });
+    expect(byGlob.report.findings.filter((f) => f.rule.startsWith("mutant") || f.rule === "unit-not-executed")).toEqual(
+      [],
+    );
+    expect(byGlob.report.units.find((u) => u.id === "greet")?.mutation?.noCoverage).toBe(2);
+  });
+});
+
+describe("@acceptFinding on a mutant (#40)", () => {
+  test('Mutator:"replacement" accepts that mutant next to the code, and only that one', async () => {
+    const tagged = POLICY.replace(
+      "/** @guarantee ok.adult an `age` of 18 or more is adult */",
+      '/**\n * @guarantee ok.adult an `age` of 18 or more is adult\n * @acceptFinding mutant-survived EqualityOperator:"age > 18" ages are whole years and 18 is tested in the caller\n */',
+    );
+    expect(tagged).not.toBe(POLICY);
+    const dir = project({
+      "src/policy.ts": tagged,
+      "tests/policy.test.ts": TESTS,
+      "reports/mutation.json": reportJson(tagged),
+    });
+    const report = await reportOf(dir);
+    const survived = report.findings.filter((f) => f.rule === "mutant-survived");
+    expect(survived.map((f) => [f.unit, f.mutant?.replacement, f.severity, f.acceptedReason ?? null])).toEqual([
+      ["isBlocked", '""', "warn", null],
+      ["isAdult", "age > 18", "info", "ages are whole years and 18 is tested in the caller"],
+    ]);
+    expect(report.findings.filter((f) => f.rule.startsWith("accept-tag"))).toEqual([]);
   });
 });

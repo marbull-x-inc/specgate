@@ -31,6 +31,14 @@
     "root": {
       "type": "string"
     },
+    "revision": {
+      "description": "The commit the analysed checkout was on, read from .git",
+      "type": "string"
+    },
+    "configHash": {
+      "description": "Hash of the resolved config, without root",
+      "type": "string"
+    },
     "mode": {
       "type": "string",
       "enum": [
@@ -284,6 +292,10 @@
                     "suffix",
                     "contains"
                   ]
+                },
+                "key": {
+                  "description": "match decisions: the constant key the compared value is read with",
+                  "type": "string"
                 }
               },
               "required": [
@@ -530,6 +542,36 @@
           "supersedes": {
             "type": "string"
           },
+          "accepts": {
+            "description": "@acceptFinding tags: findings on this unit accepted in the source, with the reason",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rule": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "rule",
+                "target",
+                "reason",
+                "line"
+              ],
+              "additionalProperties": false
+            }
+          },
           "hasDoc": {
             "type": "boolean"
           },
@@ -746,6 +788,13 @@
             },
             "description": "Literal values the test body, its each tables and same-file fixtures use (capped at tests.literalLimit)"
           },
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Identifier and string keys of the object literals the test body, its each tables and same-file fixtures write (capped at tests.literalLimit)"
+          },
           "iterates": {
             "type": "array",
             "items": {
@@ -782,6 +831,7 @@
           "status",
           "bodyHash",
           "literals",
+          "keys",
           "iterates",
           "requirementIds"
         ],
@@ -825,8 +875,12 @@
             "type": "string"
           },
           "accepted": {
-            "description": "Recorded in the accepted-findings file; reported as info",
+            "description": "Recorded in the accepted-findings file or by an @acceptFinding tag; reported as info",
             "type": "boolean"
+          },
+          "acceptedReason": {
+            "description": "The reason an @acceptFinding tag gives",
+            "type": "string"
           },
           "mutant": {
             "description": "mutant-survived: the mutant the finding is about",

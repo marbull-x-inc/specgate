@@ -56,6 +56,8 @@ export interface ParsedDoc {
   modifies: string[];
   invariants: DocTagged[];
   supersedes: string | undefined;
+  /** `@acceptFinding <rule-id> <value> <reason>`; fields are empty when missing */
+  acceptFindings: Array<{ rule: string; target: string; reason: string; lineOffset: number }>;
   isEntity: boolean;
   isPort: boolean;
   examples: DocExample[];
@@ -73,6 +75,7 @@ export function builtinTagDefinitions(): TSDocTagDefinition[] {
     block("@uses", true),
     block("@modifies", true),
     block("@supersedes", false),
+    block("@acceptFinding", true),
     modifier("@entity"),
     modifier("@port"),
   ];
@@ -299,6 +302,18 @@ function parseExampleLine(line: string, lineOffset: number): DocExample | undefi
   return { expression, expected, lineOffset };
 }
 
+/**
+ * `<rule-id> <value> <reason>`. The value is one token; a double-quoted token may hold spaces
+ * (`"amount > 100"`, `EqualityOperator:"amount > 100"`).
+ */
+export function splitAcceptFinding(text: string): { rule: string; target: string; reason: string } {
+  const flat = text.replace(/\s+/g, " ").trim();
+  const rule = /^\S*/.exec(flat)?.[0] ?? "";
+  const rest = flat.slice(rule.length).trimStart();
+  const target = /^(?:[^\s"]|"[^"]*")*/.exec(rest)?.[0] ?? "";
+  return { rule, target, reason: rest.slice(target.length).trim() };
+}
+
 function splitIdentifiers(text: string): string[] {
   return text
     .split(/[\s,、]+/)
@@ -335,6 +350,7 @@ export function parseDocComment(
   const invariants: DocTagged[] = [];
   const examples: DocExample[] = [];
   let supersedes: string | undefined;
+  const acceptFindings: ParsedDoc["acceptFindings"] = [];
 
   for (const block of comment.customBlocks) {
     const tag = block.blockTag.tagNameWithUpperCase;
@@ -357,6 +373,9 @@ export function parseDocComment(
         break;
       case "@SUPERSEDES":
         supersedes = text;
+        break;
+      case "@ACCEPTFINDING":
+        acceptFindings.push({ ...splitAcceptFinding(text), lineOffset });
         break;
       case "@THROWS": {
         const { errorType } = leadingLinkOf(block);
@@ -394,6 +413,7 @@ export function parseDocComment(
     modifies,
     invariants,
     supersedes,
+    acceptFindings,
     isEntity: comment.modifierTagSet.hasTagName("@entity"),
     isPort: comment.modifierTagSet.hasTagName("@port"),
     examples,
