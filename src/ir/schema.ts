@@ -95,9 +95,16 @@ export interface EntryInfo {
 
 /**
  * Kind of a value the implementation commits to: a `boundary` it compares against, a
- * `constant` it computes with, an `output` string it returns, a value it `match`es input to.
+ * `constant` it computes with, an `output` string it returns, a value it `match`es input to,
+ * a `member` of a module-level collection it tests membership in.
  */
-export type DecisionKind = "boundary" | "constant" | "output" | "match";
+export type DecisionKind = "boundary" | "constant" | "output" | "match" | "member";
+
+/**
+ * How a unit tests membership in a collection: equality (`includes`, `has`, `in`), or whether
+ * the input starts with, ends with or contains an element (`some((p) => v.startsWith(p))`).
+ */
+export type MemberProbe = "exact" | "prefix" | "suffix" | "contains";
 
 export interface Decision {
   kind: DecisionKind;
@@ -108,6 +115,10 @@ export interface Decision {
   values: string[];
   /** Names of the constants involved, if any */
   names: string[];
+  /** `member` decisions: the collection constant the element is declared in, and its module (relative to root) */
+  collection?: { name: string; file: string };
+  /** `member` decisions: how the unit compares its input with the element */
+  probe?: MemberProbe;
 }
 
 export interface Unit {
@@ -180,6 +191,20 @@ export interface TestCase {
   title: string;
   status: TestStatus;
   bodyHash: string;
+  /**
+   * Literal values the test body and its `each` tables use, plus same-file module-level
+   * constants they reference by name (one hop): non-empty strings as written, template parts
+   * with a word character, numbers other than 0, 1 and -1 as `String(n)`. Capped at
+   * `tests.literalLimit`.
+   */
+  literals: string[];
+  /**
+   * Imported constants the test takes its cases from (`each` table argument, `for…of`, the
+   * receiver of `forEach` / `map` / `every` / `some`, or `new Set(X)` / `[...X]` /
+   * `Array.from(X)`), with the module they come from (relative to root when it resolves to a
+   * file, the import specifier otherwise).
+   */
+  iterates: Array<{ name: string; from: string }>;
   /** Opaque frozen-requirement ids from the file header, if enabled */
   requirementIds: string[];
 }

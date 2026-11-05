@@ -62,6 +62,7 @@ instead. A `@guarantee` anywhere else is reported by `guarantee-on-non-unit`.
 | `titlePrefixes`                               | `[]`                                                      | More prefixes stripped from a title before the key is read, for categories `gen` should not write (for example `["異常系:"]` when `prefixes.err` is `"準正常系:"`). Matching only.                                                                                                                                                                                                                    |
 | `prefixRules`                                 | `[]`                                                      | `[{ id, throws?, prefix }]`, tried in order before `prefixes[kind]` when `gen` writes a title: the first rule whose `id` regular expression matches the guarantee id (and `throws`, if given, its error type) gives the prefix. Use it when a kind splits into categories, such as 4xx and 5xx errors.                                                                                                |
 | `arrange`                                     | unset                                                     | `{ sut?, port?, imports? }` templates for projects whose tests take the unit and its dependencies from a container. `sut` replaces `new Target(ports…)`; `port` replaces each port's stub; placeholders `{Target}`, `{operation}`, `{Port}`, `{member}`; `imports` are added as written. With `port` set, the frame, atomic and idempotent skeletons (which need recording stubs) become `test.todo`. |
+| `literalLimit`                                | `1000`                                                    | Most literal values recorded per test (`TestCase.literals`), which `decision-untested` and the `decision-unspecified` downgrade read.                                                                                                                                                                                                                                                                 |
 
 ## `ids`
 
@@ -108,15 +109,27 @@ instead. A `@guarantee` anywhere else is reported by `guarantee-on-non-unit`.
 
 ## `decisions`
 
-| Option   | Default | Meaning                                                                                                                                                                         |
-| -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ignore` | `[]`    | Values (`"1000"`, `"__proto__"`) or constant names (`"RETRY_LIMIT"`) that `decision-unspecified` treats as named. Use it for values you deliberately leave out of the contract. |
+| Option            | Default | Meaning                                                                                                                                                                                                                            |
+| ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ignore`          | `[]`    | Values (`"1000"`, `"__proto__"`) or constant names (`"RETRY_LIMIT"`) that `decision-unspecified` treats as named and `decision-untested` does not ask the tests for. Use it for values you deliberately leave out of the contract. |
+| `collectionLimit` | `500`   | Most `member` decisions recorded per collection. Beyond it, `decision-collection-truncated` reports the collection once. A collection name in `ignore` skips it entirely (generated route manifests, for example).                 |
 
 A decision counts as named when a guarantee or `@example` of the unit, or of a surface unit that
 calls it, contains one of its values (numbers compared by value, so `86_400_000` and `8.64e7`
 count; strings with no letter directly before or after them, a plural `s` allowed) or its
 constant name in a code span (names of three characters or more). `0`, `1`, `-1`, empty strings,
 `typeof` checks and thrown error messages are never decisions.
+
+A `member` decision is one element of a module-level collection the unit tests membership in
+(`includes`, `has`, `in`, `some((p) => v.startsWith(p))`, …). It is named when the guarantee
+names the collection in a code span. Members the contract never names are reported once per
+collection, not per element.
+
+A decision counts as used by a test when a test linked to the unit, or to a surface unit that
+calls it, writes the value as a literal in its body, its `each` table or a module-level `const`
+of the same test file that they reference: numbers by value (a `boundary` also by value ± 1), an
+`output` inside a longer string, a `member` the way the unit probes it (a prefix list is pinned
+by a longer path that starts with the element), anything else by equality.
 
 ## `resolve`
 

@@ -97,6 +97,7 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
       strayGuarantees: surface.strayGuarantees,
       surfaceFileCount: surfaceFiles.length,
       unmappedEntries: entries.filter((e) => e.source === undefined).map((e) => e.subpath),
+      truncatedCollections: surface.truncatedCollections,
     }),
     options.accepted === false ? new Set() : readAccepted(config),
   );

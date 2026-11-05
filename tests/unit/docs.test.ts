@@ -95,6 +95,8 @@ const report: Report = {
       title: "Quest#complete.ok.done …",
       status: "todo",
       bodyHash: "b",
+      literals: [],
+      iterates: [],
       requirementIds: [],
     },
   ],

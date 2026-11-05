@@ -222,7 +222,8 @@
                     "boundary",
                     "constant",
                     "output",
-                    "match"
+                    "match",
+                    "member"
                   ]
                 },
                 "expression": {
@@ -244,6 +245,33 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "collection": {
+                  "description": "member decisions: the collection constant the element is declared in",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "file"
+                  ],
+                  "additionalProperties": false
+                },
+                "probe": {
+                  "description": "member decisions: how the unit compares its input with the element",
+                  "type": "string",
+                  "enum": [
+                    "exact",
+                    "prefix",
+                    "suffix",
+                    "contains"
+                  ]
                 }
               },
               "required": [
@@ -642,6 +670,33 @@
           "bodyHash": {
             "type": "string"
           },
+          "literals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Literal values the test body, its each tables and same-file fixtures use (capped at tests.literalLimit)"
+          },
+          "iterates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "from"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Imported constants the test iterates, with the module they come from"
+          },
           "requirementIds": {
             "type": "array",
             "items": {
@@ -657,6 +712,8 @@
           "title",
           "status",
           "bodyHash",
+          "literals",
+          "iterates",
           "requirementIds"
         ],
         "additionalProperties": false

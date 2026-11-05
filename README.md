@@ -99,26 +99,29 @@ export default defineConfig({
 
 ### Rules
 
-| Rule                                              | Default | Meaning                                                                                            |
-| ------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
-| `operation-no-guarantee`                          | fail    | A public operation has no `@guarantee` / `@throws`                                                 |
-| `guarantee-placeholder`                           | fail    | A `TODO` id is still there                                                                         |
-| `guarantee-id-invalid` / `guarantee-id-duplicate` | fail    | Id does not match `ids.pattern`, or repeats within the unit                                        |
-| `guarantee-no-test`                               | fail    | No test names the guarantee key                                                                    |
-| `test-orphan`                                     | fail    | A test names a key that no guarantee has                                                           |
-| `identifier-unresolved`                           | fail    | A code-shaped token in the statement is not a parameter, declared port, entity or public operation |
-| `tsdoc-syntax`                                    | warn    | Undefined tags or malformed TSDoc (HTML/escape pedantry is ignored; `tsdoc.jsdoc` accepts JSDoc)   |
-| `operation-removed`                               | fail    | An operation in the previous report is gone and nothing `@supersedes` it                           |
-| `guarantee-changed-test-unchanged`                | warn    | Statement hash changed, linked tests did not (needs a previous report)                             |
-| `impl-changed-spec-unchanged`                     | warn    | Implementation hash changed, guarantees and tests did not                                          |
-| `uses-mismatch`                                   | warn    | Ports called (including through private helpers) differ from `@uses` / `@modifies`                 |
-| `env-input-direct`                                | warn    | `Date.now`, `new Date`, `Math.random`, `fetch`, … used directly instead of through a port          |
-| `test-todo`                                       | warn    | A linked test is still `test.todo`                                                                 |
-| `decision-unspecified`                            | warn    | The implementation commits to a value (boundary, constant, output, match) no guarantee names       |
-| `guarantee-known-violation`                       | warn    | A linked test is `test.failing` / `test.fails`: the implementation is known not to keep it         |
-| `entry-unmapped`                                  | info    | A `package.json#exports` subpath points only to build output; map it with `surface.entries`        |
-| `guarantee-on-non-unit`                           | fail    | A `@guarantee` sits on a declaration that is not a unit (not exported, private, a type, …)         |
-| `surface-empty`                                   | warn    | No unit was extracted (the message lists the usual causes)                                         |
+| Rule                                              | Default | Meaning                                                                                                                                                                                   |
+| ------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `operation-no-guarantee`                          | fail    | A public operation has no `@guarantee` / `@throws`                                                                                                                                        |
+| `guarantee-placeholder`                           | fail    | A `TODO` id is still there                                                                                                                                                                |
+| `guarantee-id-invalid` / `guarantee-id-duplicate` | fail    | Id does not match `ids.pattern`, or repeats within the unit                                                                                                                               |
+| `guarantee-no-test`                               | fail    | No test names the guarantee key                                                                                                                                                           |
+| `test-orphan`                                     | fail    | A test names a key that no guarantee has                                                                                                                                                  |
+| `identifier-unresolved`                           | fail    | A code-shaped token in the statement is not a parameter, declared port, entity or public operation                                                                                        |
+| `tsdoc-syntax`                                    | warn    | Undefined tags or malformed TSDoc (HTML/escape pedantry is ignored; `tsdoc.jsdoc` accepts JSDoc)                                                                                          |
+| `operation-removed`                               | fail    | An operation in the previous report is gone and nothing `@supersedes` it                                                                                                                  |
+| `guarantee-changed-test-unchanged`                | warn    | Statement hash changed, linked tests did not (needs a previous report)                                                                                                                    |
+| `impl-changed-spec-unchanged`                     | warn    | Implementation hash changed, guarantees and tests did not                                                                                                                                 |
+| `uses-mismatch`                                   | warn    | Ports called (including through private helpers) differ from `@uses` / `@modifies`                                                                                                        |
+| `env-input-direct`                                | warn    | `Date.now`, `new Date`, `Math.random`, `fetch`, … used directly instead of through a port                                                                                                 |
+| `test-todo`                                       | warn    | A linked test is still `test.todo`                                                                                                                                                        |
+| `decision-unspecified`                            | warn    | The implementation commits to a value (boundary, constant, output, match, member) no guarantee names; one step lower, with "(a linked test uses it)", when a linked test writes the value |
+| `decision-untested`                               | warn    | A value the contract names that no linked test writes as a literal: a test cannot fail when it changes                                                                                    |
+| `test-tautology`                                  | warn    | A linked test takes its cases from the collection the unit checks membership in, so removing an element cannot fail it                                                                    |
+| `decision-collection-truncated`                   | info    | A collection holds more elements than `decisions.collectionLimit`; the rest are not checked                                                                                               |
+| `guarantee-known-violation`                       | warn    | A linked test is `test.failing` / `test.fails`: the implementation is known not to keep it                                                                                                |
+| `entry-unmapped`                                  | info    | A `package.json#exports` subpath points only to build output; map it with `surface.entries`                                                                                               |
+| `guarantee-on-non-unit`                           | fail    | A `@guarantee` sits on a declaration that is not a unit (not exported, private, a type, …)                                                                                                |
+| `surface-empty`                                   | warn    | No unit was extracted (the message lists the usual causes)                                                                                                                                |
 
 Severity per rule is configuration (`fail` / `warn` / `info` / `off`). In `mode: "advisory"` the
 exit code is always 0; `--strict` or `mode: "blocking"` exits 1 on any `fail`.
@@ -166,6 +169,17 @@ helpers and non-exported functions of the module) and reports those that no guar
 `@example` of the unit, or of a surface unit that calls it, names. Each finding is either a hole
 in the contract (write the guarantee, then the test) or a value you accept as unspecified
 (`decisions.ignore`).
+
+Naming a value lets a test be written for it; only a test that uses it can fail when it
+changes. `decision-untested` asks the second question: for each value the contract names, does a
+test linked to the unit (or to a unit that calls it) write it as a literal? That includes each
+element of a module-level collection the unit checks membership in (`DENIED.includes(path)`,
+`PREFIXES.some((p) => path.startsWith(p))`), so a deny list whose test lists 8 of its 26 paths
+gets 18 findings. A test that iterates the list itself (`it.each(DENIED)`) passes whatever the
+list holds; `test-tautology` reports it. When `decision-unspecified` fires for a value a linked
+test does write, the finding is one step lower and says so. Values a test reaches only through a
+lookup (a route table, a fixture in another file) are not seen, so treat these findings as
+hints too. Design: `docs/design/0002-decisions-pinned-by-tests.md`.
 
 It matches by value, so it is a hint, not a proof: a value named for one purpose (`100` as an
 example result) also counts for another (`100` as the input length limit), and a value named in

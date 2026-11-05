@@ -71,6 +71,8 @@ export interface Config {
      * placeholders `{Target}`, `{operation}`, `{Port}`, `{member}`. `imports` are added as written.
      */
     arrange?: { sut?: string; port?: string; imports?: string[] };
+    /** Most literal values recorded per test (`TestCase.literals`). */
+    literalLimit: number;
   };
   /** `deriveThrows`: give `@throws` without an id one (`err.<error-type>`); see surface extraction. */
   ids: { pattern: string; placeholder: string; deriveThrows: boolean };
@@ -83,8 +85,12 @@ export interface Config {
   provenance: { enabled: boolean; prPattern: string };
   requirementHeader: { enabled: boolean; pattern: string };
   envInputs: { forbid: string[]; include?: string[] };
-  /** Values or constant names `decision-unspecified` treats as named by the contract. */
-  decisions: { ignore: string[] };
+  /**
+   * `ignore`: values or constant names `decision-unspecified` treats as named by the contract and
+   * `decision-untested` does not ask the tests for. `collectionLimit`: most `member` decisions
+   * recorded per collection; the rest are reported once by `decision-collection-truncated`.
+   */
+  decisions: { ignore: string[]; collectionLimit: number };
   resolve: { ignore: string[]; allowProgramTypes: boolean };
 }
 
@@ -134,6 +140,7 @@ export function defaultConfig(): Config {
       titleLength: 100,
       titlePrefixes: [],
       prefixRules: [],
+      literalLimit: 1000,
     },
     ids: {
       pattern: "^(ok|err|atomic|frame|idempotent)(\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
@@ -147,7 +154,7 @@ export function defaultConfig(): Config {
     provenance: { enabled: true, prPattern: "\\(#(\\d+)\\)\\s*$" },
     requirementHeader: { enabled: false, pattern: "^\\s*(?:\\*|//)\\s*@requirement\\s+(\\S+)" },
     envInputs: { forbid: ["Date.now", "new Date", "Math.random", "fetch", "process.env"] },
-    decisions: { ignore: [] },
+    decisions: { ignore: [], collectionLimit: 500 },
     resolve: { ignore: [], allowProgramTypes: true },
   };
 }
@@ -310,6 +317,9 @@ function applyInput(config: Config, input: unknown, label: string): void {
     t.number("titleLength", (v) => {
       config.tests.titleLength = v;
     });
+    t.number("literalLimit", (v) => {
+      config.tests.literalLimit = v;
+    });
     t.strings("titlePrefixes", (v) => {
       config.tests.titlePrefixes = v;
     });
@@ -412,6 +422,9 @@ function applyInput(config: Config, input: unknown, label: string): void {
     d.strings("ignore", (v) => {
       config.decisions.ignore = v;
     });
+    d.number("collectionLimit", (v) => {
+      config.decisions.collectionLimit = v;
+    });
   });
   r.object("resolve", (x) => {
     x.strings("ignore", (v) => {
@@ -491,6 +504,9 @@ export const RULE_IDS = [
   "surface-empty",
   "guarantee-known-violation",
   "entry-unmapped",
+  "decision-untested",
+  "test-tautology",
+  "decision-collection-truncated",
 ] as const;
 export type RuleId = (typeof RULE_IDS)[number];
 
@@ -514,6 +530,9 @@ export const DEFAULT_SEVERITIES: Record<RuleId, RuleSeverity> = {
   "surface-empty": "warn",
   "guarantee-known-violation": "warn",
   "entry-unmapped": "info",
+  "decision-untested": "warn",
+  "test-tautology": "warn",
+  "decision-collection-truncated": "info",
 };
 
 export function severityOf(config: Config, rule: RuleId): RuleSeverity {
