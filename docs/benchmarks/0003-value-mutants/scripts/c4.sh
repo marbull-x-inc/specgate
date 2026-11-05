@@ -9,7 +9,7 @@
 # (branch feature/bench-oss-0001-e87ac9). Writes data/c4/<project>.json and prints a table.
 set -uo pipefail
 work="$1"; repo="$2"
-here="$(cd "$(dirname "$0")" && pwd)"; out="$(dirname "$here")/data/c4"
+here="$(cd "$(dirname "$0")" && pwd)"; out="$(dirname "$here")/data/c4${C4_SUFFIX:-}"
 branch=feature/bench-oss-0001-e87ac9
 mkdir -p "$out"
 for p in scule ufo zustand mantine-hooks ahooks hono; do

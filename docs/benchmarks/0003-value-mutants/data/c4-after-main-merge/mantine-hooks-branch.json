@@ -1,0 +1,2014 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "generatedAt": "2026-11-05T23:55:11.538Z",
+  "root": "<work-0001>/mantine-hooks",
+  "revision": "82fb128c43f9927c1370a2732cd5aa9e6663ca11",
+  "configHash": "5fd2b8f01c276e51",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "useCounter",
+      "kind": "function",
+      "operation": "useCounter",
+      "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+      "line": 31,
+      "endLine": 54,
+      "referencedBy": [
+        "packages/@docs/demos/src/demos/core/ActionIcon/ActionIcon.demo.groupSection.tsx",
+        "packages/@docs/demos/src/demos/core/Button/Button.demo.groupSection.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.sizeAuto.tsx",
+        "packages/@docs/demos/src/demos/core/ScrollArea/ScrollArea.demo.maxHeight.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-counter/use-counter.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/notifications/Notifications.demo.store.tsx",
+        "packages/@mantine/core/src/components/NavLink/NavLink.story.tsx",
+        "packages/@mantine/hooks/src/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "initialValue",
+          "type": "number",
+          "optional": true
+        },
+        {
+          "name": "options",
+          "type": "UseCounterOptions",
+          "optional": true
+        }
+      ],
+      "returns": "UseCounterReturnValue",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "constantRanges": [
+        {
+          "name": "DEFAULT_OPTIONS",
+          "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "line": 4,
+          "endLine": 7
+        }
+      ],
+      "implHash": "56699cfc3f5d8e4f",
+      "guarantees": [
+        {
+          "id": "ok.initial",
+          "key": "useCounter.ok.initial",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the value starts at `initialValue`, 0 when it is not given",
+          "textHash": "d7181c2e05a0c953",
+          "line": 25,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-counter/use-counter.test.ts:5",
+            "packages/@mantine/hooks/src/use-counter/use-counter.test.ts:10"
+          ]
+        },
+        {
+          "id": "ok.increment",
+          "key": "useCounter.ok.increment",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`increment` adds `step` to the value, `decrement` subtracts it",
+          "textHash": "16dd7796d8a2067f",
+          "line": 26,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-counter/use-counter.test.ts:27"
+          ]
+        },
+        {
+          "id": "ok.bounds",
+          "key": "useCounter.ok.bounds",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the value never goes above `max` or below `min`",
+          "textHash": "a5b8a051d8e1c7b9",
+          "line": 27,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-counter/use-counter.test.ts:41",
+            "packages/@mantine/hooks/src/use-counter/use-counter.test.ts:55"
+          ]
+        },
+        {
+          "id": "ok.set",
+          "key": "useCounter.ok.set",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`set` sets the value to the given number, within `min` and `max`",
+          "textHash": "74c590eaf64ce5a9",
+          "line": 28,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.reset",
+          "key": "useCounter.ok.reset",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`reset` sets the value back to `initialValue`",
+          "textHash": "62e231bf425639d3",
+          "line": 29,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "useDisclosure",
+      "kind": "function",
+      "operation": "useDisclosure",
+      "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+      "line": 23,
+      "endLine": 54,
+      "referencedBy": [
+        "packages/@docs/demos/src/demos/core/ActionBar/ActionBar.demo.closeOnEscape.tsx",
+        "packages/@docs/demos/src/demos/core/ActionBar/ActionBar.demo.placement.tsx",
+        "packages/@docs/demos/src/demos/core/ActionIcon/ActionIcon.demo.loading.tsx",
+        "packages/@docs/demos/src/demos/core/Autocomplete/Autocomplete.demo.dropdownOpened.tsx",
+        "packages/@docs/demos/src/demos/core/Burger/Burger.demo.lineWidth.tsx",
+        "packages/@docs/demos/src/demos/core/Burger/Burger.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/core/Button/Button.demo.loading.tsx",
+        "packages/@docs/demos/src/demos/core/Collapse/Collapse.demo.horizontal.tsx",
+        "packages/@docs/demos/src/demos/core/Collapse/Collapse.demo.transition.tsx",
+        "packages/@docs/demos/src/demos/core/Collapse/Collapse.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/core/ComboboxPopover/ComboboxPopover.demo.dropdownOpened.tsx",
+        "packages/@docs/demos/src/demos/core/Dialog/Dialog.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.closeIcon.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.composition.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.header.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.initialFocus.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.initialFocusTrap.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.offset.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.overflow.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.overlay.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.scrollarea.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.transitionEnd.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.transitions.tsx",
+        "packages/@docs/demos/src/demos/core/Drawer/Drawer.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/core/FloatingWindow/FloatingWindow.demo.axis.tsx",
+        "packages/@docs/demos/src/demos/core/FloatingWindow/FloatingWindow.demo.constrainOffset.tsx",
+        "packages/@docs/demos/src/demos/core/FloatingWindow/FloatingWindow.demo.constrainToViewport.tsx",
+        "packages/@docs/demos/src/demos/core/FloatingWindow/FloatingWindow.demo.dragHandleSelector.tsx",
+        "packages/@docs/demos/src/demos/core/FloatingWindow/FloatingWindow.demo.enabled.tsx",
+        "packages/@docs/demos/src/demos/core/FloatingWindow/FloatingWindow.demo.resizeCallbacks.tsx",
+        "packages/@docs/demos/src/demos/core/FloatingWindow/FloatingWindow.demo.resizeHandle.tsx",
+        "packages/@docs/demos/src/demos/core/FloatingWindow/FloatingWindow.demo.setPosition.tsx",
+        "packages/@docs/demos/src/demos/core/FloatingWindow/FloatingWindow.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/core/FocusTrap/FocusTrap.demo.initial.tsx",
+        "packages/@docs/demos/src/demos/core/FocusTrap/FocusTrap.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/core/Indicator/Indicator.demo.disabled.tsx",
+        "packages/@docs/demos/src/demos/core/LoadingOverlay/LoadingOverlay.demo.customLoader.tsx",
+        "packages/@docs/demos/src/demos/core/LoadingOverlay/LoadingOverlay.demo.loaderProps.tsx",
+        "packages/@docs/demos/src/demos/core/LoadingOverlay/LoadingOverlay.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.centered.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.closeIcon.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.composition.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.fullScreen.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.fullScreenMobile.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.header.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.initialFocus.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.initialFocusTrap.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.offset.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.overflow.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.overlay.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.scrollarea.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.sizeAuto.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.transitionEnd.tsx",
+        "packages/@docs/demos/src/demos/core/Modal/Modal.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/core/MultiSelect/MultiSelect.demo.dropdownOpened.tsx",
+        "packages/@docs/demos/src/demos/core/PasswordInput/PasswordInput.demo.controlledVisibility.tsx",
+        "packages/@docs/demos/src/demos/core/Popover/Popover.demo.hover.tsx",
+        "packages/@docs/demos/src/demos/core/Select/Select.demo.dropdownOpened.tsx",
+        "packages/@docs/demos/src/demos/core/TagsInput/TagsInput.demo.dropdownOpened.tsx",
+        "packages/@docs/demos/src/demos/core/TreeSelect/TreeSelect.demo.dropdownOpened.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-collapse/use-collapse.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-floating-window/use-floating-window.demo.axis.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-floating-window/use-floating-window.demo.constrainOffset.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-floating-window/use-floating-window.demo.constrainToViewport.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-floating-window/use-floating-window.demo.dragHandleSelector.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-floating-window/use-floating-window.demo.enabled.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-floating-window/use-floating-window.demo.setPosition.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-floating-window/use-floating-window.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-headroom/use-headroom.demo.callbacks.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-headroom/use-headroom.demo.scrollProgress.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-headroom/use-headroom.demo.usage.tsx",
+        "packages/@docs/demos/src/demos/hooks/use-horizontal-collapse/use-horizontal-collapse.demo.usage.tsx",
+        "packages/@mantine/core/src/components/ActionBar/ActionBar.story.tsx",
+        "packages/@mantine/core/src/components/AppShell/AppShell.story.tsx",
+        "packages/@mantine/core/src/components/Dialog/Dialog.story.tsx",
+        "packages/@mantine/core/src/components/Drawer/Drawer.story.tsx",
+        "packages/@mantine/core/src/components/FloatingIndicator/FloatingIndicator.story.tsx",
+        "packages/@mantine/core/src/components/FocusTrap/FocusTrap.story.tsx",
+        "packages/@mantine/core/src/components/Menu/Menu.story.tsx",
+        "packages/@mantine/core/src/components/Modal/Modal.story.tsx",
+        "packages/@mantine/core/src/components/ModalBase/ModalBase.story.tsx",
+        "packages/@mantine/core/src/components/SegmentedControl/SegmentedControl.story.tsx",
+        "packages/@mantine/core/src/components/Select/Select.story.tsx",
+        "packages/@mantine/dates/src/components/DateTimePicker/DateTimePicker.tsx",
+        "packages/@mantine/dates/src/components/PickerInputBase/PickerInputBase.tsx",
+        "packages/@mantine/dates/src/hooks/use-dates-input/use-dates-input.ts",
+        "packages/@mantine/dropzone/src/DropzoneFullScreen.tsx",
+        "packages/@mantine/hooks/src/index.ts",
+        "packages/@mantine/schedule/src/components/MoreEvents/MoreEvents.tsx",
+        "packages/@mantine/schedule/src/components/ScheduleHeader/MonthYearSelect/MonthYearSelect.tsx",
+        "packages/@mantine/tiptap/src/RichTextEditorControl/RichTextEditorColorPickerControl.tsx",
+        "packages/@mantine/tiptap/src/RichTextEditorControl/RichTextEditorLinkControl.tsx",
+        "packages/@mantine/tiptap/src/RichTextEditorControl/RichTextEditorTableInsertControl.tsx"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "initialState",
+          "type": "boolean",
+          "optional": true
+        },
+        {
+          "name": "options",
+          "type": "UseDisclosureOptions",
+          "optional": true
+        }
+      ],
+      "returns": "UseDisclosureReturnValue",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "options",
+          "member": "onOpen",
+          "count": 1
+        },
+        {
+          "port": "options",
+          "member": "onClose",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "06f15790dd37f1de",
+      "guarantees": [
+        {
+          "id": "ok.initial",
+          "key": "useDisclosure.ok.initial",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the state starts at `initialState`, false when it is not given",
+          "textHash": "2ae9ff6ab06884ff",
+          "line": 18,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.handlers",
+          "key": "useDisclosure.ok.handlers",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`open` sets the state to true, `close` to false, `toggle` to its opposite and `set` to the given value",
+          "textHash": "bd81ef394ae35573",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts:5",
+            "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts:13",
+            "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts:21"
+          ]
+        },
+        {
+          "id": "ok.callbacks",
+          "key": "useDisclosure.ok.callbacks",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`onOpen` is called when the state changes to true and `onClose` when it changes to false",
+          "textHash": "7e941c822a4db72e",
+          "line": 20,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts:32",
+            "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts:44",
+            "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts:56"
+          ]
+        },
+        {
+          "id": "ok.no-change",
+          "key": "useDisclosure.ok.no-change",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`open` when already open and `close` when already closed do nothing and call no callback",
+          "textHash": "f183ba2325f80616",
+          "line": 21,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "useOs",
+      "kind": "function",
+      "operation": "useOs",
+      "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+      "line": 85,
+      "endLine": 97,
+      "referencedBy": [
+        "packages/@docs/demos/src/demos/hooks/use-os/use-os.demo.usage.tsx",
+        "packages/@mantine/hooks/src/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "options",
+          "type": "UseOsOptions",
+          "optional": true
+        }
+      ],
+      "returns": "UseOSReturnValue",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "output",
+          "expression": "'undetermined'",
+          "line": 50,
+          "values": [
+            "undetermined"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'ios'",
+          "line": 56,
+          "values": [
+            "ios"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'macos'",
+          "line": 59,
+          "values": [
+            "macos"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'windows'",
+          "line": 62,
+          "values": [
+            "windows"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'android'",
+          "line": 65,
+          "values": [
+            "android"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'chromeos'",
+          "line": 68,
+          "values": [
+            "chromeos"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'linux'",
+          "line": 71,
+          "values": [
+            "linux"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "line": 48,
+          "endLine": 75
+        }
+      ],
+      "constantRanges": [
+        {
+          "name": "useIsomorphicEffect",
+          "file": "packages/@mantine/hooks/src/use-isomorphic-effect/use-isomorphic-effect.ts",
+          "line": 5,
+          "endLine": 5
+        }
+      ],
+      "implHash": "82b13258c8ec5dc2",
+      "guarantees": [
+        {
+          "id": "ok.values",
+          "key": "useOs.ok.values",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns one of \"undetermined\", \"macos\", \"ios\", \"windows\", \"android\", \"linux\" and \"chromeos\", according to the user agent",
+          "textHash": "431499148cbf476b",
+          "line": 82,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.undetermined",
+          "key": "useOs.ok.undetermined",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns \"undetermined\" when the OS cannot be identified, for example during server-side rendering",
+          "textHash": "e05bd188fcf9bdf5",
+          "line": 83,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "usePagination",
+      "kind": "function",
+      "operation": "usePagination",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+      "line": 66,
+      "endLine": 153,
+      "referencedBy": [
+        "packages/@docs/demos/src/demos/hooks/use-pagination/use-pagination.demo.startValue.tsx",
+        "packages/@mantine/core/src/components/Pagination/PaginationRoot/PaginationRoot.tsx",
+        "packages/@mantine/hooks/src/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "{\n  total,\n  siblings = 1,\n  boundaries = 1,\n  page,\n  initialPage,\n  onChange,\n  startValue = 1,\n}",
+          "type": "UsePaginationOptions",
+          "optional": false
+        }
+      ],
+      "returns": "UsePaginationReturnValue",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "constant",
+          "expression": "siblings * 2 + 3",
+          "line": 106,
+          "values": [
+            "3"
+          ],
+          "names": []
+        },
+        {
+          "kind": "constant",
+          "expression": "siblings * 2",
+          "line": 106,
+          "values": [
+            "2"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 4,
+          "endLine": 7
+        }
+      ],
+      "constantRanges": [
+        {
+          "name": "DOTS",
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 9,
+          "endLine": 9
+        }
+      ],
+      "implHash": "2711d11e590187fa",
+      "guarantees": [
+        {
+          "id": "ok.range",
+          "key": "usePagination.ok.range",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with total 10 and page 1, range is [1, 2, 3, 4, 5, \"dots\", 10]; on page 5 it is [1, \"dots\", 4, 5, 6, \"dots\", 10]; on page 6 [1, \"dots\", 5, 6, 7, \"dots\", 10]; on page 10 [1, \"dots\", 6, 7, 8, 9, 10]",
+          "textHash": "3905cc17dfabaf99",
+          "line": 58,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:5",
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:18",
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:24",
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:82",
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:100",
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:105"
+          ]
+        },
+        {
+          "id": "ok.defaults",
+          "key": "usePagination.ok.defaults",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`siblings` and `boundaries` default to 1, and the first page defaults to 1 or `startValue`",
+          "textHash": "2618b5477d4c2231",
+          "line": 59,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.navigation",
+          "key": "usePagination.ok.navigation",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`next`, `previous`, `first` and `last` move the active page to the next, previous, first and last page",
+          "textHash": "5a298d6395200159",
+          "line": 60,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.controlled",
+          "key": "usePagination.ok.controlled",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `page` and `onChange`, `setPage` calls `onChange` with the page and the active page follows `page`",
+          "textHash": "004212a21c3cd5e9",
+          "line": 61,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:47"
+          ]
+        },
+        {
+          "id": "ok.siblings",
+          "key": "usePagination.ok.siblings",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`siblings` sets how many pages are shown on each side of the active page",
+          "textHash": "7651a4e260d8498f",
+          "line": 62,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:33",
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:65"
+          ]
+        },
+        {
+          "id": "ok.boundaries",
+          "key": "usePagination.ok.boundaries",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`boundaries` sets how many pages are shown at each edge",
+          "textHash": "54a7d7dd84e651fa",
+          "line": 63,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:87"
+          ]
+        },
+        {
+          "id": "ok.start-value",
+          "key": "usePagination.ok.start-value",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `startValue` 5 and `total` 15, the pages range from 5 to 15",
+          "textHash": "36a6c91d7402c180",
+          "line": 64,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts:110"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "useQueue",
+      "kind": "function",
+      "operation": "useQueue",
+      "file": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+      "line": 34,
+      "endLine": 72,
+      "referencedBy": [
+        "packages/@mantine/hooks/src/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "{\n  initialValues = [],\n  limit,\n}",
+          "type": "UseQueueOptions<T>",
+          "optional": false
+        }
+      ],
+      "returns": "UseQueueReturnValue<T>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "4694054b7d7e0b8f",
+      "guarantees": [
+        {
+          "id": "ok.initial",
+          "key": "useQueue.ok.initial",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`initialValues` (default empty) are divided between state and queue: the first `limit` items in state, the rest in queue",
+          "textHash": "14f334f0373cd3e2",
+          "line": 29,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-queue/use-queue.test.ts:5",
+            "packages/@mantine/hooks/src/use-queue/use-queue.test.ts:11"
+          ]
+        },
+        {
+          "id": "ok.add",
+          "key": "useQueue.ok.add",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`add` puts items in state while state holds fewer than `limit` items, and in queue after that",
+          "textHash": "e9321b4bc866a2dd",
+          "line": 30,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-queue/use-queue.test.ts:17",
+            "packages/@mantine/hooks/src/use-queue/use-queue.test.ts:24"
+          ]
+        },
+        {
+          "id": "ok.update",
+          "key": "useQueue.ok.update",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`update` applies the function to all items of state and queue, then divides the result again by `limit`, keeping order",
+          "textHash": "6a289c5a5e09ab3b",
+          "line": 31,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-queue/use-queue.test.ts:31",
+            "packages/@mantine/hooks/src/use-queue/use-queue.test.ts:39",
+            "packages/@mantine/hooks/src/use-queue/use-queue.test.ts:47"
+          ]
+        },
+        {
+          "id": "ok.clean",
+          "key": "useQueue.ok.clean",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`cleanQueue` empties the queue and leaves state unchanged",
+          "textHash": "2a71492eaff255c2",
+          "line": 32,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-queue/use-queue.test.ts:54"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "useToggle",
+      "kind": "function",
+      "operation": "useToggle",
+      "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+      "line": 12,
+      "endLine": 23,
+      "referencedBy": [
+        "packages/@docs/demos/src/demos/hooks/use-toggle/use-toggle.demo.usage.tsx",
+        "packages/@mantine/hooks/src/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "options",
+          "type": "readonly T[]",
+          "optional": true
+        }
+      ],
+      "returns": "UseToggleReturnValue<T>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "d10cbd9869b9fc31",
+      "guarantees": [
+        {
+          "id": "ok.first",
+          "key": "useToggle.ok.first",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the value starts at the first element of `options`",
+          "textHash": "5fade5da04202be1",
+          "line": 7,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts:5"
+          ]
+        },
+        {
+          "id": "ok.cycle",
+          "key": "useToggle.ok.cycle",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "calling the toggle function with no argument moves the value to the next element of `options`, and from the last back to the first ([\"light\", \"dark\"]: \"dark\", then \"light\")",
+          "textHash": "4ca398facba75b00",
+          "line": 8,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts:10",
+            "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts:20"
+          ]
+        },
+        {
+          "id": "ok.force",
+          "key": "useToggle.ok.force",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "calling the toggle function with a value sets the value to it",
+          "textHash": "1f0fb3cd2f56d1d6",
+          "line": 9,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts:39",
+            "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts:49"
+          ]
+        },
+        {
+          "id": "ok.boolean",
+          "key": "useToggle.ok.boolean",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "without `options`, the value starts at false and toggles between false and true",
+          "textHash": "3a504ee3787892d4",
+          "line": 10,
+          "references": [],
+          "tests": [
+            "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts:55"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "useCounter.ok.initial",
+      "unitId": "useCounter",
+      "guaranteeId": "ok.initial",
+      "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+      "line": 5,
+      "title": "useCounter.ok.initial correctly returns initial state",
+      "status": "test",
+      "bodyHash": "b1aacc2ceb3bc642",
+      "literals": [
+        "20",
+        "100"
+      ],
+      "keys": [
+        "min",
+        "max"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useCounter",
+          "from": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useCounter.ok.initial",
+      "unitId": "useCounter",
+      "guaranteeId": "ok.initial",
+      "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+      "line": 10,
+      "title": "useCounter.ok.initial correctly performs operations without initialValue or options",
+      "status": "test",
+      "bodyHash": "6f35c17ba8ece822",
+      "literals": [
+        "5"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useCounter",
+          "from": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useCounter.ok.increment",
+      "unitId": "useCounter",
+      "guaranteeId": "ok.increment",
+      "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+      "line": 27,
+      "title": "useCounter.ok.increment correctly increments and decrements by custom step",
+      "status": "test",
+      "bodyHash": "7a91014924a50a61",
+      "literals": [
+        "5",
+        "10"
+      ],
+      "keys": [
+        "step"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useCounter",
+          "from": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useCounter.ok.bounds",
+      "unitId": "useCounter",
+      "guaranteeId": "ok.bounds",
+      "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+      "line": 41,
+      "title": "useCounter.ok.bounds clamps step increment/decrement to min/max",
+      "status": "test",
+      "bodyHash": "158b3e188fa6c382",
+      "literals": [
+        "-3",
+        "3",
+        "5",
+        "-2",
+        "2"
+      ],
+      "keys": [
+        "min",
+        "max",
+        "step"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useCounter",
+          "from": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useCounter.ok.bounds",
+      "unitId": "useCounter",
+      "guaranteeId": "ok.bounds",
+      "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+      "line": 55,
+      "title": "useCounter.ok.bounds correctly performs operations with initialValue and options",
+      "status": "test",
+      "bodyHash": "8bcfc0072fe276d5",
+      "literals": [
+        "11",
+        "-10",
+        "10",
+        "9",
+        "5",
+        "20"
+      ],
+      "keys": [
+        "min",
+        "max"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useCounter",
+          "from": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useDisclosure.ok.handlers",
+      "unitId": "useDisclosure",
+      "guaranteeId": "ok.handlers",
+      "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+      "line": 5,
+      "title": "useDisclosure.ok.handlers handles close correctly",
+      "status": "test",
+      "bodyHash": "12596147135ae452",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useDisclosure",
+          "from": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useDisclosure.ok.handlers",
+      "unitId": "useDisclosure",
+      "guaranteeId": "ok.handlers",
+      "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+      "line": 13,
+      "title": "useDisclosure.ok.handlers handles open correctly",
+      "status": "test",
+      "bodyHash": "0d789a2c477129f1",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useDisclosure",
+          "from": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useDisclosure.ok.handlers",
+      "unitId": "useDisclosure",
+      "guaranteeId": "ok.handlers",
+      "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+      "line": 21,
+      "title": "useDisclosure.ok.handlers handles toggle correctly",
+      "status": "test",
+      "bodyHash": "5736abd7759500b9",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useDisclosure",
+          "from": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useDisclosure.ok.callbacks",
+      "unitId": "useDisclosure",
+      "guaranteeId": "ok.callbacks",
+      "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+      "line": 32,
+      "title": "useDisclosure.ok.callbacks calls onClose when close is called",
+      "status": "test",
+      "bodyHash": "2c7560e131e4ff21",
+      "literals": [],
+      "keys": [
+        "onClose"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useDisclosure",
+          "from": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useDisclosure.ok.callbacks",
+      "unitId": "useDisclosure",
+      "guaranteeId": "ok.callbacks",
+      "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+      "line": 44,
+      "title": "useDisclosure.ok.callbacks calls onOpen when open is called",
+      "status": "test",
+      "bodyHash": "22871431f37fd878",
+      "literals": [],
+      "keys": [
+        "onOpen"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useDisclosure",
+          "from": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useDisclosure.ok.callbacks",
+      "unitId": "useDisclosure",
+      "guaranteeId": "ok.callbacks",
+      "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+      "line": 56,
+      "title": "useDisclosure.ok.callbacks calls onOpen and onClose correctly when toggle is called",
+      "status": "test",
+      "bodyHash": "70e8401527b99859",
+      "literals": [
+        "2"
+      ],
+      "keys": [
+        "onOpen",
+        "onClose"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useDisclosure",
+          "from": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.range",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.range",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 5,
+      "title": "usePagination.ok.range setPage function sets active page",
+      "status": "test",
+      "bodyHash": "03b8c11d930ae1df",
+      "literals": [
+        "10",
+        "5",
+        "15"
+      ],
+      "keys": [
+        "total"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.range",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.range",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 18,
+      "title": "usePagination.ok.range returns correct initial state",
+      "status": "test",
+      "bodyHash": "4b283112c1ef338a",
+      "literals": [
+        "10",
+        "2",
+        "3",
+        "4",
+        "5",
+        "dots"
+      ],
+      "keys": [
+        "total"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "lengths": [
+        7
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.range",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.range",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 24,
+      "title": "usePagination.ok.range does not change range length between page changes",
+      "status": "test",
+      "bodyHash": "299f7aa6fa871a2e",
+      "literals": [
+        "10",
+        "7"
+      ],
+      "keys": [
+        "total"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.siblings",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.siblings",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 33,
+      "title": "usePagination.ok.siblings returns correct initial state with custom parameters",
+      "status": "test",
+      "bodyHash": "7186cc3dc5993865",
+      "literals": [
+        "20",
+        "2",
+        "7",
+        "dots",
+        "5",
+        "6",
+        "8",
+        "9",
+        "19"
+      ],
+      "keys": [
+        "total",
+        "siblings",
+        "boundaries",
+        "initialPage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "lengths": [
+        11
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.controlled",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.controlled",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 47,
+      "title": "usePagination.ok.controlled calls onChange correctly with active page",
+      "status": "test",
+      "bodyHash": "7b948960543e7614",
+      "literals": [
+        "7",
+        "20",
+        "2",
+        "8"
+      ],
+      "keys": [
+        "page",
+        "onChange",
+        "total",
+        "siblings",
+        "boundaries"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.siblings",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.siblings",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 65,
+      "title": "usePagination.ok.siblings does not change range length between page changes with custom parameters",
+      "status": "test",
+      "bodyHash": "1def036579a90c97",
+      "literals": [
+        "20",
+        "2",
+        "7",
+        "11"
+      ],
+      "keys": [
+        "total",
+        "siblings",
+        "boundaries",
+        "initialPage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.range",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.range",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 82,
+      "title": "usePagination.ok.range does not hide a single page behind dots",
+      "status": "test",
+      "bodyHash": "3b63d022259d4e6e",
+      "literals": [
+        "10",
+        "7",
+        "dots",
+        "6",
+        "8",
+        "9"
+      ],
+      "keys": [
+        "total",
+        "initialPage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "lengths": [
+        7
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.boundaries",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.boundaries",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 87,
+      "title": "usePagination.ok.boundaries does not hide a single page behind dots with custom parameters",
+      "status": "test",
+      "bodyHash": "e27f4cf24c0f4c31",
+      "literals": [
+        "20",
+        "2",
+        "15",
+        "dots",
+        "13",
+        "14",
+        "16",
+        "17",
+        "18",
+        "19"
+      ],
+      "keys": [
+        "total",
+        "siblings",
+        "boundaries",
+        "initialPage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "lengths": [
+        11
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.range",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.range",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 100,
+      "title": "usePagination.ok.range truncates total value",
+      "status": "test",
+      "bodyHash": "aad1e40ed3131d55",
+      "literals": [
+        "45.21",
+        "2",
+        "3",
+        "4",
+        "5",
+        "dots",
+        "45"
+      ],
+      "keys": [
+        "total"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "lengths": [
+        7
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.range",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.range",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 105,
+      "title": "usePagination.ok.range handles negative total value correctly",
+      "status": "test",
+      "bodyHash": "7d4e2e55021e9897",
+      "literals": [
+        "-5",
+        "5"
+      ],
+      "keys": [
+        "total"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "lengths": [
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "usePagination.ok.start-value",
+      "unitId": "usePagination",
+      "guaranteeId": "ok.start-value",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+      "line": 110,
+      "title": "usePagination.ok.start-value handles startValue correctly",
+      "status": "test",
+      "bodyHash": "27d41206971b7b8d",
+      "literals": [
+        "15",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "dots",
+        "10",
+        "11",
+        "3",
+        "20"
+      ],
+      "keys": [
+        "total",
+        "startValue"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "usePagination",
+          "from": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "literals": [
+            "dots",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "lengths": [
+        7
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useQueue.ok.initial",
+      "unitId": "useQueue",
+      "guaranteeId": "ok.initial",
+      "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+      "line": 5,
+      "title": "useQueue.ok.initial correctly distributes initial values when limit is not reached",
+      "status": "test",
+      "bodyHash": "07ddc076e8c77396",
+      "literals": [
+        "2"
+      ],
+      "keys": [
+        "initialValues",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useQueue",
+          "from": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useQueue.ok.initial",
+      "unitId": "useQueue",
+      "guaranteeId": "ok.initial",
+      "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+      "line": 11,
+      "title": "useQueue.ok.initial correctly distributes initial values when limit is reached",
+      "status": "test",
+      "bodyHash": "4c00e4a12b96d169",
+      "literals": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "keys": [
+        "initialValues",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useQueue",
+          "from": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        5,
+        2,
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useQueue.ok.add",
+      "unitId": "useQueue",
+      "guaranteeId": "ok.add",
+      "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+      "line": 17,
+      "title": "useQueue.ok.add adds items to the state when limit is not reached",
+      "status": "test",
+      "bodyHash": "d63b5401e21ded34",
+      "literals": [
+        "2"
+      ],
+      "keys": [
+        "initialValues",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useQueue",
+          "from": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1,
+        2,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useQueue.ok.add",
+      "unitId": "useQueue",
+      "guaranteeId": "ok.add",
+      "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+      "line": 24,
+      "title": "useQueue.ok.add adds items to the queue when limit is reached",
+      "status": "test",
+      "bodyHash": "f37237e106fe841f",
+      "literals": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "keys": [
+        "initialValues",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useQueue",
+          "from": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2,
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useQueue.ok.update",
+      "unitId": "useQueue",
+      "guaranteeId": "ok.update",
+      "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+      "line": 31,
+      "title": "useQueue.ok.update correctly applies given update to state without queue",
+      "status": "test",
+      "bodyHash": "14c2fbee1cb81819",
+      "literals": [
+        "2",
+        "3"
+      ],
+      "keys": [
+        "initialValues",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useQueue",
+          "from": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2,
+        1,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useQueue.ok.update",
+      "unitId": "useQueue",
+      "guaranteeId": "ok.update",
+      "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+      "line": 39,
+      "title": "useQueue.ok.update correctly applies given update to state with queue",
+      "status": "test",
+      "bodyHash": "0bb005fd9a9c66cc",
+      "literals": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "keys": [
+        "initialValues",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useQueue",
+          "from": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        8,
+        3,
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useQueue.ok.update",
+      "unitId": "useQueue",
+      "guaranteeId": "ok.update",
+      "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+      "line": 47,
+      "title": "useQueue.ok.update puts extra items to the queue if state has extra items after update",
+      "status": "test",
+      "bodyHash": "7cb5c9131f1a3598",
+      "literals": [
+        "3",
+        "2",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "keys": [
+        "initialValues",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useQueue",
+          "from": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0,
+        8,
+        3,
+        5
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useQueue.ok.clean",
+      "unitId": "useQueue",
+      "guaranteeId": "ok.clean",
+      "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+      "line": 54,
+      "title": "useQueue.ok.clean cleans queue with cleanQueue handlers",
+      "status": "test",
+      "bodyHash": "4ce034a288886cbb",
+      "literals": [
+        "2",
+        "3",
+        "4"
+      ],
+      "keys": [
+        "initialValues",
+        "limit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useQueue",
+          "from": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        4,
+        2,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.first",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.first",
+      "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+      "line": 5,
+      "title": "useToggle.ok.first returns correct initial state",
+      "status": "test",
+      "bodyHash": "00479539479e675a",
+      "literals": [
+        "dark",
+        "light"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useToggle",
+          "from": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.cycle",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.cycle",
+      "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+      "line": 10,
+      "title": "useToggle.ok.cycle correctly toggles value",
+      "status": "test",
+      "bodyHash": "d920c6089623c08f",
+      "literals": [
+        "dark",
+        "light"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useToggle",
+          "from": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.cycle",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.cycle",
+      "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+      "line": 20,
+      "title": "useToggle.ok.cycle correctly toggles more than two values",
+      "status": "test",
+      "bodyHash": "d1c3056eb61d37b9",
+      "literals": [
+        "dark",
+        "light",
+        "normal"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useToggle",
+          "from": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.force",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.force",
+      "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+      "line": 39,
+      "title": "useToggle.ok.force allows to set value",
+      "status": "test",
+      "bodyHash": "761ce3a67dbd000a",
+      "literals": [
+        "dark",
+        "light"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useToggle",
+          "from": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.force",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.force",
+      "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+      "line": 49,
+      "title": "useToggle.ok.force allows to set value with callback function",
+      "status": "test",
+      "bodyHash": "79c0dda1e92c4e1d",
+      "literals": [
+        "dark",
+        "light"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useToggle",
+          "from": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.boolean",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.boolean",
+      "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+      "line": 55,
+      "title": "useToggle.ok.boolean allows to use hook without options",
+      "status": "test",
+      "bodyHash": "3ded239fb88ce7d4",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "useToggle",
+          "from": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "guarantee-no-test",
+      "message": "useCounter.ok.set has no test naming it",
+      "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+      "line": 28,
+      "unit": "useCounter",
+      "guarantee": "useCounter.ok.set",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "useCounter.ok.reset has no test naming it",
+      "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+      "line": 29,
+      "unit": "useCounter",
+      "guarantee": "useCounter.ok.reset",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "useDisclosure.ok.initial has no test naming it",
+      "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+      "line": 18,
+      "unit": "useDisclosure",
+      "guarantee": "useDisclosure.ok.initial",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "useDisclosure.ok.no-change has no test naming it",
+      "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+      "line": 21,
+      "unit": "useDisclosure",
+      "guarantee": "useDisclosure.ok.no-change",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "useOs.ok.values has no test naming it",
+      "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+      "line": 82,
+      "unit": "useOs",
+      "guarantee": "useOs.ok.values",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "useOs.ok.undetermined has no test naming it",
+      "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+      "line": 83,
+      "unit": "useOs",
+      "guarantee": "useOs.ok.undetermined",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "usePagination.ok.defaults has no test naming it",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+      "line": 59,
+      "unit": "usePagination",
+      "guarantee": "usePagination.ok.defaults",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "usePagination.ok.navigation has no test naming it",
+      "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+      "line": 60,
+      "unit": "usePagination",
+      "guarantee": "usePagination.ok.navigation",
+      "severity": "fail"
+    }
+  ],
+  "summary": {
+    "units": 6,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 26,
+    "guaranteesWithoutTest": 8,
+    "tests": 36,
+    "orphanTests": 0,
+    "unlinkedTests": 605,
+    "findings": {
+      "fail": 8,
+      "warn": 0,
+      "info": 0
+    }
+  }
+}

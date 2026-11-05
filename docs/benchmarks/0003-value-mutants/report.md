@@ -8,12 +8,12 @@ deviations (site selection unchanged throughout). Stryker 10.1.1. Node 24.3.0, m
 
 ## Verdict
 
-| #   | Criterion                                                                                                    | Result                               | Holds  |
-| --- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------ | ------ |
-| C1  | Real holes no `Survived` / `NoCoverage` Stryker mutant expresses, in more than half of the projects that ran | 6 of 10 projects (needs more than 5) | yes    |
-| C2  | Green value mutants that are real holes, after the equivalence review, at least 70%                          | 83 of 96 (86%)                       | yes    |
-| C3  | Runner wall-clock with `coveredBy` selection, at most 2× Stryker's, summed                                   | 3276 s against 1262 s: **2.60×**     | **no** |
-| C4  | Static `decision-*` findings on 0001's six projects, no more than 0.5.0                                      | 15 and 15; equal in every project    | yes    |
+| #   | Criterion                                                                                                    | Result                                                        | Holds  |
+| --- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- | ------ |
+| C1  | Real holes no `Survived` / `NoCoverage` Stryker mutant expresses, in more than half of the projects that ran | 6 of 10 projects (needs more than 5)                          | yes    |
+| C2  | Green value mutants that are real holes, after the equivalence review, at least 70%                          | 83 of 96 (86%)                                                | yes    |
+| C3  | Runner wall-clock with `coveredBy` selection, at most 2× Stryker's, summed                                   | 3276 s against 1262 s: **2.60×**                              | **no** |
+| C4  | Static `decision-*` findings on 0001's six projects, no more than 0.5.0                                      | 15 and 15, equal in every project; 8 after merging main (#73) | yes    |
 
 **C3 fails by 0.60× (about 752 s over the 2× budget of 2524 s).** One project accounts for it:
 es-toolkit's runner took 2392 s against Stryker's 62 s, because 89 of its 113 value mutants sit in
@@ -94,16 +94,18 @@ express-rate-limit 2 (initial values always overwritten), react-hook-form 1 (a t
 ## Regression check on 0001's six projects
 
 **C4.** `specgate check` from this branch with 0001's configs and committed patches, against
-0001's recorded 0.5.0 results (`data/c4/`, `scripts/c4.sh`):
+0001's recorded 0.5.0 results (`data/c4/`, `scripts/c4.sh`). The value-mutant runs above used this
+branch before main's #73 (false-positive fixes from 0001) was merged; C4 was measured on both, the
+latter in `data/c4-after-main-merge/`. Value mutants were not re-run after the merge:
 
-| Project       | 0.5.0 `decision-*` | this branch | Units (0.5.0 → branch)                              |
-| ------------- | -----------------: | ----------: | --------------------------------------------------- |
-| scule         |                  4 |           4 | 11 → 11                                             |
-| ufo           |                  4 |           4 | 9 → 9                                               |
-| zustand       |                  0 |           0 | 4 → 4                                               |
-| mantine-hooks |                  0 |           0 | 6 → 6                                               |
-| ahooks        |                  0 |           0 | 0 → 3 (#63, a declaration exported only as default) |
-| hono          |                  7 |           7 | 5 → 5                                               |
+| Project       | 0.5.0 `decision-*` | this branch | after merging main | Units (0.5.0 → branch)                              |
+| ------------- | -----------------: | ----------: | -----------------: | --------------------------------------------------- |
+| scule         |                  4 |           4 |                  0 | 11 → 11                                             |
+| ufo           |                  4 |           4 |                  4 | 9 → 9                                               |
+| zustand       |                  0 |           0 |                  0 | 4 → 4                                               |
+| mantine-hooks |                  0 |           0 |                  0 | 6 → 6                                               |
+| ahooks        |                  0 |           0 |                  0 | 0 → 3 (#63, a declaration exported only as default) |
+| hono          |                  7 |           7 |                  4 | 5 → 5                                               |
 
 **Value mutants, counts only** (no equivalence review; `data/regression/`):
 
