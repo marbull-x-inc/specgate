@@ -14,7 +14,7 @@ import { resolveReferences } from "./resolve/identifiers.ts";
 import { evaluateRules } from "./rules/index.ts";
 import { expandGlobs, fileExists } from "./util/paths.ts";
 
-export const TOOL = { name: "specgate", version: "0.3.0" } as const;
+export const TOOL = { name: "specgate", version: "0.4.0" } as const;
 
 export interface Analysis {
   report: Report;
