@@ -1,0 +1,1151 @@
+diff --git a/src/format.test.ts b/src/format.test.ts
+index cdabb0f..4fb43c1 100644
+--- a/src/format.test.ts
++++ b/src/format.test.ts
+@@ -4,19 +4,19 @@ import { format } from './index';
+ // numbers
+ 
+ describe('format(number, { long: true })', () => {
+-  it('should not throw an error', () => {
++  it('format.ok.long should not throw an error', () => {
+     expect(() => {
+       format(500, { long: true });
+     }).not.toThrow();
+   });
+ 
+-  it('should support milliseconds', () => {
++  it('format.ok.long should support milliseconds', () => {
+     expect(format(500, { long: true })).toBe('500 ms');
+ 
+     expect(format(-500, { long: true })).toBe('-500 ms');
+   });
+ 
+-  it('should support seconds', () => {
++  it('format.ok.long should support seconds', () => {
+     expect(format(1000, { long: true })).toBe('1 second');
+     expect(format(1200, { long: true })).toBe('1 second');
+     expect(format(10000, { long: true })).toBe('10 seconds');
+@@ -26,7 +26,7 @@ describe('format(number, { long: true })', () => {
+     expect(format(-10000, { long: true })).toBe('-10 seconds');
+   });
+ 
+-  it('should support minutes', () => {
++  it('format.ok.long should support minutes', () => {
+     expect(format(60 * 1000, { long: true })).toBe('1 minute');
+     expect(format(60 * 1200, { long: true })).toBe('1 minute');
+     expect(format(60 * 10000, { long: true })).toBe('10 minutes');
+@@ -36,7 +36,7 @@ describe('format(number, { long: true })', () => {
+     expect(format(-1 * 60 * 10000, { long: true })).toBe('-10 minutes');
+   });
+ 
+-  it('should support hours', () => {
++  it('format.ok.long should support hours', () => {
+     expect(format(60 * 60 * 1000, { long: true })).toBe('1 hour');
+     expect(format(60 * 60 * 1200, { long: true })).toBe('1 hour');
+     expect(format(60 * 60 * 10000, { long: true })).toBe('10 hours');
+@@ -46,7 +46,7 @@ describe('format(number, { long: true })', () => {
+     expect(format(-1 * 60 * 60 * 10000, { long: true })).toBe('-10 hours');
+   });
+ 
+-  it('should support days', () => {
++  it('format.ok.long should support days', () => {
+     expect(format(1 * 24 * 60 * 60 * 1000, { long: true })).toBe('1 day');
+     expect(format(1 * 24 * 60 * 60 * 1200, { long: true })).toBe('1 day');
+     expect(format(6 * 24 * 60 * 60 * 1000, { long: true })).toBe('6 days');
+@@ -58,7 +58,7 @@ describe('format(number, { long: true })', () => {
+     );
+   });
+ 
+-  it('should support weeks', () => {
++  it('format.ok.long should support weeks', () => {
+     expect(format(1 * 7 * 24 * 60 * 60 * 1000, { long: true })).toBe('1 week');
+     expect(format(2 * 7 * 24 * 60 * 60 * 1000, { long: true })).toBe('2 weeks');
+ 
+@@ -70,7 +70,7 @@ describe('format(number, { long: true })', () => {
+     );
+   });
+ 
+-  it('should support months', () => {
++  it('format.ok.long should support months', () => {
+     expect(format(30.4375 * 24 * 60 * 60 * 1000, { long: true })).toBe(
+       '1 month',
+     );
+@@ -92,7 +92,7 @@ describe('format(number, { long: true })', () => {
+     );
+   });
+ 
+-  it('should support years', () => {
++  it('format.ok.long should support years', () => {
+     expect(format(365.25 * 24 * 60 * 60 * 1000 + 1, { long: true })).toBe(
+       '1 year',
+     );
+@@ -114,7 +114,7 @@ describe('format(number, { long: true })', () => {
+     );
+   });
+ 
+-  it('should round', () => {
++  it('format.ok.long should round', () => {
+     expect(format(234234234, { long: true })).toBe('3 days');
+ 
+     expect(format(-234234234, { long: true })).toBe('-3 days');
+@@ -124,19 +124,19 @@ describe('format(number, { long: true })', () => {
+ // numbers
+ 
+ describe('format(number)', () => {
+-  it('should not throw an error', () => {
++  it('format.ok.short should not throw an error', () => {
+     expect(() => {
+       format(500);
+     }).not.toThrow();
+   });
+ 
+-  it('should support milliseconds', () => {
++  it('format.ok.short should support milliseconds', () => {
+     expect(format(500)).toBe('500ms');
+ 
+     expect(format(-500)).toBe('-500ms');
+   });
+ 
+-  it('should support seconds', () => {
++  it('format.ok.short should support seconds', () => {
+     expect(format(1000)).toBe('1s');
+     expect(format(10000)).toBe('10s');
+ 
+@@ -144,7 +144,7 @@ describe('format(number)', () => {
+     expect(format(-10000)).toBe('-10s');
+   });
+ 
+-  it('should support minutes', () => {
++  it('format.ok.short should support minutes', () => {
+     expect(format(60 * 1000)).toBe('1m');
+     expect(format(60 * 10000)).toBe('10m');
+ 
+@@ -152,7 +152,7 @@ describe('format(number)', () => {
+     expect(format(-1 * 60 * 10000)).toBe('-10m');
+   });
+ 
+-  it('should support hours', () => {
++  it('format.ok.short should support hours', () => {
+     expect(format(60 * 60 * 1000)).toBe('1h');
+     expect(format(60 * 60 * 10000)).toBe('10h');
+ 
+@@ -160,7 +160,7 @@ describe('format(number)', () => {
+     expect(format(-1 * 60 * 60 * 10000)).toBe('-10h');
+   });
+ 
+-  it('should support days', () => {
++  it('format.ok.short should support days', () => {
+     expect(format(24 * 60 * 60 * 1000)).toBe('1d');
+     expect(format(24 * 60 * 60 * 6000)).toBe('6d');
+ 
+@@ -168,7 +168,7 @@ describe('format(number)', () => {
+     expect(format(-1 * 24 * 60 * 60 * 6000)).toBe('-6d');
+   });
+ 
+-  it('should support weeks', () => {
++  it('format.ok.short should support weeks', () => {
+     expect(format(1 * 7 * 24 * 60 * 60 * 1000)).toBe('1w');
+     expect(format(2 * 7 * 24 * 60 * 60 * 1000)).toBe('2w');
+ 
+@@ -176,7 +176,7 @@ describe('format(number)', () => {
+     expect(format(-1 * 2 * 7 * 24 * 60 * 60 * 1000)).toBe('-2w');
+   });
+ 
+-  it('should support months', () => {
++  it('format.ok.short should support months', () => {
+     expect(format(30.4375 * 24 * 60 * 60 * 1000)).toBe('1mo');
+     expect(format(30.4375 * 24 * 60 * 60 * 1200)).toBe('1mo');
+     expect(format(30.4375 * 24 * 60 * 60 * 10000)).toBe('10mo');
+@@ -186,7 +186,7 @@ describe('format(number)', () => {
+     expect(format(-1 * 30.4375 * 24 * 60 * 60 * 10000)).toBe('-10mo');
+   });
+ 
+-  it('should support years', () => {
++  it('format.ok.short should support years', () => {
+     expect(format(365.25 * 24 * 60 * 60 * 1000 + 1)).toBe('1y');
+     expect(format(365.25 * 24 * 60 * 60 * 1200 + 1)).toBe('1y');
+     expect(format(365.25 * 24 * 60 * 60 * 10000 + 1)).toBe('10y');
+@@ -196,7 +196,7 @@ describe('format(number)', () => {
+     expect(format(-1 * 365.25 * 24 * 60 * 60 * 10000 - 1)).toBe('-10y');
+   });
+ 
+-  it('should round', () => {
++  it('format.ok.short should round', () => {
+     expect(format(234234234)).toBe('3d');
+ 
+     expect(format(-234234234)).toBe('-3d');
+@@ -206,54 +206,54 @@ describe('format(number)', () => {
+ // invalid inputs
+ 
+ describe('format(invalid inputs)', () => {
+-  it('should throw an error, when format("")', () => {
++  it('format.ok.short should throw an error, when format("")', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       format('');
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when format(undefined)', () => {
++  it('format.ok.short should throw an error, when format(undefined)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       format(undefined);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when format(null)', () => {
++  it('format.ok.short should throw an error, when format(null)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       format(null);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when format([])', () => {
++  it('format.ok.short should throw an error, when format([])', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       format([]);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when format({})', () => {
++  it('format.ok.short should throw an error, when format({})', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       format({});
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when format(NaN)', () => {
++  it('format.ok.short should throw an error, when format(NaN)', () => {
+     expect(() => {
+       format(NaN);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when format(Infinity)', () => {
++  it('format.ok.short should throw an error, when format(Infinity)', () => {
+     expect(() => {
+       format(Infinity);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when format(-Infinity)', () => {
++  it('format.ok.short should throw an error, when format(-Infinity)', () => {
+     expect(() => {
+       format(-Infinity);
+     }).toThrow();
+diff --git a/src/index.test.ts b/src/index.test.ts
+index 5035ab9..a6210d7 100644
+--- a/src/index.test.ts
++++ b/src/index.test.ts
+@@ -2,53 +2,53 @@ import { describe, expect, it } from '@jest/globals';
+ import { ms } from './index';
+ 
+ describe('ms(string)', () => {
+-  it('should not throw an error', () => {
++  it('ms.ok.parse should not throw an error', () => {
+     expect(() => {
+       ms('1m');
+     }).not.toThrow();
+   });
+ 
+-  it('should preserve ms', () => {
++  it('ms.ok.parse should preserve ms', () => {
+     expect(ms('100')).toBe(100);
+   });
+ 
+-  it('should convert from m to ms', () => {
++  it('ms.ok.parse should convert from m to ms', () => {
+     expect(ms('1m')).toBe(60000);
+   });
+ 
+-  it('should convert from h to ms', () => {
++  it('ms.ok.parse should convert from h to ms', () => {
+     expect(ms('1h')).toBe(3600000);
+   });
+ 
+-  it('should convert d to ms', () => {
++  it('ms.ok.parse should convert d to ms', () => {
+     expect(ms('2d')).toBe(172800000);
+   });
+ 
+-  it('should convert w to ms', () => {
++  it('ms.ok.parse should convert w to ms', () => {
+     expect(ms('3w')).toBe(1814400000);
+   });
+ 
+-  it('should convert s to ms', () => {
++  it('ms.ok.parse should convert s to ms', () => {
+     expect(ms('1s')).toBe(1000);
+   });
+ 
+-  it('should convert ms to ms', () => {
++  it('ms.ok.parse should convert ms to ms', () => {
+     expect(ms('100ms')).toBe(100);
+   });
+ 
+-  it('should convert y to ms', () => {
++  it('ms.ok.parse should convert y to ms', () => {
+     expect(ms('1y')).toBe(31557600000);
+   });
+ 
+-  it('should work with decimals', () => {
++  it('ms.ok.parse should work with decimals', () => {
+     expect(ms('1.5h')).toBe(5400000);
+   });
+ 
+-  it('should work with multiple spaces', () => {
++  it('ms.ok.parse should work with multiple spaces', () => {
+     expect(ms('1   s')).toBe(1000);
+   });
+ 
+-  it('should return NaN if invalid', () => {
++  it('ms.ok.parse should return NaN if invalid', () => {
+     // @ts-expect-error - We expect this to fail.
+     expect(Number.isNaN(ms('☃'))).toBe(true);
+     // @ts-expect-error - We expect this to fail.
+@@ -57,24 +57,24 @@ describe('ms(string)', () => {
+     expect(Number.isNaN(ms('ms'))).toBe(true);
+   });
+ 
+-  it('should be case-insensitive', () => {
++  it('ms.ok.parse should be case-insensitive', () => {
+     expect(ms('1.5H')).toBe(5400000);
+   });
+ 
+-  it('should work with numbers starting with .', () => {
++  it('ms.ok.parse should work with numbers starting with .', () => {
+     expect(ms('.5ms')).toBe(0.5);
+   });
+ 
+-  it('should work with negative integers', () => {
++  it('ms.ok.parse should work with negative integers', () => {
+     expect(ms('-100ms')).toBe(-100);
+   });
+ 
+-  it('should work with negative decimals', () => {
++  it('ms.ok.parse should work with negative decimals', () => {
+     expect(ms('-1.5h')).toBe(-5400000);
+     expect(ms('-10.5h')).toBe(-37800000);
+   });
+ 
+-  it('should work with negative decimals starting with "."', () => {
++  it('ms.ok.parse should work with negative decimals starting with "."', () => {
+     expect(ms('-.5h')).toBe(-1800000);
+   });
+ });
+@@ -82,57 +82,57 @@ describe('ms(string)', () => {
+ // long strings
+ 
+ describe('ms(long string)', () => {
+-  it('should not throw an error', () => {
++  it('ms.ok.parse should not throw an error', () => {
+     expect(() => {
+       ms('53 milliseconds');
+     }).not.toThrow();
+   });
+ 
+-  it('should convert milliseconds to ms', () => {
++  it('ms.ok.parse should convert milliseconds to ms', () => {
+     expect(ms('53 milliseconds')).toBe(53);
+   });
+ 
+-  it('should convert msecs to ms', () => {
++  it('ms.ok.parse should convert msecs to ms', () => {
+     expect(ms('17 msecs')).toBe(17);
+   });
+ 
+-  it('should convert sec to ms', () => {
++  it('ms.ok.parse should convert sec to ms', () => {
+     expect(ms('1 sec')).toBe(1000);
+   });
+ 
+-  it('should convert from min to ms', () => {
++  it('ms.ok.parse should convert from min to ms', () => {
+     expect(ms('1 min')).toBe(60000);
+   });
+ 
+-  it('should convert from hr to ms', () => {
++  it('ms.ok.parse should convert from hr to ms', () => {
+     expect(ms('1 hr')).toBe(3600000);
+   });
+ 
+-  it('should convert days to ms', () => {
++  it('ms.ok.parse should convert days to ms', () => {
+     expect(ms('2 days')).toBe(172800000);
+   });
+ 
+-  it('should convert weeks to ms', () => {
++  it('ms.ok.parse should convert weeks to ms', () => {
+     expect(ms('1 week')).toBe(604800000);
+   });
+ 
+-  it('should convert years to ms', () => {
++  it('ms.ok.parse should convert years to ms', () => {
+     expect(ms('1 year')).toBe(31557600000);
+   });
+ 
+-  it('should work with decimals', () => {
++  it('ms.ok.parse should work with decimals', () => {
+     expect(ms('1.5 hours')).toBe(5400000);
+   });
+ 
+-  it('should work with negative integers', () => {
++  it('ms.ok.parse should work with negative integers', () => {
+     expect(ms('-100 milliseconds')).toBe(-100);
+   });
+ 
+-  it('should work with negative decimals', () => {
++  it('ms.ok.parse should work with negative decimals', () => {
+     expect(ms('-1.5 hours')).toBe(-5400000);
+   });
+ 
+-  it('should work with negative decimals starting with "."', () => {
++  it('ms.ok.parse should work with negative decimals starting with "."', () => {
+     expect(ms('-.5 hr')).toBe(-1800000);
+   });
+ });
+@@ -140,19 +140,19 @@ describe('ms(long string)', () => {
+ // numbers
+ 
+ describe('ms(number, { long: true })', () => {
+-  it('should not throw an error', () => {
++  it('ms.ok.long should not throw an error', () => {
+     expect(() => {
+       ms(500, { long: true });
+     }).not.toThrow();
+   });
+ 
+-  it('should support milliseconds', () => {
++  it('ms.ok.long should support milliseconds', () => {
+     expect(ms(500, { long: true })).toBe('500 ms');
+ 
+     expect(ms(-500, { long: true })).toBe('-500 ms');
+   });
+ 
+-  it('should support seconds', () => {
++  it('ms.ok.long should support seconds', () => {
+     expect(ms(1000, { long: true })).toBe('1 second');
+     expect(ms(1200, { long: true })).toBe('1 second');
+     expect(ms(10000, { long: true })).toBe('10 seconds');
+@@ -162,7 +162,7 @@ describe('ms(number, { long: true })', () => {
+     expect(ms(-10000, { long: true })).toBe('-10 seconds');
+   });
+ 
+-  it('should support minutes', () => {
++  it('ms.ok.long should support minutes', () => {
+     expect(ms(60 * 1000, { long: true })).toBe('1 minute');
+     expect(ms(60 * 1200, { long: true })).toBe('1 minute');
+     expect(ms(60 * 10000, { long: true })).toBe('10 minutes');
+@@ -172,7 +172,7 @@ describe('ms(number, { long: true })', () => {
+     expect(ms(-1 * 60 * 10000, { long: true })).toBe('-10 minutes');
+   });
+ 
+-  it('should support hours', () => {
++  it('ms.ok.long should support hours', () => {
+     expect(ms(60 * 60 * 1000, { long: true })).toBe('1 hour');
+     expect(ms(60 * 60 * 1200, { long: true })).toBe('1 hour');
+     expect(ms(60 * 60 * 10000, { long: true })).toBe('10 hours');
+@@ -182,7 +182,7 @@ describe('ms(number, { long: true })', () => {
+     expect(ms(-1 * 60 * 60 * 10000, { long: true })).toBe('-10 hours');
+   });
+ 
+-  it('should support days', () => {
++  it('ms.ok.long should support days', () => {
+     expect(ms(1 * 24 * 60 * 60 * 1000, { long: true })).toBe('1 day');
+     expect(ms(1 * 24 * 60 * 60 * 1200, { long: true })).toBe('1 day');
+     expect(ms(6 * 24 * 60 * 60 * 1000, { long: true })).toBe('6 days');
+@@ -192,7 +192,7 @@ describe('ms(number, { long: true })', () => {
+     expect(ms(-1 * 6 * 24 * 60 * 60 * 1000, { long: true })).toBe('-6 days');
+   });
+ 
+-  it('should support weeks', () => {
++  it('ms.ok.long should support weeks', () => {
+     expect(ms(1 * 7 * 24 * 60 * 60 * 1000, { long: true })).toBe('1 week');
+     expect(ms(2 * 7 * 24 * 60 * 60 * 1000, { long: true })).toBe('2 weeks');
+ 
+@@ -204,7 +204,7 @@ describe('ms(number, { long: true })', () => {
+     );
+   });
+ 
+-  it('should support months', () => {
++  it('ms.ok.long should support months', () => {
+     expect(ms(30.4375 * 24 * 60 * 60 * 1000, { long: true })).toBe('1 month');
+     expect(ms(30.4375 * 24 * 60 * 60 * 1200, { long: true })).toBe('1 month');
+     expect(ms(30.4375 * 24 * 60 * 60 * 10000, { long: true })).toBe(
+@@ -222,7 +222,7 @@ describe('ms(number, { long: true })', () => {
+     );
+   });
+ 
+-  it('should support years', () => {
++  it('ms.ok.long should support years', () => {
+     expect(ms(365.25 * 24 * 60 * 60 * 1000 + 1, { long: true })).toBe('1 year');
+     expect(ms(365.25 * 24 * 60 * 60 * 1200 + 1, { long: true })).toBe('1 year');
+     expect(ms(365.25 * 24 * 60 * 60 * 10000 + 1, { long: true })).toBe(
+@@ -240,7 +240,7 @@ describe('ms(number, { long: true })', () => {
+     );
+   });
+ 
+-  it('should round', () => {
++  it('ms.ok.long should round', () => {
+     expect(ms(234234234, { long: true })).toBe('3 days');
+ 
+     expect(ms(-234234234, { long: true })).toBe('-3 days');
+@@ -250,19 +250,19 @@ describe('ms(number, { long: true })', () => {
+ // numbers
+ 
+ describe('ms(number)', () => {
+-  it('should not throw an error', () => {
++  it('ms.ok.format should not throw an error', () => {
+     expect(() => {
+       ms(500);
+     }).not.toThrow();
+   });
+ 
+-  it('should support milliseconds', () => {
++  it('ms.ok.format should support milliseconds', () => {
+     expect(ms(500)).toBe('500ms');
+ 
+     expect(ms(-500)).toBe('-500ms');
+   });
+ 
+-  it('should support seconds', () => {
++  it('ms.ok.format should support seconds', () => {
+     expect(ms(1000)).toBe('1s');
+     expect(ms(10000)).toBe('10s');
+ 
+@@ -270,7 +270,7 @@ describe('ms(number)', () => {
+     expect(ms(-10000)).toBe('-10s');
+   });
+ 
+-  it('should support minutes', () => {
++  it('ms.ok.format should support minutes', () => {
+     expect(ms(60 * 1000)).toBe('1m');
+     expect(ms(60 * 10000)).toBe('10m');
+ 
+@@ -278,7 +278,7 @@ describe('ms(number)', () => {
+     expect(ms(-1 * 60 * 10000)).toBe('-10m');
+   });
+ 
+-  it('should support hours', () => {
++  it('ms.ok.format should support hours', () => {
+     expect(ms(60 * 60 * 1000)).toBe('1h');
+     expect(ms(60 * 60 * 10000)).toBe('10h');
+ 
+@@ -286,7 +286,7 @@ describe('ms(number)', () => {
+     expect(ms(-1 * 60 * 60 * 10000)).toBe('-10h');
+   });
+ 
+-  it('should support days', () => {
++  it('ms.ok.format should support days', () => {
+     expect(ms(24 * 60 * 60 * 1000)).toBe('1d');
+     expect(ms(24 * 60 * 60 * 6000)).toBe('6d');
+ 
+@@ -294,7 +294,7 @@ describe('ms(number)', () => {
+     expect(ms(-1 * 24 * 60 * 60 * 6000)).toBe('-6d');
+   });
+ 
+-  it('should support weeks', () => {
++  it('ms.ok.format should support weeks', () => {
+     expect(ms(1 * 7 * 24 * 60 * 60 * 1000)).toBe('1w');
+     expect(ms(2 * 7 * 24 * 60 * 60 * 1000)).toBe('2w');
+ 
+@@ -302,7 +302,7 @@ describe('ms(number)', () => {
+     expect(ms(-1 * 2 * 7 * 24 * 60 * 60 * 1000)).toBe('-2w');
+   });
+ 
+-  it('should support months', () => {
++  it('ms.ok.format should support months', () => {
+     expect(ms(30.4375 * 24 * 60 * 60 * 1000)).toBe('1mo');
+     expect(ms(30.4375 * 24 * 60 * 60 * 1200)).toBe('1mo');
+     expect(ms(30.4375 * 24 * 60 * 60 * 10000)).toBe('10mo');
+@@ -312,7 +312,7 @@ describe('ms(number)', () => {
+     expect(ms(-1 * 30.4375 * 24 * 60 * 60 * 10000)).toBe('-10mo');
+   });
+ 
+-  it('should support years', () => {
++  it('ms.ok.format should support years', () => {
+     expect(ms(365.25 * 24 * 60 * 60 * 1000 + 1)).toBe('1y');
+     expect(ms(365.25 * 24 * 60 * 60 * 1200 + 1)).toBe('1y');
+     expect(ms(365.25 * 24 * 60 * 60 * 10000 + 1)).toBe('10y');
+@@ -322,7 +322,7 @@ describe('ms(number)', () => {
+     expect(ms(-1 * 365.25 * 24 * 60 * 60 * 10000 - 1)).toBe('-10y');
+   });
+ 
+-  it('should round', () => {
++  it('ms.ok.format should round', () => {
+     expect(ms(234234234)).toBe('3d');
+ 
+     expect(ms(-234234234)).toBe('-3d');
+@@ -332,54 +332,54 @@ describe('ms(number)', () => {
+ // invalid inputs
+ 
+ describe('ms(invalid inputs)', () => {
+-  it('should throw an error, when ms("")', () => {
++  it('ms.ok.parse should throw an error, when ms("")', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       ms('');
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when ms(undefined)', () => {
++  it('ms.ok.parse should throw an error, when ms(undefined)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       ms(undefined);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when ms(null)', () => {
++  it('ms.ok.parse should throw an error, when ms(null)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       ms(null);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when ms([])', () => {
++  it('ms.ok.parse should throw an error, when ms([])', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       ms([]);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when ms({})', () => {
++  it('ms.ok.parse should throw an error, when ms({})', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       ms({});
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when ms(NaN)', () => {
++  it('ms.ok.parse should throw an error, when ms(NaN)', () => {
+     expect(() => {
+       ms(NaN);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when ms(Infinity)', () => {
++  it('ms.ok.parse should throw an error, when ms(Infinity)', () => {
+     expect(() => {
+       ms(Infinity);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when ms(-Infinity)', () => {
++  it('ms.ok.parse should throw an error, when ms(-Infinity)', () => {
+     expect(() => {
+       ms(-Infinity);
+     }).toThrow();
+diff --git a/src/parse-strict.test.ts b/src/parse-strict.test.ts
+index 9c30a5e..ea91db3 100644
+--- a/src/parse-strict.test.ts
++++ b/src/parse-strict.test.ts
+@@ -2,56 +2,56 @@ import { describe, expect, it } from '@jest/globals';
+ import { parseStrict } from './index';
+ 
+ describe('parseStrict(string)', () => {
+-  it('should not throw an error', () => {
++  it('parseStrict.ok.parse should not throw an error', () => {
+     expect(() => {
+       parseStrict('1m');
+     }).not.toThrow();
+   });
+ 
+-  it('should preserve ms', () => {
++  it('parseStrict.ok.parse should preserve ms', () => {
+     expect(parseStrict('100')).toBe(100);
+   });
+ 
+-  it('should convert from m to ms', () => {
++  it('parseStrict.ok.parse should convert from m to ms', () => {
+     expect(parseStrict('1m')).toBe(60000);
+   });
+ 
+-  it('should convert from h to ms', () => {
++  it('parseStrict.ok.parse should convert from h to ms', () => {
+     expect(parseStrict('1h')).toBe(3600000);
+   });
+ 
+-  it('should convert d to ms', () => {
++  it('parseStrict.ok.parse should convert d to ms', () => {
+     expect(parseStrict('2d')).toBe(172800000);
+   });
+ 
+-  it('should convert w to ms', () => {
++  it('parseStrict.ok.parse should convert w to ms', () => {
+     expect(parseStrict('3w')).toBe(1814400000);
+   });
+ 
+-  it('should convert s to ms', () => {
++  it('parseStrict.ok.parse should convert s to ms', () => {
+     expect(parseStrict('1s')).toBe(1000);
+   });
+ 
+-  it('should convert ms to ms', () => {
++  it('parseStrict.ok.parse should convert ms to ms', () => {
+     expect(parseStrict('100ms')).toBe(100);
+   });
+ 
+-  it('should convert mo to ms', () => {
++  it('parseStrict.ok.parse should convert mo to ms', () => {
+     expect(parseStrict('1mo')).toBe(2629800000);
+   });
+-  it('should convert y to ms', () => {
++  it('parseStrict.ok.parse should convert y to ms', () => {
+     expect(parseStrict('1y')).toBe(31557600000);
+   });
+ 
+-  it('should work with ms', () => {
++  it('parseStrict.ok.parse should work with ms', () => {
+     expect(parseStrict('1.5h')).toBe(5400000);
+   });
+ 
+-  it('should work with multiple spaces', () => {
++  it('parseStrict.ok.parse should work with multiple spaces', () => {
+     expect(parseStrict('1   s')).toBe(1000);
+   });
+ 
+-  it('should return NaN if invalid', () => {
++  it('parseStrict.ok.parse should return NaN if invalid', () => {
+     // @ts-expect-error - we expect the types to fail but JS users can still use this
+     expect(Number.isNaN(parseStrict('☃'))).toBe(true);
+     // @ts-expect-error - we expect the types to fail but JS users can still use this
+@@ -60,7 +60,7 @@ describe('parseStrict(string)', () => {
+     expect(Number.isNaN(parseStrict('foo'))).toBe(true);
+   });
+ 
+-  it('should be case-insensitive', () => {
++  it('parseStrict.ok.parse should be case-insensitive', () => {
+     // @ts-expect-error - we expect the types to fail but JS users can still use this
+     expect(parseStrict('53 YeArS')).toBe(1672552800000);
+     // @ts-expect-error - we expect the types to fail but JS users can still use this
+@@ -73,20 +73,20 @@ describe('parseStrict(string)', () => {
+     expect(parseStrict('53 MiLliSeCondS')).toBe(53);
+   });
+ 
+-  it('should work with numbers starting with .', () => {
++  it('parseStrict.ok.parse should work with numbers starting with .', () => {
+     expect(parseStrict('.5ms')).toBe(0.5);
+   });
+ 
+-  it('should work with negative integers', () => {
++  it('parseStrict.ok.parse should work with negative integers', () => {
+     expect(parseStrict('-100ms')).toBe(-100);
+   });
+ 
+-  it('should work with negative decimals', () => {
++  it('parseStrict.ok.parse should work with negative decimals', () => {
+     expect(parseStrict('-1.5h')).toBe(-5400000);
+     expect(parseStrict('-10.5h')).toBe(-37800000);
+   });
+ 
+-  it('should work with negative decimals starting with "."', () => {
++  it('parseStrict.ok.parse should work with negative decimals starting with "."', () => {
+     expect(parseStrict('-.5h')).toBe(-1800000);
+   });
+ });
+@@ -94,61 +94,61 @@ describe('parseStrict(string)', () => {
+ // long strings
+ 
+ describe('parseStrict(long string)', () => {
+-  it('should not throw an error', () => {
++  it('parseStrict.ok.parse should not throw an error', () => {
+     expect(() => {
+       parseStrict('53 milliseconds');
+     }).not.toThrow();
+   });
+ 
+-  it('should convert milliseconds to ms', () => {
++  it('parseStrict.ok.parse should convert milliseconds to ms', () => {
+     expect(parseStrict('53 milliseconds')).toBe(53);
+   });
+ 
+-  it('should convert msecs to ms', () => {
++  it('parseStrict.ok.parse should convert msecs to ms', () => {
+     expect(parseStrict('17 msecs')).toBe(17);
+   });
+ 
+-  it('should convert sec to ms', () => {
++  it('parseStrict.ok.parse should convert sec to ms', () => {
+     expect(parseStrict('1 sec')).toBe(1000);
+   });
+ 
+-  it('should convert from min to ms', () => {
++  it('parseStrict.ok.parse should convert from min to ms', () => {
+     expect(parseStrict('1 min')).toBe(60000);
+   });
+ 
+-  it('should convert from hr to ms', () => {
++  it('parseStrict.ok.parse should convert from hr to ms', () => {
+     expect(parseStrict('1 hr')).toBe(3600000);
+   });
+ 
+-  it('should convert days to ms', () => {
++  it('parseStrict.ok.parse should convert days to ms', () => {
+     expect(parseStrict('2 days')).toBe(172800000);
+   });
+ 
+-  it('should convert weeks to ms', () => {
++  it('parseStrict.ok.parse should convert weeks to ms', () => {
+     expect(parseStrict('1 week')).toBe(604800000);
+   });
+ 
+-  it('should convert months to ms', () => {
++  it('parseStrict.ok.parse should convert months to ms', () => {
+     expect(parseStrict('1 month')).toBe(2629800000);
+   });
+ 
+-  it('should convert years to ms', () => {
++  it('parseStrict.ok.parse should convert years to ms', () => {
+     expect(parseStrict('1 year')).toBe(31557600000);
+   });
+ 
+-  it('should work with decimals', () => {
++  it('parseStrict.ok.parse should work with decimals', () => {
+     expect(parseStrict('1.5 hours')).toBe(5400000);
+   });
+ 
+-  it('should work with negative integers', () => {
++  it('parseStrict.ok.parse should work with negative integers', () => {
+     expect(parseStrict('-100 milliseconds')).toBe(-100);
+   });
+ 
+-  it('should work with negative decimals', () => {
++  it('parseStrict.ok.parse should work with negative decimals', () => {
+     expect(parseStrict('-1.5 hours')).toBe(-5400000);
+   });
+ 
+-  it('should work with negative decimals starting with "."', () => {
++  it('parseStrict.ok.parse should work with negative decimals starting with "."', () => {
+     expect(parseStrict('-.5 hr')).toBe(-1800000);
+   });
+ });
+@@ -156,63 +156,63 @@ describe('parseStrict(long string)', () => {
+ // invalid inputs
+ 
+ describe('parseStrict(invalid inputs)', () => {
+-  it('should throw an error, when parseStrict("")', () => {
++  it('parseStrict.ok.parse should throw an error, when parseStrict("")', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parseStrict('');
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parseStrict("...>100 length string...")', () => {
++  it('parseStrict.ok.parse should throw an error, when parseStrict("...>100 length string...")', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parseStrict('▲'.repeat(101));
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parseStrict(undefined)', () => {
++  it('parseStrict.ok.parse should throw an error, when parseStrict(undefined)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parseStrict(undefined);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parseStrict(null)', () => {
++  it('parseStrict.ok.parse should throw an error, when parseStrict(null)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parseStrict(null);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parseStrict([])', () => {
++  it('parseStrict.ok.parse should throw an error, when parseStrict([])', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parseStrict([]);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parseStrict({})', () => {
++  it('parseStrict.ok.parse should throw an error, when parseStrict({})', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parseStrict({});
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parseStrict(NaN)', () => {
++  it('parseStrict.ok.parse should throw an error, when parseStrict(NaN)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parseStrict(NaN);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parseStrict(Infinity)', () => {
++  it('parseStrict.ok.parse should throw an error, when parseStrict(Infinity)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parseStrict(Infinity);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parseStrict(-Infinity)', () => {
++  it('parseStrict.ok.parse should throw an error, when parseStrict(-Infinity)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parseStrict(-Infinity);
+diff --git a/src/parse.test.ts b/src/parse.test.ts
+index 9182411..dc678ae 100644
+--- a/src/parse.test.ts
++++ b/src/parse.test.ts
+@@ -2,59 +2,59 @@ import { describe, expect, it } from '@jest/globals';
+ import { parse } from './index';
+ 
+ describe('parse(string)', () => {
+-  it('should not throw an error', () => {
++  it('parse.ok.units should not throw an error', () => {
+     expect(() => {
+       parse('1m');
+     }).not.toThrow();
+   });
+ 
+-  it('should preserve ms', () => {
++  it('parse.ok.default-unit should preserve ms', () => {
+     expect(parse('100')).toBe(100);
+   });
+ 
+-  it('should convert from m to ms', () => {
++  it('parse.ok.values should convert from m to ms', () => {
+     expect(parse('1m')).toBe(60000);
+   });
+ 
+-  it('should convert from h to ms', () => {
++  it('parse.ok.values should convert from h to ms', () => {
+     expect(parse('1h')).toBe(3600000);
+   });
+ 
+-  it('should convert d to ms', () => {
++  it('parse.ok.values should convert d to ms', () => {
+     expect(parse('2d')).toBe(172800000);
+   });
+ 
+-  it('should convert w to ms', () => {
++  it('parse.ok.units should convert w to ms', () => {
+     expect(parse('3w')).toBe(1814400000);
+   });
+ 
+-  it('should convert s to ms', () => {
++  it('parse.ok.values should convert s to ms', () => {
+     expect(parse('1s')).toBe(1000);
+   });
+ 
+-  it('should convert ms to ms', () => {
++  it('parse.ok.units should convert ms to ms', () => {
+     expect(parse('100ms')).toBe(100);
+   });
+ 
+-  it('should convert y to ms', () => {
++  it('parse.ok.values should convert y to ms', () => {
+     expect(parse('1y')).toBe(31557600000);
+   });
+ 
+-  it('should work with ms', () => {
++  it('parse.ok.fraction should work with ms', () => {
+     expect(parse('1.5h')).toBe(5400000);
+   });
+ 
+-  it('should work with multiple spaces', () => {
++  it('parse.ok.case should work with multiple spaces', () => {
+     expect(parse('1   s')).toBe(1000);
+   });
+ 
+-  it('should return NaN if invalid', () => {
++  it('parse.ok.units should return NaN if invalid', () => {
+     expect(Number.isNaN(parse('☃'))).toBe(true);
+     expect(Number.isNaN(parse('10-.5'))).toBe(true);
+     expect(Number.isNaN(parse('foo'))).toBe(true);
+   });
+ 
+-  it('should be case-insensitive', () => {
++  it('parse.ok.case should be case-insensitive', () => {
+     expect(parse('53 YeArS')).toBe(1672552800000);
+     expect(parse('53 WeEkS')).toBe(32054400000);
+     expect(parse('53 DaYS')).toBe(4579200000);
+@@ -62,20 +62,20 @@ describe('parse(string)', () => {
+     expect(parse('53 MiLliSeCondS')).toBe(53);
+   });
+ 
+-  it('should work with numbers starting with .', () => {
++  it('parse.ok.fraction should work with numbers starting with .', () => {
+     expect(parse('.5ms')).toBe(0.5);
+   });
+ 
+-  it('should work with negative integers', () => {
++  it('parse.ok.fraction should work with negative integers', () => {
+     expect(parse('-100ms')).toBe(-100);
+   });
+ 
+-  it('should work with negative decimals', () => {
++  it('parse.ok.fraction should work with negative decimals', () => {
+     expect(parse('-1.5h')).toBe(-5400000);
+     expect(parse('-10.5h')).toBe(-37800000);
+   });
+ 
+-  it('should work with negative decimals starting with "."', () => {
++  it('parse.ok.fraction should work with negative decimals starting with "."', () => {
+     expect(parse('-.5h')).toBe(-1800000);
+   });
+ });
+@@ -83,61 +83,61 @@ describe('parse(string)', () => {
+ // long strings
+ 
+ describe('parse(long string)', () => {
+-  it('should not throw an error', () => {
++  it('parse.ok.units should not throw an error', () => {
+     expect(() => {
+       parse('53 milliseconds');
+     }).not.toThrow();
+   });
+ 
+-  it('should convert milliseconds to ms', () => {
++  it('parse.ok.units should convert milliseconds to ms', () => {
+     expect(parse('53 milliseconds')).toBe(53);
+   });
+ 
+-  it('should convert msecs to ms', () => {
++  it('parse.ok.units should convert msecs to ms', () => {
+     expect(parse('17 msecs')).toBe(17);
+   });
+ 
+-  it('should convert sec to ms', () => {
++  it('parse.ok.units should convert sec to ms', () => {
+     expect(parse('1 sec')).toBe(1000);
+   });
+ 
+-  it('should convert from min to ms', () => {
++  it('parse.ok.units should convert from min to ms', () => {
+     expect(parse('1 min')).toBe(60000);
+   });
+ 
+-  it('should convert from hr to ms', () => {
++  it('parse.ok.units should convert from hr to ms', () => {
+     expect(parse('1 hr')).toBe(3600000);
+   });
+ 
+-  it('should convert days to ms', () => {
++  it('parse.ok.units should convert days to ms', () => {
+     expect(parse('2 days')).toBe(172800000);
+   });
+ 
+-  it('should convert weeks to ms', () => {
++  it('parse.ok.units should convert weeks to ms', () => {
+     expect(parse('1 week')).toBe(604800000);
+   });
+ 
+-  it('should convert months to ms', () => {
++  it('parse.ok.units should convert months to ms', () => {
+     expect(parse('1 month')).toBe(2629800000);
+   });
+ 
+-  it('should convert years to ms', () => {
++  it('parse.ok.units should convert years to ms', () => {
+     expect(parse('1 year')).toBe(31557600000);
+   });
+ 
+-  it('should work with decimals', () => {
++  it('parse.ok.fraction should work with decimals', () => {
+     expect(parse('1.5 hours')).toBe(5400000);
+   });
+ 
+-  it('should work with negative integers', () => {
++  it('parse.ok.fraction should work with negative integers', () => {
+     expect(parse('-100 milliseconds')).toBe(-100);
+   });
+ 
+-  it('should work with negative decimals', () => {
++  it('parse.ok.fraction should work with negative decimals', () => {
+     expect(parse('-1.5 hours')).toBe(-5400000);
+   });
+ 
+-  it('should work with negative decimals starting with "."', () => {
++  it('parse.ok.fraction should work with negative decimals starting with "."', () => {
+     expect(parse('-.5 hr')).toBe(-1800000);
+   });
+ });
+@@ -145,61 +145,61 @@ describe('parse(long string)', () => {
+ // invalid inputs
+ 
+ describe('parse(invalid inputs)', () => {
+-  it('should throw an error, when parse("")', () => {
++  it('parse.ok.units should throw an error, when parse("")', () => {
+     expect(() => {
+       parse('');
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parseStrict("...>100 length string...")', () => {
++  it('parse.ok.units should throw an error, when parseStrict("...>100 length string...")', () => {
+     expect(() => {
+       parse('▲'.repeat(101));
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parse(undefined)', () => {
++  it('parse.ok.units should throw an error, when parse(undefined)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parse(undefined);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parse(null)', () => {
++  it('parse.ok.units should throw an error, when parse(null)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parse(null);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parse([])', () => {
++  it('parse.ok.units should throw an error, when parse([])', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parse([]);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parse({})', () => {
++  it('parse.ok.units should throw an error, when parse({})', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parse({});
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parse(NaN)', () => {
++  it('parse.ok.units should throw an error, when parse(NaN)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parse(NaN);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parse(Infinity)', () => {
++  it('parse.ok.units should throw an error, when parse(Infinity)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parse(Infinity);
+     }).toThrow();
+   });
+ 
+-  it('should throw an error, when parse(-Infinity)', () => {
++  it('parse.ok.units should throw an error, when parse(-Infinity)', () => {
+     expect(() => {
+       // @ts-expect-error - We expect this to throw.
+       parse(-Infinity);

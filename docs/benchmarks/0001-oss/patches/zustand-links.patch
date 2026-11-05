@@ -1,0 +1,1514 @@
+diff --git a/tests/devtools.test.tsx b/tests/devtools.test.tsx
+index 1262a18..4bccb66 100644
+--- a/tests/devtools.test.tsx
++++ b/tests/devtools.test.tsx
+@@ -129,7 +129,7 @@ beforeEach(() => {
+   unnamedConnections.clear()
+ })
+ 
+-it('connects to the extension by passing the options and initializes', async () => {
++it('createStore.ok.api connects to the extension by passing the options and initializes', async () => {
+   const options = { name: 'test', foo: 'bar' }
+   const initialState = { count: 0 }
+   createStore(devtools(() => initialState, { enabled: true, ...options }))
+@@ -152,20 +152,20 @@ describe('If there is no extension installed...', () => {
+     ;(window as any).__REDUX_DEVTOOLS_EXTENSION__ = extensionConnector
+   })
+ 
+-  it('does not throw', async () => {
++  it('createStore.ok.api does not throw', async () => {
+     expect(() => {
+       createStore(devtools(() => ({ count: 0 })))
+     }).not.toThrow()
+   })
+ 
+-  it('does not warn', async () => {
++  it('createStore.ok.api does not warn', async () => {
+     createStore(devtools(() => ({ count: 0 })))
+     expect(console.warn).not.toBeCalled()
+   })
+ })
+ 
+ describe('When state changes...', () => {
+-  it("sends { type: setStateName || 'anonymous`, ...rest } as the action with current state", async () => {
++  it("createStore.ok.api sends { type: setStateName || 'anonymous`, ...rest } as the action with current state", async () => {
+     const options = {
+       name: 'testOptionsName',
+       enabled: true,
+@@ -196,7 +196,7 @@ describe('When state changes...', () => {
+   })
+ })
+ 
+-it('preserves external action names and payloads with persist', () => {
++it('persist.ok.shape preserves external action names and payloads with persist', () => {
+   const setItem = vi.fn(() => 'stored')
+   const api = createStore(
+     devtools(
+@@ -246,7 +246,7 @@ it('preserves external action names and payloads with persist', () => {
+ })
+ 
+ describe('When state changes with automatic setter inferring...', () => {
+-  it("sends { type: setStateName || 'setCount`, ...rest } as the action with current state", async () => {
++  it("createStore.ok.api sends { type: setStateName || 'setCount`, ...rest } as the action with current state", async () => {
+     const options = {
+       name: 'testOptionsName',
+       enabled: true,
+@@ -317,7 +317,7 @@ describe('When state changes with automatic setter inferring...', () => {
+       expected: 'Foo',
+     },
+   ])(
+-    'infers caller name from V8 stack format — $label',
++    'createStore.ok.api infers caller name from V8 stack format — $label',
+     ({ stack, expected }) => {
+       const OriginalError = Error
+       function ErrorWithV8Stack(
+@@ -367,7 +367,7 @@ describe('When state changes with automatic setter inferring...', () => {
+     },
+   )
+ 
+-  it('infers caller name from Firefox/SpiderMonkey stack format', () => {
++  it('createStore.ok.api infers caller name from Firefox/SpiderMonkey stack format', () => {
+     const geckoStack = [
+       'api.setState@http://localhost/devtools.ts:200:5',
+       'setCount@http://localhost/app.ts:10:5',
+@@ -423,7 +423,7 @@ describe('When state changes with automatic setter inferring...', () => {
+ 
+ describe('when it receives a message of type...', () => {
+   describe('ACTION...', () => {
+-    it('does nothing', async () => {
++    it('createStore.ok.api does nothing', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(devtools(() => initialState, { enabled: true }))
+       const setState = vi.spyOn(api, 'setState')
+@@ -438,7 +438,7 @@ describe('when it receives a message of type...', () => {
+       expect(setState).not.toBeCalled()
+     })
+ 
+-    it('unless action type is __setState', async () => {
++    it('createStore.ok.api unless action type is __setState', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(devtools(() => initialState, { enabled: true }))
+ 
+@@ -451,7 +451,7 @@ describe('when it receives a message of type...', () => {
+       expect(api.getState()).toStrictEqual({ ...initialState, foo: 'bar' })
+     })
+ 
+-    it('does nothing even if there is `api.dispatch`', async () => {
++    it('createStore.ok.api does nothing even if there is `api.dispatch`', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(devtools(() => initialState, { enabled: true }))
+       ;(api as any).dispatch = vi.fn()
+@@ -468,7 +468,7 @@ describe('when it receives a message of type...', () => {
+       expect((api as any).dispatch).not.toBeCalled()
+     })
+ 
+-    it('dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true', async () => {
++    it('createStore.ok.api dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(devtools(() => initialState, { enabled: true }))
+       ;(api as any).dispatch = vi.fn()
+@@ -488,7 +488,7 @@ describe('when it receives a message of type...', () => {
+       })
+     })
+ 
+-    it('does not throw for unsupported payload', async () => {
++    it('createStore.ok.api does not throw for unsupported payload', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(devtools(() => initialState, { enabled: true }))
+       ;(api as any).dispatch = vi.fn()
+@@ -536,7 +536,7 @@ describe('when it receives a message of type...', () => {
+   })
+ 
+   describe('DISPATCH and payload of type...', () => {
+-    it('RESET, it inits with initial state', async () => {
++    it('createStore.ok.api RESET, it inits with initial state', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(devtools(() => initialState, { enabled: true }))
+       api.setState({ count: 1 })
+@@ -554,7 +554,7 @@ describe('when it receives a message of type...', () => {
+       expect(connection.send).not.toBeCalled()
+     })
+ 
+-    it('COMMIT, it inits with current state', async () => {
++    it('createStore.ok.api COMMIT, it inits with current state', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(devtools(() => initialState, { enabled: true }))
+       api.setState({ count: 2 })
+@@ -573,7 +573,7 @@ describe('when it receives a message of type...', () => {
+     })
+ 
+     describe('ROLLBACK...', () => {
+-      it('updates state without recording and inits with `message.state`', async () => {
++      it('createStore.ok.api updates state without recording and inits with `message.state`', async () => {
+         const initialState = { count: 0, increment: () => {} }
+         const api = createStore(devtools(() => initialState, { enabled: true }))
+         const newState = { foo: 'bar' }
+@@ -595,7 +595,7 @@ describe('when it receives a message of type...', () => {
+         expect(connection.send).not.toBeCalled()
+       })
+ 
+-      it('does not throw for unparsable `message.state`', async () => {
++      it('createStore.ok.api does not throw for unparsable `message.state`', async () => {
+         const increment = () => {}
+         const initialState = { count: 0, increment }
+         const api = createStore(devtools(() => initialState, { enabled: true }))
+@@ -632,7 +632,7 @@ describe('when it receives a message of type...', () => {
+ 
+     describe('JUMP_TO_STATE...', () => {
+       const increment = () => {}
+-      it('updates state without recording with `message.state`', async () => {
++      it('createStore.ok.api updates state without recording with `message.state`', async () => {
+         const initialState = { count: 0, increment }
+         const api = createStore(devtools(() => initialState, { enabled: true }))
+         const newState = { foo: 'bar' }
+@@ -649,7 +649,7 @@ describe('when it receives a message of type...', () => {
+         expect(connection.send).not.toBeCalled()
+       })
+ 
+-      it('does not throw for unparsable `message.state`', async () => {
++      it('createStore.ok.api does not throw for unparsable `message.state`', async () => {
+         const initialState = { count: 0, increment: () => {} }
+         const api = createStore(devtools(() => initialState, { enabled: true }))
+         const originalConsoleError = console.error
+@@ -682,7 +682,7 @@ describe('when it receives a message of type...', () => {
+     })
+ 
+     describe('JUMP_TO_ACTION...', () => {
+-      it('updates state without recording with `message.state`', async () => {
++      it('createStore.ok.api updates state without recording with `message.state`', async () => {
+         const initialState = { count: 0, increment: () => {} }
+         const api = createStore(devtools(() => initialState, { enabled: true }))
+         const newState = { foo: 'bar' }
+@@ -699,7 +699,7 @@ describe('when it receives a message of type...', () => {
+         expect(connection.send).not.toBeCalled()
+       })
+ 
+-      it('does not throw for unparsable `message.state`', async () => {
++      it('createStore.ok.api does not throw for unparsable `message.state`', async () => {
+         const increment = () => {}
+         const initialState = { count: 0, increment }
+         const api = createStore(devtools(() => initialState, { enabled: true }))
+@@ -732,7 +732,7 @@ describe('when it receives a message of type...', () => {
+       })
+     })
+ 
+-    it('IMPORT_STATE, it updates state without recording and inits the last computedState', async () => {
++    it('createStore.ok.api IMPORT_STATE, it updates state without recording and inits the last computedState', async () => {
+       const initialState = { count: 0, increment: () => {} }
+       const api = createStore(devtools(() => initialState, { enabled: true }))
+       const nextLiftedState = {
+@@ -756,7 +756,7 @@ describe('when it receives a message of type...', () => {
+       expect(connection.send).toHaveBeenLastCalledWith(null, nextLiftedState)
+     })
+ 
+-    it('PAUSE_RECORDING, it toggles the sending of actions', async () => {
++    it('createStore.ok.api PAUSE_RECORDING, it toggles the sending of actions', async () => {
+       const api = createStore(devtools(() => ({ count: 0 }), { enabled: true }))
+ 
+       api.setState({ count: 1 }, false, 'increment')
+@@ -793,7 +793,7 @@ describe('when it receives a message of type...', () => {
+     const reviver = (key: string, value: unknown) =>
+       key === 'count' ? Number(value) * 10 : value
+ 
+-    it('applies reviver to ACTION `__setState` payload', async () => {
++    it('createStore.ok.api applies reviver to ACTION `__setState` payload', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(
+         devtools(() => initialState, { enabled: true, serialize: { reviver } }),
+@@ -808,7 +808,7 @@ describe('when it receives a message of type...', () => {
+       expect(api.getState()).toStrictEqual({ ...initialState, count: 50 })
+     })
+ 
+-    it('applies reviver to `message.state` on JUMP_TO_STATE', async () => {
++    it('createStore.ok.api applies reviver to `message.state` on JUMP_TO_STATE', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(
+         devtools(() => initialState, { enabled: true, serialize: { reviver } }),
+@@ -828,7 +828,7 @@ describe('when it receives a message of type...', () => {
+       expect(connection.send).not.toBeCalled()
+     })
+ 
+-    it('applies reviver to `message.state` on ROLLBACK', async () => {
++    it('createStore.ok.api applies reviver to `message.state` on ROLLBACK', async () => {
+       const initialState = { count: 0 }
+       const api = createStore(
+         devtools(() => initialState, { enabled: true, serialize: { reviver } }),
+@@ -855,7 +855,7 @@ describe('with redux middleware', () => {
+     ) => { type: 'INCREMENT' } | { type: 'DECREMENT' }
+   }>
+ 
+-  it('works as expected', async () => {
++  it('createStore.ok.api works as expected', async () => {
+     api = createStore(
+       devtools(
+         redux(
+@@ -922,7 +922,7 @@ describe('different envs', () => {
+     console.warn = savedConsoleWarn
+   })
+ 
+-  it('works in non-browser env', async () => {
++  it('createStore.ok.api works in non-browser env', async () => {
+     const originalWindow = globalThis.window
+     globalThis.window = undefined as any
+ 
+@@ -933,7 +933,7 @@ describe('different envs', () => {
+     globalThis.window = originalWindow
+   })
+ 
+-  it('works in react native env', async () => {
++  it('createStore.ok.api works in react native env', async () => {
+     const originalWindow = globalThis.window
+     globalThis.window = {} as any
+ 
+@@ -945,7 +945,7 @@ describe('different envs', () => {
+   })
+ })
+ 
+-it('preserves isRecording after setting from devtools', async () => {
++it('createStore.ok.api preserves isRecording after setting from devtools', async () => {
+   const api = createStore(devtools(() => ({ count: 0 }), { enabled: true }))
+   const [connection] = getNamedConnectionApis(undefined)
+   const [connectionSubscriber] = getNamedConnectionSubscribers(undefined)
+@@ -976,7 +976,7 @@ it('preserves isRecording after setting from devtools', async () => {
+  **/
+ 
+ describe('when redux connection was called on multiple stores with `name` undefined in `devtools` options', () => {
+-  it('should create separate connection for each devtools store with .connect call', async () => {
++  it('createStore.ok.api should create separate connection for each devtools store with .connect call', async () => {
+     const options1 = { foo: 'bar', testConnectionId: 'asdf' }
+     const options2 = { foo: 'barr', testConnectionId: '123asd' }
+     const initialState1 = { count: 0 }
+@@ -989,7 +989,7 @@ describe('when redux connection was called on multiple stores with `name` undefi
+     expect(extensionConnector.connect).toHaveBeenNthCalledWith(2, options2)
+   })
+ 
+-  it('should call .init on each different connection object', async () => {
++  it('createStore.ok.api should call .init on each different connection object', async () => {
+     const options1 = { foo: 'bar', testConnectionId: 'asdf' }
+     const options2 = { foo: 'barr', testConnectionId: '123asd' }
+     const initialState1 = { count: 0 }
+@@ -1007,7 +1007,7 @@ describe('when redux connection was called on multiple stores with `name` undefi
+   })
+ 
+   describe('when `store` property was provided in `devtools` call in options', () => {
+-    it('should create single connection for all internal calls of .connect and `store` is not passed to .connect', async () => {
++    it('createStore.ok.api should create single connection for all internal calls of .connect and `store` is not passed to .connect', async () => {
+       const { devtools: newDevtools } = await import('zustand/middleware')
+ 
+       const options1 = { store: 'store1123', foo: 'bar1' }
+@@ -1028,7 +1028,7 @@ describe('when redux connection was called on multiple stores with `name` undefi
+       })
+     })
+ 
+-    it('should call `.init` on single connection with combined states after each `create(devtools` call', async () => {
++    it('createStore.ok.api should call `.init` on single connection with combined states after each `create(devtools` call', async () => {
+       const { devtools: newDevtools } = await import('zustand/middleware')
+ 
+       const options1 = { store: 'store12' }
+@@ -1059,7 +1059,7 @@ describe('when redux connection was called on multiple stores with `name` undefi
+ 
+ describe('when redux connection was called on multiple stores with `name` provided in `devtools` options', () => {
+   describe('when same `name` is provided to all stores in devtools options', () => {
+-    it('should call .connect of redux extension with `name` that was passed from `devtools` options', async () => {
++    it('createStore.ok.api should call .connect of redux extension with `name` that was passed from `devtools` options', async () => {
+       const connectionName = 'test'
+       const options1 = { name: connectionName, store: 'store1123', foo: 'bar1' }
+       const options2 = { name: connectionName, store: 'store1414', foo: 'bar1' }
+@@ -1078,7 +1078,7 @@ describe('when redux connection was called on multiple stores with `name` provid
+   })
+ 
+   describe('when different `name` props were provided for different group of stores in devtools options', () => {
+-    it('should call .connect of redux extension with `name` that was passed from `devtools` options', async () => {
++    it('createStore.ok.api should call .connect of redux extension with `name` that was passed from `devtools` options', async () => {
+       const connectionNameGroup1 = 'test1'
+       const connectionNameGroup2 = 'test2'
+       const options1 = {
+@@ -1122,7 +1122,7 @@ describe('when redux connection was called on multiple stores with `name` provid
+       })
+     })
+ 
+-    it('should call `.init` on single connection with combined states after each `create(devtools` call', async () => {
++    it('createStore.ok.api should call `.init` on single connection with combined states after each `create(devtools` call', async () => {
+       const { devtools: newDevtools } = await import('zustand/middleware')
+       const connectionNameGroup1 = 'test1'
+       const connectionNameGroup2 = 'test2'
+@@ -1187,7 +1187,7 @@ describe('when redux connection was called on multiple stores with `name` provid
+       })
+     })
+ 
+-    it('preserves isRecording after setting from devtools on proper connection subscriber', async () => {
++    it('createStore.ok.api preserves isRecording after setting from devtools on proper connection subscriber', async () => {
+       const options1 = { name: 'asdf1' }
+       const options2 = { name: 'asdf2' }
+       const api1 = createStore(
+@@ -1227,7 +1227,7 @@ describe('when redux connection was called on multiple stores with `name` provid
+         ) => { type: 'INCREMENT' } | { type: 'DECREMENT' }
+       }>
+ 
+-      it('works as expected', async () => {
++      it('createStore.ok.api works as expected', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         api1 = createStore(
+@@ -1323,7 +1323,7 @@ describe('when redux connection was called on multiple stores with `name` provid
+ 
+ describe('when create devtools was called multiple times with `name` option undefined', () => {
+   describe('When state changes...', () => {
+-    it("sends { type: setStateName || 'anonymous`, ...rest } as the action with current state, isolated from other connections", async () => {
++    it("createStore.ok.api sends { type: setStateName || 'anonymous`, ...rest } as the action with current state, isolated from other connections", async () => {
+       const options1 = {
+         enabled: true,
+         testConnectionId: '123',
+@@ -1378,7 +1378,7 @@ describe('when create devtools was called multiple times with `name` option unde
+ 
+   describe('when it receives a message of type...', () => {
+     describe('ACTION...', () => {
+-      it('does nothing, connections isolated from each other', async () => {
++      it('createStore.ok.api does nothing, connections isolated from each other', async () => {
+         const options1 = { testConnectionId: '123' }
+         const options2 = { testConnectionId: '231' }
+         const options3 = { testConnectionId: '4342' }
+@@ -1423,7 +1423,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         expect(setState3).not.toBeCalled()
+       })
+ 
+-      it('unless action type is __setState, connections isolated from each other', async () => {
++      it('createStore.ok.api unless action type is __setState, connections isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -1453,7 +1453,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         expect(api3.getState()).toStrictEqual({ ...initialState3 })
+       })
+ 
+-      it('does nothing even if there is `api.dispatch`, connections isolated from each other', async () => {
++      it('createStore.ok.api does nothing even if there is `api.dispatch`, connections isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -1498,7 +1498,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         expect((api3 as any).dispatch).not.toBeCalled()
+       })
+ 
+-      it('dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other', async () => {
++      it('createStore.ok.api dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -1552,7 +1552,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         })
+       })
+ 
+-      it('does not throw for unsupported payload, connections are isolated from each other', async () => {
++      it('createStore.ok.api does not throw for unsupported payload, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -1689,7 +1689,7 @@ describe('when create devtools was called multiple times with `name` option unde
+     })
+ 
+     describe('DISPATCH and payload of type...', () => {
+-      it('RESET, it inits with initial state, connections are isolated from each other', async () => {
++      it('createStore.ok.api RESET, it inits with initial state, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -1736,7 +1736,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         connections.forEach((conn) => expect(conn.send).not.toBeCalled())
+       })
+ 
+-      it('COMMIT, it inits with current state, connections are isolated from each other', async () => {
++      it('createStore.ok.api COMMIT, it inits with current state, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -1785,7 +1785,7 @@ describe('when create devtools was called multiple times with `name` option unde
+     })
+ 
+     describe('ROLLBACK...', () => {
+-      it('updates state without recording and inits with `message.state, connections are isolated from each other`', async () => {
++      it('createStore.ok.api updates state without recording and inits with `message.state, connections are isolated from each other`', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -1864,7 +1864,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         connections.forEach((conn) => expect(conn.send).not.toBeCalled())
+       })
+ 
+-      it('does not throw for unparsable `message.state`, connections are isolated from each other', async () => {
++      it('createStore.ok.api does not throw for unparsable `message.state`, connections are isolated from each other', async () => {
+         const increment1 = () => {}
+         const increment2 = () => {}
+         const increment3 = () => {}
+@@ -1965,7 +1965,7 @@ describe('when create devtools was called multiple times with `name` option unde
+       const increment2 = () => {}
+       const increment3 = () => {}
+ 
+-      it('updates state without recording with `message.state`, connections are isolated from each other', async () => {
++      it('createStore.ok.api updates state without recording with `message.state`, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -2031,7 +2031,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         connections.forEach((conn) => expect(conn.send).not.toBeCalled())
+       })
+ 
+-      it('does not throw for unparsable `message.state`, connections are isolated from each other', async () => {
++      it('createStore.ok.api does not throw for unparsable `message.state`, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -2126,7 +2126,7 @@ describe('when create devtools was called multiple times with `name` option unde
+       const increment2 = () => {}
+       const increment3 = () => {}
+ 
+-      it('updates state without recording with `message.state`, connections are isolated from each other', async () => {
++      it('createStore.ok.api updates state without recording with `message.state`, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -2193,7 +2193,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         connections.forEach((conn) => expect(conn.send).not.toBeCalled())
+       })
+ 
+-      it('does not throw for unparsable `message.state`, connections are isolated from each other', async () => {
++      it('createStore.ok.api does not throw for unparsable `message.state`, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -2281,7 +2281,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         console.error = originalConsoleError
+       })
+ 
+-      it('IMPORT_STATE, it updates state without recording and inits the last computedState, connections are isolated from each other', async () => {
++      it('createStore.ok.api IMPORT_STATE, it updates state without recording and inits the last computedState, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -2372,7 +2372,7 @@ describe('when create devtools was called multiple times with `name` option unde
+         )
+       })
+ 
+-      it('PAUSE_RECORDING, it toggles the sending of actions, connections are isolated from each other', async () => {
++      it('createStore.ok.api PAUSE_RECORDING, it toggles the sending of actions, connections are isolated from each other', async () => {
+         const options1 = { testConnectionId: 'asdf' }
+         const options2 = { testConnectionId: '2f' }
+         const options3 = { testConnectionId: 'd2e' }
+@@ -2485,7 +2485,7 @@ describe('when create devtools was called multiple times with `name` option unde
+ describe('when create devtools was called multiple times with `name` and `store` options defined', () => {
+   describe('when `type` was provided in store state methods as option', () => {
+     describe('When state changes...', () => {
+-      it("sends { type: setStateName || 'anonymous`, ...rest } as the action with current state", async () => {
++      it("createStore.ok.api sends { type: setStateName || 'anonymous`, ...rest } as the action with current state", async () => {
+         const options = {
+           name: 'testOptionsName',
+           store: 'someStore',
+@@ -2523,7 +2523,7 @@ describe('when create devtools was called multiple times with `name` and `store`
+ 
+     describe('when it receives a message of type...', () => {
+       describe('ACTION...', () => {
+-        it('does nothing, connections isolated from each other', async () => {
++        it('createStore.ok.api does nothing, connections isolated from each other', async () => {
+           const options1 = { testConnectionId: '123', store: 'store1' }
+           const options2 = { testConnectionId: '231', store: 'store2' }
+           const initialState1 = { count: 0 }
+@@ -2577,7 +2577,7 @@ describe('when create devtools was called multiple times with `name` and `store`
+           expect(setState4).not.toBeCalled()
+         })
+ 
+-        it('unless action type is __setState, connections isolated from each other', async () => {
++        it('createStore.ok.api unless action type is __setState, connections isolated from each other', async () => {
+           const name1 = 'name1'
+           const name2 = 'name2'
+           const store1 = 'someStore1'
+@@ -2633,7 +2633,7 @@ describe('when create devtools was called multiple times with `name` and `store`
+           console.error = originalConsoleError
+         })
+ 
+-        it('does nothing even if there is `api.dispatch`, connections isolated from each other', async () => {
++        it('createStore.ok.api does nothing even if there is `api.dispatch`, connections isolated from each other', async () => {
+           const { devtools: newDevtools } = await import('zustand/middleware')
+ 
+           const name1 = 'name1'
+@@ -2681,7 +2681,7 @@ describe('when create devtools was called multiple times with `name` and `store`
+           expect((api2 as any).dispatch).not.toBeCalled()
+         })
+ 
+-        it('dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other', async () => {
++        it('createStore.ok.api dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other', async () => {
+           const { devtools: newDevtools } = await import('zustand/middleware')
+           const name1 = 'name1'
+           const name2 = 'name2'
+@@ -2739,7 +2739,7 @@ describe('when create devtools was called multiple times with `name` and `store`
+ })
+ 
+ describe('cleanup', () => {
+-  it('should preserve a replacement store when the original store is cleaned up', () => {
++  it('createStore.ok.api should preserve a replacement store when the original store is cleaned up', () => {
+     const options = {
+       name: 'replacement-before-cleanup',
+       store: 'shared',
+@@ -2768,7 +2768,7 @@ describe('cleanup', () => {
+   })
+ 
+   it.each([1, 2])(
+-    'should preserve other stores on a shared connection after %i cleanup calls',
++    'createStore.ok.api should preserve other stores on a shared connection after %i cleanup calls',
+     (cleanupCalls) => {
+       const name = `shared-cleanup-${cleanupCalls}`
+       const store1 = createStore(
+@@ -2803,7 +2803,7 @@ describe('cleanup', () => {
+     },
+   )
+ 
+-  it('should close a shared connection only after its last store is cleaned up', () => {
++  it('createStore.ok.api should close a shared connection only after its last store is cleaned up', () => {
+     const name = 'last-store-cleanup'
+     const store1 = createStore(
+       devtools(() => ({ count: 0 }), { name, store: 'first', enabled: true }),
+@@ -2840,7 +2840,7 @@ describe('cleanup', () => {
+     replacement.devtools.cleanup()
+   })
+ 
+-  it('should close an untracked connection while a tracked connection uses the same name', () => {
++  it('createStore.ok.api should close an untracked connection while a tracked connection uses the same name', () => {
+     const name = 'mixed-connection-cleanup'
+     const options = { name, testStore: 'untracked', enabled: true }
+     const untrackedStore = createStore(devtools(() => ({ count: 0 }), options))
+@@ -2869,7 +2869,7 @@ describe('cleanup', () => {
+     expect(trackedConnection.unsubscribe).toHaveBeenCalledTimes(1)
+   })
+ 
+-  it('should unsubscribe from devtools when cleanup is called', async () => {
++  it('createStore.ok.api should unsubscribe from devtools when cleanup is called', async () => {
+     const options = { name: 'test' }
+     const store = createStore(devtools(() => ({ count: 0 }), options))
+     const [connection] = getNamedConnectionApis(options.name)
+@@ -2878,7 +2878,7 @@ describe('cleanup', () => {
+     expect(connection.unsubscribe).toHaveBeenCalledTimes(1)
+   })
+ 
+-  it('should remove store from tracked connection after cleanup', async () => {
++  it('createStore.ok.api should remove store from tracked connection after cleanup', async () => {
+     const options = {
+       name: 'test-store-name',
+       store: 'test-store-id',
+@@ -2906,7 +2906,7 @@ describe('cleanup', () => {
+ })
+ 
+ describe('actionsDenylist', () => {
+-  it('should pass actionsDenylist option to Redux DevTools', async () => {
++  it('createStore.ok.api should pass actionsDenylist option to Redux DevTools', async () => {
+     const options = {
+       name: 'test-filter',
+       enabled: true,
+diff --git a/tests/immer.test.tsx b/tests/immer.test.tsx
+index 1158de5..64aa142 100644
+--- a/tests/immer.test.tsx
++++ b/tests/immer.test.tsx
+@@ -61,7 +61,7 @@ describe('immer middleware', () => {
+     expect(previousUser.tags).toEqual(['a'])
+   })
+ 
+-  it('should work with vanilla createStore', () => {
++  it('createStore.ok.updater should work with vanilla createStore', () => {
+     type State = { count: number }
+     const store = createStore<State>()(immer(() => ({ count: 0 })))
+ 
+diff --git a/tests/middlewareTypes.test.tsx b/tests/middlewareTypes.test.tsx
+index e0add0f..92405e7 100644
+--- a/tests/middlewareTypes.test.tsx
++++ b/tests/middlewareTypes.test.tsx
+@@ -57,7 +57,7 @@ describe('counter state spec (no middleware)', () => {
+ })
+ 
+ describe('counter state spec (single middleware)', () => {
+-  it('immer', () => {
++  it('createStore.ok.api immer', () => {
+     const useBoundStore = create<CounterState>()(
+       immer((set, get) => ({
+         count: 0,
+@@ -115,7 +115,7 @@ describe('counter state spec (single middleware)', () => {
+     >().not.toExtend<{ additional: number }>()
+   })
+ 
+-  it('redux', () => {
++  it('createStore.ok.api redux', () => {
+     const useBoundStore = create(
+       redux<{ count: number }, { type: 'INC' }>(
+         (state, action) => {
+@@ -150,7 +150,7 @@ describe('counter state spec (single middleware)', () => {
+     expect(testSubtyping).toBeDefined()
+   })
+ 
+-  it('devtools', () => {
++  it('createStore.ok.api devtools', () => {
+     const useBoundStore = create<CounterState>()(
+       devtools(
+         (set, get) => ({
+@@ -220,7 +220,7 @@ describe('counter state spec (single middleware)', () => {
+     expect(useBoundStore).toBeDefined()
+   })
+ 
+-  it('subscribeWithSelector', () => {
++  it('createStore.ok.api subscribeWithSelector', () => {
+     const useBoundStore = create<CounterState>()(
+       subscribeWithSelector((set, get) => ({
+         count: 1,
+@@ -248,7 +248,7 @@ describe('counter state spec (single middleware)', () => {
+     expect(testSubtyping).toBeDefined()
+   })
+ 
+-  it('combine', () => {
++  it('createStore.ok.api combine', () => {
+     const useBoundStore = create(
+       combine({ count: 1 }, (set, get) => ({
+         inc: () => set({ count: get().count + 1 }, false),
+@@ -271,7 +271,7 @@ describe('counter state spec (single middleware)', () => {
+     expect(testSubtyping).toBeDefined()
+   })
+ 
+-  it('persist', () => {
++  it('persist.ok.name persist', () => {
+     const useBoundStore = create<CounterState>()(
+       persist(
+         (set, get) => ({
+@@ -299,7 +299,7 @@ describe('counter state spec (single middleware)', () => {
+     expect(testSubtyping).toBeDefined()
+   })
+ 
+-  it('persist with partialize', () => {
++  it('persist.ok.partialize persist with partialize', () => {
+     const useBoundStore = create<CounterState>()(
+       persist(
+         (set, get) => ({
+@@ -326,7 +326,7 @@ describe('counter state spec (single middleware)', () => {
+     expect(TestComponent).toBeDefined()
+   })
+ 
+-  it('persist without custom api (#638)', () => {
++  it('persist.ok.name persist without custom api (#638)', () => {
+     const useBoundStore = create<CounterState>()(
+       persist(
+         (set, get) => ({
+@@ -499,7 +499,7 @@ describe('counter state spec (double middleware)', () => {
+     expect(TestComponent).toBeDefined()
+   })
+ 
+-  it('devtools & persist', () => {
++  it('persist.ok.name devtools & persist', () => {
+     const useBoundStore = create<CounterState>()(
+       devtools(
+         persist(
+@@ -530,7 +530,7 @@ describe('counter state spec (double middleware)', () => {
+ })
+ 
+ describe('counter state spec (triple middleware)', () => {
+-  it('devtools & persist & immer', () => {
++  it('persist.ok.name devtools & persist & immer', () => {
+     const useBoundStore = create<CounterState>()(
+       devtools(
+         persist(
+@@ -594,7 +594,7 @@ describe('counter state spec (triple middleware)', () => {
+     expect(TestComponent).toBeDefined()
+   })
+ 
+-  it('devtools & subscribeWithSelector & persist', () => {
++  it('persist.ok.name devtools & subscribeWithSelector & persist', () => {
+     const useBoundStore = create<CounterState>()(
+       devtools(
+         subscribeWithSelector(
+@@ -633,7 +633,7 @@ describe('counter state spec (triple middleware)', () => {
+ })
+ 
+ describe('counter state spec (quadruple middleware)', () => {
+-  it('devtools & subscribeWithSelector & persist & immer (#616)', () => {
++  it('persist.ok.name devtools & subscribeWithSelector & persist & immer (#616)', () => {
+     const useBoundStore = create<CounterState>()(
+       devtools(
+         subscribeWithSelector(
+@@ -675,7 +675,7 @@ describe('counter state spec (quadruple middleware)', () => {
+ })
+ 
+ describe('more complex state spec with subscribeWithSelector', () => {
+-  it('#619, #632', () => {
++  it('persist.ok.name #619, #632', () => {
+     const useBoundStore = create(
+       subscribeWithSelector(
+         persist(
+@@ -725,7 +725,7 @@ describe('more complex state spec with subscribeWithSelector', () => {
+     expect(TestComponent).toBeDefined()
+   })
+ 
+-  it('#650', () => {
++  it('persist.ok.name #650', () => {
+     type MyState = {
+       token: string | undefined
+       authenticated: boolean
+@@ -767,7 +767,7 @@ describe('more complex state spec with subscribeWithSelector', () => {
+ })
+ 
+ describe('create with explicitly annotated mutators', () => {
+-  it('subscribeWithSelector & persist', () => {
++  it('persist.ok.name subscribeWithSelector & persist', () => {
+     const useBoundStore = create<
+       CounterState,
+       [
+diff --git a/tests/persistAsync.test.tsx b/tests/persistAsync.test.tsx
+index 88f8b07..43466da 100644
+--- a/tests/persistAsync.test.tsx
++++ b/tests/persistAsync.test.tsx
+@@ -52,7 +52,7 @@ describe('persist middleware with async configuration', () => {
+     console.error = consoleError
+   })
+ 
+-  it('can rehydrate state', async () => {
++  it('persist.ok.merge can rehydrate state', async () => {
+     const onRehydrateStorageSpy = vi.fn()
+     const storage = {
+       getItem: async (name: string) => {
+@@ -106,7 +106,7 @@ describe('persist middleware with async configuration', () => {
+     )
+   })
+ 
+-  it('can throw rehydrate error', async () => {
++  it('persist.ok.on-rehydrate can throw rehydrate error', async () => {
+     const onRehydrateStorageSpy = vi.fn()
+ 
+     const storage = {
+@@ -145,7 +145,7 @@ describe('persist middleware with async configuration', () => {
+     )
+   })
+ 
+-  it('can persist state', async () => {
++  it('persist.ok.shape can persist state', async () => {
+     const { storage, setItemSpy } = createPersistantStore(null)
+ 
+     const createStore = () => {
+@@ -213,7 +213,7 @@ describe('persist middleware with async configuration', () => {
+     )
+   })
+ 
+-  it('can async migrate persisted state', async () => {
++  it('persist.ok.migrate can async migrate persisted state', async () => {
+     const setItemSpy = vi.fn()
+     const onRehydrateStorageSpy = vi.fn()
+     const migrateSpy = vi.fn(async () => {
+@@ -268,7 +268,7 @@ describe('persist middleware with async configuration', () => {
+     expect(onRehydrateStorageSpy).toHaveBeenCalledWith({ count: 99 }, undefined)
+   })
+ 
+-  it('can merge partial persisted state', async () => {
++  it('persist.ok.merge can merge partial persisted state', async () => {
+     const storage = {
+       getItem: async () => {
+         await sleep(10)
+@@ -331,7 +331,7 @@ describe('persist middleware with async configuration', () => {
+     )
+   })
+ 
+-  it('can correctly handle a missing migrate function', async () => {
++  it('persist.ok.version can correctly handle a missing migrate function', async () => {
+     console.error = vi.fn()
+     const onRehydrateStorageSpy = vi.fn()
+     const storage = {
+@@ -372,7 +372,7 @@ describe('persist middleware with async configuration', () => {
+     expect(onRehydrateStorageSpy).toHaveBeenCalledWith({ count: 0 }, undefined)
+   })
+ 
+-  it('can throw migrate error', async () => {
++  it('persist.ok.migrate can throw migrate error', async () => {
+     console.error = vi.fn()
+     const onRehydrateStorageSpy = vi.fn()
+ 
+@@ -419,7 +419,7 @@ describe('persist middleware with async configuration', () => {
+     )
+   })
+ 
+-  it('passes the latest state to onRehydrateStorage and onHydrate on first hydrate', async () => {
++  it('persist.ok.on-rehydrate passes the latest state to onRehydrateStorage and onHydrate on first hydrate', async () => {
+     const onRehydrateStorageSpy = vi.fn()
+ 
+     const storage = {
+@@ -471,7 +471,7 @@ describe('persist middleware with async configuration', () => {
+     expect(onRehydrateStorageSpy).toHaveBeenCalledWith({ count: 0 })
+   })
+ 
+-  it('gives the merged state to onRehydrateStorage', async () => {
++  it('persist.ok.merge gives the merged state to onRehydrateStorage', async () => {
+     const onRehydrateStorageSpy = vi.fn()
+ 
+     const storage = {
+@@ -515,7 +515,7 @@ describe('persist middleware with async configuration', () => {
+     )
+   })
+ 
+-  it('can custom merge the stored state', async () => {
++  it('persist.ok.merge can custom merge the stored state', async () => {
+     const storage = {
+       getItem: async () => {
+         await sleep(10)
+@@ -570,7 +570,7 @@ describe('persist middleware with async configuration', () => {
+     })
+   })
+ 
+-  it("can merge the state when the storage item doesn't have a version", async () => {
++  it("persist.ok.merge can merge the state when the storage item doesn't have a version", async () => {
+     const storage = {
+       getItem: async () => {
+         await sleep(10)
+@@ -609,7 +609,7 @@ describe('persist middleware with async configuration', () => {
+     })
+   })
+ 
+-  it('can manually rehydrate through the api', async () => {
++  it('persist.ok.merge can manually rehydrate through the api', async () => {
+     const storageValue = '{"state":{"count":1},"version":0}'
+ 
+     const storage = {
+@@ -640,7 +640,7 @@ describe('persist middleware with async configuration', () => {
+     })
+   })
+ 
+-  it('can check if the store has been hydrated through the api', async () => {
++  it('persist.ok.skip-hydration can check if the store has been hydrated through the api', async () => {
+     const storage = {
+       getItem: async () => {
+         await sleep(10)
+@@ -666,7 +666,7 @@ describe('persist middleware with async configuration', () => {
+     expect(useBoundStore.persist.hasHydrated()).toBe(true)
+   })
+ 
+-  it('can skip initial hydration', async () => {
++  it('persist.ok.skip-hydration can skip initial hydration', async () => {
+     const storage = {
+       getItem: async (name: string) => {
+         await sleep(10)
+@@ -717,7 +717,7 @@ describe('persist middleware with async configuration', () => {
+     )
+   })
+ 
+-  it('handles state updates during onRehydrateStorage', async () => {
++  it('persist.ok.on-rehydrate handles state updates during onRehydrateStorage', async () => {
+     const storage = {
+       getItem: async () => {
+         await sleep(10)
+@@ -757,7 +757,7 @@ describe('persist middleware with async configuration', () => {
+     expect(useBoundStore.getState().count).toEqual(2)
+   })
+ 
+-  it('passes latest state to post-rehydration callback after hydration-triggered updates', async () => {
++  it('persist.ok.on-rehydrate passes latest state to post-rehydration callback after hydration-triggered updates', async () => {
+     const onRehydrateStorageSpy = vi.fn()
+     const storage = {
+       getItem: async () => {
+@@ -811,7 +811,7 @@ describe('persist middleware with async configuration', () => {
+     unsubscribe()
+   })
+ 
+-  it('can rehydrate state with custom deserialized Map', async () => {
++  it('persist.ok.merge can rehydrate state with custom deserialized Map', async () => {
+     const onRehydrateStorageSpy = vi.fn()
+     const storage = {
+       getItem: async () => {
+@@ -858,7 +858,7 @@ describe('persist middleware with async configuration', () => {
+     )
+   })
+ 
+-  it('can persist state with custom serialization of Map', async () => {
++  it('persist.ok.shape can persist state with custom serialization of Map', async () => {
+     const { storage, setItemSpy } = createPersistantStore(null)
+     const map = new Map()
+ 
+@@ -932,7 +932,7 @@ describe('persist middleware with async configuration', () => {
+     )
+   })
+ 
+-  it('should handle multiple concurrent rehydrate calls (only last one wins)', async () => {
++  it('persist.ok.name should handle multiple concurrent rehydrate calls (only last one wins)', async () => {
+     let callCount = 0
+     const storage = {
+       getItem: async () => {
+@@ -978,7 +978,7 @@ describe('persist middleware with async configuration', () => {
+     expect(onFinishHydrationSpy).toHaveBeenCalledWith({ count: 30 })
+   })
+ 
+-  it('should not overwrite user state changes made during async hydration', async () => {
++  it('persist.ok.merge should not overwrite user state changes made during async hydration', async () => {
+     const storage = {
+       getItem: async () => {
+         await sleep(20)
+@@ -1020,7 +1020,7 @@ describe('persist middleware with async configuration', () => {
+     })
+   })
+ 
+-  it('should abort hydration with async migration when newer hydration starts', async () => {
++  it('persist.ok.migrate should abort hydration with async migration when newer hydration starts', async () => {
+     let migrationCount = 0
+     const storage = {
+       getItem: async () => {
+@@ -1079,7 +1079,7 @@ const deferred = <T,>(): Deferred<T> => {
+ }
+ 
+ describe('persist clearStorage hydration generation', () => {
+-  it('keeps a cleared delayed stored value from hydrating state', async () => {
++  it('persist.ok.name keeps a cleared delayed stored value from hydrating state', async () => {
+     const storedValue = deferred<{
+       state: { count: number }
+       version: number
+@@ -1106,7 +1106,7 @@ describe('persist clearStorage hydration generation', () => {
+     expect(store.getState().count).toBe(0)
+   })
+ 
+-  it('keeps a cleared delayed migration from hydrating state', async () => {
++  it('persist.ok.migrate keeps a cleared delayed migration from hydrating state', async () => {
+     const migratedValue = deferred<{ count: number }>()
+     const migrate = vi.fn(() => migratedValue.promise)
+     const removeItem = vi.fn()
+@@ -1134,7 +1134,7 @@ describe('persist clearStorage hydration generation', () => {
+     expect(store.getState().count).toBe(0)
+   })
+ 
+-  it('revokes the active hydration even when storage removal throws', async () => {
++  it('persist.ok.name revokes the active hydration even when storage removal throws', async () => {
+     const olderValue = deferred<{
+       state: { count: number }
+       version: number
+@@ -1171,7 +1171,7 @@ describe('persist clearStorage hydration generation', () => {
+     expect(store.getState().count).toBe(2)
+   })
+ 
+-  it('does not reset live state when clearing after hydration', async () => {
++  it('persist.ok.name does not reset live state when clearing after hydration', async () => {
+     const removeItem = vi.fn()
+     const store = createStore(
+       persist(() => ({ count: 0 }), {
+@@ -1192,7 +1192,7 @@ describe('persist clearStorage hydration generation', () => {
+     expect(store.getState().count).toBe(1)
+   })
+ 
+-  it('suppresses stale completion signals and allows a later hydration', async () => {
++  it('persist.ok.on-rehydrate suppresses stale completion signals and allows a later hydration', async () => {
+     const olderValue = deferred<{
+       state: { count: number }
+       version: number
+diff --git a/tests/persistSync.test.tsx b/tests/persistSync.test.tsx
+index c1663c8..77eec47 100644
+--- a/tests/persistSync.test.tsx
++++ b/tests/persistSync.test.tsx
+@@ -38,7 +38,7 @@ describe('persist middleware with sync configuration', () => {
+     console.error = consoleError
+   })
+ 
+-  it('can rehydrate state', () => {
++  it('persist.ok.merge can rehydrate state', () => {
+     const storage = {
+       getItem: (name: string) =>
+         JSON.stringify({
+@@ -74,7 +74,7 @@ describe('persist middleware with sync configuration', () => {
+     )
+   })
+ 
+-  it('can throw rehydrate error', () => {
++  it('persist.ok.on-rehydrate can throw rehydrate error', () => {
+     const storage = {
+       getItem: () => {
+         throw new Error('getItem error')
+@@ -95,7 +95,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(spy).toBeCalledWith(undefined, new Error('getItem error'))
+   })
+ 
+-  it('can persist state', () => {
++  it('persist.ok.shape can persist state', () => {
+     const { storage, setItemSpy } = createPersistentStore(null)
+ 
+     const createStore = () => {
+@@ -133,7 +133,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(onRehydrateStorageSpy2).toBeCalledWith({ count: 42 }, undefined)
+   })
+ 
+-  it('can non-async migrate persisted state', () => {
++  it('persist.ok.migrate can non-async migrate persisted state', () => {
+     const setItemSpy = vi.fn()
+     const onRehydrateStorageSpy = vi.fn()
+     const migrateSpy = vi.fn(() => ({ count: 99 }))
+@@ -170,7 +170,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(onRehydrateStorageSpy).toBeCalledWith({ count: 99 }, undefined)
+   })
+ 
+-  it('can correctly handle a missing migrate function', () => {
++  it('persist.ok.version can correctly handle a missing migrate function', () => {
+     console.error = vi.fn()
+     const onRehydrateStorageSpy = vi.fn()
+     const storage = {
+@@ -197,7 +197,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(onRehydrateStorageSpy).toBeCalledWith({ count: 0 }, undefined)
+   })
+ 
+-  it('can throw migrate error', () => {
++  it('persist.ok.migrate can throw migrate error', () => {
+     const onRehydrateStorageSpy = vi.fn()
+ 
+     const storage = {
+@@ -229,7 +229,7 @@ describe('persist middleware with sync configuration', () => {
+     )
+   })
+ 
+-  it('passes the latest state to onRehydrateStorage and onHydrate on first hydrate', () => {
++  it('persist.ok.on-rehydrate passes the latest state to onRehydrateStorage and onHydrate on first hydrate', () => {
+     const onRehydrateStorageSpy = vi.fn()
+ 
+     const storage = {
+@@ -263,7 +263,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(useBoundStore.getState()).toEqual({ count: 1 })
+   })
+ 
+-  it('gives the merged state to onRehydrateStorage', () => {
++  it('persist.ok.merge gives the merged state to onRehydrateStorage', () => {
+     const onRehydrateStorageSpy = vi.fn()
+ 
+     const storage = {
+@@ -292,7 +292,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(onRehydrateStorageSpy).toBeCalledWith(expectedState, undefined)
+   })
+ 
+-  it('can custom merge the stored state', () => {
++  it('persist.ok.merge can custom merge the stored state', () => {
+     const storage = {
+       getItem: () =>
+         JSON.stringify({
+@@ -332,7 +332,7 @@ describe('persist middleware with sync configuration', () => {
+     })
+   })
+ 
+-  it("can merge the state when the storage item doesn't have a version", () => {
++  it("persist.ok.merge can merge the state when the storage item doesn't have a version", () => {
+     const storage = {
+       getItem: () =>
+         JSON.stringify({
+@@ -356,7 +356,7 @@ describe('persist middleware with sync configuration', () => {
+     })
+   })
+ 
+-  it('can filter the persisted value', () => {
++  it('persist.ok.partialize can filter the persisted value', () => {
+     const setItemSpy = vi.fn()
+ 
+     const storage = {
+@@ -421,7 +421,7 @@ describe('persist middleware with sync configuration', () => {
+     )
+   })
+ 
+-  it('can access the options through the api', () => {
++  it('persist.ok.name can access the options through the api', () => {
+     const storage = {
+       getItem: () => null,
+       setItem: vi.fn(),
+@@ -438,7 +438,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(useBoundStore.persist.getOptions().name).toBe('test-storage')
+   })
+ 
+-  it('can change the options through the api', () => {
++  it('persist.ok.name can change the options through the api', () => {
+     const setItemSpy = vi.fn()
+ 
+     const storage = {
+@@ -475,7 +475,7 @@ describe('persist middleware with sync configuration', () => {
+     )
+   })
+ 
+-  it('can clear the storage through the api', () => {
++  it('persist.ok.name can clear the storage through the api', () => {
+     const removeItemSpy = vi.fn()
+ 
+     const storage = {
+@@ -495,7 +495,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(removeItemSpy).toBeCalledWith('test-storage')
+   })
+ 
+-  it('can manually rehydrate through the api', () => {
++  it('persist.ok.merge can manually rehydrate through the api', () => {
+     const storageValue = '{"state":{"count":1},"version":0}'
+ 
+     const storage = {
+@@ -518,7 +518,7 @@ describe('persist middleware with sync configuration', () => {
+     })
+   })
+ 
+-  it('can check if the store has been hydrated through the api', async () => {
++  it('persist.ok.skip-hydration can check if the store has been hydrated through the api', async () => {
+     const storage = {
+       getItem: () => null,
+       setItem: () => {},
+@@ -538,7 +538,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(useBoundStore.persist.hasHydrated()).toBe(true)
+   })
+ 
+-  it('can wait for rehydration through the api', async () => {
++  it('persist.ok.name can wait for rehydration through the api', async () => {
+     const storageValue1 = '{"state":{"count":1},"version":0}'
+     const storageValue2 = '{"state":{"count":2},"version":0}'
+ 
+@@ -586,7 +586,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(onFinishHydrationSpy2).toBeCalledWith({ count: 2 })
+   })
+ 
+-  it('can skip initial hydration', async () => {
++  it('persist.ok.skip-hydration can skip initial hydration', async () => {
+     const storage = {
+       getItem: (name: string) => ({
+         state: { count: 42, name },
+@@ -632,7 +632,7 @@ describe('persist middleware with sync configuration', () => {
+     )
+   })
+ 
+-  it('handles state updates during onRehydrateStorage', () => {
++  it('persist.ok.on-rehydrate handles state updates during onRehydrateStorage', () => {
+     const storage = {
+       getItem: () => JSON.stringify({ state: { count: 1 } }),
+       setItem: () => {},
+@@ -656,7 +656,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(useBoundStore.getState().count).toEqual(2)
+   })
+ 
+-  it('can rehydrate state with custom deserialized Map', () => {
++  it('persist.ok.merge can rehydrate state with custom deserialized Map', () => {
+     const storage = {
+       getItem: () =>
+         JSON.stringify({
+@@ -688,7 +688,7 @@ describe('persist middleware with sync configuration', () => {
+     expect(onRehydrateStorageSpy).toBeCalledWith({ map: updatedMap }, undefined)
+   })
+ 
+-  it('can persist state with custom serialization of Map', () => {
++  it('persist.ok.shape can persist state with custom serialization of Map', () => {
+     const { storage, setItemSpy } = createPersistentStore(null)
+     const map = new Map()
+ 
+@@ -736,7 +736,7 @@ describe('persist middleware with sync configuration', () => {
+     )
+   })
+ 
+-  it('does not call setItem when hydrating from its own storage', async () => {
++  it('persist.ok.name does not call setItem when hydrating from its own storage', async () => {
+     const setItem = vi.fn()
+     const storage = {
+       getItem: (name: string) => ({
+diff --git a/tests/types.test.tsx b/tests/types.test.tsx
+index 3128f8c..1cd959f 100644
+--- a/tests/types.test.tsx
++++ b/tests/types.test.tsx
+@@ -196,7 +196,7 @@ it('state is covariant', () => {
+   expect(testIsNotContravariant).toBeDefined()
+ })
+ 
+-it('StateCreator<T, [StoreMutatorIdentfier, unknown][]> is StateCreator<T, []>', () => {
++it('persist.ok.name StateCreator<T, [StoreMutatorIdentfier, unknown][]> is StateCreator<T, []>', () => {
+   interface State {
+     count: number
+     increment: () => void
+@@ -216,7 +216,7 @@ it('StateCreator<T, [StoreMutatorIdentfier, unknown][]> is StateCreator<T, []>',
+   expect(store).toBeDefined()
+ })
+ 
+-it('StateCreator subtyping', () => {
++it('persist.ok.name StateCreator subtyping', () => {
+   interface State {
+     count: number
+     increment: () => void
+diff --git a/tests/vanilla/basic.test.ts b/tests/vanilla/basic.test.ts
+index a3428e9..cb9f98d 100644
+--- a/tests/vanilla/basic.test.ts
++++ b/tests/vanilla/basic.test.ts
+@@ -10,7 +10,7 @@ afterEach(() => {
+   console.error = consoleError
+ })
+ 
+-it('create a store', () => {
++it('createStore.ok.api create a store', () => {
+   let params
+   const result = createStore((...args) => {
+     params = args
+@@ -43,7 +43,7 @@ type CounterState = {
+   inc: () => void
+ }
+ 
+-it('uses the store', async () => {
++it('createStore.ok.updater uses the store', async () => {
+   const store = createStore<CounterState>((set) => ({
+     count: 0,
+     inc: () => set((state) => ({ count: state.count + 1 })),
+@@ -53,7 +53,7 @@ it('uses the store', async () => {
+   expect(store.getState().count).toBe(1)
+ })
+ 
+-it('can get the store', async () => {
++it('createStore.ok.initial can get the store', async () => {
+   type State = {
+     value: number
+     getState1: () => State
+@@ -70,14 +70,14 @@ it('can get the store', async () => {
+   expect(store.getState().getState2().value).toBe(1)
+ })
+ 
+-it('can get the initial state', () => {
++it('createStore.ok.initial can get the initial state', () => {
+   const initial = { value: 1 }
+   const store = createStore(() => initial)
+   store.setState({ value: 2 })
+   expect(store.getInitialState()).toBe(initial)
+ })
+ 
+-it('can set the store', async () => {
++it('createStore.ok.merge can set the store', async () => {
+   type State = {
+     value: number
+     setState1: StoreApi<State>['setState']
+@@ -96,7 +96,7 @@ it('can set the store', async () => {
+   expect(store.getState().value).toBe(3)
+ })
+ 
+-it('both NaN should not update', () => {
++it('createStore.ok.subscribe both NaN should not update', () => {
+   const store = createStore<number>(() => NaN)
+   const fn = vi.fn()
+ 
+@@ -106,7 +106,7 @@ it('both NaN should not update', () => {
+   expect(fn).not.toBeCalled()
+ })
+ 
+-it('can set the store without merging', () => {
++it('createStore.ok.replace can set the store without merging', () => {
+   const { setState, getState } = createStore<{ a: number } | { b: number }>(
+     (_set) => ({
+       a: 1,
+@@ -119,7 +119,7 @@ it('can set the store without merging', () => {
+   expect(getState()).toEqual({ b: 2 })
+ })
+ 
+-it('can set the object store to null', () => {
++it('createStore.ok.merge can set the object store to null', () => {
+   const { setState, getState } = createStore<{ a: number } | null>(() => ({
+     a: 1,
+   }))
+@@ -129,7 +129,7 @@ it('can set the object store to null', () => {
+   expect(getState()).toEqual(null)
+ })
+ 
+-it('can set the non-object store to null', () => {
++it('createStore.ok.merge can set the non-object store to null', () => {
+   const { setState, getState } = createStore<string | null>(() => 'value')
+ 
+   setState(null)
+@@ -137,7 +137,7 @@ it('can set the non-object store to null', () => {
+   expect(getState()).toEqual(null)
+ })
+ 
+-it('works with non-object state', () => {
++it('createStore.ok.updater works with non-object state', () => {
+   const store = createStore<number>(() => 1)
+   const inc = () => store.setState((c) => c + 1)
+ 
+diff --git a/tests/vanilla/shallow.test.tsx b/tests/vanilla/shallow.test.tsx
+index 71f06c4..50384ae 100644
+--- a/tests/vanilla/shallow.test.tsx
++++ b/tests/vanilla/shallow.test.tsx
+@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
+ import { shallow } from 'zustand/shallow'
+ 
+ describe('shallow', () => {
+-  it('compares primitive values', () => {
++  it('shallow.ok.primitives compares primitive values', () => {
+     expect(shallow(true, true)).toBe(true)
+     expect(shallow(true, false)).toBe(false)
+ 
+@@ -13,7 +13,7 @@ describe('shallow', () => {
+     expect(shallow('zustand', 'redux')).toBe(false)
+   })
+ 
+-  it('compares objects', () => {
++  it('shallow.ok.objects compares objects', () => {
+     expect(shallow({ foo: 'bar', asd: 123 }, { foo: 'bar', asd: 123 })).toBe(
+       true,
+     )
+@@ -27,7 +27,7 @@ describe('shallow', () => {
+     ).toBe(false)
+   })
+ 
+-  it('compares arrays', () => {
++  it('shallow.ok.objects compares arrays', () => {
+     expect(shallow([1, 2, 3], [1, 2, 3])).toBe(true)
+ 
+     expect(shallow([1, 2, 3], [2, 3, 4])).toBe(false)
+@@ -41,7 +41,7 @@ describe('shallow', () => {
+     expect(shallow([1, 2, 3], [2, 3, 1])).toBe(false)
+   })
+ 
+-  it('compares Maps', () => {
++  it('shallow.ok.maps compares Maps', () => {
+     expect(
+       shallow(
+         new Map<string, unknown>([
+@@ -105,7 +105,7 @@ describe('shallow', () => {
+     ).toBe(false)
+   })
+ 
+-  it('compares Sets', () => {
++  it('shallow.ok.sets compares Sets', () => {
+     expect(shallow(new Set(['bar', 123]), new Set(['bar', 123]))).toBe(true)
+ 
+     expect(shallow(new Set(['bar', 123]), new Set([123, 'bar']))).toBe(true)
+@@ -126,7 +126,7 @@ describe('shallow', () => {
+     expect(shallow(['bar', 123] as never, new Set(['bar', 123]))).toBe(false)
+   })
+ 
+-  it('compares functions', () => {
++  it('shallow.ok.primitives compares functions', () => {
+     function firstFnCompare() {
+       return { foo: 'bar' }
+     }
+@@ -142,7 +142,7 @@ describe('shallow', () => {
+     expect(shallow(firstFnCompare, secondFnCompare)).toBe(false)
+   })
+ 
+-  it('compares URLSearchParams', () => {
++  it('shallow.ok.maps compares URLSearchParams', () => {
+     expect(
+       shallow(new URLSearchParams({ a: 'a' }), new URLSearchParams({ a: 'a' })),
+     ).toBe(true)
+@@ -166,12 +166,12 @@ describe('shallow', () => {
+     ).toBe(true)
+   })
+ 
+-  it('should work with nested arrays (#2794)', () => {
++  it('shallow.ok.objects should work with nested arrays (#2794)', () => {
+     const arr = [1, 2]
+     expect(shallow([arr, 1], [arr, 1])).toBe(true)
+   })
+ 
+-  it('should work with undefined (#3204)', () => {
++  it('shallow.ok.objects should work with undefined (#3204)', () => {
+     expect(shallow({ a: undefined }, { b: 1 })).toBe(false)
+   })
+ })
+@@ -185,7 +185,7 @@ describe('mixed cases', () => {
+     [1, 'bar'],
+   ])
+ 
+-  it('compares different data structures', () => {
++  it('shallow.ok.prototype compares different data structures', () => {
+     expect(shallow<unknown>(obj, arr)).toBe(false)
+     expect(shallow<unknown>(obj, set)).toBe(false)
+     expect(shallow<unknown>(obj, map)).toBe(false)
+@@ -196,7 +196,7 @@ describe('mixed cases', () => {
+ })
+ 
+ describe('generators', () => {
+-  it('pure iterable', () => {
++  it('shallow.ok.primitives pure iterable', () => {
+     function* gen() {
+       yield 1
+       yield 2
+@@ -205,7 +205,7 @@ describe('generators', () => {
+     expect(shallow(gen(), gen())).toBe(true)
+   })
+ 
+-  it('pure iterable with different values returns false', () => {
++  it('shallow.ok.primitives pure iterable with different values returns false', () => {
+     const iterableA = {
+       [Symbol.iterator]: function* (): Generator<number> {
+         yield 1
+@@ -225,7 +225,7 @@ describe('generators', () => {
+ })
+ 
+ describe('unsupported cases', () => {
+-  it('date', () => {
++  it('shallow.ok.objects date', () => {
+     expect(
+       shallow(
+         new Date('2022-07-19T00:00:00.000Z'),
+diff --git a/tests/vanilla/subscribe.test.tsx b/tests/vanilla/subscribe.test.tsx
+index 1f0be15..0c54a9e 100644
+--- a/tests/vanilla/subscribe.test.tsx
++++ b/tests/vanilla/subscribe.test.tsx
+@@ -3,7 +3,7 @@ import { subscribeWithSelector } from 'zustand/middleware'
+ import { createStore } from 'zustand/vanilla'
+ 
+ describe('subscribe()', () => {
+-  it('should not be called if new state identity is the same', () => {
++  it('createStore.ok.subscribe should not be called if new state identity is the same', () => {
+     const spy = vi.fn()
+     const initialState = { value: 1, other: 'a' }
+     const { setState, subscribe } = createStore(() => initialState)
+@@ -13,7 +13,7 @@ describe('subscribe()', () => {
+     expect(spy).not.toHaveBeenCalled()
+   })
+ 
+-  it('should be called if new state identity is different', () => {
++  it('createStore.ok.subscribe should be called if new state identity is different', () => {
+     const spy = vi.fn()
+     const initialState = { value: 1, other: 'a' }
+     const { setState, getState, subscribe } = createStore(() => initialState)
+@@ -23,7 +23,7 @@ describe('subscribe()', () => {
+     expect(spy).toHaveBeenCalledWith(initialState, initialState)
+   })
+ 
+-  it('should not be called when state slice is the same', () => {
++  it('createStore.ok.subscribe should not be called when state slice is the same', () => {
+     const spy = vi.fn()
+     const initialState = { value: 1, other: 'a' }
+     const { setState, subscribe } = createStore(
+@@ -35,7 +35,7 @@ describe('subscribe()', () => {
+     expect(spy).not.toHaveBeenCalled()
+   })
+ 
+-  it('should be called when state slice changes', () => {
++  it('createStore.ok.subscribe should be called when state slice changes', () => {
+     const spy = vi.fn()
+     const initialState = { value: 1, other: 'a' }
+     const { setState, subscribe } = createStore(
+@@ -48,7 +48,7 @@ describe('subscribe()', () => {
+     expect(spy).toHaveBeenCalledWith(initialState.value + 1, initialState.value)
+   })
+ 
+-  it('should not be called when equality checker returns true', () => {
++  it('createStore.ok.subscribe should not be called when equality checker returns true', () => {
+     const spy = vi.fn()
+     const initialState = { value: 1, other: 'a' }
+     const { setState, subscribe } = createStore(
+@@ -60,7 +60,7 @@ describe('subscribe()', () => {
+     expect(spy).not.toHaveBeenCalled()
+   })
+ 
+-  it('should be called when equality checker returns false', () => {
++  it('createStore.ok.subscribe should be called when equality checker returns false', () => {
+     const spy = vi.fn()
+     const initialState = { value: 1, other: 'a' }
+     const { setState, subscribe } = createStore(
+@@ -73,7 +73,7 @@ describe('subscribe()', () => {
+     expect(spy).toHaveBeenCalledWith(initialState.value + 2, initialState.value)
+   })
+ 
+-  it('should unsubscribe correctly', () => {
++  it('createStore.ok.subscribe should unsubscribe correctly', () => {
+     const spy = vi.fn()
+     const initialState = { value: 1, other: 'a' }
+     const { setState, subscribe } = createStore(
+@@ -90,7 +90,7 @@ describe('subscribe()', () => {
+     expect(spy).toHaveBeenCalledWith(initialState.value + 1, initialState.value)
+   })
+ 
+-  it('should keep consistent behavior with equality check', () => {
++  it('createStore.ok.subscribe should keep consistent behavior with equality check', () => {
+     const spy = vi.fn()
+     const initialState = { value: 1, other: 'a' }
+     const { getState, setState, subscribe } = createStore(
+@@ -121,7 +121,7 @@ describe('subscribe()', () => {
+     expect(spy2).toHaveBeenCalledWith(1, 0)
+   })
+ 
+-  it('should call listener immediately when fireImmediately is true', () => {
++  it('createStore.ok.subscribe should call listener immediately when fireImmediately is true', () => {
+     const spy = vi.fn()
+     const initialState = { value: 1 }
+     const { subscribe } = createStore(subscribeWithSelector(() => initialState))

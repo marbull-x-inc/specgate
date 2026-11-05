@@ -1,0 +1,70 @@
+diff --git a/packages/hooks/src/useBoolean/__tests__/index.spec.ts b/packages/hooks/src/useBoolean/__tests__/index.spec.ts
+index 2498d3f..e8d7f4d 100644
+--- a/packages/hooks/src/useBoolean/__tests__/index.spec.ts
++++ b/packages/hooks/src/useBoolean/__tests__/index.spec.ts
+@@ -5,7 +5,7 @@ import useBoolean from '../index';
+ const setUp = (defaultValue?: boolean) => renderHook(() => useBoolean(defaultValue));
+ 
+ describe('useBoolean', () => {
+-  test('test on methods', async () => {
++  test('useBoolean.actions test on methods', async () => {
+     const { result } = setUp();
+     expect(result.current[0]).toBe(false);
+     act(() => {
+@@ -44,7 +44,7 @@ describe('useBoolean', () => {
+     expect(result.current[0]).toBe(true);
+   });
+ 
+-  test('test on default value', () => {
++  test('useBoolean.default test on default value', () => {
+     const hook1 = setUp(true);
+     expect(hook1.result.current[0]).toBe(true);
+     const hook2 = setUp();
+diff --git a/packages/hooks/src/useCounter/__tests__/index.spec.ts b/packages/hooks/src/useCounter/__tests__/index.spec.ts
+index e095e2e..b561443 100644
+--- a/packages/hooks/src/useCounter/__tests__/index.spec.ts
++++ b/packages/hooks/src/useCounter/__tests__/index.spec.ts
+@@ -6,13 +6,13 @@ import useCounter from '../index';
+ const setUp = (init?: number, options?: Options) => renderHook(() => useCounter(init, options));
+ 
+ describe('useCounter', () => {
+-  test('should init counter', () => {
++  test('useCounter.initial should init counter', () => {
+     const { result } = setUp(100);
+     const [current] = result.current;
+     expect(current).toBe(100);
+   });
+ 
+-  test('should max, min, actions work', () => {
++  test('useCounter.bounds should max, min, actions work', () => {
+     const { result } = setUp(100, { max: 10, min: 1 });
+     const [current, { inc, dec, reset, set }] = result.current;
+     expect(current).toBe(10);
+diff --git a/packages/hooks/src/useToggle/__tests__/index.spec.ts b/packages/hooks/src/useToggle/__tests__/index.spec.ts
+index 402d5ba..23ba32c 100644
+--- a/packages/hooks/src/useToggle/__tests__/index.spec.ts
++++ b/packages/hooks/src/useToggle/__tests__/index.spec.ts
+@@ -9,12 +9,12 @@ const callToggle = (hook: any) => {
+ };
+ 
+ describe('useToggle', () => {
+-  test('test on init', async () => {
++  test('useToggle.default test on init', async () => {
+     const hook = renderHook(() => useToggle());
+     expect(hook.result.current[0]).toBeFalsy();
+   });
+ 
+-  test('test on methods', async () => {
++  test('useToggle.left-right test on methods', async () => {
+     const hook = renderHook(() => useToggle('Hello'));
+     expect(hook.result.current[0]).toBe('Hello');
+     callToggle(hook);
+@@ -29,7 +29,7 @@ describe('useToggle', () => {
+     expect(hook.result.current[0]).toBeFalsy();
+   });
+ 
+-  test('test on optional', () => {
++  test('useToggle.toggle test on optional', () => {
+     const hook = renderHook(() => useToggle('Hello', 'World'));
+     callToggle(hook);
+     expect(hook.result.current[0]).toBe('World');

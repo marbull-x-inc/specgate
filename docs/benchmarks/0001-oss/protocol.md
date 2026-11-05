@@ -203,3 +203,12 @@ made; the report gives counts and states that they do not generalise beyond thes
   issue candidates for specgate
 
 No third-party source is committed beyond the patches.
+
+## Deviations
+
+### 1. Computed test titles (2026-11-06, before any measurement)
+
+Four ufo tests take their title from a loop variable (`test(t.input.toString(), …)`), so there
+is no literal to prefix. Their title expression was rewritten as a template literal that starts
+with the key (`` test(`parseURL.ok.full ${t.input.toString()}`, …) ``). Only the title changes;
+the body does not. The four are marked `computedTitle: true` in `data/ufo/links.json`.

@@ -1,0 +1,318 @@
+diff --git a/packages/@mantine/hooks/src/use-counter/use-counter.test.ts b/packages/@mantine/hooks/src/use-counter/use-counter.test.ts
+index 32312aa..b85016d 100644
+--- a/packages/@mantine/hooks/src/use-counter/use-counter.test.ts
++++ b/packages/@mantine/hooks/src/use-counter/use-counter.test.ts
+@@ -2,12 +2,12 @@ import { act, renderHook } from '@testing-library/react';
+ import { useCounter } from './use-counter';
+ 
+ describe('@mantine/hooks/use-counter', () => {
+-  it('correctly returns initial state', () => {
++  it('useCounter.initial correctly returns initial state', () => {
+     const hook = renderHook(() => useCounter(20, { min: 0, max: 100 }));
+     expect(hook.result.current[0]).toBe(20);
+   });
+ 
+-  it('correctly performs operations without initialValue or options', () => {
++  it('useCounter.initial correctly performs operations without initialValue or options', () => {
+     const hook = renderHook(() => useCounter());
+     expect(hook.result.current[0]).toBe(0);
+ 
+@@ -24,7 +24,7 @@ describe('@mantine/hooks/use-counter', () => {
+     expect(hook.result.current[0]).toBe(0);
+   });
+ 
+-  it('correctly increments and decrements by custom step', () => {
++  it('useCounter.increment correctly increments and decrements by custom step', () => {
+     const hook = renderHook(() => useCounter(0, { step: 5 }));
+     expect(hook.result.current[0]).toBe(0);
+ 
+@@ -38,7 +38,7 @@ describe('@mantine/hooks/use-counter', () => {
+     expect(hook.result.current[0]).toBe(5);
+   });
+ 
+-  it('clamps step increment/decrement to min/max', () => {
++  it('useCounter.bounds clamps step increment/decrement to min/max', () => {
+     const hook = renderHook(() => useCounter(0, { min: -3, max: 3, step: 5 }));
+     expect(hook.result.current[0]).toBe(0);
+ 
+@@ -52,7 +52,7 @@ describe('@mantine/hooks/use-counter', () => {
+     expect(hook.result.current[0]).toBe(-3);
+   });
+ 
+-  it('correctly performs operations with initialValue and options', () => {
++  it('useCounter.bounds correctly performs operations with initialValue and options', () => {
+     const hook = renderHook(() => useCounter(11, { min: -10, max: 10 }));
+     expect(hook.result.current[0]).toBe(10);
+ 
+diff --git a/packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts b/packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts
+index f36cdff..46d4cd2 100644
+--- a/packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts
++++ b/packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts
+@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react';
+ import { useDisclosure } from './use-disclosure';
+ 
+ describe('@mantine/hooks/use-disclosure', () => {
+-  it('handles close correctly', () => {
++  it('useDisclosure.handlers handles close correctly', () => {
+     const hook = renderHook(() => useDisclosure(true));
+     expect(hook.result.current[0]).toBe(true);
+ 
+@@ -10,7 +10,7 @@ describe('@mantine/hooks/use-disclosure', () => {
+     expect(hook.result.current[0]).toBe(false);
+   });
+ 
+-  it('handles open correctly', () => {
++  it('useDisclosure.handlers handles open correctly', () => {
+     const hook = renderHook(() => useDisclosure(false));
+     expect(hook.result.current[0]).toBe(false);
+ 
+@@ -18,7 +18,7 @@ describe('@mantine/hooks/use-disclosure', () => {
+     expect(hook.result.current[0]).toBe(true);
+   });
+ 
+-  it('handles toggle correctly', () => {
++  it('useDisclosure.handlers handles toggle correctly', () => {
+     const hook = renderHook(() => useDisclosure(false));
+     expect(hook.result.current[0]).toBe(false);
+ 
+@@ -29,7 +29,7 @@ describe('@mantine/hooks/use-disclosure', () => {
+     expect(hook.result.current[0]).toBe(false);
+   });
+ 
+-  it('calls onClose when close is called', () => {
++  it('useDisclosure.callbacks calls onClose when close is called', () => {
+     const spy = jest.fn();
+     const hook = renderHook(() => useDisclosure(true, { onClose: spy }));
+     expect(spy).toHaveBeenCalledTimes(0);
+@@ -41,7 +41,7 @@ describe('@mantine/hooks/use-disclosure', () => {
+     expect(spy).toHaveBeenCalledTimes(1);
+   });
+ 
+-  it('calls onOpen when open is called', () => {
++  it('useDisclosure.callbacks calls onOpen when open is called', () => {
+     const spy = jest.fn();
+     const hook = renderHook(() => useDisclosure(false, { onOpen: spy }));
+     expect(spy).toHaveBeenCalledTimes(0);
+@@ -53,7 +53,7 @@ describe('@mantine/hooks/use-disclosure', () => {
+     expect(spy).toHaveBeenCalledTimes(1);
+   });
+ 
+-  it('calls onOpen and onClose correctly when toggle is called', () => {
++  it('useDisclosure.callbacks calls onOpen and onClose correctly when toggle is called', () => {
+     const onClose = jest.fn();
+     const onOpen = jest.fn();
+     const hook = renderHook(() => useDisclosure(false, { onOpen, onClose }));
+diff --git a/packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts b/packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts
+index 9f5bbc0..8445f70 100644
+--- a/packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts
++++ b/packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts
+@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react';
+ import { usePagination } from './use-pagination';
+ 
+ describe('@mantine/hooks/use-pagination', () => {
+-  it('setPage function sets active page', () => {
++  it('usePagination.range setPage function sets active page', () => {
+     const { result } = renderHook(() => usePagination({ total: 10 }));
+ 
+     act(() => result.current.setPage(5));
+@@ -15,13 +15,13 @@ describe('@mantine/hooks/use-pagination', () => {
+     expect(result.current.active).toBe(1);
+   });
+ 
+-  it('returns correct initial state', () => {
++  it('usePagination.range returns correct initial state', () => {
+     const { result } = renderHook(() => usePagination({ total: 10 }));
+     expect(result.current.range).toStrictEqual([1, 2, 3, 4, 5, 'dots', 10]);
+     expect(result.current.active).toBe(1);
+   });
+ 
+-  it('does not change range length between page changes', () => {
++  it('usePagination.range does not change range length between page changes', () => {
+     const { result } = renderHook(() => usePagination({ total: 10 }));
+ 
+     [...new Array(10).fill(null)].forEach(() => {
+@@ -30,7 +30,7 @@ describe('@mantine/hooks/use-pagination', () => {
+     });
+   });
+ 
+-  it('returns correct initial state with custom parameters', () => {
++  it('usePagination.siblings returns correct initial state with custom parameters', () => {
+     const { result } = renderHook(() =>
+       usePagination({
+         total: 20,
+@@ -44,7 +44,7 @@ describe('@mantine/hooks/use-pagination', () => {
+     expect(result.current.active).toBe(7);
+   });
+ 
+-  it('calls onChange correctly with active page', () => {
++  it('usePagination.controlled calls onChange correctly with active page', () => {
+     const spy = jest.fn();
+     const { result } = renderHook(() =>
+       usePagination({
+@@ -62,7 +62,7 @@ describe('@mantine/hooks/use-pagination', () => {
+     expect(spy).toHaveBeenCalledWith(8);
+   });
+ 
+-  it('does not change range length between page changes with custom parameters', () => {
++  it('usePagination.siblings does not change range length between page changes with custom parameters', () => {
+     const { result } = renderHook(() =>
+       usePagination({
+         total: 20,
+@@ -79,12 +79,12 @@ describe('@mantine/hooks/use-pagination', () => {
+     });
+   });
+ 
+-  it('does not hide a single page behind dots', () => {
++  it('usePagination.range does not hide a single page behind dots', () => {
+     const { result } = renderHook(() => usePagination({ total: 10, initialPage: 7 }));
+     expect(result.current.range).toStrictEqual([1, 'dots', 6, 7, 8, 9, 10]);
+   });
+ 
+-  it('does not hide a single page behind dots with custom parameters', () => {
++  it('usePagination.boundaries does not hide a single page behind dots with custom parameters', () => {
+     const { result } = renderHook(() =>
+       usePagination({
+         total: 20,
+@@ -97,17 +97,17 @@ describe('@mantine/hooks/use-pagination', () => {
+     expect(result.current.range).toStrictEqual([1, 2, 'dots', 13, 14, 15, 16, 17, 18, 19, 20]);
+   });
+ 
+-  it('truncates total value', () => {
++  it('usePagination.range truncates total value', () => {
+     const hook = renderHook(() => usePagination({ total: 45.21 }));
+     expect(hook.result.current.range).toStrictEqual([1, 2, 3, 4, 5, 'dots', 45]);
+   });
+ 
+-  it('handles negative total value correctly', () => {
++  it('usePagination.range handles negative total value correctly', () => {
+     const hook = renderHook(() => usePagination({ total: -5 }));
+     expect(hook.result.current.range).toStrictEqual([1]);
+   });
+ 
+-  it('handles startValue correctly', () => {
++  it('usePagination.start-value handles startValue correctly', () => {
+     const { result } = renderHook(() => usePagination({ total: 15, startValue: 5 }));
+     expect(result.current.range).toStrictEqual([5, 6, 7, 8, 9, 'dots', 15]);
+     expect(result.current.active).toBe(5);
+diff --git a/packages/@mantine/hooks/src/use-queue/use-queue.test.ts b/packages/@mantine/hooks/src/use-queue/use-queue.test.ts
+index da877a9..6f7f67b 100644
+--- a/packages/@mantine/hooks/src/use-queue/use-queue.test.ts
++++ b/packages/@mantine/hooks/src/use-queue/use-queue.test.ts
+@@ -2,33 +2,33 @@ import { act, renderHook } from '@testing-library/react';
+ import { useQueue } from './use-queue';
+ 
+ describe('@mantine/hooks/use-queue', () => {
+-  it('correctly distributes initial values when limit is not reached', () => {
++  it('useQueue.initial correctly distributes initial values when limit is not reached', () => {
+     const hook = renderHook(() => useQueue({ initialValues: [1], limit: 2 }));
+     expect(hook.result.current.state).toStrictEqual([1]);
+     expect(hook.result.current.queue).toStrictEqual([]);
+   });
+ 
+-  it('correctly distributes initial values when limit is reached', () => {
++  it('useQueue.initial correctly distributes initial values when limit is reached', () => {
+     const hook = renderHook(() => useQueue({ initialValues: [1, 2, 3, 4, 5], limit: 2 }));
+     expect(hook.result.current.state).toStrictEqual([1, 2]);
+     expect(hook.result.current.queue).toStrictEqual([3, 4, 5]);
+   });
+ 
+-  it('adds items to the state when limit is not reached', () => {
++  it('useQueue.add adds items to the state when limit is not reached', () => {
+     const hook = renderHook(() => useQueue({ initialValues: [1], limit: 2 }));
+     act(() => hook.result.current.add(2));
+     expect(hook.result.current.state).toStrictEqual([1, 2]);
+     expect(hook.result.current.queue).toStrictEqual([]);
+   });
+ 
+-  it('adds items to the queue when limit is reached', () => {
++  it('useQueue.add adds items to the queue when limit is reached', () => {
+     const hook = renderHook(() => useQueue({ initialValues: [1, 2], limit: 2 }));
+     act(() => hook.result.current.add(3, 4, 5));
+     expect(hook.result.current.state).toStrictEqual([1, 2]);
+     expect(hook.result.current.queue).toStrictEqual([3, 4, 5]);
+   });
+ 
+-  it('correctly applies given update to state without queue', () => {
++  it('useQueue.update correctly applies given update to state without queue', () => {
+     const hook = renderHook(() => useQueue({ initialValues: [1, 2], limit: 3 }));
+     act(() => hook.result.current.update((state) => state.filter((i) => i % 2)));
+ 
+@@ -36,7 +36,7 @@ describe('@mantine/hooks/use-queue', () => {
+     expect(hook.result.current.queue).toStrictEqual([]);
+   });
+ 
+-  it('correctly applies given update to state with queue', () => {
++  it('useQueue.update correctly applies given update to state with queue', () => {
+     const hook = renderHook(() => useQueue({ initialValues: [1, 2, 3, 4, 5, 6, 7, 8], limit: 3 }));
+     act(() => hook.result.current.update((state) => state.filter((i) => i % 2)));
+ 
+@@ -44,14 +44,14 @@ describe('@mantine/hooks/use-queue', () => {
+     expect(hook.result.current.queue).toStrictEqual([7]);
+   });
+ 
+-  it('puts extra items to the queue if state has extra items after update', () => {
++  it('useQueue.update puts extra items to the queue if state has extra items after update', () => {
+     const hook = renderHook(() => useQueue<number>({ initialValues: [], limit: 3 }));
+     act(() => hook.result.current.update(() => [1, 2, 3, 4, 5, 6, 7, 8]));
+     expect(hook.result.current.state).toStrictEqual([1, 2, 3]);
+     expect(hook.result.current.queue).toStrictEqual([4, 5, 6, 7, 8]);
+   });
+ 
+-  it('cleans queue with cleanQueue handlers', () => {
++  it('useQueue.clean cleans queue with cleanQueue handlers', () => {
+     const hook = renderHook(() => useQueue({ initialValues: [1, 2, 3, 4], limit: 2 }));
+     act(() => hook.result.current.cleanQueue());
+     expect(hook.result.current.state).toStrictEqual([1, 2]);
+diff --git a/packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts b/packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts
+index a33dfa7..8638f5a 100644
+--- a/packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts
++++ b/packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts
+@@ -2,12 +2,12 @@ import { act, renderHook } from '@testing-library/react';
+ import { useToggle } from './use-toggle';
+ 
+ describe('@mantine/hooks/use-toggle', () => {
+-  it('returns correct initial state', () => {
++  it('useToggle.first returns correct initial state', () => {
+     const hook = renderHook(() => useToggle(['dark', 'light'] as const));
+     expect(hook.result.current[0]).toBe('dark');
+   });
+ 
+-  it('correctly toggles value', () => {
++  it('useToggle.cycle correctly toggles value', () => {
+     const hook = renderHook(() => useToggle(['dark', 'light'] as const));
+ 
+     act(() => hook.result.current[1]());
+@@ -17,7 +17,7 @@ describe('@mantine/hooks/use-toggle', () => {
+     expect(hook.result.current[0]).toBe('dark');
+   });
+ 
+-  it('correctly toggles more than two values', () => {
++  it('useToggle.cycle correctly toggles more than two values', () => {
+     const hook = renderHook(() => useToggle(['dark', 'light', 'normal'] as const));
+ 
+     act(() => hook.result.current[1]());
+@@ -36,7 +36,7 @@ describe('@mantine/hooks/use-toggle', () => {
+     expect(hook.result.current[0]).toBe('dark');
+   });
+ 
+-  it('allows to set value', () => {
++  it('useToggle.force allows to set value', () => {
+     const hook = renderHook(() => useToggle(['dark', 'light'] as const));
+ 
+     act(() => hook.result.current[1]('dark'));
+@@ -46,13 +46,13 @@ describe('@mantine/hooks/use-toggle', () => {
+     expect(hook.result.current[0]).toBe('dark');
+   });
+ 
+-  it('allows to set value with callback function', () => {
++  it('useToggle.force allows to set value with callback function', () => {
+     const hook = renderHook(() => useToggle(['dark', 'light'] as const));
+     act(() => hook.result.current[1]((v) => v));
+     expect(hook.result.current[0]).toBe('dark');
+   });
+ 
+-  it('allows to use hook without options', () => {
++  it('useToggle.boolean allows to use hook without options', () => {
+     const hook = renderHook(() => useToggle());
+     expect(hook.result.current[0]).toBe(false);
+     act(() => hook.result.current[1]());

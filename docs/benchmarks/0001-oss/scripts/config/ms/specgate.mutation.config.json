@@ -1,0 +1,26 @@
+{
+  "surface": {
+    "include": [
+      "src/index.ts"
+    ],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": [
+      "src/**/*.test.ts"
+    ],
+    "adapter": "jest"
+  },
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-mutation"
+  },
+  "mutation": {
+    "report": "reports/mutation/mutation.json"
+  }
+}

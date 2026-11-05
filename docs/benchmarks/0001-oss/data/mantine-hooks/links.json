@@ -1,0 +1,254 @@
+[
+  {
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+    "line": 5,
+    "title": "correctly returns initial state",
+    "key": "useCounter.initial",
+    "reason": "value equals initialValue 20"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+    "line": 10,
+    "title": "correctly performs operations without initialValue or options",
+    "key": "useCounter.initial",
+    "reason": "defaults: starts at 0 without initialValue, then increment/decrement/set/reset"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+    "line": 27,
+    "title": "correctly increments and decrements by custom step",
+    "key": "useCounter.increment",
+    "reason": "increment/decrement change value by step 5"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+    "line": 41,
+    "title": "clamps step increment/decrement to min/max",
+    "key": "useCounter.bounds",
+    "reason": "increment/decrement clamped to min -3 / max 3"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.test.ts",
+    "line": 55,
+    "title": "correctly performs operations with initialValue and options",
+    "key": "useCounter.bounds",
+    "reason": "initial 11 clamped to max 10; set(20) clamped to 10; reset to clamped value"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+    "line": 5,
+    "title": "handles close correctly",
+    "key": "useDisclosure.handlers",
+    "reason": "close sets state to false"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+    "line": 13,
+    "title": "handles open correctly",
+    "key": "useDisclosure.handlers",
+    "reason": "open sets state to true"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+    "line": 21,
+    "title": "handles toggle correctly",
+    "key": "useDisclosure.handlers",
+    "reason": "toggle flips state"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+    "line": 32,
+    "title": "calls onClose when close is called",
+    "key": "useDisclosure.callbacks",
+    "reason": "onClose called once on close; not again when already closed"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+    "line": 44,
+    "title": "calls onOpen when open is called",
+    "key": "useDisclosure.callbacks",
+    "reason": "onOpen called once on open; not again when already open"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.test.ts",
+    "line": 56,
+    "title": "calls onOpen and onClose correctly when toggle is called",
+    "key": "useDisclosure.callbacks",
+    "reason": "toggle calls onOpen/onClose on each transition"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+    "line": 5,
+    "title": "returns correct initial state",
+    "key": "useToggle.first",
+    "reason": "value starts at first option"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+    "line": 10,
+    "title": "correctly toggles value",
+    "key": "useToggle.cycle",
+    "reason": "toggle cycles dark -> light -> dark"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+    "line": 20,
+    "title": "correctly toggles more than two values",
+    "key": "useToggle.cycle",
+    "reason": "toggle cycles through three options and wraps"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+    "line": 39,
+    "title": "allows to set value",
+    "key": "useToggle.force",
+    "reason": "toggle with value sets value"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+    "line": 49,
+    "title": "allows to set value with callback function",
+    "key": "useToggle.force",
+    "reason": "toggle with callback sets returned value"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.test.ts",
+    "line": 55,
+    "title": "allows to use hook without options",
+    "key": "useToggle.boolean",
+    "reason": "no options: starts false, toggles to true"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 5,
+    "title": "setPage function sets active page",
+    "key": "usePagination.range",
+    "reason": "setPage sets/clamps active page (no direct guarantee; first ok.* fallback)"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 18,
+    "title": "returns correct initial state",
+    "key": "usePagination.range",
+    "reason": "range for total 10 page 1 is [1,2,3,4,5,dots,10], active 1"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 24,
+    "title": "does not change range length between page changes",
+    "key": "usePagination.range",
+    "reason": "range length stays 7 while calling next"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 33,
+    "title": "returns correct initial state with custom parameters",
+    "key": "usePagination.siblings",
+    "reason": "range with siblings 2 / boundaries 2 at page 7"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 47,
+    "title": "calls onChange correctly with active page",
+    "key": "usePagination.controlled",
+    "reason": "controlled page: next calls onChange with 8"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 65,
+    "title": "does not change range length between page changes with custom parameters",
+    "key": "usePagination.siblings",
+    "reason": "range length 11 with siblings 2 / boundaries 2 while calling next"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 82,
+    "title": "does not hide a single page behind dots",
+    "key": "usePagination.range",
+    "reason": "range for total 10 page 7 is [1,dots,6,7,8,9,10]"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 87,
+    "title": "does not hide a single page behind dots with custom parameters",
+    "key": "usePagination.boundaries",
+    "reason": "range with boundaries 2 at page 15 shows 1,2 and 19,20"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 100,
+    "title": "truncates total value",
+    "key": "usePagination.range",
+    "reason": "fractional total truncated in range (no direct guarantee; first ok.* fallback)"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 105,
+    "title": "handles negative total value correctly",
+    "key": "usePagination.range",
+    "reason": "negative total gives range [1] (no direct guarantee; first ok.* fallback)"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.test.ts",
+    "line": 110,
+    "title": "handles startValue correctly",
+    "key": "usePagination.start-value",
+    "reason": "startValue 5 total 15: range and active stay within 5..15"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+    "line": 5,
+    "title": "correctly distributes initial values when limit is not reached",
+    "key": "useQueue.initial",
+    "reason": "initialValues under limit all in state"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+    "line": 11,
+    "title": "correctly distributes initial values when limit is reached",
+    "key": "useQueue.initial",
+    "reason": "initialValues split between state and queue by limit"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+    "line": 17,
+    "title": "adds items to the state when limit is not reached",
+    "key": "useQueue.add",
+    "reason": "add puts item in state below limit"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+    "line": 24,
+    "title": "adds items to the queue when limit is reached",
+    "key": "useQueue.add",
+    "reason": "add puts items in queue at limit"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+    "line": 31,
+    "title": "correctly applies given update to state without queue",
+    "key": "useQueue.update",
+    "reason": "update filters state"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+    "line": 39,
+    "title": "correctly applies given update to state with queue",
+    "key": "useQueue.update",
+    "reason": "update applied to state+queue, redistributed"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+    "line": 47,
+    "title": "puts extra items to the queue if state has extra items after update",
+    "key": "useQueue.update",
+    "reason": "update result redistributed by limit"
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.test.ts",
+    "line": 54,
+    "title": "cleans queue with cleanQueue handlers",
+    "key": "useQueue.clean",
+    "reason": "cleanQueue empties queue, state unchanged"
+  }
+]

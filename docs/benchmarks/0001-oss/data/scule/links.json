@@ -1,0 +1,90 @@
+[
+  {
+    "file": "test/scule.test.ts",
+    "line": 35,
+    "title": "%s => %s",
+    "key": "splitByCase.ok.case-change",
+    "reason": "splits at case changes, default and custom splitters (mixed table)",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 53,
+    "title": "%s => %s",
+    "key": "pascalCase.ok.normalize",
+    "reason": "normalize:true output",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 62,
+    "title": "%s => %s",
+    "key": "camelCase.ok.normalize",
+    "reason": "normalize:true output",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 77,
+    "title": "%s => %s",
+    "key": "kebabCase.ok.join",
+    "reason": "lower-case parts joined with -",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 86,
+    "title": "%s => %s",
+    "key": "snakeCase.ok.join",
+    "reason": "lower-case parts joined with _",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 96,
+    "title": "%s => %s",
+    "key": "upperFirst.ok.first",
+    "reason": "first character upper-cased",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 106,
+    "title": "%s => %s",
+    "key": "lowerFirst.ok.first",
+    "reason": "first character lower-cased",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 123,
+    "title": "%s => %s",
+    "key": "trainCase.ok.preserve",
+    "reason": "uppercase runs kept (WWWAuthenticate, AcceptCH, FOO_BAR)",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 131,
+    "title": "%s => %s",
+    "key": "trainCase.ok.normalize",
+    "reason": "normalize:true output",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 143,
+    "title": "%s => %s",
+    "key": "titleCase.ok.join",
+    "reason": "'this-IS-aTitle' gives 'This is a Title'",
+    "each": true
+  },
+  {
+    "file": "test/scule.test.ts",
+    "line": 157,
+    "title": "%s => %s",
+    "key": "flatCase.ok.join",
+    "reason": "lower-case parts joined with no separator",
+    "each": true
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "jest",
+  "coverageAnalysis": "perTest",
+  "mutate": [
+    "src/index.ts"
+  ],
+  "reporters": [
+    "json",
+    "clear-text"
+  ],
+  "jsonReporter": {
+    "fileName": "reports/mutation/mutation.json"
+  },
+  "tempDirName": ".stryker-tmp",
+  "jest": {
+    "projectType": "custom",
+    "configFile": "jest.config.ts"
+  }
+}
