@@ -1,0 +1,24 @@
+{
+  "surface": {
+    "include": [
+      "src/middleware/cors/index.ts",
+      "src/middleware/secure-headers/secure-headers.ts",
+      "src/middleware/body-limit/index.ts",
+      "src/middleware/request-id/request-id.ts"
+    ],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": ["src/middleware/{cors,secure-headers,body-limit,request-id}/*.test.ts"],
+    "adapter": "vitest"
+  },
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-static"
+  }
+}

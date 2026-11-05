@@ -1,0 +1,64 @@
+[
+  {
+    "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+    "symbol": "useCounter",
+    "tags": [
+      "@guarantee ok.initial the value starts at `initialValue`, 0 when it is not given",
+      "@guarantee ok.increment `increment` adds `step` to the value, `decrement` subtracts it",
+      "@guarantee ok.bounds the value never goes above `max` or below `min`",
+      "@guarantee ok.set `set` sets the value to the given number, within `min` and `max`",
+      "@guarantee ok.reset `reset` sets the value back to `initialValue`"
+    ]
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts",
+    "symbol": "useDisclosure",
+    "tags": [
+      "@guarantee ok.initial the state starts at `initialState`, false when it is not given",
+      "@guarantee ok.handlers `open` sets the state to true, `close` to false, `toggle` to its opposite and `set` to the given value",
+      "@guarantee ok.callbacks `onOpen` is called when the state changes to true and `onClose` when it changes to false",
+      "@guarantee ok.no-change `open` when already open and `close` when already closed do nothing and call no callback"
+    ]
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+    "symbol": "useToggle",
+    "tags": [
+      "@guarantee ok.first the value starts at the first element of `options`",
+      "@guarantee ok.cycle calling the toggle function with no argument moves the value to the next element of `options`, and from the last back to the first ([\"light\", \"dark\"]: \"dark\", then \"light\")",
+      "@guarantee ok.force calling the toggle function with a value sets the value to it",
+      "@guarantee ok.boolean without `options`, the value starts at false and toggles between false and true"
+    ]
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+    "symbol": "usePagination",
+    "tags": [
+      "@guarantee ok.range with total 10 and page 1, range is [1, 2, 3, 4, 5, \"dots\", 10]; on page 5 it is [1, \"dots\", 4, 5, 6, \"dots\", 10]; on page 6 [1, \"dots\", 5, 6, 7, \"dots\", 10]; on page 10 [1, \"dots\", 6, 7, 8, 9, 10]",
+      "@guarantee ok.defaults `siblings` and `boundaries` default to 1, and the first page defaults to 1 or `startValue`",
+      "@guarantee ok.navigation `next`, `previous`, `first` and `last` move the active page to the next, previous, first and last page",
+      "@guarantee ok.controlled with `page` and `onChange`, `setPage` calls `onChange` with the page and the active page follows `page`",
+      "@guarantee ok.siblings `siblings` sets how many pages are shown on each side of the active page",
+      "@guarantee ok.boundaries `boundaries` sets how many pages are shown at each edge",
+      "@guarantee ok.start-value with `startValue` 5 and `total` 15, the pages range from 5 to 15"
+    ]
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+    "symbol": "useQueue",
+    "tags": [
+      "@guarantee ok.initial `initialValues` (default empty) are divided between state and queue: the first `limit` items in state, the rest in queue",
+      "@guarantee ok.add `add` puts items in state while state holds fewer than `limit` items, and in queue after that",
+      "@guarantee ok.update `update` applies the function to all items of state and queue, then divides the result again by `limit`, keeping order",
+      "@guarantee ok.clean `cleanQueue` empties the queue and leaves state unchanged"
+    ]
+  },
+  {
+    "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+    "symbol": "useOs",
+    "tags": [
+      "@guarantee ok.values returns one of \"undetermined\", \"macos\", \"ios\", \"windows\", \"android\", \"linux\" and \"chromeos\", according to the user agent",
+      "@guarantee ok.undetermined returns \"undetermined\" when the OS cannot be identified, for example during server-side rendering"
+    ]
+  }
+]

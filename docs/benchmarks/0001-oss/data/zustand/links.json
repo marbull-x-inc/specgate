@@ -1,0 +1,1157 @@
+[
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 132,
+    "title": "connects to the extension by passing the options and initializes",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 155,
+    "title": "does not throw",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 161,
+    "title": "does not warn",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 168,
+    "title": "sends { type: setStateName || 'anonymous`, ...rest } as the action with current state",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 199,
+    "title": "preserves external action names and payloads with persist",
+    "key": "persist.ok.shape",
+    "reason": "setItem called with name and {state, version} on each setState"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 249,
+    "title": "sends { type: setStateName || 'setCount`, ...rest } as the action with current state",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 278,
+    "title": "infers caller name from V8 stack format — $label",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 370,
+    "title": "infers caller name from Firefox/SpiderMonkey stack format",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 426,
+    "title": "does nothing",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 441,
+    "title": "unless action type is __setState",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 454,
+    "title": "does nothing even if there is `api.dispatch`",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 471,
+    "title": "dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 491,
+    "title": "does not throw for unsupported payload",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 539,
+    "title": "RESET, it inits with initial state",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 557,
+    "title": "COMMIT, it inits with current state",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 576,
+    "title": "updates state without recording and inits with `message.state`",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 598,
+    "title": "does not throw for unparsable `message.state`",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 635,
+    "title": "updates state without recording with `message.state`",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 652,
+    "title": "does not throw for unparsable `message.state`",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 685,
+    "title": "updates state without recording with `message.state`",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 702,
+    "title": "does not throw for unparsable `message.state`",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 735,
+    "title": "IMPORT_STATE, it updates state without recording and inits the last computedState",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 759,
+    "title": "PAUSE_RECORDING, it toggles the sending of actions",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 796,
+    "title": "applies reviver to ACTION `__setState` payload",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 811,
+    "title": "applies reviver to `message.state` on JUMP_TO_STATE",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 831,
+    "title": "applies reviver to `message.state` on ROLLBACK",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 858,
+    "title": "works as expected",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 925,
+    "title": "works in non-browser env",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 936,
+    "title": "works in react native env",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 948,
+    "title": "preserves isRecording after setting from devtools",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 979,
+    "title": "should create separate connection for each devtools store with .connect call",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 992,
+    "title": "should call .init on each different connection object",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1010,
+    "title": "should create single connection for all internal calls of .connect and `store` is not passed to .connect",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1031,
+    "title": "should call `.init` on single connection with combined states after each `create(devtools` call",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1062,
+    "title": "should call .connect of redux extension with `name` that was passed from `devtools` options",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1081,
+    "title": "should call .connect of redux extension with `name` that was passed from `devtools` options",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1125,
+    "title": "should call `.init` on single connection with combined states after each `create(devtools` call",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1190,
+    "title": "preserves isRecording after setting from devtools on proper connection subscriber",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1230,
+    "title": "works as expected",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1326,
+    "title": "sends { type: setStateName || 'anonymous`, ...rest } as the action with current state, isolated from other connections",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1381,
+    "title": "does nothing, connections isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1426,
+    "title": "unless action type is __setState, connections isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1456,
+    "title": "does nothing even if there is `api.dispatch`, connections isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1501,
+    "title": "dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1555,
+    "title": "does not throw for unsupported payload, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1692,
+    "title": "RESET, it inits with initial state, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1739,
+    "title": "COMMIT, it inits with current state, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1788,
+    "title": "updates state without recording and inits with `message.state, connections are isolated from each other`",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1867,
+    "title": "does not throw for unparsable `message.state`, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 1968,
+    "title": "updates state without recording with `message.state`, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2034,
+    "title": "does not throw for unparsable `message.state`, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2129,
+    "title": "updates state without recording with `message.state`, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2196,
+    "title": "does not throw for unparsable `message.state`, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2284,
+    "title": "IMPORT_STATE, it updates state without recording and inits the last computedState, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2375,
+    "title": "PAUSE_RECORDING, it toggles the sending of actions, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2488,
+    "title": "sends { type: setStateName || 'anonymous`, ...rest } as the action with current state",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2526,
+    "title": "does nothing, connections isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2580,
+    "title": "unless action type is __setState, connections isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2636,
+    "title": "does nothing even if there is `api.dispatch`, connections isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2684,
+    "title": "dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2742,
+    "title": "should preserve a replacement store when the original store is cleaned up",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2770,
+    "title": "should preserve other stores on a shared connection after %i cleanup calls",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2806,
+    "title": "should close a shared connection only after its last store is cleaned up",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2843,
+    "title": "should close an untracked connection while a tracked connection uses the same name",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2872,
+    "title": "should unsubscribe from devtools when cleanup is called",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2881,
+    "title": "should remove store from tracked connection after cleanup",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/devtools.test.tsx",
+    "line": 2909,
+    "title": "should pass actionsDenylist option to Redux DevTools",
+    "key": "createStore.ok.api",
+    "reason": "devtools behaviour on a createStore store; no createStore guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/immer.test.tsx",
+    "line": 64,
+    "title": "should work with vanilla createStore",
+    "key": "createStore.ok.updater",
+    "reason": "setState with (immer) function updater sets count 10"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 60,
+    "title": "immer",
+    "key": "createStore.ok.api",
+    "reason": "type checks; createStore(immer(...)) is defined; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 118,
+    "title": "redux",
+    "key": "createStore.ok.api",
+    "reason": "type checks; createStore(redux(...)) is defined; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 153,
+    "title": "devtools",
+    "key": "createStore.ok.api",
+    "reason": "type checks; createStore(devtools(...)) is defined; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 223,
+    "title": "subscribeWithSelector",
+    "key": "createStore.ok.api",
+    "reason": "type checks; createStore(subscribeWithSelector(...)) is defined; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 251,
+    "title": "combine",
+    "key": "createStore.ok.api",
+    "reason": "type checks; createStore(combine(...)) is defined; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 274,
+    "title": "persist",
+    "key": "persist.ok.name",
+    "reason": "type checks of persist store; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 302,
+    "title": "persist with partialize",
+    "key": "persist.ok.partialize",
+    "reason": "type check that partialize return type is inferred"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 329,
+    "title": "persist without custom api (#638)",
+    "key": "persist.ok.name",
+    "reason": "type checks of persist store; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 502,
+    "title": "devtools & persist",
+    "key": "persist.ok.name",
+    "reason": "type checks of devtools+persist store; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 533,
+    "title": "devtools & persist & immer",
+    "key": "persist.ok.name",
+    "reason": "type checks of devtools+persist+immer store; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 597,
+    "title": "devtools & subscribeWithSelector & persist",
+    "key": "persist.ok.name",
+    "reason": "type checks of devtools+subscribeWithSelector+persist store; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 636,
+    "title": "devtools & subscribeWithSelector & persist & immer (#616)",
+    "key": "persist.ok.name",
+    "reason": "type checks of four-middleware store; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 678,
+    "title": "#619, #632",
+    "key": "persist.ok.name",
+    "reason": "type checks of subscribeWithSelector+persist store; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 728,
+    "title": "#650",
+    "key": "persist.ok.name",
+    "reason": "type checks of persist store with async action; first ok.* used"
+  },
+  {
+    "file": "tests/middlewareTypes.test.tsx",
+    "line": 770,
+    "title": "subscribeWithSelector & persist",
+    "key": "persist.ok.name",
+    "reason": "type checks with annotated mutators incl. persist; first ok.* used"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 55,
+    "title": "can rehydrate state",
+    "key": "persist.ok.merge",
+    "reason": "state rehydrated from async storage; callback gets it"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 109,
+    "title": "can throw rehydrate error",
+    "key": "persist.ok.on-rehydrate",
+    "reason": "post-rehydration callback receives the getItem error"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 148,
+    "title": "can persist state",
+    "key": "persist.ok.shape",
+    "reason": "setItem called with name and {state, version}; second store reloads it"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 216,
+    "title": "can async migrate persisted state",
+    "key": "persist.ok.migrate",
+    "reason": "async migrate called with (42, 12); result used and stored"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 271,
+    "title": "can merge partial persisted state",
+    "key": "persist.ok.merge",
+    "reason": "partial persisted state merged with current state"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 334,
+    "title": "can correctly handle a missing migrate function",
+    "key": "persist.ok.version",
+    "reason": "version mismatch without migrate keeps default state and logs error"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 375,
+    "title": "can throw migrate error",
+    "key": "persist.ok.migrate",
+    "reason": "migrate error passed to callback"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 422,
+    "title": "passes the latest state to onRehydrateStorage and onHydrate on first hydrate",
+    "key": "persist.ok.on-rehydrate",
+    "reason": "onRehydrateStorage called with pre-hydration state"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 474,
+    "title": "gives the merged state to onRehydrateStorage",
+    "key": "persist.ok.merge",
+    "reason": "callback receives merged state (method kept)"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 518,
+    "title": "can custom merge the stored state",
+    "key": "persist.ok.merge",
+    "reason": "custom merge result used as state"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 573,
+    "title": "can merge the state when the storage item doesn't have a version",
+    "key": "persist.ok.merge",
+    "reason": "persisted state without version merged in"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 612,
+    "title": "can manually rehydrate through the api",
+    "key": "persist.ok.merge",
+    "reason": "rehydrate() loads stored count 1"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 643,
+    "title": "can check if the store has been hydrated through the api",
+    "key": "persist.ok.skip-hydration",
+    "reason": "hasHydrated() becomes true without skipHydration"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 669,
+    "title": "can skip initial hydration",
+    "key": "persist.ok.skip-hydration",
+    "reason": "not hydrated until rehydrate() is called"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 720,
+    "title": "handles state updates during onRehydrateStorage",
+    "key": "persist.ok.on-rehydrate",
+    "reason": "post-rehydration callback runs after rehydration (count 2)"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 760,
+    "title": "passes latest state to post-rehydration callback after hydration-triggered updates",
+    "key": "persist.ok.on-rehydrate",
+    "reason": "post-rehydration callback receives latest state"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 814,
+    "title": "can rehydrate state with custom deserialized Map",
+    "key": "persist.ok.merge",
+    "reason": "rehydrated state with deserialized Map"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 861,
+    "title": "can persist state with custom serialization of Map",
+    "key": "persist.ok.shape",
+    "reason": "setItem receives {state, version} with serialized Map"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 935,
+    "title": "should handle multiple concurrent rehydrate calls (only last one wins)",
+    "key": "persist.ok.name",
+    "reason": "concurrent rehydrate, last wins; no guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 981,
+    "title": "should not overwrite user state changes made during async hydration",
+    "key": "persist.ok.merge",
+    "reason": "custom merge result after hydration"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 1023,
+    "title": "should abort hydration with async migration when newer hydration starts",
+    "key": "persist.ok.migrate",
+    "reason": "migrate runs per hydration, last migration result used"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 1082,
+    "title": "keeps a cleared delayed stored value from hydrating state",
+    "key": "persist.ok.name",
+    "reason": "clearStorage revokes pending hydration; no guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 1109,
+    "title": "keeps a cleared delayed migration from hydrating state",
+    "key": "persist.ok.migrate",
+    "reason": "migrate called with (state, 1); cleared migration result not used"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 1137,
+    "title": "revokes the active hydration even when storage removal throws",
+    "key": "persist.ok.name",
+    "reason": "revocation when removeItem throws; no guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 1174,
+    "title": "does not reset live state when clearing after hydration",
+    "key": "persist.ok.name",
+    "reason": "clearStorage after hydration keeps live state; no guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/persistAsync.test.tsx",
+    "line": 1195,
+    "title": "suppresses stale completion signals and allows a later hydration",
+    "key": "persist.ok.on-rehydrate",
+    "reason": "stale post-rehydration callback suppressed; later one called once"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 41,
+    "title": "can rehydrate state",
+    "key": "persist.ok.merge",
+    "reason": "state rehydrated from storage values; onRehydrateStorage gets it"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 77,
+    "title": "can throw rehydrate error",
+    "key": "persist.ok.on-rehydrate",
+    "reason": "post-rehydration callback receives the getItem error"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 98,
+    "title": "can persist state",
+    "key": "persist.ok.shape",
+    "reason": "setItem called with name and {state, version}; second store reloads it"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 136,
+    "title": "can non-async migrate persisted state",
+    "key": "persist.ok.migrate",
+    "reason": "migrate called with (state 42, version 12); result {count:99} used and stored"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 173,
+    "title": "can correctly handle a missing migrate function",
+    "key": "persist.ok.version",
+    "reason": "version mismatch without migrate keeps default state and logs error"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 200,
+    "title": "can throw migrate error",
+    "key": "persist.ok.migrate",
+    "reason": "migrate error passed to callback; state unchanged"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 232,
+    "title": "passes the latest state to onRehydrateStorage and onHydrate on first hydrate",
+    "key": "persist.ok.on-rehydrate",
+    "reason": "onRehydrateStorage called with pre-hydration state"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 266,
+    "title": "gives the merged state to onRehydrateStorage",
+    "key": "persist.ok.merge",
+    "reason": "persisted state shallow-merged with current (method kept)"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 295,
+    "title": "can custom merge the stored state",
+    "key": "persist.ok.merge",
+    "reason": "custom merge result used as state"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 335,
+    "title": "can merge the state when the storage item doesn't have a version",
+    "key": "persist.ok.merge",
+    "reason": "persisted state without version merged in"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 359,
+    "title": "can filter the persisted value",
+    "key": "persist.ok.partialize",
+    "reason": "setItem receives only the partialized state"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 424,
+    "title": "can access the options through the api",
+    "key": "persist.ok.name",
+    "reason": "getOptions().name equals the configured name"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 441,
+    "title": "can change the options through the api",
+    "key": "persist.ok.name",
+    "reason": "setItem uses new name after setOptions"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 478,
+    "title": "can clear the storage through the api",
+    "key": "persist.ok.name",
+    "reason": "clearStorage calls removeItem with name"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 498,
+    "title": "can manually rehydrate through the api",
+    "key": "persist.ok.merge",
+    "reason": "rehydrate() loads stored count 1"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 521,
+    "title": "can check if the store has been hydrated through the api",
+    "key": "persist.ok.skip-hydration",
+    "reason": "hasHydrated() true by default (skipHydration false)"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 541,
+    "title": "can wait for rehydration through the api",
+    "key": "persist.ok.name",
+    "reason": "onHydrate/onFinishHydration listeners; no guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 589,
+    "title": "can skip initial hydration",
+    "key": "persist.ok.skip-hydration",
+    "reason": "not hydrated until rehydrate() is called"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 635,
+    "title": "handles state updates during onRehydrateStorage",
+    "key": "persist.ok.on-rehydrate",
+    "reason": "post-rehydration callback runs after rehydration (count 2)"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 659,
+    "title": "can rehydrate state with custom deserialized Map",
+    "key": "persist.ok.merge",
+    "reason": "rehydrated state with Map; callback gets it"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 691,
+    "title": "can persist state with custom serialization of Map",
+    "key": "persist.ok.shape",
+    "reason": "setItem receives {state, version} with serialized Map"
+  },
+  {
+    "file": "tests/persistSync.test.tsx",
+    "line": 739,
+    "title": "does not call setItem when hydrating from its own storage",
+    "key": "persist.ok.name",
+    "reason": "no setItem during hydration; no guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/types.test.tsx",
+    "line": 199,
+    "title": "StateCreator<T, [StoreMutatorIdentfier, unknown][]> is StateCreator<T, []>",
+    "key": "persist.ok.name",
+    "reason": "type-level StateCreator with persist; only toBeDefined; first ok.* used"
+  },
+  {
+    "file": "tests/types.test.tsx",
+    "line": 219,
+    "title": "StateCreator subtyping",
+    "key": "persist.ok.name",
+    "reason": "type-level subtyping with persist; only toBeDefined; first ok.* used"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 13,
+    "title": "create a store",
+    "key": "createStore.ok.api",
+    "reason": "inline snapshot of returned store: setState/getState/getInitialState/subscribe"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 46,
+    "title": "uses the store",
+    "key": "createStore.ok.updater",
+    "reason": "inc() calls set(fn) with current state; count becomes 1"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 56,
+    "title": "can get the store",
+    "key": "createStore.ok.initial",
+    "reason": "getState()/get() return the created state (value 1)"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 73,
+    "title": "can get the initial state",
+    "key": "createStore.ok.initial",
+    "reason": "getInitialState() returns the initial object after setState"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 80,
+    "title": "can set the store",
+    "key": "createStore.ok.merge",
+    "reason": "setState with object updates value"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 99,
+    "title": "both NaN should not update",
+    "key": "createStore.ok.subscribe",
+    "reason": "listener not called when setState(NaN) on NaN state"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 109,
+    "title": "can set the store without merging",
+    "key": "createStore.ok.replace",
+    "reason": "setState({b:2}, true) replaces state"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 122,
+    "title": "can set the object store to null",
+    "key": "createStore.ok.merge",
+    "reason": "setState(null) on object state gives null (non-object partial is set as is)"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 132,
+    "title": "can set the non-object store to null",
+    "key": "createStore.ok.merge",
+    "reason": "setState(null) on string state gives null"
+  },
+  {
+    "file": "tests/vanilla/basic.test.ts",
+    "line": 140,
+    "title": "works with non-object state",
+    "key": "createStore.ok.updater",
+    "reason": "setState(c => c + 1) on number state gives 2"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 5,
+    "title": "compares primitive values",
+    "key": "shallow.ok.primitives",
+    "reason": "true/1/'zustand' equal vs different primitives"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 16,
+    "title": "compares objects",
+    "key": "shallow.ok.objects",
+    "reason": "same keys/values true; different or extra keys false"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 30,
+    "title": "compares arrays",
+    "key": "shallow.ok.objects",
+    "reason": "arrays with same elements true; different or reordered false"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 44,
+    "title": "compares Maps",
+    "key": "shallow.ok.maps",
+    "reason": "Maps with same keys/values true (order-insensitive), different keys false"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 108,
+    "title": "compares Sets",
+    "key": "shallow.ok.sets",
+    "reason": "Sets with same entries true, different entries false"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 129,
+    "title": "compares functions",
+    "key": "shallow.ok.primitives",
+    "reason": "functions compared by identity"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 145,
+    "title": "compares URLSearchParams",
+    "key": "shallow.ok.maps",
+    "reason": "URLSearchParams compared as key/value entries; no exact guarantee, closest maps"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 169,
+    "title": "should work with nested arrays (#2794)",
+    "key": "shallow.ok.objects",
+    "reason": "arrays holding the same reference are equal"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 174,
+    "title": "should work with undefined (#3204)",
+    "key": "shallow.ok.objects",
+    "reason": "objects with different keys are not equal"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 188,
+    "title": "compares different data structures",
+    "key": "shallow.ok.prototype",
+    "reason": "object vs array vs Set vs Map all false"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 199,
+    "title": "pure iterable",
+    "key": "shallow.ok.primitives",
+    "reason": "generator iterables compared by entries; no guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 208,
+    "title": "pure iterable with different values returns false",
+    "key": "shallow.ok.primitives",
+    "reason": "iterables with different yields false; no guarantee matches, first ok.* used"
+  },
+  {
+    "file": "tests/vanilla/shallow.test.tsx",
+    "line": 228,
+    "title": "date",
+    "key": "shallow.ok.objects",
+    "reason": "two Dates with no own keys are not reported false"
+  },
+  {
+    "file": "tests/vanilla/subscribe.test.tsx",
+    "line": 6,
+    "title": "should not be called if new state identity is the same",
+    "key": "createStore.ok.subscribe",
+    "reason": "listener not called when setState with same identity"
+  },
+  {
+    "file": "tests/vanilla/subscribe.test.tsx",
+    "line": 16,
+    "title": "should be called if new state identity is different",
+    "key": "createStore.ok.subscribe",
+    "reason": "listener called with new and previous state"
+  },
+  {
+    "file": "tests/vanilla/subscribe.test.tsx",
+    "line": 26,
+    "title": "should not be called when state slice is the same",
+    "key": "createStore.ok.subscribe",
+    "reason": "selector listener (subscribeWithSelector) not called when slice same"
+  },
+  {
+    "file": "tests/vanilla/subscribe.test.tsx",
+    "line": 38,
+    "title": "should be called when state slice changes",
+    "key": "createStore.ok.subscribe",
+    "reason": "selector listener called once when slice changes"
+  },
+  {
+    "file": "tests/vanilla/subscribe.test.tsx",
+    "line": 51,
+    "title": "should not be called when equality checker returns true",
+    "key": "createStore.ok.subscribe",
+    "reason": "selector listener not called when equalityFn true"
+  },
+  {
+    "file": "tests/vanilla/subscribe.test.tsx",
+    "line": 63,
+    "title": "should be called when equality checker returns false",
+    "key": "createStore.ok.subscribe",
+    "reason": "selector listener called when equalityFn false"
+  },
+  {
+    "file": "tests/vanilla/subscribe.test.tsx",
+    "line": 76,
+    "title": "should unsubscribe correctly",
+    "key": "createStore.ok.subscribe",
+    "reason": "unsubscribe stops further calls"
+  },
+  {
+    "file": "tests/vanilla/subscribe.test.tsx",
+    "line": 93,
+    "title": "should keep consistent behavior with equality check",
+    "key": "createStore.ok.subscribe",
+    "reason": "listener call counts with rough equality"
+  },
+  {
+    "file": "tests/vanilla/subscribe.test.tsx",
+    "line": 124,
+    "title": "should call listener immediately when fireImmediately is true",
+    "key": "createStore.ok.subscribe",
+    "reason": "fireImmediately calls listener at subscribe"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "F12-parseURL-match-file:",
+    "verdict": "RED",
+    "detail": "     × parseURL.ok.full file:///C:/home/user 4ms |  FAIL  test/parse.test.ts > parseURL > parseURL.ok.full file:///C:/home/user"
+  },
+  {
+    "id": "F13-parseQuery-boundary-2",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F14-parseQuery-match-__proto__",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F15-parseQuery-match-constructor",
+    "verdict": "GREEN",
+    "detail": ""
+  }
+]

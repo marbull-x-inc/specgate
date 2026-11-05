@@ -1,0 +1,26 @@
+{
+  "surface": {
+    "include": [
+      "packages/hooks/src/useCounter/index.ts",
+      "packages/hooks/src/useToggle/index.ts",
+      "packages/hooks/src/useBoolean/index.ts"
+    ],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": ["packages/hooks/src/**/__tests__/*.spec.ts", "packages/hooks/src/**/__tests__/*.spec.tsx"],
+    "adapter": "vitest"
+  },
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-mutation"
+  },
+  "mutation": {
+    "report": "packages/hooks/reports/mutation/mutation.json"
+  }
+}

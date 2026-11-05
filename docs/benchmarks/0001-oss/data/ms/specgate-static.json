@@ -1,0 +1,4684 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.0"
+  },
+  "generatedAt": "2026-11-05T19:03:01.991Z",
+  "root": "<work>/ms",
+  "revision": "4ff48cec099f0514c3e9bbca18706c9c21122bfb",
+  "configHash": "d574b84217ad6d28",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "ms",
+      "kind": "function",
+      "operation": "ms",
+      "file": "src/index.ts",
+      "line": 51,
+      "endLine": 65,
+      "referencedBy": [],
+      "summary": "Parse or format the given value.",
+      "params": [
+        {
+          "name": "value",
+          "type": "StringValue | number",
+          "optional": false,
+          "doc": "The string or number to convert"
+        },
+        {
+          "name": "options",
+          "type": "Options",
+          "optional": true,
+          "doc": "Options for the conversion"
+        }
+      ],
+      "returns": "number | string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "format",
+        "parse"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "cd2eafcae715f5bd",
+      "guarantees": [
+        {
+          "id": "ok.parse",
+          "key": "ms.ok.parse",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a string is parsed like `parse` (\"2 days\" gives 172800000, \"1d\" 86400000, \"10h\" 36000000, \"2.5 hrs\" 9000000, \"1m\" 60000, \"5s\" 5000, \"1y\" 31557600000, \"100\" 100, \"-3 days\" -259200000)",
+          "textHash": "f5cc0c7bce74de5a",
+          "line": 47,
+          "references": [],
+          "tests": [
+            "src/index.test.ts:5",
+            "src/index.test.ts:11",
+            "src/index.test.ts:15",
+            "src/index.test.ts:19",
+            "src/index.test.ts:23",
+            "src/index.test.ts:27",
+            "src/index.test.ts:31",
+            "src/index.test.ts:35",
+            "src/index.test.ts:39",
+            "src/index.test.ts:43",
+            "src/index.test.ts:47",
+            "src/index.test.ts:51",
+            "src/index.test.ts:60",
+            "src/index.test.ts:64",
+            "src/index.test.ts:68",
+            "src/index.test.ts:72",
+            "src/index.test.ts:77",
+            "src/index.test.ts:85",
+            "src/index.test.ts:91",
+            "src/index.test.ts:95",
+            "src/index.test.ts:99",
+            "src/index.test.ts:103",
+            "src/index.test.ts:107",
+            "src/index.test.ts:111",
+            "src/index.test.ts:115",
+            "src/index.test.ts:119",
+            "src/index.test.ts:123",
+            "src/index.test.ts:127",
+            "src/index.test.ts:131",
+            "src/index.test.ts:135",
+            "src/index.test.ts:335",
+            "src/index.test.ts:342",
+            "src/index.test.ts:349",
+            "src/index.test.ts:356",
+            "src/index.test.ts:363",
+            "src/index.test.ts:370",
+            "src/index.test.ts:376",
+            "src/index.test.ts:382"
+          ]
+        },
+        {
+          "id": "ok.format",
+          "key": "ms.ok.format",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a number is formatted like `format` (60000 gives \"1m\", 120000 \"2m\", -180000 \"-3m\")",
+          "textHash": "f3212deed5735731",
+          "line": 48,
+          "references": [],
+          "tests": [
+            "src/index.test.ts:253",
+            "src/index.test.ts:259",
+            "src/index.test.ts:265",
+            "src/index.test.ts:273",
+            "src/index.test.ts:281",
+            "src/index.test.ts:289",
+            "src/index.test.ts:297",
+            "src/index.test.ts:305",
+            "src/index.test.ts:315",
+            "src/index.test.ts:325"
+          ]
+        },
+        {
+          "id": "ok.long",
+          "key": "ms.ok.long",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `long` true a number is written out (60000 gives \"1 minute\", 120000 \"2 minutes\", -180000 \"-3 minutes\", 36000000 \"10 hours\")",
+          "textHash": "8db113f09fe64b57",
+          "line": 49,
+          "references": [],
+          "tests": [
+            "src/index.test.ts:143",
+            "src/index.test.ts:149",
+            "src/index.test.ts:155",
+            "src/index.test.ts:165",
+            "src/index.test.ts:175",
+            "src/index.test.ts:185",
+            "src/index.test.ts:195",
+            "src/index.test.ts:207",
+            "src/index.test.ts:225",
+            "src/index.test.ts:243"
+          ]
+        },
+        {
+          "id": "err.error",
+          "key": "ms.err.error",
+          "kind": "err",
+          "source": "throws",
+          "text": "if `value` is not a non-empty string or a number",
+          "textHash": "acfd097cd5868998",
+          "line": 46,
+          "references": [],
+          "tests": [],
+          "throws": "Error"
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "parse",
+      "kind": "function",
+      "operation": "parse",
+      "file": "src/index.ts",
+      "line": 79,
+      "endLine": 155,
+      "referencedBy": [],
+      "summary": "Parse the given string and return milliseconds.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "A string to parse to milliseconds"
+        }
+      ],
+      "returns": "number",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "constant",
+          "expression": "s = 1000",
+          "line": 1,
+          "values": [
+            "1000"
+          ],
+          "names": [
+            "s"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "m = s * 60",
+          "line": 2,
+          "values": [
+            "60000"
+          ],
+          "names": [
+            "m"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "h = m * 60",
+          "line": 3,
+          "values": [
+            "3600000"
+          ],
+          "names": [
+            "h"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "d = h * 24",
+          "line": 4,
+          "values": [
+            "86400000"
+          ],
+          "names": [
+            "d"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "w = d * 7",
+          "line": 5,
+          "values": [
+            "604800000"
+          ],
+          "names": [
+            "w"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "y = d * 365.25",
+          "line": 6,
+          "values": [
+            "31557600000"
+          ],
+          "names": [
+            "y"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "mo = y / 12",
+          "line": 7,
+          "values": [
+            "2629800000"
+          ],
+          "names": [
+            "mo"
+          ]
+        },
+        {
+          "kind": "boundary",
+          "expression": "str.length > 100",
+          "line": 80,
+          "values": [
+            "100"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'years'",
+          "line": 107,
+          "values": [
+            "years"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'year'",
+          "line": 108,
+          "values": [
+            "year"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'yrs'",
+          "line": 109,
+          "values": [
+            "yrs"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'yr'",
+          "line": 110,
+          "values": [
+            "yr"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'y'",
+          "line": 111,
+          "values": [
+            "y"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'months'",
+          "line": 113,
+          "values": [
+            "months"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'month'",
+          "line": 114,
+          "values": [
+            "month"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'mo'",
+          "line": 115,
+          "values": [
+            "mo"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'weeks'",
+          "line": 117,
+          "values": [
+            "weeks"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'week'",
+          "line": 118,
+          "values": [
+            "week"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'w'",
+          "line": 119,
+          "values": [
+            "w"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'days'",
+          "line": 121,
+          "values": [
+            "days"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'day'",
+          "line": 122,
+          "values": [
+            "day"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'d'",
+          "line": 123,
+          "values": [
+            "d"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'hours'",
+          "line": 125,
+          "values": [
+            "hours"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'hour'",
+          "line": 126,
+          "values": [
+            "hour"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'hrs'",
+          "line": 127,
+          "values": [
+            "hrs"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'hr'",
+          "line": 128,
+          "values": [
+            "hr"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'h'",
+          "line": 129,
+          "values": [
+            "h"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'minutes'",
+          "line": 131,
+          "values": [
+            "minutes"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'minute'",
+          "line": 132,
+          "values": [
+            "minute"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'mins'",
+          "line": 133,
+          "values": [
+            "mins"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'min'",
+          "line": 134,
+          "values": [
+            "min"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'m'",
+          "line": 135,
+          "values": [
+            "m"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'seconds'",
+          "line": 137,
+          "values": [
+            "seconds"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'second'",
+          "line": 138,
+          "values": [
+            "second"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'secs'",
+          "line": 139,
+          "values": [
+            "secs"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'sec'",
+          "line": 140,
+          "values": [
+            "sec"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'s'",
+          "line": 141,
+          "values": [
+            "s"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'milliseconds'",
+          "line": 143,
+          "values": [
+            "milliseconds"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'millisecond'",
+          "line": 144,
+          "values": [
+            "millisecond"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'msecs'",
+          "line": 145,
+          "values": [
+            "msecs"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'msec'",
+          "line": 146,
+          "values": [
+            "msec"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'ms'",
+          "line": 147,
+          "values": [
+            "ms"
+          ],
+          "names": []
+        }
+      ],
+      "implHash": "a3d7c83002767c80",
+      "guarantees": [
+        {
+          "id": "ok.units",
+          "key": "parse.ok.units",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "accepts the units years, year, yrs, yr, y; months, month, mo; weeks, week, w; days, day, d; hours, hour, hrs, hr, h; minutes, minute, mins, min, m; seconds, second, secs, sec, s; milliseconds, millisecond, msecs, msec, ms",
+          "textHash": "eab2b7232a404697",
+          "line": 73,
+          "references": [],
+          "tests": [
+            "src/parse.test.ts:5",
+            "src/parse.test.ts:27",
+            "src/parse.test.ts:35",
+            "src/parse.test.ts:51",
+            "src/parse.test.ts:86",
+            "src/parse.test.ts:92",
+            "src/parse.test.ts:96",
+            "src/parse.test.ts:100",
+            "src/parse.test.ts:104",
+            "src/parse.test.ts:108",
+            "src/parse.test.ts:112",
+            "src/parse.test.ts:116",
+            "src/parse.test.ts:120",
+            "src/parse.test.ts:124",
+            "src/parse.test.ts:148",
+            "src/parse.test.ts:154",
+            "src/parse.test.ts:160",
+            "src/parse.test.ts:167",
+            "src/parse.test.ts:174",
+            "src/parse.test.ts:181",
+            "src/parse.test.ts:188",
+            "src/parse.test.ts:195",
+            "src/parse.test.ts:202"
+          ]
+        },
+        {
+          "id": "ok.values",
+          "key": "parse.ok.values",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a year is 31557600000 ms, a day 86400000, an hour 3600000, a minute 60000, a second 1000 (\"1h\" gives 3600000)",
+          "textHash": "2d630ae59e7c52f6",
+          "line": 74,
+          "references": [],
+          "tests": [
+            "src/parse.test.ts:15",
+            "src/parse.test.ts:19",
+            "src/parse.test.ts:23",
+            "src/parse.test.ts:31",
+            "src/parse.test.ts:39"
+          ]
+        },
+        {
+          "id": "ok.case",
+          "key": "parse.ok.case",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "units may be lowercase, uppercase or capitalised, with or without a space before them",
+          "textHash": "8100baeeeffa131d",
+          "line": 75,
+          "references": [],
+          "tests": [
+            "src/parse.test.ts:47",
+            "src/parse.test.ts:57"
+          ]
+        },
+        {
+          "id": "ok.default-unit",
+          "key": "parse.ok.default-unit",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a number with no unit is milliseconds (\"100\" gives 100, \"-200\" gives -200)",
+          "textHash": "d119663b999a30de",
+          "line": 76,
+          "references": [],
+          "tests": [
+            "src/parse.test.ts:11"
+          ]
+        },
+        {
+          "id": "ok.fraction",
+          "key": "parse.ok.fraction",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "fractional and negative values are accepted (\"0.5m\", \"-0.5m\", \".5m\", \"-.5m\")",
+          "textHash": "9c56d10f9f8cc3f3",
+          "line": 77,
+          "references": [],
+          "tests": [
+            "src/parse.test.ts:43",
+            "src/parse.test.ts:65",
+            "src/parse.test.ts:69",
+            "src/parse.test.ts:73",
+            "src/parse.test.ts:78",
+            "src/parse.test.ts:128",
+            "src/parse.test.ts:132",
+            "src/parse.test.ts:136",
+            "src/parse.test.ts:140"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "parseStrict",
+      "kind": "function",
+      "operation": "parseStrict",
+      "file": "src/index.ts",
+      "line": 165,
+      "endLine": 167,
+      "referencedBy": [],
+      "summary": "Parse the given StringValue and return milliseconds.",
+      "params": [
+        {
+          "name": "value",
+          "type": "StringValue",
+          "optional": false,
+          "doc": "A typesafe StringValue to parse to milliseconds"
+        }
+      ],
+      "returns": "number",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "parse"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "54075a9dfb28464a",
+      "guarantees": [
+        {
+          "id": "ok.parse",
+          "key": "parseStrict.ok.parse",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "parses like `parse` (\"1h\" gives 3600000)",
+          "textHash": "d7be1038d52b4001",
+          "line": 163,
+          "references": [],
+          "tests": [
+            "src/parse-strict.test.ts:5",
+            "src/parse-strict.test.ts:11",
+            "src/parse-strict.test.ts:15",
+            "src/parse-strict.test.ts:19",
+            "src/parse-strict.test.ts:23",
+            "src/parse-strict.test.ts:27",
+            "src/parse-strict.test.ts:31",
+            "src/parse-strict.test.ts:35",
+            "src/parse-strict.test.ts:39",
+            "src/parse-strict.test.ts:42",
+            "src/parse-strict.test.ts:46",
+            "src/parse-strict.test.ts:50",
+            "src/parse-strict.test.ts:54",
+            "src/parse-strict.test.ts:63",
+            "src/parse-strict.test.ts:76",
+            "src/parse-strict.test.ts:80",
+            "src/parse-strict.test.ts:84",
+            "src/parse-strict.test.ts:89",
+            "src/parse-strict.test.ts:97",
+            "src/parse-strict.test.ts:103",
+            "src/parse-strict.test.ts:107",
+            "src/parse-strict.test.ts:111",
+            "src/parse-strict.test.ts:115",
+            "src/parse-strict.test.ts:119",
+            "src/parse-strict.test.ts:123",
+            "src/parse-strict.test.ts:127",
+            "src/parse-strict.test.ts:131",
+            "src/parse-strict.test.ts:135",
+            "src/parse-strict.test.ts:139",
+            "src/parse-strict.test.ts:143",
+            "src/parse-strict.test.ts:147",
+            "src/parse-strict.test.ts:151",
+            "src/parse-strict.test.ts:159",
+            "src/parse-strict.test.ts:166",
+            "src/parse-strict.test.ts:173",
+            "src/parse-strict.test.ts:180",
+            "src/parse-strict.test.ts:187",
+            "src/parse-strict.test.ts:194",
+            "src/parse-strict.test.ts:201",
+            "src/parse-strict.test.ts:208",
+            "src/parse-strict.test.ts:215"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "format",
+      "kind": "function",
+      "operation": "format",
+      "file": "src/index.ts",
+      "line": 237,
+      "endLine": 243,
+      "referencedBy": [],
+      "summary": "Format the given integer as a string.",
+      "params": [
+        {
+          "name": "ms",
+          "type": "number",
+          "optional": false,
+          "doc": "milliseconds"
+        },
+        {
+          "name": "options",
+          "type": "Options",
+          "optional": true,
+          "doc": "Options for the conversion"
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "constant",
+          "expression": "s = 1000",
+          "line": 1,
+          "values": [
+            "1000"
+          ],
+          "names": [
+            "s"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "m = s * 60",
+          "line": 2,
+          "values": [
+            "60000"
+          ],
+          "names": [
+            "m"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "h = m * 60",
+          "line": 3,
+          "values": [
+            "3600000"
+          ],
+          "names": [
+            "h"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "d = h * 24",
+          "line": 4,
+          "values": [
+            "86400000"
+          ],
+          "names": [
+            "d"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "w = d * 7",
+          "line": 5,
+          "values": [
+            "604800000"
+          ],
+          "names": [
+            "w"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "y = d * 365.25",
+          "line": 6,
+          "values": [
+            "31557600000"
+          ],
+          "names": [
+            "y"
+          ]
+        },
+        {
+          "kind": "constant",
+          "expression": "mo = y / 12",
+          "line": 7,
+          "values": [
+            "2629800000"
+          ],
+          "names": [
+            "mo"
+          ]
+        },
+        {
+          "kind": "output",
+          "expression": "`${Math.round(ms / y)}y`",
+          "line": 175,
+          "values": [
+            "y"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "`${Math.round(ms / mo)}mo`",
+          "line": 178,
+          "values": [
+            "mo"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "`${Math.round(ms / w)}w`",
+          "line": 181,
+          "values": [
+            "w"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "`${Math.round(ms / d)}d`",
+          "line": 184,
+          "values": [
+            "d"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "`${Math.round(ms / h)}h`",
+          "line": 187,
+          "values": [
+            "h"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "`${Math.round(ms / m)}m`",
+          "line": 190,
+          "values": [
+            "m"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "msAbs >= y",
+          "line": 203,
+          "values": [
+            "31557600000"
+          ],
+          "names": [
+            "y"
+          ]
+        },
+        {
+          "kind": "output",
+          "expression": "'year'",
+          "line": 204,
+          "values": [
+            "year"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "msAbs >= mo",
+          "line": 206,
+          "values": [
+            "2629800000"
+          ],
+          "names": [
+            "mo"
+          ]
+        },
+        {
+          "kind": "output",
+          "expression": "'month'",
+          "line": 207,
+          "values": [
+            "month"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "msAbs >= w",
+          "line": 209,
+          "values": [
+            "604800000"
+          ],
+          "names": [
+            "w"
+          ]
+        },
+        {
+          "kind": "output",
+          "expression": "'week'",
+          "line": 210,
+          "values": [
+            "week"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "msAbs >= d",
+          "line": 212,
+          "values": [
+            "86400000"
+          ],
+          "names": [
+            "d"
+          ]
+        },
+        {
+          "kind": "output",
+          "expression": "'day'",
+          "line": 213,
+          "values": [
+            "day"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "msAbs >= h",
+          "line": 215,
+          "values": [
+            "3600000"
+          ],
+          "names": [
+            "h"
+          ]
+        },
+        {
+          "kind": "output",
+          "expression": "'hour'",
+          "line": 216,
+          "values": [
+            "hour"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "msAbs >= m",
+          "line": 218,
+          "values": [
+            "60000"
+          ],
+          "names": [
+            "m"
+          ]
+        },
+        {
+          "kind": "output",
+          "expression": "'minute'",
+          "line": 219,
+          "values": [
+            "minute"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "msAbs >= s",
+          "line": 221,
+          "values": [
+            "1000"
+          ],
+          "names": [
+            "s"
+          ]
+        },
+        {
+          "kind": "output",
+          "expression": "'second'",
+          "line": 222,
+          "values": [
+            "second"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "`${ms} ms`",
+          "line": 224,
+          "values": [
+            "ms"
+          ],
+          "names": []
+        },
+        {
+          "kind": "constant",
+          "expression": "n * 1.5",
+          "line": 254,
+          "values": [
+            "1.5"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'s'",
+          "line": 255,
+          "values": [
+            "s"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 172,
+          "endLine": 196
+        },
+        {
+          "line": 201,
+          "endLine": 225
+        },
+        {
+          "line": 248,
+          "endLine": 256
+        }
+      ],
+      "implHash": "d0fe992e97d00fe0",
+      "guarantees": [
+        {
+          "id": "ok.short",
+          "key": "format.ok.short",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "formats milliseconds in the largest fitting unit with a short suffix (2000 gives \"2s\", 60000 gives \"1m\", 36000000 gives \"10h\")",
+          "textHash": "598bf82b590178ce",
+          "line": 233,
+          "references": [],
+          "tests": [
+            "src/format.test.ts:127",
+            "src/format.test.ts:133",
+            "src/format.test.ts:139",
+            "src/format.test.ts:147",
+            "src/format.test.ts:155",
+            "src/format.test.ts:163",
+            "src/format.test.ts:171",
+            "src/format.test.ts:179",
+            "src/format.test.ts:189",
+            "src/format.test.ts:199",
+            "src/format.test.ts:209",
+            "src/format.test.ts:216",
+            "src/format.test.ts:223",
+            "src/format.test.ts:230",
+            "src/format.test.ts:237",
+            "src/format.test.ts:244",
+            "src/format.test.ts:250",
+            "src/format.test.ts:256"
+          ]
+        },
+        {
+          "id": "ok.long",
+          "key": "format.ok.long",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `long` true writes the unit out, plural when the value is not 1 (60000 gives \"1 minute\", 120000 \"2 minutes\")",
+          "textHash": "e2a9d485306d96e1",
+          "line": 234,
+          "references": [],
+          "tests": [
+            "src/format.test.ts:7",
+            "src/format.test.ts:13",
+            "src/format.test.ts:19",
+            "src/format.test.ts:29",
+            "src/format.test.ts:39",
+            "src/format.test.ts:49",
+            "src/format.test.ts:61",
+            "src/format.test.ts:73",
+            "src/format.test.ts:95",
+            "src/format.test.ts:117"
+          ]
+        },
+        {
+          "id": "ok.negative",
+          "key": "format.ok.negative",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a negative value keeps its sign (-180000 gives \"-3m\")",
+          "textHash": "ac74e9d15fa1dacc",
+          "line": 235,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 7,
+      "title": "format.ok.long should not throw an error",
+      "status": "test",
+      "bodyHash": "118cc4e8630196e0",
+      "literals": [
+        "500"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 13,
+      "title": "format.ok.long should support milliseconds",
+      "status": "test",
+      "bodyHash": "8baf61fb170cb3ad",
+      "literals": [
+        "500",
+        "500 ms",
+        "-500",
+        "-500 ms"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 19,
+      "title": "format.ok.long should support seconds",
+      "status": "test",
+      "bodyHash": "3ccff62738f51e32",
+      "literals": [
+        "1000",
+        "1 second",
+        "1200",
+        "10000",
+        "10 seconds",
+        "-1000",
+        "-1 second",
+        "-1200",
+        "-10000",
+        "-10 seconds"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 29,
+      "title": "format.ok.long should support minutes",
+      "status": "test",
+      "bodyHash": "edaf57e984656241",
+      "literals": [
+        "60",
+        "1000",
+        "1 minute",
+        "1200",
+        "10000",
+        "10 minutes",
+        "-1 minute",
+        "-10 minutes"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 39,
+      "title": "format.ok.long should support hours",
+      "status": "test",
+      "bodyHash": "e82dbea27972cfb8",
+      "literals": [
+        "60",
+        "1000",
+        "1 hour",
+        "1200",
+        "10000",
+        "10 hours",
+        "-1 hour",
+        "-10 hours"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 49,
+      "title": "format.ok.long should support days",
+      "status": "test",
+      "bodyHash": "9efa55f85da040ee",
+      "literals": [
+        "24",
+        "60",
+        "1000",
+        "1 day",
+        "1200",
+        "6",
+        "6 days",
+        "-1 day",
+        "-6 days"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 61,
+      "title": "format.ok.long should support weeks",
+      "status": "test",
+      "bodyHash": "a7d4f4b888fdea10",
+      "literals": [
+        "7",
+        "24",
+        "60",
+        "1000",
+        "1 week",
+        "2",
+        "2 weeks",
+        "-1 week",
+        "-2 weeks"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 73,
+      "title": "format.ok.long should support months",
+      "status": "test",
+      "bodyHash": "e60228399cc97058",
+      "literals": [
+        "30.4375",
+        "24",
+        "60",
+        "1000",
+        "1 month",
+        "1200",
+        "10000",
+        "10 months",
+        "-1 month",
+        "-10 months"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 95,
+      "title": "format.ok.long should support years",
+      "status": "test",
+      "bodyHash": "b535c7633c2feae3",
+      "literals": [
+        "365.25",
+        "24",
+        "60",
+        "1000",
+        "1 year",
+        "1200",
+        "10000",
+        "10 years",
+        "-1 year",
+        "-10 years"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.long",
+      "unitId": "format",
+      "guaranteeId": "ok.long",
+      "file": "src/format.test.ts",
+      "line": 117,
+      "title": "format.ok.long should round",
+      "status": "test",
+      "bodyHash": "fed0abbd6e4c7e57",
+      "literals": [
+        "234234234",
+        "3 days",
+        "-234234234",
+        "-3 days"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 127,
+      "title": "format.ok.short should not throw an error",
+      "status": "test",
+      "bodyHash": "81aa72e43a1ba29d",
+      "literals": [
+        "500"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 133,
+      "title": "format.ok.short should support milliseconds",
+      "status": "test",
+      "bodyHash": "c5c70ec7dd68a31a",
+      "literals": [
+        "500",
+        "500ms",
+        "-500",
+        "-500ms"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 139,
+      "title": "format.ok.short should support seconds",
+      "status": "test",
+      "bodyHash": "348c5532f8d9a1dd",
+      "literals": [
+        "1000",
+        "1s",
+        "10000",
+        "10s",
+        "-1000",
+        "-1s",
+        "-10000",
+        "-10s"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 147,
+      "title": "format.ok.short should support minutes",
+      "status": "test",
+      "bodyHash": "6814c65816820ac6",
+      "literals": [
+        "60",
+        "1000",
+        "1m",
+        "10000",
+        "10m",
+        "-1m",
+        "-10m"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 155,
+      "title": "format.ok.short should support hours",
+      "status": "test",
+      "bodyHash": "df4c82d00ebc1093",
+      "literals": [
+        "60",
+        "1000",
+        "1h",
+        "10000",
+        "10h",
+        "-1h",
+        "-10h"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 163,
+      "title": "format.ok.short should support days",
+      "status": "test",
+      "bodyHash": "baef7e8bc5429440",
+      "literals": [
+        "24",
+        "60",
+        "1000",
+        "1d",
+        "6000",
+        "6d",
+        "-1d",
+        "-6d"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 171,
+      "title": "format.ok.short should support weeks",
+      "status": "test",
+      "bodyHash": "a1c495bb4a19a85d",
+      "literals": [
+        "7",
+        "24",
+        "60",
+        "1000",
+        "1w",
+        "2",
+        "2w",
+        "-1w",
+        "-2w"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 179,
+      "title": "format.ok.short should support months",
+      "status": "test",
+      "bodyHash": "141a1dea5e097e36",
+      "literals": [
+        "30.4375",
+        "24",
+        "60",
+        "1000",
+        "1mo",
+        "1200",
+        "10000",
+        "10mo",
+        "-1mo",
+        "-10mo"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 189,
+      "title": "format.ok.short should support years",
+      "status": "test",
+      "bodyHash": "880422784bb162f0",
+      "literals": [
+        "365.25",
+        "24",
+        "60",
+        "1000",
+        "1y",
+        "1200",
+        "10000",
+        "10y",
+        "-1y",
+        "-10y"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 199,
+      "title": "format.ok.short should round",
+      "status": "test",
+      "bodyHash": "5f4c6769c6769494",
+      "literals": [
+        "234234234",
+        "3d",
+        "-234234234",
+        "-3d"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 209,
+      "title": "format.ok.short should throw an error, when format(\"\")",
+      "status": "test",
+      "bodyHash": "47a6a767f5f24fa4",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 216,
+      "title": "format.ok.short should throw an error, when format(undefined)",
+      "status": "test",
+      "bodyHash": "57b9677f1c0ee86d",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 223,
+      "title": "format.ok.short should throw an error, when format(null)",
+      "status": "test",
+      "bodyHash": "be3f9f57f7a4951d",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 230,
+      "title": "format.ok.short should throw an error, when format([])",
+      "status": "test",
+      "bodyHash": "d62b8c84c30c1d0f",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 237,
+      "title": "format.ok.short should throw an error, when format({})",
+      "status": "test",
+      "bodyHash": "22d21e243fe5dc2b",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 244,
+      "title": "format.ok.short should throw an error, when format(NaN)",
+      "status": "test",
+      "bodyHash": "e52d4e275d62db4b",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 250,
+      "title": "format.ok.short should throw an error, when format(Infinity)",
+      "status": "test",
+      "bodyHash": "4cedd7c5c98f648c",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "format.ok.short",
+      "unitId": "format",
+      "guaranteeId": "ok.short",
+      "file": "src/format.test.ts",
+      "line": 256,
+      "title": "format.ok.short should throw an error, when format(-Infinity)",
+      "status": "test",
+      "bodyHash": "2c00b7d4147e8b11",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 5,
+      "title": "ms.ok.parse should not throw an error",
+      "status": "test",
+      "bodyHash": "e76cecc80b89ad88",
+      "literals": [
+        "1m"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 11,
+      "title": "ms.ok.parse should preserve ms",
+      "status": "test",
+      "bodyHash": "2c9e1231781de152",
+      "literals": [
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 15,
+      "title": "ms.ok.parse should convert from m to ms",
+      "status": "test",
+      "bodyHash": "f7a8011776ec6ae1",
+      "literals": [
+        "1m",
+        "60000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 19,
+      "title": "ms.ok.parse should convert from h to ms",
+      "status": "test",
+      "bodyHash": "4cc8eac25ec02793",
+      "literals": [
+        "1h",
+        "3600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 23,
+      "title": "ms.ok.parse should convert d to ms",
+      "status": "test",
+      "bodyHash": "e3995ab0f95148cf",
+      "literals": [
+        "2d",
+        "172800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 27,
+      "title": "ms.ok.parse should convert w to ms",
+      "status": "test",
+      "bodyHash": "09ff89dc9015b31a",
+      "literals": [
+        "3w",
+        "1814400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 31,
+      "title": "ms.ok.parse should convert s to ms",
+      "status": "test",
+      "bodyHash": "98f4cc5dc9ad6a7d",
+      "literals": [
+        "1s",
+        "1000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 35,
+      "title": "ms.ok.parse should convert ms to ms",
+      "status": "test",
+      "bodyHash": "dbc1c3fbbad4400e",
+      "literals": [
+        "100ms",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 39,
+      "title": "ms.ok.parse should convert y to ms",
+      "status": "test",
+      "bodyHash": "2fcfecea3c2ba550",
+      "literals": [
+        "1y",
+        "31557600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 43,
+      "title": "ms.ok.parse should work with decimals",
+      "status": "test",
+      "bodyHash": "40bc4cc19dd485d8",
+      "literals": [
+        "1.5h",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 47,
+      "title": "ms.ok.parse should work with multiple spaces",
+      "status": "test",
+      "bodyHash": "9b353339abda21ad",
+      "literals": [
+        "1   s",
+        "1000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 51,
+      "title": "ms.ok.parse should return NaN if invalid",
+      "status": "test",
+      "bodyHash": "d4e885acb6e44635",
+      "literals": [
+        "☃",
+        "10-.5",
+        "ms"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 60,
+      "title": "ms.ok.parse should be case-insensitive",
+      "status": "test",
+      "bodyHash": "03d0029d4c0338b9",
+      "literals": [
+        "1.5H",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 64,
+      "title": "ms.ok.parse should work with numbers starting with .",
+      "status": "test",
+      "bodyHash": "cee8b0d01aa73c45",
+      "literals": [
+        ".5ms",
+        "0.5"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 68,
+      "title": "ms.ok.parse should work with negative integers",
+      "status": "test",
+      "bodyHash": "7cf03698ce35f38c",
+      "literals": [
+        "-100ms",
+        "-100",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 72,
+      "title": "ms.ok.parse should work with negative decimals",
+      "status": "test",
+      "bodyHash": "a4c324862a15977c",
+      "literals": [
+        "-1.5h",
+        "-5400000",
+        "5400000",
+        "-10.5h",
+        "-37800000",
+        "37800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 77,
+      "title": "ms.ok.parse should work with negative decimals starting with \".\"",
+      "status": "test",
+      "bodyHash": "b130f055d57ed49c",
+      "literals": [
+        "-.5h",
+        "-1800000",
+        "1800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 85,
+      "title": "ms.ok.parse should not throw an error",
+      "status": "test",
+      "bodyHash": "50bb48731eecec11",
+      "literals": [
+        "53 milliseconds"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 91,
+      "title": "ms.ok.parse should convert milliseconds to ms",
+      "status": "test",
+      "bodyHash": "6c63823d4e73080c",
+      "literals": [
+        "53 milliseconds",
+        "53"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 95,
+      "title": "ms.ok.parse should convert msecs to ms",
+      "status": "test",
+      "bodyHash": "3479fc2be468a030",
+      "literals": [
+        "17 msecs",
+        "17"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 99,
+      "title": "ms.ok.parse should convert sec to ms",
+      "status": "test",
+      "bodyHash": "6f0e2d25891d56d2",
+      "literals": [
+        "1 sec",
+        "1000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 103,
+      "title": "ms.ok.parse should convert from min to ms",
+      "status": "test",
+      "bodyHash": "d1e88c7bef20644c",
+      "literals": [
+        "1 min",
+        "60000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 107,
+      "title": "ms.ok.parse should convert from hr to ms",
+      "status": "test",
+      "bodyHash": "ec0cf4287954102d",
+      "literals": [
+        "1 hr",
+        "3600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 111,
+      "title": "ms.ok.parse should convert days to ms",
+      "status": "test",
+      "bodyHash": "2f200341cc087f88",
+      "literals": [
+        "2 days",
+        "172800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 115,
+      "title": "ms.ok.parse should convert weeks to ms",
+      "status": "test",
+      "bodyHash": "a174f3286e7c4b6e",
+      "literals": [
+        "1 week",
+        "604800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 119,
+      "title": "ms.ok.parse should convert years to ms",
+      "status": "test",
+      "bodyHash": "622e4c442efe2d08",
+      "literals": [
+        "1 year",
+        "31557600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 123,
+      "title": "ms.ok.parse should work with decimals",
+      "status": "test",
+      "bodyHash": "caf3e678feee4537",
+      "literals": [
+        "1.5 hours",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 127,
+      "title": "ms.ok.parse should work with negative integers",
+      "status": "test",
+      "bodyHash": "aed3e98e94fb85ae",
+      "literals": [
+        "-100 milliseconds",
+        "-100",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 131,
+      "title": "ms.ok.parse should work with negative decimals",
+      "status": "test",
+      "bodyHash": "04aaf6feb9ebbf15",
+      "literals": [
+        "-1.5 hours",
+        "-5400000",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 135,
+      "title": "ms.ok.parse should work with negative decimals starting with \".\"",
+      "status": "test",
+      "bodyHash": "6810af7d1994198a",
+      "literals": [
+        "-.5 hr",
+        "-1800000",
+        "1800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 143,
+      "title": "ms.ok.long should not throw an error",
+      "status": "test",
+      "bodyHash": "1744431f2f22d325",
+      "literals": [
+        "500"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 149,
+      "title": "ms.ok.long should support milliseconds",
+      "status": "test",
+      "bodyHash": "5d08ebd28f3c31f8",
+      "literals": [
+        "500",
+        "500 ms",
+        "-500",
+        "-500 ms"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 155,
+      "title": "ms.ok.long should support seconds",
+      "status": "test",
+      "bodyHash": "09574eef3fda37ca",
+      "literals": [
+        "1000",
+        "1 second",
+        "1200",
+        "10000",
+        "10 seconds",
+        "-1000",
+        "-1 second",
+        "-1200",
+        "-10000",
+        "-10 seconds"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 165,
+      "title": "ms.ok.long should support minutes",
+      "status": "test",
+      "bodyHash": "8ec1be6a55c1af27",
+      "literals": [
+        "60",
+        "1000",
+        "1 minute",
+        "1200",
+        "10000",
+        "10 minutes",
+        "-1 minute",
+        "-10 minutes"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 175,
+      "title": "ms.ok.long should support hours",
+      "status": "test",
+      "bodyHash": "c604a12655ffda07",
+      "literals": [
+        "60",
+        "1000",
+        "1 hour",
+        "1200",
+        "10000",
+        "10 hours",
+        "-1 hour",
+        "-10 hours"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 185,
+      "title": "ms.ok.long should support days",
+      "status": "test",
+      "bodyHash": "5de9a0b4c9e53bd8",
+      "literals": [
+        "24",
+        "60",
+        "1000",
+        "1 day",
+        "1200",
+        "6",
+        "6 days",
+        "-1 day",
+        "-6 days"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 195,
+      "title": "ms.ok.long should support weeks",
+      "status": "test",
+      "bodyHash": "0d1ab8e2b8fa4eb5",
+      "literals": [
+        "7",
+        "24",
+        "60",
+        "1000",
+        "1 week",
+        "2",
+        "2 weeks",
+        "-1 week",
+        "-2 weeks"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 207,
+      "title": "ms.ok.long should support months",
+      "status": "test",
+      "bodyHash": "c0eddb462335fce7",
+      "literals": [
+        "30.4375",
+        "24",
+        "60",
+        "1000",
+        "1 month",
+        "1200",
+        "10000",
+        "10 months",
+        "-1 month",
+        "-10 months"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 225,
+      "title": "ms.ok.long should support years",
+      "status": "test",
+      "bodyHash": "7c400703d40a72e2",
+      "literals": [
+        "365.25",
+        "24",
+        "60",
+        "1000",
+        "1 year",
+        "1200",
+        "10000",
+        "10 years",
+        "-1 year",
+        "-10 years"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.long",
+      "unitId": "ms",
+      "guaranteeId": "ok.long",
+      "file": "src/index.test.ts",
+      "line": 243,
+      "title": "ms.ok.long should round",
+      "status": "test",
+      "bodyHash": "a767aa2cc3f05eaf",
+      "literals": [
+        "234234234",
+        "3 days",
+        "-234234234",
+        "-3 days"
+      ],
+      "keys": [
+        "long"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 253,
+      "title": "ms.ok.format should not throw an error",
+      "status": "test",
+      "bodyHash": "c858744c319de8f0",
+      "literals": [
+        "500"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 259,
+      "title": "ms.ok.format should support milliseconds",
+      "status": "test",
+      "bodyHash": "44f52256eef70736",
+      "literals": [
+        "500",
+        "500ms",
+        "-500",
+        "-500ms"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 265,
+      "title": "ms.ok.format should support seconds",
+      "status": "test",
+      "bodyHash": "f4fce023ada8ce60",
+      "literals": [
+        "1000",
+        "1s",
+        "10000",
+        "10s",
+        "-1000",
+        "-1s",
+        "-10000",
+        "-10s"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 273,
+      "title": "ms.ok.format should support minutes",
+      "status": "test",
+      "bodyHash": "108e3fdd2d25891b",
+      "literals": [
+        "60",
+        "1000",
+        "1m",
+        "10000",
+        "10m",
+        "-1m",
+        "-10m"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 281,
+      "title": "ms.ok.format should support hours",
+      "status": "test",
+      "bodyHash": "736f15eeadfd42b7",
+      "literals": [
+        "60",
+        "1000",
+        "1h",
+        "10000",
+        "10h",
+        "-1h",
+        "-10h"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 289,
+      "title": "ms.ok.format should support days",
+      "status": "test",
+      "bodyHash": "38695d2bad14802b",
+      "literals": [
+        "24",
+        "60",
+        "1000",
+        "1d",
+        "6000",
+        "6d",
+        "-1d",
+        "-6d"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 297,
+      "title": "ms.ok.format should support weeks",
+      "status": "test",
+      "bodyHash": "a9e385ea0b263f51",
+      "literals": [
+        "7",
+        "24",
+        "60",
+        "1000",
+        "1w",
+        "2",
+        "2w",
+        "-1w",
+        "-2w"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 305,
+      "title": "ms.ok.format should support months",
+      "status": "test",
+      "bodyHash": "6155605a6a3bdcdc",
+      "literals": [
+        "30.4375",
+        "24",
+        "60",
+        "1000",
+        "1mo",
+        "1200",
+        "10000",
+        "10mo",
+        "-1mo",
+        "-10mo"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 315,
+      "title": "ms.ok.format should support years",
+      "status": "test",
+      "bodyHash": "0327a9e5bfd78bc6",
+      "literals": [
+        "365.25",
+        "24",
+        "60",
+        "1000",
+        "1y",
+        "1200",
+        "10000",
+        "10y",
+        "-1y",
+        "-10y"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.format",
+      "unitId": "ms",
+      "guaranteeId": "ok.format",
+      "file": "src/index.test.ts",
+      "line": 325,
+      "title": "ms.ok.format should round",
+      "status": "test",
+      "bodyHash": "59139f4715f0a0e6",
+      "literals": [
+        "234234234",
+        "3d",
+        "-234234234",
+        "-3d"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 335,
+      "title": "ms.ok.parse should throw an error, when ms(\"\")",
+      "status": "test",
+      "bodyHash": "33bd9a57bda8c191",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 342,
+      "title": "ms.ok.parse should throw an error, when ms(undefined)",
+      "status": "test",
+      "bodyHash": "54d04d5d42feaa5b",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 349,
+      "title": "ms.ok.parse should throw an error, when ms(null)",
+      "status": "test",
+      "bodyHash": "7b430b9e51ca54f3",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 356,
+      "title": "ms.ok.parse should throw an error, when ms([])",
+      "status": "test",
+      "bodyHash": "88bbee071fe4c95a",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 363,
+      "title": "ms.ok.parse should throw an error, when ms({})",
+      "status": "test",
+      "bodyHash": "0239b5b9e86fc885",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 370,
+      "title": "ms.ok.parse should throw an error, when ms(NaN)",
+      "status": "test",
+      "bodyHash": "828477a7869aa37e",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 376,
+      "title": "ms.ok.parse should throw an error, when ms(Infinity)",
+      "status": "test",
+      "bodyHash": "210d454acc9d84c5",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "ms.ok.parse",
+      "unitId": "ms",
+      "guaranteeId": "ok.parse",
+      "file": "src/index.test.ts",
+      "line": 382,
+      "title": "ms.ok.parse should throw an error, when ms(-Infinity)",
+      "status": "test",
+      "bodyHash": "1a65660d8bd6b1b5",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 5,
+      "title": "parseStrict.ok.parse should not throw an error",
+      "status": "test",
+      "bodyHash": "0e8a9e01999ad80e",
+      "literals": [
+        "1m"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 11,
+      "title": "parseStrict.ok.parse should preserve ms",
+      "status": "test",
+      "bodyHash": "6ac71ae3d9e2a9ab",
+      "literals": [
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 15,
+      "title": "parseStrict.ok.parse should convert from m to ms",
+      "status": "test",
+      "bodyHash": "37c2b71cbabfd42c",
+      "literals": [
+        "1m",
+        "60000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 19,
+      "title": "parseStrict.ok.parse should convert from h to ms",
+      "status": "test",
+      "bodyHash": "6041cda3dbbdb6e8",
+      "literals": [
+        "1h",
+        "3600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 23,
+      "title": "parseStrict.ok.parse should convert d to ms",
+      "status": "test",
+      "bodyHash": "d25b153e2e4b9c57",
+      "literals": [
+        "2d",
+        "172800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 27,
+      "title": "parseStrict.ok.parse should convert w to ms",
+      "status": "test",
+      "bodyHash": "8dff32de58c5968a",
+      "literals": [
+        "3w",
+        "1814400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 31,
+      "title": "parseStrict.ok.parse should convert s to ms",
+      "status": "test",
+      "bodyHash": "ad43593f7b8cd6a8",
+      "literals": [
+        "1s",
+        "1000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 35,
+      "title": "parseStrict.ok.parse should convert ms to ms",
+      "status": "test",
+      "bodyHash": "ee8dcfdb6afc1c02",
+      "literals": [
+        "100ms",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 39,
+      "title": "parseStrict.ok.parse should convert mo to ms",
+      "status": "test",
+      "bodyHash": "fe26a04790206bf6",
+      "literals": [
+        "1mo",
+        "2629800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 42,
+      "title": "parseStrict.ok.parse should convert y to ms",
+      "status": "test",
+      "bodyHash": "3b7e7cd8785b7f4a",
+      "literals": [
+        "1y",
+        "31557600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 46,
+      "title": "parseStrict.ok.parse should work with ms",
+      "status": "test",
+      "bodyHash": "44d73acac9816f7a",
+      "literals": [
+        "1.5h",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 50,
+      "title": "parseStrict.ok.parse should work with multiple spaces",
+      "status": "test",
+      "bodyHash": "0954c3a4ff1db9fa",
+      "literals": [
+        "1   s",
+        "1000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 54,
+      "title": "parseStrict.ok.parse should return NaN if invalid",
+      "status": "test",
+      "bodyHash": "da15e50a68dc21e1",
+      "literals": [
+        "☃",
+        "10-.5",
+        "foo"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 63,
+      "title": "parseStrict.ok.parse should be case-insensitive",
+      "status": "test",
+      "bodyHash": "194330325f232b83",
+      "literals": [
+        "53 YeArS",
+        "1672552800000",
+        "53 WeEkS",
+        "32054400000",
+        "53 DaYS",
+        "4579200000",
+        "53 HoUrs",
+        "190800000",
+        "53 MiLliSeCondS",
+        "53"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 76,
+      "title": "parseStrict.ok.parse should work with numbers starting with .",
+      "status": "test",
+      "bodyHash": "c92890ba489a5dc5",
+      "literals": [
+        ".5ms",
+        "0.5"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 80,
+      "title": "parseStrict.ok.parse should work with negative integers",
+      "status": "test",
+      "bodyHash": "47d88886bab700e4",
+      "literals": [
+        "-100ms",
+        "-100",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 84,
+      "title": "parseStrict.ok.parse should work with negative decimals",
+      "status": "test",
+      "bodyHash": "f5f45d91892dde57",
+      "literals": [
+        "-1.5h",
+        "-5400000",
+        "5400000",
+        "-10.5h",
+        "-37800000",
+        "37800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 89,
+      "title": "parseStrict.ok.parse should work with negative decimals starting with \".\"",
+      "status": "test",
+      "bodyHash": "a1ff3a48dda9891c",
+      "literals": [
+        "-.5h",
+        "-1800000",
+        "1800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 97,
+      "title": "parseStrict.ok.parse should not throw an error",
+      "status": "test",
+      "bodyHash": "e50047179952816e",
+      "literals": [
+        "53 milliseconds"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 103,
+      "title": "parseStrict.ok.parse should convert milliseconds to ms",
+      "status": "test",
+      "bodyHash": "f330c5bb5059ef4b",
+      "literals": [
+        "53 milliseconds",
+        "53"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 107,
+      "title": "parseStrict.ok.parse should convert msecs to ms",
+      "status": "test",
+      "bodyHash": "7cdfb677ce445447",
+      "literals": [
+        "17 msecs",
+        "17"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 111,
+      "title": "parseStrict.ok.parse should convert sec to ms",
+      "status": "test",
+      "bodyHash": "268b2f3aaab1f540",
+      "literals": [
+        "1 sec",
+        "1000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 115,
+      "title": "parseStrict.ok.parse should convert from min to ms",
+      "status": "test",
+      "bodyHash": "3989f12447485ce0",
+      "literals": [
+        "1 min",
+        "60000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 119,
+      "title": "parseStrict.ok.parse should convert from hr to ms",
+      "status": "test",
+      "bodyHash": "83002457bce2b711",
+      "literals": [
+        "1 hr",
+        "3600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 123,
+      "title": "parseStrict.ok.parse should convert days to ms",
+      "status": "test",
+      "bodyHash": "3c290085012f9cd9",
+      "literals": [
+        "2 days",
+        "172800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 127,
+      "title": "parseStrict.ok.parse should convert weeks to ms",
+      "status": "test",
+      "bodyHash": "0f3d052afbf5b550",
+      "literals": [
+        "1 week",
+        "604800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 131,
+      "title": "parseStrict.ok.parse should convert months to ms",
+      "status": "test",
+      "bodyHash": "f3979c0bcd3a890f",
+      "literals": [
+        "1 month",
+        "2629800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 135,
+      "title": "parseStrict.ok.parse should convert years to ms",
+      "status": "test",
+      "bodyHash": "17eaa009cb66b64f",
+      "literals": [
+        "1 year",
+        "31557600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 139,
+      "title": "parseStrict.ok.parse should work with decimals",
+      "status": "test",
+      "bodyHash": "f088b076db5ed5f9",
+      "literals": [
+        "1.5 hours",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 143,
+      "title": "parseStrict.ok.parse should work with negative integers",
+      "status": "test",
+      "bodyHash": "240889db05b60e1c",
+      "literals": [
+        "-100 milliseconds",
+        "-100",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 147,
+      "title": "parseStrict.ok.parse should work with negative decimals",
+      "status": "test",
+      "bodyHash": "a53f462e040e5da5",
+      "literals": [
+        "-1.5 hours",
+        "-5400000",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 151,
+      "title": "parseStrict.ok.parse should work with negative decimals starting with \".\"",
+      "status": "test",
+      "bodyHash": "e9fa5cc241006a27",
+      "literals": [
+        "-.5 hr",
+        "-1800000",
+        "1800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 159,
+      "title": "parseStrict.ok.parse should throw an error, when parseStrict(\"\")",
+      "status": "test",
+      "bodyHash": "9f2fdf6e767da952",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 166,
+      "title": "parseStrict.ok.parse should throw an error, when parseStrict(\"...>100 length string...\")",
+      "status": "test",
+      "bodyHash": "aa1f4d3d381050bd",
+      "literals": [
+        "▲",
+        "101"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 173,
+      "title": "parseStrict.ok.parse should throw an error, when parseStrict(undefined)",
+      "status": "test",
+      "bodyHash": "decd117cf5c9daa5",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 180,
+      "title": "parseStrict.ok.parse should throw an error, when parseStrict(null)",
+      "status": "test",
+      "bodyHash": "9c6800e87b89b1aa",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 187,
+      "title": "parseStrict.ok.parse should throw an error, when parseStrict([])",
+      "status": "test",
+      "bodyHash": "08a1f3701b7a0413",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 194,
+      "title": "parseStrict.ok.parse should throw an error, when parseStrict({})",
+      "status": "test",
+      "bodyHash": "a191702ba4ca156b",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 201,
+      "title": "parseStrict.ok.parse should throw an error, when parseStrict(NaN)",
+      "status": "test",
+      "bodyHash": "10929740bd494f25",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 208,
+      "title": "parseStrict.ok.parse should throw an error, when parseStrict(Infinity)",
+      "status": "test",
+      "bodyHash": "0d320cd4d5a68114",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parseStrict.ok.parse",
+      "unitId": "parseStrict",
+      "guaranteeId": "ok.parse",
+      "file": "src/parse-strict.test.ts",
+      "line": 215,
+      "title": "parseStrict.ok.parse should throw an error, when parseStrict(-Infinity)",
+      "status": "test",
+      "bodyHash": "4bd06a2b2381879c",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 5,
+      "title": "parse.ok.units should not throw an error",
+      "status": "test",
+      "bodyHash": "fb02d171b64bd423",
+      "literals": [
+        "1m"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.default-unit",
+      "unitId": "parse",
+      "guaranteeId": "ok.default-unit",
+      "file": "src/parse.test.ts",
+      "line": 11,
+      "title": "parse.ok.default-unit should preserve ms",
+      "status": "test",
+      "bodyHash": "ed6c6d69bdd6ce54",
+      "literals": [
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.values",
+      "unitId": "parse",
+      "guaranteeId": "ok.values",
+      "file": "src/parse.test.ts",
+      "line": 15,
+      "title": "parse.ok.values should convert from m to ms",
+      "status": "test",
+      "bodyHash": "db593d7e1a088905",
+      "literals": [
+        "1m",
+        "60000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.values",
+      "unitId": "parse",
+      "guaranteeId": "ok.values",
+      "file": "src/parse.test.ts",
+      "line": 19,
+      "title": "parse.ok.values should convert from h to ms",
+      "status": "test",
+      "bodyHash": "06ac756b8c96555d",
+      "literals": [
+        "1h",
+        "3600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.values",
+      "unitId": "parse",
+      "guaranteeId": "ok.values",
+      "file": "src/parse.test.ts",
+      "line": 23,
+      "title": "parse.ok.values should convert d to ms",
+      "status": "test",
+      "bodyHash": "336e311796937382",
+      "literals": [
+        "2d",
+        "172800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 27,
+      "title": "parse.ok.units should convert w to ms",
+      "status": "test",
+      "bodyHash": "f953dfd6b96ec990",
+      "literals": [
+        "3w",
+        "1814400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.values",
+      "unitId": "parse",
+      "guaranteeId": "ok.values",
+      "file": "src/parse.test.ts",
+      "line": 31,
+      "title": "parse.ok.values should convert s to ms",
+      "status": "test",
+      "bodyHash": "b8ab8109f5f22027",
+      "literals": [
+        "1s",
+        "1000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 35,
+      "title": "parse.ok.units should convert ms to ms",
+      "status": "test",
+      "bodyHash": "292c1530e24c02db",
+      "literals": [
+        "100ms",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.values",
+      "unitId": "parse",
+      "guaranteeId": "ok.values",
+      "file": "src/parse.test.ts",
+      "line": 39,
+      "title": "parse.ok.values should convert y to ms",
+      "status": "test",
+      "bodyHash": "cf8ad7d2032d7562",
+      "literals": [
+        "1y",
+        "31557600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.fraction",
+      "unitId": "parse",
+      "guaranteeId": "ok.fraction",
+      "file": "src/parse.test.ts",
+      "line": 43,
+      "title": "parse.ok.fraction should work with ms",
+      "status": "test",
+      "bodyHash": "83a120b5dc5a7b18",
+      "literals": [
+        "1.5h",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.case",
+      "unitId": "parse",
+      "guaranteeId": "ok.case",
+      "file": "src/parse.test.ts",
+      "line": 47,
+      "title": "parse.ok.case should work with multiple spaces",
+      "status": "test",
+      "bodyHash": "fad06d75f1fc5c77",
+      "literals": [
+        "1   s",
+        "1000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 51,
+      "title": "parse.ok.units should return NaN if invalid",
+      "status": "test",
+      "bodyHash": "bdc1cb152da70021",
+      "literals": [
+        "☃",
+        "10-.5",
+        "foo"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.case",
+      "unitId": "parse",
+      "guaranteeId": "ok.case",
+      "file": "src/parse.test.ts",
+      "line": 57,
+      "title": "parse.ok.case should be case-insensitive",
+      "status": "test",
+      "bodyHash": "bf2717d5edd46237",
+      "literals": [
+        "53 YeArS",
+        "1672552800000",
+        "53 WeEkS",
+        "32054400000",
+        "53 DaYS",
+        "4579200000",
+        "53 HoUrs",
+        "190800000",
+        "53 MiLliSeCondS",
+        "53"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.fraction",
+      "unitId": "parse",
+      "guaranteeId": "ok.fraction",
+      "file": "src/parse.test.ts",
+      "line": 65,
+      "title": "parse.ok.fraction should work with numbers starting with .",
+      "status": "test",
+      "bodyHash": "4a17f63c58ff5dde",
+      "literals": [
+        ".5ms",
+        "0.5"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.fraction",
+      "unitId": "parse",
+      "guaranteeId": "ok.fraction",
+      "file": "src/parse.test.ts",
+      "line": 69,
+      "title": "parse.ok.fraction should work with negative integers",
+      "status": "test",
+      "bodyHash": "aa6c718fa3bac80d",
+      "literals": [
+        "-100ms",
+        "-100",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.fraction",
+      "unitId": "parse",
+      "guaranteeId": "ok.fraction",
+      "file": "src/parse.test.ts",
+      "line": 73,
+      "title": "parse.ok.fraction should work with negative decimals",
+      "status": "test",
+      "bodyHash": "7cdb29218f249db9",
+      "literals": [
+        "-1.5h",
+        "-5400000",
+        "5400000",
+        "-10.5h",
+        "-37800000",
+        "37800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.fraction",
+      "unitId": "parse",
+      "guaranteeId": "ok.fraction",
+      "file": "src/parse.test.ts",
+      "line": 78,
+      "title": "parse.ok.fraction should work with negative decimals starting with \".\"",
+      "status": "test",
+      "bodyHash": "534ccf8a546c3ed3",
+      "literals": [
+        "-.5h",
+        "-1800000",
+        "1800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 86,
+      "title": "parse.ok.units should not throw an error",
+      "status": "test",
+      "bodyHash": "8ee6ed5fdd9098eb",
+      "literals": [
+        "53 milliseconds"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 92,
+      "title": "parse.ok.units should convert milliseconds to ms",
+      "status": "test",
+      "bodyHash": "6b7aead1c50c71c8",
+      "literals": [
+        "53 milliseconds",
+        "53"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 96,
+      "title": "parse.ok.units should convert msecs to ms",
+      "status": "test",
+      "bodyHash": "6857c7b656ad373b",
+      "literals": [
+        "17 msecs",
+        "17"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 100,
+      "title": "parse.ok.units should convert sec to ms",
+      "status": "test",
+      "bodyHash": "6b849787a3636fef",
+      "literals": [
+        "1 sec",
+        "1000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 104,
+      "title": "parse.ok.units should convert from min to ms",
+      "status": "test",
+      "bodyHash": "d71768f7d916c088",
+      "literals": [
+        "1 min",
+        "60000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 108,
+      "title": "parse.ok.units should convert from hr to ms",
+      "status": "test",
+      "bodyHash": "66d664923a68d642",
+      "literals": [
+        "1 hr",
+        "3600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 112,
+      "title": "parse.ok.units should convert days to ms",
+      "status": "test",
+      "bodyHash": "d7595c828f79cb5d",
+      "literals": [
+        "2 days",
+        "172800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 116,
+      "title": "parse.ok.units should convert weeks to ms",
+      "status": "test",
+      "bodyHash": "b3f2dc2ede102ca5",
+      "literals": [
+        "1 week",
+        "604800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 120,
+      "title": "parse.ok.units should convert months to ms",
+      "status": "test",
+      "bodyHash": "9b3e82de7ec04688",
+      "literals": [
+        "1 month",
+        "2629800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 124,
+      "title": "parse.ok.units should convert years to ms",
+      "status": "test",
+      "bodyHash": "71ae8fca18d45a5f",
+      "literals": [
+        "1 year",
+        "31557600000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.fraction",
+      "unitId": "parse",
+      "guaranteeId": "ok.fraction",
+      "file": "src/parse.test.ts",
+      "line": 128,
+      "title": "parse.ok.fraction should work with decimals",
+      "status": "test",
+      "bodyHash": "5db14713d8b329a5",
+      "literals": [
+        "1.5 hours",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.fraction",
+      "unitId": "parse",
+      "guaranteeId": "ok.fraction",
+      "file": "src/parse.test.ts",
+      "line": 132,
+      "title": "parse.ok.fraction should work with negative integers",
+      "status": "test",
+      "bodyHash": "e100a28cea9127a4",
+      "literals": [
+        "-100 milliseconds",
+        "-100",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.fraction",
+      "unitId": "parse",
+      "guaranteeId": "ok.fraction",
+      "file": "src/parse.test.ts",
+      "line": 136,
+      "title": "parse.ok.fraction should work with negative decimals",
+      "status": "test",
+      "bodyHash": "f12938e14044bc37",
+      "literals": [
+        "-1.5 hours",
+        "-5400000",
+        "5400000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.fraction",
+      "unitId": "parse",
+      "guaranteeId": "ok.fraction",
+      "file": "src/parse.test.ts",
+      "line": 140,
+      "title": "parse.ok.fraction should work with negative decimals starting with \".\"",
+      "status": "test",
+      "bodyHash": "1e576ce9410ee1e9",
+      "literals": [
+        "-.5 hr",
+        "-1800000",
+        "1800000"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 148,
+      "title": "parse.ok.units should throw an error, when parse(\"\")",
+      "status": "test",
+      "bodyHash": "97cb7dc869b40d97",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 154,
+      "title": "parse.ok.units should throw an error, when parseStrict(\"...>100 length string...\")",
+      "status": "test",
+      "bodyHash": "bdb27995d12fc901",
+      "literals": [
+        "▲",
+        "101"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 160,
+      "title": "parse.ok.units should throw an error, when parse(undefined)",
+      "status": "test",
+      "bodyHash": "25170fbf4ce9adc7",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 167,
+      "title": "parse.ok.units should throw an error, when parse(null)",
+      "status": "test",
+      "bodyHash": "3876911293e1c88e",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 174,
+      "title": "parse.ok.units should throw an error, when parse([])",
+      "status": "test",
+      "bodyHash": "582098857b4c46ac",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 181,
+      "title": "parse.ok.units should throw an error, when parse({})",
+      "status": "test",
+      "bodyHash": "c95a6035c747b642",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 188,
+      "title": "parse.ok.units should throw an error, when parse(NaN)",
+      "status": "test",
+      "bodyHash": "c3953e51400e93d0",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 195,
+      "title": "parse.ok.units should throw an error, when parse(Infinity)",
+      "status": "test",
+      "bodyHash": "dd54c4db6bb0729b",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "parse.ok.units",
+      "unitId": "parse",
+      "guaranteeId": "ok.units",
+      "file": "src/parse.test.ts",
+      "line": 202,
+      "title": "parse.ok.units should throw an error, when parse(-Infinity)",
+      "status": "test",
+      "bodyHash": "49854f80babbd3bb",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "guarantee-no-test",
+      "message": "ms.err.error has no test naming it",
+      "file": "src/index.ts",
+      "line": 46,
+      "unit": "ms",
+      "guarantee": "ms.err.error",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "format.ok.negative has no test naming it",
+      "file": "src/index.ts",
+      "line": 235,
+      "unit": "format",
+      "guarantee": "format.ok.negative",
+      "severity": "fail"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to constant \"86400000\" (d) and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 4,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "format commits to constant \"86400000\" (d) and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 4,
+      "unit": "format",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to constant \"2629800000\" (mo) in `mo = y / 12`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/index.ts",
+      "line": 7,
+      "unit": "format",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"years\" and the contract names it, but no linked test uses it (closest: \"10 years\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 107,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"year\" and the contract names it, but no linked test uses it (closest: \"1 year\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 108,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"yrs\" and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 109,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"yr\" and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 110,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"y\" and the contract names it, but no linked test uses it (closest: \"1y\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 111,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"months\" and the contract names it, but no linked test uses it (closest: \"10 months\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 113,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"month\" and the contract names it, but no linked test uses it (closest: \"1 month\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 114,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"mo\" and the contract names it, but no linked test uses it (closest: \"1mo\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 115,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"weeks\" and the contract names it, but no linked test uses it (closest: \"2 weeks\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 117,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"week\" and the contract names it, but no linked test uses it (closest: \"1 week\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 118,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"w\" and the contract names it, but no linked test uses it (closest: \"3w\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 119,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"days\" and the contract names it, but no linked test uses it (closest: \"2 days\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 121,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"day\" and the contract names it, but no linked test uses it (closest: \"1 day\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 122,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"d\" and the contract names it, but no linked test uses it (closest: \"2d\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 123,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"hours\" and the contract names it, but no linked test uses it (closest: \"10 hours\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 125,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"hour\" and the contract names it, but no linked test uses it (closest: \"1 hour\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 126,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"hrs\" and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 127,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"hr\" and the contract names it, but no linked test uses it (closest: \"1 hr\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 128,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"h\" and the contract names it, but no linked test uses it (closest: \"1h\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 129,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"minutes\" and the contract names it, but no linked test uses it (closest: \"10 minutes\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 131,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"minute\" and the contract names it, but no linked test uses it (closest: \"1 minute\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 132,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"mins\" and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 133,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"min\" and the contract names it, but no linked test uses it (closest: \"1 min\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 134,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"m\" and the contract names it, but no linked test uses it (closest: \"1m\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 135,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"seconds\" and the contract names it, but no linked test uses it (closest: \"10 seconds\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 137,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"second\" and the contract names it, but no linked test uses it (closest: \"1 second\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 138,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"secs\" and the contract names it, but no linked test uses it (closest: \"17 msecs\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 139,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"sec\" and the contract names it, but no linked test uses it (closest: \"1 sec\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 140,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"s\" and the contract names it, but no linked test uses it (closest: \"1s\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 141,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"milliseconds\" and the contract names it, but no linked test uses it (closest: \"53 milliseconds\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 143,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"millisecond\" and the contract names it, but no linked test uses it (closest: \"53 milliseconds\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 144,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"msecs\" and the contract names it, but no linked test uses it (closest: \"17 msecs\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 145,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "parse commits to match \"msec\" and the contract names it, but no linked test uses it (closest: \"17 msecs\"); a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 146,
+      "unit": "parse",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to boundary \"2629800000\" (mo) in `msAbs >= mo`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/index.ts",
+      "line": 206,
+      "unit": "format",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "format commits to boundary \"86400000\" (d) and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 212,
+      "unit": "format",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to constant \"1.5\" in `n * 1.5`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/index.ts",
+      "line": 254,
+      "unit": "format",
+      "severity": "warn"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to constant \"1000\" (s) in `s = 1000`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 1,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to constant \"3600000\" (h) in `h = m * 60`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 3,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "parse commits to constant \"604800000\" (w) in `w = d * 7`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 5,
+      "unit": "parse",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to constant \"604800000\" (w) in `w = d * 7`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 5,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "parse commits to constant \"2629800000\" (mo) in `mo = y / 12`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 7,
+      "unit": "parse",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to output \"mo\" in ``${Math.round(ms / mo)}mo``, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 178,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to output \"w\" in ``${Math.round(ms / w)}w``, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 181,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to output \"year\" in `'year'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 204,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to output \"month\" in `'month'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 207,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to boundary \"604800000\" (w) in `msAbs >= w`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 209,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to output \"week\" in `'week'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 210,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to boundary \"3600000\" (h) in `msAbs >= h`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 215,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to boundary \"1000\" (s) in `msAbs >= s`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 221,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to output \"second\" in `'second'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 222,
+      "unit": "format",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "format commits to output \"ms\" in ``${ms} ms``, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/index.ts",
+      "line": 224,
+      "unit": "format",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 4,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 13,
+    "guaranteesWithoutTest": 2,
+    "tests": 167,
+    "orphanTests": 0,
+    "unlinkedTests": 0,
+    "findings": {
+      "fail": 2,
+      "warn": 39,
+      "info": 16
+    }
+  }
+}

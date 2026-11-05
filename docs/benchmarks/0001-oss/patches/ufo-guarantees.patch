@@ -1,0 +1,87 @@
+diff --git a/src/parse.ts b/src/parse.ts
+index b2a2e7e..940a75a 100644
+--- a/src/parse.ts
++++ b/src/parse.ts
+@@ -47,6 +47,9 @@ export interface ParsedHost {
+  * @param [input] - The URL to parse.
+  * @param [defaultProto] - The default protocol to use if the input doesn't have one.
+  * @returns A parsed URL object.
++ * @guarantee ok.full for "http://foo.com/foo?test=123#token" returns protocol "http:", auth "", host "foo.com", pathname "/foo", search "?test=123" and hash "#token"
++ * @guarantee ok.no-protocol for an input with no protocol ("foo.com/foo?test=123#token") returns only pathname "foo.com/foo", search and hash
++ * @guarantee ok.default-proto with `defaultProto` "https://" an input with no protocol is parsed as if it started with it: protocol "https:", host "foo.com", pathname "/foo"
+  */
+ export function parseURL(input = "", defaultProto?: string): ParsedURL {
+   const _specialProtoMatch = input.match(
+@@ -108,6 +111,7 @@ export function parseURL(input = "", defaultProto?: string): ParsedURL {
+  *
+  * @param [input] - The URL to parse.
+  * @returns An object with three properties: `pathname`, `search`, and `hash`.
++ * @guarantee ok.split splits `input` at the first "?" and the first "#" into pathname, search (with "?") and hash (with "#"): "http://foo.com/foo?test=123#token" gives "http://foo.com/foo", "?test=123", "#token"
+  */
+ export function parsePath(input = ""): ParsedPath {
+   const [pathname = "", search = "", hash = ""] = (
+@@ -129,6 +133,7 @@ export function parsePath(input = ""): ParsedPath {
+  *
+  * @param [input] - The URL to parse.
+  * @returns An object with two properties: username and password.
++ * @guarantee ok.split for "username:password" returns username and password, each decoded
+  */
+ export function parseAuth(input = ""): ParsedAuth {
+   const [username, password] = input.split(":");
+@@ -153,6 +158,7 @@ export function parseAuth(input = ""): ParsedAuth {
+  * @param [input] - The URL to parse.
+  * @returns A function that takes a string and returns an object with two properties: `hostname` and
+  * `port`.
++ * @guarantee ok.split returns hostname and port: "foo.com:8080" gives hostname "foo.com" and port "8080"
+  */
+ export function parseHost(input = ""): ParsedHost {
+   const [hostname, port] = (input.match(/([^/:]*):?(\d+)?/) || []).splice(1);
+@@ -178,6 +184,7 @@ export function parseHost(input = ""): ParsedHost {
+  *
+  * @param [parsed] - The parsed URL
+  * @returns A stringified URL.
++ * @guarantee ok.roundtrip joins protocol, auth, host, pathname, search and hash back into a URL: after changing host to "bar.com" in the result of parseURL("http://foo.com/foo?test=123#token") it returns "http://bar.com/foo?test=123#token"
+  */
+ export function stringifyParsedURL(parsed: Partial<ParsedURL>): string {
+   const pathname = parsed.pathname || "";
+@@ -216,6 +223,8 @@ const FILENAME_REGEX = /\/([^/]+)$/;
+  *
+  * @param [input] - The URL to parse.
+  * @param [opts]  - Options to use while parsing
++ * @guarantee ok.last-segment returns the last segment of the path of `input` ("http://example.com/path/to/filename.ext" gives "filename.ext")
++ * @guarantee ok.strict with `strict` true, returns the last segment only when it ends with an extension, else undefined ("/path/to/.hidden-file" gives undefined)
+  */
+ export function parseFilename(
+   input = "",
+diff --git a/src/query.ts b/src/query.ts
+index 6fbcaaa..561cf79 100644
+--- a/src/query.ts
++++ b/src/query.ts
+@@ -43,6 +43,9 @@ export type ParsedQuery = Record<string, string | string[]>;
+  * The `__proto__` and `constructor` keys are ignored to prevent prototype pollution.
+  *
+  * @group Query_utils
++ * @guarantee ok.pairs parses and decodes "key=value" pairs separated by "&" into an object ("?foo=bar&baz=qux" gives foo "bar" and baz "qux")
++ * @guarantee ok.leading-question accepts the query with or without a leading "?"
++ * @guarantee ok.repeated a key that appears several times gives an array of its values in order ("tags=javascript&tags=web&tags=dev" gives tags ["javascript", "web", "dev"])
+  */
+ export function parseQuery<T extends ParsedQuery = ParsedQuery>(
+   parametersString = "",
+@@ -90,6 +93,8 @@ export function parseQuery<T extends ParsedQuery = ParsedQuery>(
+  * ```
+  *
+  * @group Query_utils
++ * @guarantee ok.pair encodes `key` and `value` as "key=value", spaces in the value as "+" ("message", "Hello World" gives "message=Hello+World")
++ * @guarantee ok.array an array value gives one "key=value" pair per element joined by "&" ("tags=javascript&tags=web&tags=dev")
+  */
+ export function encodeQueryItem(
+   key: string,
+@@ -128,6 +133,8 @@ export function encodeQueryItem(
+  * ```
+  *
+  * @group Query_utils
++ * @guarantee ok.pairs encodes each entry of `query` as a query item and joins them with "&" (foo "bar", baz "qux" gives "foo=bar&baz=qux")
++ * @guarantee ok.undefined an entry whose value is undefined is left out (foo "bar", baz undefined gives "foo=bar")
+  */
+ export function stringifyQuery(query: QueryObject): string {
+   return Object.keys(query)

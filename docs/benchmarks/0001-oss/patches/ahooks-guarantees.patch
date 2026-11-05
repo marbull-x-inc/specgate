@@ -1,0 +1,50 @@
+diff --git a/packages/hooks/src/useBoolean/index.ts b/packages/hooks/src/useBoolean/index.ts
+index d0a2b7a..2df6491 100644
+--- a/packages/hooks/src/useBoolean/index.ts
++++ b/packages/hooks/src/useBoolean/index.ts
+@@ -8,6 +8,10 @@ export interface Actions {
+   toggle: () => void;
+ }
+ 
++/**
++ * @guarantee ok.default the state starts at `defaultValue`, false when it is not given
++ * @guarantee ok.actions `toggle` switches the state, `set` sets it to the given value, `setTrue` to true and `setFalse` to false
++ */
+ export default function useBoolean(defaultValue = false): [boolean, Actions] {
+   const [state, { toggle, set }] = useToggle(!!defaultValue);
+ 
+diff --git a/packages/hooks/src/useCounter/index.ts b/packages/hooks/src/useCounter/index.ts
+index a3cb34f..6c2cf70 100644
+--- a/packages/hooks/src/useCounter/index.ts
++++ b/packages/hooks/src/useCounter/index.ts
+@@ -28,6 +28,13 @@ function getTargetValue(val: number, options: Options = {}) {
+   return target;
+ }
+ 
++/**
++ * @guarantee ok.initial the value starts at `initialValue`, 0 when it is not given
++ * @guarantee ok.inc `inc` adds `delta` to the value, 1 when it is not given; `dec` subtracts it
++ * @guarantee ok.bounds the value never goes above `max` or below `min`
++ * @guarantee ok.set `set` sets the value to a number, or to what a function of the current value returns
++ * @guarantee ok.reset `reset` sets the value back to `initialValue`
++ */
+ function useCounter(initialValue: number = 0, options: Options = {}) {
+   const { min, max } = options;
+ 
+diff --git a/packages/hooks/src/useToggle/index.ts b/packages/hooks/src/useToggle/index.ts
+index 3a9c302..ded08e1 100644
+--- a/packages/hooks/src/useToggle/index.ts
++++ b/packages/hooks/src/useToggle/index.ts
+@@ -7,6 +7,12 @@ export interface Actions<T> {
+   toggle: () => void;
+ }
+ 
++/**
++ * @guarantee ok.default the state starts at `defaultValue`, false when it is not given
++ * @guarantee ok.toggle `toggle` switches the state between `defaultValue` and `reverseValue`
++ * @guarantee ok.set `set` sets the state to the given value
++ * @guarantee ok.left-right `setLeft` sets the state to `defaultValue`; `setRight` sets it to `reverseValue`, or to the reverse of `defaultValue` when `reverseValue` is not given
++ */
+ function useToggle<T = boolean>(): [boolean, Actions<T>];
+ 
+ function useToggle<T>(defaultValue: T): [T, Actions<T>];

@@ -1,0 +1,6 @@
+[
+ {"id":"F11-pascalCase-normalize","file":"src/index.ts","line":120,"from":"\"normalize\"","to":"\"normalize_x\""},
+ {"id":"F12-camelCase-normalize","file":"src/index.ts","line":139,"from":"\"normalize\"","to":"\"normalize_x\""},
+ {"id":"F13-trainCase-normalize","file":"src/index.ts","line":205,"from":"\"normalize\"","to":"\"normalize_x\""},
+ {"id":"F14-titleCase-normalize","file":"src/index.ts","line":234,"from":"\"normalize\"","to":"\"normalize_x\""}
+]

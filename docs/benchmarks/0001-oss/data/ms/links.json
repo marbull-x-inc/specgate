@@ -1,0 +1,1171 @@
+[
+  {
+    "file": "src/index.test.ts",
+    "line": 5,
+    "title": "should not throw an error",
+    "key": "ms.ok.parse",
+    "reason": "string input does not throw"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 11,
+    "title": "should preserve ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 15,
+    "title": "should convert from m to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 19,
+    "title": "should convert from h to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 23,
+    "title": "should convert d to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 27,
+    "title": "should convert w to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 31,
+    "title": "should convert s to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 35,
+    "title": "should convert ms to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 39,
+    "title": "should convert y to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 43,
+    "title": "should work with decimals",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 47,
+    "title": "should work with multiple spaces",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 51,
+    "title": "should return NaN if invalid",
+    "key": "ms.ok.parse",
+    "reason": "invalid strings give NaN; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 60,
+    "title": "should be case-insensitive",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 64,
+    "title": "should work with numbers starting with .",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 68,
+    "title": "should work with negative integers",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 72,
+    "title": "should work with negative decimals",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 77,
+    "title": "should work with negative decimals starting with \".\"",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 85,
+    "title": "should not throw an error",
+    "key": "ms.ok.parse",
+    "reason": "string input does not throw"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 91,
+    "title": "should convert milliseconds to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 95,
+    "title": "should convert msecs to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 99,
+    "title": "should convert sec to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 103,
+    "title": "should convert from min to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 107,
+    "title": "should convert from hr to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 111,
+    "title": "should convert days to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 115,
+    "title": "should convert weeks to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 119,
+    "title": "should convert years to ms",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 123,
+    "title": "should work with decimals",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 127,
+    "title": "should work with negative integers",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 131,
+    "title": "should work with negative decimals",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 135,
+    "title": "should work with negative decimals starting with \".\"",
+    "key": "ms.ok.parse",
+    "reason": "string input parsed to a millisecond number"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 143,
+    "title": "should not throw an error",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 149,
+    "title": "should support milliseconds",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 155,
+    "title": "should support seconds",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 165,
+    "title": "should support minutes",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 175,
+    "title": "should support hours",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 185,
+    "title": "should support days",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 195,
+    "title": "should support weeks",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 207,
+    "title": "should support months",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 225,
+    "title": "should support years",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 243,
+    "title": "should round",
+    "key": "ms.ok.long",
+    "reason": "number with long:true formatted as written-out unit"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 253,
+    "title": "should not throw an error",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 259,
+    "title": "should support milliseconds",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 265,
+    "title": "should support seconds",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 273,
+    "title": "should support minutes",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 281,
+    "title": "should support hours",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 289,
+    "title": "should support days",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 297,
+    "title": "should support weeks",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 305,
+    "title": "should support months",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 315,
+    "title": "should support years",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 325,
+    "title": "should round",
+    "key": "ms.ok.format",
+    "reason": "number formatted with short suffix"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 335,
+    "title": "should throw an error, when ms(\"\")",
+    "key": "ms.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 342,
+    "title": "should throw an error, when ms(undefined)",
+    "key": "ms.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 349,
+    "title": "should throw an error, when ms(null)",
+    "key": "ms.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 356,
+    "title": "should throw an error, when ms([])",
+    "key": "ms.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 363,
+    "title": "should throw an error, when ms({})",
+    "key": "ms.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 370,
+    "title": "should throw an error, when ms(NaN)",
+    "key": "ms.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 376,
+    "title": "should throw an error, when ms(Infinity)",
+    "key": "ms.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/index.test.ts",
+    "line": 382,
+    "title": "should throw an error, when ms(-Infinity)",
+    "key": "ms.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 5,
+    "title": "should not throw an error",
+    "key": "parse.ok.units",
+    "reason": "'1m' does not throw; no direct match, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 11,
+    "title": "should preserve ms",
+    "key": "parse.ok.default-unit",
+    "reason": "'100' gives 100"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 15,
+    "title": "should convert from m to ms",
+    "key": "parse.ok.values",
+    "reason": "'1m' gives 60000"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 19,
+    "title": "should convert from h to ms",
+    "key": "parse.ok.values",
+    "reason": "'1h' gives 3600000"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 23,
+    "title": "should convert d to ms",
+    "key": "parse.ok.values",
+    "reason": "'2d' gives 172800000"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 27,
+    "title": "should convert w to ms",
+    "key": "parse.ok.units",
+    "reason": "'3w' accepted (week value not in ok.values)"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 31,
+    "title": "should convert s to ms",
+    "key": "parse.ok.values",
+    "reason": "'1s' gives 1000"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 35,
+    "title": "should convert ms to ms",
+    "key": "parse.ok.units",
+    "reason": "'100ms' accepted as milliseconds"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 39,
+    "title": "should convert y to ms",
+    "key": "parse.ok.values",
+    "reason": "'1y' gives 31557600000"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 43,
+    "title": "should work with ms",
+    "key": "parse.ok.fraction",
+    "reason": "'1.5h' fractional value"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 47,
+    "title": "should work with multiple spaces",
+    "key": "parse.ok.case",
+    "reason": "multiple spaces before the unit"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 51,
+    "title": "should return NaN if invalid",
+    "key": "parse.ok.units",
+    "reason": "invalid strings give NaN; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 57,
+    "title": "should be case-insensitive",
+    "key": "parse.ok.case",
+    "reason": "mixed-case unit names"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 65,
+    "title": "should work with numbers starting with .",
+    "key": "parse.ok.fraction",
+    "reason": "'.5ms' gives 0.5"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 69,
+    "title": "should work with negative integers",
+    "key": "parse.ok.fraction",
+    "reason": "'-100ms' negative value"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 73,
+    "title": "should work with negative decimals",
+    "key": "parse.ok.fraction",
+    "reason": "negative decimals"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 78,
+    "title": "should work with negative decimals starting with \".\"",
+    "key": "parse.ok.fraction",
+    "reason": "'-.5h' negative fraction"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 86,
+    "title": "should not throw an error",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted (does not throw)"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 92,
+    "title": "should convert milliseconds to ms",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted and converted"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 96,
+    "title": "should convert msecs to ms",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted and converted"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 100,
+    "title": "should convert sec to ms",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted and converted"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 104,
+    "title": "should convert from min to ms",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted and converted"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 108,
+    "title": "should convert from hr to ms",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted and converted"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 112,
+    "title": "should convert days to ms",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted and converted"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 116,
+    "title": "should convert weeks to ms",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted and converted"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 120,
+    "title": "should convert months to ms",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted and converted"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 124,
+    "title": "should convert years to ms",
+    "key": "parse.ok.units",
+    "reason": "long unit name accepted and converted"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 128,
+    "title": "should work with decimals",
+    "key": "parse.ok.fraction",
+    "reason": "'1.5 hours' fractional value"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 132,
+    "title": "should work with negative integers",
+    "key": "parse.ok.fraction",
+    "reason": "negative integer with long unit"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 136,
+    "title": "should work with negative decimals",
+    "key": "parse.ok.fraction",
+    "reason": "negative decimal with long unit"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 140,
+    "title": "should work with negative decimals starting with \".\"",
+    "key": "parse.ok.fraction",
+    "reason": "'-.5 hr' negative fraction"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 148,
+    "title": "should throw an error, when parse(\"\")",
+    "key": "parse.ok.units",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 154,
+    "title": "should throw an error, when parseStrict(\"...>100 length string...\")",
+    "key": "parse.ok.units",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 160,
+    "title": "should throw an error, when parse(undefined)",
+    "key": "parse.ok.units",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 167,
+    "title": "should throw an error, when parse(null)",
+    "key": "parse.ok.units",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 174,
+    "title": "should throw an error, when parse([])",
+    "key": "parse.ok.units",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 181,
+    "title": "should throw an error, when parse({})",
+    "key": "parse.ok.units",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 188,
+    "title": "should throw an error, when parse(NaN)",
+    "key": "parse.ok.units",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 195,
+    "title": "should throw an error, when parse(Infinity)",
+    "key": "parse.ok.units",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse.test.ts",
+    "line": 202,
+    "title": "should throw an error, when parse(-Infinity)",
+    "key": "parse.ok.units",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 5,
+    "title": "should not throw an error",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 11,
+    "title": "should preserve ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 15,
+    "title": "should convert from m to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 19,
+    "title": "should convert from h to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 23,
+    "title": "should convert d to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 27,
+    "title": "should convert w to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 31,
+    "title": "should convert s to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 35,
+    "title": "should convert ms to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 39,
+    "title": "should convert mo to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 42,
+    "title": "should convert y to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 46,
+    "title": "should work with ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 50,
+    "title": "should work with multiple spaces",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 54,
+    "title": "should return NaN if invalid",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid strings give NaN; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 63,
+    "title": "should be case-insensitive",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 76,
+    "title": "should work with numbers starting with .",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 80,
+    "title": "should work with negative integers",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 84,
+    "title": "should work with negative decimals",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 89,
+    "title": "should work with negative decimals starting with \".\"",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 97,
+    "title": "should not throw an error",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 103,
+    "title": "should convert milliseconds to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 107,
+    "title": "should convert msecs to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 111,
+    "title": "should convert sec to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 115,
+    "title": "should convert from min to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 119,
+    "title": "should convert from hr to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 123,
+    "title": "should convert days to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 127,
+    "title": "should convert weeks to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 131,
+    "title": "should convert months to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 135,
+    "title": "should convert years to ms",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 139,
+    "title": "should work with decimals",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 143,
+    "title": "should work with negative integers",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 147,
+    "title": "should work with negative decimals",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 151,
+    "title": "should work with negative decimals starting with \".\"",
+    "key": "parseStrict.ok.parse",
+    "reason": "parses like parse"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 159,
+    "title": "should throw an error, when parseStrict(\"\")",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 166,
+    "title": "should throw an error, when parseStrict(\"...>100 length string...\")",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 173,
+    "title": "should throw an error, when parseStrict(undefined)",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 180,
+    "title": "should throw an error, when parseStrict(null)",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 187,
+    "title": "should throw an error, when parseStrict([])",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 194,
+    "title": "should throw an error, when parseStrict({})",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 201,
+    "title": "should throw an error, when parseStrict(NaN)",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid strings give NaN; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 208,
+    "title": "should throw an error, when parseStrict(Infinity)",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/parse-strict.test.ts",
+    "line": 215,
+    "title": "should throw an error, when parseStrict(-Infinity)",
+    "key": "parseStrict.ok.parse",
+    "reason": "invalid input throws; no matching guarantee, only ok.*"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 7,
+    "title": "should not throw an error",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 13,
+    "title": "should support milliseconds",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 19,
+    "title": "should support seconds",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 29,
+    "title": "should support minutes",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 39,
+    "title": "should support hours",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 49,
+    "title": "should support days",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 61,
+    "title": "should support weeks",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 73,
+    "title": "should support months",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 95,
+    "title": "should support years",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 117,
+    "title": "should round",
+    "key": "format.ok.long",
+    "reason": "long:true writes unit out, plural when not 1"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 127,
+    "title": "should not throw an error",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 133,
+    "title": "should support milliseconds",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 139,
+    "title": "should support seconds",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 147,
+    "title": "should support minutes",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 155,
+    "title": "should support hours",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 163,
+    "title": "should support days",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 171,
+    "title": "should support weeks",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 179,
+    "title": "should support months",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 189,
+    "title": "should support years",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 199,
+    "title": "should round",
+    "key": "format.ok.short",
+    "reason": "largest fitting unit with short suffix"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 209,
+    "title": "should throw an error, when format(\"\")",
+    "key": "format.ok.short",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 216,
+    "title": "should throw an error, when format(undefined)",
+    "key": "format.ok.short",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 223,
+    "title": "should throw an error, when format(null)",
+    "key": "format.ok.short",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 230,
+    "title": "should throw an error, when format([])",
+    "key": "format.ok.short",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 237,
+    "title": "should throw an error, when format({})",
+    "key": "format.ok.short",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 244,
+    "title": "should throw an error, when format(NaN)",
+    "key": "format.ok.short",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 250,
+    "title": "should throw an error, when format(Infinity)",
+    "key": "format.ok.short",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  },
+  {
+    "file": "src/format.test.ts",
+    "line": 256,
+    "title": "should throw an error, when format(-Infinity)",
+    "key": "format.ok.short",
+    "reason": "invalid input throws; no matching guarantee, first ok.*"
+  }
+]

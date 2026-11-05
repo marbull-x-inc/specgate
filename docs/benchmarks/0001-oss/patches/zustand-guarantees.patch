@@ -1,0 +1,68 @@
+diff --git a/src/middleware/persist.ts b/src/middleware/persist.ts
+index 56e4684..7be122d 100644
+--- a/src/middleware/persist.ts
++++ b/src/middleware/persist.ts
+@@ -28,6 +28,10 @@ type JsonStorageOptions = {
+   replacer?: (key: string, value: unknown) => unknown
+ }
+ 
++/**
++ * @guarantee ok.json reads values with `JSON.parse` and writes them with `JSON.stringify` through the storage the getter returns
++ * @guarantee ok.lazy the getter is called only when the storage is first accessed, not when `createJSONStorage` is called
++ */
+ export function createJSONStorage<S, R = unknown>(
+   getStorage: () => StateStorage<R>,
+   options?: JsonStorageOptions,
+@@ -400,4 +404,15 @@ type PersistImpl = <T>(
+   options: PersistOptions<T, T>,
+ ) => StateCreator<T, [], []>
+ 
++/**
++ * @guarantee ok.name the state is written to the storage under the key `name`
++ * @guarantee ok.shape the stored value holds the state and the `version`
++ * @guarantee ok.default-storage without `storage`, uses `createJSONStorage` over `localStorage`
++ * @guarantee ok.partialize with `partialize`, only the state it returns is persisted
++ * @guarantee ok.version a stored state whose version differs from `version` is not used as is
++ * @guarantee ok.migrate when the versions differ, `migrate` is called with the persisted state and its version, and its result is used
++ * @guarantee ok.merge without `merge`, the persisted state is shallow-merged into the current state on rehydration
++ * @guarantee ok.skip-hydration `skipHydration` defaults to false; when true, the state is not rehydrated on initialisation until `rehydrate` is called
++ * @guarantee ok.on-rehydrate `onRehydrateStorage` is called before rehydration, and the function it returns is called after it
++ */
+ export const persist = persistImpl as unknown as Persist
+diff --git a/src/vanilla.ts b/src/vanilla.ts
+index a20f0f8..6c767b8 100644
+--- a/src/vanilla.ts
++++ b/src/vanilla.ts
+@@ -96,5 +96,13 @@ const createStoreImpl: CreateStoreImpl = (createState) => {
+   return api as any
+ }
+ 
++/**
++ * @guarantee ok.api returns a store exposing `setState`, `getState`, `getInitialState` and `subscribe`
++ * @guarantee ok.initial `getState` and `getInitialState` return the state the state creator returned, before any update
++ * @guarantee ok.merge `setState` with an object shallow-merges it into the current state by default
++ * @guarantee ok.replace `setState` with `replace` true replaces the state with the given one
++ * @guarantee ok.updater `setState` with a function calls it with the current state and merges what it returns
++ * @guarantee ok.subscribe a listener passed to `subscribe` is called whenever the state updates, and the function `subscribe` returns removes it
++ */
+ export const createStore = ((createState) =>
+   createState ? createStoreImpl(createState) : createStoreImpl) as CreateStore
+diff --git a/src/vanilla/shallow.ts b/src/vanilla/shallow.ts
+index 2621ef8..274399c 100644
+--- a/src/vanilla/shallow.ts
++++ b/src/vanilla/shallow.ts
+@@ -45,6 +45,14 @@ const compareIterables = (
+   return !!nextA.done && !!nextB.done
+ }
+ 
++/**
++ * @guarantee ok.primitives for primitive values returns true when they are the same value and false otherwise, like `Object.is`
++ * @guarantee ok.objects for two objects returns true when they have the same top-level keys and each top-level value is the same by reference
++ * @guarantee ok.nested returns false when a top-level value is a different object with equal contents
++ * @guarantee ok.prototype returns false when the two objects have different prototypes
++ * @guarantee ok.sets for two Sets returns true when they hold the same entries
++ * @guarantee ok.maps for two Maps returns true when they hold the same keys mapped to the same values
++ */
+ export function shallow<T>(valueA: T, valueB: T): boolean {
+   if (Object.is(valueA, valueB)) {
+     return true

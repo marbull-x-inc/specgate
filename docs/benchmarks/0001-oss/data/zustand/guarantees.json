@@ -1,0 +1,49 @@
+[
+  {
+    "file": "src/vanilla.ts",
+    "symbol": "createStore",
+    "tags": [
+      "@guarantee ok.api returns a store exposing `setState`, `getState`, `getInitialState` and `subscribe`",
+      "@guarantee ok.initial `getState` and `getInitialState` return the state the state creator returned, before any update",
+      "@guarantee ok.merge `setState` with an object shallow-merges it into the current state by default",
+      "@guarantee ok.replace `setState` with `replace` true replaces the state with the given one",
+      "@guarantee ok.updater `setState` with a function calls it with the current state and merges what it returns",
+      "@guarantee ok.subscribe a listener passed to `subscribe` is called whenever the state updates, and the function `subscribe` returns removes it"
+    ]
+  },
+  {
+    "file": "src/vanilla/shallow.ts",
+    "symbol": "shallow",
+    "tags": [
+      "@guarantee ok.primitives for primitive values returns true when they are the same value and false otherwise, like `Object.is`",
+      "@guarantee ok.objects for two objects returns true when they have the same top-level keys and each top-level value is the same by reference",
+      "@guarantee ok.nested returns false when a top-level value is a different object with equal contents",
+      "@guarantee ok.prototype returns false when the two objects have different prototypes",
+      "@guarantee ok.sets for two Sets returns true when they hold the same entries",
+      "@guarantee ok.maps for two Maps returns true when they hold the same keys mapped to the same values"
+    ]
+  },
+  {
+    "file": "src/middleware/persist.ts",
+    "symbol": "createJSONStorage",
+    "tags": [
+      "@guarantee ok.json reads values with `JSON.parse` and writes them with `JSON.stringify` through the storage the getter returns",
+      "@guarantee ok.lazy the getter is called only when the storage is first accessed, not when `createJSONStorage` is called"
+    ]
+  },
+  {
+    "file": "src/middleware/persist.ts",
+    "symbol": "persist",
+    "tags": [
+      "@guarantee ok.name the state is written to the storage under the key `name`",
+      "@guarantee ok.shape the stored value holds the state and the `version`",
+      "@guarantee ok.default-storage without `storage`, uses `createJSONStorage` over `localStorage`",
+      "@guarantee ok.partialize with `partialize`, only the state it returns is persisted",
+      "@guarantee ok.version a stored state whose version differs from `version` is not used as is",
+      "@guarantee ok.migrate when the versions differ, `migrate` is called with the persisted state and its version, and its result is used",
+      "@guarantee ok.merge without `merge`, the persisted state is shallow-merged into the current state on rehydration",
+      "@guarantee ok.skip-hydration `skipHydration` defaults to false; when true, the state is not rehydrated on initialisation until `rehydrate` is called",
+      "@guarantee ok.on-rehydrate `onRehydrateStorage` is called before rehydration, and the function it returns is called after it"
+    ]
+  }
+]

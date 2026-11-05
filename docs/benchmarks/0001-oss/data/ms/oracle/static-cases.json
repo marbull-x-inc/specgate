@@ -1,0 +1,488 @@
+[
+ {
+  "id": "F2-parse-constant-86400000",
+  "finding": 2,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 4,
+  "from": "h * 24",
+  "to": "h * 25"
+ },
+ {
+  "id": "F3-format-constant-86400000",
+  "finding": 3,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 4,
+  "from": "h * 24",
+  "to": "h * 25"
+ },
+ {
+  "id": "F4-format-constant-2629800000",
+  "finding": 4,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 7,
+  "from": "y / 12",
+  "to": "y / 13"
+ },
+ {
+  "id": "F5-parse-match-years",
+  "finding": 5,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 107,
+  "from": "'years'",
+  "to": "'years_x'"
+ },
+ {
+  "id": "F6-parse-match-year",
+  "finding": 6,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 108,
+  "from": "'year'",
+  "to": "'year_x'"
+ },
+ {
+  "id": "F7-parse-match-yrs",
+  "finding": 7,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 109,
+  "from": "'yrs'",
+  "to": "'yrs_x'"
+ },
+ {
+  "id": "F8-parse-match-yr",
+  "finding": 8,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 110,
+  "from": "'yr'",
+  "to": "'yr_x'"
+ },
+ {
+  "id": "F9-parse-match-y",
+  "finding": 9,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 111,
+  "from": "'y'",
+  "to": "'y_x'"
+ },
+ {
+  "id": "F10-parse-match-months",
+  "finding": 10,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 113,
+  "from": "'months'",
+  "to": "'months_x'"
+ },
+ {
+  "id": "F11-parse-match-month",
+  "finding": 11,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 114,
+  "from": "'month'",
+  "to": "'month_x'"
+ },
+ {
+  "id": "F12-parse-match-mo",
+  "finding": 12,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 115,
+  "from": "'mo'",
+  "to": "'mo_x'"
+ },
+ {
+  "id": "F13-parse-match-weeks",
+  "finding": 13,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 117,
+  "from": "'weeks'",
+  "to": "'weeks_x'"
+ },
+ {
+  "id": "F14-parse-match-week",
+  "finding": 14,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 118,
+  "from": "'week'",
+  "to": "'week_x'"
+ },
+ {
+  "id": "F15-parse-match-w",
+  "finding": 15,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 119,
+  "from": "'w'",
+  "to": "'w_x'"
+ },
+ {
+  "id": "F16-parse-match-days",
+  "finding": 16,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 121,
+  "from": "'days'",
+  "to": "'days_x'"
+ },
+ {
+  "id": "F17-parse-match-day",
+  "finding": 17,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 122,
+  "from": "'day'",
+  "to": "'day_x'"
+ },
+ {
+  "id": "F18-parse-match-d",
+  "finding": 18,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 123,
+  "from": "'d'",
+  "to": "'d_x'"
+ },
+ {
+  "id": "F19-parse-match-hours",
+  "finding": 19,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 125,
+  "from": "'hours'",
+  "to": "'hours_x'"
+ },
+ {
+  "id": "F20-parse-match-hour",
+  "finding": 20,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 126,
+  "from": "'hour'",
+  "to": "'hour_x'"
+ },
+ {
+  "id": "F21-parse-match-hrs",
+  "finding": 21,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 127,
+  "from": "'hrs'",
+  "to": "'hrs_x'"
+ },
+ {
+  "id": "F22-parse-match-hr",
+  "finding": 22,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 128,
+  "from": "'hr'",
+  "to": "'hr_x'"
+ },
+ {
+  "id": "F23-parse-match-h",
+  "finding": 23,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 129,
+  "from": "'h'",
+  "to": "'h_x'"
+ },
+ {
+  "id": "F24-parse-match-minutes",
+  "finding": 24,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 131,
+  "from": "'minutes'",
+  "to": "'minutes_x'"
+ },
+ {
+  "id": "F25-parse-match-minute",
+  "finding": 25,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 132,
+  "from": "'minute'",
+  "to": "'minute_x'"
+ },
+ {
+  "id": "F26-parse-match-mins",
+  "finding": 26,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 133,
+  "from": "'mins'",
+  "to": "'mins_x'"
+ },
+ {
+  "id": "F27-parse-match-min",
+  "finding": 27,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 134,
+  "from": "'min'",
+  "to": "'min_x'"
+ },
+ {
+  "id": "F28-parse-match-m",
+  "finding": 28,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 135,
+  "from": "'m'",
+  "to": "'m_x'"
+ },
+ {
+  "id": "F29-parse-match-seconds",
+  "finding": 29,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 137,
+  "from": "'seconds'",
+  "to": "'seconds_x'"
+ },
+ {
+  "id": "F30-parse-match-second",
+  "finding": 30,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 138,
+  "from": "'second'",
+  "to": "'second_x'"
+ },
+ {
+  "id": "F31-parse-match-secs",
+  "finding": 31,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 139,
+  "from": "'secs'",
+  "to": "'secs_x'"
+ },
+ {
+  "id": "F32-parse-match-sec",
+  "finding": 32,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 140,
+  "from": "'sec'",
+  "to": "'sec_x'"
+ },
+ {
+  "id": "F33-parse-match-s",
+  "finding": 33,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 141,
+  "from": "'s'",
+  "to": "'s_x'"
+ },
+ {
+  "id": "F34-parse-match-milliseconds",
+  "finding": 34,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 143,
+  "from": "'milliseconds'",
+  "to": "'milliseconds_x'"
+ },
+ {
+  "id": "F35-parse-match-millisecond",
+  "finding": 35,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 144,
+  "from": "'millisecond'",
+  "to": "'millisecond_x'"
+ },
+ {
+  "id": "F36-parse-match-msecs",
+  "finding": 36,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 145,
+  "from": "'msecs'",
+  "to": "'msecs_x'"
+ },
+ {
+  "id": "F37-parse-match-msec",
+  "finding": 37,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 146,
+  "from": "'msec'",
+  "to": "'msec_x'"
+ },
+ {
+  "id": "F38-format-boundary-2629800000",
+  "finding": 38,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 206,
+  "from": ">=",
+  "to": ">"
+ },
+ {
+  "id": "F39-format-boundary-86400000",
+  "finding": 39,
+  "rule": "decision-untested",
+  "file": "src/index.ts",
+  "line": 212,
+  "from": ">=",
+  "to": ">"
+ },
+ {
+  "id": "F40-format-constant-1.5",
+  "finding": 40,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 254,
+  "from": "1.5",
+  "to": "2.5"
+ },
+ {
+  "id": "F42-format-constant-1000",
+  "finding": 42,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 1,
+  "from": "1000",
+  "to": "1001"
+ },
+ {
+  "id": "F43-format-constant-3600000",
+  "finding": 43,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 3,
+  "from": "m * 60",
+  "to": "m * 61"
+ },
+ {
+  "id": "F44-parse-constant-604800000",
+  "finding": 44,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 5,
+  "from": "d * 7",
+  "to": "d * 8"
+ },
+ {
+  "id": "F45-format-constant-604800000",
+  "finding": 45,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 5,
+  "from": "d * 7",
+  "to": "d * 8"
+ },
+ {
+  "id": "F46-parse-constant-2629800000",
+  "finding": 46,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 7,
+  "from": "y / 12",
+  "to": "y / 13"
+ },
+ {
+  "id": "F47-format-output-mo",
+  "finding": 47,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 178,
+  "from": "}mo`",
+  "to": "}mo_x`"
+ },
+ {
+  "id": "F48-format-output-w",
+  "finding": 48,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 181,
+  "from": "}w`",
+  "to": "}w_x`"
+ },
+ {
+  "id": "F49-format-output-year",
+  "finding": 49,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 204,
+  "from": "'year'",
+  "to": "'year_x'"
+ },
+ {
+  "id": "F50-format-output-month",
+  "finding": 50,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 207,
+  "from": "'month'",
+  "to": "'month_x'"
+ },
+ {
+  "id": "F51-format-boundary-604800000",
+  "finding": 51,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 209,
+  "from": ">=",
+  "to": ">"
+ },
+ {
+  "id": "F52-format-output-week",
+  "finding": 52,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 210,
+  "from": "'week'",
+  "to": "'week_x'"
+ },
+ {
+  "id": "F53-format-boundary-3600000",
+  "finding": 53,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 215,
+  "from": ">=",
+  "to": ">"
+ },
+ {
+  "id": "F54-format-boundary-1000",
+  "finding": 54,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 221,
+  "from": ">=",
+  "to": ">"
+ },
+ {
+  "id": "F55-format-output-second",
+  "finding": 55,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 222,
+  "from": "'second'",
+  "to": "'second_x'"
+ },
+ {
+  "id": "F56-format-output-ms",
+  "finding": 56,
+  "rule": "decision-unspecified",
+  "file": "src/index.ts",
+  "line": 224,
+  "from": "} ms`",
+  "to": "} ms_x`"
+ }
+]

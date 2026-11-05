@@ -1,0 +1,245 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.0"
+  },
+  "generatedAt": "2026-11-05T19:04:00.975Z",
+  "root": "<work>/ahooks",
+  "revision": "a0c33c21caefda40753fe4b3cbb3b1efbabd1a79",
+  "configHash": "4c35944cfac31402",
+  "mode": "advisory",
+  "units": [],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "useBoolean.ok.actions",
+      "unitId": "useBoolean",
+      "guaranteeId": "ok.actions",
+      "file": "packages/hooks/src/useBoolean/__tests__/index.spec.ts",
+      "line": 8,
+      "title": "useBoolean.ok.actions test on methods",
+      "status": "test",
+      "bodyHash": "47221066ae87997a",
+      "literals": [
+        "a"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useBoolean.ok.default",
+      "unitId": "useBoolean",
+      "guaranteeId": "ok.default",
+      "file": "packages/hooks/src/useBoolean/__tests__/index.spec.ts",
+      "line": 47,
+      "title": "useBoolean.ok.default test on default value",
+      "status": "test",
+      "bodyHash": "d04482d6d0f39a20",
+      "literals": [
+        "hello"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useCounter.ok.initial",
+      "unitId": "useCounter",
+      "guaranteeId": "ok.initial",
+      "file": "packages/hooks/src/useCounter/__tests__/index.spec.ts",
+      "line": 9,
+      "title": "useCounter.ok.initial should init counter",
+      "status": "test",
+      "bodyHash": "112c210c84417970",
+      "literals": [
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useCounter.ok.bounds",
+      "unitId": "useCounter",
+      "guaranteeId": "ok.bounds",
+      "file": "packages/hooks/src/useCounter/__tests__/index.spec.ts",
+      "line": 15,
+      "title": "useCounter.ok.bounds should max, min, actions work",
+      "status": "test",
+      "bodyHash": "72627c6f6482a0f1",
+      "literals": [
+        "100",
+        "10",
+        "2",
+        "-1000",
+        "1000",
+        "3",
+        "6"
+      ],
+      "keys": [
+        "max",
+        "min"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.default",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.default",
+      "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
+      "line": 12,
+      "title": "useToggle.ok.default test on init",
+      "status": "test",
+      "bodyHash": "ae413890add132e5",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.left-right",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.left-right",
+      "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
+      "line": 17,
+      "title": "useToggle.ok.left-right test on methods",
+      "status": "test",
+      "bodyHash": "921350b618dec0b4",
+      "literals": [
+        "Hello"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.toggle",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.toggle",
+      "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
+      "line": 32,
+      "title": "useToggle.ok.toggle test on optional",
+      "status": "test",
+      "bodyHash": "d2fb1000b91f970f",
+      "literals": [
+        "Hello",
+        "World"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "test-orphan",
+      "message": "test names \"useBoolean.ok.actions\" but no guarantee with that key exists",
+      "file": "packages/hooks/src/useBoolean/__tests__/index.spec.ts",
+      "line": 8,
+      "test": "useBoolean.ok.actions",
+      "unit": "useBoolean",
+      "severity": "fail"
+    },
+    {
+      "rule": "test-orphan",
+      "message": "test names \"useBoolean.ok.default\" but no guarantee with that key exists",
+      "file": "packages/hooks/src/useBoolean/__tests__/index.spec.ts",
+      "line": 47,
+      "test": "useBoolean.ok.default",
+      "unit": "useBoolean",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-on-non-unit",
+      "message": "useBoolean has @guarantee but is not a unit (it is not exported); its guarantees are not checked",
+      "file": "packages/hooks/src/useBoolean/index.ts",
+      "line": 11,
+      "severity": "fail"
+    },
+    {
+      "rule": "test-orphan",
+      "message": "test names \"useCounter.ok.initial\" but no guarantee with that key exists",
+      "file": "packages/hooks/src/useCounter/__tests__/index.spec.ts",
+      "line": 9,
+      "test": "useCounter.ok.initial",
+      "unit": "useCounter",
+      "severity": "fail"
+    },
+    {
+      "rule": "test-orphan",
+      "message": "test names \"useCounter.ok.bounds\" but no guarantee with that key exists",
+      "file": "packages/hooks/src/useCounter/__tests__/index.spec.ts",
+      "line": 15,
+      "test": "useCounter.ok.bounds",
+      "unit": "useCounter",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-on-non-unit",
+      "message": "useCounter has @guarantee but is not a unit (it is not exported); its guarantees are not checked",
+      "file": "packages/hooks/src/useCounter/index.ts",
+      "line": 31,
+      "severity": "fail"
+    },
+    {
+      "rule": "test-orphan",
+      "message": "test names \"useToggle.ok.default\" but no guarantee with that key exists",
+      "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
+      "line": 12,
+      "test": "useToggle.ok.default",
+      "unit": "useToggle",
+      "severity": "fail"
+    },
+    {
+      "rule": "test-orphan",
+      "message": "test names \"useToggle.ok.left-right\" but no guarantee with that key exists",
+      "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
+      "line": 17,
+      "test": "useToggle.ok.left-right",
+      "unit": "useToggle",
+      "severity": "fail"
+    },
+    {
+      "rule": "test-orphan",
+      "message": "test names \"useToggle.ok.toggle\" but no guarantee with that key exists",
+      "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
+      "line": 32,
+      "test": "useToggle.ok.toggle",
+      "unit": "useToggle",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-on-non-unit",
+      "message": "useToggle has @guarantee but is not a unit (it is not exported); its guarantees are not checked",
+      "file": "packages/hooks/src/useToggle/index.ts",
+      "line": 10,
+      "severity": "fail"
+    },
+    {
+      "rule": "surface-empty",
+      "message": "3 surface file(s) matched but no unit was extracted; check surface.mode (\"referenced\" needs a non-test importer), surface.exclude (e.g. **/index.ts in a single-file library) and that tsconfig includes the sources",
+      "severity": "warn"
+    }
+  ],
+  "summary": {
+    "units": 0,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 0,
+    "guaranteesWithoutTest": 0,
+    "tests": 7,
+    "orphanTests": 7,
+    "unlinkedTests": 431,
+    "findings": {
+      "fail": 10,
+      "warn": 1,
+      "info": 0
+    }
+  }
+}

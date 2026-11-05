@@ -1,0 +1,60 @@
+[
+  {
+    "file": "src/middleware/cors/index.ts",
+    "symbol": "cors",
+    "tags": [
+      "@guarantee ok.origin-default without `origin`, sets \"Access-Control-Allow-Origin\" to \"*\"",
+      "@guarantee ok.origin-string with a string `origin`, sets \"Access-Control-Allow-Origin\" to it",
+      "@guarantee ok.origin-list with an array `origin`, sets \"Access-Control-Allow-Origin\" to the request origin when the array contains it",
+      "@guarantee ok.origin-function with a function `origin`, sets \"Access-Control-Allow-Origin\" to what it returns for the request origin",
+      "@guarantee ok.methods-default without `allowMethods`, a preflight gets \"Access-Control-Allow-Methods\" listing \"GET\", \"HEAD\", \"PUT\", \"POST\", \"DELETE\", \"PATCH\" and \"QUERY\"",
+      "@guarantee ok.methods with `allowMethods` (an array, or a function of the origin), a preflight gets \"Access-Control-Allow-Methods\" listing those methods",
+      "@guarantee ok.headers with `allowHeaders`, a preflight gets \"Access-Control-Allow-Headers\" listing them; the default list is empty",
+      "@guarantee ok.max-age with `maxAge`, a preflight gets \"Access-Control-Max-Age\" set to it",
+      "@guarantee ok.credentials with `credentials` true, sets \"Access-Control-Allow-Credentials\"",
+      "@guarantee ok.expose with `exposeHeaders`, sets \"Access-Control-Expose-Headers\" listing them; the default list is empty"
+    ]
+  },
+  {
+    "file": "src/middleware/secure-headers/secure-headers.ts",
+    "symbol": "secureHeaders",
+    "tags": [
+      "@guarantee ok.defaults with no options, sets \"Cross-Origin-Resource-Policy\" \"same-origin\", \"Cross-Origin-Opener-Policy\" \"same-origin\", \"Origin-Agent-Cluster\" \"?1\", \"Referrer-Policy\" \"no-referrer\", \"Strict-Transport-Security\" \"max-age=15552000; includeSubDomains\", \"X-Content-Type-Options\" \"nosniff\", \"X-DNS-Prefetch-Control\" \"off\", \"X-Download-Options\" \"noopen\", \"X-Frame-Options\" \"SAMEORIGIN\", \"X-Permitted-Cross-Domain-Policies\" \"none\" and \"X-XSS-Protection\" \"0\"",
+      "@guarantee ok.powered-by removes the \"X-Powered-By\" header",
+      "@guarantee ok.coep-off \"Cross-Origin-Embedder-Policy\" is not set by default; with `crossOriginEmbedderPolicy` true it is \"require-corp\"",
+      "@guarantee ok.disable an option set to false leaves its header out",
+      "@guarantee ok.override an option set to a string sets its header to that string",
+      "@guarantee ok.csp with `contentSecurityPolicy`, sets \"Content-Security-Policy\" from the directives, each camelCase directive written in kebab case with its values separated by spaces",
+      "@guarantee ok.csp-report-only with `contentSecurityPolicyReportOnly`, sets \"Content-Security-Policy-Report-Only\" the same way",
+      "@guarantee ok.reporting with `reportingEndpoints`, sets \"Reporting-Endpoints\"; with `reportTo`, sets \"Report-To\"",
+      "@guarantee ok.permissions with `permissionsPolicy`, sets \"Permissions-Policy\"",
+      "@guarantee ok.nonce a directive holding `NONCE` gets a nonce value, and the same nonce is available as `secureHeadersNonce` on the context"
+    ]
+  },
+  {
+    "file": "src/middleware/secure-headers/secure-headers.ts",
+    "symbol": "NONCE",
+    "tags": [
+      "@guarantee ok.value returns a CSP source of the form \"'nonce-<value>'\" and stores the value as `secureHeadersNonce` on the context"
+    ]
+  },
+  {
+    "file": "src/middleware/body-limit/index.ts",
+    "symbol": "bodyLimit",
+    "tags": [
+      "@guarantee ok.content-length when the request has a \"Content-Length\" header larger than `maxSize`, calls `onError` without reading the body",
+      "@guarantee ok.stream without \"Content-Length\", reads the body as a stream and calls `onError` once more than `maxSize` bytes were read",
+      "@guarantee ok.pass a body of at most `maxSize` bytes reaches the handler unchanged"
+    ]
+  },
+  {
+    "file": "src/middleware/request-id/request-id.ts",
+    "symbol": "requestId",
+    "tags": [
+      "@guarantee ok.generate sets `requestId` on the context to a new id from `generator`, by default `crypto.randomUUID()`",
+      "@guarantee ok.header-in when the request has the header `headerName` (default \"X-Request-Id\"), uses its value instead of generating one",
+      "@guarantee ok.header-off with `headerName` \"\", the request header is ignored",
+      "@guarantee ok.limit a request id longer than `limitLength` (default 255) is not used"
+    ]
+  }
+]

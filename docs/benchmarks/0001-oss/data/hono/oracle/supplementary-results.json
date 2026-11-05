@@ -1,0 +1,97 @@
+[
+  {
+    "id": "cors-allowMethods-delete-GET",
+    "verdict": "RED",
+    "detail": "     × cors.ok.methods-default Preflight default 4ms |  FAIL  src/middleware/cors/index.test.ts > CORS by Middleware > cors.ok.methods-default Preflight default"
+  },
+  {
+    "id": "cors-allowMethods-delete-HEAD",
+    "verdict": "RED",
+    "detail": "     × cors.ok.methods-default Preflight default 4ms |  FAIL  src/middleware/cors/index.test.ts > CORS by Middleware > cors.ok.methods-default Preflight default"
+  },
+  {
+    "id": "cors-allowMethods-delete-PUT",
+    "verdict": "RED",
+    "detail": "     × cors.ok.methods-default Preflight default 4ms |  FAIL  src/middleware/cors/index.test.ts > CORS by Middleware > cors.ok.methods-default Preflight default"
+  },
+  {
+    "id": "cors-allowMethods-delete-POST",
+    "verdict": "RED",
+    "detail": "     × cors.ok.methods-default Preflight default 4ms |  FAIL  src/middleware/cors/index.test.ts > CORS by Middleware > cors.ok.methods-default Preflight default"
+  },
+  {
+    "id": "cors-allowMethods-delete-DELETE",
+    "verdict": "RED",
+    "detail": "     × cors.ok.methods-default Preflight default 4ms |  FAIL  src/middleware/cors/index.test.ts > CORS by Middleware > cors.ok.methods-default Preflight default"
+  },
+  {
+    "id": "cors-allowMethods-delete-PATCH",
+    "verdict": "RED",
+    "detail": "     × cors.ok.methods-default Preflight default 4ms |  FAIL  src/middleware/cors/index.test.ts > CORS by Middleware > cors.ok.methods-default Preflight default"
+  },
+  {
+    "id": "cors-allowMethods-delete-QUERY",
+    "verdict": "RED",
+    "detail": "     × cors.ok.methods-default Preflight default 4ms |  FAIL  src/middleware/cors/index.test.ts > CORS by Middleware > cors.ok.methods-default Preflight default"
+  },
+  {
+    "id": "HEADERS_MAP-delete-crossOriginEmbedderPolicy",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.coep-off all headers enabled 3ms |  FAIL  src/middleware/secure-headers/index.test.ts > Secure Headers Middleware > secureHeaders.ok.coep-off all headers enabled"
+  },
+  {
+    "id": "HEADERS_MAP-delete-crossOriginResourcePolicy",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 13ms |      × secureHeaders.ok.coep-off all headers enabled 1ms |      × secureHeaders.ok.disable specific headers disabled 1ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-crossOriginOpenerPolicy",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 14ms |      × secureHeaders.ok.coep-off all headers enabled 2ms |      × secureHeaders.ok.disable specific headers disabled 1ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-originAgentCluster",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 14ms |      × secureHeaders.ok.coep-off all headers enabled 2ms |      × secureHeaders.ok.disable specific headers disabled 1ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-referrerPolicy",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 14ms |      × secureHeaders.ok.coep-off all headers enabled 1ms |      × secureHeaders.ok.disable specific headers disabled 1ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-strictTransportSecurity",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 13ms |      × secureHeaders.ok.coep-off all headers enabled 1ms |      × secureHeaders.ok.disable specific headers disabled 1ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-xContentTypeOptions",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 17ms |      × secureHeaders.ok.coep-off all headers enabled 1ms |      × secureHeaders.ok.disable specific headers disabled 2ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-xDnsPrefetchControl",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 18ms |      × secureHeaders.ok.coep-off all headers enabled 1ms |      × secureHeaders.ok.disable specific headers disabled 2ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-xDownloadOptions",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 17ms |      × secureHeaders.ok.coep-off all headers enabled 1ms |      × secureHeaders.ok.disable specific headers disabled 2ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-xFrameOptions",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 17ms |      × secureHeaders.ok.coep-off all headers enabled 1ms |      × secureHeaders.ok.override should use custom value when overridden 1ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-xPermittedCrossDomainPolicies",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 19ms |      × secureHeaders.ok.coep-off all headers enabled 1ms |      × secureHeaders.ok.disable specific headers disabled 3ms"
+  },
+  {
+    "id": "HEADERS_MAP-delete-xXssProtection",
+    "verdict": "RED",
+    "detail": "     × secureHeaders.ok.defaults default middleware 16ms |      × secureHeaders.ok.coep-off all headers enabled 1ms |      × secureHeaders.ok.override should use custom value when overridden 1ms"
+  }
+]

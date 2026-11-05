@@ -1,0 +1,72 @@
+[
+  {
+    "file": "src/parse.ts",
+    "symbol": "parseURL",
+    "tags": [
+      "@guarantee ok.full for \"http://foo.com/foo?test=123#token\" returns protocol \"http:\", auth \"\", host \"foo.com\", pathname \"/foo\", search \"?test=123\" and hash \"#token\"",
+      "@guarantee ok.no-protocol for an input with no protocol (\"foo.com/foo?test=123#token\") returns only pathname \"foo.com/foo\", search and hash",
+      "@guarantee ok.default-proto with `defaultProto` \"https://\" an input with no protocol is parsed as if it started with it: protocol \"https:\", host \"foo.com\", pathname \"/foo\""
+    ]
+  },
+  {
+    "file": "src/parse.ts",
+    "symbol": "parsePath",
+    "tags": [
+      "@guarantee ok.split splits `input` at the first \"?\" and the first \"#\" into pathname, search (with \"?\") and hash (with \"#\"): \"http://foo.com/foo?test=123#token\" gives \"http://foo.com/foo\", \"?test=123\", \"#token\""
+    ]
+  },
+  {
+    "file": "src/parse.ts",
+    "symbol": "parseAuth",
+    "tags": [
+      "@guarantee ok.split for \"username:password\" returns username and password, each decoded"
+    ]
+  },
+  {
+    "file": "src/parse.ts",
+    "symbol": "parseHost",
+    "tags": [
+      "@guarantee ok.split returns hostname and port: \"foo.com:8080\" gives hostname \"foo.com\" and port \"8080\""
+    ]
+  },
+  {
+    "file": "src/parse.ts",
+    "symbol": "stringifyParsedURL",
+    "tags": [
+      "@guarantee ok.roundtrip joins protocol, auth, host, pathname, search and hash back into a URL: after changing host to \"bar.com\" in the result of parseURL(\"http://foo.com/foo?test=123#token\") it returns \"http://bar.com/foo?test=123#token\""
+    ]
+  },
+  {
+    "file": "src/parse.ts",
+    "symbol": "parseFilename",
+    "tags": [
+      "@guarantee ok.last-segment returns the last segment of the path of `input` (\"http://example.com/path/to/filename.ext\" gives \"filename.ext\")",
+      "@guarantee ok.strict with `strict` true, returns the last segment only when it ends with an extension, else undefined (\"/path/to/.hidden-file\" gives undefined)"
+    ]
+  },
+  {
+    "file": "src/query.ts",
+    "symbol": "parseQuery",
+    "tags": [
+      "@guarantee ok.pairs parses and decodes \"key=value\" pairs separated by \"&\" into an object (\"?foo=bar&baz=qux\" gives foo \"bar\" and baz \"qux\")",
+      "@guarantee ok.leading-question accepts the query with or without a leading \"?\"",
+      "@guarantee ok.repeated a key that appears several times gives an array of its values in order (\"tags=javascript&tags=web&tags=dev\" gives tags [\"javascript\", \"web\", \"dev\"])"
+    ]
+  },
+  {
+    "file": "src/query.ts",
+    "symbol": "encodeQueryItem",
+    "tags": [
+      "@guarantee ok.pair encodes `key` and `value` as \"key=value\", spaces in the value as \"+\" (\"message\", \"Hello World\" gives \"message=Hello+World\")",
+      "@guarantee ok.array an array value gives one \"key=value\" pair per element joined by \"&\" (\"tags=javascript&tags=web&tags=dev\")"
+    ]
+  },
+  {
+    "file": "src/query.ts",
+    "symbol": "stringifyQuery",
+    "tags": [
+      "@guarantee ok.pairs encodes each entry of `query` as a query item and joins them with \"&\" (foo \"bar\", baz \"qux\" gives \"foo=bar&baz=qux\")",
+      "@guarantee ok.undefined an entry whose value is undefined is left out (foo \"bar\", baz undefined gives \"foo=bar\")"
+    ]
+  }
+]
