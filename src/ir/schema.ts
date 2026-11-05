@@ -246,7 +246,8 @@ export interface TestCase {
   bodyHash: string;
   /**
    * Literal values the test body and its `each` tables use, plus same-file module-level
-   * constants they reference by name (one hop): non-empty strings as written, template parts
+   * constants they reference by name (one hop) and the factories of the file's module-level mocks
+   * (`vi.mock`, `jest.mock`, `mock.module`): non-empty strings as written, template parts
    * with a word character, numbers other than 0, 1 and -1 as `String(n)`. Capped at
    * `tests.literalLimit`.
    */

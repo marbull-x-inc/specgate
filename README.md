@@ -208,7 +208,10 @@ other forms: a `match` on a value read with a constant key (`params.get("popup")
 `key=value` pair in a literal (`"?popup=1"`), and an identifier-like `match` value by an object
 key the test writes (`sign({ iss: "…" })` pins `claim === "iss"`). A collection the unit passes to
 a call together with a string (`readEnum(search, "view", VIEWS)`) is read with that key, so
-`"?view=grid"` pins the element `grid`. A string passed as an option to a library call
+`"?view=grid"` pins the element `grid`. Literals count from the test body, its `each` tables, same-file
+constants it names, and the factories of the file's module-level mocks (`vi.mock`, `jest.mock`,
+`mock.module`), which set up every test of the file. Imports through `paths` aliases and workspace
+packages resolve like the program's, to the source file in the repository. A string passed as an option to a library call
 (`toJSONSchema(S, { io: "input" })`) configures the library and is not an `output` decision. When
 a finding fires, it names the linked-test literal to look at: one with a `key=` pair for the
 value's key, else one holding the value as a whole token, else (for values longer than two
@@ -350,7 +353,7 @@ Requires Node 24+ (Node 26 is used in CI) or Bun 1.2+.
 
 ## Status
 
-0.5.1. The public API (`analyze`, `defineConfig`, `dddTs`, `@marbull-x-inc/specgate/runtime`) and the IR are
+0.5.2. The public API (`analyze`, `defineConfig`, `dddTs`, `@marbull-x-inc/specgate/runtime`) and the IR are
 expected to change before 1.0.
 
 ## Releasing
