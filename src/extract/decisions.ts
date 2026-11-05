@@ -20,6 +20,8 @@ export interface DecisionOptions {
   onTruncated?: (collection: TruncatedCollection) => void;
   /** Called with each helper or same-module function body the walk follows (`Unit.helperRanges`). */
   onFollow?: (body: ts.Node) => void;
+  /** Called with each module-level `const` (not a function) the walk reads (`Unit.constantRanges`). */
+  onConstant?: (declaration: ts.VariableDeclaration) => void;
 }
 
 /** A literal element of a collection constant, with the constant it is written in. */
@@ -76,6 +78,8 @@ export function collectDecisions(
   const seen = new Set<string>();
   const visitedBodies = new Set<ts.Node>();
   const recordedConstants = new Set<ts.Node>();
+  /** Constants some boundary compares with a `.length` / `.size` */
+  const lengthNames = new Set<string>();
 
   const add = (kind: DecisionKind, node: ts.Node, values: string[], names: string[], readKey?: string): void => {
     if (values.length === 0) return;
@@ -381,6 +385,13 @@ export function collectDecisions(
     if (ts.isIdentifier(node) && !isDeclarationName(node)) {
       const decl = constDeclarationOf(node);
       if (decl) recordConstant(decl);
+      const moduleConst = moduleConstOf(node);
+      if (
+        moduleConst?.initializer &&
+        !ts.isArrowFunction(moduleConst.initializer) &&
+        !ts.isFunctionExpression(moduleConst.initializer)
+      )
+        options.onConstant?.(moduleConst);
     }
 
     if (ts.isBinaryExpression(node)) {
@@ -394,8 +405,16 @@ export function collectDecisions(
         const l = sideValue(node.left);
         const r = sideValue(node.right);
         const constant = l && !r ? l : r && !l ? r : undefined;
-        if (constant && !isTrivialNumber(constant.value))
+        if (constant && !isTrivialNumber(constant.value)) {
           add("boundary", node, [numberText(constant.value)], constant.names);
+          // `items.length > MAX_ITEMS`: a test pins it with arrays of that size (#56).
+          const other = constant === l ? node.right : node.left;
+          if (isLengthRead(other)) {
+            const last = out[out.length - 1];
+            if (last?.kind === "boundary" && last.line === lineOf(sf, node.getStart(sf))) last.length = true;
+            for (const n of constant.names) lengthNames.add(n);
+          }
+        }
       } else if (
         op === ts.SyntaxKind.EqualsEqualsEqualsToken ||
         op === ts.SyntaxKind.ExclamationEqualsEqualsToken ||
@@ -483,6 +502,7 @@ export function collectDecisions(
 
   // A function body itself or a concise arrow body expression.
   visit(body, !ts.isBlock(body));
+  for (const d of out) if (d.kind === "constant" && d.names.some((n) => lengthNames.has(n))) d.length = true;
   return out.sort((a, b) => a.line - b.line);
 }
 
@@ -619,6 +639,12 @@ function isErrorMessage(node: ts.Node): boolean {
     /(?:Error|Exception)$/.test(p.expression.getText()) &&
     (p.arguments ?? []).some((a) => a === node)
   );
+}
+
+/** `x.length` or `x.size`. */
+function isLengthRead(node: ts.Expression): boolean {
+  const e = unwrapExpression(node);
+  return ts.isPropertyAccessExpression(e) && (e.name.text === "length" || e.name.text === "size");
 }
 
 /** A declaration file or an installed package: code the project does not own. */

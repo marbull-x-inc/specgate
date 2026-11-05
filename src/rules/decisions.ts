@@ -89,6 +89,7 @@ export function evaluateDecisionRules(
   const literalsOf = (id: string): string[] => linkedTests(id).flatMap((t) => t.literals);
   // Reports read from disk before `keys` existed have none.
   const keysOf = (id: string): string[] => linkedTests(id).flatMap((t) => t.keys ?? []);
+  const lengthsOf = (id: string): number[] => linkedTests(id).flatMap((t) => t.lengths ?? []);
   const ignored = (d: Decision): boolean =>
     d.values.some((v) => input.ignore.has(v)) || d.names.some((n) => input.ignore.has(n));
 
@@ -103,13 +104,17 @@ export function evaluateDecisionRules(
       if (d.kind !== "member") continue;
       const key = memberKey(d);
       const by = memberUsedBy.get(key) ?? [];
-      if (!by.includes(unit.id) && valueUsed(d, literalsOf(unit.id))) by.push(unit.id);
+      if (!by.includes(unit.id) && valueUsed(d, literalsOf(unit.id), keysOf(unit.id))) by.push(unit.id);
       memberUsedBy.set(key, by);
     }
   }
   // A linked test that builds its input with another function of the unit's own module gets the
   // value from the implementation's side: both change together, and the test stays green (#47).
-  const builtBy = (unit: Unit, d: Decision): { test: string; name: string } | undefined => {
+  const builtBy = (unit: Unit, d: Decision): { test: string; name: string; reads?: true } | undefined => {
+    // A test that reads the decision's own constant from the unit's module (#57).
+    for (const t of linkedTests(unit.id))
+      for (const r of t.reads ?? [])
+        if (r.from === unit.file && d.names.includes(r.name)) return { test: t.key, name: r.name, reads: true };
     for (const t of linkedTests(unit.id))
       for (const b of t.builds ?? [])
         if (b.from === unit.file && b.name !== unit.operation && b.name !== unit.target && valueUsed(d, b.literals))
@@ -128,11 +133,12 @@ export function evaluateDecisionRules(
     const hasLinkedTests = linkedTests(unit.id).length > 0;
     const literals = literalsOf(unit.id);
     const keys = keysOf(unit.id);
+    const lengths = lengthsOf(unit.id);
     // Unnamed members are reported per collection, not per element.
     const unnamedMembers = new Map<string, { decisions: Decision[]; allUsed: boolean }>();
     for (const d of unit.decisions) {
       if (ignored(d)) continue;
-      const used = d.kind === "member" ? memberUsed(d) : valueUsed(d, literals, keys);
+      const used = d.kind === "member" ? memberUsed(d) : valueUsed(d, literals, keys, lengths);
       if (!decisionMentioned(d, corpus, input.ignore)) {
         if (d.kind === "member") {
           const key = d.names[0] ?? d.collection?.name ?? "";
@@ -156,7 +162,7 @@ export function evaluateDecisionRules(
       if (d.kind === "member") {
         // Pinned by this unit's own linked tests: nothing to say. Pinned only by another unit's
         // tests: still reported (this unit's contract is weaker than it looks), one step lower.
-        if (valueUsed(d, literals)) continue;
+        if (valueUsed(d, literals, keys)) continue;
         const key = memberKey(d);
         const current = untestedMembers.get(key);
         const home = d.collection?.file === unit.file;
@@ -244,12 +250,12 @@ export function untestedMessage(
   d: Decision,
   literals: readonly string[],
   pinnedBy: readonly string[] = [],
-  built?: { test: string; name: string },
+  built?: { test: string; name: string; reads?: true },
 ): string {
   const named = d.names.length > 0 ? ` (${d.names.join(", ")})` : "";
   const head = `${unit.id} commits to ${d.kind} ${d.values.map((v) => JSON.stringify(v)).join(", ")}${named} and the contract names it`;
   if (built)
-    return `${head}, but no linked test writes it; ${built.test} builds its input with ${built.name} from the unit's own module, so the value changes with the implementation. Write it as a literal`;
+    return `${head}, but no linked test writes it; ${built.test} ${built.reads ? "reads" : "builds its input with"} ${built.name} from the unit's own module, so the value changes with the implementation. Write it as a literal`;
   const what = `${head}, but no linked test uses it`;
   if (pinnedBy.length > 0)
     return `${what} (a test of ${pinnedBy.join(", ")} uses it); ${unit.id}'s own tests cannot fail when it changes`;
@@ -324,8 +330,18 @@ function isNumberText(value: string): boolean {
  * used by a `key=value` pair in a literal (`"?popup=1"`), and an identifier-like `match` value
  * by an object key the test writes (`{ iss: … }`, see `TestCase.keys`).
  */
-export function valueUsed(d: Decision, literals: readonly string[], keys: readonly string[] = []): boolean {
+export function valueUsed(
+  d: Decision,
+  literals: readonly string[],
+  keys: readonly string[] = [],
+  lengths: readonly number[] = [],
+): boolean {
   return d.values.some((v) => {
+    // A limit on a count is tested with arrays of that size, not by writing the number (#56).
+    if (d.length && isNumberText(v)) {
+      const n = Number(v);
+      if (lengths.some((m) => m === n || (d.kind === "boundary" && Math.abs(m - n) === 1))) return true;
+    }
     if (d.kind === "match") {
       if (d.key !== undefined && literals.some((l) => keyValuePair(d.key ?? "", v).test(l))) return true;
       if (IDENTIFIER.test(v) && keys.includes(v)) return true;
@@ -341,6 +357,8 @@ export function valueUsed(d: Decision, literals: readonly string[], keys: readon
     if (d.kind === "output") return literals.some((l) => l.includes(v));
     if (d.kind === "member") {
       if (d.key !== undefined && literals.some((l) => keyValuePair(d.key ?? "", v).test(l))) return true;
+      // Keys are whole names, so they pin an exact member only (`{ default: … }` pins "default").
+      if ((d.probe ?? "exact") === "exact" && IDENTIFIER.test(v) && keys.includes(v)) return true;
       switch (d.probe) {
         case "prefix":
           return literals.some((l) => l.startsWith(v));

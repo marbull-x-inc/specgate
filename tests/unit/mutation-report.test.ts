@@ -415,3 +415,61 @@ describe("@acceptFinding on a mutant (#40)", () => {
     expect(report.findings.filter((f) => f.rule.startsWith("accept-tag"))).toEqual([]);
   });
 });
+
+describe("mutants in module-level constants a unit reads (#53)", () => {
+  const SOURCE = `const HEX = /^#[0-9a-f]{6}$/;
+const UNUSED = /^x$/;
+
+/** @guarantee ok.hex returns true only for \`#\` and 6 lowercase hex digits */
+export const isHex = (value: string): boolean => HEX.test(value);
+
+/** @guarantee ok.color returns true for a hex colour */
+export const isColor = (value: string): boolean => HEX.test(value.trim());
+`;
+  const TEST = `import { expect, it } from "bun:test";
+import { isColor, isHex } from "../src/hex";
+it("isHex.ok.hex", () => {
+  expect(isHex("#a0b1c2")).toBe(true);
+  expect(isHex("red")).toBe(false);
+});
+it("isColor.ok.color", () => {
+  expect(isColor(" #a0b1c2 ")).toBe(true);
+});
+`;
+  const json = JSON.stringify({
+    schemaVersion: "2",
+    files: {
+      "src/hex.ts": {
+        language: "typescript",
+        source: SOURCE,
+        mutants: [
+          mutant("1", "Regex", "/#[0-9a-f]{6}$/", "Survived", 1),
+          mutant("2", "Regex", "/^x/", "Survived", 2),
+          mutant("3", "BooleanLiteral", "true", "Killed", lineOf(SOURCE, "export const isHex")),
+        ],
+      },
+    },
+  });
+
+  test("count for every unit that reads the constant, name it, and count the rest as unmapped", async () => {
+    const dir = project({ "src/hex.ts": SOURCE, "tests/hex.test.ts": TEST, "reports/mutation.json": json });
+    const report = await reportOf(dir);
+    expect(report.units.find((u) => u.id === "isHex")?.mutation).toEqual({
+      killed: 1,
+      survived: 1,
+      noCoverage: 0,
+      ignored: 0,
+    });
+    expect(report.units.find((u) => u.id === "isColor")?.mutation).toEqual({
+      killed: 0,
+      survived: 1,
+      noCoverage: 0,
+      ignored: 0,
+    });
+    expect(report.findings.filter((f) => f.rule === "mutant-survived").map((f) => f.message)).toEqual([
+      "isColor: Regex mutant in HEX: `/#[0-9a-f]{6}$/` survived; no linked test fails when the code changes like this; also reached from isHex",
+    ]);
+    expect(report.summary.mutantsUnmapped).toBe(1);
+    expect(renderStepSummary(report)).toContain("1 mutant(s) in the report map to no unit, so no rule reads them.");
+  });
+});

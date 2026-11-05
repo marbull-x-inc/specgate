@@ -175,17 +175,34 @@ function decisionsOf(
   host: ProgramHost,
   helpers: ReadonlyMap<string, ts.Node>,
   options: DecisionOptions,
-): Pick<Unit, "decisions" | "helperRanges"> {
+): Pick<Unit, "decisions" | "helperRanges" | "constantRanges"> {
   const ranges: Array<{ line: number; endLine: number }> = [];
+  const constants = new Map<ts.VariableDeclaration, NonNullable<Unit["constantRanges"]>[number]>();
   const decisions = collectDecisions(body, sf, host, helpers, {
     ...options,
     onFollow: (helper) => {
       const owner = ts.isBlock(helper) || ts.isExpression(helper) ? helper.parent : helper;
       ranges.push({ line: lineOf(sf, owner.getStart(sf)), endLine: lineOf(sf, owner.getEnd()) });
     },
+    onConstant: (decl) => {
+      if (constants.has(decl) || !ts.isIdentifier(decl.name)) return;
+      const declSf = decl.getSourceFile();
+      const statement = decl.parent.parent;
+      constants.set(decl, {
+        name: decl.name.text,
+        file: relativeTo(options.root, declSf.fileName),
+        line: lineOf(declSf, statement.getStart(declSf)),
+        endLine: lineOf(declSf, statement.getEnd()),
+      });
+    },
   });
   ranges.sort((x, y) => x.line - y.line || x.endLine - y.endLine);
-  return ranges.length > 0 ? { decisions, helperRanges: ranges } : { decisions };
+  const constantRanges = [...constants.values()].sort((x, y) => x.file.localeCompare(y.file) || x.line - y.line);
+  return {
+    decisions,
+    ...(ranges.length > 0 ? { helperRanges: ranges } : {}),
+    ...(constantRanges.length > 0 ? { constantRanges } : {}),
+  };
 }
 
 /**

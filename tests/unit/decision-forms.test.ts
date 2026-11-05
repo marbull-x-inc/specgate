@@ -608,3 +608,193 @@ it("viewOf.ok.view", () => {
     expect(found).toEqual([]);
   });
 });
+
+describe("0.5.3: object keys for members, describe fixtures, describe targets, read constants, lengths (#54–#58)", () => {
+  test("#55: an object key pins an exact member, not a prefix one", async () => {
+    const { untested: found } = await untested({
+      "src/pages.ts": `export const PAGES = ["default", "home"] as const;
+export const PREFIXES = ["admin", "team"] as const;
+
+/** @guarantee ok.pages returns the keys of \`pages\` that are not in \`PAGES\` (\`default\`, \`home\`) */
+export const unknownPages = (pages: Record<string, unknown>): string[] =>
+  Object.keys(pages).filter((k) => !PAGES.some((p) => p === k));
+
+/** @guarantee ok.prefixed returns true for a key starting with one of \`PREFIXES\` (\`admin\`, \`team\`) */
+export const prefixed = (key: string): boolean => PREFIXES.some((p) => key.startsWith(p));
+`,
+      "tests/pages.test.ts": `import { expect, it } from "bun:test";
+import { prefixed, unknownPages } from "../src/pages";
+it("unknownPages.ok.pages", () => {
+  expect(unknownPages({ default: 1, home: 2, other: 3 })).toEqual(["other"]);
+});
+it("prefixed.ok.prefixed", () => {
+  expect(prefixed(JSON.stringify({ admin: 1, team: 2 }))).toBe(false);
+});
+`,
+    });
+    expect(found.map((f) => f.message.match(/member "([^"]+)"/)?.[1]).sort()).toEqual(["admin", "team"]);
+  });
+
+  const POSITIONS = `export const POSITIONS = ["center", "top", "bottom"] as const;
+
+/** @guarantee ok.position returns true for a position in \`POSITIONS\` (\`center\`, \`top\`, \`bottom\`) */
+export const isPosition = (value: string): boolean => POSITIONS.some((p) => p === value);
+`;
+
+  test("#54: a const in an enclosing describe callback counts, two levels up too; a sibling's does not", async () => {
+    const { untested: found } = await untested({
+      "src/pos.ts": POSITIONS,
+      "tests/pos.test.ts": `import { describe, expect, it } from "bun:test";
+import { isPosition } from "../src/pos";
+describe("isPosition / shared", () => {
+  const outer = { position: "top" };
+  describe("inner group", () => {
+    it("isPosition.ok.position", () => {
+      expect(isPosition(outer.position)).toBe(true);
+      expect(isPosition("center")).toBe(true);
+    });
+  });
+  describe("sibling group", () => {
+    const sibling = "bottom";
+    it("unlinked", () => {
+      expect(sibling).toBe(sibling);
+    });
+  });
+});
+`,
+    });
+    expect(found.map((f) => f.message.match(/member "([^"]+)"/)?.[1])).toEqual(["bottom"]);
+  });
+
+  test("#58: an identifier-like describe title is the target only when such a target exists", async () => {
+    const { report } = await untested({
+      "src/rules.ts": `/** @guarantee ok.position returns true for \`center\` */
+export const isPosition = (value: string): boolean => value === "center";
+
+/** @guarantee ok.prune returns the unused keys */
+export const pruneUnusedImages = (keys: string[]): string[] => keys;
+
+export class Pricing {
+  /** @guarantee ok.x returns \`amount\` */
+  total(amount: number): number {
+    return amount;
+  }
+}
+`,
+      "tests/rules.test.ts": `import { describe, expect, it } from "bun:test";
+import { Pricing, isPosition, pruneUnusedImages } from "../src/rules";
+describe("rules", () => {
+  it("isPosition.ok.position", () => {
+    expect(isPosition("center")).toBe(true);
+  });
+});
+describe("pruneUnusedImages", () => {
+  it("pruneUnusedImages.ok.prune", () => {
+    expect(pruneUnusedImages([])).toEqual([]);
+  });
+  it("isPosition.ok.position again", () => {
+    expect(isPosition("center")).toBe(true);
+  });
+});
+describe("Pricing", () => {
+  it("total.ok.x", () => {
+    expect(new Pricing().total(5)).toBe(5);
+  });
+});
+`,
+    });
+    expect(report.tests.map((t) => t.key)).toEqual([
+      "isPosition.ok.position",
+      "pruneUnusedImages.ok.prune",
+      "isPosition.ok.position",
+      "Pricing#total.ok.x",
+    ]);
+    expect(report.findings.filter((f) => f.rule === "test-orphan" || f.rule === "guarantee-no-test")).toEqual([]);
+  });
+
+  test("#58: an orphan whose operation.id exists says where the target came from", async () => {
+    const { report } = await untested({
+      "src/rules.ts": `/** @guarantee ok.position returns true for \`center\` */
+export const isPosition = (value: string): boolean => value === "center";
+
+export class Pricing {
+  /** @guarantee ok.x returns \`amount\` */
+  total(amount: number): number {
+    return amount;
+  }
+}
+`,
+      "tests/rules.test.ts": `import { describe, expect, it } from "bun:test";
+import { isPosition } from "../src/rules";
+describe("Pricing", () => {
+  it("isPosition.ok.position", () => {
+    expect(isPosition("center")).toBe(true);
+  });
+});
+`,
+    });
+    expect(report.findings.find((f) => f.rule === "test-orphan")?.message).toBe(
+      'test names "Pricing#isPosition.ok.position" but no guarantee with that key exists (a guarantee isPosition.ok.position exists; the target "Pricing" comes from the title or an enclosing describe)',
+    );
+  });
+
+  const RULES = `export const NAME_MAX = 255;
+
+/** @guarantee err.too-long returns true when \`name\` is longer than \`NAME_MAX\` (255) */
+export const tooLong = (name: string): boolean => name.length > NAME_MAX;
+`;
+
+  test("#57: a test that reads the unit's own constant is named", async () => {
+    const { untested: found } = await untested({
+      "src/rules.ts": RULES,
+      "tests/rules.test.ts": `import { expect, it } from "bun:test";
+import { NAME_MAX, tooLong } from "../src/rules";
+it("tooLong.err.too-long", () => {
+  expect(tooLong("a".repeat(NAME_MAX))).toBe(false);
+  expect(tooLong("a".repeat(NAME_MAX + 1))).toBe(true);
+});
+`,
+    });
+    expect(found.map((f) => f.message)).toEqual([
+      'tooLong commits to constant "255" (NAME_MAX) and the contract names it, but no linked test writes it; tooLong.err.too-long reads NAME_MAX from the unit\'s own module, so the value changes with the implementation. Write it as a literal',
+      'tooLong commits to boundary "255" (NAME_MAX) and the contract names it, but no linked test writes it; tooLong.err.too-long reads NAME_MAX from the unit\'s own module, so the value changes with the implementation. Write it as a literal',
+    ]);
+    const cleared = await untested({
+      "src/rules.ts": RULES,
+      "tests/rules.test.ts": `import { expect, it } from "bun:test";
+import { tooLong } from "../src/rules";
+it("tooLong.err.too-long", () => {
+  expect(tooLong("a".repeat(255))).toBe(false);
+  expect(tooLong("a".repeat(256))).toBe(true);
+});
+`,
+    });
+    expect(cleared.untested).toEqual([]);
+  });
+
+  test("#56: arrays of the limit's size pin a limit compared with .length, not one compared with a number", async () => {
+    const { report, untested: found } = await untested({
+      "src/limits.ts": `export const MAX_ITEMS = 3;
+export const MAX_RETRIES = 3;
+
+/** @guarantee err.too-many returns true when \`items\` holds more than \`MAX_ITEMS\` (3) entries */
+export const tooMany = (items: readonly string[]): boolean => items.length > MAX_ITEMS;
+
+/** @guarantee err.retries returns true when \`retries\` is more than \`MAX_RETRIES\` (3) */
+export const tooManyRetries = (retries: number, items: readonly string[]): boolean => retries + items.length * 0 > MAX_RETRIES;
+`,
+      "tests/limits.test.ts": `import { expect, it } from "bun:test";
+import { tooMany, tooManyRetries } from "../src/limits";
+it("tooMany.err.too-many", () => {
+  expect(tooMany(["a", "b", "c"])).toBe(false);
+  expect(tooMany(["a", "b", "c", "d"])).toBe(true);
+});
+it("tooManyRetries.err.retries", () => {
+  expect(tooManyRetries(0, ["a", "b", "c"])).toBe(false);
+});
+`,
+    });
+    expect(report.units.find((u) => u.id === "tooMany")?.decisions.every((d) => d.length === true)).toBe(true);
+    expect(found.map((f) => f.unit)).toEqual(["tooManyRetries", "tooManyRetries"]);
+  });
+});

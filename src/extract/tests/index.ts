@@ -129,6 +129,8 @@ export function extractTests(
   config: Config,
   files: readonly string[],
   adapter: TestAdapter = config.tests.adapter,
+  /** Targets (classes, ports) of the surface; a describe title that names none is not a target. */
+  knownTargets?: ReadonlySet<string>,
 ): TestExtraction {
   moduleCache.clear();
   const resolveImport = importResolver(config.root, compilerOptionsOf(config.root, config.tsconfig));
@@ -147,6 +149,7 @@ export function extractTests(
     const stack: string[] = [];
     const describeTables: ts.Node[] = [];
     const scope = testFileScope(sf, file, config.root, resolveImport);
+    const describeConsts: Array<ReadonlyMap<string, ts.Expression>> = [];
 
     const visit = (node: ts.Node): void => {
       if (ts.isCallExpression(node)) {
@@ -159,7 +162,9 @@ export function extractTests(
           stack.push(title ?? "");
           const tables = eachTables(node.expression);
           describeTables.push(...tables);
+          describeConsts.push(callback ? constsOf(callback.body) : new Map());
           if (callback) ts.forEachChild(callback, visit);
+          describeConsts.pop();
           describeTables.length -= tables.length;
           stack.pop();
           return;
@@ -181,16 +186,31 @@ export function extractTests(
             const body = node.arguments.find((a) => ts.isArrowFunction(a) || ts.isFunctionExpression(a));
             const bodyHash = textHash(body ? body.getText(sf) : "");
             const tables = [...eachTables(node.expression), ...describeTables];
-            const used = usedValues(scope, body ? [body, ...tables] : tables, tables, config.tests.literalLimit);
+            // Fixtures of the enclosing describe callbacks count like module-level ones; inner wins.
+            const consts = new Map(scope.consts);
+            for (const level of describeConsts) for (const [k, v] of level) consts.set(k, v);
+            const used = usedValues(
+              { ...scope, consts },
+              body ? [body, ...tables] : tables,
+              tables,
+              config.tests.literalLimit,
+            );
             const line = sf.getLineAndCharacterOfPosition(node.getStart(sf)).line + 1;
             const match = matchTitle(stripTitlePrefix(title, prefixes), idPattern);
             if (match) {
               const context = describeContext(stack, describePatterns);
               // "op.id" names a free function unless an enclosing describe names a different target (a class).
               const operation = match.operation ?? context.operation;
-              const target =
-                match.target ??
-                (context.target !== undefined && context.target !== operation ? context.target : undefined);
+              // A describe title names the target only when such a target exists, or when the title
+              // itself names no operation (#58): `describe("rules") > it("isPosition.ok.x")` is a
+              // group of free functions, not a class called rules.
+              const contextTarget =
+                context.target !== undefined &&
+                context.target !== operation &&
+                (match.operation === undefined || knownTargets === undefined || knownTargets.has(context.target))
+                  ? context.target
+                  : undefined;
+              const target = match.target ?? contextTarget;
               const unitId = operation ? (target ? `${target}#${operation}` : operation) : target;
               // A lone kind word ("ok", "err") with nothing to qualify it is ordinary prose, not a key.
               if (unitId === undefined && !match.id.includes(".")) {
@@ -210,6 +230,8 @@ export function extractTests(
                 keys: used.keys,
                 iterates: used.iterates,
                 ...(used.builds.length > 0 ? { builds: used.builds } : {}),
+                ...(used.reads.length > 0 ? { reads: used.reads } : {}),
+                ...(used.lengths.length > 0 ? { lengths: used.lengths } : {}),
                 requirementIds: reqIds,
               });
             } else {
@@ -238,6 +260,17 @@ interface TestFileScope {
    * environment every test of the file runs in, so their literals count for each of them.
    */
   mocks: readonly ts.Node[];
+}
+
+/** `const` declarations directly in a callback body (a describe's shared fixtures). */
+function constsOf(body: ts.ConciseBody): Map<string, ts.Expression> {
+  const out = new Map<string, ts.Expression>();
+  if (!ts.isBlock(body)) return out;
+  for (const st of body.statements)
+    if (ts.isVariableStatement(st) && (st.declarationList.flags & ts.NodeFlags.Const) !== 0)
+      for (const d of st.declarationList.declarations)
+        if (ts.isIdentifier(d.name) && d.initializer) out.set(d.name.text, d.initializer);
+  return out;
 }
 
 const MOCK_CALLEES = new Set(["vi.mock", "vi.doMock", "jest.mock", "jest.doMock", "mock.module"]);
@@ -345,8 +378,12 @@ function usedValues(
   keys: string[];
   iterates: Array<{ name: string; from: string }>;
   builds: Array<{ name: string; from: string; literals: string[] }>;
+  reads: Array<{ name: string; from: string }>;
+  lengths: number[];
 } {
   const literals = new Set<string>();
+  const lengths = new Set<number>();
+  const reads = new Map<string, { name: string; from: string }>();
   const builds = new Map<string, { name: string; from: string }>();
   const keys = new Set<string>();
   const iterates = new Map<string, { name: string; from: string }>();
@@ -387,6 +424,18 @@ function usedValues(
       const imported = scope.imports.get(n.expression.text);
       if (recording && imported && RESOLVED_MODULE.test(imported.from))
         builds.set(`${imported.from}#${imported.name}`, imported);
+    }
+    if (ts.isArrayLiteralExpression(n) && !n.elements.some(ts.isSpreadElement) && lengths.size < limit)
+      lengths.add(n.elements.length);
+    // An imported value of the project read, not called: `"a".repeat(NAME_MAX)` (#57).
+    if (
+      recording &&
+      ts.isIdentifier(n) &&
+      !(ts.isCallExpression(n.parent) && n.parent.expression === n) &&
+      !(ts.isPropertyAccessExpression(n.parent) && n.parent.name === n)
+    ) {
+      const imported = scope.imports.get(n.text);
+      if (imported && RESOLVED_MODULE.test(imported.from)) reads.set(`${imported.from}#${imported.name}`, imported);
     }
     if ((ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n)) && n.text.length > 0) add(n.text);
     else if (ts.isTemplateExpression(n)) {
@@ -444,6 +493,8 @@ function usedValues(
     keys: [...keys],
     iterates: [...iterates.values()],
     builds: [...builds.values()].map((b) => ({ ...b, literals: functionLiterals(scope.root, b.from, b.name, limit) })),
+    reads: [...reads.values()],
+    lengths: [...lengths],
   };
 }
 

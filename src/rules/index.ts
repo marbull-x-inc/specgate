@@ -201,8 +201,14 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
 
   for (const t of ctx.tests) {
     if (!guaranteeKeys.has(t.key)) {
+      // `Target#op.id` with no such guarantee, while a top-level `op.id` exists: say where the target came from.
+      const bare = t.key.includes("#") ? t.key.slice(t.key.indexOf("#") + 1) : undefined;
+      const hint =
+        bare !== undefined && guaranteeKeys.has(bare)
+          ? ` (a guarantee ${bare} exists; the target "${t.key.slice(0, t.key.indexOf("#"))}" comes from the title or an enclosing describe)`
+          : "";
       emit("test-orphan", {
-        message: `test names "${t.key}" but no guarantee with that key exists`,
+        message: `test names "${t.key}" but no guarantee with that key exists${hint}`,
         file: t.file,
         line: t.line,
         test: t.key,
