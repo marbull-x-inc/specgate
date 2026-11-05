@@ -41,7 +41,9 @@ Units are also: exported type aliases and non-`@port` interfaces whose doc has `
 Units are: exported functions (declarations, arrow/function expressions, and constants whose
 value is callable, such as `export const defu = createDefu()`; when such a constant only renames a
 function of the same module, `export const persist = persistImpl as unknown as Persist`, that
-function's body is the unit's for decisions and mutants), public methods of exported
+function's body is the unit's for decisions and mutants; a declaration exported only as the
+module's default, `const useCounter = …; export default useCounter` or `export default function
+useBoolean`, is a unit under its declared name), public methods of exported
 classes (static or instance; `private` / `protected` / `#name` excluded), and exported
 interfaces marked `@port`. Overload signatures and their implementation are one unit; a
 `@guarantee` on any of the signatures belongs to it. Classes marked `@entity` become vocabulary

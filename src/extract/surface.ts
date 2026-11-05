@@ -79,6 +79,27 @@ function referenceKey(file: string, name: string): string {
 }
 
 /**
+ * Adds, for a declaration of this module exported only as `default` (`const useCounter = …;
+ * export default useCounter`, `export default function useBoolean(…)`), its declared name, so
+ * that the unit is named after the declaration as test keys and default imports name it (#63).
+ * An anonymous default export has no name to add and stays out of the surface.
+ */
+function withDefaultExportNames(
+  exported: Map<string, ts.Declaration[]>,
+  sf: ts.SourceFile,
+): Map<string, ts.Declaration[]> {
+  const declarations = exported.get("default");
+  if (!declarations) return exported;
+  const out = new Map(exported);
+  for (const decl of declarations) {
+    if (decl.getSourceFile() !== sf) continue;
+    const name = ts.getNameOfDeclaration(decl);
+    if (name && ts.isIdentifier(name) && !out.has(name.text)) out.set(name.text, [decl]);
+  }
+  return out;
+}
+
+/**
  * Indexes which files import which exported declaration, following import aliases.
  * Test files never count as referrers: a unit used only by its own tests is not part of a
  * module's public surface.
@@ -489,7 +510,7 @@ export function extractSurface(
     // Declarations whose doc became part of a unit or port; any other `@guarantee` is stray.
     const usedDocNodes = new Set<ts.Node>();
     const relFile = relativeTo(config.root, sf.fileName);
-    const exported = host.exportsOf(sf);
+    const exported = withDefaultExportNames(host.exportsOf(sf), sf);
     const importSources = importSourcesOf(sf);
 
     const referencedBy = (name: string): string[] => {
