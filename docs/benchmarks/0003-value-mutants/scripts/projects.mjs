@@ -47,7 +47,7 @@ export const PROJECTS = {
   "express-rate-limit": {
     runner: "jest",
     cwd: ".",
-    test: "npx jest --watchman=false --testPathIgnorePatterns /node_modules/ /.stryker-tmp/ types-test",
+    test: "npx jest {files} --watchman=false --testPathIgnorePatterns /node_modules/ /.stryker-tmp/ types-test",
     tests: ["test/library/**/*-test.ts"],
     jestConfig: "jest.config.json",
     // Not "/.stryker-tmp/": Stryker's own sandbox is inside it.

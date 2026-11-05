@@ -1,7 +1,7 @@
-baseline run 3287 ms; timeout 30000 ms
-value-5 Timeout    source/rate-limit.ts:207 `60 * 1000`: 1000 → 1001
+baseline run 3281 ms; timeout 30000 ms
 value-3 Timeout    source/rate-limit.ts:202 `standardHeaders = 'draft-6'`: 'draft-6' → 'draft-6_x'
 value-4 Timeout    source/rate-limit.ts:207 `60 * 1000`: 60 → 61
+value-5 Timeout    source/rate-limit.ts:207 `60 * 1000`: 1000 → 1001
 value-6 Timeout    source/rate-limit.ts:208 `passedOptions.max ?? 5`: 5 → 6
 value-7 Timeout    source/rate-limit.ts:209 `message` 'Too many requests, please try again later.' → 'Too many requests, please try again later._x'
 value-8 Timeout    source/rate-limit.ts:210 `statusCode` 429 → 430
@@ -24,10 +24,10 @@ value-23 Timeout    source/rate-limit.ts:224 `hours > 1 ? 's' : ''`: 's' → 's_
 value-24 Timeout    source/rate-limit.ts:225 `days > 1`: 1 → 2
 value-25 Timeout    source/rate-limit.ts:225 `days > 1 ? 's' : ''`: 's' → 's_x'
 value-26 Timeout    source/rate-limit.ts:229 `requestPropertyName` 'rateLimit' → 'rateLimit_x'
-value-29 Timeout    source/rate-limit.ts:264 `ipv6Subnet` 56 → 57
 value-27 Timeout    source/rate-limit.ts:233 `response.statusCode < 400`: 400 → 401
 value-28 Timeout    source/rate-limit.ts:248 `subnet` 56 → 57
 value-2 Timeout    source/ip-key-generator.ts:28 the default `ipv6Subnet` 56 → 57
+value-29 Timeout    source/rate-limit.ts:264 `ipv6Subnet` 56 → 57
 value-30 Timeout    source/rate-limit.ts:363 `createDebugLogger('express-rate-limit')`: 'express-rate-limit' → 'express-rate-limit_x'
 value-31 Timeout    source/rate-limit.ts:364 `debug('creating new rate limiter with %…`: 'creating new rate limiter with %o' → 'creating new rate limiter with %o_x'
 value-32 Timeout    source/rate-limit.ts:368 `debug('set %s to %o', key, val)`: 'set %s to %o' → 'set %s to %o_x'
@@ -56,12 +56,71 @@ value-54 Timeout    source/rate-limit.ts:531 `case 'draft-8': { const retrieveNa
 value-55 Timeout    source/rate-limit.ts:538 `debug('set ietf draft 8 headers')`: 'set ietf draft 8 headers' → 'set ietf draft 8 headers_x'
 value-56 Timeout    source/rate-limit.ts:539 `debug('set name to %o', name)`: 'set name to %o' → 'set name to %o_x'
 value-57 Timeout    source/rate-limit.ts:566 `debug('decrementing count')`: 'decrementing count' → 'decrementing count_x'
-value-58 Timeout    source/rate-limit.ts:579 `debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'
 value-59 Timeout    source/rate-limit.ts:608 `debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'
+value-58 Timeout    source/rate-limit.ts:579 `debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'
 value-60 Timeout    source/rate-limit.ts:618 `debug('limit exceeded')`: 'limit exceeded' → 'limit exceeded_x'
 value-61 Survived   source/rate-limit.ts:620 `debug('set retry-after header')`: 'set retry-after header' → 'set retry-after header_x'
-value-mutants: 61 mutant(s): 59 Timeout, 1 NoCoverage, 1 Survived; 131671 ms (baseline run 3287 ms)
+value-1 Killed     (rerun alone) source/ip-key-generator.ts:7
+value-2 Killed     (rerun alone) source/ip-key-generator.ts:28
+value-3 Survived   (rerun alone) source/rate-limit.ts:202
+value-4 Survived   (rerun alone) source/rate-limit.ts:207
+value-5 Survived   (rerun alone) source/rate-limit.ts:207
+value-6 Survived   (rerun alone) source/rate-limit.ts:208
+value-7 Survived   (rerun alone) source/rate-limit.ts:209
+value-8 Survived   (rerun alone) source/rate-limit.ts:210
+value-9 Survived   (rerun alone) source/rate-limit.ts:217
+value-10 Survived   (rerun alone) source/rate-limit.ts:218
+value-11 Survived   (rerun alone) source/rate-limit.ts:218
+value-12 Survived   (rerun alone) source/rate-limit.ts:219
+value-13 Survived   (rerun alone) source/rate-limit.ts:219
+value-14 Survived   (rerun alone) source/rate-limit.ts:219
+value-15 Survived   (rerun alone) source/rate-limit.ts:220
+value-16 Survived   (rerun alone) source/rate-limit.ts:220
+value-17 Survived   (rerun alone) source/rate-limit.ts:220
+value-18 Survived   (rerun alone) source/rate-limit.ts:220
+value-19 Survived   (rerun alone) source/rate-limit.ts:222
+value-20 Survived   (rerun alone) source/rate-limit.ts:223
+value-21 Survived   (rerun alone) source/rate-limit.ts:224
+value-22 Survived   (rerun alone) source/rate-limit.ts:224
+value-23 Survived   (rerun alone) source/rate-limit.ts:224
+value-24 Survived   (rerun alone) source/rate-limit.ts:225
+value-25 Survived   (rerun alone) source/rate-limit.ts:225
+value-26 Survived   (rerun alone) source/rate-limit.ts:229
+value-27 Survived   (rerun alone) source/rate-limit.ts:233
+value-28 Survived   (rerun alone) source/rate-limit.ts:248
+value-29 Survived   (rerun alone) source/rate-limit.ts:264
+value-30 Survived   (rerun alone) source/rate-limit.ts:363
+value-31 Survived   (rerun alone) source/rate-limit.ts:364
+value-32 Survived   (rerun alone) source/rate-limit.ts:368
+value-33 Survived   (rerun alone) source/rate-limit.ts:377
+value-34 Survived   (rerun alone) source/rate-limit.ts:387
+value-35 Survived   (rerun alone) source/rate-limit.ts:394
+value-36 Survived   (rerun alone) source/rate-limit.ts:406
+value-37 Survived   (rerun alone) source/rate-limit.ts:410
+value-38 Survived   (rerun alone) source/rate-limit.ts:414
+value-39 Survived   (rerun alone) source/rate-limit.ts:416
+value-40 Survived   (rerun alone) source/rate-limit.ts:417
+value-41 Survived   (rerun alone) source/rate-limit.ts:422
+value-42 Survived   (rerun alone) source/rate-limit.ts:432
+value-43 Survived   (rerun alone) source/rate-limit.ts:435
+value-44 Survived   (rerun alone) source/rate-limit.ts:436
+value-45 Survived   (rerun alone) source/rate-limit.ts:453
+value-46 Survived   (rerun alone) source/rate-limit.ts:480
+value-48 Survived   (rerun alone) source/rate-limit.ts:499
+value-49 Survived   (rerun alone) source/rate-limit.ts:510
+value-50 Survived   (rerun alone) source/rate-limit.ts:518
+value-51 Survived   (rerun alone) source/rate-limit.ts:519
+value-52 Survived   (rerun alone) source/rate-limit.ts:524
+value-53 Survived   (rerun alone) source/rate-limit.ts:525
+value-54 Survived   (rerun alone) source/rate-limit.ts:531
+value-55 Survived   (rerun alone) source/rate-limit.ts:538
+value-56 Survived   (rerun alone) source/rate-limit.ts:539
+value-57 Survived   (rerun alone) source/rate-limit.ts:566
+value-58 Survived   (rerun alone) source/rate-limit.ts:579
+value-59 Survived   (rerun alone) source/rate-limit.ts:608
+value-60 Survived   (rerun alone) source/rate-limit.ts:618
+value-mutants: 61 mutant(s): 2 Killed, 58 Survived, 1 NoCoverage; 334799 ms (baseline run 3281 ms)
 wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit/reports/value/value.json
-real 131.79
-user 46.75
-sys 7.40
+real 334.88
+user 1387.08
+sys 148.34

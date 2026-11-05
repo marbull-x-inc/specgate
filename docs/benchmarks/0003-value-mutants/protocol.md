@@ -264,3 +264,13 @@ Both are run from the start; react-hook-form, not yet run, uses the same setting
   1820 tests; the 10 server-rendering tests (`*.server.test.tsx`) are left out of both.
 - express-rate-limit's Stryker config no longer ignores `/.stryker-tmp/`, which held Stryker's
   own sandbox (its first run found no test).
+
+### 9. express-rate-limit: selected test files were swallowed by a jest flag (2026-11-06, during the runs)
+
+express-rate-limit's test command ended with `--testPathIgnorePatterns /node_modules/
+/.stryker-tmp/ types-test`. That flag takes every following argument, so the test files the
+runner appended were read as more ignore patterns: the runs left out exactly the tests covering
+the changed line and ran the others, and 58 of 61 value mutants came back `Survived`. The test
+files now go before the flag (`npx jest {files} --watchman=false --testPathIgnorePatterns …`),
+and the runner's baseline run now expands `{files}` to nothing as well. express-rate-limit is run
+again; its earlier runner result is discarded. No other project's command has such a flag.

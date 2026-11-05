@@ -2,9 +2,9 @@
   "schemaVersion": "1.0",
   "counts": {
     "NoCoverage": 12,
-    "Timeout": 48,
-    "Killed": 247,
-    "Survived": 85,
+    "Timeout": 53,
+    "Killed": 253,
+    "Survived": 74,
     "RuntimeError": 1
   },
   "mutants": [
@@ -174,17 +174,6 @@
       "status": "Killed"
     },
     {
-      "id": "22",
-      "file": "source/rate-limit.ts",
-      "line": 45,
-      "column": 2,
-      "endLine": 45,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof (store as any).increment === 'function'",
-      "original": "typeof (store as any).increment !== 'function'",
-      "status": "Killed"
-    },
-    {
       "id": "24",
       "file": "source/rate-limit.ts",
       "line": 54,
@@ -193,39 +182,6 @@
       "mutator": "BlockStatement",
       "replacement": "{}",
       "original": "{\n\tif (!isLegacyStore(passedStore)) {\n\t\t// It's not an old store, return as is\n\t\treturn passedStore\n\t}\n\n\tconst legacyStore = passedStore\n\n\t// A promisified version of the store\n\tclass PromisifiedStore",
-      "status": "Killed"
-    },
-    {
-      "id": "23",
-      "file": "source/rate-limit.ts",
-      "line": 45,
-      "column": 38,
-      "endLine": 45,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "17",
-      "file": "source/rate-limit.ts",
-      "line": 44,
-      "column": 2,
-      "endLine": 45,
-      "mutator": "LogicalOperator",
-      "replacement": "// Check that `incr` exists but `increment` does not - store authors might want\n// to keep both around for backwards compatibility.\ntypeof (store as any).incr === 'function' || typeof (store as any).increment !== 'function'",
-      "original": "typeof (store as any).incr === 'function' &&\n\ttypeof (store as any).increment !== 'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "18",
-      "file": "source/rate-limit.ts",
-      "line": 44,
-      "column": 2,
-      "endLine": 44,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "typeof (store as any).incr === 'function'",
       "status": "Killed"
     },
     {
@@ -240,6 +196,72 @@
       "status": "Killed"
     },
     {
+      "id": "26",
+      "file": "source/rate-limit.ts",
+      "line": 55,
+      "column": 6,
+      "endLine": 55,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "!isLegacyStore(passedStore)",
+      "status": "Killed"
+    },
+    {
+      "id": "23",
+      "file": "source/rate-limit.ts",
+      "line": 45,
+      "column": 38,
+      "endLine": 45,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'function'",
+      "status": "Timeout"
+    },
+    {
+      "id": "29",
+      "file": "source/rate-limit.ts",
+      "line": 64,
+      "column": 62,
+      "endLine": 78,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\treturn new Promise((resolve, reject) => {\n\t\t\t\tlegacyStore.incr(\n\t\t\t\t\tkey,\n\t\t\t\t\t(\n\t\t\t\t\t\terror: Error | undefined,\n\t\t\t\t\t\ttotalHits: number,\n\t\t\t\t\t\tresetTime: Date | undefined,\n\t\t\t\t\t) => {\n\t\t\t\t\t\tif (",
+      "status": "Timeout"
+    },
+    {
+      "id": "22",
+      "file": "source/rate-limit.ts",
+      "line": 45,
+      "column": 2,
+      "endLine": 45,
+      "mutator": "EqualityOperator",
+      "replacement": "typeof (store as any).increment === 'function'",
+      "original": "typeof (store as any).increment !== 'function'",
+      "status": "Timeout"
+    },
+    {
+      "id": "30",
+      "file": "source/rate-limit.ts",
+      "line": 65,
+      "column": 44,
+      "endLine": 77,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\tlegacyStore.incr(\n\t\t\t\t\tkey,\n\t\t\t\t\t(\n\t\t\t\t\t\terror: Error | undefined,\n\t\t\t\t\t\ttotalHits: number,\n\t\t\t\t\t\tresetTime: Date | undefined,\n\t\t\t\t\t) => {\n\t\t\t\t\t\tif (error) reject(error)\n\t\t\t\t\t\tresolve({ totalHit",
+      "status": "Timeout"
+    },
+    {
+      "id": "31",
+      "file": "source/rate-limit.ts",
+      "line": 66,
+      "column": 5,
+      "endLine": 76,
+      "mutator": "CallExpression",
+      "replacement": ";",
+      "original": "legacyStore.incr(\n\t\t\t\t\tkey,\n\t\t\t\t\t(\n\t\t\t\t\t\terror: Error | undefined,\n\t\t\t\t\t\ttotalHits: number,\n\t\t\t\t\t\tresetTime: Date | undefined,\n\t\t\t\t\t) => {\n\t\t\t\t\t\tif (error) reject(error)\n\t\t\t\t\t\tresolve({ totalHits, res",
+      "status": "Timeout"
+    },
+    {
       "id": "33",
       "file": "source/rate-limit.ts",
       "line": 73,
@@ -251,6 +273,28 @@
       "status": "Killed"
     },
     {
+      "id": "17",
+      "file": "source/rate-limit.ts",
+      "line": 44,
+      "column": 2,
+      "endLine": 45,
+      "mutator": "LogicalOperator",
+      "replacement": "// Check that `incr` exists but `increment` does not - store authors might want\n// to keep both around for backwards compatibility.\ntypeof (store as any).incr === 'function' || typeof (store as any).increment !== 'function'",
+      "original": "typeof (store as any).incr === 'function' &&\n\ttypeof (store as any).increment !== 'function'",
+      "status": "Timeout"
+    },
+    {
+      "id": "18",
+      "file": "source/rate-limit.ts",
+      "line": 44,
+      "column": 2,
+      "endLine": 44,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "typeof (store as any).incr === 'function'",
+      "status": "Timeout"
+    },
+    {
       "id": "19",
       "file": "source/rate-limit.ts",
       "line": 44,
@@ -259,7 +303,7 @@
       "mutator": "EqualityOperator",
       "replacement": "typeof (store as any).incr !== 'function'",
       "original": "typeof (store as any).incr === 'function'",
-      "status": "Killed"
+      "status": "Timeout"
     },
     {
       "id": "34",
@@ -273,6 +317,39 @@
       "status": "Survived"
     },
     {
+      "id": "28",
+      "file": "source/rate-limit.ts",
+      "line": 55,
+      "column": 35,
+      "endLine": 58,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t// It's not an old store, return as is\n\t\treturn passedStore\n\t}",
+      "status": "Timeout"
+    },
+    {
+      "id": "27",
+      "file": "source/rate-limit.ts",
+      "line": 55,
+      "column": 6,
+      "endLine": 55,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "!isLegacyStore(passedStore)",
+      "status": "Timeout"
+    },
+    {
+      "id": "25",
+      "file": "source/rate-limit.ts",
+      "line": 55,
+      "column": 6,
+      "endLine": 55,
+      "mutator": "BooleanLiteral",
+      "replacement": "isLegacyStore(passedStore)",
+      "original": "!isLegacyStore(passedStore)",
+      "status": "Timeout"
+    },
+    {
       "id": "37",
       "file": "source/rate-limit.ts",
       "line": 74,
@@ -284,14 +361,47 @@
       "status": "Killed"
     },
     {
-      "id": "26",
+      "id": "48",
       "file": "source/rate-limit.ts",
-      "line": 55,
-      "column": 6,
-      "endLine": 55,
+      "line": 162,
+      "column": 17,
+      "endLine": 162,
+      "mutator": "LogicalOperator",
+      "replacement": "passedOptions.logger && ConsoleLogger",
+      "original": "passedOptions.logger ?? ConsoleLogger",
+      "status": "Killed"
+    },
+    {
+      "id": "52",
+      "file": "source/rate-limit.ts",
+      "line": 169,
+      "column": 2,
+      "endLine": 169,
+      "mutator": "CallExpression",
+      "replacement": ";",
+      "original": "validations.validationsConfig()",
+      "status": "Survived"
+    },
+    {
+      "id": "56",
+      "file": "source/rate-limit.ts",
+      "line": 186,
+      "column": 3,
+      "endLine": 187,
       "mutator": "ConditionalExpression",
       "replacement": "true",
-      "original": "!isLegacyStore(passedStore)",
+      "original": "notUndefinedOptions.ipv6Subnet !== undefined &&\n\t\ttypeof notUndefinedOptions.ipv6Subnet !== 'function'",
+      "status": "Killed"
+    },
+    {
+      "id": "57",
+      "file": "source/rate-limit.ts",
+      "line": 186,
+      "column": 3,
+      "endLine": 187,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "notUndefinedOptions.ipv6Subnet !== undefined &&\n\t\ttypeof notUndefinedOptions.ipv6Subnet !== 'function'",
       "status": "Killed"
     },
     {
@@ -317,6 +427,61 @@
       "status": "Killed"
     },
     {
+      "id": "58",
+      "file": "source/rate-limit.ts",
+      "line": 186,
+      "column": 3,
+      "endLine": 187,
+      "mutator": "LogicalOperator",
+      "replacement": "notUndefinedOptions.ipv6Subnet !== undefined || typeof notUndefinedOptions.ipv6Subnet !== 'function'",
+      "original": "notUndefinedOptions.ipv6Subnet !== undefined &&\n\t\ttypeof notUndefinedOptions.ipv6Subnet !== 'function'",
+      "status": "Killed"
+    },
+    {
+      "id": "59",
+      "file": "source/rate-limit.ts",
+      "line": 186,
+      "column": 3,
+      "endLine": 186,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "notUndefinedOptions.ipv6Subnet !== undefined",
+      "status": "Killed"
+    },
+    {
+      "id": "61",
+      "file": "source/rate-limit.ts",
+      "line": 187,
+      "column": 3,
+      "endLine": 187,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "typeof notUndefinedOptions.ipv6Subnet !== 'function'",
+      "status": "Survived"
+    },
+    {
+      "id": "63",
+      "file": "source/rate-limit.ts",
+      "line": 187,
+      "column": 45,
+      "endLine": 187,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'function'",
+      "status": "Survived"
+    },
+    {
+      "id": "62",
+      "file": "source/rate-limit.ts",
+      "line": 187,
+      "column": 3,
+      "endLine": 187,
+      "mutator": "EqualityOperator",
+      "replacement": "typeof notUndefinedOptions.ipv6Subnet === 'function'",
+      "original": "typeof notUndefinedOptions.ipv6Subnet !== 'function'",
+      "status": "Killed"
+    },
+    {
       "id": "47",
       "file": "source/rate-limit.ts",
       "line": 156,
@@ -325,17 +490,6 @@
       "mutator": "BlockStatement",
       "replacement": "{}",
       "original": "{\n\t// Passing undefined should be equivalent to not passing an option at all, so we'll\n\t// omit all fields where their value is undefined.\n\tconst notUndefinedOptions: Partial<Options> =\n\t\tomitUndefine",
-      "status": "Killed"
-    },
-    {
-      "id": "48",
-      "file": "source/rate-limit.ts",
-      "line": 162,
-      "column": 17,
-      "endLine": 162,
-      "mutator": "LogicalOperator",
-      "replacement": "passedOptions.logger && ConsoleLogger",
-      "original": "passedOptions.logger ?? ConsoleLogger",
       "status": "Killed"
     },
     {
@@ -350,6 +504,39 @@
       "status": "Killed"
     },
     {
+      "id": "60",
+      "file": "source/rate-limit.ts",
+      "line": 186,
+      "column": 3,
+      "endLine": 186,
+      "mutator": "EqualityOperator",
+      "replacement": "notUndefinedOptions.ipv6Subnet === undefined",
+      "original": "notUndefinedOptions.ipv6Subnet !== undefined",
+      "status": "Killed"
+    },
+    {
+      "id": "64",
+      "file": "source/rate-limit.ts",
+      "line": 188,
+      "column": 4,
+      "endLine": 190,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\tvalidations.ipv6Subnet(notUndefinedOptions.ipv6Subnet)\n\t}",
+      "status": "Killed"
+    },
+    {
+      "id": "65",
+      "file": "source/rate-limit.ts",
+      "line": 189,
+      "column": 3,
+      "endLine": 189,
+      "mutator": "CallExpression",
+      "replacement": ";",
+      "original": "validations.ipv6Subnet(notUndefinedOptions.ipv6Subnet)",
+      "status": "Killed"
+    },
+    {
       "id": "46",
       "file": "source/rate-limit.ts",
       "line": 143,
@@ -358,17 +545,6 @@
       "mutator": "ObjectLiteral",
       "replacement": "{}",
       "original": "{\n\t\t...directlyPassableEntries,\n\t\tvalidate: validations.enabled as EnabledValidations,\n\t}",
-      "status": "Killed"
-    },
-    {
-      "id": "51",
-      "file": "source/rate-limit.ts",
-      "line": 166,
-      "column": 36,
-      "endLine": 166,
-      "mutator": "BooleanLiteral",
-      "replacement": "false",
-      "original": "true",
       "status": "Killed"
     },
     {
@@ -394,14 +570,25 @@
       "status": "Survived"
     },
     {
-      "id": "52",
+      "id": "51",
       "file": "source/rate-limit.ts",
-      "line": 169,
+      "line": 166,
+      "column": 36,
+      "endLine": 166,
+      "mutator": "BooleanLiteral",
+      "replacement": "false",
+      "original": "true",
+      "status": "Killed"
+    },
+    {
+      "id": "54",
+      "file": "source/rate-limit.ts",
+      "line": 176,
       "column": 2,
-      "endLine": 169,
+      "endLine": 179,
       "mutator": "CallExpression",
       "replacement": ";",
-      "original": "validations.validationsConfig()",
+      "original": "validations.draftPolliHeaders(\n\t\t// @ts-expect-error see the note above.\n\t\tnotUndefinedOptions.draft_polli_ratelimit_headers,\n\t)",
       "status": "Survived"
     },
     {
@@ -416,17 +603,6 @@
       "status": "Survived"
     },
     {
-      "id": "54",
-      "file": "source/rate-limit.ts",
-      "line": 176,
-      "column": 2,
-      "endLine": 179,
-      "mutator": "CallExpression",
-      "replacement": ";",
-      "original": "validations.draftPolliHeaders(\n\t\t// @ts-expect-error see the note above.\n\t\tnotUndefinedOptions.draft_polli_ratelimit_headers,\n\t)",
-      "status": "Survived"
-    },
-    {
       "id": "55",
       "file": "source/rate-limit.ts",
       "line": 181,
@@ -438,182 +614,6 @@
       "status": "Survived"
     },
     {
-      "id": "61",
-      "file": "source/rate-limit.ts",
-      "line": 187,
-      "column": 3,
-      "endLine": 187,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "typeof notUndefinedOptions.ipv6Subnet !== 'function'",
-      "status": "Survived"
-    },
-    {
-      "id": "62",
-      "file": "source/rate-limit.ts",
-      "line": 187,
-      "column": 3,
-      "endLine": 187,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof notUndefinedOptions.ipv6Subnet === 'function'",
-      "original": "typeof notUndefinedOptions.ipv6Subnet !== 'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "56",
-      "file": "source/rate-limit.ts",
-      "line": 186,
-      "column": 3,
-      "endLine": 187,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "notUndefinedOptions.ipv6Subnet !== undefined &&\n\t\ttypeof notUndefinedOptions.ipv6Subnet !== 'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "30",
-      "file": "source/rate-limit.ts",
-      "line": 65,
-      "column": 44,
-      "endLine": 77,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\tlegacyStore.incr(\n\t\t\t\t\tkey,\n\t\t\t\t\t(\n\t\t\t\t\t\terror: Error | undefined,\n\t\t\t\t\t\ttotalHits: number,\n\t\t\t\t\t\tresetTime: Date | undefined,\n\t\t\t\t\t) => {\n\t\t\t\t\t\tif (error) reject(error)\n\t\t\t\t\t\tresolve({ totalHit",
-      "status": "Timeout"
-    },
-    {
-      "id": "29",
-      "file": "source/rate-limit.ts",
-      "line": 64,
-      "column": 62,
-      "endLine": 78,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\treturn new Promise((resolve, reject) => {\n\t\t\t\tlegacyStore.incr(\n\t\t\t\t\tkey,\n\t\t\t\t\t(\n\t\t\t\t\t\terror: Error | undefined,\n\t\t\t\t\t\ttotalHits: number,\n\t\t\t\t\t\tresetTime: Date | undefined,\n\t\t\t\t\t) => {\n\t\t\t\t\t\tif (",
-      "status": "Timeout"
-    },
-    {
-      "id": "31",
-      "file": "source/rate-limit.ts",
-      "line": 66,
-      "column": 5,
-      "endLine": 76,
-      "mutator": "CallExpression",
-      "replacement": ";",
-      "original": "legacyStore.incr(\n\t\t\t\t\tkey,\n\t\t\t\t\t(\n\t\t\t\t\t\terror: Error | undefined,\n\t\t\t\t\t\ttotalHits: number,\n\t\t\t\t\t\tresetTime: Date | undefined,\n\t\t\t\t\t) => {\n\t\t\t\t\t\tif (error) reject(error)\n\t\t\t\t\t\tresolve({ totalHits, res",
-      "status": "Timeout"
-    },
-    {
-      "id": "57",
-      "file": "source/rate-limit.ts",
-      "line": 186,
-      "column": 3,
-      "endLine": 187,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "notUndefinedOptions.ipv6Subnet !== undefined &&\n\t\ttypeof notUndefinedOptions.ipv6Subnet !== 'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "63",
-      "file": "source/rate-limit.ts",
-      "line": 187,
-      "column": 45,
-      "endLine": 187,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'function'",
-      "status": "Survived"
-    },
-    {
-      "id": "59",
-      "file": "source/rate-limit.ts",
-      "line": 186,
-      "column": 3,
-      "endLine": 186,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "notUndefinedOptions.ipv6Subnet !== undefined",
-      "status": "Killed"
-    },
-    {
-      "id": "58",
-      "file": "source/rate-limit.ts",
-      "line": 186,
-      "column": 3,
-      "endLine": 187,
-      "mutator": "LogicalOperator",
-      "replacement": "notUndefinedOptions.ipv6Subnet !== undefined || typeof notUndefinedOptions.ipv6Subnet !== 'function'",
-      "original": "notUndefinedOptions.ipv6Subnet !== undefined &&\n\t\ttypeof notUndefinedOptions.ipv6Subnet !== 'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "64",
-      "file": "source/rate-limit.ts",
-      "line": 188,
-      "column": 4,
-      "endLine": 190,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\tvalidations.ipv6Subnet(notUndefinedOptions.ipv6Subnet)\n\t}",
-      "status": "Killed"
-    },
-    {
-      "id": "60",
-      "file": "source/rate-limit.ts",
-      "line": 186,
-      "column": 3,
-      "endLine": 186,
-      "mutator": "EqualityOperator",
-      "replacement": "notUndefinedOptions.ipv6Subnet === undefined",
-      "original": "notUndefinedOptions.ipv6Subnet !== undefined",
-      "status": "Killed"
-    },
-    {
-      "id": "65",
-      "file": "source/rate-limit.ts",
-      "line": 189,
-      "column": 3,
-      "endLine": 189,
-      "mutator": "CallExpression",
-      "replacement": ";",
-      "original": "validations.ipv6Subnet(notUndefinedOptions.ipv6Subnet)",
-      "status": "Killed"
-    },
-    {
-      "id": "25",
-      "file": "source/rate-limit.ts",
-      "line": 55,
-      "column": 6,
-      "endLine": 55,
-      "mutator": "BooleanLiteral",
-      "replacement": "isLegacyStore(passedStore)",
-      "original": "!isLegacyStore(passedStore)",
-      "status": "Timeout"
-    },
-    {
-      "id": "28",
-      "file": "source/rate-limit.ts",
-      "line": 55,
-      "column": 35,
-      "endLine": 58,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t// It's not an old store, return as is\n\t\treturn passedStore\n\t}",
-      "status": "Timeout"
-    },
-    {
-      "id": "27",
-      "file": "source/rate-limit.ts",
-      "line": 55,
-      "column": 6,
-      "endLine": 55,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "!isLegacyStore(passedStore)",
-      "status": "Timeout"
-    },
-    {
       "id": "74",
       "file": "source/rate-limit.ts",
       "line": 202,
@@ -622,17 +622,6 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'draft-6'",
-      "status": "Killed"
-    },
-    {
-      "id": "75",
-      "file": "source/rate-limit.ts",
-      "line": 206,
-      "column": 32,
-      "endLine": 298,
-      "mutator": "ObjectLiteral",
-      "replacement": "{}",
-      "original": "{\n\t\twindowMs: 60 * 1000,\n\t\tlimit: passedOptions.max ?? 5, // `max` is deprecated, but support it anyways.\n\t\tmessage: 'Too many requests, please try again later.',\n\t\tstatusCode: 429,\n\t\tlegacyHeaders: p",
       "status": "Killed"
     },
     {
@@ -647,36 +636,36 @@
       "status": "Survived"
     },
     {
-      "id": "72",
+      "id": "67",
       "file": "source/rate-limit.ts",
-      "line": 202,
-      "column": 6,
-      "endLine": 202,
-      "mutator": "EqualityOperator",
-      "replacement": "standardHeaders !== true",
-      "original": "standardHeaders === true",
+      "line": 196,
+      "column": 2,
+      "endLine": 196,
+      "mutator": "CallExpression",
+      "replacement": ";",
+      "original": "validations.ipv6SubnetOrKeyGenerator(notUndefinedOptions)",
+      "status": "Survived"
+    },
+    {
+      "id": "75",
+      "file": "source/rate-limit.ts",
+      "line": 206,
+      "column": 32,
+      "endLine": 298,
+      "mutator": "ObjectLiteral",
+      "replacement": "{}",
+      "original": "{\n\t\twindowMs: 60 * 1000,\n\t\tlimit: passedOptions.max ?? 5, // `max` is deprecated, but support it anyways.\n\t\tmessage: 'Too many requests, please try again later.',\n\t\tstatusCode: 429,\n\t\tlegacyHeaders: p",
       "status": "Killed"
     },
     {
-      "id": "73",
+      "id": "68",
       "file": "source/rate-limit.ts",
-      "line": 202,
-      "column": 26,
-      "endLine": 202,
-      "mutator": "BooleanLiteral",
-      "replacement": "false",
-      "original": "true",
-      "status": "Killed"
-    },
-    {
-      "id": "71",
-      "file": "source/rate-limit.ts",
-      "line": 202,
-      "column": 6,
-      "endLine": 202,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "standardHeaders === true",
+      "line": 201,
+      "column": 24,
+      "endLine": 201,
+      "mutator": "LogicalOperator",
+      "replacement": "notUndefinedOptions.standardHeaders && false",
+      "original": "notUndefinedOptions.standardHeaders ?? false",
       "status": "Killed"
     },
     {
@@ -691,15 +680,26 @@
       "status": "Killed"
     },
     {
-      "id": "76",
+      "id": "71",
       "file": "source/rate-limit.ts",
-      "line": 207,
-      "column": 13,
-      "endLine": 207,
-      "mutator": "ArithmeticOperator",
-      "replacement": "60 / 1000",
-      "original": "60 * 1000",
+      "line": 202,
+      "column": 6,
+      "endLine": 202,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "standardHeaders === true",
       "status": "Killed"
+    },
+    {
+      "id": "69",
+      "file": "source/rate-limit.ts",
+      "line": 201,
+      "column": 63,
+      "endLine": 201,
+      "mutator": "BooleanLiteral",
+      "replacement": "true",
+      "original": "false",
+      "status": "Survived"
     },
     {
       "id": "81",
@@ -710,6 +710,17 @@
       "mutator": "BlockStatement",
       "replacement": "{}",
       "original": "{\n\t\t\tlet duration = ''\n\t\t\tconst property = config.requestPropertyName\n\n\t\t\tconst { limit } = (request as AugmentedRequest)[property]\n\t\t\tconst seconds = config.windowMs / 1000\n\t\t\tconst minutes = config.",
+      "status": "Killed"
+    },
+    {
+      "id": "73",
+      "file": "source/rate-limit.ts",
+      "line": 202,
+      "column": 26,
+      "endLine": 202,
+      "mutator": "BooleanLiteral",
+      "replacement": "false",
+      "original": "true",
       "status": "Killed"
     },
     {
@@ -724,6 +735,28 @@
       "status": "Survived"
     },
     {
+      "id": "32",
+      "file": "source/rate-limit.ts",
+      "line": 72,
+      "column": 11,
+      "endLine": 75,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\t\t\tif (error) reject(error)\n\t\t\t\t\t\tresolve({ totalHits, resetTime })\n\t\t\t\t\t},",
+      "status": "Timeout"
+    },
+    {
+      "id": "72",
+      "file": "source/rate-limit.ts",
+      "line": 202,
+      "column": 6,
+      "endLine": 202,
+      "mutator": "EqualityOperator",
+      "replacement": "standardHeaders !== true",
+      "original": "standardHeaders === true",
+      "status": "Killed"
+    },
+    {
       "id": "83",
       "file": "source/rate-limit.ts",
       "line": 217,
@@ -732,28 +765,6 @@
       "mutator": "ArithmeticOperator",
       "replacement": "config.windowMs * 1000",
       "original": "config.windowMs / 1000",
-      "status": "Killed"
-    },
-    {
-      "id": "80",
-      "file": "source/rate-limit.ts",
-      "line": 211,
-      "column": 43,
-      "endLine": 211,
-      "mutator": "BooleanLiteral",
-      "replacement": "false",
-      "original": "true",
-      "status": "Killed"
-    },
-    {
-      "id": "85",
-      "file": "source/rate-limit.ts",
-      "line": 218,
-      "column": 39,
-      "endLine": 218,
-      "mutator": "ArithmeticOperator",
-      "replacement": "1000 / 60",
-      "original": "1000 * 60",
       "status": "Killed"
     },
     {
@@ -768,6 +779,39 @@
       "status": "Killed"
     },
     {
+      "id": "76",
+      "file": "source/rate-limit.ts",
+      "line": 207,
+      "column": 13,
+      "endLine": 207,
+      "mutator": "ArithmeticOperator",
+      "replacement": "60 / 1000",
+      "original": "60 * 1000",
+      "status": "Killed"
+    },
+    {
+      "id": "78",
+      "file": "source/rate-limit.ts",
+      "line": 209,
+      "column": 12,
+      "endLine": 209,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'Too many requests, please try again later.'",
+      "status": "Survived"
+    },
+    {
+      "id": "85",
+      "file": "source/rate-limit.ts",
+      "line": 218,
+      "column": 39,
+      "endLine": 218,
+      "mutator": "ArithmeticOperator",
+      "replacement": "1000 / 60",
+      "original": "1000 * 60",
+      "status": "Killed"
+    },
+    {
       "id": "86",
       "file": "source/rate-limit.ts",
       "line": 219,
@@ -776,6 +820,17 @@
       "mutator": "ArithmeticOperator",
       "replacement": "config.windowMs * (1000 * 60 * 60)",
       "original": "config.windowMs / (1000 * 60 * 60)",
+      "status": "Killed"
+    },
+    {
+      "id": "79",
+      "file": "source/rate-limit.ts",
+      "line": 211,
+      "column": 18,
+      "endLine": 211,
+      "mutator": "LogicalOperator",
+      "replacement": "passedOptions.headers && true",
+      "original": "passedOptions.headers ?? true",
       "status": "Killed"
     },
     {
@@ -801,25 +856,14 @@
       "status": "Killed"
     },
     {
-      "id": "89",
+      "id": "80",
       "file": "source/rate-limit.ts",
-      "line": 220,
-      "column": 17,
-      "endLine": 220,
-      "mutator": "ArithmeticOperator",
-      "replacement": "config.windowMs * (1000 * 60 * 60 * 24)",
-      "original": "config.windowMs / (1000 * 60 * 60 * 24)",
-      "status": "Killed"
-    },
-    {
-      "id": "91",
-      "file": "source/rate-limit.ts",
-      "line": 220,
-      "column": 36,
-      "endLine": 220,
-      "mutator": "ArithmeticOperator",
-      "replacement": "1000 * 60 / 60",
-      "original": "1000 * 60 * 60",
+      "line": 211,
+      "column": 43,
+      "endLine": 211,
+      "mutator": "BooleanLiteral",
+      "replacement": "false",
+      "original": "true",
       "status": "Killed"
     },
     {
@@ -834,14 +878,14 @@
       "status": "Killed"
     },
     {
-      "id": "94",
+      "id": "89",
       "file": "source/rate-limit.ts",
-      "line": 222,
-      "column": 8,
-      "endLine": 222,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "seconds < 60",
+      "line": 220,
+      "column": 17,
+      "endLine": 220,
+      "mutator": "ArithmeticOperator",
+      "replacement": "config.windowMs * (1000 * 60 * 60 * 24)",
+      "original": "config.windowMs / (1000 * 60 * 60 * 24)",
       "status": "Killed"
     },
     {
@@ -867,6 +911,17 @@
       "status": "Killed"
     },
     {
+      "id": "94",
+      "file": "source/rate-limit.ts",
+      "line": 222,
+      "column": 8,
+      "endLine": 222,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "seconds < 60",
+      "status": "Killed"
+    },
+    {
       "id": "95",
       "file": "source/rate-limit.ts",
       "line": 222,
@@ -874,17 +929,6 @@
       "endLine": 222,
       "mutator": "EqualityOperator",
       "replacement": "seconds <= 60",
-      "original": "seconds < 60",
-      "status": "Killed"
-    },
-    {
-      "id": "96",
-      "file": "source/rate-limit.ts",
-      "line": 222,
-      "column": 8,
-      "endLine": 222,
-      "mutator": "EqualityOperator",
-      "replacement": "seconds >= 60",
       "original": "seconds < 60",
       "status": "Killed"
     },
@@ -897,6 +941,17 @@
       "mutator": "StringLiteral",
       "replacement": "``",
       "original": "`${seconds}sec`",
+      "status": "Killed"
+    },
+    {
+      "id": "96",
+      "file": "source/rate-limit.ts",
+      "line": 222,
+      "column": 8,
+      "endLine": 222,
+      "mutator": "EqualityOperator",
+      "replacement": "seconds >= 60",
+      "original": "seconds < 60",
       "status": "Killed"
     },
     {
@@ -988,36 +1043,25 @@
       "status": "Killed"
     },
     {
-      "id": "69",
+      "id": "106",
       "file": "source/rate-limit.ts",
-      "line": 201,
-      "column": 63,
-      "endLine": 201,
-      "mutator": "BooleanLiteral",
+      "line": 224,
+      "column": 13,
+      "endLine": 224,
+      "mutator": "EqualityOperator",
+      "replacement": "hours >= 24",
+      "original": "hours < 24",
+      "status": "Killed"
+    },
+    {
+      "id": "108",
+      "file": "source/rate-limit.ts",
+      "line": 224,
+      "column": 49,
+      "endLine": 224,
+      "mutator": "ConditionalExpression",
       "replacement": "true",
-      "original": "false",
-      "status": "Survived"
-    },
-    {
-      "id": "67",
-      "file": "source/rate-limit.ts",
-      "line": 196,
-      "column": 2,
-      "endLine": 196,
-      "mutator": "CallExpression",
-      "replacement": ";",
-      "original": "validations.ipv6SubnetOrKeyGenerator(notUndefinedOptions)",
-      "status": "Survived"
-    },
-    {
-      "id": "68",
-      "file": "source/rate-limit.ts",
-      "line": 201,
-      "column": 24,
-      "endLine": 201,
-      "mutator": "LogicalOperator",
-      "replacement": "notUndefinedOptions.standardHeaders && false",
-      "original": "notUndefinedOptions.standardHeaders ?? false",
+      "original": "hours > 1",
       "status": "Killed"
     },
     {
@@ -1032,17 +1076,6 @@
       "status": "Killed"
     },
     {
-      "id": "106",
-      "file": "source/rate-limit.ts",
-      "line": 224,
-      "column": 13,
-      "endLine": 224,
-      "mutator": "EqualityOperator",
-      "replacement": "hours >= 24",
-      "original": "hours < 24",
-      "status": "Killed"
-    },
-    {
       "id": "109",
       "file": "source/rate-limit.ts",
       "line": 224,
@@ -1054,6 +1087,17 @@
       "status": "Killed"
     },
     {
+      "id": "111",
+      "file": "source/rate-limit.ts",
+      "line": 224,
+      "column": 49,
+      "endLine": 224,
+      "mutator": "EqualityOperator",
+      "replacement": "hours <= 1",
+      "original": "hours > 1",
+      "status": "Killed"
+    },
+    {
       "id": "110",
       "file": "source/rate-limit.ts",
       "line": 224,
@@ -1061,17 +1105,6 @@
       "endLine": 224,
       "mutator": "EqualityOperator",
       "replacement": "hours >= 1",
-      "original": "hours > 1",
-      "status": "Killed"
-    },
-    {
-      "id": "108",
-      "file": "source/rate-limit.ts",
-      "line": 224,
-      "column": 49,
-      "endLine": 224,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
       "original": "hours > 1",
       "status": "Killed"
     },
@@ -1098,39 +1131,6 @@
       "status": "Killed"
     },
     {
-      "id": "111",
-      "file": "source/rate-limit.ts",
-      "line": 224,
-      "column": 49,
-      "endLine": 224,
-      "mutator": "EqualityOperator",
-      "replacement": "hours <= 1",
-      "original": "hours > 1",
-      "status": "Killed"
-    },
-    {
-      "id": "78",
-      "file": "source/rate-limit.ts",
-      "line": 209,
-      "column": 12,
-      "endLine": 209,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'Too many requests, please try again later.'",
-      "status": "Survived"
-    },
-    {
-      "id": "32",
-      "file": "source/rate-limit.ts",
-      "line": 72,
-      "column": 11,
-      "endLine": 75,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\t\t\tif (error) reject(error)\n\t\t\t\t\t\tresolve({ totalHits, resetTime })\n\t\t\t\t\t},",
-      "status": "Timeout"
-    },
-    {
       "id": "114",
       "file": "source/rate-limit.ts",
       "line": 225,
@@ -1153,24 +1153,13 @@
       "status": "Killed"
     },
     {
-      "id": "79",
-      "file": "source/rate-limit.ts",
-      "line": 211,
-      "column": 18,
-      "endLine": 211,
-      "mutator": "LogicalOperator",
-      "replacement": "passedOptions.headers && true",
-      "original": "passedOptions.headers ?? true",
-      "status": "Killed"
-    },
-    {
-      "id": "118",
+      "id": "116",
       "file": "source/rate-limit.ts",
       "line": 225,
       "column": 33,
       "endLine": 225,
-      "mutator": "EqualityOperator",
-      "replacement": "days <= 1",
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
       "original": "days > 1",
       "status": "Killed"
     },
@@ -1186,25 +1175,14 @@
       "status": "Killed"
     },
     {
-      "id": "116",
+      "id": "118",
       "file": "source/rate-limit.ts",
       "line": 225,
       "column": 33,
       "endLine": 225,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
+      "mutator": "EqualityOperator",
+      "replacement": "days <= 1",
       "original": "days > 1",
-      "status": "Killed"
-    },
-    {
-      "id": "121",
-      "file": "source/rate-limit.ts",
-      "line": 227,
-      "column": 11,
-      "endLine": 227,
-      "mutator": "StringLiteral",
-      "replacement": "``",
-      "original": "`${limit}-in-${duration}`",
       "status": "Killed"
     },
     {
@@ -1219,6 +1197,17 @@
       "status": "Killed"
     },
     {
+      "id": "121",
+      "file": "source/rate-limit.ts",
+      "line": 227,
+      "column": 11,
+      "endLine": 227,
+      "mutator": "StringLiteral",
+      "replacement": "``",
+      "original": "`${limit}-in-${duration}`",
+      "status": "Killed"
+    },
+    {
       "id": "120",
       "file": "source/rate-limit.ts",
       "line": 225,
@@ -1227,6 +1216,28 @@
       "mutator": "StringLiteral",
       "replacement": "\"Stryker was here!\"",
       "original": "''",
+      "status": "Killed"
+    },
+    {
+      "id": "91",
+      "file": "source/rate-limit.ts",
+      "line": 220,
+      "column": 36,
+      "endLine": 220,
+      "mutator": "ArithmeticOperator",
+      "replacement": "1000 * 60 / 60",
+      "original": "1000 * 60 * 60",
+      "status": "Killed"
+    },
+    {
+      "id": "126",
+      "file": "source/rate-limit.ts",
+      "line": 233,
+      "column": 4,
+      "endLine": 233,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "response.statusCode < 400",
       "status": "Killed"
     },
     {
@@ -1263,6 +1274,17 @@
       "status": "Killed"
     },
     {
+      "id": "124",
+      "file": "source/rate-limit.ts",
+      "line": 231,
+      "column": 27,
+      "endLine": 231,
+      "mutator": "BooleanLiteral",
+      "replacement": "true",
+      "original": "false",
+      "status": "Killed"
+    },
+    {
       "id": "122",
       "file": "source/rate-limit.ts",
       "line": 229,
@@ -1285,17 +1307,6 @@
       "status": "Killed"
     },
     {
-      "id": "124",
-      "file": "source/rate-limit.ts",
-      "line": 231,
-      "column": 27,
-      "endLine": 231,
-      "mutator": "BooleanLiteral",
-      "replacement": "true",
-      "original": "false",
-      "status": "Killed"
-    },
-    {
       "id": "125",
       "file": "source/rate-limit.ts",
       "line": 232,
@@ -1305,17 +1316,6 @@
       "replacement": "() => undefined",
       "original": "(_request: Request, response: Response): boolean =>\n\t\t\tresponse.statusCode < 400,",
       "status": "Killed"
-    },
-    {
-      "id": "133",
-      "file": "source/rate-limit.ts",
-      "line": 240,
-      "column": 4,
-      "endLine": 240,
-      "mutator": "CallExpression",
-      "replacement": ";",
-      "original": "validations.ip(request.ip)",
-      "status": "Survived"
     },
     {
       "id": "139",
@@ -1340,6 +1340,17 @@
       "status": "Survived"
     },
     {
+      "id": "130",
+      "file": "source/rate-limit.ts",
+      "line": 234,
+      "column": 9,
+      "endLine": 234,
+      "mutator": "ArrowFunction",
+      "replacement": "() => undefined",
+      "original": "(_request: Request, _response: Response): boolean => false",
+      "status": "Survived"
+    },
+    {
       "id": "132",
       "file": "source/rate-limit.ts",
       "line": 235,
@@ -1351,14 +1362,14 @@
       "status": "Survived"
     },
     {
-      "id": "135",
+      "id": "133",
       "file": "source/rate-limit.ts",
-      "line": 242,
+      "line": 240,
       "column": 4,
-      "endLine": 242,
+      "endLine": 240,
       "mutator": "CallExpression",
       "replacement": ";",
-      "original": "validations.xForwardedForHeader(request)",
+      "original": "validations.ip(request.ip)",
       "status": "Survived"
     },
     {
@@ -1384,17 +1395,6 @@
       "status": "Survived"
     },
     {
-      "id": "130",
-      "file": "source/rate-limit.ts",
-      "line": 234,
-      "column": 9,
-      "endLine": 234,
-      "mutator": "ArrowFunction",
-      "replacement": "() => undefined",
-      "original": "(_request: Request, _response: Response): boolean => false",
-      "status": "Survived"
-    },
-    {
       "id": "143",
       "file": "source/rate-limit.ts",
       "line": 253,
@@ -1417,17 +1417,6 @@
       "status": "Survived"
     },
     {
-      "id": "146",
-      "file": "source/rate-limit.ts",
-      "line": 258,
-      "column": 9,
-      "endLine": 258,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof config.ipv6Subnet !== 'function'",
-      "original": "typeof config.ipv6Subnet === 'function'",
-      "status": "Survived"
-    },
-    {
       "id": "136",
       "file": "source/rate-limit.ts",
       "line": 243,
@@ -1436,39 +1425,6 @@
       "mutator": "CallExpression",
       "replacement": ";",
       "original": "validations.forwardedHeader(request)",
-      "status": "Survived"
-    },
-    {
-      "id": "145",
-      "file": "source/rate-limit.ts",
-      "line": 258,
-      "column": 9,
-      "endLine": 258,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "typeof config.ipv6Subnet === 'function'",
-      "status": "Survived"
-    },
-    {
-      "id": "147",
-      "file": "source/rate-limit.ts",
-      "line": 258,
-      "column": 38,
-      "endLine": 258,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'function'",
-      "status": "Survived"
-    },
-    {
-      "id": "138",
-      "file": "source/rate-limit.ts",
-      "line": 250,
-      "column": 8,
-      "endLine": 250,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "isIPv6(ip)",
       "status": "Survived"
     },
     {
@@ -1483,15 +1439,59 @@
       "status": "Survived"
     },
     {
-      "id": "151",
+      "id": "145",
       "file": "source/rate-limit.ts",
-      "line": 275,
-      "column": 5,
-      "endLine": 275,
+      "line": 258,
+      "column": 9,
+      "endLine": 258,
       "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "typeof config.message === 'function'",
-      "status": "Killed"
+      "replacement": "false",
+      "original": "typeof config.ipv6Subnet === 'function'",
+      "status": "Survived"
+    },
+    {
+      "id": "146",
+      "file": "source/rate-limit.ts",
+      "line": 258,
+      "column": 9,
+      "endLine": 258,
+      "mutator": "EqualityOperator",
+      "replacement": "typeof config.ipv6Subnet !== 'function'",
+      "original": "typeof config.ipv6Subnet === 'function'",
+      "status": "Survived"
+    },
+    {
+      "id": "135",
+      "file": "source/rate-limit.ts",
+      "line": 242,
+      "column": 4,
+      "endLine": 242,
+      "mutator": "CallExpression",
+      "replacement": ";",
+      "original": "validations.xForwardedForHeader(request)",
+      "status": "Survived"
+    },
+    {
+      "id": "138",
+      "file": "source/rate-limit.ts",
+      "line": 250,
+      "column": 8,
+      "endLine": 250,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "isIPv6(ip)",
+      "status": "Survived"
+    },
+    {
+      "id": "147",
+      "file": "source/rate-limit.ts",
+      "line": 258,
+      "column": 38,
+      "endLine": 258,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'function'",
+      "status": "Survived"
     },
     {
       "id": "150",
@@ -1505,14 +1505,14 @@
       "status": "Killed"
     },
     {
-      "id": "126",
+      "id": "151",
       "file": "source/rate-limit.ts",
-      "line": 233,
-      "column": 4,
-      "endLine": 233,
+      "line": 275,
+      "column": 5,
+      "endLine": 275,
       "mutator": "ConditionalExpression",
       "replacement": "true",
-      "original": "response.statusCode < 400",
+      "original": "typeof config.message === 'function'",
       "status": "Killed"
     },
     {
@@ -1527,15 +1527,15 @@
       "status": "Killed"
     },
     {
-      "id": "156",
+      "id": "153",
       "file": "source/rate-limit.ts",
-      "line": 283,
-      "column": 8,
-      "endLine": 283,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "!response.writableEnded",
-      "status": "Survived"
+      "line": 275,
+      "column": 5,
+      "endLine": 275,
+      "mutator": "EqualityOperator",
+      "replacement": "typeof config.message !== 'function'",
+      "original": "typeof config.message === 'function'",
+      "status": "Killed"
     },
     {
       "id": "154",
@@ -1546,17 +1546,6 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "153",
-      "file": "source/rate-limit.ts",
-      "line": 275,
-      "column": 5,
-      "endLine": 275,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof config.message !== 'function'",
-      "original": "typeof config.message === 'function'",
       "status": "Killed"
     },
     {
@@ -1571,15 +1560,15 @@
       "status": "Killed"
     },
     {
-      "id": "77",
+      "id": "156",
       "file": "source/rate-limit.ts",
-      "line": 208,
-      "column": 10,
-      "endLine": 208,
-      "mutator": "LogicalOperator",
-      "replacement": "passedOptions.max && 5",
-      "original": "passedOptions.max ?? 5",
-      "status": "Timeout"
+      "line": 283,
+      "column": 8,
+      "endLine": 283,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "!response.writableEnded",
+      "status": "Survived"
     },
     {
       "id": "159",
@@ -1604,11 +1593,11 @@
       "status": "Killed"
     },
     {
-      "id": "164",
+      "id": "162",
       "file": "source/rate-limit.ts",
       "line": 302,
       "column": 3,
-      "endLine": 306,
+      "endLine": 307,
       "mutator": "ConditionalExpression",
       "replacement": "false",
       "original": "typeof config.store.increment !== 'function' ||\n\t\ttypeof config.store.decrement !== 'function' ||\n\t\ttypeof config.store.resetKey !== 'function' ||\n\t\t(config.store.resetAll !== undefined &&\n\t\t\ttypeof c",
@@ -1626,6 +1615,17 @@
       "status": "Killed"
     },
     {
+      "id": "164",
+      "file": "source/rate-limit.ts",
+      "line": 302,
+      "column": 3,
+      "endLine": 306,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "typeof config.store.increment !== 'function' ||\n\t\ttypeof config.store.decrement !== 'function' ||\n\t\ttypeof config.store.resetKey !== 'function' ||\n\t\t(config.store.resetAll !== undefined &&\n\t\t\ttypeof c",
+      "status": "Killed"
+    },
+    {
       "id": "165",
       "file": "source/rate-limit.ts",
       "line": 302,
@@ -1633,17 +1633,6 @@
       "endLine": 306,
       "mutator": "LogicalOperator",
       "replacement": "(typeof config.store.increment !== 'function' || typeof config.store.decrement !== 'function' || typeof config.store.resetKey !== 'function') && config.store.resetAll !== undefined && typeof config.store.resetAll !== 'function'",
-      "original": "typeof config.store.increment !== 'function' ||\n\t\ttypeof config.store.decrement !== 'function' ||\n\t\ttypeof config.store.resetKey !== 'function' ||\n\t\t(config.store.resetAll !== undefined &&\n\t\t\ttypeof c",
-      "status": "Killed"
-    },
-    {
-      "id": "162",
-      "file": "source/rate-limit.ts",
-      "line": 302,
-      "column": 3,
-      "endLine": 307,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
       "original": "typeof config.store.increment !== 'function' ||\n\t\ttypeof config.store.decrement !== 'function' ||\n\t\ttypeof config.store.resetKey !== 'function' ||\n\t\t(config.store.resetAll !== undefined &&\n\t\t\ttypeof c",
       "status": "Killed"
     },
@@ -1670,6 +1659,28 @@
       "status": "Survived"
     },
     {
+      "id": "168",
+      "file": "source/rate-limit.ts",
+      "line": 302,
+      "column": 3,
+      "endLine": 303,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "typeof config.store.increment !== 'function' ||\n\t\ttypeof config.store.decrement !== 'function' ||",
+      "status": "Survived"
+    },
+    {
+      "id": "171",
+      "file": "source/rate-limit.ts",
+      "line": 302,
+      "column": 3,
+      "endLine": 302,
+      "mutator": "EqualityOperator",
+      "replacement": "typeof config.store.increment === 'function'",
+      "original": "typeof config.store.increment !== 'function'",
+      "status": "Killed"
+    },
+    {
       "id": "169",
       "file": "source/rate-limit.ts",
       "line": 302,
@@ -1681,17 +1692,6 @@
       "status": "Survived"
     },
     {
-      "id": "170",
-      "file": "source/rate-limit.ts",
-      "line": 302,
-      "column": 3,
-      "endLine": 302,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "typeof config.store.increment !== 'function'",
-      "status": "Survived"
-    },
-    {
       "id": "172",
       "file": "source/rate-limit.ts",
       "line": 302,
@@ -1700,17 +1700,6 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "171",
-      "file": "source/rate-limit.ts",
-      "line": 302,
-      "column": 3,
-      "endLine": 302,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof config.store.increment === 'function'",
-      "original": "typeof config.store.increment !== 'function'",
       "status": "Killed"
     },
     {
@@ -1736,15 +1725,15 @@
       "status": "Killed"
     },
     {
-      "id": "177",
+      "id": "170",
       "file": "source/rate-limit.ts",
-      "line": 304,
+      "line": 302,
       "column": 3,
-      "endLine": 304,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof config.store.resetKey === 'function'",
-      "original": "typeof config.store.resetKey !== 'function'",
-      "status": "Killed"
+      "endLine": 302,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "typeof config.store.increment !== 'function'",
+      "status": "Survived"
     },
     {
       "id": "178",
@@ -1755,6 +1744,17 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'function'",
+      "status": "Killed"
+    },
+    {
+      "id": "177",
+      "file": "source/rate-limit.ts",
+      "line": 304,
+      "column": 3,
+      "endLine": 304,
+      "mutator": "EqualityOperator",
+      "replacement": "typeof config.store.resetKey === 'function'",
+      "original": "typeof config.store.resetKey !== 'function'",
       "status": "Killed"
     },
     {
@@ -1769,17 +1769,6 @@
       "status": "Survived"
     },
     {
-      "id": "176",
-      "file": "source/rate-limit.ts",
-      "line": 304,
-      "column": 3,
-      "endLine": 304,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "typeof config.store.resetKey !== 'function'",
-      "status": "Survived"
-    },
-    {
       "id": "180",
       "file": "source/rate-limit.ts",
       "line": 305,
@@ -1789,6 +1778,17 @@
       "replacement": "config.store.resetAll !== undefined || typeof config.store.resetAll !== 'function'",
       "original": "config.store.resetAll !== undefined &&\n\t\t\ttypeof config.store.resetAll !== 'function') ||",
       "status": "Killed"
+    },
+    {
+      "id": "176",
+      "file": "source/rate-limit.ts",
+      "line": 304,
+      "column": 3,
+      "endLine": 304,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "typeof config.store.resetKey !== 'function'",
+      "status": "Survived"
     },
     {
       "id": "183",
@@ -1835,14 +1835,25 @@
       "status": "Killed"
     },
     {
-      "id": "187",
+      "id": "77",
       "file": "source/rate-limit.ts",
-      "line": 307,
-      "column": 4,
-      "endLine": 307,
+      "line": 208,
+      "column": 10,
+      "endLine": 208,
       "mutator": "LogicalOperator",
-      "replacement": "config.store.init !== undefined || typeof config.store.init !== 'function'",
-      "original": "config.store.init !== undefined && typeof config.store.init !== 'function'",
+      "replacement": "passedOptions.max && 5",
+      "original": "passedOptions.max ?? 5",
+      "status": "Timeout"
+    },
+    {
+      "id": "181",
+      "file": "source/rate-limit.ts",
+      "line": 305,
+      "column": 4,
+      "endLine": 305,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "config.store.resetAll !== undefined",
       "status": "Killed"
     },
     {
@@ -1857,26 +1868,26 @@
       "status": "Killed"
     },
     {
-      "id": "181",
+      "id": "187",
       "file": "source/rate-limit.ts",
-      "line": 305,
+      "line": 307,
       "column": 4,
-      "endLine": 305,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "config.store.resetAll !== undefined",
+      "endLine": 307,
+      "mutator": "LogicalOperator",
+      "replacement": "config.store.init !== undefined || typeof config.store.init !== 'function'",
+      "original": "config.store.init !== undefined && typeof config.store.init !== 'function'",
       "status": "Killed"
     },
     {
-      "id": "168",
+      "id": "190",
       "file": "source/rate-limit.ts",
-      "line": 302,
-      "column": 3,
-      "endLine": 303,
+      "line": 307,
+      "column": 39,
+      "endLine": 307,
       "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "typeof config.store.increment !== 'function' ||\n\t\ttypeof config.store.decrement !== 'function' ||",
-      "status": "Survived"
+      "replacement": "true",
+      "original": "typeof config.store.init !== 'function'",
+      "status": "Killed"
     },
     {
       "id": "193",
@@ -1901,13 +1912,13 @@
       "status": "Killed"
     },
     {
-      "id": "190",
+      "id": "191",
       "file": "source/rate-limit.ts",
       "line": 307,
       "column": 39,
       "endLine": 307,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
+      "mutator": "EqualityOperator",
+      "replacement": "typeof config.store.init === 'function'",
       "original": "typeof config.store.init !== 'function'",
       "status": "Killed"
     },
@@ -1920,28 +1931,6 @@
       "mutator": "ConditionalExpression",
       "replacement": "false",
       "original": "config.store.init !== undefined && typeof config.store.init !== 'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "191",
-      "file": "source/rate-limit.ts",
-      "line": 307,
-      "column": 39,
-      "endLine": 307,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof config.store.init === 'function'",
-      "original": "typeof config.store.init !== 'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "192",
-      "file": "source/rate-limit.ts",
-      "line": 307,
-      "column": 68,
-      "endLine": 307,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'function'",
       "status": "Killed"
     },
     {
@@ -1989,17 +1978,6 @@
       "status": "Survived"
     },
     {
-      "id": "207",
-      "file": "source/rate-limit.ts",
-      "line": 368,
-      "column": 9,
-      "endLine": 368,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'set %s to %o'",
-      "status": "Survived"
-    },
-    {
       "id": "205",
       "file": "source/rate-limit.ts",
       "line": 364,
@@ -2008,6 +1986,28 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'creating new rate limiter with %o'",
+      "status": "Survived"
+    },
+    {
+      "id": "202",
+      "file": "source/rate-limit.ts",
+      "line": 359,
+      "column": 30,
+      "endLine": 359,
+      "mutator": "LogicalOperator",
+      "replacement": "passedOptions && {}",
+      "original": "passedOptions ?? {}",
+      "status": "Killed"
+    },
+    {
+      "id": "207",
+      "file": "source/rate-limit.ts",
+      "line": 368,
+      "column": 9,
+      "endLine": 368,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'set %s to %o'",
       "status": "Survived"
     },
     {
@@ -2022,14 +2022,14 @@
       "status": "Survived"
     },
     {
-      "id": "202",
+      "id": "192",
       "file": "source/rate-limit.ts",
-      "line": 359,
-      "column": 30,
-      "endLine": 359,
-      "mutator": "LogicalOperator",
-      "replacement": "passedOptions && {}",
-      "original": "passedOptions ?? {}",
+      "line": 307,
+      "column": 68,
+      "endLine": 307,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'function'",
       "status": "Killed"
     },
     {
@@ -2077,17 +2077,6 @@
       "status": "Killed"
     },
     {
-      "id": "213",
-      "file": "source/rate-limit.ts",
-      "line": 376,
-      "column": 35,
-      "endLine": 376,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'function'",
-      "status": "Killed"
-    },
-    {
       "id": "212",
       "file": "source/rate-limit.ts",
       "line": 376,
@@ -2096,6 +2085,17 @@
       "mutator": "EqualityOperator",
       "replacement": "typeof config.store.init !== 'function'",
       "original": "typeof config.store.init === 'function'",
+      "status": "Killed"
+    },
+    {
+      "id": "213",
+      "file": "source/rate-limit.ts",
+      "line": 376,
+      "column": 35,
+      "endLine": 376,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'function'",
       "status": "Killed"
     },
     {
@@ -2121,28 +2121,6 @@
       "status": "Survived"
     },
     {
-      "id": "140",
-      "file": "source/rate-limit.ts",
-      "line": 253,
-      "column": 6,
-      "endLine": 253,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "typeof config.ipv6Subnet === 'function'",
-      "status": "Timeout"
-    },
-    {
-      "id": "218",
-      "file": "source/rate-limit.ts",
-      "line": 383,
-      "column": 8,
-      "endLine": 383,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "storeInit instanceof Promise",
-      "status": "Killed"
-    },
-    {
       "id": "220",
       "file": "source/rate-limit.ts",
       "line": 383,
@@ -2151,17 +2129,6 @@
       "mutator": "BlockStatement",
       "replacement": "{}",
       "original": "{\n\t\t\t\tstoreInit.catch((error) =>\n\t\t\t\t\tconfig.logger.error(\n\t\t\t\t\t\terror,\n\t\t\t\t\t\t'express-rate-limit: async error during store initialization.',\n\t\t\t\t\t),\n\t\t\t\t)\n\t\t\t}",
-      "status": "Killed"
-    },
-    {
-      "id": "223",
-      "file": "source/rate-limit.ts",
-      "line": 387,
-      "column": 7,
-      "endLine": 387,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'express-rate-limit: async error during store initialization.'",
       "status": "Killed"
     },
     {
@@ -2176,14 +2143,14 @@
       "status": "Killed"
     },
     {
-      "id": "226",
+      "id": "223",
       "file": "source/rate-limit.ts",
-      "line": 394,
-      "column": 5,
-      "endLine": 394,
+      "line": 387,
+      "column": 7,
+      "endLine": 387,
       "mutator": "StringLiteral",
       "replacement": "\"\"",
-      "original": "'express-rate-limit: error during store initialization.'",
+      "original": "'express-rate-limit: async error during store initialization.'",
       "status": "Killed"
     },
     {
@@ -2198,15 +2165,15 @@
       "status": "Killed"
     },
     {
-      "id": "142",
+      "id": "226",
       "file": "source/rate-limit.ts",
-      "line": 253,
-      "column": 6,
-      "endLine": 253,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof config.ipv6Subnet !== 'function'",
-      "original": "typeof config.ipv6Subnet === 'function'",
-      "status": "Timeout"
+      "line": 394,
+      "column": 5,
+      "endLine": 394,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'express-rate-limit: error during store initialization.'",
+      "status": "Killed"
     },
     {
       "id": "219",
@@ -2216,6 +2183,17 @@
       "endLine": 383,
       "mutator": "ConditionalExpression",
       "replacement": "false",
+      "original": "storeInit instanceof Promise",
+      "status": "Killed"
+    },
+    {
+      "id": "218",
+      "file": "source/rate-limit.ts",
+      "line": 383,
+      "column": 8,
+      "endLine": 383,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
       "original": "storeInit instanceof Promise",
       "status": "Killed"
     },
@@ -2242,17 +2220,6 @@
       "status": "Killed"
     },
     {
-      "id": "149",
-      "file": "source/rate-limit.ts",
-      "line": 270,
-      "column": 20,
-      "endLine": 284,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t// Set the response status code.\n\t\t\tresponse.status(config.statusCode)\n\t\t\t// Call the `message` if it is a function.\n\t\t\tconst message: unknown =\n\t\t\t\ttypeof config.message === 'function'\n\t\t\t\t\t? aw",
-      "status": "Timeout"
-    },
-    {
       "id": "229",
       "file": "source/rate-limit.ts",
       "line": 405,
@@ -2262,6 +2229,72 @@
       "replacement": "false",
       "original": "config.skipFailedRequests &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('close', resolve))",
       "status": "Killed"
+    },
+    {
+      "id": "140",
+      "file": "source/rate-limit.ts",
+      "line": 253,
+      "column": 6,
+      "endLine": 253,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "typeof config.ipv6Subnet === 'function'",
+      "status": "Timeout"
+    },
+    {
+      "id": "142",
+      "file": "source/rate-limit.ts",
+      "line": 253,
+      "column": 6,
+      "endLine": 253,
+      "mutator": "EqualityOperator",
+      "replacement": "typeof config.ipv6Subnet !== 'function'",
+      "original": "typeof config.ipv6Subnet === 'function'",
+      "status": "Timeout"
+    },
+    {
+      "id": "234",
+      "file": "source/rate-limit.ts",
+      "line": 409,
+      "column": 5,
+      "endLine": 410,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "(config.skipFailedRequests || config.skipSuccessfulRequests) &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('finish', resolve))",
+      "status": "Killed"
+    },
+    {
+      "id": "236",
+      "file": "source/rate-limit.ts",
+      "line": 409,
+      "column": 6,
+      "endLine": 409,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
+      "status": "Survived"
+    },
+    {
+      "id": "239",
+      "file": "source/rate-limit.ts",
+      "line": 410,
+      "column": 50,
+      "endLine": 410,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'finish'",
+      "status": "Killed"
+    },
+    {
+      "id": "149",
+      "file": "source/rate-limit.ts",
+      "line": 270,
+      "column": 20,
+      "endLine": 284,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t// Set the response status code.\n\t\t\tresponse.status(config.statusCode)\n\t\t\t// Call the `message` if it is a function.\n\t\t\tconst message: unknown =\n\t\t\t\ttypeof config.message === 'function'\n\t\t\t\t\t? aw",
+      "status": "Timeout"
     },
     {
       "id": "155",
@@ -2297,80 +2330,14 @@
       "status": "Timeout"
     },
     {
-      "id": "239",
+      "id": "241",
       "file": "source/rate-limit.ts",
-      "line": 410,
-      "column": 50,
-      "endLine": 410,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'finish'",
-      "status": "Killed"
-    },
-    {
-      "id": "236",
-      "file": "source/rate-limit.ts",
-      "line": 409,
-      "column": 6,
-      "endLine": 409,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
-      "status": "Survived"
-    },
-    {
-      "id": "237",
-      "file": "source/rate-limit.ts",
-      "line": 409,
-      "column": 6,
-      "endLine": 409,
-      "mutator": "LogicalOperator",
-      "replacement": "config.skipFailedRequests && config.skipSuccessfulRequests",
-      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
-      "status": "Killed"
-    },
-    {
-      "id": "244",
-      "file": "source/rate-limit.ts",
-      "line": 414,
-      "column": 50,
-      "endLine": 414,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'error'",
-      "status": "Survived"
-    },
-    {
-      "id": "243",
-      "file": "source/rate-limit.ts",
-      "line": 414,
-      "column": 23,
-      "endLine": 414,
-      "mutator": "ArrowFunction",
-      "replacement": "() => undefined",
-      "original": "(resolve) => response.once('error', resolve)",
-      "status": "Survived"
-    },
-    {
-      "id": "234",
-      "file": "source/rate-limit.ts",
-      "line": 409,
+      "line": 413,
       "column": 5,
-      "endLine": 410,
+      "endLine": 414,
       "mutator": "ConditionalExpression",
       "replacement": "false",
-      "original": "(config.skipFailedRequests || config.skipSuccessfulRequests) &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('finish', resolve))",
-      "status": "Killed"
-    },
-    {
-      "id": "246",
-      "file": "source/rate-limit.ts",
-      "line": 416,
-      "column": 10,
-      "endLine": 416,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'requested %o'",
+      "original": "config.skipFailedRequests &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('error', resolve))",
       "status": "Survived"
     },
     {
@@ -2385,6 +2352,28 @@
       "status": "Killed"
     },
     {
+      "id": "237",
+      "file": "source/rate-limit.ts",
+      "line": 409,
+      "column": 6,
+      "endLine": 409,
+      "mutator": "LogicalOperator",
+      "replacement": "config.skipFailedRequests && config.skipSuccessfulRequests",
+      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
+      "status": "Killed"
+    },
+    {
+      "id": "248",
+      "file": "source/rate-limit.ts",
+      "line": 417,
+      "column": 10,
+      "endLine": 417,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'request from ip %o'",
+      "status": "Survived"
+    },
+    {
       "id": "251",
       "file": "source/rate-limit.ts",
       "line": 421,
@@ -2393,6 +2382,17 @@
       "mutator": "BlockStatement",
       "replacement": "{}",
       "original": "{\n\t\t\t\tdebug('skipping request')\n\t\t\t\tnext()\n\t\t\t\treturn\n\t\t\t}",
+      "status": "Killed"
+    },
+    {
+      "id": "249",
+      "file": "source/rate-limit.ts",
+      "line": 421,
+      "column": 8,
+      "endLine": 421,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "skip",
       "status": "Killed"
     },
     {
@@ -2407,28 +2407,6 @@
       "status": "Survived"
     },
     {
-      "id": "248",
-      "file": "source/rate-limit.ts",
-      "line": 417,
-      "column": 10,
-      "endLine": 417,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'request from ip %o'",
-      "status": "Survived"
-    },
-    {
-      "id": "249",
-      "file": "source/rate-limit.ts",
-      "line": 421,
-      "column": 8,
-      "endLine": 421,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "skip",
-      "status": "Killed"
-    },
-    {
       "id": "250",
       "file": "source/rate-limit.ts",
       "line": 421,
@@ -2440,14 +2418,47 @@
       "status": "Killed"
     },
     {
-      "id": "241",
+      "id": "243",
       "file": "source/rate-limit.ts",
-      "line": 413,
-      "column": 5,
+      "line": 414,
+      "column": 23,
       "endLine": 414,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "config.skipFailedRequests &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('error', resolve))",
+      "mutator": "ArrowFunction",
+      "replacement": "() => undefined",
+      "original": "(resolve) => response.once('error', resolve)",
+      "status": "Survived"
+    },
+    {
+      "id": "244",
+      "file": "source/rate-limit.ts",
+      "line": 414,
+      "column": 50,
+      "endLine": 414,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'error'",
+      "status": "Survived"
+    },
+    {
+      "id": "246",
+      "file": "source/rate-limit.ts",
+      "line": 416,
+      "column": 10,
+      "endLine": 416,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'requested %o'",
+      "status": "Survived"
+    },
+    {
+      "id": "256",
+      "file": "source/rate-limit.ts",
+      "line": 432,
+      "column": 10,
+      "endLine": 432,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'computed key %o'",
       "status": "Survived"
     },
     {
@@ -2473,17 +2484,6 @@
       "status": "Killed"
     },
     {
-      "id": "256",
-      "file": "source/rate-limit.ts",
-      "line": 432,
-      "column": 10,
-      "endLine": 432,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'computed key %o'",
-      "status": "Survived"
-    },
-    {
       "id": "261",
       "file": "source/rate-limit.ts",
       "line": 442,
@@ -2492,17 +2492,6 @@
       "mutator": "ConditionalExpression",
       "replacement": "false",
       "original": "incrementResult.resetTime &&\n\t\t\t\t\t(config.skipFailedRequests || config.skipSuccessfulRequests)",
-      "status": "Survived"
-    },
-    {
-      "id": "264",
-      "file": "source/rate-limit.ts",
-      "line": 443,
-      "column": 7,
-      "endLine": 443,
-      "mutator": "LogicalOperator",
-      "replacement": "config.skipFailedRequests && config.skipSuccessfulRequests",
-      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
       "status": "Survived"
     },
     {
@@ -2517,15 +2506,15 @@
       "status": "Survived"
     },
     {
-      "id": "267",
+      "id": "264",
       "file": "source/rate-limit.ts",
-      "line": 449,
-      "column": 20,
-      "endLine": 460,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\tif (config.passOnStoreError) {\n\t\t\t\t\tconfig.logger.error(\n\t\t\t\t\t\terror,\n\t\t\t\t\t\t'express-rate-limit: error from store, allowing request without rate-limiting.',\n\t\t\t\t\t)\n\t\t\t\t\tnext()\n\t\t\t\t\treturn\n\t\t\t\t}\n",
-      "status": "Killed"
+      "line": 443,
+      "column": 7,
+      "endLine": 443,
+      "mutator": "LogicalOperator",
+      "replacement": "config.skipFailedRequests && config.skipSuccessfulRequests",
+      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
+      "status": "Survived"
     },
     {
       "id": "265",
@@ -2547,6 +2536,17 @@
       "mutator": "BlockStatement",
       "replacement": "{}",
       "original": "{\n\t\t\t\t\tresetTime = incrementResult.resetTime\n\t\t\t\t}",
+      "status": "Killed"
+    },
+    {
+      "id": "267",
+      "file": "source/rate-limit.ts",
+      "line": 449,
+      "column": 20,
+      "endLine": 460,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\tif (config.passOnStoreError) {\n\t\t\t\t\tconfig.logger.error(\n\t\t\t\t\t\terror,\n\t\t\t\t\t\t'express-rate-limit: error from store, allowing request without rate-limiting.',\n\t\t\t\t\t)\n\t\t\t\t\tnext()\n\t\t\t\t\treturn\n\t\t\t\t}\n",
       "status": "Killed"
     },
     {
@@ -2649,17 +2649,6 @@
       "status": "Killed"
     },
     {
-      "id": "280",
-      "file": "source/rate-limit.ts",
-      "line": 474,
-      "column": 4,
-      "endLine": 474,
-      "mutator": "CallExpression",
-      "replacement": ";",
-      "original": "config.validations.limit(limit)",
-      "status": "Survived"
-    },
-    {
       "id": "277",
       "file": "source/rate-limit.ts",
       "line": 470,
@@ -2671,15 +2660,15 @@
       "status": "Killed"
     },
     {
-      "id": "282",
+      "id": "280",
       "file": "source/rate-limit.ts",
-      "line": 480,
-      "column": 16,
-      "endLine": 480,
-      "mutator": "MethodExpression",
-      "replacement": "Math.min(limit - totalHits, 0)",
-      "original": "Math.max(limit - totalHits, 0)",
-      "status": "Killed"
+      "line": 474,
+      "column": 4,
+      "endLine": 474,
+      "mutator": "CallExpression",
+      "replacement": ";",
+      "original": "config.validations.limit(limit)",
+      "status": "Survived"
     },
     {
       "id": "227",
@@ -2715,6 +2704,17 @@
       "status": "Timeout"
     },
     {
+      "id": "282",
+      "file": "source/rate-limit.ts",
+      "line": 480,
+      "column": 16,
+      "endLine": 480,
+      "mutator": "MethodExpression",
+      "replacement": "Math.min(limit - totalHits, 0)",
+      "original": "Math.max(limit - totalHits, 0)",
+      "status": "Killed"
+    },
+    {
       "id": "233",
       "file": "source/rate-limit.ts",
       "line": 409,
@@ -2723,6 +2723,61 @@
       "mutator": "ConditionalExpression",
       "replacement": "true",
       "original": "(config.skipFailedRequests || config.skipSuccessfulRequests) &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('finish', resolve))",
+      "status": "Timeout"
+    },
+    {
+      "id": "235",
+      "file": "source/rate-limit.ts",
+      "line": 409,
+      "column": 5,
+      "endLine": 410,
+      "mutator": "LogicalOperator",
+      "replacement": "config.skipFailedRequests || config.skipSuccessfulRequests || new Promise<void>(resolve => response.once('finish', resolve))",
+      "original": "(config.skipFailedRequests || config.skipSuccessfulRequests) &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('finish', resolve))",
+      "status": "Timeout"
+    },
+    {
+      "id": "290",
+      "file": "source/rate-limit.ts",
+      "line": 499,
+      "column": 32,
+      "endLine": 499,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'current'",
+      "status": "Killed"
+    },
+    {
+      "id": "240",
+      "file": "source/rate-limit.ts",
+      "line": 413,
+      "column": 5,
+      "endLine": 414,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "config.skipFailedRequests &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('error', resolve))",
+      "status": "Timeout"
+    },
+    {
+      "id": "293",
+      "file": "source/rate-limit.ts",
+      "line": 501,
+      "column": 17,
+      "endLine": 501,
+      "mutator": "BooleanLiteral",
+      "replacement": "true",
+      "original": "false",
+      "status": "Survived"
+    },
+    {
+      "id": "242",
+      "file": "source/rate-limit.ts",
+      "line": 413,
+      "column": 5,
+      "endLine": 414,
+      "mutator": "LogicalOperator",
+      "replacement": "config.skipFailedRequests || new Promise<void>(resolve => response.once('error', resolve))",
+      "original": "config.skipFailedRequests &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('error', resolve))",
       "status": "Timeout"
     },
     {
@@ -2737,50 +2792,6 @@
       "status": "Killed"
     },
     {
-      "id": "235",
-      "file": "source/rate-limit.ts",
-      "line": 409,
-      "column": 5,
-      "endLine": 410,
-      "mutator": "LogicalOperator",
-      "replacement": "config.skipFailedRequests || config.skipSuccessfulRequests || new Promise<void>(resolve => response.once('finish', resolve))",
-      "original": "(config.skipFailedRequests || config.skipSuccessfulRequests) &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('finish', resolve))",
-      "status": "Timeout"
-    },
-    {
-      "id": "292",
-      "file": "source/rate-limit.ts",
-      "line": 500,
-      "column": 19,
-      "endLine": 500,
-      "mutator": "BooleanLiteral",
-      "replacement": "true",
-      "original": "false",
-      "status": "Survived"
-    },
-    {
-      "id": "240",
-      "file": "source/rate-limit.ts",
-      "line": 413,
-      "column": 5,
-      "endLine": 414,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "config.skipFailedRequests &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('error', resolve))",
-      "status": "Timeout"
-    },
-    {
-      "id": "242",
-      "file": "source/rate-limit.ts",
-      "line": 413,
-      "column": 5,
-      "endLine": 414,
-      "mutator": "LogicalOperator",
-      "replacement": "config.skipFailedRequests || new Promise<void>(resolve => response.once('error', resolve))",
-      "original": "config.skipFailedRequests &&\n\t\t\t\tnew Promise<void>((resolve) => response.once('error', resolve))",
-      "status": "Timeout"
-    },
-    {
       "id": "284",
       "file": "source/rate-limit.ts",
       "line": 487,
@@ -2792,17 +2803,6 @@
       "status": "Survived"
     },
     {
-      "id": "294",
-      "file": "source/rate-limit.ts",
-      "line": 509,
-      "column": 8,
-      "endLine": 509,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "config.legacyHeaders && !response.headersSent",
-      "status": "Killed"
-    },
-    {
       "id": "285",
       "file": "source/rate-limit.ts",
       "line": 487,
@@ -2811,18 +2811,7 @@
       "mutator": "ConditionalExpression",
       "replacement": "false",
       "original": "debug.enabled",
-      "status": "Killed"
-    },
-    {
-      "id": "290",
-      "file": "source/rate-limit.ts",
-      "line": 499,
-      "column": 32,
-      "endLine": 499,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'current'",
-      "status": "Killed"
+      "status": "Survived"
     },
     {
       "id": "291",
@@ -2836,11 +2825,55 @@
       "status": "Killed"
     },
     {
-      "id": "293",
+      "id": "295",
       "file": "source/rate-limit.ts",
-      "line": 501,
-      "column": 17,
-      "endLine": 501,
+      "line": 509,
+      "column": 8,
+      "endLine": 509,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "config.legacyHeaders && !response.headersSent",
+      "status": "Killed"
+    },
+    {
+      "id": "297",
+      "file": "source/rate-limit.ts",
+      "line": 509,
+      "column": 32,
+      "endLine": 509,
+      "mutator": "BooleanLiteral",
+      "replacement": "response.headersSent",
+      "original": "!response.headersSent",
+      "status": "Killed"
+    },
+    {
+      "id": "300",
+      "file": "source/rate-limit.ts",
+      "line": 510,
+      "column": 11,
+      "endLine": 510,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'set legacy headers'",
+      "status": "Killed"
+    },
+    {
+      "id": "298",
+      "file": "source/rate-limit.ts",
+      "line": 509,
+      "column": 55,
+      "endLine": 512,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\tdebug('set legacy headers')\n\t\t\t\tsetLegacyHeaders(response, info)\n\t\t\t}",
+      "status": "Killed"
+    },
+    {
+      "id": "292",
+      "file": "source/rate-limit.ts",
+      "line": 500,
+      "column": 19,
+      "endLine": 500,
       "mutator": "BooleanLiteral",
       "replacement": "true",
       "original": "false",
@@ -2858,50 +2891,6 @@
       "status": "Timeout"
     },
     {
-      "id": "297",
-      "file": "source/rate-limit.ts",
-      "line": 509,
-      "column": 32,
-      "endLine": 509,
-      "mutator": "BooleanLiteral",
-      "replacement": "response.headersSent",
-      "original": "!response.headersSent",
-      "status": "Killed"
-    },
-    {
-      "id": "298",
-      "file": "source/rate-limit.ts",
-      "line": 509,
-      "column": 55,
-      "endLine": 512,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\tdebug('set legacy headers')\n\t\t\t\tsetLegacyHeaders(response, info)\n\t\t\t}",
-      "status": "Killed"
-    },
-    {
-      "id": "300",
-      "file": "source/rate-limit.ts",
-      "line": 510,
-      "column": 11,
-      "endLine": 510,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'set legacy headers'",
-      "status": "Killed"
-    },
-    {
-      "id": "301",
-      "file": "source/rate-limit.ts",
-      "line": 511,
-      "column": 5,
-      "endLine": 511,
-      "mutator": "CallExpression",
-      "replacement": ";",
-      "original": "setLegacyHeaders(response, info)",
-      "status": "Killed"
-    },
-    {
       "id": "305",
       "file": "source/rate-limit.ts",
       "line": 516,
@@ -2910,28 +2899,6 @@
       "mutator": "BooleanLiteral",
       "replacement": "response.headersSent",
       "original": "!response.headersSent",
-      "status": "Killed"
-    },
-    {
-      "id": "302",
-      "file": "source/rate-limit.ts",
-      "line": 516,
-      "column": 8,
-      "endLine": 516,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "config.standardHeaders && !response.headersSent",
-      "status": "Killed"
-    },
-    {
-      "id": "307",
-      "file": "source/rate-limit.ts",
-      "line": 518,
-      "column": 6,
-      "endLine": 522,
-      "mutator": "ConditionalExpression",
-      "replacement": "case 'draft-6':",
-      "original": "case 'draft-6': {\n\t\t\t\t\t\tdebug('set ietf draft 6 headers')\n\t\t\t\t\t\tsetDraft6Headers(response, info, config.windowMs)\n\t\t\t\t\t\tbreak\n\t\t\t\t\t}",
       "status": "Killed"
     },
     {
@@ -2946,14 +2913,36 @@
       "status": "Killed"
     },
     {
-      "id": "308",
+      "id": "301",
       "file": "source/rate-limit.ts",
-      "line": 518,
-      "column": 11,
-      "endLine": 518,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'draft-6'",
+      "line": 511,
+      "column": 5,
+      "endLine": 511,
+      "mutator": "CallExpression",
+      "replacement": ";",
+      "original": "setLegacyHeaders(response, info)",
+      "status": "Killed"
+    },
+    {
+      "id": "302",
+      "file": "source/rate-limit.ts",
+      "line": 516,
+      "column": 8,
+      "endLine": 516,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "config.standardHeaders && !response.headersSent",
+      "status": "Killed"
+    },
+    {
+      "id": "294",
+      "file": "source/rate-limit.ts",
+      "line": 509,
+      "column": 8,
+      "endLine": 509,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "config.legacyHeaders && !response.headersSent",
       "status": "Killed"
     },
     {
@@ -2965,6 +2954,17 @@
       "mutator": "ConditionalExpression",
       "replacement": "false",
       "original": "config.standardHeaders && !response.headersSent",
+      "status": "Killed"
+    },
+    {
+      "id": "308",
+      "file": "source/rate-limit.ts",
+      "line": 518,
+      "column": 11,
+      "endLine": 518,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'draft-6'",
       "status": "Killed"
     },
     {
@@ -2990,25 +2990,14 @@
       "status": "Killed"
     },
     {
-      "id": "295",
+      "id": "304",
       "file": "source/rate-limit.ts",
-      "line": 509,
+      "line": 516,
       "column": 8,
-      "endLine": 509,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "config.legacyHeaders && !response.headersSent",
-      "status": "Killed"
-    },
-    {
-      "id": "313",
-      "file": "source/rate-limit.ts",
-      "line": 524,
-      "column": 6,
-      "endLine": 529,
-      "mutator": "ConditionalExpression",
-      "replacement": "case 'draft-7':",
-      "original": "case 'draft-7': {\n\t\t\t\t\t\tdebug('set ietf draft 7 headers')\n\t\t\t\t\t\tconfig.validations.headersResetTime(info.resetTime)\n\t\t\t\t\t\tsetDraft7Headers(response, info, config.windowMs)\n\t\t\t\t\t\tbreak\n\t\t\t\t\t}",
+      "endLine": 516,
+      "mutator": "LogicalOperator",
+      "replacement": "config.standardHeaders || !response.headersSent",
+      "original": "config.standardHeaders && !response.headersSent",
       "status": "Killed"
     },
     {
@@ -3023,15 +3012,15 @@
       "status": "Killed"
     },
     {
-      "id": "260",
+      "id": "313",
       "file": "source/rate-limit.ts",
-      "line": 442,
+      "line": 524,
       "column": 6,
-      "endLine": 443,
+      "endLine": 529,
       "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "incrementResult.resetTime &&\n\t\t\t\t\t(config.skipFailedRequests || config.skipSuccessfulRequests)",
-      "status": "Timeout"
+      "replacement": "case 'draft-7':",
+      "original": "case 'draft-7': {\n\t\t\t\t\t\tdebug('set ietf draft 7 headers')\n\t\t\t\t\t\tconfig.validations.headersResetTime(info.resetTime)\n\t\t\t\t\t\tsetDraft7Headers(response, info, config.windowMs)\n\t\t\t\t\t\tbreak\n\t\t\t\t\t}",
+      "status": "Killed"
     },
     {
       "id": "296",
@@ -3043,6 +3032,17 @@
       "replacement": "config.legacyHeaders || !response.headersSent",
       "original": "config.legacyHeaders && !response.headersSent",
       "status": "Killed"
+    },
+    {
+      "id": "260",
+      "file": "source/rate-limit.ts",
+      "line": 442,
+      "column": 6,
+      "endLine": 443,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "incrementResult.resetTime &&\n\t\t\t\t\t(config.skipFailedRequests || config.skipSuccessfulRequests)",
+      "status": "Timeout"
     },
     {
       "id": "314",
@@ -3067,15 +3067,15 @@
       "status": "Killed"
     },
     {
-      "id": "262",
+      "id": "318",
       "file": "source/rate-limit.ts",
-      "line": 442,
-      "column": 6,
-      "endLine": 443,
-      "mutator": "LogicalOperator",
-      "replacement": "incrementResult.resetTime || config.skipFailedRequests || config.skipSuccessfulRequests",
-      "original": "incrementResult.resetTime &&\n\t\t\t\t\t(config.skipFailedRequests || config.skipSuccessfulRequests)",
-      "status": "Timeout"
+      "line": 526,
+      "column": 7,
+      "endLine": 526,
+      "mutator": "CallExpression",
+      "replacement": ";",
+      "original": "config.validations.headersResetTime(info.resetTime)",
+      "status": "Killed"
     },
     {
       "id": "317",
@@ -3086,17 +3086,6 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'set ietf draft 7 headers'",
-      "status": "Killed"
-    },
-    {
-      "id": "318",
-      "file": "source/rate-limit.ts",
-      "line": 526,
-      "column": 7,
-      "endLine": 526,
-      "mutator": "CallExpression",
-      "replacement": ";",
-      "original": "config.validations.headersResetTime(info.resetTime)",
       "status": "Killed"
     },
     {
@@ -3133,15 +3122,26 @@
       "status": "Killed"
     },
     {
-      "id": "323",
+      "id": "322",
       "file": "source/rate-limit.ts",
-      "line": 533,
-      "column": 8,
-      "endLine": 533,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "typeof config.identifier === 'function'",
+      "line": 531,
+      "column": 22,
+      "endLine": 543,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\t\t\tconst retrieveName =\n\t\t\t\t\t\t\ttypeof config.identifier === 'function'\n\t\t\t\t\t\t\t\t? config.identifier(request, response)\n\t\t\t\t\t\t\t\t: config.identifier\n\t\t\t\t\t\tconst name = await retrieveName\n\n\t\t\t\t\t\tdebu",
       "status": "Killed"
+    },
+    {
+      "id": "262",
+      "file": "source/rate-limit.ts",
+      "line": 442,
+      "column": 6,
+      "endLine": 443,
+      "mutator": "LogicalOperator",
+      "replacement": "incrementResult.resetTime || config.skipFailedRequests || config.skipSuccessfulRequests",
+      "original": "incrementResult.resetTime &&\n\t\t\t\t\t(config.skipFailedRequests || config.skipSuccessfulRequests)",
+      "status": "Timeout"
     },
     {
       "id": "324",
@@ -3155,17 +3155,6 @@
       "status": "Killed"
     },
     {
-      "id": "273",
-      "file": "source/rate-limit.ts",
-      "line": 455,
-      "column": 6,
-      "endLine": 455,
-      "mutator": "CallExpression",
-      "replacement": ";",
-      "original": "next()",
-      "status": "Timeout"
-    },
-    {
       "id": "325",
       "file": "source/rate-limit.ts",
       "line": 533,
@@ -3175,6 +3164,28 @@
       "replacement": "typeof config.identifier !== 'function'",
       "original": "typeof config.identifier === 'function'",
       "status": "Killed"
+    },
+    {
+      "id": "326",
+      "file": "source/rate-limit.ts",
+      "line": 533,
+      "column": 37,
+      "endLine": 533,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'function'",
+      "status": "Killed"
+    },
+    {
+      "id": "273",
+      "file": "source/rate-limit.ts",
+      "line": 455,
+      "column": 6,
+      "endLine": 455,
+      "mutator": "CallExpression",
+      "replacement": ";",
+      "original": "next()",
+      "status": "Timeout"
     },
     {
       "id": "330",
@@ -3221,6 +3232,17 @@
       "status": "Killed"
     },
     {
+      "id": "307",
+      "file": "source/rate-limit.ts",
+      "line": 518,
+      "column": 6,
+      "endLine": 522,
+      "mutator": "ConditionalExpression",
+      "replacement": "case 'draft-6':",
+      "original": "case 'draft-6': {\n\t\t\t\t\t\tdebug('set ietf draft 6 headers')\n\t\t\t\t\t\tsetDraft6Headers(response, info, config.windowMs)\n\t\t\t\t\t\tbreak\n\t\t\t\t\t}",
+      "status": "Killed"
+    },
+    {
       "id": "333",
       "file": "source/rate-limit.ts",
       "line": 545,
@@ -3229,17 +3251,6 @@
       "mutator": "ConditionalExpression",
       "replacement": "default:",
       "original": "default: {\n\t\t\t\t\t\tconfig.validations.headersDraftVersion(config.standardHeaders)\n\t\t\t\t\t\tbreak\n\t\t\t\t\t}",
-      "status": "Survived"
-    },
-    {
-      "id": "334",
-      "file": "source/rate-limit.ts",
-      "line": 545,
-      "column": 15,
-      "endLine": 548,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\t\t\tconfig.validations.headersDraftVersion(config.standardHeaders)\n\t\t\t\t\t\tbreak\n\t\t\t\t\t}",
       "status": "Survived"
     },
     {
@@ -3265,14 +3276,25 @@
       "status": "Timeout"
     },
     {
-      "id": "304",
+      "id": "336",
       "file": "source/rate-limit.ts",
-      "line": 516,
+      "line": 554,
       "column": 8,
-      "endLine": 516,
-      "mutator": "LogicalOperator",
-      "replacement": "config.standardHeaders || !response.headersSent",
-      "original": "config.standardHeaders && !response.headersSent",
+      "endLine": 554,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
+      "status": "Killed"
+    },
+    {
+      "id": "342",
+      "file": "source/rate-limit.ts",
+      "line": 559,
+      "column": 10,
+      "endLine": 559,
+      "mutator": "BooleanLiteral",
+      "replacement": "decremented",
+      "original": "!decremented",
       "status": "Killed"
     },
     {
@@ -3298,47 +3320,14 @@
       "status": "Killed"
     },
     {
-      "id": "340",
-      "file": "source/rate-limit.ts",
-      "line": 555,
-      "column": 23,
-      "endLine": 555,
-      "mutator": "BooleanLiteral",
-      "replacement": "true",
-      "original": "false",
-      "status": "Killed"
-    },
-    {
-      "id": "342",
+      "id": "345",
       "file": "source/rate-limit.ts",
       "line": 559,
-      "column": 10,
-      "endLine": 559,
-      "mutator": "BooleanLiteral",
-      "replacement": "decremented",
-      "original": "!decremented",
-      "status": "Killed"
-    },
-    {
-      "id": "278",
-      "file": "source/rate-limit.ts",
-      "line": 470,
-      "column": 5,
-      "endLine": 470,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof config.limit !== 'function'",
-      "original": "typeof config.limit === 'function'",
-      "status": "Timeout"
-    },
-    {
-      "id": "344",
-      "file": "source/rate-limit.ts",
-      "line": 559,
-      "column": 10,
-      "endLine": 559,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "!decremented",
+      "column": 24,
+      "endLine": 569,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\t\t\t// Don't decrement if the reset time has already passed,\n\t\t\t\t\t\t// as the store will have already reset the count for this key.\n\t\t\t\t\t\tif (resetTime && Date.now() >= resetTime.getTime()) {\n\t\t\t\t\t",
       "status": "Killed"
     },
     {
@@ -3353,14 +3342,25 @@
       "status": "Killed"
     },
     {
-      "id": "338",
+      "id": "340",
       "file": "source/rate-limit.ts",
-      "line": 554,
-      "column": 8,
-      "endLine": 554,
-      "mutator": "LogicalOperator",
-      "replacement": "config.skipFailedRequests && config.skipSuccessfulRequests",
-      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
+      "line": 555,
+      "column": 23,
+      "endLine": 555,
+      "mutator": "BooleanLiteral",
+      "replacement": "true",
+      "original": "false",
+      "status": "Killed"
+    },
+    {
+      "id": "344",
+      "file": "source/rate-limit.ts",
+      "line": 559,
+      "column": 10,
+      "endLine": 559,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "!decremented",
       "status": "Killed"
     },
     {
@@ -3375,15 +3375,26 @@
       "status": "Killed"
     },
     {
-      "id": "322",
+      "id": "323",
       "file": "source/rate-limit.ts",
-      "line": 531,
-      "column": 22,
-      "endLine": 543,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\t\t\tconst retrieveName =\n\t\t\t\t\t\t\ttypeof config.identifier === 'function'\n\t\t\t\t\t\t\t\t? config.identifier(request, response)\n\t\t\t\t\t\t\t\t: config.identifier\n\t\t\t\t\t\tconst name = await retrieveName\n\n\t\t\t\t\t\tdebu",
+      "line": 533,
+      "column": 8,
+      "endLine": 533,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "typeof config.identifier === 'function'",
       "status": "Killed"
+    },
+    {
+      "id": "278",
+      "file": "source/rate-limit.ts",
+      "line": 470,
+      "column": 5,
+      "endLine": 470,
+      "mutator": "EqualityOperator",
+      "replacement": "typeof config.limit !== 'function'",
+      "original": "typeof config.limit === 'function'",
+      "status": "Timeout"
     },
     {
       "id": "347",
@@ -3394,50 +3405,6 @@
       "mutator": "ConditionalExpression",
       "replacement": "false",
       "original": "resetTime && Date.now() >= resetTime.getTime()",
-      "status": "Killed"
-    },
-    {
-      "id": "349",
-      "file": "source/rate-limit.ts",
-      "line": 562,
-      "column": 24,
-      "endLine": 562,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "Date.now() >= resetTime.getTime()",
-      "status": "Killed"
-    },
-    {
-      "id": "346",
-      "file": "source/rate-limit.ts",
-      "line": 562,
-      "column": 11,
-      "endLine": 562,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "resetTime && Date.now() >= resetTime.getTime()",
-      "status": "Killed"
-    },
-    {
-      "id": "350",
-      "file": "source/rate-limit.ts",
-      "line": 562,
-      "column": 24,
-      "endLine": 562,
-      "mutator": "EqualityOperator",
-      "replacement": "Date.now() > resetTime.getTime()",
-      "original": "Date.now() >= resetTime.getTime()",
-      "status": "Survived"
-    },
-    {
-      "id": "326",
-      "file": "source/rate-limit.ts",
-      "line": 533,
-      "column": 37,
-      "endLine": 533,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'function'",
       "status": "Killed"
     },
     {
@@ -3452,6 +3419,50 @@
       "status": "Killed"
     },
     {
+      "id": "334",
+      "file": "source/rate-limit.ts",
+      "line": 545,
+      "column": 15,
+      "endLine": 548,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\t\t\tconfig.validations.headersDraftVersion(config.standardHeaders)\n\t\t\t\t\t\tbreak\n\t\t\t\t\t}",
+      "status": "Killed"
+    },
+    {
+      "id": "350",
+      "file": "source/rate-limit.ts",
+      "line": 562,
+      "column": 24,
+      "endLine": 562,
+      "mutator": "EqualityOperator",
+      "replacement": "Date.now() > resetTime.getTime()",
+      "original": "Date.now() >= resetTime.getTime()",
+      "status": "Killed"
+    },
+    {
+      "id": "349",
+      "file": "source/rate-limit.ts",
+      "line": 562,
+      "column": 24,
+      "endLine": 562,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "Date.now() >= resetTime.getTime()",
+      "status": "Killed"
+    },
+    {
+      "id": "351",
+      "file": "source/rate-limit.ts",
+      "line": 562,
+      "column": 24,
+      "endLine": 562,
+      "mutator": "EqualityOperator",
+      "replacement": "Date.now() < resetTime.getTime()",
+      "original": "Date.now() >= resetTime.getTime()",
+      "status": "Killed"
+    },
+    {
       "id": "348",
       "file": "source/rate-limit.ts",
       "line": 562,
@@ -3463,17 +3474,6 @@
       "status": "Killed"
     },
     {
-      "id": "281",
-      "file": "source/rate-limit.ts",
-      "line": 477,
-      "column": 32,
-      "endLine": 483,
-      "mutator": "ObjectLiteral",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\tlimit,\n\t\t\t\tused: totalHits,\n\t\t\t\tremaining: Math.max(limit - totalHits, 0),\n\t\t\t\tresetTime,\n\t\t\t\tkey,\n\t\t\t}",
-      "status": "Timeout"
-    },
-    {
       "id": "354",
       "file": "source/rate-limit.ts",
       "line": 566,
@@ -3482,7 +3482,7 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'decrementing count'",
-      "status": "Survived"
+      "status": "Killed"
     },
     {
       "id": "355",
@@ -3493,7 +3493,7 @@
       "mutator": "BooleanLiteral",
       "replacement": "false",
       "original": "true",
-      "status": "Survived"
+      "status": "Killed"
     },
     {
       "id": "356",
@@ -3518,15 +3518,15 @@
       "status": "Killed"
     },
     {
-      "id": "358",
+      "id": "359",
       "file": "source/rate-limit.ts",
-      "line": 572,
-      "column": 36,
-      "endLine": 599,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\t\tif (finishPromise) {\n\t\t\t\t\t\tvoid finishPromise.then(async () => {\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed req",
-      "status": "Killed"
+      "line": 573,
+      "column": 10,
+      "endLine": 573,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "finishPromise",
+      "status": "Survived"
     },
     {
       "id": "360",
@@ -3540,26 +3540,26 @@
       "status": "Killed"
     },
     {
-      "id": "359",
+      "id": "362",
       "file": "source/rate-limit.ts",
-      "line": 573,
-      "column": 10,
-      "endLine": 573,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "finishPromise",
-      "status": "Survived"
-    },
-    {
-      "id": "361",
-      "file": "source/rate-limit.ts",
-      "line": 573,
-      "column": 25,
-      "endLine": 582,
+      "line": 574,
+      "column": 43,
+      "endLine": 581,
       "mutator": "BlockStatement",
       "replacement": "{}",
-      "original": "{\n\t\t\t\t\t\tvoid finishPromise.then(async () => {\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed requestWasSuccessful as %o', ",
+      "original": "{\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed requestWasSuccessful as %o', success)\n\t\t\t\t\t\t\tif (!success) await decremen",
       "status": "Killed"
+    },
+    {
+      "id": "281",
+      "file": "source/rate-limit.ts",
+      "line": 477,
+      "column": 32,
+      "endLine": 483,
+      "mutator": "ObjectLiteral",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\tlimit,\n\t\t\t\tused: totalHits,\n\t\t\t\tremaining: Math.max(limit - totalHits, 0),\n\t\t\t\tresetTime,\n\t\t\t\tkey,\n\t\t\t}",
+      "status": "Timeout"
     },
     {
       "id": "364",
@@ -3584,17 +3584,6 @@
       "status": "Killed"
     },
     {
-      "id": "362",
-      "file": "source/rate-limit.ts",
-      "line": 574,
-      "column": 43,
-      "endLine": 581,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed requestWasSuccessful as %o', success)\n\t\t\t\t\t\t\tif (!success) await decremen",
-      "status": "Killed"
-    },
-    {
       "id": "367",
       "file": "source/rate-limit.ts",
       "line": 580,
@@ -3602,6 +3591,28 @@
       "endLine": 580,
       "mutator": "ConditionalExpression",
       "replacement": "false",
+      "original": "!success",
+      "status": "Killed"
+    },
+    {
+      "id": "361",
+      "file": "source/rate-limit.ts",
+      "line": 573,
+      "column": 25,
+      "endLine": 582,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\t\t\tvoid finishPromise.then(async () => {\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed requestWasSuccessful as %o', ",
+      "status": "Killed"
+    },
+    {
+      "id": "366",
+      "file": "source/rate-limit.ts",
+      "line": 580,
+      "column": 12,
+      "endLine": 580,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
       "original": "!success",
       "status": "Killed"
     },
@@ -3614,7 +3625,7 @@
       "mutator": "ConditionalExpression",
       "replacement": "true",
       "original": "closePromise",
-      "status": "Survived"
+      "status": "Killed"
     },
     {
       "id": "369",
@@ -3625,6 +3636,17 @@
       "mutator": "ConditionalExpression",
       "replacement": "false",
       "original": "closePromise",
+      "status": "Killed"
+    },
+    {
+      "id": "338",
+      "file": "source/rate-limit.ts",
+      "line": 554,
+      "column": 8,
+      "endLine": 554,
+      "mutator": "LogicalOperator",
+      "replacement": "config.skipFailedRequests && config.skipSuccessfulRequests",
+      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
       "status": "Killed"
     },
     {
@@ -3639,25 +3661,14 @@
       "status": "Killed"
     },
     {
-      "id": "336",
+      "id": "346",
       "file": "source/rate-limit.ts",
-      "line": 554,
-      "column": 8,
-      "endLine": 554,
+      "line": 562,
+      "column": 11,
+      "endLine": 562,
       "mutator": "ConditionalExpression",
       "replacement": "true",
-      "original": "config.skipFailedRequests || config.skipSuccessfulRequests",
-      "status": "Survived"
-    },
-    {
-      "id": "345",
-      "file": "source/rate-limit.ts",
-      "line": 559,
-      "column": 24,
-      "endLine": 569,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\t\t\t// Don't decrement if the reset time has already passed,\n\t\t\t\t\t\t// as the store will have already reset the count for this key.\n\t\t\t\t\t\tif (resetTime && Date.now() >= resetTime.getTime()) {\n\t\t\t\t\t",
+      "original": "resetTime && Date.now() >= resetTime.getTime()",
       "status": "Killed"
     },
     {
@@ -3672,6 +3683,28 @@
       "status": "Killed"
     },
     {
+      "id": "381",
+      "file": "source/rate-limit.ts",
+      "line": 601,
+      "column": 40,
+      "endLine": 612,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\t\tif (finishPromise) {\n\t\t\t\t\t\tvoid finishPromise.then(async () => {\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed req",
+      "status": "Killed"
+    },
+    {
+      "id": "382",
+      "file": "source/rate-limit.ts",
+      "line": 602,
+      "column": 10,
+      "endLine": 602,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "finishPromise",
+      "status": "Survived"
+    },
+    {
       "id": "372",
       "file": "source/rate-limit.ts",
       "line": 586,
@@ -3683,14 +3716,14 @@
       "status": "Killed"
     },
     {
-      "id": "381",
+      "id": "384",
       "file": "source/rate-limit.ts",
-      "line": 601,
-      "column": 40,
-      "endLine": 612,
+      "line": 602,
+      "column": 25,
+      "endLine": 611,
       "mutator": "BlockStatement",
       "replacement": "{}",
-      "original": "{\n\t\t\t\t\tif (finishPromise) {\n\t\t\t\t\t\tvoid finishPromise.then(async () => {\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed req",
+      "original": "{\n\t\t\t\t\t\tvoid finishPromise.then(async () => {\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed requestWasSuccessful as %o', ",
       "status": "Killed"
     },
     {
@@ -3705,14 +3738,36 @@
       "status": "Killed"
     },
     {
-      "id": "374",
+      "id": "383",
       "file": "source/rate-limit.ts",
-      "line": 586,
-      "column": 12,
-      "endLine": 586,
+      "line": 602,
+      "column": 10,
+      "endLine": 602,
       "mutator": "ConditionalExpression",
       "replacement": "false",
-      "original": "!response.writableEnded",
+      "original": "finishPromise",
+      "status": "Killed"
+    },
+    {
+      "id": "375",
+      "file": "source/rate-limit.ts",
+      "line": 594,
+      "column": 10,
+      "endLine": 594,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "errorPromise",
+      "status": "Killed"
+    },
+    {
+      "id": "377",
+      "file": "source/rate-limit.ts",
+      "line": 594,
+      "column": 24,
+      "endLine": 598,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\t\t\tvoid errorPromise.then(async () => {\n\t\t\t\t\t\t\tawait decrementKey()\n\t\t\t\t\t\t})\n\t\t\t\t\t}",
       "status": "Killed"
     },
     {
@@ -3724,40 +3779,7 @@
       "mutator": "ConditionalExpression",
       "replacement": "false",
       "original": "errorPromise",
-      "status": "Survived"
-    },
-    {
-      "id": "377",
-      "file": "source/rate-limit.ts",
-      "line": 594,
-      "column": 24,
-      "endLine": 598,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\t\t\tvoid errorPromise.then(async () => {\n\t\t\t\t\t\t\tawait decrementKey()\n\t\t\t\t\t\t})\n\t\t\t\t\t}",
-      "status": "Survived"
-    },
-    {
-      "id": "375",
-      "file": "source/rate-limit.ts",
-      "line": 594,
-      "column": 10,
-      "endLine": 594,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "errorPromise",
-      "status": "Survived"
-    },
-    {
-      "id": "382",
-      "file": "source/rate-limit.ts",
-      "line": 602,
-      "column": 10,
-      "endLine": 602,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "finishPromise",
-      "status": "Survived"
+      "status": "Killed"
     },
     {
       "id": "379",
@@ -3768,28 +3790,6 @@
       "mutator": "ConditionalExpression",
       "replacement": "true",
       "original": "config.skipSuccessfulRequests",
-      "status": "Killed"
-    },
-    {
-      "id": "351",
-      "file": "source/rate-limit.ts",
-      "line": 562,
-      "column": 24,
-      "endLine": 562,
-      "mutator": "EqualityOperator",
-      "replacement": "Date.now() < resetTime.getTime()",
-      "original": "Date.now() >= resetTime.getTime()",
-      "status": "Killed"
-    },
-    {
-      "id": "383",
-      "file": "source/rate-limit.ts",
-      "line": 602,
-      "column": 10,
-      "endLine": 602,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "finishPromise",
       "status": "Killed"
     },
     {
@@ -3815,17 +3815,6 @@
       "status": "Killed"
     },
     {
-      "id": "384",
-      "file": "source/rate-limit.ts",
-      "line": 602,
-      "column": 25,
-      "endLine": 611,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\t\t\tvoid finishPromise.then(async () => {\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed requestWasSuccessful as %o', ",
-      "status": "Killed"
-    },
-    {
       "id": "387",
       "file": "source/rate-limit.ts",
       "line": 608,
@@ -3834,7 +3823,18 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'computed requestWasSuccessful as %o'",
-      "status": "Survived"
+      "status": "Killed"
+    },
+    {
+      "id": "358",
+      "file": "source/rate-limit.ts",
+      "line": 572,
+      "column": 36,
+      "endLine": 599,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\t\tif (finishPromise) {\n\t\t\t\t\t\tvoid finishPromise.then(async () => {\n\t\t\t\t\t\t\tconst success = await config.requestWasSuccessful(\n\t\t\t\t\t\t\t\trequest,\n\t\t\t\t\t\t\t\tresponse,\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tdebug('computed req",
+      "status": "Killed"
     },
     {
       "id": "388",
@@ -3859,28 +3859,6 @@
       "status": "Killed"
     },
     {
-      "id": "366",
-      "file": "source/rate-limit.ts",
-      "line": 580,
-      "column": 12,
-      "endLine": 580,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "!success",
-      "status": "Killed"
-    },
-    {
-      "id": "396",
-      "file": "source/rate-limit.ts",
-      "line": 618,
-      "column": 11,
-      "endLine": 618,
-      "mutator": "StringLiteral",
-      "replacement": "\"\"",
-      "original": "'limit exceeded'",
-      "status": "Survived"
-    },
-    {
       "id": "394",
       "file": "source/rate-limit.ts",
       "line": 617,
@@ -3892,14 +3870,14 @@
       "status": "Killed"
     },
     {
-      "id": "391",
+      "id": "396",
       "file": "source/rate-limit.ts",
-      "line": 617,
-      "column": 8,
-      "endLine": 617,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "totalHits > limit",
+      "line": 618,
+      "column": 11,
+      "endLine": 618,
+      "mutator": "StringLiteral",
+      "replacement": "\"\"",
+      "original": "'limit exceeded'",
       "status": "Killed"
     },
     {
@@ -3910,6 +3888,17 @@
       "endLine": 619,
       "mutator": "ConditionalExpression",
       "replacement": "true",
+      "original": "config.legacyHeaders || config.standardHeaders",
+      "status": "Killed"
+    },
+    {
+      "id": "398",
+      "file": "source/rate-limit.ts",
+      "line": 619,
+      "column": 9,
+      "endLine": 619,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
       "original": "config.legacyHeaders || config.standardHeaders",
       "status": "Killed"
     },
@@ -3925,13 +3914,24 @@
       "status": "Killed"
     },
     {
-      "id": "392",
+      "id": "400",
+      "file": "source/rate-limit.ts",
+      "line": 619,
+      "column": 57,
+      "endLine": 627,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\t\t\tdebug('set retry-after header')\n\t\t\t\t\tconst retrieveRetryAfter =\n\t\t\t\t\t\ttypeof config.retryAfter === 'function'\n\t\t\t\t\t\t\t? config.retryAfter(request, response)\n\t\t\t\t\t\t\t: config.retryAfter\n\t\t\t\t\tconst",
+      "status": "Killed"
+    },
+    {
+      "id": "391",
       "file": "source/rate-limit.ts",
       "line": 617,
       "column": 8,
       "endLine": 617,
-      "mutator": "EqualityOperator",
-      "replacement": "totalHits >= limit",
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
       "original": "totalHits > limit",
       "status": "Killed"
     },
@@ -3944,28 +3944,6 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'set retry-after header'",
-      "status": "Survived"
-    },
-    {
-      "id": "400",
-      "file": "source/rate-limit.ts",
-      "line": 619,
-      "column": 57,
-      "endLine": 627,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\t\t\tdebug('set retry-after header')\n\t\t\t\t\tconst retrieveRetryAfter =\n\t\t\t\t\t\ttypeof config.retryAfter === 'function'\n\t\t\t\t\t\t\t? config.retryAfter(request, response)\n\t\t\t\t\t\t\t: config.retryAfter\n\t\t\t\t\tconst",
-      "status": "Killed"
-    },
-    {
-      "id": "398",
-      "file": "source/rate-limit.ts",
-      "line": 619,
-      "column": 9,
-      "endLine": 619,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "config.legacyHeaders || config.standardHeaders",
       "status": "Killed"
     },
     {
@@ -3976,6 +3954,28 @@
       "endLine": 622,
       "mutator": "ConditionalExpression",
       "replacement": "true",
+      "original": "typeof config.retryAfter === 'function'",
+      "status": "Killed"
+    },
+    {
+      "id": "392",
+      "file": "source/rate-limit.ts",
+      "line": 617,
+      "column": 8,
+      "endLine": 617,
+      "mutator": "EqualityOperator",
+      "replacement": "totalHits >= limit",
+      "original": "totalHits > limit",
+      "status": "Killed"
+    },
+    {
+      "id": "405",
+      "file": "source/rate-limit.ts",
+      "line": 622,
+      "column": 7,
+      "endLine": 622,
+      "mutator": "EqualityOperator",
+      "replacement": "typeof config.retryAfter !== 'function'",
       "original": "typeof config.retryAfter === 'function'",
       "status": "Killed"
     },
@@ -3991,26 +3991,26 @@
       "status": "Killed"
     },
     {
-      "id": "405",
+      "id": "374",
       "file": "source/rate-limit.ts",
-      "line": 622,
-      "column": 7,
-      "endLine": 622,
-      "mutator": "EqualityOperator",
-      "replacement": "typeof config.retryAfter !== 'function'",
-      "original": "typeof config.retryAfter === 'function'",
+      "line": 586,
+      "column": 12,
+      "endLine": 586,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "!response.writableEnded",
       "status": "Killed"
     },
     {
-      "id": "406",
+      "id": "411",
       "file": "source/rate-limit.ts",
-      "line": 622,
-      "column": 36,
-      "endLine": 622,
+      "line": 638,
+      "column": 19,
+      "endLine": 638,
       "mutator": "StringLiteral",
       "replacement": "\"\"",
-      "original": "'function'",
-      "status": "Killed"
+      "original": "'The current store does not support the get/getKey method'",
+      "status": "Survived"
     },
     {
       "id": "409",
@@ -4024,15 +4024,15 @@
       "status": "Killed"
     },
     {
-      "id": "411",
+      "id": "406",
       "file": "source/rate-limit.ts",
-      "line": 638,
-      "column": 19,
-      "endLine": 638,
+      "line": 622,
+      "column": 36,
+      "endLine": 622,
       "mutator": "StringLiteral",
       "replacement": "\"\"",
-      "original": "'The current store does not support the get/getKey method'",
-      "status": "Survived"
+      "original": "'function'",
+      "status": "Killed"
     },
     {
       "id": "407",
@@ -4068,6 +4068,17 @@
       "status": "Killed"
     },
     {
+      "id": "413",
+      "file": "source/rate-limit.ts",
+      "line": 646,
+      "column": 3,
+      "endLine": 646,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "typeof config.store.get === 'function'",
+      "status": "Killed"
+    },
+    {
       "id": "414",
       "file": "source/rate-limit.ts",
       "line": 646,
@@ -4087,17 +4098,6 @@
       "mutator": "StringLiteral",
       "replacement": "\"\"",
       "original": "'function'",
-      "status": "Killed"
-    },
-    {
-      "id": "413",
-      "file": "source/rate-limit.ts",
-      "line": 646,
-      "column": 3,
-      "endLine": 646,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "typeof config.store.get === 'function'",
       "status": "Killed"
     },
     {
@@ -4145,17 +4145,6 @@
       "status": "Timeout"
     },
     {
-      "id": "13",
-      "file": "source/ip-key-generator.ts",
-      "line": 57,
-      "column": 32,
-      "endLine": 57,
-      "mutator": "StringLiteral",
-      "replacement": "``",
-      "original": "`${ip}/${ipv6Subnet}`",
-      "status": "Timeout"
-    },
-    {
       "id": "6",
       "file": "source/ip-key-generator.ts",
       "line": 47,
@@ -4163,6 +4152,83 @@
       "endLine": 51,
       "mutator": "ConditionalExpression",
       "replacement": "false",
+      "original": "address.isMapped4() ||\n\t\t\t// The deprecated IPv4-compatible notation keeps its existing behavior.\n\t\t\t// Its range is shared with addresses that embed no IPv4 address at all\n\t\t\t// (`::`, `::1`), so her",
+      "status": "Timeout"
+    },
+    {
+      "id": "12",
+      "file": "source/ip-key-generator.ts",
+      "line": 56,
+      "column": 19,
+      "endLine": 59,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\t\tconst subnet = new Address6(`${ip}/${ipv6Subnet}`)\n\t\t\treturn subnet.networkForm()\n\t\t}",
+      "status": "Timeout"
+    },
+    {
+      "id": "4",
+      "file": "source/ip-key-generator.ts",
+      "line": 29,
+      "column": 18,
+      "endLine": 60,
+      "mutator": "BlockStatement",
+      "replacement": "{}",
+      "original": "{\n\t\tconst address = new Address6(ip)\n\n\t\t// First, check if the address is IPv4 mapped to IPv6 (e.g., ::ffff:x.y.z.w),\n\t\t// as is common on servers with dual-stack networks (both IPv4 and IPv6). If\n\t\t/",
+      "status": "Timeout"
+    },
+    {
+      "id": "11",
+      "file": "source/ip-key-generator.ts",
+      "line": 56,
+      "column": 7,
+      "endLine": 56,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "ipv6Subnet",
+      "status": "Timeout"
+    },
+    {
+      "id": "10",
+      "file": "source/ip-key-generator.ts",
+      "line": 56,
+      "column": 7,
+      "endLine": 56,
+      "mutator": "ConditionalExpression",
+      "replacement": "true",
+      "original": "ipv6Subnet",
+      "status": "Timeout"
+    },
+    {
+      "id": "8",
+      "file": "source/ip-key-generator.ts",
+      "line": 51,
+      "column": 5,
+      "endLine": 51,
+      "mutator": "ConditionalExpression",
+      "replacement": "false",
+      "original": "address.is4() && address.isInSubnet(ipv4CompatibleSubnet)",
+      "status": "Timeout"
+    },
+    {
+      "id": "9",
+      "file": "source/ip-key-generator.ts",
+      "line": 51,
+      "column": 5,
+      "endLine": 51,
+      "mutator": "LogicalOperator",
+      "replacement": "// The deprecated IPv4-compatible notation keeps its existing behavior.\n// Its range is shared with addresses that embed no IPv4 address at all\n// (`::`, `::1`), so here the notation is what tells them apart.\naddress.is4() || address.isInSubnet(ipv4CompatibleSubnet)",
+      "original": "address.is4() && address.isInSubnet(ipv4CompatibleSubnet)",
+      "status": "Timeout"
+    },
+    {
+      "id": "7",
+      "file": "source/ip-key-generator.ts",
+      "line": 47,
+      "column": 4,
+      "endLine": 51,
+      "mutator": "LogicalOperator",
+      "replacement": "address.isMapped4() &&\n// The deprecated IPv4-compatible notation keeps its existing behavior.\n// Its range is shared with addresses that embed no IPv4 address at all\n// (`::`, `::1`), so here the notation is what tells them apart.\naddress.is4() && address.isInSubnet(ipv4CompatibleSubnet)",
       "original": "address.isMapped4() ||\n\t\t\t// The deprecated IPv4-compatible notation keeps its existing behavior.\n\t\t\t// Its range is shared with addresses that embed no IPv4 address at all\n\t\t\t// (`::`, `::1`), so her",
       "status": "Timeout"
     },
@@ -4178,47 +4244,25 @@
       "status": "Timeout"
     },
     {
-      "id": "7",
+      "id": "1",
       "file": "source/ip-key-generator.ts",
-      "line": 47,
-      "column": 4,
-      "endLine": 51,
-      "mutator": "LogicalOperator",
-      "replacement": "address.isMapped4() &&\n// The deprecated IPv4-compatible notation keeps its existing behavior.\n// Its range is shared with addresses that embed no IPv4 address at all\n// (`::`, `::1`), so here the notation is what tells them apart.\naddress.is4() && address.isInSubnet(ipv4CompatibleSubnet)",
-      "original": "address.isMapped4() ||\n\t\t\t// The deprecated IPv4-compatible notation keeps its existing behavior.\n\t\t\t// Its range is shared with addresses that embed no IPv4 address at all\n\t\t\t// (`::`, `::1`), so her",
-      "status": "Timeout"
-    },
-    {
-      "id": "4",
-      "file": "source/ip-key-generator.ts",
-      "line": 29,
-      "column": 18,
-      "endLine": 60,
+      "line": 28,
+      "column": 77,
+      "endLine": 64,
       "mutator": "BlockStatement",
       "replacement": "{}",
-      "original": "{\n\t\tconst address = new Address6(ip)\n\n\t\t// First, check if the address is IPv4 mapped to IPv6 (e.g., ::ffff:x.y.z.w),\n\t\t// as is common on servers with dual-stack networks (both IPv4 and IPv6). If\n\t\t/",
+      "original": "{\n\tif (isIPv6(ip)) {\n\t\tconst address = new Address6(ip)\n\n\t\t// First, check if the address is IPv4 mapped to IPv6 (e.g., ::ffff:x.y.z.w),\n\t\t// as is common on servers with dual-stack networks (both IPv",
       "status": "Timeout"
     },
     {
-      "id": "9",
+      "id": "13",
       "file": "source/ip-key-generator.ts",
-      "line": 51,
-      "column": 5,
-      "endLine": 51,
-      "mutator": "LogicalOperator",
-      "replacement": "// The deprecated IPv4-compatible notation keeps its existing behavior.\n// Its range is shared with addresses that embed no IPv4 address at all\n// (`::`, `::1`), so here the notation is what tells them apart.\naddress.is4() || address.isInSubnet(ipv4CompatibleSubnet)",
-      "original": "address.is4() && address.isInSubnet(ipv4CompatibleSubnet)",
-      "status": "Timeout"
-    },
-    {
-      "id": "12",
-      "file": "source/ip-key-generator.ts",
-      "line": 56,
-      "column": 19,
-      "endLine": 59,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\t\t\tconst subnet = new Address6(`${ip}/${ipv6Subnet}`)\n\t\t\treturn subnet.networkForm()\n\t\t}",
+      "line": 57,
+      "column": 32,
+      "endLine": 57,
+      "mutator": "StringLiteral",
+      "replacement": "``",
+      "original": "`${ip}/${ipv6Subnet}`",
       "status": "Timeout"
     },
     {
@@ -4233,39 +4277,6 @@
       "status": "Timeout"
     },
     {
-      "id": "11",
-      "file": "source/ip-key-generator.ts",
-      "line": 56,
-      "column": 7,
-      "endLine": 56,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "ipv6Subnet",
-      "status": "Timeout"
-    },
-    {
-      "id": "1",
-      "file": "source/ip-key-generator.ts",
-      "line": 28,
-      "column": 77,
-      "endLine": 64,
-      "mutator": "BlockStatement",
-      "replacement": "{}",
-      "original": "{\n\tif (isIPv6(ip)) {\n\t\tconst address = new Address6(ip)\n\n\t\t// First, check if the address is IPv4 mapped to IPv6 (e.g., ::ffff:x.y.z.w),\n\t\t// as is common on servers with dual-stack networks (both IPv",
-      "status": "Timeout"
-    },
-    {
-      "id": "10",
-      "file": "source/ip-key-generator.ts",
-      "line": 56,
-      "column": 7,
-      "endLine": 56,
-      "mutator": "ConditionalExpression",
-      "replacement": "true",
-      "original": "ipv6Subnet",
-      "status": "Timeout"
-    },
-    {
       "id": "2",
       "file": "source/ip-key-generator.ts",
       "line": 29,
@@ -4274,17 +4285,6 @@
       "mutator": "ConditionalExpression",
       "replacement": "true",
       "original": "isIPv6(ip)",
-      "status": "Timeout"
-    },
-    {
-      "id": "8",
-      "file": "source/ip-key-generator.ts",
-      "line": 51,
-      "column": 5,
-      "endLine": 51,
-      "mutator": "ConditionalExpression",
-      "replacement": "false",
-      "original": "address.is4() && address.isInSubnet(ipv4CompatibleSubnet)",
       "status": "Timeout"
     },
     {

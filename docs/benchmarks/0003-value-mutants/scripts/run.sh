@@ -20,7 +20,7 @@ cp "$cfg/stryker.config.json" "$dir/$cwd/"
 for f in "$cfg"/vitest.stryker.config.* "$cfg"/jest.stryker.config.*; do [ -e "$f" ] && cp "$f" "$dir/$cwd/"; done
 
 echo "== tests"
-(cd "$dir/$cwd" && sh -c "$test") > "$data/tests.log" 2>&1 || { echo "tests failed, see $data/tests.log"; exit 1; }
+(cd "$dir/$cwd" && sh -c "${test//\{files\}/}") > "$data/tests.log" 2>&1 || { echo "tests failed, see $data/tests.log"; exit 1; }
 
 echo "== stryker"
 (cd "$dir/$cwd" && /usr/bin/time -p npx stryker run stryker.config.json) > "$data/stryker.log" 2>&1

@@ -263,7 +263,7 @@ export async function runValueMutants(
   }
 
   const t0 = Date.now();
-  const baseline = await runCommand(options.command, root, 30 * 60_000);
+  const baseline = await runCommand(commandFor(options.command, []), root, 30 * 60_000);
   const baselineMs = Date.now() - t0;
   if (baseline.code !== 0) throw new Error(`the test command fails before any change (exit ${baseline.code})`);
   const timeoutMs = options.timeoutMs ?? Math.max(30_000, baselineMs * 5);

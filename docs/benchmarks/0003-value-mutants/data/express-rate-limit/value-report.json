@@ -25,8 +25,9 @@
               "column": 50
             }
           },
-          "status": "Timeout",
-          "duration": 30882
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "duration": 6679
         },
         {
           "id": "value-2",
@@ -43,8 +44,9 @@
               "column": 75
             }
           },
-          "status": "Timeout",
-          "duration": 62014
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "duration": 3960
         }
       ]
     },
@@ -67,12 +69,12 @@
               "column": 59
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "188",
             "199"
           ],
-          "duration": 30291
+          "duration": 3895
         },
         {
           "id": "value-4",
@@ -89,7 +91,7 @@
               "column": 15
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -200,7 +202,7 @@
             "221",
             "222"
           ],
-          "duration": 30654
+          "duration": 2753
         },
         {
           "id": "value-5",
@@ -217,7 +219,7 @@
               "column": 22
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -328,7 +330,7 @@
             "221",
             "222"
           ],
-          "duration": 30146
+          "duration": 2766
         },
         {
           "id": "value-6",
@@ -345,7 +347,7 @@
               "column": 32
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -456,7 +458,7 @@
             "221",
             "222"
           ],
-          "duration": 30653
+          "duration": 2675
         },
         {
           "id": "value-7",
@@ -473,7 +475,7 @@
               "column": 56
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -584,7 +586,7 @@
             "221",
             "222"
           ],
-          "duration": 30654
+          "duration": 2432
         },
         {
           "id": "value-8",
@@ -601,7 +603,7 @@
               "column": 18
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -712,7 +714,7 @@
             "221",
             "222"
           ],
-          "duration": 30656
+          "duration": 2358
         },
         {
           "id": "value-9",
@@ -729,12 +731,12 @@
               "column": 42
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30657
+          "duration": 3123
         },
         {
           "id": "value-10",
@@ -751,12 +753,12 @@
               "column": 43
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30664
+          "duration": 3275
         },
         {
           "id": "value-11",
@@ -773,12 +775,12 @@
               "column": 48
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30674
+          "duration": 3639
         },
         {
           "id": "value-12",
@@ -795,12 +797,12 @@
               "column": 41
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30679
+          "duration": 3449
         },
         {
           "id": "value-13",
@@ -817,12 +819,12 @@
               "column": 46
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30685
+          "duration": 3546
         },
         {
           "id": "value-14",
@@ -839,12 +841,12 @@
               "column": 51
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30735
+          "duration": 3566
         },
         {
           "id": "value-15",
@@ -861,12 +863,12 @@
               "column": 40
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30754
+          "duration": 3556
         },
         {
           "id": "value-16",
@@ -883,12 +885,12 @@
               "column": 45
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30135
+          "duration": 3357
         },
         {
           "id": "value-17",
@@ -905,12 +907,12 @@
               "column": 50
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30514
+          "duration": 3395
         },
         {
           "id": "value-18",
@@ -927,12 +929,12 @@
               "column": 55
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30331
+          "duration": 3490
         },
         {
           "id": "value-19",
@@ -949,12 +951,12 @@
               "column": 20
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30518
+          "duration": 3707
         },
         {
           "id": "value-20",
@@ -971,12 +973,12 @@
               "column": 25
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30648
+          "duration": 3564
         },
         {
           "id": "value-21",
@@ -993,12 +995,12 @@
               "column": 23
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 30910
+          "duration": 3744
         },
         {
           "id": "value-22",
@@ -1015,12 +1017,12 @@
               "column": 58
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191"
           ],
-          "duration": 31056
+          "duration": 3367
         },
         {
           "id": "value-23",
@@ -1037,11 +1039,11 @@
               "column": 64
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190"
           ],
-          "duration": 31065
+          "duration": 3229
         },
         {
           "id": "value-24",
@@ -1058,11 +1060,11 @@
               "column": 41
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "191"
           ],
-          "duration": 31066
+          "duration": 3160
         },
         {
           "id": "value-25",
@@ -1079,11 +1081,11 @@
               "column": 47
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "191"
           ],
-          "duration": 31066
+          "duration": 3306
         },
         {
           "id": "value-26",
@@ -1100,7 +1102,7 @@
               "column": 35
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -1211,7 +1213,7 @@
             "221",
             "222"
           ],
-          "duration": 31085
+          "duration": 2524
         },
         {
           "id": "value-27",
@@ -1228,7 +1230,7 @@
               "column": 29
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "34",
             "35",
@@ -1252,7 +1254,7 @@
             "68",
             "69"
           ],
-          "duration": 31150
+          "duration": 3979
         },
         {
           "id": "value-28",
@@ -1269,7 +1271,7 @@
               "column": 35
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "5",
             "6",
@@ -1350,7 +1352,7 @@
             "202",
             "203"
           ],
-          "duration": 31147
+          "duration": 3348
         },
         {
           "id": "value-29",
@@ -1367,7 +1369,7 @@
               "column": 17
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -1478,7 +1480,7 @@
             "221",
             "222"
           ],
-          "duration": 30980
+          "duration": 2562
         },
         {
           "id": "value-30",
@@ -1495,7 +1497,7 @@
               "column": 54
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -1604,7 +1606,7 @@
             "219",
             "222"
           ],
-          "duration": 30244
+          "duration": 2985
         },
         {
           "id": "value-31",
@@ -1621,7 +1623,7 @@
               "column": 43
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -1730,7 +1732,7 @@
             "219",
             "222"
           ],
-          "duration": 30258
+          "duration": 2881
         },
         {
           "id": "value-32",
@@ -1747,7 +1749,7 @@
               "column": 23
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -1856,7 +1858,7 @@
             "219",
             "222"
           ],
-          "duration": 30319
+          "duration": 3356
         },
         {
           "id": "value-33",
@@ -1873,7 +1875,7 @@
               "column": 35
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "0",
             "1",
@@ -1948,7 +1950,7 @@
             "219",
             "222"
           ],
-          "duration": 30407
+          "duration": 2929
         },
         {
           "id": "value-34",
@@ -1965,11 +1967,11 @@
               "column": 69
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "3"
           ],
-          "duration": 30679
+          "duration": 3381
         },
         {
           "id": "value-35",
@@ -1986,11 +1988,11 @@
               "column": 61
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "4"
           ],
-          "duration": 30621
+          "duration": 5063
         },
         {
           "id": "value-36",
@@ -2007,7 +2009,7 @@
               "column": 57
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "39",
             "49",
@@ -2032,7 +2034,7 @@
             "68",
             "69"
           ],
-          "duration": 30556
+          "duration": 4344
         },
         {
           "id": "value-37",
@@ -2049,7 +2051,7 @@
               "column": 58
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "34",
             "35",
@@ -2088,7 +2090,7 @@
             "68",
             "69"
           ],
-          "duration": 30637
+          "duration": 4309
         },
         {
           "id": "value-38",
@@ -2105,7 +2107,7 @@
               "column": 57
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "39",
             "49",
@@ -2130,7 +2132,7 @@
             "68",
             "69"
           ],
-          "duration": 30707
+          "duration": 3614
         },
         {
           "id": "value-39",
@@ -2147,7 +2149,7 @@
               "column": 24
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "5",
             "6",
@@ -2238,7 +2240,7 @@
             "202",
             "203"
           ],
-          "duration": 30766
+          "duration": 3315
         },
         {
           "id": "value-40",
@@ -2255,7 +2257,7 @@
               "column": 30
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "5",
             "6",
@@ -2346,7 +2348,7 @@
             "202",
             "203"
           ],
-          "duration": 30878
+          "duration": 3123
         },
         {
           "id": "value-41",
@@ -2363,12 +2365,12 @@
               "column": 29
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "20",
             "21"
           ],
-          "duration": 30987
+          "duration": 4320
         },
         {
           "id": "value-42",
@@ -2385,7 +2387,7 @@
               "column": 27
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "5",
             "6",
@@ -2471,7 +2473,7 @@
             "202",
             "203"
           ],
-          "duration": 30986
+          "duration": 3288
         },
         {
           "id": "value-43",
@@ -2488,7 +2490,7 @@
               "column": 30
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "5",
             "6",
@@ -2574,7 +2576,7 @@
             "202",
             "203"
           ],
-          "duration": 30983
+          "duration": 3561
         },
         {
           "id": "value-44",
@@ -2591,7 +2593,7 @@
               "column": 21
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "5",
             "6",
@@ -2682,7 +2684,7 @@
             "202",
             "203"
           ],
-          "duration": 30958
+          "duration": 3043
         },
         {
           "id": "value-45",
@@ -2699,13 +2701,13 @@
               "column": 86
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "80",
             "81",
             "83"
           ],
-          "duration": 30208
+          "duration": 3847
         },
         {
           "id": "value-46",
@@ -2722,7 +2724,7 @@
               "column": 45
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "5",
             "6",
@@ -2804,7 +2806,7 @@
             "202",
             "203"
           ],
-          "duration": 30183
+          "duration": 3362
         },
         {
           "id": "value-47",
@@ -2841,7 +2843,7 @@
               "column": 41
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "5",
             "6",
@@ -2923,7 +2925,7 @@
             "202",
             "203"
           ],
-          "duration": 30231
+          "duration": 3102
         },
         {
           "id": "value-49",
@@ -2940,7 +2942,7 @@
               "column": 31
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "5",
             "6",
@@ -3017,7 +3019,7 @@
             "200",
             "203"
           ],
-          "duration": 30310
+          "duration": 3176
         },
         {
           "id": "value-50",
@@ -3034,7 +3036,7 @@
               "column": 20
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "188",
             "189",
@@ -3047,7 +3049,7 @@
             "202",
             "203"
           ],
-          "duration": 30210
+          "duration": 3796
         },
         {
           "id": "value-51",
@@ -3064,14 +3066,14 @@
               "column": 39
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "188",
             "199",
             "201",
             "203"
           ],
-          "duration": 30127
+          "duration": 3323
         },
         {
           "id": "value-52",
@@ -3088,7 +3090,7 @@
               "column": 20
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "189",
             "190",
@@ -3097,7 +3099,7 @@
             "198",
             "202"
           ],
-          "duration": 30104
+          "duration": 3345
         },
         {
           "id": "value-53",
@@ -3114,12 +3116,12 @@
               "column": 39
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "189",
             "202"
           ],
-          "duration": 30116
+          "duration": 3860
         },
         {
           "id": "value-54",
@@ -3136,14 +3138,14 @@
               "column": 20
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191",
             "192",
             "198"
           ],
-          "duration": 30113
+          "duration": 4584
         },
         {
           "id": "value-55",
@@ -3160,13 +3162,13 @@
               "column": 39
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191",
             "192"
           ],
-          "duration": 30145
+          "duration": 3484
         },
         {
           "id": "value-56",
@@ -3183,13 +3185,13 @@
               "column": 29
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "190",
             "191",
             "192"
           ],
-          "duration": 30165
+          "duration": 3569
         },
         {
           "id": "value-57",
@@ -3206,7 +3208,7 @@
               "column": 33
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "34",
             "35",
@@ -3235,7 +3237,7 @@
             "68",
             "69"
           ],
-          "duration": 30077
+          "duration": 3109
         },
         {
           "id": "value-58",
@@ -3252,7 +3254,7 @@
               "column": 51
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "39",
             "49",
@@ -3271,7 +3273,7 @@
             "68",
             "69"
           ],
-          "duration": 30048
+          "duration": 3597
         },
         {
           "id": "value-59",
@@ -3288,7 +3290,7 @@
               "column": 51
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "34",
             "35",
@@ -3305,7 +3307,7 @@
             "47",
             "48"
           ],
-          "duration": 30047
+          "duration": 3288
         },
         {
           "id": "value-60",
@@ -3322,7 +3324,7 @@
               "column": 27
             }
           },
-          "status": "Timeout",
+          "status": "Survived",
           "coveredBy": [
             "6",
             "7",
@@ -3354,7 +3356,7 @@
             "196",
             "199"
           ],
-          "duration": 30060
+          "duration": 2657
         },
         {
           "id": "value-61",
@@ -3402,7 +3404,7 @@
             "195",
             "199"
           ],
-          "duration": 6634
+          "duration": 5500
         }
       ]
     }
