@@ -20,7 +20,7 @@ value-3 Survived   src/CronExpression.ts:28 `LOOP_LIMIT` 10000 → 10001
 value-16 Killed     src/CronExpression.ts:541 `currentDate.getMonth() + 1`: 1 → 2
 value-10 Timeout    src/CronExpression.ts:449 `skipped + 1`: 1 → 2
 value-mutants: 20 mutant(s): 10 Survived, 9 Killed, 1 Timeout; 32403 ms (baseline run 2046 ms)
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/reports/value/value.json
+wrote <work>/cron-parser/reports/value/value.json
 real 32.49
 user 89.40
 sys 18.07

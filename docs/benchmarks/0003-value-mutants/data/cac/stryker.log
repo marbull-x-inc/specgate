@@ -7,7 +7,7 @@
   You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
   For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants
   (disable "warnings.slow" to ignore this warning)
-[32m05:57:14 (39532) INFO JsonReporter[39m Your report can be found at: file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cac/reports/mutation/mutation.json
+[32m05:57:14 (39532) INFO JsonReporter[39m Your report can be found at: file://<work>/cac/reports/mutation/mutation.json
 [32m05:57:14 (39532) INFO MutationTestExecutor[39m Done in 9 seconds.
 real 10.24
 user 60.91

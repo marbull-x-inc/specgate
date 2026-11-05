@@ -20,7 +20,7 @@ value-4 Survived   packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:19 `e
 value-5 Survived   packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:19 `disableScope: () => {}` removed from `HotkeysContext`
 value-9 Killed     packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:59 the default `delimiter` ',' → ',_x'
 value-mutants: 20 mutant(s): 4 Survived, 16 Killed; 119370 ms (baseline run 18066 ms)
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/reports/value/value.json
+wrote <work>/react-hotkeys-hook/reports/value/value.json
 real 119.45
 user 82.23
 sys 21.06

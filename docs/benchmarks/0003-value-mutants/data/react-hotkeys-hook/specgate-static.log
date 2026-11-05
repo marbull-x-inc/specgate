@@ -7,6 +7,6 @@ specgate check (advisory): 8 units, 20 guarantees, 140 linked tests
   ❌ [guarantee-no-test] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:6 useRecordHotkeys.ok.use-key-true has no test naming it
   ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/.specgate-static/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/.specgate-static/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/.specgate-static/report.sarif
+wrote <work>/react-hotkeys-hook/.specgate-static/report.json
+      <work>/react-hotkeys-hook/.specgate-static/summary.md
+      <work>/react-hotkeys-hook/.specgate-static/report.sarif

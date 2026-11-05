@@ -6,7 +6,7 @@
     "version": "0.5.3"
   },
   "generatedAt": "2026-11-05T22:07:47.452Z",
-  "root": "/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook",
+  "root": "<work>/react-hotkeys-hook",
   "revision": "0798c4eb1cedb1f868b7570d8e0cc163c5a01b51",
   "configHash": "bb4fdcd4e1b010af",
   "mode": "advisory",
@@ -90,7 +90,7 @@
           "optional": false
         }
       ],
-      "returns": "import(\"/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/node_modules/@types/react/index\").JSX.Element",
+      "returns": "import(\"<work>/react-hotkeys-hook/node_modules/@types/react/index\").JSX.Element",
       "uses": [],
       "modifies": [],
       "injectedPorts": [],

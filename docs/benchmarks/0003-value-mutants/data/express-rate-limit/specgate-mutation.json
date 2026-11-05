@@ -5,8 +5,8 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-05T22:30:56.924Z",
-  "root": "/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit",
+  "generatedAt": "2026-11-05T22:51:25.374Z",
+  "root": "<work>/express-rate-limit",
   "revision": "b0d0c1f7cfaf44b8c73d6f82cbff0ce09bb3dffb",
   "configHash": "8ad07df10f4c021c",
   "mode": "advisory",
@@ -518,8 +518,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 293,
-        "survived": 129,
+        "killed": 324,
+        "survived": 98,
         "noCoverage": 13,
         "ignored": 0
       }
@@ -4061,21 +4061,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "rateLimit: `standardHeaders = 'draft-6'`: 'draft-6' → 'draft-6_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 202,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-3",
-        "mutator": "Value",
-        "replacement": "`standardHeaders = 'draft-6'`: 'draft-6' → 'draft-6_x'",
-        "status": "Survived",
-        "line": 202
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "rateLimit: `60 * 1000`: 60 → 61 survived; no linked test fails when the code changes like this",
       "file": "source/rate-limit.ts",
       "line": 207,
@@ -4101,21 +4086,6 @@
         "replacement": "`60 * 1000`: 1000 → 1001",
         "status": "Survived",
         "line": 207
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `passedOptions.max ?? 5`: 5 → 6 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 208,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-6",
-        "mutator": "Value",
-        "replacement": "`passedOptions.max ?? 5`: 5 → 6",
-        "status": "Survived",
-        "line": 208
       },
       "severity": "warn"
     },
@@ -4151,21 +4121,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "rateLimit: `statusCode` 429 → 430 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 210,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-8",
-        "mutator": "Value",
-        "replacement": "`statusCode` 429 → 430",
-        "status": "Survived",
-        "line": 210
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "rateLimit: StringLiteral mutant in a helper it calls: `\"Stryker was here!\"` survived; no linked test fails when the code changes like this",
       "file": "source/rate-limit.ts",
       "line": 213,
@@ -4176,291 +4131,6 @@
         "replacement": "\"Stryker was here!\"",
         "status": "Survived",
         "line": 213
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `config.windowMs / 1000`: 1000 → 1001 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 217,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-9",
-        "mutator": "Value",
-        "replacement": "`config.windowMs / 1000`: 1000 → 1001",
-        "status": "Survived",
-        "line": 217
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `1000 * 60`: 1000 → 1001 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 218,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-10",
-        "mutator": "Value",
-        "replacement": "`1000 * 60`: 1000 → 1001",
-        "status": "Survived",
-        "line": 218
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `1000 * 60`: 60 → 61 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 218,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-11",
-        "mutator": "Value",
-        "replacement": "`1000 * 60`: 60 → 61",
-        "status": "Survived",
-        "line": 218
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `1000 * 60`: 1000 → 1001 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 219,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-12",
-        "mutator": "Value",
-        "replacement": "`1000 * 60`: 1000 → 1001",
-        "status": "Survived",
-        "line": 219
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `1000 * 60`: 60 → 61 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 219,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-13",
-        "mutator": "Value",
-        "replacement": "`1000 * 60`: 60 → 61",
-        "status": "Survived",
-        "line": 219
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `1000 * 60 * 60`: 60 → 61 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 219,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-14",
-        "mutator": "Value",
-        "replacement": "`1000 * 60 * 60`: 60 → 61",
-        "status": "Survived",
-        "line": 219
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `1000 * 60`: 1000 → 1001 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 220,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-15",
-        "mutator": "Value",
-        "replacement": "`1000 * 60`: 1000 → 1001",
-        "status": "Survived",
-        "line": 220
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `1000 * 60`: 60 → 61 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 220,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-16",
-        "mutator": "Value",
-        "replacement": "`1000 * 60`: 60 → 61",
-        "status": "Survived",
-        "line": 220
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `1000 * 60 * 60`: 60 → 61 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 220,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-17",
-        "mutator": "Value",
-        "replacement": "`1000 * 60 * 60`: 60 → 61",
-        "status": "Survived",
-        "line": 220
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `1000 * 60 * 60 * 24`: 24 → 25 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 220,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-18",
-        "mutator": "Value",
-        "replacement": "`1000 * 60 * 60 * 24`: 24 → 25",
-        "status": "Survived",
-        "line": 220
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `seconds < 60`: 60 → 61 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 222,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-19",
-        "mutator": "Value",
-        "replacement": "`seconds < 60`: 60 → 61",
-        "status": "Survived",
-        "line": 222
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `minutes < 60`: 60 → 61 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 223,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-20",
-        "mutator": "Value",
-        "replacement": "`minutes < 60`: 60 → 61",
-        "status": "Survived",
-        "line": 223
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `hours < 24`: 24 → 25 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 224,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-21",
-        "mutator": "Value",
-        "replacement": "`hours < 24`: 24 → 25",
-        "status": "Survived",
-        "line": 224
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `hours > 1`: 1 → 2 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 224,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-22",
-        "mutator": "Value",
-        "replacement": "`hours > 1`: 1 → 2",
-        "status": "Survived",
-        "line": 224
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `hours > 1 ? 's' : ''`: 's' → 's_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 224,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-23",
-        "mutator": "Value",
-        "replacement": "`hours > 1 ? 's' : ''`: 's' → 's_x'",
-        "status": "Survived",
-        "line": 224
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `days > 1`: 1 → 2 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 225,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-24",
-        "mutator": "Value",
-        "replacement": "`days > 1`: 1 → 2",
-        "status": "Survived",
-        "line": 225
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `days > 1 ? 's' : ''`: 's' → 's_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 225,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-25",
-        "mutator": "Value",
-        "replacement": "`days > 1 ? 's' : ''`: 's' → 's_x'",
-        "status": "Survived",
-        "line": 225
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `requestPropertyName` 'rateLimit' → 'rateLimit_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 229,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-26",
-        "mutator": "Value",
-        "replacement": "`requestPropertyName` 'rateLimit' → 'rateLimit_x'",
-        "status": "Survived",
-        "line": 229
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `response.statusCode < 400`: 400 → 401 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 233,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-27",
-        "mutator": "Value",
-        "replacement": "`response.statusCode < 400`: 400 → 401",
-        "status": "Survived",
-        "line": 233
       },
       "severity": "warn"
     },
@@ -5051,51 +4721,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "rateLimit: `config.logger.error( error, 'express-ra…`: 'express-rate-limit: async error during store ini… → 'express-rate-limit: async error during store ini… survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 387,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-34",
-        "mutator": "Value",
-        "replacement": "`config.logger.error( error, 'express-ra…`: 'express-rate-l…",
-        "status": "Survived",
-        "line": 387
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `config.logger.error( error, 'express-ra…`: 'express-rate-limit: error during store initializ… → 'express-rate-limit: error during store initializ… survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 394,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-35",
-        "mutator": "Value",
-        "replacement": "`config.logger.error( error, 'express-ra…`: 'express-rate-l…",
-        "status": "Survived",
-        "line": 394
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `response.once('close', resolve)`: 'close' → 'close_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 406,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-36",
-        "mutator": "Value",
-        "replacement": "`response.once('close', resolve)`: 'close' → 'close_x'",
-        "status": "Survived",
-        "line": 406
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
       "file": "source/rate-limit.ts",
       "line": 409,
@@ -5115,21 +4740,6 @@
       "file": "source/rate-limit.ts",
       "line": 410,
       "unit": "rateLimit",
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `response.once('finish', resolve)`: 'finish' → 'finish_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 410,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-37",
-        "mutator": "Value",
-        "replacement": "`response.once('finish', resolve)`: 'finish' → 'finish_x'",
-        "status": "Survived",
-        "line": 410
-      },
       "severity": "warn"
     },
     {
@@ -5464,21 +5074,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "rateLimit: `Math.max(limit - totalHits, 0)`: 0 → 1 survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 480,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-46",
-        "mutator": "Value",
-        "replacement": "`Math.max(limit - totalHits, 0)`: 0 → 1",
-        "status": "Survived",
-        "line": 480
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "rateLimit: BlockStatement mutant: `{}` is not run by any test",
       "file": "source/rate-limit.ts",
       "line": 487,
@@ -5554,21 +5149,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "rateLimit: `Object.defineProperty(info, 'current', …`: 'current' → 'current_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 499,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-48",
-        "mutator": "Value",
-        "replacement": "`Object.defineProperty(info, 'current', …`: 'current' → 'cu…",
-        "status": "Survived",
-        "line": 499
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "rateLimit: BooleanLiteral mutant: `true` survived; no linked test fails when the code changes like this",
       "file": "source/rate-limit.ts",
       "line": 501,
@@ -5599,21 +5179,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "rateLimit: `case 'draft-6': { debug('set ietf draft…`: 'draft-6' → 'draft-6_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 518,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-50",
-        "mutator": "Value",
-        "replacement": "`case 'draft-6': { debug('set ietf draft…`: 'draft-6' → 'dr…",
-        "status": "Survived",
-        "line": 518
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "rateLimit: `debug('set ietf draft 6 headers')`: 'set ietf draft 6 headers' → 'set ietf draft 6 headers_x' survived; no linked test fails when the code changes like this",
       "file": "source/rate-limit.ts",
       "line": 519,
@@ -5629,21 +5194,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "rateLimit: `case 'draft-7': { debug('set ietf draft…`: 'draft-7' → 'draft-7_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 524,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-52",
-        "mutator": "Value",
-        "replacement": "`case 'draft-7': { debug('set ietf draft…`: 'draft-7' → 'dr…",
-        "status": "Survived",
-        "line": 524
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "rateLimit: `debug('set ietf draft 7 headers')`: 'set ietf draft 7 headers' → 'set ietf draft 7 headers_x' survived; no linked test fails when the code changes like this",
       "file": "source/rate-limit.ts",
       "line": 525,
@@ -5654,21 +5204,6 @@
         "replacement": "`debug('set ietf draft 7 headers')`: 'set ietf draft 7 head…",
         "status": "Survived",
         "line": 525
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `case 'draft-8': { const retrieveName = …`: 'draft-8' → 'draft-8_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 531,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-54",
-        "mutator": "Value",
-        "replacement": "`case 'draft-8': { const retrieveName = …`: 'draft-8' → 'dr…",
-        "status": "Survived",
-        "line": 531
       },
       "severity": "warn"
     },
@@ -6056,7 +5591,7 @@
     "unlinkedTests": 83,
     "findings": {
       "fail": 12,
-      "warn": 145,
+      "warn": 114,
       "info": 14
     },
     "mutantsUnmapped": 3

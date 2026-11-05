@@ -5,8 +5,8 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-05T22:25:20.144Z",
-  "root": "/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit",
+  "generatedAt": "2026-11-05T22:50:06.158Z",
+  "root": "<work>/express-rate-limit",
   "revision": "b0d0c1f7cfaf44b8c73d6f82cbff0ce09bb3dffb",
   "configHash": "80b9a51a9b3c59b7",
   "mode": "advisory",

@@ -7,7 +7,7 @@ Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
 [32m07:02:27 (99352) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
 [32m07:02:31 (99352) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
 [32m07:02:56 (99352) INFO DryRunExecutor[39m Initial test run succeeded. Ran 164 tests in 24 seconds (net 17558.319370000023 ms, overhead 7210.680629999977 ms).
-[32m07:05:45 (99352) INFO JsonReporter[39m Your report can be found at: file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hotkeys-hook/packages/react-hotkeys-hook/reports/mutation/mutation.json
+[32m07:05:45 (99352) INFO JsonReporter[39m Your report can be found at: file://<work>/react-hotkeys-hook/packages/react-hotkeys-hook/reports/mutation/mutation.json
 [32m07:05:45 (99352) INFO MutationTestExecutor[39m Done in 3 minutes and 19 seconds.
 real 202.97
 user 717.82

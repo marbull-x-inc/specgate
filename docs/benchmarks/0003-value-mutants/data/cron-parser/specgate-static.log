@@ -30,6 +30,6 @@ specgate check (advisory): 19 units, 18 guarantees, 255 linked tests
   ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:105 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
   ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/.specgate-static/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/.specgate-static/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cron-parser/.specgate-static/report.sarif
+wrote <work>/cron-parser/.specgate-static/report.json
+      <work>/cron-parser/.specgate-static/summary.md
+      <work>/cron-parser/.specgate-static/report.sarif

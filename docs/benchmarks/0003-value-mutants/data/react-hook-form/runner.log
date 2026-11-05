@@ -1,22 +1,62 @@
-node:fs:434
-    return binding.readFileUtf8(path, stringToFlags(options.flag));
-                   ^
-
-Error: ENOENT: no such file or directory, open '/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/reports/mutation/mutation.json'
-    at readFileSync (node:fs:434:20)
-    at readStrykerCoverage (file:///Users/yodai-hi/Dev/6_marbullX/specgate/.claude/worktrees/value-mutants-c94b04/scripts/value-mutants/run.ts:102:38)
-    at main (file:///Users/yodai-hi/Dev/6_marbullX/specgate/.claude/worktrees/value-mutants-c94b04/scripts/value-mutants/run.ts:419:37)
-    at file:///Users/yodai-hi/Dev/6_marbullX/specgate/.claude/worktrees/value-mutants-c94b04/scripts/value-mutants/run.ts:442:28
-    at ModuleJob.run (node:internal/modules/esm/module_job:365:25)
-    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
-    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:99:5) {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/reports/mutation/mutation.json'
-}
-
-Node.js v24.3.0
-real 0.09
-user 0.12
-sys 0.01
+baseline run 5929 ms; timeout 30000 ms
+value-1 Killed     src/constants.ts:2 `BLUR: 'blur'` removed from `EVENTS`
+value-2 Killed     src/constants.ts:2 `BLUR` in `EVENTS` 'blur' → 'blur_x'
+value-3 Survived   src/constants.ts:3 `FOCUS_OUT: 'focusout'` removed from `EVENTS`
+value-4 Survived   src/constants.ts:3 `FOCUS_OUT` in `EVENTS` 'focusout' → 'focusout_x'
+value-5 Killed     src/constants.ts:4 `CHANGE: 'change'` removed from `EVENTS`
+value-6 Killed     src/constants.ts:4 `CHANGE` in `EVENTS` 'change' → 'change_x'
+value-7 Survived   src/constants.ts:5 `SUBMIT: 'submit'` removed from `EVENTS`
+value-8 Survived   src/constants.ts:5 `SUBMIT` in `EVENTS` 'submit' → 'submit_x'
+value-9 Survived   src/constants.ts:6 `TRIGGER: 'trigger'` removed from `EVENTS`
+value-10 Survived   src/constants.ts:6 `TRIGGER` in `EVENTS` 'trigger' → 'trigger_x'
+value-11 Survived   src/constants.ts:6 `VALID: 'valid'` removed from `EVENTS`
+value-12 Survived   src/constants.ts:7 `VALID` in `EVENTS` 'valid' → 'valid_x'
+value-13 Killed     src/constants.ts:11 `onBlur: 'onBlur'` removed from `VALIDATION_MODE`
+value-14 Killed     src/constants.ts:11 `onBlur` in `VALIDATION_MODE` 'onBlur' → 'onBlur_x'
+value-15 Killed     src/constants.ts:12 `onChange: 'onChange'` removed from `VALIDATION_MODE`
+value-16 Killed     src/constants.ts:12 `onChange` in `VALIDATION_MODE` 'onChange' → 'onChange_x'
+value-17 Killed     src/constants.ts:13 `onSubmit: 'onSubmit'` removed from `VALIDATION_MODE`
+value-18 Killed     src/constants.ts:13 `onSubmit` in `VALIDATION_MODE` 'onSubmit' → 'onSubmit_x'
+value-19 Killed     src/constants.ts:14 `onTouched: 'onTouched'` removed from `VALIDATION_MODE`
+value-20 Killed     src/constants.ts:14 `onTouched` in `VALIDATION_MODE` 'onTouched' → 'onTouched_x'
+value-21 Timeout    src/constants.ts:14 `all: 'all'` removed from `VALIDATION_MODE`
+value-22 Killed     src/constants.ts:15 `all` in `VALIDATION_MODE` 'all' → 'all_x'
+value-23 Killed     src/constants.ts:38 `FORM_ERROR_TYPE` 'form' → 'form_x'
+value-37 Killed     src/useFieldArray.ts:88 the default `keyName` 'id' → 'id_x'
+value-38 Killed     src/useFieldArray.ts:200 `updatedFieldArrayValues.length - 1`: 1 → 2
+value-39 Killed     src/useFieldArray.ts:226 `getFocusFieldName(name, 0, options)`: 0 → 1
+value-40 Killed     src/useFieldArray.ts:369 `data.slice(0, updatedFieldArrayValues.l…`: 0 → 1
+value-24 Killed     src/constants.ts:40 `ROOT_ERROR_TYPE` 'root' → 'root_x'
+value-41 Survived   src/useFieldArray.ts:500 `return 1;`: 1 → 2
+value-42 Killed     src/useFieldArray.ts:546 `arrayName + '.'`: '.' → '._x'
+value-25 Killed     src/logic/createFormControl.ts:136 `submitCount: 0` removed from `DEFAULT_FORM_STATE`
+value-26 Killed     src/logic/createFormControl.ts:136 `submitCount` in `DEFAULT_FORM_STATE` 0 → 1
+value-27 Killed     src/logic/createFormControl.ts:137 `isDirty: false` removed from `DEFAULT_FORM_STATE`
+value-28 Killed     src/logic/createFormControl.ts:138 `isReady: false` removed from `DEFAULT_FORM_STATE`
+value-29 Killed     src/logic/createFormControl.ts:139 `isValidating: false` removed from `DEFAULT_FORM_STATE`
+value-30 Killed     src/logic/createFormControl.ts:140 `isSubmitted: false` removed from `DEFAULT_FORM_STATE`
+value-31 Killed     src/logic/createFormControl.ts:141 `isSubmitting: false` removed from `DEFAULT_FORM_STATE`
+value-32 Killed     src/logic/createFormControl.ts:142 `isSubmitSuccessful: false` removed from `DEFAULT_FORM_STATE`
+value-33 Timeout    src/logic/createFormControl.ts:143 `isValid: false` removed from `DEFAULT_FORM_STATE`
+value-34 Killed     src/logic/createFormControl.ts:144 `touchedFields: {}` removed from `DEFAULT_FORM_STATE`
+value-35 Timeout    src/logic/createFormControl.ts:145 `dirtyFields: {}` removed from `DEFAULT_FORM_STATE`
+value-36 Killed     src/logic/createFormControl.ts:145 `validatingFields: {}` removed from `DEFAULT_FORM_STATE`
+value-43 Killed     src/useForm.ts:20 `mode: defaultOptions.mode` removed from `RESET_OPTIONS`
+value-44 Survived   src/useForm.ts:21 `reValidateMode: defaultOptions.reValidateMode` removed from `RESET_OPTIONS`
+value-45 Survived   src/useForm.ts:22 `shouldFocusError: defaultOptions.shouldFocusError` removed from `RESET_OPTIONS`
+value-46 Killed     src/useForm.ts:23 `resolver: undefined` removed from `RESET_OPTIONS`
+value-47 Survived   src/useForm.ts:24 `criteriaMode: undefined` removed from `RESET_OPTIONS`
+value-48 Survived   src/useForm.ts:25 `delayError: undefined` removed from `RESET_OPTIONS`
+value-49 Survived   src/useForm.ts:26 `shouldUnregister: undefined` removed from `RESET_OPTIONS`
+value-50 Survived   src/useForm.ts:27 `shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS`
+value-51 Survived   src/useForm.ts:28 `context: undefined` removed from `RESET_OPTIONS`
+value-52 Killed     src/useForm.ts:29 `progressive: undefined` removed from `RESET_OPTIONS`
+value-53 Killed     src/useForm.ts:29 `resetOptions: undefined` removed from `RESET_OPTIONS`
+value-21 Timeout    (rerun alone) src/constants.ts:14
+value-33 Timeout    (rerun alone) src/logic/createFormControl.ts:143
+value-35 Timeout    (rerun alone) src/logic/createFormControl.ts:145
+value-mutants: 53 mutant(s): 34 Killed, 16 Survived, 3 Timeout; 475421 ms (baseline run 5929 ms)
+wrote <work>/react-hook-form/reports/value/value.json
+real 475.56
+user 1984.77
+sys 859.74

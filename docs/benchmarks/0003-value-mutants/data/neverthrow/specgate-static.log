@@ -26,6 +26,6 @@ specgate check (advisory): 40 units, 24 guarantees, 25 linked tests
   ❌ [operation-no-guarantee] src/result.ts:587 fromThrowable has no guarantee (no doc comment)
   ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/neverthrow/.specgate-static/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/neverthrow/.specgate-static/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/neverthrow/.specgate-static/report.sarif
+wrote <work>/neverthrow/.specgate-static/report.json
+      <work>/neverthrow/.specgate-static/summary.md
+      <work>/neverthrow/.specgate-static/report.sarif

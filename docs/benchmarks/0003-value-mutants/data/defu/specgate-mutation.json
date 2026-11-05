@@ -6,7 +6,7 @@
     "version": "0.5.3"
   },
   "generatedAt": "2026-11-05T20:56:45.329Z",
-  "root": "/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu",
+  "root": "<work>/defu",
   "revision": "82632b66f5914e9946edce300e10633a3d5c0cb7",
   "configHash": "cffd3fb8b1f74fc1",
   "mode": "advisory",
@@ -116,7 +116,7 @@
       "params": [
         {
           "name": "source",
-          "type": "Source | import(\"/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/src/types\").IgnoredInput",
+          "type": "Source | import(\"<work>/defu/src/types\").IgnoredInput",
           "optional": false
         },
         {
@@ -125,7 +125,7 @@
           "optional": true
         }
       ],
-      "returns": "import(\"/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/src/types\").Defu<Source, Defaults>",
+      "returns": "import(\"<work>/defu/src/types\").Defu<Source, Defaults>",
       "uses": [],
       "modifies": [],
       "injectedPorts": [],
@@ -254,7 +254,7 @@
           "optional": true
         }
       ],
-      "returns": "import(\"/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/src/types\").Defu<Source, Defaults>",
+      "returns": "import(\"<work>/defu/src/types\").Defu<Source, Defaults>",
       "uses": [],
       "modifies": [],
       "injectedPorts": [],
@@ -336,7 +336,7 @@
           "optional": true
         }
       ],
-      "returns": "import(\"/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/src/types\").Defu<Source, Defaults>",
+      "returns": "import(\"<work>/defu/src/types\").Defu<Source, Defaults>",
       "uses": [],
       "modifies": [],
       "injectedPorts": [],

@@ -1,5 +1,5 @@
 specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
-  fail 12 · warn 145 · info 14
+  fail 12 · warn 114 · info 14
   ❌ [identifier-unresolved] source/ip-key-generator.ts:23 ipKeyGenerator.ok.ipv4-unchanged: "IPv4" is not a parameter, declared port, entity or public operation
   ❌ [identifier-unresolved] source/ip-key-generator.ts:24 ipKeyGenerator.ok.default-ipv6-subnet-56: "IPv6" is not a parameter, declared port, entity or public operation
   ❌ [identifier-unresolved] source/ip-key-generator.ts:25 ipKeyGenerator.ok.ipv6-subnet-false: "IPv6" is not a parameter, declared port, entity or public operation
@@ -31,33 +31,11 @@ specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
   ⚠️ [mutant-survived] source/rate-limit.ts:193 rateLimit: CallExpression mutant in a helper it calls: `;` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:196 rateLimit: CallExpression mutant in a helper it calls: `;` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:201 rateLimit: BooleanLiteral mutant in a helper it calls: `true` survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:202 rateLimit: `standardHeaders = 'draft-6'`: 'draft-6' → 'draft-6_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:207 rateLimit: `60 * 1000`: 60 → 61 survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:207 rateLimit: `60 * 1000`: 1000 → 1001 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:208 rateLimit: `passedOptions.max ?? 5`: 5 → 6 survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:209 rateLimit: StringLiteral mutant in a helper it calls: `""` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:209 rateLimit: `message` 'Too many requests, please try again later.' → 'Too many requests, please try again later._x' survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:210 rateLimit: `statusCode` 429 → 430 survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:213 rateLimit: StringLiteral mutant in a helper it calls: `"Stryker was here!"` survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:217 rateLimit: `config.windowMs / 1000`: 1000 → 1001 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:218 rateLimit: `1000 * 60`: 1000 → 1001 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:218 rateLimit: `1000 * 60`: 60 → 61 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:219 rateLimit: `1000 * 60`: 1000 → 1001 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:219 rateLimit: `1000 * 60`: 60 → 61 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:219 rateLimit: `1000 * 60 * 60`: 60 → 61 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:220 rateLimit: `1000 * 60`: 1000 → 1001 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:220 rateLimit: `1000 * 60`: 60 → 61 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:220 rateLimit: `1000 * 60 * 60`: 60 → 61 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:220 rateLimit: `1000 * 60 * 60 * 24`: 24 → 25 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:222 rateLimit: `seconds < 60`: 60 → 61 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:223 rateLimit: `minutes < 60`: 60 → 61 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:224 rateLimit: `hours < 24`: 24 → 25 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:224 rateLimit: `hours > 1`: 1 → 2 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:224 rateLimit: `hours > 1 ? 's' : ''`: 's' → 's_x' survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:225 rateLimit: `days > 1`: 1 → 2 survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:225 rateLimit: `days > 1 ? 's' : ''`: 's' → 's_x' survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:229 rateLimit: `requestPropertyName` 'rateLimit' → 'rateLimit_x' survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:233 rateLimit: `response.statusCode < 400`: 400 → 401 survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:234 rateLimit: ArrowFunction mutant in a helper it calls: `() => undefined` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:235 rateLimit: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:240 rateLimit: CallExpression mutant in a helper it calls: `;` survived; no linked test fails when the code changes like this
@@ -97,12 +75,8 @@ specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
   ⚠️ [mutant-survived] source/rate-limit.ts:376 rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:377 rateLimit: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:377 rateLimit: `debug('executing init for store')`: 'executing init for store' → 'executing init for store_x' survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:387 rateLimit: `config.logger.error( error, 'express-ra…`: 'express-rate-limit: async error during store ini… → 'express-rate-limit: async error during store ini… survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:394 rateLimit: `config.logger.error( error, 'express-ra…`: 'express-rate-limit: error during store initializ… → 'express-rate-limit: error during store initializ… survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:406 rateLimit: `response.once('close', resolve)`: 'close' → 'close_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:409 rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [decision-unspecified] source/rate-limit.ts:410 rateLimit commits to output "finish" in `'finish'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
-  ⚠️ [mutant-survived] source/rate-limit.ts:410 rateLimit: `response.once('finish', resolve)`: 'finish' → 'finish_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:413 rateLimit: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:414 rateLimit: ArrowFunction mutant (the output "error"): `() => undefined` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:414 rateLimit: StringLiteral mutant (the output "error"): `""` survived; no linked test fails when the code changes like this
@@ -125,20 +99,15 @@ specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
   ⚠️ [mutant-survived] source/rate-limit.ts:465 rateLimit: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:466 rateLimit: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:474 rateLimit: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:480 rateLimit: `Math.max(limit - totalHits, 0)`: 0 → 1 survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:487 rateLimit: BlockStatement mutant: `{}` is not run by any test
   ⚠️ [mutant-survived] source/rate-limit.ts:487 rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:487 rateLimit: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:490 rateLimit: StringLiteral mutant: `""` is not run by any test
   ⚠️ [mutant-survived] source/rate-limit.ts:490 rateLimit: `debug( 'set request.%s.%s to be %o', co…`: 'set request.%s.%s to be %o' → 'set request.%s.%s to be %o_x' is not run by any test
-  ⚠️ [mutant-survived] source/rate-limit.ts:499 rateLimit: `Object.defineProperty(info, 'current', …`: 'current' → 'current_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:501 rateLimit: BooleanLiteral mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:510 rateLimit: `debug('set legacy headers')`: 'set legacy headers' → 'set legacy headers_x' survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:518 rateLimit: `case 'draft-6': { debug('set ietf draft…`: 'draft-6' → 'draft-6_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:519 rateLimit: `debug('set ietf draft 6 headers')`: 'set ietf draft 6 headers' → 'set ietf draft 6 headers_x' survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:524 rateLimit: `case 'draft-7': { debug('set ietf draft…`: 'draft-7' → 'draft-7_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:525 rateLimit: `debug('set ietf draft 7 headers')`: 'set ietf draft 7 headers' → 'set ietf draft 7 headers_x' survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:531 rateLimit: `case 'draft-8': { const retrieveName = …`: 'draft-8' → 'draft-8_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:538 rateLimit: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:538 rateLimit: `debug('set ietf draft 8 headers')`: 'set ietf draft 8 headers' → 'set ietf draft 8 headers_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:539 rateLimit: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
@@ -172,6 +141,6 @@ specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
   ℹ️ [decision-unspecified] source/rate-limit.ts:524 rateLimit commits to match "draft-7" in `'draft-7'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
   ℹ️ [decision-unspecified] source/rate-limit.ts:531 rateLimit commits to match "draft-8" in `'draft-8'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit/.specgate-mutation/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit/.specgate-mutation/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit/.specgate-mutation/report.sarif
+wrote <work>/express-rate-limit/.specgate-mutation/report.json
+      <work>/express-rate-limit/.specgate-mutation/summary.md
+      <work>/express-rate-limit/.specgate-mutation/report.sarif

@@ -6,7 +6,7 @@ Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
 [32m05:56:35 (35544) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
 [32m05:56:36 (35544) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
 [32m05:56:36 (35544) INFO DryRunExecutor[39m Initial test run succeeded. Ran 21 tests in 0 seconds (net 6.264210999999818 ms, overhead 201.73578900000018 ms).
-[32m05:56:39 (35544) INFO JsonReporter[39m Your report can be found at: file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/reports/mutation/mutation.json
+[32m05:56:39 (35544) INFO JsonReporter[39m Your report can be found at: file://<work>/defu/reports/mutation/mutation.json
 [32m05:56:39 (35544) INFO MutationTestExecutor[39m Done in 4 seconds.
 real 5.91
 user 24.55

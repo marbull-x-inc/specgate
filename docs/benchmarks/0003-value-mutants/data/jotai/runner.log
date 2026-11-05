@@ -36,7 +36,7 @@ value-35 Survived   src/vanilla/utils/unwrap.ts:64 `process.env.NODE_ENV !== 'pr
 value-31 Killed     src/vanilla/utils/splitAtom.ts:203 `arr.slice(0, index2)`: 0 → 1
 value-13 Survived   src/vanilla/utils/constants.ts:6 `process.env.NODE_ENV !== 'production' ?…`: 'RESET' → 'RESET_x'
 value-mutants: 36 mutant(s): 18 Survived, 18 Killed; 67710 ms (baseline run 15348 ms)
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/reports/value/value.json
+wrote <work>/jotai/reports/value/value.json
 real 68.00
 user 265.50
 sys 97.92

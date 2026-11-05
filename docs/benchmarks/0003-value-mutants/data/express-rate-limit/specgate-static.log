@@ -30,6 +30,6 @@ specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
   ℹ️ [decision-unspecified] source/rate-limit.ts:524 rateLimit commits to match "draft-7" in `'draft-7'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
   ℹ️ [decision-unspecified] source/rate-limit.ts:531 rateLimit commits to match "draft-8" in `'draft-8'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit/.specgate-static/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit/.specgate-static/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/express-rate-limit/.specgate-static/report.sarif
+wrote <work>/express-rate-limit/.specgate-static/report.json
+      <work>/express-rate-limit/.specgate-static/summary.md
+      <work>/express-rate-limit/.specgate-static/report.sarif

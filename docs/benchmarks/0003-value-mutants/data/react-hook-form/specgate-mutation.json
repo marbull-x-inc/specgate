@@ -5,8 +5,8 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-05T22:22:18.309Z",
-  "root": "/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form",
+  "generatedAt": "2026-11-05T22:50:01.699Z",
+  "root": "<work>/react-hook-form",
   "revision": "7e65ad5271daf8db8b123fdd0f8edad9d2b4416f",
   "configHash": "3e248fdaf7ef2625",
   "mode": "advisory",
@@ -192,7 +192,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 86,
+        "survived": 35,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "useFieldArray",
@@ -611,7 +617,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 300,
+        "survived": 63,
+        "noCoverage": 2,
+        "ignored": 0
+      }
     },
     {
       "id": "useForm",
@@ -1596,7 +1608,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 187,
+        "survived": 7,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "useFormContext",
@@ -1672,7 +1690,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 1,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "FormProvider",
@@ -1715,7 +1739,13 @@
       "implHash": "7f69f3a51051bc9c",
       "guarantees": [],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 4,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     },
     {
       "id": "useWatch",
@@ -1907,7 +1937,13 @@
         }
       ],
       "examples": [],
-      "hasDoc": true
+      "hasDoc": true,
+      "mutation": {
+        "killed": 72,
+        "survived": 4,
+        "noCoverage": 0,
+        "ignored": 0
+      }
     }
   ],
   "vocabulary": {
@@ -53634,15 +53670,1668 @@
       "severity": "fail"
     },
     {
-      "rule": "mutation-report-unreadable",
-      "message": "mutation.report reports/mutation/mutation.json: file not found; the mutation rules did not run",
-      "file": "reports/mutation/mutation.json",
+      "rule": "mutant-survived",
+      "message": "useController: `FOCUS_OUT: 'focusout'` removed from `EVENTS` survived; no linked test fails when the code changes like this",
+      "file": "src/constants.ts",
+      "line": 3,
+      "unit": "useController",
+      "mutant": {
+        "id": "2:value-3",
+        "mutator": "Value",
+        "replacement": "`FOCUS_OUT: 'focusout'` removed from `EVENTS`",
+        "status": "Survived",
+        "line": 3
+      },
       "severity": "warn"
     },
     {
-      "rule": "mutation-report-unreadable",
-      "message": "mutation.report reports/value/value.json: file not found; the mutation rules did not run",
-      "file": "reports/value/value.json",
+      "rule": "mutant-survived",
+      "message": "useController: `FOCUS_OUT` in `EVENTS` 'focusout' → 'focusout_x' survived; no linked test fails when the code changes like this",
+      "file": "src/constants.ts",
+      "line": 3,
+      "unit": "useController",
+      "mutant": {
+        "id": "2:value-4",
+        "mutator": "Value",
+        "replacement": "`FOCUS_OUT` in `EVENTS` 'focusout' → 'focusout_x'",
+        "status": "Survived",
+        "line": 3
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: `SUBMIT: 'submit'` removed from `EVENTS` survived; no linked test fails when the code changes like this",
+      "file": "src/constants.ts",
+      "line": 5,
+      "unit": "useController",
+      "mutant": {
+        "id": "2:value-7",
+        "mutator": "Value",
+        "replacement": "`SUBMIT: 'submit'` removed from `EVENTS`",
+        "status": "Survived",
+        "line": 5
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: `SUBMIT` in `EVENTS` 'submit' → 'submit_x' survived; no linked test fails when the code changes like this",
+      "file": "src/constants.ts",
+      "line": 5,
+      "unit": "useController",
+      "mutant": {
+        "id": "2:value-8",
+        "mutator": "Value",
+        "replacement": "`SUBMIT` in `EVENTS` 'submit' → 'submit_x'",
+        "status": "Survived",
+        "line": 5
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: `TRIGGER: 'trigger'` removed from `EVENTS` survived; no linked test fails when the code changes like this",
+      "file": "src/constants.ts",
+      "line": 6,
+      "unit": "useController",
+      "mutant": {
+        "id": "2:value-9",
+        "mutator": "Value",
+        "replacement": "`TRIGGER: 'trigger'` removed from `EVENTS`",
+        "status": "Survived",
+        "line": 6
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: `TRIGGER` in `EVENTS` 'trigger' → 'trigger_x' survived; no linked test fails when the code changes like this",
+      "file": "src/constants.ts",
+      "line": 6,
+      "unit": "useController",
+      "mutant": {
+        "id": "2:value-10",
+        "mutator": "Value",
+        "replacement": "`TRIGGER` in `EVENTS` 'trigger' → 'trigger_x'",
+        "status": "Survived",
+        "line": 6
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: `VALID: 'valid'` removed from `EVENTS` survived; no linked test fails when the code changes like this",
+      "file": "src/constants.ts",
+      "line": 6,
+      "unit": "useController",
+      "mutant": {
+        "id": "2:value-11",
+        "mutator": "Value",
+        "replacement": "`VALID: 'valid'` removed from `EVENTS`",
+        "status": "Survived",
+        "line": 6
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: `VALID` in `EVENTS` 'valid' → 'valid_x' survived; no linked test fails when the code changes like this",
+      "file": "src/constants.ts",
+      "line": 7,
+      "unit": "useController",
+      "mutant": {
+        "id": "2:value-12",
+        "mutator": "Value",
+        "replacement": "`VALID` in `EVENTS` 'valid' → 'valid_x'",
+        "status": "Survived",
+        "line": 7
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 105,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:13",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 105
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 146,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:18",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 146
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 147,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:21",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 147
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 170,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:27",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 170
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 184,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:33",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 184
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 188,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:35",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 188
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 201,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:39",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 201
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 201,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:43",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 201
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 203,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:44",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 203
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 206,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:45",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 206
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 230,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:62",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 230
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 250,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:73",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 250
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 250,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:74",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 250
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: LogicalOperator mutant: `control._options.values && control._defaultValues` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 250,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:75",
+        "mutator": "LogicalOperator",
+        "replacement": "control._options.values && control._defaultValues",
+        "status": "Survived",
+        "line": 250
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 260,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:79",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 260
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 260,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:78",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 260
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: CallExpression mutant: `;` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 261,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:80",
+        "mutator": "CallExpression",
+        "replacement": ";",
+        "status": "Survived",
+        "line": 261
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 265,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:81",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 265
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 265,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:82",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 265
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: LogicalOperator mutant: `!isArrayField || control.register(name, { ..._props.current…` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 265,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:83",
+        "mutator": "LogicalOperator",
+        "replacement": "!isArrayField || control.register(name, { ..._props.current…",
+        "status": "Survived",
+        "line": 265
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: BooleanLiteral mutant: `isArrayField` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 265,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:84",
+        "mutator": "BooleanLiteral",
+        "replacement": "isArrayField",
+        "status": "Survived",
+        "line": 265
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 269,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:86",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 269
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 275,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:90",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 275
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: LogicalOperator mutant: `field || field._f` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 275,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:92",
+        "mutator": "LogicalOperator",
+        "replacement": "field || field._f",
+        "status": "Survived",
+        "line": 275
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 294,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:105",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 294
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 295,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:107",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 295
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useController: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useController.ts",
+      "line": 299,
+      "unit": "useController",
+      "mutant": {
+        "id": "1:108",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 299
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 107,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:117",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 107
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 121,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:136",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 130,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:149",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 130
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BlockStatement mutant: `{}` is not run by any test",
+      "file": "src/useFieldArray.ts",
+      "line": 135,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:153",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "NoCoverage",
+        "line": 135
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 135,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:151",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 135
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BooleanLiteral mutant: `deepEqual(fields, fieldValues)` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 135,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:150",
+        "mutator": "BooleanLiteral",
+        "replacement": "deepEqual(fields, fieldValues)",
+        "status": "Survived",
+        "line": 135
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 135,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:152",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 135
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: CallExpression mutant: `;` is not run by any test",
+      "file": "src/useFieldArray.ts",
+      "line": 136,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:154",
+        "mutator": "CallExpression",
+        "replacement": ";",
+        "status": "NoCoverage",
+        "line": 136
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 139,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:156",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 139
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 155,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:171",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 155
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ArrayDeclaration mutant: `[\"Stryker was here\"]` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 157,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:176",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[\"Stryker was here\"]",
+        "status": "Survived",
+        "line": 157
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 163,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:177",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 163
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: CallExpression mutant: `;` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 164,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:178",
+        "mutator": "CallExpression",
+        "replacement": ";",
+        "status": "Survived",
+        "line": 164
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 165,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:180",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 165
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 180,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:185",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 180
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 206,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:194",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 206
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 230,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:202",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 230
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 246,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:209",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 246
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 246,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:210",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 246
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BooleanLiteral mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 320,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:244",
+        "mutator": "BooleanLiteral",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 320
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 362,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:267",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 362
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 376,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:278",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 376
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 376,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:277",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 376
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: CallExpression mutant: `;` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 377,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:279",
+        "mutator": "CallExpression",
+        "replacement": ";",
+        "status": "Survived",
+        "line": 377
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: CallExpression mutant: `;` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 382,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:281",
+        "mutator": "CallExpression",
+        "replacement": ";",
+        "status": "Survived",
+        "line": 382
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 385,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:285",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 385
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 394,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:293",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 394
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 401,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:310",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 401
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 411,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:318",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 411
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 412,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:321",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 412
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 415,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:325",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 415
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 415,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:326",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 415
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 416,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:328",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 416
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: LogicalOperator mutant: `existingError.message && existingError.root && existingErro…` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 416,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:329",
+        "mutator": "LogicalOperator",
+        "replacement": "existingError.message && existingError.root && existingErro…",
+        "status": "Survived",
+        "line": 416
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 417,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:330",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 417
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 420,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:332",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 420
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 421,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:334",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 421
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: LogicalOperator mutant: `!error || existingErrorType` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 421,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:338",
+        "mutator": "LogicalOperator",
+        "replacement": "!error || existingErrorType",
+        "status": "Survived",
+        "line": 421
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: LogicalOperator mutant: `error || existingErrorType !== error.type || existingErrorM…` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 422,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:341",
+        "mutator": "LogicalOperator",
+        "replacement": "error || existingErrorType !== error.type || existingErrorM…",
+        "status": "Survived",
+        "line": 422
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 423,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:342",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 423
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: EqualityOperator mutant: `existingErrorType === error.type` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 423,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:345",
+        "mutator": "EqualityOperator",
+        "replacement": "existingErrorType === error.type",
+        "status": "Survived",
+        "line": 423
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 423,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:344",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 423
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 425,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:348",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 425
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 427,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:352",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 427
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 428,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:355",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 428
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: LogicalOperator mutant: `isObject(error) || !Object.keys(error).some(key => !Number.…` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 428,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:357",
+        "mutator": "LogicalOperator",
+        "replacement": "isObject(error) || !Object.keys(error).some(key => !Number.…",
+        "status": "Survived",
+        "line": 428
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: MethodExpression mutant: `Object.keys(error).every(key => !Number.isNaN(+key))` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 429,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:359",
+        "mutator": "MethodExpression",
+        "replacement": "Object.keys(error).every(key => !Number.isNaN(+key))",
+        "status": "Survived",
+        "line": 429
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 429,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:360",
+        "mutator": "ArrowFunction",
+        "replacement": "() => undefined",
+        "status": "Survived",
+        "line": 429
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: UnaryOperator mutant: `-key` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 429,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:362",
+        "mutator": "UnaryOperator",
+        "replacement": "-key",
+        "status": "Survived",
+        "line": 429
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 440,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:367",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 440
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 452,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:374",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 452
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 452,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:375",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 452
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: EqualityOperator mutant: `control._options.criteriaMode !== VALIDATION_MODE.all` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 452,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:376",
+        "mutator": "EqualityOperator",
+        "replacement": "control._options.criteriaMode !== VALIDATION_MODE.all",
+        "status": "Survived",
+        "line": 452
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 459,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:384",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 459
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 462,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:390",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 462
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 470,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:392",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 470
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 473,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:400",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 473
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: `return 1;`: 1 → 2 survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 500,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "2:value-41",
+        "mutator": "Value",
+        "replacement": "`return 1;`: 1 → 2",
+        "status": "Survived",
+        "line": 500
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: StringLiteral mutant: `\"Stryker was here!\"` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 505,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:417",
+        "mutator": "StringLiteral",
+        "replacement": "\"Stryker was here!\"",
+        "status": "Survived",
+        "line": 505
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 521,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:438",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 521
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 536,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:453",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 536
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: MethodExpression mutant: `[...control._state.actionArrayLengths.keys()].every(arrayNa…` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 545,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:460",
+        "mutator": "MethodExpression",
+        "replacement": "[...control._state.actionArrayLengths.keys()].every(arrayNa…",
+        "status": "Survived",
+        "line": 545
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 559,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:469",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 559
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 561,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:471",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 561
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useFieldArray.ts",
+      "line": 568,
+      "unit": "useFieldArray",
+      "mutant": {
+        "id": "1:473",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 568
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useForm: `reValidateMode: defaultOptions.reValidateMode` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
+      "file": "src/useForm.ts",
+      "line": 21,
+      "unit": "useForm",
+      "mutant": {
+        "id": "2:value-44",
+        "mutator": "Value",
+        "replacement": "`reValidateMode: defaultOptions.reValidateMode` removed fro…",
+        "status": "Survived",
+        "line": 21
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useForm: `shouldFocusError: defaultOptions.shouldFocusError` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
+      "file": "src/useForm.ts",
+      "line": 22,
+      "unit": "useForm",
+      "mutant": {
+        "id": "2:value-45",
+        "mutator": "Value",
+        "replacement": "`shouldFocusError: defaultOptions.shouldFocusError` removed…",
+        "status": "Survived",
+        "line": 22
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useForm: `criteriaMode: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
+      "file": "src/useForm.ts",
+      "line": 24,
+      "unit": "useForm",
+      "mutant": {
+        "id": "2:value-47",
+        "mutator": "Value",
+        "replacement": "`criteriaMode: undefined` removed from `RESET_OPTIONS`",
+        "status": "Survived",
+        "line": 24
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useForm: `delayError: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
+      "file": "src/useForm.ts",
+      "line": 25,
+      "unit": "useForm",
+      "mutant": {
+        "id": "2:value-48",
+        "mutator": "Value",
+        "replacement": "`delayError: undefined` removed from `RESET_OPTIONS`",
+        "status": "Survived",
+        "line": 25
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useForm: `shouldUnregister: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
+      "file": "src/useForm.ts",
+      "line": 26,
+      "unit": "useForm",
+      "mutant": {
+        "id": "2:value-49",
+        "mutator": "Value",
+        "replacement": "`shouldUnregister: undefined` removed from `RESET_OPTIONS`",
+        "status": "Survived",
+        "line": 26
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useForm: `shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
+      "file": "src/useForm.ts",
+      "line": 27,
+      "unit": "useForm",
+      "mutant": {
+        "id": "2:value-50",
+        "mutator": "Value",
+        "replacement": "`shouldUseNativeValidation: undefined` removed from `RESET_…",
+        "status": "Survived",
+        "line": 27
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useForm: `context: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
+      "file": "src/useForm.ts",
+      "line": 28,
+      "unit": "useForm",
+      "mutant": {
+        "id": "2:value-51",
+        "mutator": "Value",
+        "replacement": "`context: undefined` removed from `RESET_OPTIONS`",
+        "status": "Survived",
+        "line": 28
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useWatch: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/useWatch.ts",
+      "line": 217,
+      "unit": "useWatch",
+      "mutant": {
+        "id": "1:708",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 217
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useWatch: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/useWatch.ts",
+      "line": 250,
+      "unit": "useWatch",
+      "mutant": {
+        "id": "1:729",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 250
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useWatch: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this",
+      "file": "src/useWatch.ts",
+      "line": 252,
+      "unit": "useWatch",
+      "mutant": {
+        "id": "1:731",
+        "mutator": "ArrowFunction",
+        "replacement": "() => undefined",
+        "status": "Survived",
+        "line": 252
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useWatch: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/useWatch.ts",
+      "line": 266,
+      "unit": "useWatch",
+      "mutant": {
+        "id": "1:742",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 266
+      },
       "severity": "warn"
     },
     {
@@ -53670,8 +55359,9 @@
     "unlinkedTests": 427,
     "findings": {
       "fail": 4,
-      "warn": 2,
+      "warn": 111,
       "info": 2
-    }
+    },
+    "mutantsUnmapped": 1
   }
 }

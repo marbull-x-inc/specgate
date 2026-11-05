@@ -11,7 +11,7 @@ Browserslist: browsers data (caniuse-lite) is 12 months old. Please run:
   You might want to enable "ignoreStatic" to ignore these static mutants for your next run. 
   For more information about static mutants visit: https://stryker-mutator.io/docs/mutation-testing-elements/static-mutants
   (disable "warnings.slow" to ignore this warning)
-[32m06:15:19 (38238) INFO JsonReporter[39m Your report can be found at: file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/valibot/library/reports/mutation/mutation.json
+[32m06:15:19 (38238) INFO JsonReporter[39m Your report can be found at: file://<work>/valibot/library/reports/mutation/mutation.json
 [32m06:15:19 (38238) INFO MutationTestExecutor[39m Done in 1 minute and 26 seconds.
 real 88.52
 user 305.42

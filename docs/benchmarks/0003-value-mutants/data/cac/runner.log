@@ -22,7 +22,7 @@ value-16 Killed     src/cac.ts:301 `argv.indexOf('--')`: '--' → '--_x'
 value-17 Killed     src/cac.ts:302 `doubleDashesIndex !== -1`: -1 → -2
 value-22 Killed     src/cac.ts:354 `key.split('.')`: '.' → '._x'
 value-mutants: 22 mutant(s): 6 NoCoverage, 6 Survived, 10 Killed; 7913 ms (baseline run 1428 ms)
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cac/reports/value/value.json
+wrote <work>/cac/reports/value/value.json
 real 8.02
 user 46.72
 sys 9.98

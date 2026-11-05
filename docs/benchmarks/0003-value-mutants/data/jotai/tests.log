@@ -1,5 +1,5 @@
 
-[1m[30m[46m RUN [49m[39m[22m [36mv5.0.2 [39m[90m/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai[39m
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.2 [39m[90m<work>/jotai[39m
 
 [90mstdout[2m | tests/vanilla/internals.test.tsx[2m > [22m[2minternals[2m > [22m[2meach store.get causes full scan of atom dependencies when state unchanged (performance)
 [22m[39mstore.get: 41.631ms
@@ -51,16 +51,16 @@ This ensures that you're testing the behavior the user would see in the browser.
  [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/memoryleaks.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 467[2mms[22m[39m
 [90mstderr[2m | tests/react/vanilla-utils/atomWithObservable.test.tsx[2m > [22m[2mwritable count state without initial value
 [22m[39mError: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
-    at trackUsedThenable [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:6353:35[90m)[39m
-    at useThenable [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8248:18[90m)[39m
-    at Object.use [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8268:55[90m)[39m
-    at process.env.NODE_ENV.exports.use [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react@19.3.0/node_modules/[4mreact[24m/cjs/react.development.js:1240:34[90m)[39m
-    at useAtomValue [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39msrc/react/useAtomValue.ts:73:12[90m)[39m
-    at CounterValue [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mtests/react/vanilla-utils/atomWithObservable.test.tsx:154:19[90m)[39m
-    at Object.react_stack_bottom_frame [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:28571:20[90m)[39m
-    at renderWithHooks [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8030:22[90m)[39m
-    at updateFunctionComponent [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:10569:19[90m)[39m
-    at beginWork [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:12205:18[90m)[39m
+    at trackUsedThenable [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:6353:35[90m)[39m
+    at useThenable [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8248:18[90m)[39m
+    at Object.use [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8268:55[90m)[39m
+    at process.env.NODE_ENV.exports.use [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react@19.3.0/node_modules/[4mreact[24m/cjs/react.development.js:1240:34[90m)[39m
+    at useAtomValue [90m(<work>/jotai/[39msrc/react/useAtomValue.ts:73:12[90m)[39m
+    at CounterValue [90m(<work>/jotai/[39mtests/react/vanilla-utils/atomWithObservable.test.tsx:154:19[90m)[39m
+    at Object.react_stack_bottom_frame [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:28571:20[90m)[39m
+    at renderWithHooks [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8030:22[90m)[39m
+    at updateFunctionComponent [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:10569:19[90m)[39m
+    at beginWork [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:12205:18[90m)[39m
 
  [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithDefault.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 379[2mms[22m[39m
  [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithStorage.test.tsx [2m([22m[2m25 tests[22m[2m)[22m[33m 483[2mms[22m[39m
@@ -82,16 +82,16 @@ This ensures that you're testing the behavior the user would see in the browser.
  [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/useHydrateAtoms.test.tsx [2m([22m[2m8 tests[22m[2m)[22m[32m 112[2mms[22m[39m
 [90mstderr[2m | tests/react/useAtomValue.test.tsx[2m > [22m[2museAtomValue with error throwing atom
 [22m[39mError: fail
-    at Object.read [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mtests/react/useAtomValue.test.tsx:90:11[90m)[39m
-    at BUILDING_BLOCK_atomRead [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39msrc/vanilla/internals.ts:499:11[90m)[39m
-    at BUILDING_BLOCK_readAtomState [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39msrc/vanilla/internals.ts:808:28[90m)[39m
-    at BUILDING_BLOCK_storeGet [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39msrc/vanilla/internals.ts:1117:26[90m)[39m
-    at Object.get [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39msrc/vanilla/internals.ts:1212:14[90m)[39m
-    at [90m/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39msrc/react/useAtomValueRaw.ts:68:42
-    at mountReducer [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8322:28[90m)[39m
-    at Object.useReducer [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:28897:18[90m)[39m
-    at process.env.NODE_ENV.exports.useReducer [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39mnode_modules/[4m.pnpm[24m/react@19.3.0/node_modules/[4mreact[24m/cjs/react.development.js:1303:34[90m)[39m
-    at useAtomValueRaw [90m(/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/[39msrc/react/useAtomValueRaw.ts:57:7[90m)[39m {
+    at Object.read [90m(<work>/jotai/[39mtests/react/useAtomValue.test.tsx:90:11[90m)[39m
+    at BUILDING_BLOCK_atomRead [90m(<work>/jotai/[39msrc/vanilla/internals.ts:499:11[90m)[39m
+    at BUILDING_BLOCK_readAtomState [90m(<work>/jotai/[39msrc/vanilla/internals.ts:808:28[90m)[39m
+    at BUILDING_BLOCK_storeGet [90m(<work>/jotai/[39msrc/vanilla/internals.ts:1117:26[90m)[39m
+    at Object.get [90m(<work>/jotai/[39msrc/vanilla/internals.ts:1212:14[90m)[39m
+    at [90m<work>/jotai/[39msrc/react/useAtomValueRaw.ts:68:42
+    at mountReducer [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8322:28[90m)[39m
+    at Object.useReducer [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:28897:18[90m)[39m
+    at process.env.NODE_ENV.exports.useReducer [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react@19.3.0/node_modules/[4mreact[24m/cjs/react.development.js:1303:34[90m)[39m
+    at useAtomValueRaw [90m(<work>/jotai/[39msrc/react/useAtomValueRaw.ts:57:7[90m)[39m {
   [stack]: [36m[Getter/Setter][39m,
   [message]: [32m'fail'[39m
 }

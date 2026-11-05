@@ -1,5 +1,5 @@
 
- RUN  v4.1.6 /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu
+ RUN  v4.1.6 <work>/defu
 
 ✔ isPlainObject (1.282542ms)
 

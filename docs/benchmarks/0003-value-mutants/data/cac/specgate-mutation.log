@@ -173,6 +173,6 @@ specgate check (advisory): 28 units, 38 guarantees, 12 linked tests
   ⚠️ [mutant-survived] src/index.ts:9 cac: StringLiteral mutant: `"Stryker was here!"` survived; no linked test fails when the code changes like this
   ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cac/.specgate-mutation/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cac/.specgate-mutation/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/cac/.specgate-mutation/report.sarif
+wrote <work>/cac/.specgate-mutation/report.json
+      <work>/cac/.specgate-mutation/summary.md
+      <work>/cac/.specgate-mutation/report.sarif

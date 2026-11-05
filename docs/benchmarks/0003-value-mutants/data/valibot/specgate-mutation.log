@@ -45,6 +45,6 @@ specgate check (advisory): 15 units, 37 guarantees, 220 linked tests
   ℹ️ [decision-unspecified] library/src/actions/notValue/notValue.ts:110 notValue commits to output "not_value" in `'not_value'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
   ℹ️ [decision-unspecified] library/src/actions/value/value.ts:108 value commits to output "validation" in `'validation'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/valibot/.specgate-mutation/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/valibot/.specgate-mutation/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/valibot/.specgate-mutation/report.sarif
+wrote <work>/valibot/.specgate-mutation/report.json
+      <work>/valibot/.specgate-mutation/summary.md
+      <work>/valibot/.specgate-mutation/report.sarif

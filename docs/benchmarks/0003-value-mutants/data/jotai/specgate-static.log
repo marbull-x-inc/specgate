@@ -23,6 +23,6 @@ specgate check (advisory): 11 units, 29 guarantees, 78 linked tests
   ℹ️ [entry-unmapped] package.json package.json#exports "./react" points only to build output; map it to its source module with surface.entries to write guarantees on it
   ℹ️ [entry-unmapped] package.json package.json#exports "./react/utils" points only to build output; map it to its source module with surface.entries to write guarantees on it
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/.specgate-static/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/.specgate-static/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/jotai/.specgate-static/report.sarif
+wrote <work>/jotai/.specgate-static/report.json
+      <work>/jotai/.specgate-static/summary.md
+      <work>/jotai/.specgate-static/report.sarif

@@ -9,6 +9,6 @@ specgate check (advisory): 4 units, 14 guarantees, 21 linked tests
   ⚠️ [decision-unspecified] src/defu.ts:13 createDefu commits to match "constructor" in `key === "constructor"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
   ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/.specgate-static/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/.specgate-static/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/defu/.specgate-static/report.sarif
+wrote <work>/defu/.specgate-static/report.json
+      <work>/defu/.specgate-static/summary.md
+      <work>/defu/.specgate-static/report.sarif

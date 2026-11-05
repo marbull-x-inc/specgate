@@ -23,8 +23,13 @@ echo "== tests"
 (cd "$dir/$cwd" && sh -c "${test//\{files\}/}") > "$data/tests.log" 2>&1 || { echo "tests failed, see $data/tests.log"; exit 1; }
 
 echo "== stryker"
-(cd "$dir/$cwd" && /usr/bin/time -p npx stryker run stryker.config.json) > "$data/stryker.log" 2>&1
-echo "stryker exit $?"
+if [ -n "${SKIP_STRYKER:-}" ] && [ -f "$dir/$cwd/reports/mutation/mutation.json" ]; then
+  echo "stryker skipped (SKIP_STRYKER, report and log kept)"
+else
+  # setsid-like isolation: Stryker may signal its process group on exit.
+  (cd "$dir/$cwd" && /usr/bin/time -p npx stryker run stryker.config.json) > "$data/stryker.log" 2>&1 < /dev/null
+  echo "stryker exit $?"
+fi
 runners=$(grep -oE "Creating [0-9]+ test runner" "$data/stryker.log" | grep -oE "[0-9]+" | head -1)
 runners=${runners:-1}
 

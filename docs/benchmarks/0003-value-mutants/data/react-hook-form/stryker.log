@@ -5,7 +5,7 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
 [32m07:31:05 (40580) INFO DryRunExecutor[39m Starting initial test run (jest test runner with "perTest" coverage analysis). This may take a while.
 [32m07:31:20 (40580) INFO DryRunExecutor[39m Initial test run succeeded. Ran 1419 tests in 14 seconds (net 10593 ms, overhead 4152 ms).
 [33m07:31:45 (40580) WARN ChildProcessProxy[39m Child process [pid 40663] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
-	/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/createFormControl.ts:809
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/createFormControl.ts:809
 	        let name = target.name;
 	                          ^
 	
@@ -13,7 +13,7 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
 	
 	Node.js v24.3.0
 	 ChildProcessCrashedError: Child process [pid 40663] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
-	/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/createFormControl.ts:809
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/createFormControl.ts:809
 	        let name = target.name;
 	                          ^
 	
@@ -21,7 +21,7 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
 	
 	Node.js v24.3.0
 	
-    at ChildProcess.handleUnexpectedExit (file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.handleUnexpectedExit (file://<work>/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
     at ChildProcess.emit (node:events:507:28)
     at maybeClose (node:internal/child_process:1101:16)
     at ChildProcess._handle.onexit (node:internal/child_process:305:5) {
@@ -31,7 +31,7 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
   signal: null
 }
 [33m07:31:53 (40580) WARN ChildProcessProxy[39m Child process [pid 43388] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
-	/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/createFormControl.ts:809
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/createFormControl.ts:809
 	        let name = target.name;
 	                          ^
 	
@@ -39,7 +39,7 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
 	
 	Node.js v24.3.0
 	 ChildProcessCrashedError: Child process [pid 43388] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
-	/private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/createFormControl.ts:809
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/createFormControl.ts:809
 	        let name = target.name;
 	                          ^
 	
@@ -47,7 +47,7 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
 	
 	Node.js v24.3.0
 	
-    at ChildProcess.handleUnexpectedExit (file:///private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.handleUnexpectedExit (file://<work>/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
     at ChildProcess.emit (node:events:507:28)
     at maybeClose (node:internal/child_process:1101:16)
     at Socket.<anonymous> (node:internal/child_process:457:11)
@@ -58,3 +58,200 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
   exitCode: 1,
   signal: null
 }
+[33m07:32:16 (40580) WARN ChildProcessProxy[39m Child process [pid 43998] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/utils/isFileInput.ts:12
+	const _default = (element)=>element.type === 'file';
+	                                    ^
+	
+	[TypeError: Cannot read properties of null (reading 'type')]
+	
+	Node.js v24.3.0
+	 ChildProcessCrashedError: Child process [pid 43998] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/utils/isFileInput.ts:12
+	const _default = (element)=>element.type === 'file';
+	                                    ^
+	
+	[TypeError: Cannot read properties of null (reading 'type')]
+	
+	Node.js v24.3.0
+	
+    at ChildProcess.handleUnexpectedExit (file://<work>/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.emit (node:events:507:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:457:11)
+    at Socket.emit (node:events:507:28)
+    at Pipe.<anonymous> (node:net:346:12) {
+  innerError: undefined,
+  pid: 43998,
+  exitCode: 1,
+  signal: null
+}
+[33m07:34:36 (40580) WARN ChildProcessProxy[39m Child process [pid 55957] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/useFieldArray.ts:642
+	                                                if (stryMutAct_9fa48("333") ? false : stryMutAct_9fa48("332") ? true : (stryCov_9fa48("332", "333"), existingError ? stryMutAct_9fa48("336") ? !error && existingErrorType && error && (existingErrorType !== error.type || existingErrorMessage !== error.message) : stryMutAct_9fa48("335") ? false : stryMutAct_9fa48("334") ? true : (stryCov_9fa48("334", "335", "336"), (stryMutAct_9fa48("338") ? !error || existingErrorType : stryMutAct_9fa48("337") ? false : (stryCov_9fa48("337", "338"), (stryMutAct_9fa48("339") ? error : (stryCov_9fa48("339"), !error)) && existingErrorType)) || (stryMutAct_9fa48("341") ? error || existingErrorType !== error.type || existingErrorMessage !== error.message : stryMutAct_9fa48("340") ? false : (stryCov_9fa48("340", "341"), error && (stryMutAct_9fa48("343") ? existingErrorType !== error.type && existingErrorMessage !== error.message : stryMutAct_9fa48("342") ? true : (stryCov_9fa48("342", "343"), (stryMutAct_9fa48("345") ? existingErrorType === error.type : stryMutAct_9fa48("344") ? false : (stryCov_9fa48("344", "345"), existingErrorType !== error.type)) || (stryMutAct_9fa48("347") ? existingErrorMessage === error.message : stryMutAct_9fa48("346") ? false : (stryCov_9fa48("346", "347"), existingErrorMessage !== error.message))))))) : stryMutAct_9fa48("350") ? error || error.type : stryMutAct_9fa48("349") ? false : stryMutAct_9fa48("348") ? true : (stryCov_9fa48("348", "349", "350"), error && error.type))) {
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+	
+	[TypeError: Cannot read properties of undefined (reading 'type')]
+	
+	Node.js v24.3.0
+	 ChildProcessCrashedError: Child process [pid 55957] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/useFieldArray.ts:642
+	                                                if (stryMutAct_9fa48("333") ? false : stryMutAct_9fa48("332") ? true : (stryCov_9fa48("332", "333"), existingError ? stryMutAct_9fa48("336") ? !error && existingErrorType && error && (existingErrorType !== error.type || existingErrorMessage !== error.message) : stryMutAct_9fa48("335") ? false : stryMutAct_9fa48("334") ? true : (stryCov_9fa48("334", "335", "336"), (stryMutAct_9fa48("338") ? !error || existingErrorType : stryMutAct_9fa48("337") ? false : (stryCov_9fa48("337", "338"), (stryMutAct_9fa48("339") ? error : (stryCov_9fa48("339"), !error)) && existingErrorType)) || (stryMutAct_9fa48("341") ? error || existingErrorType !== error.type || existingErrorMessage !== error.message : stryMutAct_9fa48("340") ? false : (stryCov_9fa48("340", "341"), error && (stryMutAct_9fa48("343") ? existingErrorType !== error.type && existingErrorMessage !== error.message : stryMutAct_9fa48("342") ? true : (stryCov_9fa48("342", "343"), (stryMutAct_9fa48("345") ? existingErrorType === error.type : stryMutAct_9fa48("344") ? false : (stryCov_9fa48("344", "345"), existingErrorType !== error.type)) || (stryMutAct_9fa48("347") ? existingErrorMessage === error.message : stryMutAct_9fa48("346") ? false : (stryCov_9fa48("346", "347"), existingErrorMessage !== error.message))))))) : stryMutAct_9fa48("350") ? error || error.type : stryMutAct_9fa48("349") ? false : stryMutAct_9fa48("348") ? true : (stryCov_9fa48("348", "349", "350"), error && error.type))) {
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+	
+	[TypeError: Cannot read properties of undefined (reading 'type')]
+	
+	Node.js v24.3.0
+	
+    at ChildProcess.handleUnexpectedExit (file://<work>/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.emit (node:events:507:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:457:11)
+    at Socket.emit (node:events:507:28)
+    at Pipe.<anonymous> (node:net:346:12) {
+  innerError: undefined,
+  pid: 55957,
+  exitCode: 1,
+  signal: null
+}
+[33m07:34:42 (40580) WARN ChildProcessProxy[39m Child process [pid 54048] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/validateField.ts:38
+	    const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount, _c } = field._f;
+	            ^
+	
+	[TypeError: Cannot destructure property 'ref' of 'field._f' as it is undefined.]
+	
+	Node.js v24.3.0
+	 ChildProcessCrashedError: Child process [pid 54048] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/validateField.ts:38
+	    const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount, _c } = field._f;
+	            ^
+	
+	[TypeError: Cannot destructure property 'ref' of 'field._f' as it is undefined.]
+	
+	Node.js v24.3.0
+	
+    at ChildProcess.handleUnexpectedExit (file://<work>/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.emit (node:events:507:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:457:11)
+    at Socket.emit (node:events:507:28)
+    at Pipe.<anonymous> (node:net:346:12) {
+  innerError: undefined,
+  pid: 54048,
+  exitCode: 1,
+  signal: null
+}
+[33m07:34:42 (40580) WARN ChildProcessProxy[39m Child process [pid 56275] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/useFieldArray.ts:642
+	                                                if (stryMutAct_9fa48("333") ? false : stryMutAct_9fa48("332") ? true : (stryCov_9fa48("332", "333"), existingError ? stryMutAct_9fa48("336") ? !error && existingErrorType && error && (existingErrorType !== error.type || existingErrorMessage !== error.message) : stryMutAct_9fa48("335") ? false : stryMutAct_9fa48("334") ? true : (stryCov_9fa48("334", "335", "336"), (stryMutAct_9fa48("338") ? !error || existingErrorType : stryMutAct_9fa48("337") ? false : (stryCov_9fa48("337", "338"), (stryMutAct_9fa48("339") ? error : (stryCov_9fa48("339"), !error)) && existingErrorType)) || (stryMutAct_9fa48("341") ? error || existingErrorType !== error.type || existingErrorMessage !== error.message : stryMutAct_9fa48("340") ? false : (stryCov_9fa48("340", "341"), error && (stryMutAct_9fa48("343") ? existingErrorType !== error.type && existingErrorMessage !== error.message : stryMutAct_9fa48("342") ? true : (stryCov_9fa48("342", "343"), (stryMutAct_9fa48("345") ? existingErrorType === error.type : stryMutAct_9fa48("344") ? false : (stryCov_9fa48("344", "345"), existingErrorType !== error.type)) || (stryMutAct_9fa48("347") ? existingErrorMessage === error.message : stryMutAct_9fa48("346") ? false : (stryCov_9fa48("346", "347"), existingErrorMessage !== error.message))))))) : stryMutAct_9fa48("350") ? error || error.type : stryMutAct_9fa48("349") ? false : stryMutAct_9fa48("348") ? true : (stryCov_9fa48("348", "349", "350"), error && error.type))) {
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+	
+	[TypeError: Cannot read properties of undefined (reading 'type')]
+	
+	Node.js v24.3.0
+	 ChildProcessCrashedError: Child process [pid 56275] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/useFieldArray.ts:642
+	                                                if (stryMutAct_9fa48("333") ? false : stryMutAct_9fa48("332") ? true : (stryCov_9fa48("332", "333"), existingError ? stryMutAct_9fa48("336") ? !error && existingErrorType && error && (existingErrorType !== error.type || existingErrorMessage !== error.message) : stryMutAct_9fa48("335") ? false : stryMutAct_9fa48("334") ? true : (stryCov_9fa48("334", "335", "336"), (stryMutAct_9fa48("338") ? !error || existingErrorType : stryMutAct_9fa48("337") ? false : (stryCov_9fa48("337", "338"), (stryMutAct_9fa48("339") ? error : (stryCov_9fa48("339"), !error)) && existingErrorType)) || (stryMutAct_9fa48("341") ? error || existingErrorType !== error.type || existingErrorMessage !== error.message : stryMutAct_9fa48("340") ? false : (stryCov_9fa48("340", "341"), error && (stryMutAct_9fa48("343") ? existingErrorType !== error.type && existingErrorMessage !== error.message : stryMutAct_9fa48("342") ? true : (stryCov_9fa48("342", "343"), (stryMutAct_9fa48("345") ? existingErrorType === error.type : stryMutAct_9fa48("344") ? false : (stryCov_9fa48("344", "345"), existingErrorType !== error.type)) || (stryMutAct_9fa48("347") ? existingErrorMessage === error.message : stryMutAct_9fa48("346") ? false : (stryCov_9fa48("346", "347"), existingErrorMessage !== error.message))))))) : stryMutAct_9fa48("350") ? error || error.type : stryMutAct_9fa48("349") ? false : stryMutAct_9fa48("348") ? true : (stryCov_9fa48("348", "349", "350"), error && error.type))) {
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+	
+	[TypeError: Cannot read properties of undefined (reading 'type')]
+	
+	Node.js v24.3.0
+	
+    at ChildProcess.handleUnexpectedExit (file://<work>/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.emit (node:events:507:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:457:11)
+    at Socket.emit (node:events:507:28)
+    at Pipe.<anonymous> (node:net:346:12) {
+  innerError: undefined,
+  pid: 56275,
+  exitCode: 1,
+  signal: null
+}
+[33m07:34:42 (40580) WARN ChildProcessProxy[39m Child process [pid 55171] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/validateField.ts:38
+	    const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount, _c } = field._f;
+	            ^
+	
+	[TypeError: Cannot destructure property 'ref' of 'field._f' as it is undefined.]
+	
+	Node.js v24.3.0
+	 ChildProcessCrashedError: Child process [pid 55171] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/validateField.ts:38
+	    const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount, _c } = field._f;
+	            ^
+	
+	[TypeError: Cannot destructure property 'ref' of 'field._f' as it is undefined.]
+	
+	Node.js v24.3.0
+	
+    at ChildProcess.handleUnexpectedExit (file://<work>/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.emit (node:events:507:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:457:11)
+    at Socket.emit (node:events:507:28)
+    at Pipe.<anonymous> (node:net:346:12) {
+  innerError: undefined,
+  pid: 55171,
+  exitCode: 1,
+  signal: null
+}
+[33m07:34:46 (40580) WARN ChildProcessProxy[39m Child process [pid 56801] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/validateField.ts:38
+	    const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount, _c } = field._f;
+	            ^
+	
+	[TypeError: Cannot destructure property 'ref' of 'field._f' as it is undefined.]
+	
+	Node.js v24.3.0
+	 ChildProcessCrashedError: Child process [pid 56801] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/validateField.ts:38
+	    const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount, _c } = field._f;
+	            ^
+	
+	[TypeError: Cannot destructure property 'ref' of 'field._f' as it is undefined.]
+	
+	Node.js v24.3.0
+	
+    at ChildProcess.handleUnexpectedExit (file://<work>/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.emit (node:events:507:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:305:5) {
+  innerError: undefined,
+  pid: 56801,
+  exitCode: 1,
+  signal: null
+}
+[33m07:34:46 (40580) WARN ChildProcessProxy[39m Child process [pid 56748] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/validateField.ts:38
+	    const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount, _c } = field._f;
+	            ^
+	
+	[TypeError: Cannot destructure property 'ref' of 'field._f' as it is undefined.]
+	
+	Node.js v24.3.0
+	 ChildProcessCrashedError: Child process [pid 56748] exited unexpectedly with exit code 1 (without signal). Last part of stdout and stderr was:
+	<work>/react-hook-form/.stryker-tmp/sandbox-Cc3xBt/src/logic/validateField.ts:38
+	    const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount, _c } = field._f;
+	            ^
+	
+	[TypeError: Cannot destructure property 'ref' of 'field._f' as it is undefined.]
+	
+	Node.js v24.3.0
+	
+    at ChildProcess.handleUnexpectedExit (file://<work>/react-hook-form/node_modules/.pnpm/@stryker-mutator+core@10.1.1_@types+node@25.9.3/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.emit (node:events:507:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:305:5) {
+  innerError: undefined,
+  pid: 56748,
+  exitCode: 1,
+  signal: null
+}
+[32m07:41:02 (40580) INFO JsonReporter[39m Your report can be found at: file://<work>/react-hook-form/reports/mutation/mutation.json
+[32m07:41:02 (40580) INFO MutationTestExecutor[39m Done in 9 minutes and 58 seconds.
+real 599.18
+user 4941.68
+sys 1371.93

@@ -60,6 +60,6 @@ specgate check (advisory): 17 units, 75 guarantees, 152 linked tests
   ℹ️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to boundary "192" in `code >= 0xc0`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
   ℹ️ [decision-unspecified] src/string/pad.ts:22 pad commits to constant "2" in `(length - str.length) / 2`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/es-toolkit/.specgate-mutation/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/es-toolkit/.specgate-mutation/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/es-toolkit/.specgate-mutation/report.sarif
+wrote <work>/es-toolkit/.specgate-mutation/report.json
+      <work>/es-toolkit/.specgate-mutation/summary.md
+      <work>/es-toolkit/.specgate-mutation/report.sarif

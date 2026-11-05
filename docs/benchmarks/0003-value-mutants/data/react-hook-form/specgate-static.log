@@ -7,6 +7,6 @@ specgate check (advisory): 6 units, 33 guarantees, 1213 linked tests
   ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
   ℹ️ [decision-unspecified] src/useForm.ts:132 useForm commits to output "defaultValues" in `'defaultValues'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
 
-wrote /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.specgate-static/report.json
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.specgate-static/summary.md
-      /private/tmp/claude-501/-Users-yodai-hi-Dev-6-marbullX-specgate--claude-worktrees-value-mutants-c94b04/d8245e25-e39c-4d69-8741-e5430cb4756d/scratchpad/bench/react-hook-form/.specgate-static/report.sarif
+wrote <work>/react-hook-form/.specgate-static/report.json
+      <work>/react-hook-form/.specgate-static/summary.md
+      <work>/react-hook-form/.specgate-static/report.sarif
