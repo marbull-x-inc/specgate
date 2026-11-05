@@ -262,3 +262,29 @@ installs dependencies with lifecycle scripts off, runs the tests, Stryker and sp
 `data/<project>/`. The oracle is `scripts/oracle.mjs` with the case files in
 `data/<project>/oracle/*-cases.json`; `scripts/metrics.mjs data` recomputes `data/metrics.json`.
 hono needs pnpm 12 (`PNPM=<path>`); scule uses Stryker 8.7.1 (`scripts/config/scule/stryker.version`).
+
+## Follow-up (added after the results; the numbers above are unchanged)
+
+The issue candidates were filed and fixed after this run:
+
+| Candidate                                             | Issue                         | Fixed in                                                                        |
+| ----------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------- |
+| 1. default exports are not units                      | #63                           | #71                                                                             |
+| 2. a callable exported through a cast is not followed | #64                           | #72                                                                             |
+| 3. strings in type positions                          | #65                           | #73                                                                             |
+| 4. a collection probed through a local alias          | #61 (part of a larger change) | open                                                                            |
+| 5. `match` compared by equality                       | #66                           | #73 (only the unit's own tests; callers' tests would hide 7 of ms's real holes) |
+| 6. a plain-identifier `describe`                      | #67                           | already fixed in 0.5.3 (#58); closed as a duplicate                             |
+| 7. implementation arithmetic                          | #68                           | #73                                                                             |
+| 8. an inline array probe                              | #69                           | #73                                                                             |
+| 9. an operation's own name                            | #70                           | #73                                                                             |
+
+With #71–#73, re-running the static check on the same patches gives fewer `decision-*` findings
+(ms 54 → 38, scule 4 → 0, hono 7 → 4, ufo 4 → 4), and every finding this report judged a real hole
+is still reported. That is not a new measurement: the guarantees and links were made for this
+run, and new projects are needed to judge a change.
+
+A PoC after this run found that StrykerJS never changes a number literal, never changes a
+non-empty string to another non-empty string, and never removes one element of a list. Making
+those changes found real holes no Stryker survivor expressed. It is proposed as #60 (with #61 and
+#62), to be measured on eleven projects that took no part in this benchmark.
