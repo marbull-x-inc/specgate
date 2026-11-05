@@ -179,7 +179,10 @@ test linked to the unit (or to a unit that calls it) write it as a literal? That
 element of a module-level collection the unit checks membership in (`DENIED.includes(path)`,
 `PREFIXES.some((p) => path.startsWith(p))`), so a deny list whose test lists 8 of its 26 paths
 gets 18 findings. A test that iterates the list itself (`it.each(DENIED)`) passes whatever the
-list holds; `test-tautology` reports it. When `decision-unspecified` fires for a value a linked
+list holds; `test-tautology` reports it. An element that only the tests of another unit checking
+the same collection use (a collection spread into another one) is still reported, one step lower
+and naming that unit: removing it fails that test, but this unit's own tests do not pin it. When
+`decision-unspecified` fires for a value a linked
 test does write, the finding is one step lower and says so. A value also counts as written in two
 other forms: a `match` on a value read with a constant key (`params.get("popup") === "1"`) by a
 `key=value` pair in a literal (`"?popup=1"`), and an identifier-like `match` value by an object

@@ -93,17 +93,21 @@ export function evaluateDecisionRules(
     d.values.some((v) => input.ignore.has(v)) || d.names.some((n) => input.ignore.has(n));
 
   // An element of a collection may be reached from several units (`[...SHARED, "x"]`); a test of
-  // any of them that uses it pins it.
+  // any of them that uses it pins it. Only units with a `member` decision on the collection count,
+  // so an unrelated test that happens to hold the same string does not.
   const memberKey = (d: Decision): string =>
     `${d.collection?.file ?? ""}#${d.collection?.name ?? ""}|${d.values[0] ?? ""}`;
-  const memberUsed = new Map<string, boolean>();
+  const memberUsedBy = new Map<string, string[]>();
   for (const unit of input.units) {
     for (const d of unit.decisions) {
       if (d.kind !== "member") continue;
       const key = memberKey(d);
-      if (memberUsed.get(key) !== true) memberUsed.set(key, valueUsed(d, literalsOf(unit.id)));
+      const by = memberUsedBy.get(key) ?? [];
+      if (!by.includes(unit.id) && valueUsed(d, literalsOf(unit.id))) by.push(unit.id);
+      memberUsedBy.set(key, by);
     }
   }
+  const memberUsed = (d: Decision): boolean => (memberUsedBy.get(memberKey(d)) ?? []).length > 0;
 
   // decision-untested on a member is reported once, preferably on a unit in the collection's module.
   const untestedMembers = new Map<string, { unit: Unit; decision: Decision }>();
@@ -119,7 +123,7 @@ export function evaluateDecisionRules(
     const unnamedMembers = new Map<string, { decisions: Decision[]; allUsed: boolean }>();
     for (const d of unit.decisions) {
       if (ignored(d)) continue;
-      const used = d.kind === "member" ? memberUsed.get(memberKey(d)) === true : valueUsed(d, literals, keys);
+      const used = d.kind === "member" ? memberUsed(d) : valueUsed(d, literals, keys);
       if (!decisionMentioned(d, corpus, input.ignore)) {
         if (d.kind === "member") {
           const key = d.names[0] ?? d.collection?.name ?? "";
@@ -139,8 +143,11 @@ export function evaluateDecisionRules(
         });
         continue;
       }
-      if (!hasLinkedTests || used) continue;
+      if (!hasLinkedTests) continue;
       if (d.kind === "member") {
+        // Pinned by this unit's own linked tests: nothing to say. Pinned only by another unit's
+        // tests: still reported (this unit's contract is weaker than it looks), one step lower.
+        if (valueUsed(d, literals)) continue;
         const key = memberKey(d);
         const current = untestedMembers.get(key);
         const home = d.collection?.file === unit.file;
@@ -148,6 +155,7 @@ export function evaluateDecisionRules(
           untestedMembers.set(key, { unit, decision: d });
         continue;
       }
+      if (used) continue;
       emit("decision-untested", {
         message: untestedMessage(unit, d, literals),
         file: unit.file,
@@ -169,13 +177,16 @@ export function evaluateDecisionRules(
       });
     }
   }
-  for (const { unit, decision } of untestedMembers.values())
+  for (const { unit, decision } of untestedMembers.values()) {
+    const others = (memberUsedBy.get(memberKey(decision)) ?? []).filter((id) => id !== unit.id);
     emit("decision-untested", {
-      message: untestedMessage(unit, decision, literalsOf(unit.id)),
+      message: untestedMessage(unit, decision, literalsOf(unit.id), others),
       file: unit.file,
       line: decision.line,
       unit: unit.id,
+      ...(others.length > 0 ? { downgrade: true } : {}),
     });
+  }
 
   // test-tautology: a test of the unit (or of a caller) that derives its cases from the very
   // collection the unit checks membership in. A test linked elsewhere that walks the collection
@@ -219,11 +230,19 @@ export function evaluateDecisionRules(
     });
 }
 
-function untestedMessage(unit: Unit, d: Decision, literals: readonly string[]): string {
+function untestedMessage(
+  unit: Unit,
+  d: Decision,
+  literals: readonly string[],
+  pinnedBy: readonly string[] = [],
+): string {
   const named = d.names.length > 0 ? ` (${d.names.join(", ")})` : "";
+  const what = `${unit.id} commits to ${d.kind} ${d.values.map((v) => JSON.stringify(v)).join(", ")}${named} and the contract names it, but no linked test uses it`;
+  if (pinnedBy.length > 0)
+    return `${what} (a test of ${pinnedBy.join(", ")} uses it); ${unit.id}'s own tests cannot fail when it changes`;
   const near = closestLiteral(d, literals);
   const closest = near !== undefined ? ` (closest: ${JSON.stringify(near)})` : "";
-  return `${unit.id} commits to ${d.kind} ${d.values.map((v) => JSON.stringify(v)).join(", ")}${named} and the contract names it, but no linked test uses it${closest}; a test cannot fail when it changes`;
+  return `${what}${closest}; a test cannot fail when it changes`;
 }
 
 const CLOSEST_LENGTH = 60;

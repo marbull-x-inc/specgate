@@ -166,3 +166,61 @@ it("described.ok.named", () => {
     ]);
   });
 });
+
+describe("decision-untested on an element another unit's tests pin (#38)", () => {
+  const ALPHA = `export const ALPHA = ["x", "y"];
+
+/** @guarantee ok.in a \`v\` in \`ALPHA\` is in */
+export function isAlpha(v: string): boolean {
+  return ALPHA.includes(v);
+}
+`;
+  const BETA = `import { ALPHA } from "./alpha";
+
+export const BETA = [...ALPHA, "z"];
+
+/** @guarantee ok.in a \`v\` in \`BETA\` is in */
+export function isBeta(v: string): boolean {
+  return BETA.includes(v);
+}
+`;
+  const OTHER = `/** @guarantee ok.echo returns \`v\` */
+export function echo(v: string): string {
+  return v;
+}
+`;
+
+  test("is one step lower and names that unit; an unrelated test does not count", async () => {
+    const { untested: found } = await untested({
+      "src/alpha.ts": ALPHA,
+      "src/beta.ts": BETA,
+      "src/other.ts": OTHER,
+      "tests/alpha.test.ts": `import { expect, it } from "bun:test";
+import { isAlpha } from "../src/alpha";
+it("isAlpha.ok.in", () => {
+  expect(isAlpha("nope")).toBe(false);
+});
+`,
+      "tests/beta.test.ts": `import { expect, it } from "bun:test";
+import { isBeta } from "../src/beta";
+it("isBeta.ok.in", () => {
+  expect(isBeta("x")).toBe(true);
+  expect(isBeta("z")).toBe(true);
+});
+`,
+      "tests/other.test.ts": `import { expect, it } from "bun:test";
+import { echo } from "../src/other";
+it("echo.ok.echo", () => {
+  expect(echo("y")).toBe("y");
+});
+`,
+    });
+    expect(found.map((f) => [f.unit, f.severity, f.message.match(/member "([^"]+)"/)?.[1]]).sort()).toEqual([
+      ["isAlpha", "info", "x"],
+      ["isAlpha", "warn", "y"],
+    ]);
+    expect(found.find((f) => f.severity === "info")?.message).toBe(
+      'isAlpha commits to member "x" (ALPHA) and the contract names it, but no linked test uses it (a test of isBeta uses it); isAlpha\'s own tests cannot fail when it changes',
+    );
+  });
+});

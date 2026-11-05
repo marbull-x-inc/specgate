@@ -247,9 +247,13 @@ test("needsSecondFactor.ok.listed", () => {
     );
     const untested = report.findings
       .filter((f) => f.rule === "decision-untested")
-      .map((f) => `${f.unit}:${f.message.match(/member "([^"]+)"/)?.[1]}`);
-    // s1 is used by a test of isDeniedOp, so the shared element is pinned for both units.
-    expect(untested.sort()).toEqual(["isDeniedOp:d1", "needsSecondFactor:s2"]);
+      .map((f) => `${f.unit}:${f.message.match(/member "([^"]+)"/)?.[1]}:${f.severity}`);
+    // s1 is used by a test of isDeniedOp: removing it fails that test, but needsSecondFactor's own
+    // tests do not pin it, so it stays reported one step lower (#38).
+    expect(untested.sort()).toEqual(["isDeniedOp:d1:warn", "needsSecondFactor:s1:info", "needsSecondFactor:s2:warn"]);
+    expect(report.findings.find((f) => f.message.includes('"s1"'))?.message).toContain(
+      "(a test of isDeniedOp uses it); needsSecondFactor's own tests cannot fail when it changes",
+    );
   });
 
   test("decisions.ignore silences an element or a whole collection", async () => {
