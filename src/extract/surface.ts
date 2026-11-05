@@ -166,6 +166,29 @@ function envInputOf(node: ts.Node, sf: ts.SourceFile, forbid: readonly string[])
 }
 
 /**
+ * The decisions of a unit body, and the lines of the helper bodies the walk followed (the parts
+ * of the module that belong to the unit; mutants there count for it).
+ */
+function decisionsOf(
+  body: ts.Node,
+  sf: ts.SourceFile,
+  host: ProgramHost,
+  helpers: ReadonlyMap<string, ts.Node>,
+  options: DecisionOptions,
+): Pick<Unit, "decisions" | "helperRanges"> {
+  const ranges: Array<{ line: number; endLine: number }> = [];
+  const decisions = collectDecisions(body, sf, host, helpers, {
+    ...options,
+    onFollow: (helper) => {
+      const owner = ts.isBlock(helper) || ts.isExpression(helper) ? helper.parent : helper;
+      ranges.push({ line: lineOf(sf, owner.getStart(sf)), endLine: lineOf(sf, owner.getEnd()) });
+    },
+  });
+  ranges.sort((x, y) => x.line - y.line || x.endLine - y.endLine);
+  return ranges.length > 0 ? { decisions, helperRanges: ranges } : { decisions };
+}
+
+/**
  * Walks a body and, for class methods, the private helpers it calls on `this` (transitively,
  * cycle-safe). Private helpers are part of the operation, not units of their own, so the ports
  * they touch and the errors they throw belong to the public operation that reaches them.
@@ -518,7 +541,7 @@ export function extractSurface(
         ),
         operationCalls: [],
         envInputs: scan.envInputs,
-        decisions: body ? collectDecisions(body, sf, host, new Map(), decisionOptions) : [],
+        ...(body ? decisionsOf(body, sf, host, new Map(), decisionOptions) : { decisions: [] }),
         implHash: textHash(body ? body.getText(sf) : (last.getText(sf) ?? "")),
         guarantees: deriveThrowsIds(
           unitId,
@@ -758,7 +781,7 @@ export function extractSurface(
             ),
             operationCalls: [],
             envInputs: scan.envInputs,
-            decisions: member.body ? collectDecisions(member.body, sf, host, helpers, decisionOptions) : [],
+            ...(member.body ? decisionsOf(member.body, sf, host, helpers, decisionOptions) : { decisions: [] }),
             implHash: textHash(member.body ? member.body.getText(sf) : ""),
             guarantees: deriveThrowsIds(
               unitId,

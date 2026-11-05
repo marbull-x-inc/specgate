@@ -91,6 +91,12 @@ export interface Config {
    * recorded per collection; the rest are reported once by `decision-collection-truncated`.
    */
   decisions: { ignore: string[]; collectionLimit: number };
+  /**
+   * `report`: a mutation-testing-report-schema JSON (Stryker's `mutation.json`) another tool
+   * wrote, relative to root; unset turns the mutation rules off. `detected`: mutant statuses that
+   * count as caught by the tests.
+   */
+  mutation: { report?: string; detected: string[] };
   resolve: { ignore: string[]; allowProgramTypes: boolean };
 }
 
@@ -109,6 +115,7 @@ export interface ConfigInput {
   requirementHeader?: Partial<Config["requirementHeader"]>;
   envInputs?: Partial<Config["envInputs"]>;
   decisions?: Partial<Config["decisions"]>;
+  mutation?: Partial<Config["mutation"]>;
   resolve?: Partial<Config["resolve"]>;
 }
 
@@ -155,6 +162,7 @@ export function defaultConfig(): Config {
     requirementHeader: { enabled: false, pattern: "^\\s*(?:\\*|//)\\s*@requirement\\s+(\\S+)" },
     envInputs: { forbid: ["Date.now", "new Date", "Math.random", "fetch", "process.env"] },
     decisions: { ignore: [], collectionLimit: 500 },
+    mutation: { detected: ["Killed", "Timeout", "RuntimeError", "CompileError"] },
     resolve: { ignore: [], allowProgramTypes: true },
   };
 }
@@ -426,6 +434,14 @@ function applyInput(config: Config, input: unknown, label: string): void {
       config.decisions.collectionLimit = v;
     });
   });
+  r.object("mutation", (m) => {
+    m.string("report", (v) => {
+      config.mutation.report = v;
+    });
+    m.strings("detected", (v) => {
+      config.mutation.detected = v;
+    });
+  });
   r.object("resolve", (x) => {
     x.strings("ignore", (v) => {
       config.resolve.ignore = v;
@@ -507,6 +523,9 @@ export const RULE_IDS = [
   "decision-untested",
   "test-tautology",
   "decision-collection-truncated",
+  "mutant-survived",
+  "unit-not-executed",
+  "mutation-report-unreadable",
 ] as const;
 export type RuleId = (typeof RULE_IDS)[number];
 
@@ -533,6 +552,9 @@ export const DEFAULT_SEVERITIES: Record<RuleId, RuleSeverity> = {
   "decision-untested": "warn",
   "test-tautology": "warn",
   "decision-collection-truncated": "info",
+  "mutant-survived": "warn",
+  "unit-not-executed": "warn",
+  "mutation-report-unreadable": "warn",
 };
 
 export function severityOf(config: Config, rule: RuleId): RuleSeverity {

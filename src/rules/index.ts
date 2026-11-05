@@ -1,6 +1,7 @@
 import { type Config, RULE_IDS, type RuleId, severityOf } from "../config/schema.ts";
 import type { Finding, Report, Severity, TestCase, Unit } from "../ir/schema.ts";
-import { evaluateDecisionRules } from "./decisions.ts";
+import { evaluateDecisionRules, linkedTestsIndex } from "./decisions.ts";
+import { evaluateMutationRules, type MutationRuleInput } from "./mutation.ts";
 
 /**
  * Deterministic judgement rules.
@@ -26,6 +27,8 @@ export interface RuleContext {
   unmappedEntries?: readonly string[];
   /** Collections whose `member` decisions were cut at `decisions.collectionLimit`. */
   truncatedCollections?: ReadonlyArray<{ name: string; file: string; size: number }>;
+  /** The mutation report (`mutation.report`), mapped to units; absent when none is configured. */
+  mutation?: Omit<MutationRuleInput, "linkedTests">;
 }
 
 /** `downgrade` lowers the configured severity one step (fail → warn, warn → info). */
@@ -189,6 +192,9 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
     },
     emit,
   );
+
+  if (ctx.mutation)
+    evaluateMutationRules({ ...ctx.mutation, linkedTests: linkedTestsIndex(ctx.tests, callersOf) }, emit);
 
   for (const t of ctx.tests) {
     if (!guaranteeKeys.has(t.key)) {

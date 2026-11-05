@@ -115,8 +115,11 @@ export interface Decision {
   values: string[];
   /** Names of the constants involved, if any */
   names: string[];
-  /** `member` decisions: the collection constant the element is declared in, and its module (relative to root) */
-  collection?: { name: string; file: string };
+  /**
+   * `member` decisions: the collection constant the element is declared in, its module
+   * (relative to root) and the lines of its declaration
+   */
+  collection?: { name: string; file: string; line: number; endLine: number };
   /** `member` decisions: how the unit compares its input with the element */
   probe?: MemberProbe;
 }
@@ -147,6 +150,13 @@ export interface Unit {
   envInputs: Array<{ expression: string; line: number }>;
   /** Values the implementation (and the helpers it reaches) commits to; see `decision-unspecified` */
   decisions: Decision[];
+  /**
+   * Lines (in `file`) of the private helpers and same-module functions the body reaches; the
+   * decision walk and mutant mapping treat them as part of the unit. Absent when there are none.
+   */
+  helperRanges?: Array<{ line: number; endLine: number }>;
+  /** Mutants of the unit in the mutation report (`mutation.report`), when one was read. */
+  mutation?: MutationCounts;
   /** sha256 of the implementation body text */
   implHash: string;
   guarantees: Guarantee[];
@@ -157,6 +167,29 @@ export interface Unit {
   typeText?: string;
   /** `entry` units */
   entry?: EntryInfo;
+}
+
+/**
+ * Mutants mapped to a unit, by outcome: `killed` (a status in `mutation.detected`), `survived`,
+ * `noCoverage` (no test ran the mutated code), `ignored` (every other status).
+ */
+export interface MutationCounts {
+  killed: number;
+  survived: number;
+  noCoverage: number;
+  ignored: number;
+}
+
+/** A mutant from the mutation report that a finding is about. */
+export interface FindingMutant {
+  /** Mutant id as the report gives it */
+  id: string;
+  mutator: string;
+  /** Replacement source text, on one line, shortened */
+  replacement?: string;
+  /** Status as the report gives it (Survived, NoCoverage, …) */
+  status: string;
+  line: number;
 }
 
 export interface Entity {
@@ -220,6 +253,8 @@ export interface Finding {
   test?: string;
   /** Recorded in the accepted-findings file; reported as `info` (see `check --accept-baseline`). */
   accepted?: boolean;
+  /** `mutant-survived`: the mutant the finding is about */
+  mutant?: FindingMutant;
 }
 
 export interface Summary {

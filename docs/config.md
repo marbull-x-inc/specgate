@@ -131,6 +131,13 @@ of the same test file that they reference: numbers by value (a `boundary` also b
 `output` inside a longer string, a `member` the way the unit probes it (a prefix list is pinned
 by a longer path that starts with the element), anything else by equality.
 
+## `mutation`
+
+| Option     | Default                                                 | Meaning                                                                                                                                                                                                                                                                            |
+| ---------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `report`   | unset                                                   | Mutation-testing-report-schema JSON (versions 1–3, Stryker's `mutation.json`) another tool wrote, relative to `root`. Unset turns `mutant-survived`, `unit-not-executed` and `mutation-report-unreadable` off. Paths in the report resolve against its `projectRoot`, else `root`. |
+| `detected` | `["Killed", "Timeout", "RuntimeError", "CompileError"]` | Statuses that count as caught by the tests (`units[].mutation.killed`). `Survived` and `NoCoverage` count as such; every other status is `ignored`.                                                                                                                                |
+
 ## `resolve`
 
 | Option              | Default | Meaning                                                                                                                                                         |

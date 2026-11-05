@@ -1,6 +1,6 @@
 # 0002 — Decisions pinned by tests
 
-Status: accepted (phase 1) · Issues: #31 (phase 1), #32 (phase 2: mutation report)
+Status: accepted (phase 1) · Issues: #31 (phase 1), #32 (phase 2: mutation report, see 0003)
 
 ## Problem
 

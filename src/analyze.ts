@@ -8,6 +8,7 @@ import { type ExtractedUnit, extractSurface } from "./extract/surface.ts";
 import { extractTests } from "./extract/tests/index.ts";
 import { createTsdocParser } from "./extract/tsdoc-parser.ts";
 import { isReport, type Report, type Unit } from "./ir/schema.ts";
+import { countMutants, mapMutants, readMutationReport } from "./mutation/report.ts";
 import { attachProvenance } from "./provenance/git.ts";
 import { resolveReferences } from "./resolve/identifiers.ts";
 import { evaluateRules } from "./rules/index.ts";
@@ -81,6 +82,20 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
   }
   if (options.provenance !== false) attachProvenance(config, units);
 
+  const mutationRead = readMutationReport(config);
+  const mutation =
+    mutationRead === undefined || config.mutation.report === undefined
+      ? undefined
+      : {
+          path: config.mutation.report,
+          result:
+            "error" in mutationRead
+              ? mutationRead
+              : { mapped: mapMutants(units, mutationRead.mutants, config.mutation.detected) },
+        };
+  if (mutation && "mapped" in mutation.result)
+    for (const [unit, counts] of countMutants(mutation.result.mapped)) unit.mutation = counts;
+
   const docMessages = [
     ...surface.docMessages,
     ...configMessages.map((text) => ({ file: "tsdoc.json", line: 1, text })),
@@ -98,6 +113,7 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
       surfaceFileCount: surfaceFiles.length,
       unmappedEntries: entries.filter((e) => e.source === undefined).map((e) => e.subpath),
       truncatedCollections: surface.truncatedCollections,
+      ...(mutation ? { mutation } : {}),
     }),
     options.accepted === false ? new Set() : readAccepted(config),
   );
