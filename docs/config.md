@@ -39,7 +39,9 @@ export default defineConfig({ presets: [dddTs] /* overrides */ });
 Units are also: exported type aliases and non-`@port` interfaces whose doc has `@guarantee` (`type`), and the `@packageDocumentation` comment of each `package.json#exports` entry module (`entry`, id `entry#main` / `entry#<subpath>`); see the README section on types and package entries.
 
 Units are: exported functions (declarations, arrow/function expressions, and constants whose
-value is callable, such as `export const defu = createDefu()`; a declaration exported only as the
+value is callable, such as `export const defu = createDefu()`; when such a constant only renames a
+function of the same module, `export const persist = persistImpl as unknown as Persist`, that
+function's body is the unit's for decisions and mutants; a declaration exported only as the
 module's default, `const useCounter = …; export default useCounter` or `export default function
 useBoolean`, is a unit under its declared name), public methods of exported
 classes (static or instance; `private` / `protected` / `#name` excluded), and exported
