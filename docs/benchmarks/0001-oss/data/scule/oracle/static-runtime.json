@@ -1,0 +1,22 @@
+[
+  {
+    "id": "F11-pascalCase-normalize",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F12-camelCase-normalize",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F13-trainCase-normalize",
+    "verdict": "GREEN",
+    "detail": ""
+  },
+  {
+    "id": "F14-titleCase-normalize",
+    "verdict": "GREEN",
+    "detail": ""
+  }
+]

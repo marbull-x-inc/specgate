@@ -1,0 +1,6 @@
+[
+ {"id":"F12-parseURL-match-file:","finding":12,"file":"src/parse.ts","line":83,"from":"\"file:\"","to":"\"file:_x\""},
+ {"id":"F13-parseQuery-boundary-2","finding":13,"file":"src/query.ts","line":61,"from":"< 2","to":"<= 2"},
+ {"id":"F14-parseQuery-match-__proto__","finding":14,"file":"src/query.ts","line":65,"from":"\"__proto__\"","to":"\"__proto___x\""},
+ {"id":"F15-parseQuery-match-constructor","finding":15,"file":"src/query.ts","line":65,"from":"\"constructor\"","to":"\"constructor_x\""}
+]

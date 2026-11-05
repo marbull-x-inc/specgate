@@ -1,0 +1,551 @@
+04:01:59 (37256) INFO ProjectReader Found 1 of 39 file(s) to be mutated.
+Browserslist: browsers data (caniuse-lite) is 16 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+04:02:00 (37256) INFO Instrumenter Instrumented 1 source file(s) with 227 mutant(s)
+04:02:00 (37256) INFO ConcurrencyTokenProvider Creating 15 test runner process(es).
+04:02:00 (37256) INFO DryRunExecutor Starting initial test run (jest test runner with "perTest" coverage analysis). This may take a while.
+04:02:01 (37256) INFO DryRunExecutor Initial test run succeeded. Ran 167 tests in 0 seconds (net 74 ms, overhead 890 ms).
+
+All tests
+  format.test.ts
+    ~ format(number, { long: true }) format.ok.long should not throw an error [line 7] (covered 39)
+    ✓ format(number, { long: true }) format.ok.long should support milliseconds [line 13] (killed 6)
+    ✓ format(number, { long: true }) format.ok.long should support seconds [line 19] (killed 3)
+    ✓ format(number, { long: true }) format.ok.long should support minutes [line 29] (killed 5)
+    ✓ format(number, { long: true }) format.ok.long should support hours [line 39] (killed 2)
+    ✓ format(number, { long: true }) format.ok.long should support days [line 49] (killed 2)
+    ~ format(number, { long: true }) format.ok.long should support weeks [line 61] (covered 30)
+    ~ format(number, { long: true }) format.ok.long should support months [line 73] (covered 26)
+    ✓ format(number, { long: true }) format.ok.long should support years [line 95] (killed 2)
+    ~ format(number, { long: true }) format.ok.long should round [line 117] (covered 34)
+    ~ format(number) format.ok.short should not throw an error [line 127] (covered 39)
+    ✓ format(number) format.ok.short should support milliseconds [line 133] (killed 4)
+    ✓ format(number) format.ok.short should support seconds [line 139] (killed 1)
+    ✓ format(number) format.ok.short should support minutes [line 147] (killed 3)
+    ~ format(number) format.ok.short should support hours [line 155] (covered 33)
+    ✓ format(number) format.ok.short should support days [line 163] (killed 3)
+    ✓ format(number) format.ok.short should support weeks [line 171] (killed 3)
+    ✓ format(number) format.ok.short should support months [line 179] (killed 1)
+    ~ format(number) format.ok.short should support years [line 189] (covered 17)
+    ~ format(number) format.ok.short should round [line 199] (covered 29)
+    ~ format(invalid inputs) format.ok.short should throw an error, when format("") [line 209] (covered 9)
+    ~ format(invalid inputs) format.ok.short should throw an error, when format(undefined) [line 216] (covered 9)
+    ~ format(invalid inputs) format.ok.short should throw an error, when format(null) [line 223] (covered 9)
+    ~ format(invalid inputs) format.ok.short should throw an error, when format([]) [line 230] (covered 9)
+    ~ format(invalid inputs) format.ok.short should throw an error, when format({}) [line 237] (covered 9)
+    ~ format(invalid inputs) format.ok.short should throw an error, when format(NaN) [line 244] (covered 10)
+    ~ format(invalid inputs) format.ok.short should throw an error, when format(Infinity) [line 250] (covered 10)
+    ~ format(invalid inputs) format.ok.short should throw an error, when format(-Infinity) [line 256] (covered 10)
+  index.test.ts
+    ✓ ms(string) ms.ok.parse should not throw an error [line 5] (killed 9)
+    ✓ ms(string) ms.ok.parse should preserve ms [line 11] (killed 10)
+    ✓ ms(string) ms.ok.parse should convert from m to ms [line 15] (killed 1)
+    ~ ms(string) ms.ok.parse should convert from h to ms [line 19] (covered 68)
+    ~ ms(string) ms.ok.parse should convert d to ms [line 23] (covered 63)
+    ✓ ms(string) ms.ok.parse should convert w to ms [line 27] (killed 1)
+    ~ ms(string) ms.ok.parse should convert s to ms [line 31] (covered 78)
+    ~ ms(string) ms.ok.parse should convert ms to ms [line 35] (covered 82)
+    ✓ ms(string) ms.ok.parse should convert y to ms [line 39] (killed 2)
+    ✓ ms(string) ms.ok.parse should work with decimals [line 43] (killed 1)
+    ~ ms(string) ms.ok.parse should work with multiple spaces [line 47] (covered 78)
+    ✓ ms(string) ms.ok.parse should return NaN if invalid [line 51] (killed 2)
+    ~ ms(string) ms.ok.parse should be case-insensitive [line 60] (covered 68)
+    ~ ms(string) ms.ok.parse should work with numbers starting with . [line 64] (covered 82)
+    ~ ms(string) ms.ok.parse should work with negative integers [line 68] (covered 82)
+    ~ ms(string) ms.ok.parse should work with negative decimals [line 72] (covered 68)
+    ~ ms(string) ms.ok.parse should work with negative decimals starting with "." [line 77] (covered 68)
+    ~ ms(long string) ms.ok.parse should not throw an error [line 85] (covered 78)
+    ~ ms(long string) ms.ok.parse should convert milliseconds to ms [line 91] (covered 78)
+    ~ ms(long string) ms.ok.parse should convert msecs to ms [line 95] (covered 80)
+    ✓ ms(long string) ms.ok.parse should convert sec to ms [line 99] (killed 1)
+    ✓ ms(long string) ms.ok.parse should convert from min to ms [line 103] (killed 1)
+    ~ ms(long string) ms.ok.parse should convert from hr to ms [line 107] (covered 67)
+    ✓ ms(long string) ms.ok.parse should convert days to ms [line 111] (killed 1)
+    ~ ms(long string) ms.ok.parse should convert weeks to ms [line 115] (covered 59)
+    ✓ ms(long string) ms.ok.parse should convert years to ms [line 119] (killed 1)
+    ~ ms(long string) ms.ok.parse should work with decimals [line 123] (covered 64)
+    ~ ms(long string) ms.ok.parse should work with negative integers [line 127] (covered 78)
+    ~ ms(long string) ms.ok.parse should work with negative decimals [line 131] (covered 64)
+    ~ ms(long string) ms.ok.parse should work with negative decimals starting with "." [line 135] (covered 67)
+    ✓ ms(number, { long: true }) ms.ok.long should not throw an error [line 143] (killed 9)
+    ✓ ms(number, { long: true }) ms.ok.long should support milliseconds [line 149] (killed 11)
+    ✓ ms(number, { long: true }) ms.ok.long should support seconds [line 155] (killed 6)
+    ~ ms(number, { long: true }) ms.ok.long should support minutes [line 165] (covered 52)
+    ✓ ms(number, { long: true }) ms.ok.long should support hours [line 175] (killed 2)
+    ✓ ms(number, { long: true }) ms.ok.long should support days [line 185] (killed 2)
+    ✓ ms(number, { long: true }) ms.ok.long should support weeks [line 195] (killed 4)
+    ✓ ms(number, { long: true }) ms.ok.long should support months [line 207] (killed 4)
+    ✓ ms(number, { long: true }) ms.ok.long should support years [line 225] (killed 1)
+    ~ ms(number, { long: true }) ms.ok.long should round [line 243] (covered 44)
+    ✓ ms(number) ms.ok.format should not throw an error [line 253] (killed 1)
+    ✓ ms(number) ms.ok.format should support milliseconds [line 259] (killed 12)
+    ✓ ms(number) ms.ok.format should support seconds [line 265] (killed 4)
+    ✓ ms(number) ms.ok.format should support minutes [line 273] (killed 2)
+    ✓ ms(number) ms.ok.format should support hours [line 281] (killed 5)
+    ✓ ms(number) ms.ok.format should support days [line 289] (killed 2)
+    ✓ ms(number) ms.ok.format should support weeks [line 297] (killed 2)
+    ✓ ms(number) ms.ok.format should support months [line 305] (killed 4)
+    ✓ ms(number) ms.ok.format should support years [line 315] (killed 4)
+    ~ ms(number) ms.ok.format should round [line 325] (covered 39)
+    ✓ ms(invalid inputs) ms.ok.parse should throw an error, when ms("") [line 335] (killed 6)
+    ~ ms(invalid inputs) ms.ok.parse should throw an error, when ms(undefined) [line 342] (covered 10)
+    ~ ms(invalid inputs) ms.ok.parse should throw an error, when ms(null) [line 349] (covered 10)
+    ~ ms(invalid inputs) ms.ok.parse should throw an error, when ms([]) [line 356] (covered 10)
+    ~ ms(invalid inputs) ms.ok.parse should throw an error, when ms({}) [line 363] (covered 10)
+    ✓ ms(invalid inputs) ms.ok.parse should throw an error, when ms(NaN) [line 370] (killed 3)
+    ~ ms(invalid inputs) ms.ok.parse should throw an error, when ms(Infinity) [line 376] (covered 20)
+    ~ ms(invalid inputs) ms.ok.parse should throw an error, when ms(-Infinity) [line 382] (covered 20)
+  parse-strict.test.ts
+    ✓ parseStrict(string) parseStrict.ok.parse should not throw an error [line 5] (killed 1)
+    ✓ parseStrict(string) parseStrict.ok.parse should preserve ms [line 11] (killed 3)
+    ✓ parseStrict(string) parseStrict.ok.parse should convert from m to ms [line 15] (killed 2)
+    ✓ parseStrict(string) parseStrict.ok.parse should convert from h to ms [line 19] (killed 4)
+    ✓ parseStrict(string) parseStrict.ok.parse should convert d to ms [line 23] (killed 4)
+    ✓ parseStrict(string) parseStrict.ok.parse should convert w to ms [line 27] (killed 3)
+    ✓ parseStrict(string) parseStrict.ok.parse should convert s to ms [line 31] (killed 3)
+    ~ parseStrict(string) parseStrict.ok.parse should convert ms to ms [line 35] (covered 77)
+    ✓ parseStrict(string) parseStrict.ok.parse should convert mo to ms [line 39] (killed 4)
+    ~ parseStrict(string) parseStrict.ok.parse should convert y to ms [line 42] (covered 49)
+    ~ parseStrict(string) parseStrict.ok.parse should work with ms [line 46] (covered 63)
+    ~ parseStrict(string) parseStrict.ok.parse should work with multiple spaces [line 50] (covered 73)
+    ~ parseStrict(string) parseStrict.ok.parse should return NaN if invalid [line 54] (covered 43)
+    ✓ parseStrict(string) parseStrict.ok.parse should be case-insensitive [line 63] (killed 4)
+    ~ parseStrict(string) parseStrict.ok.parse should work with numbers starting with . [line 76] (covered 77)
+    ~ parseStrict(string) parseStrict.ok.parse should work with negative integers [line 80] (covered 77)
+    ~ parseStrict(string) parseStrict.ok.parse should work with negative decimals [line 84] (covered 63)
+    ~ parseStrict(string) parseStrict.ok.parse should work with negative decimals starting with "." [line 89] (covered 63)
+    ~ parseStrict(long string) parseStrict.ok.parse should not throw an error [line 97] (covered 73)
+    ~ parseStrict(long string) parseStrict.ok.parse should convert milliseconds to ms [line 103] (covered 73)
+    ✓ parseStrict(long string) parseStrict.ok.parse should convert msecs to ms [line 107] (killed 1)
+    ✓ parseStrict(long string) parseStrict.ok.parse should convert sec to ms [line 111] (killed 1)
+    ~ parseStrict(long string) parseStrict.ok.parse should convert from min to ms [line 115] (covered 67)
+    ✓ parseStrict(long string) parseStrict.ok.parse should convert from hr to ms [line 119] (killed 2)
+    ~ parseStrict(long string) parseStrict.ok.parse should convert days to ms [line 123] (covered 56)
+    ✓ parseStrict(long string) parseStrict.ok.parse should convert weeks to ms [line 127] (killed 2)
+    ✓ parseStrict(long string) parseStrict.ok.parse should convert months to ms [line 131] (killed 2)
+    ✓ parseStrict(long string) parseStrict.ok.parse should convert years to ms [line 135] (killed 1)
+    ~ parseStrict(long string) parseStrict.ok.parse should work with decimals [line 139] (covered 59)
+    ~ parseStrict(long string) parseStrict.ok.parse should work with negative integers [line 143] (covered 73)
+    ~ parseStrict(long string) parseStrict.ok.parse should work with negative decimals [line 147] (covered 59)
+    ~ parseStrict(long string) parseStrict.ok.parse should work with negative decimals starting with "." [line 151] (covered 62)
+    ~ parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict("") [line 159] (covered 14)
+    ✓ parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict("...>100 length string...") [line 166] (killed 1)
+    ~ parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict(undefined) [line 173] (covered 12)
+    ~ parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict(null) [line 180] (covered 12)
+    ~ parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict([]) [line 187] (covered 12)
+    ✓ parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict({}) [line 194] (killed 1)
+    ~ parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict(NaN) [line 201] (covered 12)
+    ~ parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict(Infinity) [line 208] (covered 12)
+    ~ parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict(-Infinity) [line 215] (covered 12)
+  parse.test.ts
+    ~ parse(string) parse.ok.units should not throw an error [line 5] (covered 67)
+    ~ parse(string) parse.ok.default-unit should preserve ms [line 11] (covered 77)
+    ✓ parse(string) parse.ok.values should convert from m to ms [line 15] (killed 1)
+    ~ parse(string) parse.ok.values should convert from h to ms [line 19] (covered 62)
+    ~ parse(string) parse.ok.values should convert d to ms [line 23] (covered 57)
+    ~ parse(string) parse.ok.units should convert w to ms [line 27] (covered 54)
+    ~ parse(string) parse.ok.values should convert s to ms [line 31] (covered 72)
+    ~ parse(string) parse.ok.units should convert ms to ms [line 35] (covered 76)
+    ✓ parse(string) parse.ok.values should convert y to ms [line 39] (killed 1)
+    ~ parse(string) parse.ok.fraction should work with ms [line 43] (covered 62)
+    ~ parse(string) parse.ok.case should work with multiple spaces [line 47] (covered 72)
+    ✓ parse(string) parse.ok.units should return NaN if invalid [line 51] (killed 3)
+    ~ parse(string) parse.ok.case should be case-insensitive [line 57] (covered 80)
+    ~ parse(string) parse.ok.fraction should work with numbers starting with . [line 65] (covered 76)
+    ~ parse(string) parse.ok.fraction should work with negative integers [line 69] (covered 76)
+    ~ parse(string) parse.ok.fraction should work with negative decimals [line 73] (covered 62)
+    ~ parse(string) parse.ok.fraction should work with negative decimals starting with "." [line 78] (covered 62)
+    ~ parse(long string) parse.ok.units should not throw an error [line 86] (covered 72)
+    ~ parse(long string) parse.ok.units should convert milliseconds to ms [line 92] (covered 72)
+    ~ parse(long string) parse.ok.units should convert msecs to ms [line 96] (covered 74)
+    ~ parse(long string) parse.ok.units should convert sec to ms [line 100] (covered 71)
+    ✓ parse(long string) parse.ok.units should convert from min to ms [line 104] (killed 1)
+    ~ parse(long string) parse.ok.units should convert from hr to ms [line 108] (covered 61)
+    ~ parse(long string) parse.ok.units should convert days to ms [line 112] (covered 55)
+    ~ parse(long string) parse.ok.units should convert weeks to ms [line 116] (covered 53)
+    ~ parse(long string) parse.ok.units should convert months to ms [line 120] (covered 50)
+    ~ parse(long string) parse.ok.units should convert years to ms [line 124] (covered 45)
+    ~ parse(long string) parse.ok.fraction should work with decimals [line 128] (covered 58)
+    ~ parse(long string) parse.ok.fraction should work with negative integers [line 132] (covered 72)
+    ~ parse(long string) parse.ok.fraction should work with negative decimals [line 136] (covered 58)
+    ~ parse(long string) parse.ok.fraction should work with negative decimals starting with "." [line 140] (covered 61)
+    ~ parse(invalid inputs) parse.ok.units should throw an error, when parse("") [line 148] (covered 13)
+    ~ parse(invalid inputs) parse.ok.units should throw an error, when parseStrict("...>100 length string...") [line 154] (covered 16)
+    ~ parse(invalid inputs) parse.ok.units should throw an error, when parse(undefined) [line 160] (covered 11)
+    ~ parse(invalid inputs) parse.ok.units should throw an error, when parse(null) [line 167] (covered 11)
+    ~ parse(invalid inputs) parse.ok.units should throw an error, when parse([]) [line 174] (covered 11)
+    ~ parse(invalid inputs) parse.ok.units should throw an error, when parse({}) [line 181] (covered 11)
+    ~ parse(invalid inputs) parse.ok.units should throw an error, when parse(NaN) [line 188] (covered 11)
+    ~ parse(invalid inputs) parse.ok.units should throw an error, when parse(Infinity) [line 195] (covered 11)
+    ~ parse(invalid inputs) parse.ok.units should throw an error, when parse(-Infinity) [line 202] (covered 11)
+
+[NoCoverage] ConditionalExpression
+src/index.ts:149:5
+-       default:
+-         matchUnit satisfies never;
+-         throw new Error(
+-           `Unknown unit "${matchUnit}" provided to ms.parse(). value=${JSON.stringify(str)}`,
+-         );
++       default:
+
+[NoCoverage] StringLiteral
+src/index.ts:152:9
+-           `Unknown unit "${matchUnit}" provided to ms.parse(). value=${JSON.stringify(str)}`,
++           ``,
+
+[Survived] ConditionalExpression
+src/index.ts:59:14
+-     } else if (typeof value === 'number') {
++     } else if (true) {
+Tests ran:
+    ms(number, { long: true }) ms.ok.long should not throw an error
+    ms(number, { long: true }) ms.ok.long should support milliseconds
+    ms(number, { long: true }) ms.ok.long should support seconds
+  and 24 more tests!
+
+
+[Survived] EqualityOperator
+src/index.ts:80:54
+-     if (typeof str !== 'string' || str.length === 0 || str.length > 100) {
++     if (typeof str !== 'string' || str.length === 0 || str.length >= 100) {
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 92 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:63:5
+-       `Value provided to ms() must be a string or number. value=${JSON.stringify(value)}`,
++       ``,
+Tests ran:
+    ms(invalid inputs) ms.ok.parse should throw an error, when ms(undefined)
+    ms(invalid inputs) ms.ok.parse should throw an error, when ms(null)
+    ms(invalid inputs) ms.ok.parse should throw an error, when ms([])
+  and 1 more test!
+
+
+[Survived] StringLiteral
+src/index.ts:82:7
+-         `Value provided to ms.parse() must be a string with length between 1 and 99. value=${JSON.stringify(str)}`,
++         ``,
+Tests ran:
+    ms(invalid inputs) ms.ok.parse should throw an error, when ms("")
+    parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict("")
+    parseStrict(invalid inputs) parseStrict.ok.parse should throw an error, when parseStrict("...>100 length string...")
+  and 16 more tests!
+
+
+[Survived] Regex
+src/index.ts:86:5
+-       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
++       /^(?<value>-?\d*\.?\d) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 90 more tests!
+
+
+[Survived] Regex
+src/index.ts:86:5
+-       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
++       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 90 more tests!
+
+
+[Survived] Regex
+src/index.ts:86:5
+-       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
++       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 90 more tests!
+
+
+[Survived] Regex
+src/index.ts:86:5
+-       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
++       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 90 more tests!
+
+
+[Survived] Regex
+src/index.ts:86:5
+-       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
++       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 90 more tests!
+
+
+[Survived] Regex
+src/index.ts:86:5
+-       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
++       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 90 more tests!
+
+
+[Survived] Regex
+src/index.ts:86:5
+-       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
++       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs|y)?$/i.exec(
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 90 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:109:10
+-       case 'yrs':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 84 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:110:10
+-       case 'yr':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 84 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:113:10
+-       case 'months':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 81 more tests!
+
+
+[Survived] Regex
+src/index.ts:86:5
+-       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
++       /^(?<value>-?\d*\.?\d+) *(?<unit>milliseconds|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)?$/i.exec(
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 90 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:122:10
+-       case 'day':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 69 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:127:10
+-       case 'hrs':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 60 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:126:10
+-       case 'hour':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 60 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:133:10
+-       case 'mins':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 41 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:131:10
+-       case 'minutes':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 41 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:132:10
+-       case 'minute':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should not throw an error
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert from m to ms
+  and 41 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:138:10
+-       case 'second':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert s to ms
+    ms(string) ms.ok.parse should convert ms to ms
+  and 32 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:139:10
+-       case 'secs':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert s to ms
+    ms(string) ms.ok.parse should convert ms to ms
+  and 32 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:137:10
+-       case 'seconds':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert s to ms
+    ms(string) ms.ok.parse should convert ms to ms
+  and 32 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:146:10
+-       case 'msec':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert ms to ms
+    ms(string) ms.ok.parse should work with numbers starting with .
+  and 9 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:144:10
+-       case 'millisecond':
++       case "":
+Tests ran:
+    ms(string) ms.ok.parse should preserve ms
+    ms(string) ms.ok.parse should convert ms to ms
+    ms(string) ms.ok.parse should work with numbers starting with .
+  and 12 more tests!
+
+
+[Survived] EqualityOperator
+src/index.ts:174:7
+-     if (msAbs >= y) {
++     if (msAbs > y) {
+Tests ran:
+    ms(number) ms.ok.format should not throw an error
+    ms(number) ms.ok.format should support milliseconds
+    ms(number) ms.ok.format should support seconds
+  and 17 more tests!
+
+
+[Survived] EqualityOperator
+src/index.ts:203:7
+-     if (msAbs >= y) {
++     if (msAbs > y) {
+Tests ran:
+    ms(number, { long: true }) ms.ok.long should not throw an error
+    ms(number, { long: true }) ms.ok.long should support milliseconds
+    ms(number, { long: true }) ms.ok.long should support seconds
+  and 17 more tests!
+
+
+[Survived] StringLiteral
+src/index.ts:239:21
+-       throw new Error('Value provided to ms.format() must be of type number.');
++       throw new Error("");
+Tests ran:
+    ms(invalid inputs) ms.ok.parse should throw an error, when ms(NaN)
+    ms(invalid inputs) ms.ok.parse should throw an error, when ms(Infinity)
+    ms(invalid inputs) ms.ok.parse should throw an error, when ms(-Infinity)
+  and 8 more tests!
+
+
+[Survived] ConditionalExpression
+src/index.ts:238:7
+-     if (typeof ms !== 'number' || !Number.isFinite(ms)) {
++     if (false || !Number.isFinite(ms)) {
+Tests ran:
+    ms(number, { long: true }) ms.ok.long should not throw an error
+    ms(number, { long: true }) ms.ok.long should support milliseconds
+    ms(number, { long: true }) ms.ok.long should support seconds
+  and 48 more tests!
+
+
+[Survived] EqualityOperator
+src/index.ts:254:20
+-     const isPlural = msAbs >= n * 1.5;
++     const isPlural = msAbs > n * 1.5;
+Tests ran:
+    ms(number, { long: true }) ms.ok.long should support seconds
+    ms(number, { long: true }) ms.ok.long should support minutes
+    ms(number, { long: true }) ms.ok.long should support hours
+  and 13 more tests!
+
+
+Ran 39.96 tests per mutant on average.
+----------|------------------|----------|-----------|------------|----------|----------|
+          | % Mutation score |          |           |            |          |          |
+File      |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+----------|--------|---------|----------|-----------|------------|----------|----------|
+All files |  85.46 |   86.22 |      194 |         0 |         31 |        2 |        0 |
+ index.ts |  85.46 |   86.22 |      194 |         0 |         31 |        2 |        0 |
+----------|--------|---------|----------|-----------|------------|----------|----------|
+04:02:10 (37256) INFO JsonReporter Your report can be found at: file://<work>/ms/reports/mutation/mutation.json
+04:02:10 (37256) INFO MutationTestExecutor Done in 10 seconds.
+real 11.62
+user 68.59
+sys 29.91
+exit 0

@@ -1,0 +1,103 @@
+diff --git a/test/scule.test.ts b/test/scule.test.ts
+index bd5ec3b..1211dfc 100644
+--- a/test/scule.test.ts
++++ b/test/scule.test.ts
+@@ -32,7 +32,7 @@ describe("splitByCase", () => {
+       ["\\", ".", "-"],
+     ],
+     ["new-name-value", ["new-name-value"], ["_"]],
+-  ])("%s => %s", (input, expected, customSplitters?) => {
++  ])("splitByCase.ok.case-change %s => %s", (input, expected, customSplitters?) => {
+     if (customSplitters) {
+       expect(splitByCase(input, customSplitters)).toMatchObject(expected);
+     } else {
+@@ -50,7 +50,7 @@ describe("pascalCase", () => {
+     ["foo_bar-baz/qux", "FooBarBazQux"],
+     ["FOO_BAR", "FooBar"],
+     ["foo--bar-Baz", "FooBarBaz"],
+-  ])("%s => %s", (input, expected) => {
++  ])("pascalCase.ok.normalize %s => %s", (input, expected) => {
+     expect(pascalCase(input, { normalize: true })).toMatchObject(expected);
+   });
+ });
+@@ -59,7 +59,7 @@ describe("camelCase", () => {
+   test.each([
+     ["FooBarBaz", "fooBarBaz"],
+     ["FOO_BAR", "fooBar"],
+-  ])("%s => %s", (input, expected) => {
++  ])("camelCase.ok.normalize %s => %s", (input, expected) => {
+     expect(camelCase(input, { normalize: true })).toMatchObject(expected);
+   });
+ });
+@@ -74,7 +74,7 @@ describe("kebabCase", () => {
+     ["FooBAR", "foo-bar"],
+     ["ALink", "a-link"],
+     ["FOO_BAR", "foo-bar"],
+-  ])("%s => %s", (input, expected) => {
++  ])("kebabCase.ok.join %s => %s", (input, expected) => {
+     expect(kebabCase(input)).toMatchObject(expected);
+   });
+ });
+@@ -83,7 +83,7 @@ describe("snakeCase", () => {
+   test.each([
+     ["FooBarBaz", "foo_bar_baz"],
+     ["FOO_BAR", "foo_bar"],
+-  ])("%s => %s", (input, expected) => {
++  ])("snakeCase.ok.join %s => %s", (input, expected) => {
+     expect(snakeCase(input)).toMatchObject(expected);
+   });
+ });
+@@ -93,7 +93,7 @@ describe("upperFirst", () => {
+     ["", ""],
+     ["foo", "Foo"],
+     ["Foo", "Foo"],
+-  ])("%s => %s", (input, expected) => {
++  ])("upperFirst.ok.first %s => %s", (input, expected) => {
+     expect(upperFirst(input)).toMatchObject(expected);
+   });
+ });
+@@ -103,7 +103,7 @@ describe("lowerFirst", () => {
+     ["", ""],
+     ["foo", "foo"],
+     ["Foo", "foo"],
+-  ])("%s => %s", (input, expected) => {
++  ])("lowerFirst.ok.first %s => %s", (input, expected) => {
+     expect(lowerFirst(input)).toMatchObject(expected);
+   });
+ });
+@@ -120,7 +120,7 @@ describe("trainCase", () => {
+     ["foo--bar-Baz", "Foo-Bar-Baz"],
+     ["WWW-authenticate", "WWW-Authenticate"],
+     ["WWWAuthenticate", "WWW-Authenticate"],
+-  ])("%s => %s", (input, expected) => {
++  ])("trainCase.ok.preserve %s => %s", (input, expected) => {
+     expect(trainCase(input)).toMatchObject(expected);
+   });
+ 
+@@ -128,7 +128,7 @@ describe("trainCase", () => {
+     ["AcceptCH", "Accept-Ch"],
+     ["FOO_BAR", "Foo-Bar"],
+     ["WWW-authenticate", "Www-Authenticate"],
+-  ])("%s => %s", (input, expected) => {
++  ])("trainCase.ok.normalize %s => %s", (input, expected) => {
+     expect(trainCase(input, { normalize: true })).toMatchObject(expected);
+   });
+ });
+@@ -140,7 +140,7 @@ describe("titleCase", () => {
+     ["foo", "Foo"],
+     ["foo-bar", "Foo Bar"],
+     ["this-IS-aTitle", "This is a Title"],
+-  ])("%s => %s", (input, expected) => {
++  ])("titleCase.ok.join %s => %s", (input, expected) => {
+     expect(titleCase(input)).toMatchObject(expected);
+   });
+ });
+@@ -154,7 +154,7 @@ describe("flatCase", () => {
+     ["foo_bar-baz/qux", "foobarbazqux"],
+     ["FOO_BAR", "foobar"],
+     ["foo--bar-Baz", "foobarbaz"],
+-  ])("%s => %s", (input, expected) => {
++  ])("flatCase.ok.join %s => %s", (input, expected) => {
+     expect(flatCase(input)).toMatchObject(expected);
+   });
+ });

@@ -1,0 +1,6 @@
+[
+ {"id":"STR_SPLITTERS-delete-dash","file":"src/index.ts","line":13,"from":"\"-\", ","to":""},
+ {"id":"STR_SPLITTERS-delete-underscore","file":"src/index.ts","line":13,"from":"\"_\", ","to":""},
+ {"id":"STR_SPLITTERS-delete-slash","file":"src/index.ts","line":13,"from":"\"/\", ","to":""},
+ {"id":"STR_SPLITTERS-delete-dot","file":"src/index.ts","line":13,"from":", \".\"","to":""}
+]

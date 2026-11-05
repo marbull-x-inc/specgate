@@ -1,0 +1,8 @@
+{
+  "strykerSeconds": 4.35,
+  "specgateStaticSeconds": [
+    1.07482,
+    1.14498,
+    1.2354
+  ]
+}

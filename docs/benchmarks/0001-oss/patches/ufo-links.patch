@@ -1,0 +1,63 @@
+diff --git a/test/parse.test.ts b/test/parse.test.ts
+index ba72667..d791bc0 100644
+--- a/test/parse.test.ts
++++ b/test/parse.test.ts
+@@ -177,7 +177,7 @@ describe("parseURL", () => {
+   ];
+ 
+   for (const t of tests) {
+-    test(t.input.toString(), () => {
++    test(`parseURL.ok.full ${t.input.toString()}`, () => {
+       expect(structuredClone(parseURL(t.input))).toEqual(t.out);
+     });
+   }
+@@ -190,7 +190,7 @@ describe("parseHost", () => {
+   ];
+ 
+   for (const t of tests) {
+-    test(t.input, () => {
++    test(`parseHost.ok.split ${t.input}`, () => {
+       expect(parseHost(t.input)).toStrictEqual(t.out);
+     });
+   }
+@@ -282,12 +282,12 @@ describe("parseFilename", () => {
+     { input: ["/path/to/dir/../filename.ext/", true], out: undefined },
+   ] as const;
+ 
+-  test("works", () => {
++  test("parseFilename.ok.last-segment works", () => {
+     expect(parseFilename("/path/to/filename.ext")).toEqual("filename.ext");
+   });
+ 
+   for (const t of tests) {
+-    test(t.input.toString(), () => {
++    test(`parseFilename.ok.strict ${t.input.toString()}`, () => {
+       expect(
+         parseFilename(t.input[0].toString(), { strict: t.input[1] }),
+       ).toStrictEqual(t.out);
+diff --git a/test/types.test-d.ts b/test/types.test-d.ts
+index e28c503..46db2be 100644
+--- a/test/types.test-d.ts
++++ b/test/types.test-d.ts
+@@ -7,7 +7,7 @@ describe("query", () => {
+     expectTypeOf(result).toEqualTypeOf<{ foo: string }>();
+   });
+ 
+-  test("parseQuery generic type support", () => {
++  test("parseQuery.ok.pairs parseQuery generic type support", () => {
+     const result = parseQuery<{ foo: string }>("http://foo.com/?foo=bar");
+     expectTypeOf(result).toEqualTypeOf<{ foo: string }>();
+   });
+diff --git a/test/utilities.test.ts b/test/utilities.test.ts
+index 16c3f12..cb0ceca 100644
+--- a/test/utilities.test.ts
++++ b/test/utilities.test.ts
+@@ -125,7 +125,7 @@ describe("stringifyParsedURL", () => {
+   ];
+ 
+   for (const t of tests) {
+-    test(t.input.toString(), () => {
++    test(`stringifyParsedURL.ok.roundtrip ${t.input.toString()}`, () => {
+       expect(
+         stringifyParsedURL(
+           typeof t.input === "string" ? parsePath(t.input) : t.input,

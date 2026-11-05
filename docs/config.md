@@ -122,18 +122,23 @@ A decision counts as named when a guarantee or `@example` of the unit, or of a s
 calls it, contains one of its values (numbers compared by value, so `86_400_000` and `8.64e7`
 count; strings with no letter directly before or after them, a plural `s` allowed) or its
 constant name in a code span (names of three characters or more). `0`, `1`, `-1`, empty strings,
-`typeof` checks and thrown error messages are never decisions.
+`typeof` checks, thrown error messages, strings in type positions (`as T<O["normalize"]>`), the
+replacement pattern of `replace` / `replaceAll`, and arithmetic that only computes an array index
+(`out[i * 2 + 2]`) are never decisions.
 
 A `member` decision is one element of a module-level collection the unit tests membership in
-(`includes`, `has`, `in`, `some((p) => v.startsWith(p))`, …). It is named when the guarantee
-names the collection in a code span. Members the contract never names are reported once per
+(`includes`, `has`, `in`, `some((p) => v.startsWith(p))`, …), or of an array literal probed in
+place (`["self", "src"].includes(item)`, collection `inline list at line N`). It is named when the
+guarantee names the collection in a code span. Members the contract never names are reported once per
 collection, not per element.
 
 A decision counts as used by a test when a test linked to the unit, or to a surface unit that
 calls it, writes the value as a literal in its body, its `each` table or a module-level `const`
 of the same test file that they reference: numbers by value (a `boundary` also by value ± 1), an
 `output` inside a longer string, a `member` the way the unit probes it (a prefix list is pinned
-by a longer path that starts with the element), anything else by equality.
+by a longer path that starts with the element), anything else by equality. A `match` on a word
+also counts as used when one of the unit's own linked tests (not a caller's) writes a quantity
+with it as the unit, `"10 years"` for `case "years":`.
 
 ## `mutation`
 

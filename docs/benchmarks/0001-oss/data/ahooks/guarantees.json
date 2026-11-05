@@ -1,0 +1,31 @@
+[
+  {
+    "file": "packages/hooks/src/useCounter/index.ts",
+    "symbol": "useCounter",
+    "tags": [
+      "@guarantee ok.initial the value starts at `initialValue`, 0 when it is not given",
+      "@guarantee ok.inc `inc` adds `delta` to the value, 1 when it is not given; `dec` subtracts it",
+      "@guarantee ok.bounds the value never goes above `max` or below `min`",
+      "@guarantee ok.set `set` sets the value to a number, or to what a function of the current value returns",
+      "@guarantee ok.reset `reset` sets the value back to `initialValue`"
+    ]
+  },
+  {
+    "file": "packages/hooks/src/useToggle/index.ts",
+    "symbol": "useToggle",
+    "tags": [
+      "@guarantee ok.default the state starts at `defaultValue`, false when it is not given",
+      "@guarantee ok.toggle `toggle` switches the state between `defaultValue` and `reverseValue`",
+      "@guarantee ok.set `set` sets the state to the given value",
+      "@guarantee ok.left-right `setLeft` sets the state to `defaultValue`; `setRight` sets it to `reverseValue`, or to the reverse of `defaultValue` when `reverseValue` is not given"
+    ]
+  },
+  {
+    "file": "packages/hooks/src/useBoolean/index.ts",
+    "symbol": "useBoolean",
+    "tags": [
+      "@guarantee ok.default the state starts at `defaultValue`, false when it is not given",
+      "@guarantee ok.actions `toggle` switches the state, `set` sets it to the given value, `setTrue` to true and `setFalse` to false"
+    ]
+  }
+]

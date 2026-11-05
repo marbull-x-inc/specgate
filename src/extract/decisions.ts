@@ -236,6 +236,21 @@ export function collectDecisions(
    */
   const collectionElements = (node: ts.Expression, keys: boolean, depth = 0): CollectionElement[] | undefined => {
     if (depth > 5) return undefined;
+    // An array literal probed in place: `["self", "src"].includes(item)` (#69).
+    const literal = unwrapExpression(node);
+    if (depth === 0 && !keys && ts.isArrayLiteralExpression(literal)) {
+      const line = lineOf(sf, literal.getStart(sf));
+      const where = {
+        name: `inline list at line ${line}`,
+        file: relativeTo(options.root, sf.fileName),
+        line,
+        endLine: lineOf(sf, literal.getEnd()),
+      };
+      return literal.elements.flatMap((el) => {
+        const value = literalText(unwrapExpression(el));
+        return value === undefined ? [] : [{ value, ...where }];
+      });
+    }
     const decl = moduleConstOf(node);
     if (!decl?.initializer || !ts.isIdentifier(decl.name)) return undefined;
     const declSf = decl.getSourceFile();
@@ -439,10 +454,11 @@ export function collectDecisions(
         op === ts.SyntaxKind.PlusToken ||
         op === ts.SyntaxKind.MinusToken
       ) {
-        for (const side of [node.left, node.right]) {
-          if (ts.isNumericLiteral(side) && !isTrivialNumber(Number(side.text)))
-            add("constant", node, [numberText(Number(side.text))], []);
-        }
+        if (!isIndexArithmetic(node, host))
+          for (const side of [node.left, node.right]) {
+            if (ts.isNumericLiteral(side) && !isTrivialNumber(Number(side.text)))
+              add("constant", node, [numberText(Number(side.text))], []);
+          }
       }
     }
 
@@ -453,7 +469,16 @@ export function collectDecisions(
         add("match", node.expression, [numberText(Number(e.text))], []);
     }
 
-    if (inReturn && !isPropertyKey(node) && !isOperandOfTest(node) && !isErrorMessage(node) && !isLibraryOption(node)) {
+    if (
+      inReturn &&
+      !isPropertyKey(node) &&
+      !isOperandOfTest(node) &&
+      !isErrorMessage(node) &&
+      !isLibraryOption(node) &&
+      !isInTypePosition(node) &&
+      !isReplacementPattern(node) &&
+      !isInlineCollectionElement(node)
+    ) {
       if (isStringLike(node) && hasWordCharacter(node.text)) add("output", node, [node.text], []);
       if (ts.isTemplateExpression(node)) {
         const parts = [node.head.text, ...node.templateSpans.map((s) => s.literal.text)]
@@ -654,6 +679,66 @@ function isOutsideProject(fileName: string): boolean {
 
 function isPropertyKey(node: ts.Node): boolean {
   return ts.isPropertyAssignment(node.parent) && node.parent.name === node;
+}
+
+/** Inside a type (`as Cased<T, O["normalize"]>`): erased at run time, never a decision (#65). */
+function isInTypePosition(node: ts.Node): boolean {
+  for (let p: ts.Node | undefined = node.parent; p; p = p.parent) {
+    if (ts.isTypeNode(p)) return true;
+    if (ts.isStatement(p) || ts.isFunctionLike(p)) return false;
+  }
+  return false;
+}
+
+/** The replacement argument of `s.replace(re, "$1-$2")` / `replaceAll`: a pattern, not output (#68). */
+function isReplacementPattern(node: ts.Node): boolean {
+  const call = node.parent;
+  return (
+    ts.isCallExpression(call) &&
+    call.arguments[1] === node &&
+    ts.isPropertyAccessExpression(call.expression) &&
+    (call.expression.name.text === "replace" || call.expression.name.text === "replaceAll")
+  );
+}
+
+/** An element of an array literal probed in place (`["self", "src"].includes(x)`): a member (#69). */
+function isInlineCollectionElement(node: ts.Node): boolean {
+  let list: ts.Node = node.parent;
+  if (!ts.isArrayLiteralExpression(list)) return false;
+  while (ts.isParenthesizedExpression(list.parent) || ts.isAsExpression(list.parent)) list = list.parent;
+  const access = list.parent;
+  if (!ts.isPropertyAccessExpression(access) || access.expression !== list) return false;
+  const method = access.name.text;
+  return (
+    ts.isCallExpression(access.parent) && (EXACT_MEMBER_METHODS.has(method) || CALLBACK_MEMBER_METHODS.has(method))
+  );
+}
+
+/**
+ * Arithmetic that only computes an array index: `out[i * 2 + 2]`, or a variable holding it that
+ * is read only as an index (`const index = i * 2 + 2; values[index] = …`). The numbers lay out
+ * an internal array; a caller does not observe them (#68).
+ */
+function isIndexArithmetic(node: ts.BinaryExpression, host: ProgramHost): boolean {
+  let top: ts.Node = node;
+  while (ts.isBinaryExpression(top.parent) || ts.isParenthesizedExpression(top.parent)) top = top.parent;
+  const parent = top.parent;
+  if (ts.isElementAccessExpression(parent) && parent.argumentExpression === top) return true;
+  if (!ts.isVariableDeclaration(parent) || parent.initializer !== top || !ts.isIdentifier(parent.name)) return false;
+  const name = parent.name;
+  let scope: ts.Node = parent;
+  while (scope.parent && !ts.isBlock(scope) && !ts.isSourceFile(scope)) scope = scope.parent;
+  let reads = 0;
+  let indexReads = 0;
+  const walk = (n: ts.Node): void => {
+    if (ts.isIdentifier(n) && n !== name && n.text === name.text && host.declarationsOf(n).includes(parent)) {
+      reads++;
+      if (ts.isElementAccessExpression(n.parent) && n.parent.argumentExpression === n) indexReads++;
+    }
+    ts.forEachChild(n, walk);
+  };
+  walk(scope);
+  return reads > 0 && reads === indexReads;
 }
 
 function isStringLike(node: ts.Node): node is ts.StringLiteral | ts.NoSubstitutionTemplateLiteral {

@@ -5,7 +5,7 @@ import { analyze } from "../../src/analyze.ts";
 import { type ConfigInput, defineConfig } from "../../src/config/schema.ts";
 import { extractTests } from "../../src/extract/tests/index.ts";
 import type { Decision } from "../../src/ir/schema.ts";
-import { valueUsed } from "../../src/rules/decisions.ts";
+import { quantityUnitUsed, valueUsed } from "../../src/rules/decisions.ts";
 import { workDir } from "../helpers/paths.ts";
 
 /** Writes `files` (path → content) under a fresh project with a tsconfig. */
@@ -486,6 +486,12 @@ describe("valueUsed", () => {
     expect(valueUsed(d("boundary", "30"), ["31"])).toBe(true);
     expect(valueUsed(d("output", "week"), ["1 week ago"])).toBe(true);
     expect(valueUsed(d("match", "week"), ["1 week ago"])).toBe(false);
+    // #66: a quantity with the value as its unit pins a match, read from the unit's own tests.
+    expect(quantityUnitUsed(d("match", "weeks"), ["2 weeks"])).toBe(true);
+    expect(quantityUnitUsed(d("match", "d"), ["2d", "x"])).toBe(true);
+    expect(quantityUnitUsed(d("match", "weeks"), ["1 week"])).toBe(false);
+    expect(quantityUnitUsed(d("match", "week"), ["1 week ago"])).toBe(false);
+    expect(quantityUnitUsed(d("output", "weeks"), ["2 weeks"])).toBe(false);
     expect(valueUsed(d("member", "/admin/", "prefix"), ["/admin/users"])).toBe(true);
     expect(valueUsed(d("member", "/admin/", "exact"), ["/admin/users"])).toBe(false);
     expect(valueUsed(d("member", ".png", "suffix"), ["a.png"])).toBe(true);

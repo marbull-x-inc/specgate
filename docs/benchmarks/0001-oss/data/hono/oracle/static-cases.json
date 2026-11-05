@@ -1,0 +1,10 @@
+[
+ {"id":"F6-secureHeaders-constant-2","finding":6,"file":"src/middleware/secure-headers/secure-headers.ts","line":271,"from":"i * 2 + 2","to":"i * 3 + 2"},
+ {"id":"F6b-secureHeaders-constant-2-second","finding":6,"file":"src/middleware/secure-headers/secure-headers.ts","line":271,"from":"i * 2 + 2","to":"i * 2 + 3"},
+ {"id":"F7-secureHeaders-output-$1-$2","finding":7,"file":"src/middleware/secure-headers/secure-headers.ts","line":337,"from":"'$1-$2'","to":"'$1-$2_x'"},
+ {"id":"F84-cors-match-OPTIONS","finding":84,"file":"src/middleware/cors/index.ts","line":128,"from":"'OPTIONS'","to":"'OPTIONS_x'"},
+ {"id":"F85-cors-output-No Content","finding":85,"file":"src/middleware/cors/index.ts","line":163,"from":"'No Content'","to":"'No Content_x'"},
+ {"id":"F86-secureHeaders-match-*","finding":86,"file":"src/middleware/secure-headers/secure-headers.ts","line":320,"from":"'*'","to":"'*_x'"},
+ {"id":"F87-secureHeaders-output-self","finding":87,"file":"src/middleware/secure-headers/secure-headers.ts","line":326,"from":"'self'","to":"'self_x'"},
+ {"id":"F88-secureHeaders-output-src","finding":88,"file":"src/middleware/secure-headers/secure-headers.ts","line":326,"from":"'src'","to":"'src_x'"}
+]

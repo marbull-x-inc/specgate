@@ -1,0 +1,104 @@
+[
+  {
+    "finding": 12,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "parseURL",
+    "file": "src/parse.ts",
+    "line": 83,
+    "kind": "match",
+    "value": "file:",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "\"file:\"",
+        "to": "\"file:_x\""
+      }
+    ],
+    "oracle": [
+      "RED"
+    ],
+    "verdict": "pinned",
+    "reason": "tests fail after the change",
+    "expressedBy": []
+  },
+  {
+    "finding": 13,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "parseQuery",
+    "file": "src/query.ts",
+    "line": 61,
+    "kind": "boundary",
+    "value": "2",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "< 2",
+        "to": "<= 2"
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "not-applicable",
+    "reason": "equivalent: s is a match array of length 3, or [] when the parameter is empty, so s.length < 2 and s.length <= 2 agree on every input",
+    "expressedBy": []
+  },
+  {
+    "finding": 14,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "parseQuery",
+    "file": "src/query.ts",
+    "line": 65,
+    "kind": "match",
+    "value": "__proto__",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "\"__proto__\"",
+        "to": "\"__proto___x\""
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "175",
+      "176",
+      "178",
+      "174"
+    ]
+  },
+  {
+    "finding": 15,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "parseQuery",
+    "file": "src/query.ts",
+    "line": 65,
+    "kind": "match",
+    "value": "constructor",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "\"constructor\"",
+        "to": "\"constructor_x\""
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "real",
+    "reason": "tests stay green after the change",
+    "expressedBy": [
+      "175",
+      "179",
+      "181",
+      "174"
+    ]
+  }
+]

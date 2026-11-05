@@ -1,0 +1,48 @@
+[
+  {
+    "file": "test/parse.test.ts",
+    "line": 285,
+    "title": "works",
+    "key": "parseFilename.ok.last-segment",
+    "reason": "parseFilename('/path/to/filename.ext') equals 'filename.ext'"
+  },
+  {
+    "file": "test/types.test-d.ts",
+    "line": 10,
+    "title": "parseQuery generic type support",
+    "key": "parseQuery.ok.pairs",
+    "reason": "type-level only (expectTypeOf generic result); no guarantee matches, first ok.* used"
+  },
+  {
+    "file": "test/parse.test.ts",
+    "line": 180,
+    "title": null,
+    "computedTitle": true,
+    "key": "parseURL.ok.full",
+    "reason": "table of inputs and expected ParsedURL; computed title: the title expression was rewritten as a template literal starting with the key (deviation 1)"
+  },
+  {
+    "file": "test/parse.test.ts",
+    "line": 193,
+    "title": null,
+    "computedTitle": true,
+    "key": "parseHost.ok.split",
+    "reason": "table of hosts and expected hostname/port; computed title: the title expression was rewritten as a template literal starting with the key (deviation 1)"
+  },
+  {
+    "file": "test/parse.test.ts",
+    "line": 290,
+    "title": null,
+    "computedTitle": true,
+    "key": "parseFilename.ok.strict",
+    "reason": "table mixing strict false and true; computed title: the title expression was rewritten as a template literal starting with the key (deviation 1)"
+  },
+  {
+    "file": "test/utilities.test.ts",
+    "line": 128,
+    "title": null,
+    "computedTitle": true,
+    "key": "stringifyParsedURL.ok.roundtrip",
+    "reason": "parsePath/parseURL then stringifyParsedURL round trip; computed title: the title expression was rewritten as a template literal starting with the key (deviation 1)"
+  }
+]

@@ -1,0 +1,44 @@
+diff --git a/src/index.ts b/src/index.ts
+index d50e3c7..a4109e8 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -44,6 +44,9 @@ interface Options {
+  * @param value - The string or number to convert
+  * @param options - Options for the conversion
+  * @throws Error if `value` is not a non-empty string or a number
++ * @guarantee ok.parse a string is parsed like `parse` ("2 days" gives 172800000, "1d" 86400000, "10h" 36000000, "2.5 hrs" 9000000, "1m" 60000, "5s" 5000, "1y" 31557600000, "100" 100, "-3 days" -259200000)
++ * @guarantee ok.format a number is formatted like `format` (60000 gives "1m", 120000 "2m", -180000 "-3m")
++ * @guarantee ok.long with `long` true a number is written out (60000 gives "1 minute", 120000 "2 minutes", -180000 "-3 minutes", 36000000 "10 hours")
+  */
+ export function ms(value: StringValue, options?: Options): number;
+ export function ms(value: number, options?: Options): string;
+@@ -67,6 +70,11 @@ export function ms(
+  * @param str - A string to parse to milliseconds
+  * @returns The parsed value in milliseconds, or `NaN` if the string can't be
+  * parsed
++ * @guarantee ok.units accepts the units years, year, yrs, yr, y; months, month, mo; weeks, week, w; days, day, d; hours, hour, hrs, hr, h; minutes, minute, mins, min, m; seconds, second, secs, sec, s; milliseconds, millisecond, msecs, msec, ms
++ * @guarantee ok.values a year is 31557600000 ms, a day 86400000, an hour 3600000, a minute 60000, a second 1000 ("1h" gives 3600000)
++ * @guarantee ok.case units may be lowercase, uppercase or capitalised, with or without a space before them
++ * @guarantee ok.default-unit a number with no unit is milliseconds ("100" gives 100, "-200" gives -200)
++ * @guarantee ok.fraction fractional and negative values are accepted ("0.5m", "-0.5m", ".5m", "-.5m")
+  */
+ export function parse(str: string): number {
+   if (typeof str !== 'string' || str.length === 0 || str.length > 100) {
+@@ -152,6 +160,7 @@ export function parse(str: string): number {
+  * @param value - A typesafe StringValue to parse to milliseconds
+  * @returns The parsed value in milliseconds, or `NaN` if the string can't be
+  * parsed
++ * @guarantee ok.parse parses like `parse` ("1h" gives 3600000)
+  */
+ export function parseStrict(value: StringValue): number {
+   return parse(value);
+@@ -221,6 +230,9 @@ function fmtLong(ms: number): StringValue {
+  * @param ms - milliseconds
+  * @param options - Options for the conversion
+  * @returns The formatted string
++ * @guarantee ok.short formats milliseconds in the largest fitting unit with a short suffix (2000 gives "2s", 60000 gives "1m", 36000000 gives "10h")
++ * @guarantee ok.long with `long` true writes the unit out, plural when the value is not 1 (60000 gives "1 minute", 120000 "2 minutes")
++ * @guarantee ok.negative a negative value keeps its sign (-180000 gives "-3m")
+  */
+ export function format(ms: number, options?: Options): string {
+   if (typeof ms !== 'number' || !Number.isFinite(ms)) {

@@ -1,0 +1,94 @@
+[
+  {
+    "finding": 11,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "pascalCase",
+    "file": "src/index.ts",
+    "line": 120,
+    "kind": "output",
+    "value": "normalize",
+    "category": "other",
+    "change": [
+      {
+        "from": "\"normalize\"",
+        "to": "\"normalize_x\""
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "not-applicable",
+    "reason": "the value is a property key in a type position (UserCaseOptions[\"normalize\"] in an `as` cast); it is erased at run time. Runtime tests stay green; `vitest run --typecheck` fails (type-level pin)",
+    "expressedBy": []
+  },
+  {
+    "finding": 12,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "camelCase",
+    "file": "src/index.ts",
+    "line": 139,
+    "kind": "output",
+    "value": "normalize",
+    "category": "other",
+    "change": [
+      {
+        "from": "\"normalize\"",
+        "to": "\"normalize_x\""
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "not-applicable",
+    "reason": "the value is a property key in a type position (UserCaseOptions[\"normalize\"] in an `as` cast); it is erased at run time. Runtime tests stay green; `vitest run --typecheck` fails (type-level pin)",
+    "expressedBy": []
+  },
+  {
+    "finding": 13,
+    "rule": "decision-untested",
+    "severity": "warn",
+    "unit": "trainCase",
+    "file": "src/index.ts",
+    "line": 205,
+    "kind": "output",
+    "value": "normalize",
+    "category": "other",
+    "change": [
+      {
+        "from": "\"normalize\"",
+        "to": "\"normalize_x\""
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "not-applicable",
+    "reason": "the value is a property key in a type position (UserCaseOptions[\"normalize\"] in an `as` cast); it is erased at run time. Runtime tests stay green; `vitest run --typecheck` fails (type-level pin)",
+    "expressedBy": []
+  },
+  {
+    "finding": 14,
+    "rule": "decision-unspecified",
+    "severity": "warn",
+    "unit": "titleCase",
+    "file": "src/index.ts",
+    "line": 234,
+    "kind": "output",
+    "value": "normalize",
+    "category": "unspecified",
+    "change": [
+      {
+        "from": "\"normalize\"",
+        "to": "\"normalize_x\""
+      }
+    ],
+    "oracle": [
+      "GREEN"
+    ],
+    "verdict": "not-applicable",
+    "reason": "the value is a property key in a type position (UserCaseOptions[\"normalize\"] in an `as` cast); it is erased at run time. Runtime tests stay green; `vitest run --typecheck` fails (type-level pin)",
+    "expressedBy": []
+  }
+]

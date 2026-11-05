@@ -1,0 +1,506 @@
+[
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 139,
+    "title": "GET default",
+    "key": "cors.ok.origin-default",
+    "reason": "ACAO is * with default options"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 147,
+    "title": "Preflight default",
+    "key": "cors.ok.methods-default",
+    "reason": "preflight Allow-Methods equals default list incl. QUERY"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 174,
+    "title": "Preflight handles a large Access-Control-Request-Headers value",
+    "key": "cors.ok.origin-default",
+    "reason": "only status 204 on preflight with huge request-headers; no guarantee matched, first ok.*"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 181,
+    "title": "Preflight with options",
+    "key": "cors.ok.origin-string",
+    "reason": "ACAO equals configured string origin (also checks headers, methods, expose, max-age, credentials)"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 207,
+    "title": "Disallow an unmatched origin",
+    "key": "cors.ok.origin-string",
+    "reason": "string origin: unmatched request origin gets no ACAO"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 216,
+    "title": "Allow multiple origins",
+    "key": "cors.ok.origin-list",
+    "reason": "array origin: ACAO is the matching request origin, absent otherwise"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 244,
+    "title": "Set \"Origin\" to Vary header",
+    "key": "cors.ok.origin-list",
+    "reason": "array origin: ACAO is request origin, Vary Origin"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 256,
+    "title": "Keep original Vary header",
+    "key": "cors.ok.origin-default",
+    "reason": "default origin: ACAO * and original Vary kept"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 268,
+    "title": "Append \"Origin\" to Vary header, if response has some Vary header",
+    "key": "cors.ok.origin-list",
+    "reason": "array origin: ACAO is request origin, Vary appended"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 280,
+    "title": "Append \"Origin\" to Vary header on OPTIONS preflight, if response has some Vary header",
+    "key": "cors.ok.origin-string",
+    "reason": "string origin on preflight: ACAO equals it, Vary appended"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 308,
+    "title": "Allow origins by function",
+    "key": "cors.ok.origin-function",
+    "reason": "function origin: ACAO is the function result"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 330,
+    "title": "Allow origins by promise returning function",
+    "key": "cors.ok.origin-function",
+    "reason": "async function origin: ACAO is the resolved result"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 352,
+    "title": "With raw Response object",
+    "key": "cors.ok.origin-default",
+    "reason": "default origin with raw Response: ACAO *"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 359,
+    "title": "Should not return duplicate header values",
+    "key": "cors.ok.origin-string",
+    "reason": "string origin registered twice: ACAO equals it once"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 369,
+    "title": "Allow methods by function",
+    "key": "cors.ok.methods",
+    "reason": "allowMethods function: preflight Allow-Methods lists its result"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 391,
+    "title": "Allow methods by promise returning function",
+    "key": "cors.ok.methods",
+    "reason": "async allowMethods function: preflight Allow-Methods lists its result"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 413,
+    "title": "Does not set allow methods when function returns an empty array",
+    "key": "cors.ok.methods",
+    "reason": "allowMethods function returning []: no Allow-Methods"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 424,
+    "title": "Emits the wildcard, not the reflected origin, when credentials is true with wildcard origin",
+    "key": "cors.ok.origin-string",
+    "reason": "origin \"*\" with credentials: ACAO stays *, credentials true"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 440,
+    "title": "Preflight emits the wildcard, not the reflected origin, when credentials is true with wildcard origin",
+    "key": "cors.ok.origin-string",
+    "reason": "preflight, origin \"*\" with credentials: ACAO stays *"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 454,
+    "title": "Emits the wildcard with no Origin header when credentials is true with wildcard origin",
+    "key": "cors.ok.origin-string",
+    "reason": "origin \"*\" with credentials, no Origin: ACAO *"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 462,
+    "title": "Emits the wildcard for every origin (never reflects) when credentials is true with wildcard origin",
+    "key": "cors.ok.origin-string",
+    "reason": "origin \"*\" with credentials: ACAO * for every origin"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 474,
+    "title": "Origin: null gets the wildcard, not a reflected null origin, with credentials",
+    "key": "cors.ok.origin-string",
+    "reason": "origin \"*\" with credentials, Origin null: ACAO *"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 483,
+    "title": "Should not reflect an arbitrary Origin when credentials is true with default origin",
+    "key": "cors.ok.origin-default",
+    "reason": "default origin with credentials: ACAO never reflects request origin"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 496,
+    "title": "Preflight should not approve an arbitrary Origin when credentials is true with default origin",
+    "key": "cors.ok.origin-default",
+    "reason": "preflight, default origin with credentials: ACAO not the request origin"
+  },
+  {
+    "file": "src/middleware/cors/index.test.ts",
+    "line": 515,
+    "title": "Options without origin fall back to wildcard default",
+    "key": "cors.ok.origin-default",
+    "reason": "options without origin: ACAO * (also Allow-Methods from allowMethods)"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 14,
+    "title": "default middleware",
+    "key": "secureHeaders.ok.defaults",
+    "reason": "default header values set"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 43,
+    "title": "all headers enabled",
+    "key": "secureHeaders.ok.coep-off",
+    "reason": "crossOriginEmbedderPolicy true gives require-corp (also defaults, permissions, CSP, CSP-RO)"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 87,
+    "title": "specific headers disabled",
+    "key": "secureHeaders.ok.disable",
+    "reason": "options set to false leave X-Frame-Options and X-XSS-Protection out"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 114,
+    "title": "should remove x-powered-by header",
+    "key": "secureHeaders.ok.powered-by",
+    "reason": "X-Powered-By removed when set before secureHeaders runs"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 130,
+    "title": "should override Strict-Transport-Security header after middleware",
+    "key": "secureHeaders.ok.defaults",
+    "reason": "default Strict-Transport-Security value"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 148,
+    "title": "should use custom value when overridden",
+    "key": "secureHeaders.ok.override",
+    "reason": "string options set header values"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 167,
+    "title": "should set Permission-Policy header correctly",
+    "key": "secureHeaders.ok.permissions",
+    "reason": "Permissions-Policy header value"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 200,
+    "title": "Remove X-Powered-By",
+    "key": "secureHeaders.ok.powered-by",
+    "reason": "X-Powered-By removed by default, kept with removePoweredBy false"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 236,
+    "title": "CSP Setting",
+    "key": "secureHeaders.ok.csp",
+    "reason": "CSP header from camelCase directives in kebab case"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 268,
+    "title": "CSP Setting one only",
+    "key": "secureHeaders.ok.csp",
+    "reason": "CSP header with one directive"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 287,
+    "title": "No CSP Setting",
+    "key": "secureHeaders.ok.csp",
+    "reason": "empty directives give empty CSP header"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 299,
+    "title": "CSP with reportTo",
+    "key": "secureHeaders.ok.reporting",
+    "reason": "Reporting-Endpoints and Report-To headers"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 411,
+    "title": "CSP nonce for script-src",
+    "key": "secureHeaders.ok.nonce",
+    "reason": "NONCE directive gets nonce equal to secureHeadersNonce"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 433,
+    "title": "CSP nonce for script-src and style-src",
+    "key": "secureHeaders.ok.nonce",
+    "reason": "same nonce in script-src and style-src and on context"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 457,
+    "title": "CSP nonce by app own function",
+    "key": "secureHeaders.ok.csp",
+    "reason": "custom directive function values written into CSP"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 488,
+    "title": "keeps the enforced policy when report-only uses a nonce",
+    "key": "secureHeaders.ok.csp",
+    "reason": "enforced CSP kept while report-only uses NONCE"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 512,
+    "title": "keeps the report-only policy when the enforced policy uses a nonce",
+    "key": "secureHeaders.ok.csp-report-only",
+    "reason": "report-only CSP kept while enforced uses NONCE"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 536,
+    "title": "supports nonces in both policies",
+    "key": "secureHeaders.ok.nonce",
+    "reason": "same nonce in both CSP headers"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 564,
+    "title": "should set report-uri with single endpoint",
+    "key": "secureHeaders.ok.csp",
+    "reason": "report-uri directive in CSP"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 582,
+    "title": "should set report-uri with multiple endpoints",
+    "key": "secureHeaders.ok.csp",
+    "reason": "report-uri list joined by spaces in CSP"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 600,
+    "title": "should work with report-to and report-uri together",
+    "key": "secureHeaders.ok.csp",
+    "reason": "report-to and report-uri directives in CSP"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 619,
+    "title": "should work with Content-Security-Policy-Report-Only",
+    "key": "secureHeaders.ok.csp-report-only",
+    "reason": "report-uri in CSP-Report-Only"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 639,
+    "title": "should not output report-uri when reportUri is not set",
+    "key": "secureHeaders.ok.csp",
+    "reason": "no report-uri in CSP when unset"
+  },
+  {
+    "file": "src/middleware/secure-headers/index.test.ts",
+    "line": 655,
+    "title": "should not output report-uri in Report-Only when reportUri is not set",
+    "key": "secureHeaders.ok.csp-report-only",
+    "reason": "no report-uri in CSP-Report-Only when unset"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 36,
+    "title": "should return 200 response",
+    "key": "bodyLimit.ok.pass",
+    "reason": "GET without body reaches handler (200)"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 46,
+    "title": "should return 200 response",
+    "key": "bodyLimit.ok.pass",
+    "reason": "14-byte body within maxSize reaches handler unchanged"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 54,
+    "title": "should return 413 response",
+    "key": "bodyLimit.ok.content-length",
+    "reason": "Content-Length over maxSize gives 413"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 67,
+    "title": "should return 200 response",
+    "key": "bodyLimit.ok.pass",
+    "reason": "small stream body reaches handler unchanged"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 84,
+    "title": "should return 413 response",
+    "key": "bodyLimit.ok.stream",
+    "reason": "stream over maxSize gives 413 after 2 reads"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 122,
+    "title": "should return the custom error handler",
+    "key": "bodyLimit.ok.content-length",
+    "reason": "oversize Content-Length calls custom onError"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 143,
+    "title": "should prioritize Transfer-Encoding over Content-Length",
+    "key": "bodyLimit.ok.stream",
+    "reason": "chunked body over limit gives 413 despite small Content-Length"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 171,
+    "title": "should handle only Content-Length header correctly",
+    "key": "bodyLimit.ok.pass",
+    "reason": "small body with Content-Length reaches handler unchanged"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 179,
+    "title": "should handle only Transfer-Encoding header correctly",
+    "key": "bodyLimit.ok.pass",
+    "reason": "small chunked body reaches handler unchanged"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 255,
+    "title": "should reject when handler does not read the body",
+    "key": "bodyLimit.ok.stream",
+    "reason": "oversize chunked body gives 413, handler not called"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 261,
+    "title": "should reject when handler reads only the first chunk",
+    "key": "bodyLimit.ok.stream",
+    "reason": "oversize chunked body gives 413, handler not called"
+  },
+  {
+    "file": "src/middleware/body-limit/index.test.ts",
+    "line": 267,
+    "title": "should reject when handler swallows body read errors",
+    "key": "bodyLimit.ok.stream",
+    "reason": "oversize chunked body gives 413, handler not called"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 12,
+    "title": "Should return random request id",
+    "key": "requestId.ok.generate",
+    "reason": "request id is a generated UUID"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 20,
+    "title": "Should return custom request id",
+    "key": "requestId.ok.header-in",
+    "reason": "X-Request-Id request header value used"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 32,
+    "title": "Should return custom request id with all valid characters",
+    "key": "requestId.ok.header-in",
+    "reason": "X-Request-Id with all valid characters used"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 45,
+    "title": "Should return random request id without using request header",
+    "key": "requestId.ok.generate",
+    "reason": "invalid header value ignored, UUID generated"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 75,
+    "title": "Should return custom request id",
+    "key": "requestId.ok.generate",
+    "reason": "custom generator value used"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 83,
+    "title": "Should return complex request id",
+    "key": "requestId.ok.generate",
+    "reason": "custom generator using context used"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 107,
+    "title": "Should return custom request id",
+    "key": "requestId.ok.limit",
+    "reason": "255-char id within default limit used"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 118,
+    "title": "Should return random request id without using request header",
+    "key": "requestId.ok.limit",
+    "reason": "256-char id over default limit not used"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 129,
+    "title": "Should return custom request id with 256 characters",
+    "key": "requestId.ok.limit",
+    "reason": "256-char id used with limitLength 256"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 149,
+    "title": "Should return custom request id",
+    "key": "requestId.ok.header-in",
+    "reason": "custom headerName value used"
+  },
+  {
+    "file": "src/middleware/request-id/index.test.ts",
+    "line": 161,
+    "title": "Should not return request id",
+    "key": "requestId.ok.header-off",
+    "reason": "headerName \"\": no response header, id generated"
+  }
+]

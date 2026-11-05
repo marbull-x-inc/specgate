@@ -1,0 +1,3978 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.0"
+  },
+  "generatedAt": "2026-11-05T19:03:24.628Z",
+  "root": "<work>/hono",
+  "revision": "eb754bd5ef22c63f1634a4c374a86be086f85710",
+  "configHash": "5c62409ea50b4b82",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "bodyLimit",
+      "kind": "function",
+      "operation": "bodyLimit",
+      "file": "src/middleware/body-limit/index.ts",
+      "line": 53,
+      "endLine": 114,
+      "referencedBy": [],
+      "summary": "Body Limit Middleware for Hono.",
+      "params": [
+        {
+          "name": "options",
+          "type": "BodyLimitOptions",
+          "optional": false,
+          "doc": "The options for the body limit middleware."
+        }
+      ],
+      "returns": "MiddlewareHandler",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "d9bd46ce29caf525",
+      "guarantees": [
+        {
+          "id": "ok.content-length",
+          "key": "bodyLimit.ok.content-length",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "when the request has a \"Content-Length\" header larger than `maxSize`, calls `onError` without reading the body",
+          "textHash": "7ae5105bb76cd0c9",
+          "line": 49,
+          "references": [],
+          "tests": [
+            "src/middleware/body-limit/index.test.ts:54",
+            "src/middleware/body-limit/index.test.ts:122"
+          ]
+        },
+        {
+          "id": "ok.stream",
+          "key": "bodyLimit.ok.stream",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "without \"Content-Length\", reads the body as a stream and calls `onError` once more than `maxSize` bytes were read",
+          "textHash": "cdf394ed87add602",
+          "line": 50,
+          "references": [],
+          "tests": [
+            "src/middleware/body-limit/index.test.ts:84",
+            "src/middleware/body-limit/index.test.ts:143",
+            "src/middleware/body-limit/index.test.ts:255",
+            "src/middleware/body-limit/index.test.ts:261",
+            "src/middleware/body-limit/index.test.ts:267"
+          ]
+        },
+        {
+          "id": "ok.pass",
+          "key": "bodyLimit.ok.pass",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a body of at most `maxSize` bytes reaches the handler unchanged",
+          "textHash": "4d5a4b132f68a89a",
+          "line": 51,
+          "references": [],
+          "tests": [
+            "src/middleware/body-limit/index.test.ts:36",
+            "src/middleware/body-limit/index.test.ts:46",
+            "src/middleware/body-limit/index.test.ts:67",
+            "src/middleware/body-limit/index.test.ts:171",
+            "src/middleware/body-limit/index.test.ts:179"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 44,
+        "survived": 3,
+        "noCoverage": 1,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "cors",
+      "kind": "function",
+      "operation": "cors",
+      "file": "src/middleware/cors/index.ts",
+      "line": 73,
+      "endLine": 174,
+      "referencedBy": [],
+      "summary": "CORS Middleware for Hono.",
+      "params": [
+        {
+          "name": "options",
+          "type": "CORSOptions",
+          "optional": true,
+          "doc": "The options for the CORS middleware."
+        }
+      ],
+      "returns": "MiddlewareHandler",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "match",
+          "expression": "optsOrigin === '*'",
+          "line": 87,
+          "values": [
+            "*"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "c.req.method === 'OPTIONS'",
+          "line": 128,
+          "values": [
+            "OPTIONS"
+          ],
+          "names": [],
+          "key": "method"
+        },
+        {
+          "kind": "match",
+          "expression": "opts.origin !== '*'",
+          "line": 129,
+          "values": [
+            "*"
+          ],
+          "names": [],
+          "key": "origin"
+        },
+        {
+          "kind": "output",
+          "expression": "'No Content'",
+          "line": 163,
+          "values": [
+            "No Content"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 111,
+          "endLine": 113
+        }
+      ],
+      "implHash": "7bbc05da728e1005",
+      "guarantees": [
+        {
+          "id": "ok.origin-default",
+          "key": "cors.ok.origin-default",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "without `origin`, sets \"Access-Control-Allow-Origin\" to \"*\"",
+          "textHash": "91b222cb4c301fed",
+          "line": 62,
+          "references": [],
+          "tests": [
+            "src/middleware/cors/index.test.ts:139",
+            "src/middleware/cors/index.test.ts:174",
+            "src/middleware/cors/index.test.ts:256",
+            "src/middleware/cors/index.test.ts:352",
+            "src/middleware/cors/index.test.ts:483",
+            "src/middleware/cors/index.test.ts:496",
+            "src/middleware/cors/index.test.ts:515"
+          ]
+        },
+        {
+          "id": "ok.origin-string",
+          "key": "cors.ok.origin-string",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with a string `origin`, sets \"Access-Control-Allow-Origin\" to it",
+          "textHash": "7f8d1b8c2d9e2209",
+          "line": 63,
+          "references": [],
+          "tests": [
+            "src/middleware/cors/index.test.ts:181",
+            "src/middleware/cors/index.test.ts:207",
+            "src/middleware/cors/index.test.ts:280",
+            "src/middleware/cors/index.test.ts:359",
+            "src/middleware/cors/index.test.ts:424",
+            "src/middleware/cors/index.test.ts:440",
+            "src/middleware/cors/index.test.ts:454",
+            "src/middleware/cors/index.test.ts:462",
+            "src/middleware/cors/index.test.ts:474"
+          ]
+        },
+        {
+          "id": "ok.origin-list",
+          "key": "cors.ok.origin-list",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with an array `origin`, sets \"Access-Control-Allow-Origin\" to the request origin when the array contains it",
+          "textHash": "827b7c290891dd24",
+          "line": 64,
+          "references": [],
+          "tests": [
+            "src/middleware/cors/index.test.ts:216",
+            "src/middleware/cors/index.test.ts:244",
+            "src/middleware/cors/index.test.ts:268"
+          ]
+        },
+        {
+          "id": "ok.origin-function",
+          "key": "cors.ok.origin-function",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with a function `origin`, sets \"Access-Control-Allow-Origin\" to what it returns for the request origin",
+          "textHash": "b7b8dfc3b624fd0a",
+          "line": 65,
+          "references": [],
+          "tests": [
+            "src/middleware/cors/index.test.ts:308",
+            "src/middleware/cors/index.test.ts:330"
+          ]
+        },
+        {
+          "id": "ok.methods-default",
+          "key": "cors.ok.methods-default",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "without `allowMethods`, a preflight gets \"Access-Control-Allow-Methods\" listing \"GET\", \"HEAD\", \"PUT\", \"POST\", \"DELETE\", \"PATCH\" and \"QUERY\"",
+          "textHash": "c2c539ee84eda807",
+          "line": 66,
+          "references": [],
+          "tests": [
+            "src/middleware/cors/index.test.ts:147"
+          ]
+        },
+        {
+          "id": "ok.methods",
+          "key": "cors.ok.methods",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `allowMethods` (an array, or a function of the origin), a preflight gets \"Access-Control-Allow-Methods\" listing those methods",
+          "textHash": "62e97b6d89835cb7",
+          "line": 67,
+          "references": [],
+          "tests": [
+            "src/middleware/cors/index.test.ts:369",
+            "src/middleware/cors/index.test.ts:391",
+            "src/middleware/cors/index.test.ts:413"
+          ]
+        },
+        {
+          "id": "ok.headers",
+          "key": "cors.ok.headers",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `allowHeaders`, a preflight gets \"Access-Control-Allow-Headers\" listing them; the default list is empty",
+          "textHash": "750d12011c27d6a9",
+          "line": 68,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.max-age",
+          "key": "cors.ok.max-age",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `maxAge`, a preflight gets \"Access-Control-Max-Age\" set to it",
+          "textHash": "fbfe1db4332c47d4",
+          "line": 69,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.credentials",
+          "key": "cors.ok.credentials",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `credentials` true, sets \"Access-Control-Allow-Credentials\"",
+          "textHash": "64612acb90ea3df5",
+          "line": 70,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.expose",
+          "key": "cors.ok.expose",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `exposeHeaders`, sets \"Access-Control-Expose-Headers\" listing them; the default list is empty",
+          "textHash": "cbaddc79947ebe56",
+          "line": 71,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 120,
+        "survived": 12,
+        "noCoverage": 3,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "requestId",
+      "kind": "function",
+      "operation": "requestId",
+      "file": "src/middleware/request-id/request-id.ts",
+      "line": 45,
+      "endLine": 63,
+      "referencedBy": [
+        "src/middleware/request-id/index.ts"
+      ],
+      "summary": "Request ID Middleware for Hono.",
+      "params": [
+        {
+          "name": "{\n  limitLength = 255,\n  headerName = 'X-Request-Id',\n  generator = () => crypto.randomUUID(),\n}",
+          "type": "RequestIdOptions",
+          "optional": true
+        }
+      ],
+      "returns": "MiddlewareHandler",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "8b879366669d324e",
+      "guarantees": [
+        {
+          "id": "ok.generate",
+          "key": "requestId.ok.generate",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "sets `requestId` on the context to a new id from `generator`, by default `crypto.randomUUID()`",
+          "textHash": "3b9d74eeda216049",
+          "line": 40,
+          "references": [],
+          "tests": [
+            "src/middleware/request-id/index.test.ts:12",
+            "src/middleware/request-id/index.test.ts:45",
+            "src/middleware/request-id/index.test.ts:75",
+            "src/middleware/request-id/index.test.ts:83"
+          ]
+        },
+        {
+          "id": "ok.header-in",
+          "key": "requestId.ok.header-in",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "when the request has the header `headerName` (default \"X-Request-Id\"), uses its value instead of generating one",
+          "textHash": "3b90a30c43640c62",
+          "line": 41,
+          "references": [],
+          "tests": [
+            "src/middleware/request-id/index.test.ts:20",
+            "src/middleware/request-id/index.test.ts:32",
+            "src/middleware/request-id/index.test.ts:149"
+          ]
+        },
+        {
+          "id": "ok.header-off",
+          "key": "requestId.ok.header-off",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `headerName` \"\", the request header is ignored",
+          "textHash": "a00a5964e1b7daa5",
+          "line": 42,
+          "references": [],
+          "tests": [
+            "src/middleware/request-id/index.test.ts:161"
+          ]
+        },
+        {
+          "id": "ok.limit",
+          "key": "requestId.ok.limit",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a request id longer than `limitLength` (default 255) is not used",
+          "textHash": "044608e0d2a90ea1",
+          "line": 43,
+          "references": [],
+          "tests": [
+            "src/middleware/request-id/index.test.ts:107",
+            "src/middleware/request-id/index.test.ts:118",
+            "src/middleware/request-id/index.test.ts:129"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 21,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "NONCE",
+      "kind": "function",
+      "operation": "NONCE",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 140,
+      "endLine": 148,
+      "referencedBy": [
+        "src/middleware/secure-headers/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "ctx",
+          "type": "Context<any, any, {}>",
+          "optional": false
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "ctx",
+          "member": "get",
+          "count": 1
+        },
+        {
+          "port": "ctx",
+          "member": "set",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "output",
+          "expression": "`'nonce-${nonce}'`",
+          "line": 147,
+          "values": [
+            "'nonce-"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 131,
+          "endLine": 135
+        }
+      ],
+      "implHash": "ccce2ad9b55d0327",
+      "guarantees": [
+        {
+          "id": "ok.value",
+          "key": "NONCE.ok.value",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns a CSP source of the form \"'nonce-<value>'\" and stores the value as `secureHeadersNonce` on the context",
+          "textHash": "1aa7def774bd359f",
+          "line": 138,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 7,
+        "survived": 6,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "secureHeaders",
+      "kind": "function",
+      "operation": "secureHeaders",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 192,
+      "endLine": 248,
+      "referencedBy": [
+        "src/middleware/secure-headers/index.ts"
+      ],
+      "summary": "Secure Headers Middleware for Hono.",
+      "params": [
+        {
+          "name": "customOptions",
+          "type": "SecureHeadersOptions",
+          "optional": true,
+          "doc": "The options for the secure headers middleware."
+        }
+      ],
+      "returns": "MiddlewareHandler",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "constant",
+          "expression": "i * 2 + 2",
+          "line": 271,
+          "values": [
+            "2"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "value[0] === '*'",
+          "line": 320,
+          "values": [
+            "*"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "value[0] === 'none'",
+          "line": 323,
+          "values": [
+            "none"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'self'",
+          "line": 326,
+          "values": [
+            "self"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'src'",
+          "line": 326,
+          "values": [
+            "src"
+          ],
+          "names": []
+        },
+        {
+          "kind": "output",
+          "expression": "'$1-$2'",
+          "line": 337,
+          "values": [
+            "$1-$2"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "line": 350,
+          "endLine": 354
+        }
+      ],
+      "implHash": "04f3126d20692c79",
+      "guarantees": [
+        {
+          "id": "ok.defaults",
+          "key": "secureHeaders.ok.defaults",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with no options, sets \"Cross-Origin-Resource-Policy\" \"same-origin\", \"Cross-Origin-Opener-Policy\" \"same-origin\", \"Origin-Agent-Cluster\" \"?1\", \"Referrer-Policy\" \"no-referrer\", \"Strict-Transport-Security\" \"max-age=15552000; includeSubDomains\", \"X-Content-Type-Options\" \"nosniff\", \"X-DNS-Prefetch-Control\" \"off\", \"X-Download-Options\" \"noopen\", \"X-Frame-Options\" \"SAMEORIGIN\", \"X-Permitted-Cross-Domain-Policies\" \"none\" and \"X-XSS-Protection\" \"0\"",
+          "textHash": "b3016f28c266ff22",
+          "line": 181,
+          "references": [],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:14",
+            "src/middleware/secure-headers/index.test.ts:130"
+          ]
+        },
+        {
+          "id": "ok.powered-by",
+          "key": "secureHeaders.ok.powered-by",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "removes the \"X-Powered-By\" header",
+          "textHash": "5377e49a6a02c599",
+          "line": 182,
+          "references": [],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:114",
+            "src/middleware/secure-headers/index.test.ts:200"
+          ]
+        },
+        {
+          "id": "ok.coep-off",
+          "key": "secureHeaders.ok.coep-off",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"Cross-Origin-Embedder-Policy\" is not set by default; with `crossOriginEmbedderPolicy` true it is \"require-corp\"",
+          "textHash": "4b8ab9930c0bd30f",
+          "line": 183,
+          "references": [],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:43"
+          ]
+        },
+        {
+          "id": "ok.disable",
+          "key": "secureHeaders.ok.disable",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "an option set to false leaves its header out",
+          "textHash": "c2ebcfc3f9216f12",
+          "line": 184,
+          "references": [],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:87"
+          ]
+        },
+        {
+          "id": "ok.override",
+          "key": "secureHeaders.ok.override",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "an option set to a string sets its header to that string",
+          "textHash": "77eeb2d325299852",
+          "line": 185,
+          "references": [],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:148"
+          ]
+        },
+        {
+          "id": "ok.csp",
+          "key": "secureHeaders.ok.csp",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `contentSecurityPolicy`, sets \"Content-Security-Policy\" from the directives, each camelCase directive written in kebab case with its values separated by spaces",
+          "textHash": "ab49842588315580",
+          "line": 186,
+          "references": [
+            {
+              "raw": "camelCase",
+              "kind": "unresolved"
+            }
+          ],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:236",
+            "src/middleware/secure-headers/index.test.ts:268",
+            "src/middleware/secure-headers/index.test.ts:287",
+            "src/middleware/secure-headers/index.test.ts:457",
+            "src/middleware/secure-headers/index.test.ts:488",
+            "src/middleware/secure-headers/index.test.ts:564",
+            "src/middleware/secure-headers/index.test.ts:582",
+            "src/middleware/secure-headers/index.test.ts:600",
+            "src/middleware/secure-headers/index.test.ts:639"
+          ]
+        },
+        {
+          "id": "ok.csp-report-only",
+          "key": "secureHeaders.ok.csp-report-only",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `contentSecurityPolicyReportOnly`, sets \"Content-Security-Policy-Report-Only\" the same way",
+          "textHash": "08eef954d13551fa",
+          "line": 187,
+          "references": [],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:512",
+            "src/middleware/secure-headers/index.test.ts:619",
+            "src/middleware/secure-headers/index.test.ts:655"
+          ]
+        },
+        {
+          "id": "ok.reporting",
+          "key": "secureHeaders.ok.reporting",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `reportingEndpoints`, sets \"Reporting-Endpoints\"; with `reportTo`, sets \"Report-To\"",
+          "textHash": "d16738b038dc83cb",
+          "line": 188,
+          "references": [],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:299"
+          ]
+        },
+        {
+          "id": "ok.permissions",
+          "key": "secureHeaders.ok.permissions",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `permissionsPolicy`, sets \"Permissions-Policy\"",
+          "textHash": "fb6555ae72987ef0",
+          "line": 189,
+          "references": [],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:167"
+          ]
+        },
+        {
+          "id": "ok.nonce",
+          "key": "secureHeaders.ok.nonce",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a directive holding `NONCE` gets a nonce value, and the same nonce is available as `secureHeadersNonce` on the context",
+          "textHash": "9e1827391158c7d6",
+          "line": 190,
+          "references": [],
+          "tests": [
+            "src/middleware/secure-headers/index.test.ts:411",
+            "src/middleware/secure-headers/index.test.ts:433",
+            "src/middleware/secure-headers/index.test.ts:536"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 157,
+        "survived": 15,
+        "noCoverage": 4,
+        "ignored": 0
+      }
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "bodyLimit.ok.pass",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.pass",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 36,
+      "title": "bodyLimit.ok.pass should return 200 response",
+      "status": "test",
+      "bodyHash": "865178588cd21133",
+      "literals": [
+        "/",
+        "200",
+        "index"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.pass",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.pass",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 46,
+      "title": "bodyLimit.ok.pass should return 200 response",
+      "status": "test",
+      "bodyHash": "882c4099e71ab552",
+      "literals": [
+        "/body-limit-15byte",
+        "half",
+        "Content-Type",
+        "text/plain",
+        "string",
+        "Content-Length",
+        "POST",
+        "200"
+      ],
+      "keys": [
+        "Content-Type",
+        "method",
+        "headers",
+        "body",
+        "duplex"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.content-length",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.content-length",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 54,
+      "title": "bodyLimit.ok.content-length should return 413 response",
+      "status": "test",
+      "bodyHash": "f2378f86a87842bc",
+      "literals": [
+        "/body-limit-15byte",
+        "half",
+        "Content-Type",
+        "text/plain",
+        "string",
+        "Content-Length",
+        "POST",
+        "413",
+        "Payload Too Large"
+      ],
+      "keys": [
+        "Content-Type",
+        "method",
+        "headers",
+        "body",
+        "duplex"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.pass",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.pass",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 67,
+      "title": "bodyLimit.ok.pass should return 200 response",
+      "status": "test",
+      "bodyHash": "040b2ab1e68e4c69",
+      "literals": [
+        "a",
+        "b",
+        "c",
+        "/body-limit-15byte",
+        "half",
+        "Content-Type",
+        "text/plain",
+        "string",
+        "Content-Length",
+        "POST",
+        "200",
+        "abc"
+      ],
+      "keys": [
+        "start",
+        "Content-Type",
+        "method",
+        "headers",
+        "body",
+        "duplex"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.stream",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.stream",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 84,
+      "title": "bodyLimit.ok.stream should return 413 response",
+      "status": "test",
+      "bodyHash": "d61ab6d4e805ca61",
+      "literals": [
+        "getReader",
+        "/body-limit-15byte",
+        "half",
+        "Content-Type",
+        "text/plain",
+        "string",
+        "Content-Length",
+        "POST",
+        "413",
+        "2",
+        "Payload Too Large"
+      ],
+      "keys": [
+        "done",
+        "value",
+        "read",
+        "Content-Type",
+        "method",
+        "headers",
+        "body",
+        "duplex"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.content-length",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.content-length",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 122,
+      "title": "bodyLimit.ok.content-length should return the custom error handler",
+      "status": "test",
+      "bodyHash": "49ecdee0930ae9a6",
+      "literals": [
+        "/text-limit-15byte-custom",
+        "half",
+        "Content-Type",
+        "text/plain",
+        "string",
+        "Content-Length",
+        "POST",
+        "413",
+        "no"
+      ],
+      "keys": [
+        "Content-Type",
+        "method",
+        "headers",
+        "body",
+        "duplex"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.stream",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.stream",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 143,
+      "title": "bodyLimit.ok.stream should prioritize Transfer-Encoding over Content-Length",
+      "status": "test",
+      "bodyHash": "fc71ddff71031b48",
+      "literals": [
+        "this is a large content that exceeds 10 bytes",
+        "20",
+        "/test",
+        "POST",
+        "Content-Length",
+        "5",
+        "Transfer-Encoding",
+        "chunked",
+        "half",
+        "413"
+      ],
+      "keys": [
+        "start",
+        "method",
+        "headers",
+        "Content-Length",
+        "Transfer-Encoding",
+        "body",
+        "duplex"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.pass",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.pass",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 171,
+      "title": "bodyLimit.ok.pass should handle only Content-Length header correctly",
+      "status": "test",
+      "bodyHash": "7966a7d7bf80e0da",
+      "literals": [
+        "small",
+        "/test",
+        "half",
+        "Content-Type",
+        "text/plain",
+        "string",
+        "Content-Length",
+        "POST",
+        "200"
+      ],
+      "keys": [
+        "Content-Type",
+        "method",
+        "headers",
+        "body",
+        "duplex"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.pass",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.pass",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 179,
+      "title": "bodyLimit.ok.pass should handle only Transfer-Encoding header correctly",
+      "status": "test",
+      "bodyHash": "aa74e8ae7869ed3e",
+      "literals": [
+        "test",
+        "/test",
+        "POST",
+        "Transfer-Encoding",
+        "chunked",
+        "half",
+        "200"
+      ],
+      "keys": [
+        "start",
+        "method",
+        "headers",
+        "Transfer-Encoding",
+        "body",
+        "duplex"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.stream",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.stream",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 255,
+      "title": "bodyLimit.ok.stream should reject when handler does not read the body",
+      "status": "test",
+      "bodyHash": "3daed22bfa91483f",
+      "literals": [
+        "/no-read",
+        "413"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.stream",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.stream",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 261,
+      "title": "bodyLimit.ok.stream should reject when handler reads only the first chunk",
+      "status": "test",
+      "bodyHash": "e5d08ea6fd4a9ccc",
+      "literals": [
+        "/partial-read",
+        "413"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "bodyLimit.ok.stream",
+      "unitId": "bodyLimit",
+      "guaranteeId": "ok.stream",
+      "file": "src/middleware/body-limit/index.test.ts",
+      "line": 267,
+      "title": "bodyLimit.ok.stream should reject when handler swallows body read errors",
+      "status": "test",
+      "bodyHash": "25aa9d31fbf4cac2",
+      "literals": [
+        "/swallow-error",
+        "413"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-default",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-default",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 139,
+      "title": "cors.ok.origin-default GET default",
+      "status": "test",
+      "bodyHash": "3924e01c223b4188",
+      "literals": [
+        "http://localhost/api/abc",
+        "200",
+        "Access-Control-Allow-Origin",
+        "*",
+        "Vary"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.methods-default",
+      "unitId": "cors",
+      "guaranteeId": "ok.methods-default",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 147,
+      "title": "cors.ok.methods-default Preflight default",
+      "status": "test",
+      "bodyHash": "f9b4d038a699b2d6",
+      "literals": [
+        "https://localhost/api/abc",
+        "OPTIONS",
+        "Access-Control-Request-Method",
+        "QUERY",
+        "Access-Control-Request-Headers",
+        "X-PINGOTHER, Content-Type",
+        "204",
+        "No Content",
+        "Access-Control-Allow-Methods",
+        ",",
+        "GET",
+        "HEAD",
+        "PUT",
+        "POST",
+        "DELETE",
+        "PATCH",
+        "Access-Control-Allow-Headers",
+        "X-PINGOTHER",
+        "Content-Type"
+      ],
+      "keys": [
+        "method",
+        "headers",
+        "Access-Control-Request-Method",
+        "Access-Control-Request-Headers"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-default",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-default",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 174,
+      "title": "cors.ok.origin-default Preflight handles a large Access-Control-Request-Headers value",
+      "status": "test",
+      "bodyHash": "3ba73fa7a43292fd",
+      "literals": [
+        "https://localhost/api/abc",
+        "OPTIONS",
+        "Access-Control-Request-Headers",
+        "x",
+        " ",
+        "200000",
+        "204"
+      ],
+      "keys": [
+        "method"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-string",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-string",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 181,
+      "title": "cors.ok.origin-string Preflight with options",
+      "status": "test",
+      "bodyHash": "ceaf23bb52320827",
+      "literals": [
+        "https://localhost/api2/abc",
+        "OPTIONS",
+        "http://example.com",
+        "Access-Control-Allow-Origin",
+        "Vary",
+        "Origin",
+        "Access-Control-Allow-Headers",
+        "X-Custom-Header",
+        "Upgrade-Insecure-Requests",
+        "Access-Control-Allow-Methods",
+        "POST",
+        "GET",
+        "Access-Control-Expose-Headers",
+        "Content-Length",
+        "X-Kuma-Revision",
+        "Access-Control-Max-Age",
+        "600",
+        "Access-Control-Allow-Credentials",
+        "true"
+      ],
+      "keys": [
+        "method",
+        "headers",
+        "origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-string",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-string",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 207,
+      "title": "cors.ok.origin-string Disallow an unmatched origin",
+      "status": "test",
+      "bodyHash": "1eef180e142def42",
+      "literals": [
+        "https://localhost/api2/abc",
+        "OPTIONS",
+        "http://example.net",
+        "Access-Control-Allow-Origin"
+      ],
+      "keys": [
+        "method",
+        "headers",
+        "origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-list",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-list",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 216,
+      "title": "cors.ok.origin-list Allow multiple origins",
+      "status": "test",
+      "bodyHash": "cc6e63e0f9606ae1",
+      "literals": [
+        "http://localhost/api3/abc",
+        "http://example.org",
+        "Access-Control-Allow-Origin",
+        "An unmatched origin should be disallowed",
+        "http://example.net/"
+      ],
+      "keys": [
+        "headers",
+        "Origin",
+        "Referer"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-list",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-list",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 244,
+      "title": "cors.ok.origin-list Set \"Origin\" to Vary header",
+      "status": "test",
+      "bodyHash": "1ea0be72dd7b8d58",
+      "literals": [
+        "http://localhost/api3/abc",
+        "http://example.com",
+        "200",
+        "Access-Control-Allow-Origin",
+        "Vary",
+        "Origin"
+      ],
+      "keys": [
+        "headers",
+        "Origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-default",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-default",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 256,
+      "title": "cors.ok.origin-default Keep original Vary header",
+      "status": "test",
+      "bodyHash": "6d935a1117ee3496",
+      "literals": [
+        "http://localhost/api/vary-header",
+        "http://example.com",
+        "200",
+        "Access-Control-Allow-Origin",
+        "*",
+        "Vary",
+        "X-Custom-Vary-Value"
+      ],
+      "keys": [
+        "headers",
+        "Origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-list",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-list",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 268,
+      "title": "cors.ok.origin-list Append \"Origin\" to Vary header, if response has some Vary header",
+      "status": "test",
+      "bodyHash": "0c469468599cabed",
+      "literals": [
+        "http://localhost/api3/vary-header",
+        "http://example.com",
+        "200",
+        "Access-Control-Allow-Origin",
+        "Vary",
+        "X-Custom-Vary-Value, Origin"
+      ],
+      "keys": [
+        "headers",
+        "Origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-string",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-string",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 280,
+      "title": "cors.ok.origin-string Append \"Origin\" to Vary header on OPTIONS preflight, if response has some Vary header",
+      "status": "test",
+      "bodyHash": "cd1dc077ff59b18e",
+      "literals": [
+        "/api/*",
+        "Vary",
+        "Accept-Encoding",
+        "http://example.com",
+        "X-Custom-Header",
+        "/api/test",
+        "ok",
+        "http://localhost/api/test",
+        "OPTIONS",
+        "Access-Control-Request-Headers",
+        "204",
+        "Access-Control-Allow-Origin",
+        "Accept-Encoding, Origin, Access-Control-Request-Headers"
+      ],
+      "keys": [
+        "append",
+        "origin",
+        "allowHeaders",
+        "method",
+        "headers",
+        "Origin",
+        "Access-Control-Request-Headers"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-function",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-function",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 308,
+      "title": "cors.ok.origin-function Allow origins by function",
+      "status": "test",
+      "bodyHash": "c801404970017003",
+      "literals": [
+        "http://localhost/api4/abc",
+        "http://subdomain.example.com",
+        "Access-Control-Allow-Origin",
+        "http://example.com",
+        "http://evil-example.com/"
+      ],
+      "keys": [
+        "headers",
+        "Origin",
+        "Referer"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-function",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-function",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 330,
+      "title": "cors.ok.origin-function Allow origins by promise returning function",
+      "status": "test",
+      "bodyHash": "63c0008b70bc9b89",
+      "literals": [
+        "http://localhost/api8/abc",
+        "http://subdomain.example.com",
+        "Access-Control-Allow-Origin",
+        "http://example.com",
+        "http://evil-example.com/"
+      ],
+      "keys": [
+        "headers",
+        "Origin",
+        "Referer"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-default",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-default",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 352,
+      "title": "cors.ok.origin-default With raw Response object",
+      "status": "test",
+      "bodyHash": "a3d851cffd8d0037",
+      "literals": [
+        "http://localhost/api5/abc",
+        "Access-Control-Allow-Origin",
+        "*",
+        "Vary"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-string",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-string",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 359,
+      "title": "cors.ok.origin-string Should not return duplicate header values",
+      "status": "test",
+      "bodyHash": "8482e9adae5ec178",
+      "literals": [
+        "http://localhost/api6/abc",
+        "http://example.com",
+        "Access-Control-Allow-Origin"
+      ],
+      "keys": [
+        "headers",
+        "origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.methods",
+      "unitId": "cors",
+      "guaranteeId": "ok.methods",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 369,
+      "title": "cors.ok.methods Allow methods by function",
+      "status": "test",
+      "bodyHash": "cee519506674b3a8",
+      "literals": [
+        "http://localhost/api7/abc",
+        "http://example.com",
+        "OPTIONS",
+        "Access-Control-Allow-Origin",
+        "Access-Control-Allow-Methods",
+        "GET,HEAD,POST,PATCH,DELETE",
+        "http://example.org",
+        "*",
+        "GET,HEAD"
+      ],
+      "keys": [
+        "headers",
+        "Origin",
+        "method"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.methods",
+      "unitId": "cors",
+      "guaranteeId": "ok.methods",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 391,
+      "title": "cors.ok.methods Allow methods by promise returning function",
+      "status": "test",
+      "bodyHash": "09997abd7c84e1b9",
+      "literals": [
+        "http://localhost/api9/abc",
+        "http://example.com",
+        "OPTIONS",
+        "Access-Control-Allow-Origin",
+        "Access-Control-Allow-Methods",
+        "GET,HEAD,POST,PATCH,DELETE",
+        "http://example.org",
+        "*",
+        "GET,HEAD"
+      ],
+      "keys": [
+        "headers",
+        "Origin",
+        "method"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.methods",
+      "unitId": "cors",
+      "guaranteeId": "ok.methods",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 413,
+      "title": "cors.ok.methods Does not set allow methods when function returns an empty array",
+      "status": "test",
+      "bodyHash": "96d1510ccb3c7c5f",
+      "literals": [
+        "http://localhost/",
+        "OPTIONS",
+        "Access-Control-Allow-Methods"
+      ],
+      "keys": [
+        "allowMethods",
+        "method"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-string",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-string",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 424,
+      "title": "cors.ok.origin-string Emits the wildcard, not the reflected origin, when credentials is true with wildcard origin",
+      "status": "test",
+      "bodyHash": "483534ea0e0bffb6",
+      "literals": [
+        "http://localhost/api10/abc",
+        "http://example.com",
+        "200",
+        "Access-Control-Allow-Origin",
+        "*",
+        "Access-Control-Allow-Credentials",
+        "true",
+        "Vary"
+      ],
+      "keys": [
+        "headers",
+        "Origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-string",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-string",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 440,
+      "title": "cors.ok.origin-string Preflight emits the wildcard, not the reflected origin, when credentials is true with wildcard origin",
+      "status": "test",
+      "bodyHash": "16813df5e9f251ca",
+      "literals": [
+        "http://localhost/api10/abc",
+        "OPTIONS",
+        "http://example.com",
+        "204",
+        "Access-Control-Allow-Origin",
+        "*",
+        "Access-Control-Allow-Credentials",
+        "true"
+      ],
+      "keys": [
+        "method",
+        "headers",
+        "Origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-string",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-string",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 454,
+      "title": "cors.ok.origin-string Emits the wildcard with no Origin header when credentials is true with wildcard origin",
+      "status": "test",
+      "bodyHash": "d24e2e9414a4dca0",
+      "literals": [
+        "http://localhost/api10/abc",
+        "200",
+        "Access-Control-Allow-Origin",
+        "*",
+        "Access-Control-Allow-Credentials",
+        "true"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-string",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-string",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 462,
+      "title": "cors.ok.origin-string Emits the wildcard for every origin (never reflects) when credentials is true with wildcard origin",
+      "status": "test",
+      "bodyHash": "5b465377ef160029",
+      "literals": [
+        "http://localhost/api10/abc",
+        "http://example.com",
+        "http://other.com",
+        "Access-Control-Allow-Origin",
+        "*"
+      ],
+      "keys": [
+        "headers",
+        "Origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-string",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-string",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 474,
+      "title": "cors.ok.origin-string Origin: null gets the wildcard, not a reflected null origin, with credentials",
+      "status": "test",
+      "bodyHash": "81c42ad7b1b0530d",
+      "literals": [
+        "http://localhost/api10/abc",
+        "null",
+        "Access-Control-Allow-Origin",
+        "*",
+        "Access-Control-Allow-Credentials",
+        "true"
+      ],
+      "keys": [
+        "headers",
+        "Origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-default",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-default",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 483,
+      "title": "cors.ok.origin-default Should not reflect an arbitrary Origin when credentials is true with default origin",
+      "status": "test",
+      "bodyHash": "e147a320d12a119e",
+      "literals": [
+        "*",
+        "/api/me",
+        "private user data",
+        "https://attacker.example",
+        "http://evil.test",
+        "null",
+        "http://localhost/api/me",
+        "Access-Control-Allow-Origin"
+      ],
+      "keys": [
+        "credentials",
+        "secret",
+        "headers",
+        "Origin"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-default",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-default",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 496,
+      "title": "cors.ok.origin-default Preflight should not approve an arbitrary Origin when credentials is true with default origin",
+      "status": "test",
+      "bodyHash": "d5dc82b8765ce792",
+      "literals": [
+        "*",
+        "/api/account",
+        "http://localhost/api/account",
+        "OPTIONS",
+        "https://attacker.example",
+        "Access-Control-Request-Method",
+        "DELETE",
+        "Access-Control-Request-Headers",
+        "X-CSRF",
+        "Access-Control-Allow-Origin"
+      ],
+      "keys": [
+        "credentials",
+        "deleted",
+        "method",
+        "headers",
+        "Origin",
+        "Access-Control-Request-Method",
+        "Access-Control-Request-Headers"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "cors.ok.origin-default",
+      "unitId": "cors",
+      "guaranteeId": "ok.origin-default",
+      "file": "src/middleware/cors/index.test.ts",
+      "line": 515,
+      "title": "cors.ok.origin-default Options without origin fall back to wildcard default",
+      "status": "test",
+      "bodyHash": "db44208f4e39210b",
+      "literals": [
+        "/api/*",
+        "GET",
+        "POST",
+        "/api/abc",
+        "http://localhost/api/abc",
+        "200",
+        "Access-Control-Allow-Origin",
+        "*",
+        "OPTIONS",
+        "Access-Control-Allow-Methods"
+      ],
+      "keys": [
+        "allowMethods",
+        "ok",
+        "method"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.generate",
+      "unitId": "requestId",
+      "guaranteeId": "ok.generate",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 12,
+      "title": "requestId.ok.generate Should return random request id",
+      "status": "test",
+      "bodyHash": "4e26de9dd93f23b1",
+      "literals": [
+        "http://localhost/requestId",
+        "200",
+        "X-Request-Id"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.header-in",
+      "unitId": "requestId",
+      "guaranteeId": "ok.header-in",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 20,
+      "title": "requestId.ok.header-in Should return custom request id",
+      "status": "test",
+      "bodyHash": "1678e7e13302dec4",
+      "literals": [
+        "http://localhost/requestId",
+        "X-Request-Id",
+        "hono-is-hot",
+        "200"
+      ],
+      "keys": [
+        "headers",
+        "X-Request-Id"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.header-in",
+      "unitId": "requestId",
+      "guaranteeId": "ok.header-in",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 32,
+      "title": "requestId.ok.header-in Should return custom request id with all valid characters",
+      "status": "test",
+      "bodyHash": "bed6b4a3a94eb98a",
+      "literals": [
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_=",
+        "http://localhost/requestId",
+        "X-Request-Id",
+        "200"
+      ],
+      "keys": [
+        "headers",
+        "X-Request-Id"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.generate",
+      "unitId": "requestId",
+      "guaranteeId": "ok.generate",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 45,
+      "title": "requestId.ok.generate Should return random request id without using request header",
+      "status": "test",
+      "bodyHash": "98f017c4b9b82150",
+      "literals": [
+        "http://localhost/requestId",
+        "X-Request-Id",
+        "Hello!12345-@*^",
+        "200"
+      ],
+      "keys": [
+        "headers",
+        "X-Request-Id"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.generate",
+      "unitId": "requestId",
+      "guaranteeId": "ok.generate",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 75,
+      "title": "requestId.ok.generate Should return custom request id",
+      "status": "test",
+      "bodyHash": "3dc80c53f9f4f16d",
+      "literals": [
+        "http://localhost/word",
+        "200",
+        "X-Request-Id",
+        "HonoIsWebFramework"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.generate",
+      "unitId": "requestId",
+      "guaranteeId": "ok.generate",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 83,
+      "title": "requestId.ok.generate Should return complex request id",
+      "status": "test",
+      "bodyHash": "17e4ee0cd667b114",
+      "literals": [
+        "http://localhost/doubleRequestId",
+        "Hono-Request-Id",
+        "Hello",
+        "Ohno-Request-Id",
+        "World",
+        "200",
+        "X-Request-Id",
+        "HelloWorld"
+      ],
+      "keys": [
+        "headers",
+        "Hono-Request-Id",
+        "Ohno-Request-Id"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.limit",
+      "unitId": "requestId",
+      "guaranteeId": "ok.limit",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 107,
+      "title": "requestId.ok.limit Should return custom request id",
+      "status": "test",
+      "bodyHash": "5cd10c952b770b72",
+      "literals": [
+        "http://localhost/requestId",
+        "X-Request-Id",
+        "200"
+      ],
+      "keys": [
+        "headers",
+        "X-Request-Id"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.limit",
+      "unitId": "requestId",
+      "guaranteeId": "ok.limit",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 118,
+      "title": "requestId.ok.limit Should return random request id without using request header",
+      "status": "test",
+      "bodyHash": "513a13d3bf921826",
+      "literals": [
+        "http://localhost/requestId",
+        "X-Request-Id",
+        "200"
+      ],
+      "keys": [
+        "headers",
+        "X-Request-Id"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.limit",
+      "unitId": "requestId",
+      "guaranteeId": "ok.limit",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 129,
+      "title": "requestId.ok.limit Should return custom request id with 256 characters",
+      "status": "test",
+      "bodyHash": "96e2e8514ea9b212",
+      "literals": [
+        "http://localhost/limit256",
+        "X-Request-Id",
+        "200"
+      ],
+      "keys": [
+        "headers",
+        "X-Request-Id"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.header-in",
+      "unitId": "requestId",
+      "guaranteeId": "ok.header-in",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 149,
+      "title": "requestId.ok.header-in Should return custom request id",
+      "status": "test",
+      "bodyHash": "a2a23c95e53dd7f6",
+      "literals": [
+        "http://localhost/requestId",
+        "Hono-Request-Id",
+        "hono-is-hot",
+        "200"
+      ],
+      "keys": [
+        "headers",
+        "Hono-Request-Id"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "requestId.ok.header-off",
+      "unitId": "requestId",
+      "guaranteeId": "ok.header-off",
+      "file": "src/middleware/request-id/index.test.ts",
+      "line": 161,
+      "title": "requestId.ok.header-off Should not return request id",
+      "status": "test",
+      "bodyHash": "8a15803ed2113a55",
+      "literals": [
+        "http://localhost/emptyId",
+        "200",
+        "X-Request-Id"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.defaults",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.defaults",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 14,
+      "title": "secureHeaders.ok.defaults default middleware",
+      "status": "test",
+      "bodyHash": "aab38522178498ea",
+      "literals": [
+        "*",
+        "/test",
+        "test",
+        "200",
+        "X-Frame-Options",
+        "SAMEORIGIN",
+        "Strict-Transport-Security",
+        "max-age=15552000; includeSubDomains",
+        "X-Download-Options",
+        "noopen",
+        "X-XSS-Protection",
+        "0",
+        "X-Powered-By",
+        "X-DNS-Prefetch-Control",
+        "off",
+        "X-Content-Type-Options",
+        "nosniff",
+        "Referrer-Policy",
+        "no-referrer",
+        "X-Permitted-Cross-Domain-Policies",
+        "none",
+        "Cross-Origin-Resource-Policy",
+        "same-origin",
+        "Cross-Origin-Opener-Policy",
+        "Origin-Agent-Cluster",
+        "?1",
+        "Permissions-Policy",
+        "Content-Security-Policy",
+        "Content-Security-Policy-ReportOnly"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.coep-off",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.coep-off",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 43,
+      "title": "secureHeaders.ok.coep-off all headers enabled",
+      "status": "test",
+      "bodyHash": "40606269c2ce412e",
+      "literals": [
+        "*",
+        "'self'",
+        "/test",
+        "test",
+        "200",
+        "X-Frame-Options",
+        "SAMEORIGIN",
+        "Strict-Transport-Security",
+        "max-age=15552000; includeSubDomains",
+        "X-Download-Options",
+        "noopen",
+        "X-XSS-Protection",
+        "0",
+        "X-Powered-By",
+        "X-DNS-Prefetch-Control",
+        "off",
+        "X-Content-Type-Options",
+        "nosniff",
+        "Referrer-Policy",
+        "no-referrer",
+        "X-Permitted-Cross-Domain-Policies",
+        "none",
+        "Cross-Origin-Resource-Policy",
+        "same-origin",
+        "Cross-Origin-Opener-Policy",
+        "Origin-Agent-Cluster",
+        "?1",
+        "Cross-Origin-Embedder-Policy",
+        "require-corp",
+        "Permissions-Policy",
+        "camera=()",
+        "Content-Security-Policy",
+        "default-src 'self'",
+        "Content-Security-Policy-Report-Only"
+      ],
+      "keys": [
+        "contentSecurityPolicy",
+        "defaultSrc",
+        "contentSecurityPolicyReportOnly",
+        "crossOriginEmbedderPolicy",
+        "permissionsPolicy",
+        "camera"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.disable",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.disable",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 87,
+      "title": "secureHeaders.ok.disable specific headers disabled",
+      "status": "test",
+      "bodyHash": "8fc1762a6d2a1b22",
+      "literals": [
+        "*",
+        "/test",
+        "test",
+        "200",
+        "X-Frame-Options",
+        "Strict-Transport-Security",
+        "max-age=15552000; includeSubDomains",
+        "X-Download-Options",
+        "noopen",
+        "X-XSS-Protection",
+        "X-Powered-By",
+        "X-DNS-Prefetch-Control",
+        "off",
+        "X-Content-Type-Options",
+        "nosniff",
+        "Referrer-Policy",
+        "no-referrer",
+        "X-Permitted-Cross-Domain-Policies",
+        "none",
+        "Cross-Origin-Resource-Policy",
+        "same-origin",
+        "Cross-Origin-Opener-Policy",
+        "Permissions-Policy",
+        "Origin-Agent-Cluster",
+        "?1"
+      ],
+      "keys": [
+        "xFrameOptions",
+        "xXssProtection"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.powered-by",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.powered-by",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 114,
+      "title": "secureHeaders.ok.powered-by should remove x-powered-by header",
+      "status": "test",
+      "bodyHash": "4bef46f8a816c463",
+      "literals": [
+        "*",
+        "/",
+        "x-powered-by",
+        "Hono"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.defaults",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.defaults",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 130,
+      "title": "secureHeaders.ok.defaults should override Strict-Transport-Security header after middleware",
+      "status": "test",
+      "bodyHash": "4fe6d9f29ecf8e8a",
+      "literals": [
+        "/test1",
+        "*",
+        "Strict-Transport-Security",
+        "Hono",
+        "header updated",
+        "max-age=15552000; includeSubDomains",
+        "/test2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.override",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.override",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 148,
+      "title": "secureHeaders.ok.override should use custom value when overridden",
+      "status": "test",
+      "bodyHash": "356a5d5beee897b4",
+      "literals": [
+        "/test",
+        "max-age=31536000; includeSubDomains; preload;",
+        "DENY",
+        "1",
+        "Strict-Transport-Security",
+        "X-FRAME-OPTIONS",
+        "X-XSS-Protection"
+      ],
+      "keys": [
+        "strictTransportSecurity",
+        "xFrameOptions",
+        "xXssProtection"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.permissions",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.permissions",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 167,
+      "title": "secureHeaders.ok.permissions should set Permission-Policy header correctly",
+      "status": "test",
+      "bodyHash": "ac2c602c65b97a90",
+      "literals": [
+        "/test",
+        "self",
+        "none",
+        "example.com",
+        "*",
+        "https://a.example.com",
+        "https://b.example.com",
+        "https://*.example.com",
+        "src",
+        "Permissions-Policy",
+        "fullscreen=(self), bluetooth=(), payment=(self \"example.com\"), sync-xhr=(), camera=(), microphone=*, ",
+        "geolocation=*, usb=(self \"https://a.example.com\" \"https://b.example.com\"), ",
+        "accelerometer=(\"https://*.example.com\"), gyroscope=(src), ",
+        "magnetometer=(\"https://a.example.com\" \"https://b.example.com\"), ",
+        "mediasession=(self), deferred-fetch=()"
+      ],
+      "keys": [
+        "permissionsPolicy",
+        "fullscreen",
+        "bluetooth",
+        "payment",
+        "syncXhr",
+        "camera",
+        "microphone",
+        "geolocation",
+        "usb",
+        "accelerometer",
+        "gyroscope",
+        "magnetometer",
+        "mediasession",
+        "deferredFetch"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.powered-by",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.powered-by",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 200,
+      "title": "secureHeaders.ok.powered-by Remove X-Powered-By",
+      "status": "test",
+      "bodyHash": "3a32b15c161bfa11",
+      "literals": [
+        "/test",
+        "Hono is hot",
+        "/test2",
+        "X-Powered-By",
+        "Hono"
+      ],
+      "keys": [
+        "removePoweredBy"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 236,
+      "title": "secureHeaders.ok.csp CSP Setting",
+      "status": "test",
+      "bodyHash": "aea8a6e728f379da",
+      "literals": [
+        "/test",
+        "'self'",
+        "https:",
+        "data:",
+        "'none'",
+        "'unsafe-inline'",
+        "'script'",
+        "*",
+        "Strict-Transport-Security",
+        "Hono",
+        "header updated",
+        "default-src 'self'; base-uri 'self'; font-src 'self' https: data:; frame-ancestors 'self'; img-src 'self' data:; object-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self' https: 'unsafe-inline'; require-trusted-types-for 'script'; trusted-types 'none'",
+        "contentSecurityPolicy",
+        "Content-Security-Policy",
+        "contentSecurityPolicyReportOnly",
+        "Content-Security-Policy-Report-Only"
+      ],
+      "keys": [
+        "defaultSrc",
+        "baseUri",
+        "fontSrc",
+        "frameAncestors",
+        "imgSrc",
+        "objectSrc",
+        "scriptSrc",
+        "scriptSrcAttr",
+        "styleSrc",
+        "requireTrustedTypesFor",
+        "trustedTypes",
+        "cspSettingName",
+        "cspHeaderName"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 268,
+      "title": "secureHeaders.ok.csp CSP Setting one only",
+      "status": "test",
+      "bodyHash": "46cd7e14aadb7bcb",
+      "literals": [
+        "/test",
+        "'self'",
+        "*",
+        "header updated",
+        "default-src 'self'",
+        "contentSecurityPolicy",
+        "Content-Security-Policy",
+        "contentSecurityPolicyReportOnly",
+        "Content-Security-Policy-Report-Only"
+      ],
+      "keys": [
+        "defaultSrc",
+        "cspSettingName",
+        "cspHeaderName"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 287,
+      "title": "secureHeaders.ok.csp No CSP Setting",
+      "status": "test",
+      "bodyHash": "93f9345206ef4777",
+      "literals": [
+        "/test",
+        "*",
+        "header updated",
+        "contentSecurityPolicy",
+        "Content-Security-Policy",
+        "contentSecurityPolicyReportOnly",
+        "Content-Security-Policy-Report-Only"
+      ],
+      "keys": [
+        "cspSettingName",
+        "cspHeaderName"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.reporting",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.reporting",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 299,
+      "title": "secureHeaders.ok.reporting CSP with reportTo",
+      "status": "test",
+      "bodyHash": "799c132abbdb171f",
+      "literals": [
+        "/test1",
+        "endpoint-1",
+        "https://example.com/reports",
+        "'self'",
+        "/test2",
+        "10886400",
+        "/test3",
+        "g1",
+        "https://a.example.com/reports",
+        "https://b.example.com/reports",
+        "g2",
+        "https://c.example.com/reports",
+        "https://d.example.com/reports",
+        "/test4",
+        "e1",
+        "e2",
+        "*",
+        "header updated",
+        "Reporting-Endpoints",
+        "endpoint-1=\"https://example.com/reports\"",
+        "default-src 'self'; report-to endpoint-1",
+        "Report-To",
+        "{\"group\":\"endpoint-1\",\"max_age\":10886400,\"endpoints\":[{\"url\":\"https://example.com/reports\"}]}",
+        "{\"group\":\"g1\",\"max_age\":10886400,\"endpoints\":[{\"url\":\"https://a.example.com/reports\"},{\"url\":\"https://b.example.com/reports\"}]}, {\"group\":\"g2\",\"max_age\":10886400,\"endpoints\":[{\"url\":\"https://c.example.com/reports\"},{\"url\":\"https://d.example.com/reports\"}]}",
+        "default-src 'self'; report-to g2",
+        "e1=\"https://a.example.com/reports\", e2=\"https://b.example.com/reports\"",
+        "default-src 'self'; report-to e1",
+        "contentSecurityPolicy",
+        "Content-Security-Policy",
+        "contentSecurityPolicyReportOnly",
+        "Content-Security-Policy-Report-Only"
+      ],
+      "keys": [
+        "reportingEndpoints",
+        "name",
+        "url",
+        "defaultSrc",
+        "reportTo",
+        "group",
+        "max_age",
+        "endpoints",
+        "cspSettingName",
+        "cspHeaderName"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.nonce",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.nonce",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 411,
+      "title": "secureHeaders.ok.nonce CSP nonce for script-src",
+      "status": "test",
+      "bodyHash": "23cb2aafb98661bc",
+      "literals": [
+        "/test",
+        "'self'",
+        "*",
+        "nonce: ",
+        "secureHeadersNonce",
+        "script-src 'self' 'nonce-",
+        "contentSecurityPolicy",
+        "Content-Security-Policy",
+        "contentSecurityPolicyReportOnly",
+        "Content-Security-Policy-Report-Only"
+      ],
+      "keys": [
+        "scriptSrc",
+        "cspSettingName",
+        "cspHeaderName"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.nonce",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.nonce",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 433,
+      "title": "secureHeaders.ok.nonce CSP nonce for script-src and style-src",
+      "status": "test",
+      "bodyHash": "8fb3d75b602f180b",
+      "literals": [
+        "/test",
+        "'self'",
+        "*",
+        "nonce: ",
+        "secureHeadersNonce",
+        "script-src 'self' 'nonce-",
+        "style-src 'self' 'nonce-",
+        "contentSecurityPolicy",
+        "Content-Security-Policy",
+        "contentSecurityPolicyReportOnly",
+        "Content-Security-Policy-Report-Only"
+      ],
+      "keys": [
+        "scriptSrc",
+        "styleSrc",
+        "cspSettingName",
+        "cspHeaderName"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 457,
+      "title": "secureHeaders.ok.csp CSP nonce by app own function",
+      "status": "test",
+      "bodyHash": "7c7dce4c6b650ae2",
+      "literals": [
+        "test-",
+        "-nonce",
+        "'nonce-",
+        "/test",
+        "'self'",
+        "*",
+        "script: ",
+        ", style: ",
+        "test-scriptSrc-nonce",
+        "test-styleSrc-nonce",
+        "script-src 'self' 'nonce-scriptSrc'",
+        "style-src 'self' 'nonce-styleSrc'",
+        "script: scriptSrc, style: styleSrc",
+        "contentSecurityPolicy",
+        "Content-Security-Policy",
+        "contentSecurityPolicyReportOnly",
+        "Content-Security-Policy-Report-Only"
+      ],
+      "keys": [
+        "scriptSrc",
+        "styleSrc",
+        "cspSettingName",
+        "cspHeaderName"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 488,
+      "title": "secureHeaders.ok.csp keeps the enforced policy when report-only uses a nonce",
+      "status": "test",
+      "bodyHash": "7a5c16238f888a1f",
+      "literals": [
+        "/test",
+        "'self'",
+        "*",
+        "test",
+        "200",
+        "Content-Security-Policy",
+        "default-src 'self'",
+        "Content-Security-Policy-Report-Only"
+      ],
+      "keys": [
+        "contentSecurityPolicy",
+        "defaultSrc",
+        "contentSecurityPolicyReportOnly",
+        "scriptSrc"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp-report-only",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp-report-only",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 512,
+      "title": "secureHeaders.ok.csp-report-only keeps the report-only policy when the enforced policy uses a nonce",
+      "status": "test",
+      "bodyHash": "f32920904308c10f",
+      "literals": [
+        "/test",
+        "'self'",
+        "*",
+        "test",
+        "200",
+        "Content-Security-Policy",
+        "Content-Security-Policy-Report-Only",
+        "default-src 'self'"
+      ],
+      "keys": [
+        "contentSecurityPolicy",
+        "scriptSrc",
+        "contentSecurityPolicyReportOnly",
+        "defaultSrc"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.nonce",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.nonce",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 536,
+      "title": "secureHeaders.ok.nonce supports nonces in both policies",
+      "status": "test",
+      "bodyHash": "45af9b268ad112a1",
+      "literals": [
+        "/test",
+        "'self'",
+        "*",
+        "test",
+        "Content-Security-Policy",
+        "Content-Security-Policy-Report-Only",
+        "200",
+        "'nonce-"
+      ],
+      "keys": [
+        "contentSecurityPolicy",
+        "scriptSrc",
+        "contentSecurityPolicyReportOnly",
+        "styleSrc"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 564,
+      "title": "secureHeaders.ok.csp should set report-uri with single endpoint",
+      "status": "test",
+      "bodyHash": "e5041c3c17f37b33",
+      "literals": [
+        "/test",
+        "'self'",
+        "/csp-report",
+        "Content-Security-Policy",
+        "default-src 'self'; report-uri /csp-report"
+      ],
+      "keys": [
+        "contentSecurityPolicy",
+        "defaultSrc",
+        "reportUri"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 582,
+      "title": "secureHeaders.ok.csp should set report-uri with multiple endpoints",
+      "status": "test",
+      "bodyHash": "e89014c7cdd82be6",
+      "literals": [
+        "/test",
+        "'self'",
+        "/endpoint1",
+        "/endpoint2",
+        "Content-Security-Policy",
+        "default-src 'self'; report-uri /endpoint1 /endpoint2"
+      ],
+      "keys": [
+        "contentSecurityPolicy",
+        "defaultSrc",
+        "reportUri"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 600,
+      "title": "secureHeaders.ok.csp should work with report-to and report-uri together",
+      "status": "test",
+      "bodyHash": "7736fe004339fc15",
+      "literals": [
+        "/test",
+        "'self'",
+        "endpoint-1",
+        "/legacy-report",
+        "Content-Security-Policy",
+        "default-src 'self'; report-to endpoint-1; report-uri /legacy-report"
+      ],
+      "keys": [
+        "contentSecurityPolicy",
+        "defaultSrc",
+        "reportTo",
+        "reportUri"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp-report-only",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp-report-only",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 619,
+      "title": "secureHeaders.ok.csp-report-only should work with Content-Security-Policy-Report-Only",
+      "status": "test",
+      "bodyHash": "a1e07142ba59c282",
+      "literals": [
+        "/test",
+        "'self'",
+        "/csp-report-only",
+        "Content-Security-Policy-Report-Only",
+        "default-src 'self'; report-uri /csp-report-only"
+      ],
+      "keys": [
+        "contentSecurityPolicyReportOnly",
+        "defaultSrc",
+        "reportUri"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 639,
+      "title": "secureHeaders.ok.csp should not output report-uri when reportUri is not set",
+      "status": "test",
+      "bodyHash": "369193c224fff6c2",
+      "literals": [
+        "/test",
+        "'self'",
+        "Content-Security-Policy",
+        "report-uri"
+      ],
+      "keys": [
+        "contentSecurityPolicy",
+        "defaultSrc"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "secureHeaders.ok.csp-report-only",
+      "unitId": "secureHeaders",
+      "guaranteeId": "ok.csp-report-only",
+      "file": "src/middleware/secure-headers/index.test.ts",
+      "line": 655,
+      "title": "secureHeaders.ok.csp-report-only should not output report-uri in Report-Only when reportUri is not set",
+      "status": "test",
+      "bodyHash": "eb1b6729b280dca8",
+      "literals": [
+        "/test",
+        "'self'",
+        "Content-Security-Policy-Report-Only",
+        "report-uri"
+      ],
+      "keys": [
+        "contentSecurityPolicyReportOnly",
+        "defaultSrc"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "guarantee-no-test",
+      "message": "cors.ok.headers has no test naming it",
+      "file": "src/middleware/cors/index.ts",
+      "line": 68,
+      "unit": "cors",
+      "guarantee": "cors.ok.headers",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "cors.ok.max-age has no test naming it",
+      "file": "src/middleware/cors/index.ts",
+      "line": 69,
+      "unit": "cors",
+      "guarantee": "cors.ok.max-age",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "cors.ok.credentials has no test naming it",
+      "file": "src/middleware/cors/index.ts",
+      "line": 70,
+      "unit": "cors",
+      "guarantee": "cors.ok.credentials",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "cors.ok.expose has no test naming it",
+      "file": "src/middleware/cors/index.ts",
+      "line": 71,
+      "unit": "cors",
+      "guarantee": "cors.ok.expose",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "NONCE.ok.value has no test naming it",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 138,
+      "unit": "NONCE",
+      "guarantee": "NONCE.ok.value",
+      "severity": "fail"
+    },
+    {
+      "rule": "identifier-unresolved",
+      "message": "secureHeaders.ok.csp: \"camelCase\" is not a parameter, declared port, entity or public operation",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 186,
+      "unit": "secureHeaders",
+      "guarantee": "secureHeaders.ok.csp",
+      "severity": "fail"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "bodyLimit: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/body-limit/index.ts",
+      "line": 57,
+      "unit": "bodyLimit",
+      "mutant": {
+        "id": "6",
+        "mutator": "ObjectLiteral",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 57
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "bodyLimit: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/body-limit/index.ts",
+      "line": 73,
+      "unit": "bodyLimit",
+      "mutant": {
+        "id": "20",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 73
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "bodyLimit: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/body-limit/index.ts",
+      "line": 73,
+      "unit": "bodyLimit",
+      "mutant": {
+        "id": "17",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 73
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "bodyLimit: StringLiteral mutant: `\"\"` is not run by any test",
+      "file": "src/middleware/body-limit/index.ts",
+      "line": 75,
+      "unit": "bodyLimit",
+      "mutant": {
+        "id": "25",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "NoCoverage",
+        "line": 75
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: ArrayDeclaration mutant: `[\"Stryker was here\"]` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 78,
+      "unit": "cors",
+      "mutant": {
+        "id": "62",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[\"Stryker was here\"]",
+        "status": "Survived",
+        "line": 78
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: OptionalChaining mutant: `opts.exposeHeaders.length` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 82,
+      "unit": "cors",
+      "mutant": {
+        "id": "63",
+        "mutator": "OptionalChaining",
+        "replacement": "opts.exposeHeaders.length",
+        "status": "Survived",
+        "line": 82
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: OptionalChaining mutant: `opts.allowHeaders.length` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 83,
+      "unit": "cors",
+      "mutant": {
+        "id": "65",
+        "mutator": "OptionalChaining",
+        "replacement": "opts.allowHeaders.length",
+        "status": "Survived",
+        "line": 83
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 102,
+      "unit": "cors",
+      "mutant": {
+        "id": "99",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 102
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: BlockStatement mutant: `{}` is not run by any test",
+      "file": "src/middleware/cors/index.ts",
+      "line": 105,
+      "unit": "cors",
+      "mutant": {
+        "id": "104",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "NoCoverage",
+        "line": 105
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: ArrowFunction mutant: `() => undefined` is not run by any test",
+      "file": "src/middleware/cors/index.ts",
+      "line": 106,
+      "unit": "cors",
+      "mutant": {
+        "id": "105",
+        "mutator": "ArrowFunction",
+        "replacement": "() => undefined",
+        "status": "NoCoverage",
+        "line": 106
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: StringLiteral mutant: `\"Stryker was here!\"` is not run by any test",
+      "file": "src/middleware/cors/index.ts",
+      "line": 106,
+      "unit": "cors",
+      "mutant": {
+        "id": "106",
+        "mutator": "StringLiteral",
+        "replacement": "\"Stryker was here!\"",
+        "status": "NoCoverage",
+        "line": 106
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: StringLiteral mutant: `\"Stryker was here!\"` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 115,
+      "unit": "cors",
+      "mutant": {
+        "id": "114",
+        "mutator": "StringLiteral",
+        "replacement": "\"Stryker was here!\"",
+        "status": "Survived",
+        "line": 115
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 120,
+      "unit": "cors",
+      "mutant": {
+        "id": "120",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 120
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 124,
+      "unit": "cors",
+      "mutant": {
+        "id": "126",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 124
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: ConditionalExpression mutant (the match \"*\"): `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 129,
+      "unit": "cors",
+      "mutant": {
+        "id": "136",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 129
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: StringLiteral mutant (the match \"*\"): `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 129,
+      "unit": "cors",
+      "mutant": {
+        "id": "139",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 129
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: StringLiteral mutant: `\"Stryker was here!\"` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 137,
+      "unit": "cors",
+      "mutant": {
+        "id": "154",
+        "mutator": "StringLiteral",
+        "replacement": "\"Stryker was here!\"",
+        "status": "Survived",
+        "line": 137
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 143,
+      "unit": "cors",
+      "mutant": {
+        "id": "161",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 143
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/cors/index.ts",
+      "line": 152,
+      "unit": "cors",
+      "mutant": {
+        "id": "172",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 152
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "NONCE: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 131,
+      "unit": "NONCE",
+      "mutant": {
+        "id": "269",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 131
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "NONCE: CallExpression mutant in a helper it calls: `;` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 133,
+      "unit": "NONCE",
+      "mutant": {
+        "id": "270",
+        "mutator": "CallExpression",
+        "replacement": ";",
+        "status": "Survived",
+        "line": 133
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "NONCE: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 143,
+      "unit": "NONCE",
+      "mutant": {
+        "id": "273",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 143
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "NONCE: LogicalOperator mutant: `init && generateNonce()` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 143,
+      "unit": "NONCE",
+      "mutant": {
+        "id": "275",
+        "mutator": "LogicalOperator",
+        "replacement": "init && generateNonce()",
+        "status": "Survived",
+        "line": 143
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "NONCE: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 143,
+      "unit": "NONCE",
+      "mutant": {
+        "id": "274",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 143
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "NONCE: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 144,
+      "unit": "NONCE",
+      "mutant": {
+        "id": "276",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 144
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 226,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "317",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 226
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 230,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "323",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 230
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 238,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "331",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 238
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: OptionalChaining mutant: `options.removePoweredBy` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 244,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "337",
+        "mutator": "OptionalChaining",
+        "replacement": "options.removePoweredBy",
+        "status": "Survived",
+        "line": 244
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "secureHeaders commits to constant \"2\" in `i * 2 + 2`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 271,
+      "unit": "secureHeaders",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: Regex mutant in a helper it calls: `/[A-Z](?![a-z])|[A-Z]/g` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 279,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "368",
+        "mutator": "Regex",
+        "replacement": "/[A-Z](?![a-z])|[A-Z]/g",
+        "status": "Survived",
+        "line": 279
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: Regex mutant in a helper it calls: `/[A-Z]+(?=[a-z])|[A-Z]/g` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 279,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "370",
+        "mutator": "Regex",
+        "replacement": "/[A-Z]+(?=[a-z])|[A-Z]/g",
+        "status": "Survived",
+        "line": 279
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: Regex mutant in a helper it calls: `/[A-Z]+(?![^a-z])|[A-Z]/g` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 279,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "371",
+        "mutator": "Regex",
+        "replacement": "/[A-Z]+(?![^a-z])|[A-Z]/g",
+        "status": "Survived",
+        "line": 279
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: MethodExpression mutant in a helper it calls: `match.toUpperCase()` is not run by any test",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 280,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "376",
+        "mutator": "MethodExpression",
+        "replacement": "match.toUpperCase()",
+        "status": "NoCoverage",
+        "line": 280
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 288,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "383",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 288
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: MethodExpression mutant in a helper it calls: `Object.entries(policy).map(([directive, value]) => { const …` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 308,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "401",
+        "mutator": "MethodExpression",
+        "replacement": "Object.entries(policy).map(([directive, value]) => { const …",
+        "status": "Survived",
+        "line": 308
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ConditionalExpression mutant in a helper it calls: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 316,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "411",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 316
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 317,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "415",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 317
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 317,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "417",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 317
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ConditionalExpression mutant in a helper it calls (the match \"*\"): `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 320,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "422",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 320
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ConditionalExpression mutant in a helper it calls (the match \"none\"): `true` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 323,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "432",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 323
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: StringLiteral mutant in a helper it calls: `\"Stryker was here!\"` is not run by any test",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 330,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "446",
+        "mutator": "StringLiteral",
+        "replacement": "\"Stryker was here!\"",
+        "status": "NoCoverage",
+        "line": 330
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "secureHeaders commits to output \"$1-$2\" in `'$1-$2'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 337,
+      "unit": "secureHeaders",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: Regex mutant in a helper it calls (the output \"$1-$2\"): `/([a-z\\D])([A-Z])/g` survived; no linked test fails when the code changes like this",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 337,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "451",
+        "mutator": "Regex",
+        "replacement": "/([a-z\\D])([A-Z])/g",
+        "status": "Survived",
+        "line": 337
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ArrayDeclaration mutant in a helper it calls: `[\"Stryker was here\"]` is not run by any test",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 341,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "454",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[\"Stryker was here\"]",
+        "status": "NoCoverage",
+        "line": 341
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "secureHeaders: ArrayDeclaration mutant in a helper it calls: `[\"Stryker was here\"]` is not run by any test",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 346,
+      "unit": "secureHeaders",
+      "mutant": {
+        "id": "459",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[\"Stryker was here\"]",
+        "status": "NoCoverage",
+        "line": 346
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./request\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./types\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./hono-base\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./tiny\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./quick\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./http-exception\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./basic-auth\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./bearer-auth\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./body-limit\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./ip-restriction\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./cache\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./route\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./mount\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./cookie\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./accepts\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./compress\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./context-storage\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./cors\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./csrf\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./etag\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./trailing-slash\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./html\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./css\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx/jsx-dev-runtime\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx/jsx-runtime\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx/streaming\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx-renderer\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx/dom\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx/dom/jsx-dev-runtime\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx/dom/jsx-runtime\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx/dom/client\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx/dom/css\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jsx/dom/server\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jwt\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./jwk\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./timeout\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./timing\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./logger\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./method-not-allowed\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./method-override\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./powered-by\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./pretty-json\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./request-id\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./language\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./secure-headers\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./combine\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./ssg\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./streaming\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./validator\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./router\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./router/reg-exp-router\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./router/smart-router\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./router/trie-router\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./router/pattern-router\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./router/linear-router\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./utils/jwt\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./client\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./adapter\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./factory\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./serve-static\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./cloudflare-workers\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./cloudflare-pages\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./deno\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./bun\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./aws-lambda\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./vercel\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./netlify\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./lambda-edge\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./service-worker\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./testing\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./dev\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./ws\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./conninfo\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./proxy\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "cors commits to match \"OPTIONS\" in `c.req.method === 'OPTIONS'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/middleware/cors/index.ts",
+      "line": 128,
+      "unit": "cors",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "cors commits to output \"No Content\" in `'No Content'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/middleware/cors/index.ts",
+      "line": 163,
+      "unit": "cors",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "secureHeaders commits to match \"*\" in `value[0] === '*'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 320,
+      "unit": "secureHeaders",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "secureHeaders commits to output \"self\" in `'self'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 326,
+      "unit": "secureHeaders",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "secureHeaders commits to output \"src\" in `'src'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/middleware/secure-headers/secure-headers.ts",
+      "line": 326,
+      "unit": "secureHeaders",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 5,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 28,
+    "guaranteesWithoutTest": 5,
+    "tests": 72,
+    "orphanTests": 0,
+    "unlinkedTests": 0,
+    "findings": {
+      "fail": 6,
+      "warn": 46,
+      "info": 81
+    }
+  }
+}

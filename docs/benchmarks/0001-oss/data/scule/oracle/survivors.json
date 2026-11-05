@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "file": "src/index.ts",
+    "line": 15,
+    "mutator": "StringLiteral",
+    "status": "NoCoverage",
+    "equivalent": false,
+    "kind": "value",
+    "reason": "isUppercase() called with no argument returns true instead of false"
+  },
+  {
+    "id": "4",
+    "file": "src/index.ts",
+    "line": 16,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "isUppercase('1') returns false instead of undefined"
+  },
+  {
+    "id": "5",
+    "file": "src/index.ts",
+    "line": 16,
+    "mutator": "BlockStatement",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "removal",
+    "reason": "isUppercase('1') returns false instead of undefined (early return removed)"
+  },
+  {
+    "id": "17",
+    "file": "src/index.ts",
+    "line": 40,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "condition",
+    "reason": "splitByCase(123 as any) throws 'not iterable' instead of returning [] (non-string truthy input from JS)"
+  },
+  {
+    "id": "29",
+    "file": "src/index.ts",
+    "line": 60,
+    "mutator": "ConditionalExpression",
+    "status": "Survived",
+    "equivalent": true,
+    "kind": "condition",
+    "reason": "previousSplitter is only ever undefined before the first non-splitter char is processed, and at that point previousUpper is also undefined, so both inner edge checks (previousUpper === false/true) fail anyway; afterwards previousSplitter is always false (it is assigned only from isSplitter after the splitter branch has continued)"
+  },
+  {
+    "id": "76",
+    "file": "src/index.ts",
+    "line": 209,
+    "mutator": "Regex",
+    "status": "Survived",
+    "equivalent": false,
+    "kind": "other",
+    "reason": "without the $ anchor, titleCase('another-word') lower-cases 'another' (prefix 'an' matches) giving 'another Word' instead of 'Another Word'"
+  }
+]

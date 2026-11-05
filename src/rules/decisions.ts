@@ -134,11 +134,13 @@ export function evaluateDecisionRules(
     const literals = literalsOf(unit.id);
     const keys = keysOf(unit.id);
     const lengths = lengthsOf(unit.id);
+    const ownLiterals = input.tests.filter((t) => t.unitId === unit.id && runs(t)).flatMap((t) => t.literals);
     // Unnamed members are reported per collection, not per element.
     const unnamedMembers = new Map<string, { decisions: Decision[]; allUsed: boolean }>();
     for (const d of unit.decisions) {
       if (ignored(d)) continue;
-      const used = d.kind === "member" ? memberUsed(d) : valueUsed(d, literals, keys, lengths);
+      const used =
+        d.kind === "member" ? memberUsed(d) : valueUsed(d, literals, keys, lengths) || quantityUnitUsed(d, ownLiterals);
       if (!decisionMentioned(d, corpus, input.ignore)) {
         if (d.kind === "member") {
           const key = d.names[0] ?? d.collection?.name ?? "";
@@ -297,6 +299,24 @@ const TOKEN_BOUNDARY = "\\s=&?;/,:";
 
 function wholeToken(value: string): RegExp {
   return new RegExp(`(?:^|[${TOKEN_BOUNDARY}])${escapeRegExp(value)}(?:$|[${TOKEN_BOUNDARY}])`);
+}
+
+/**
+ * Whether a `match` value is the unit of a quantity one of `literals` writes in full: `case
+ * "years":` and `"10 years"`, `case "d":` and `"2d"`. `"1 year"` does not hold `"years"`, and a
+ * sentence (`"1 week ago"`) is not a quantity (#66).
+ *
+ * Only the unit's own linked tests count, not its callers'. A caller's test may write the same
+ * quantity as an expected output (`format(…)` gives `"1 hour"`), which does not exercise the
+ * unit's match.
+ */
+export function quantityUnitUsed(d: Decision, ownLiterals: readonly string[]): boolean {
+  if (d.kind !== "match") return false;
+  return d.values.some((v) => {
+    if (!/[A-Za-z]/.test(v)) return false;
+    const quantity = new RegExp(`^\\s*-?\\d*\\.?\\d+\\s*${escapeRegExp(v)}\\s*$`);
+    return ownLiterals.some((l) => quantity.test(l));
+  });
 }
 
 function keyPair(key: string): RegExp {

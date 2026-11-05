@@ -1,0 +1,1276 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.0"
+  },
+  "generatedAt": "2026-11-05T19:03:07.887Z",
+  "root": "<work>/scule",
+  "revision": "5bc68048caad7c0e7de35842c83a510e8e1a7c4f",
+  "configHash": "2f9a8eb2e227c5f5",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "isUppercase",
+      "kind": "function",
+      "operation": "isUppercase",
+      "file": "src/index.ts",
+      "line": 15,
+      "endLine": 20,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "char",
+          "type": "string",
+          "optional": true
+        }
+      ],
+      "returns": "boolean | undefined",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "char",
+          "member": "toLowerCase",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "449d6da69da81abb",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false,
+      "mutation": {
+        "killed": 6,
+        "survived": 2,
+        "noCoverage": 1,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "splitByCase",
+      "kind": "function",
+      "operation": "splitByCase",
+      "file": "src/index.ts",
+      "line": 28,
+      "endLine": 87,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "T",
+          "optional": false
+        },
+        {
+          "name": "separators",
+          "type": "Separator",
+          "optional": true
+        }
+      ],
+      "returns": "SplitByCase<T, Separator[number]>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "isUppercase"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "e628ed4756145dce",
+      "guarantees": [
+        {
+          "id": "ok.default-splitters",
+          "key": "splitByCase.ok.default-splitters",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "without `splitters`, splits `str` at each of \"-\", \"_\", \"/\" and \".\" and leaves the splitters out of the result",
+          "textHash": "8559048eac1c52eb",
+          "line": 23,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.case-change",
+          "key": "splitByCase.ok.case-change",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "splits where the case changes from lower to upper or from upper to lower, and keeps the case of each part",
+          "textHash": "9ed0d0dcff262014",
+          "line": 24,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:16"
+          ]
+        },
+        {
+          "id": "ok.numbers",
+          "key": "splitByCase.ok.numbers",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "digits are not a case change",
+          "textHash": "8b1b9276819a4bfe",
+          "line": 25,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.custom-splitters",
+          "key": "splitByCase.ok.custom-splitters",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `splitters`, splits at those characters instead of the defaults",
+          "textHash": "ff82e6e835db944e",
+          "line": 26,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 53,
+        "survived": 2,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "upperFirst",
+      "kind": "function",
+      "operation": "upperFirst",
+      "file": "src/index.ts",
+      "line": 92,
+      "endLine": 94,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "S",
+          "optional": false
+        }
+      ],
+      "returns": "Capitalize<S>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "slice",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "976d8a19856f1d6c",
+      "guarantees": [
+        {
+          "id": "ok.first",
+          "key": "upperFirst.ok.first",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns `str` with its first character in upper case and the rest unchanged (\"hello world!\" gives \"Hello world!\")",
+          "textHash": "841fab05ddcbd172",
+          "line": 90,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:92"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 1,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "lowerFirst",
+      "kind": "function",
+      "operation": "lowerFirst",
+      "file": "src/index.ts",
+      "line": 99,
+      "endLine": 101,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "S",
+          "optional": false
+        }
+      ],
+      "returns": "Uncapitalize<S>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "slice",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "4870c2b3150854d0",
+      "guarantees": [
+        {
+          "id": "ok.first",
+          "key": "lowerFirst.ok.first",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns `str` with its first character in lower case and the rest unchanged (\"Hello world!\" gives \"hello world!\")",
+          "textHash": "dd8cf2ad83ddd026",
+          "line": 97,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:102"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 1,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "pascalCase",
+      "kind": "function",
+      "operation": "pascalCase",
+      "file": "src/index.ts",
+      "line": 108,
+      "endLine": 122,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "T",
+          "optional": true
+        },
+        {
+          "name": "opts",
+          "type": "UserCaseOptions",
+          "optional": true
+        }
+      ],
+      "returns": "\"\" | PascalCase<T, UserCaseOptions[\"normalize\"]>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "splitByCase",
+        "upperFirst"
+      ],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "output",
+          "expression": "\"normalize\"",
+          "line": 120,
+          "values": [
+            "normalize"
+          ],
+          "names": []
+        }
+      ],
+      "implHash": "1b421220027e690e",
+      "guarantees": [
+        {
+          "id": "ok.join",
+          "key": "pascalCase.ok.join",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "splits `str` like `splitByCase` and joins the parts with the first letter of each in upper case (\"foo-bar_baz\" gives \"FooBarBaz\")",
+          "textHash": "65d4ed7e772efc77",
+          "line": 104,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.preserve",
+          "key": "pascalCase.ok.preserve",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "an uppercase letter followed by other uppercase letters is kept (\"FooBAR\" keeps \"BAR\")",
+          "textHash": "0d350ec2327acd75",
+          "line": 105,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.normalize",
+          "key": "pascalCase.ok.normalize",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `normalize` true, each part has only its first letter in upper case",
+          "textHash": "52fe6e39f41cb4b0",
+          "line": 106,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:45"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 2,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "camelCase",
+      "kind": "function",
+      "operation": "camelCase",
+      "file": "src/index.ts",
+      "line": 128,
+      "endLine": 141,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "T",
+          "optional": true
+        },
+        {
+          "name": "opts",
+          "type": "UserCaseOptions",
+          "optional": true
+        }
+      ],
+      "returns": "CamelCase<T, UserCaseOptions[\"normalize\"]>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "lowerFirst",
+        "pascalCase"
+      ],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "output",
+          "expression": "\"normalize\"",
+          "line": 139,
+          "values": [
+            "normalize"
+          ],
+          "names": []
+        }
+      ],
+      "implHash": "7a2bab33b6bdbcb2",
+      "guarantees": [
+        {
+          "id": "ok.join",
+          "key": "camelCase.ok.join",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "splits `str` and joins the parts by camelCase: the first part starts in lower case, every later part in upper case (\"foo-bar_baz\" gives \"fooBarBaz\")",
+          "textHash": "e0942cc00ebbc200",
+          "line": 125,
+          "references": [
+            {
+              "raw": "camelCase",
+              "kind": "unresolved"
+            }
+          ],
+          "tests": []
+        },
+        {
+          "id": "ok.normalize",
+          "key": "camelCase.ok.normalize",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `normalize` true, each part has only its first letter in upper case before the first letter of the result is lowered",
+          "textHash": "2c3199549bba670a",
+          "line": 126,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:59"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 1,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "kebabCase",
+      "kind": "function",
+      "operation": "kebabCase",
+      "file": "src/index.ts",
+      "line": 147,
+      "endLine": 164,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "T",
+          "optional": true
+        },
+        {
+          "name": "joiner",
+          "type": "Joiner",
+          "optional": true
+        }
+      ],
+      "returns": "\"\" | KebabCase<T, Joiner>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "splitByCase"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "7f26f3698b0f4a8c",
+      "guarantees": [
+        {
+          "id": "ok.join",
+          "key": "kebabCase.ok.join",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "splits `str` and joins the parts in lower case with \"-\" (\"fooBar_Baz\" gives \"foo-bar-baz\")",
+          "textHash": "8dcc7077cce4ba8e",
+          "line": 144,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:68"
+          ]
+        },
+        {
+          "id": "ok.lower",
+          "key": "kebabCase.ok.lower",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the case of the input is not preserved",
+          "textHash": "9d259d9d87a9cbd6",
+          "line": 145,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 2,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "snakeCase",
+      "kind": "function",
+      "operation": "snakeCase",
+      "file": "src/index.ts",
+      "line": 169,
+      "endLine": 175,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "T",
+          "optional": true
+        }
+      ],
+      "returns": "SnakeCase<T>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "kebabCase"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "cf325d56cb1b09c1",
+      "guarantees": [
+        {
+          "id": "ok.join",
+          "key": "snakeCase.ok.join",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "splits `str` and joins the parts in lower case with \"_\" (\"foo-barBaz\" gives \"foo_bar_baz\")",
+          "textHash": "a0d25caa1b25d4ad",
+          "line": 167,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:83"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 1,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "flatCase",
+      "kind": "function",
+      "operation": "flatCase",
+      "file": "src/index.ts",
+      "line": 180,
+      "endLine": 186,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "T",
+          "optional": true
+        }
+      ],
+      "returns": "FlatCase<T>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "kebabCase"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "6a7be5bf339df694",
+      "guarantees": [
+        {
+          "id": "ok.join",
+          "key": "flatCase.ok.join",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "splits `str` and joins the parts in lower case with no separator (\"foo-barBaz\" gives \"foobarbaz\")",
+          "textHash": "855d8e05317a7bb3",
+          "line": 178,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:149"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 1,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "trainCase",
+      "kind": "function",
+      "operation": "trainCase",
+      "file": "src/index.ts",
+      "line": 193,
+      "endLine": 206,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "T",
+          "optional": true
+        },
+        {
+          "name": "opts",
+          "type": "UserCaseOptions",
+          "optional": true
+        }
+      ],
+      "returns": "TrainCase<T, UserCaseOptions[\"normalize\"]>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "splitByCase",
+        "upperFirst"
+      ],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "output",
+          "expression": "\"normalize\"",
+          "line": 205,
+          "values": [
+            "normalize"
+          ],
+          "names": []
+        }
+      ],
+      "implHash": "0b3853e71f314a1a",
+      "guarantees": [
+        {
+          "id": "ok.join",
+          "key": "trainCase.ok.join",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "splits `str` and joins the parts with \"-\", each starting in upper case (\"FooBARb\" gives \"Foo-Ba-Rb\")",
+          "textHash": "3481f9c64e061905",
+          "line": 189,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.preserve",
+          "key": "trainCase.ok.preserve",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "an uppercase letter followed by other uppercase letters is kept (\"WWWAuthenticate\" gives \"WWW-Authenticate\")",
+          "textHash": "5556b6fe2618fe6b",
+          "line": 190,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:112"
+          ]
+        },
+        {
+          "id": "ok.normalize",
+          "key": "trainCase.ok.normalize",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `normalize` true, each part has only its first letter in upper case",
+          "textHash": "52fe6e39f41cb4b0",
+          "line": 191,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:127"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 1,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "titleCase",
+      "kind": "function",
+      "operation": "titleCase",
+      "file": "src/index.ts",
+      "line": 215,
+      "endLine": 235,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "T",
+          "optional": true
+        },
+        {
+          "name": "opts",
+          "type": "UserCaseOptions",
+          "optional": true
+        }
+      ],
+      "returns": "TrainCase<T, UserCaseOptions[\"normalize\"]>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "splitByCase",
+        "upperFirst"
+      ],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "output",
+          "expression": "\"normalize\"",
+          "line": 234,
+          "values": [
+            "normalize"
+          ],
+          "names": []
+        }
+      ],
+      "implHash": "632832d64bc039bd",
+      "guarantees": [
+        {
+          "id": "ok.join",
+          "key": "titleCase.ok.join",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "splits `str` and joins the parts with a space, each capitalised (\"this-IS-aTitle\" gives \"This is a Title\")",
+          "textHash": "f1e99493b9be3b1e",
+          "line": 212,
+          "references": [],
+          "tests": [
+            "test/scule.test.ts:137"
+          ]
+        },
+        {
+          "id": "ok.minor-words",
+          "key": "titleCase.ok.minor-words",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "minor words such as \"a\", \"for\" and \"to\" stay in lower case",
+          "textHash": "647ae8edbd1d431e",
+          "line": 213,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 1,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "splitByCase.ok.case-change",
+      "unitId": "splitByCase",
+      "guaranteeId": "ok.case-change",
+      "file": "test/scule.test.ts",
+      "line": 16,
+      "title": "splitByCase.ok.case-change %s => %s",
+      "status": "each",
+      "bodyHash": "d2bceb0a46b8faad",
+      "literals": [
+        "foo",
+        "fooBar",
+        "Bar",
+        "FooBarBaz",
+        "Foo",
+        "Baz",
+        "FooBARb",
+        "BA",
+        "Rb",
+        "foo_bar-baz/qux",
+        "bar",
+        "baz",
+        "qux",
+        "foo--bar-Baz",
+        "FOO_BAR",
+        "FOO",
+        "BAR",
+        "foo123-bar",
+        "foo123",
+        "FOOBar",
+        "ALink",
+        "A",
+        "Link",
+        "foo\\Bar.fuzz-FIZz",
+        "fuzz",
+        "FI",
+        "Zz",
+        "\\",
+        ".",
+        "-",
+        "new-name-value",
+        "_"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "pascalCase.ok.normalize",
+      "unitId": "pascalCase",
+      "guaranteeId": "ok.normalize",
+      "file": "test/scule.test.ts",
+      "line": 45,
+      "title": "pascalCase.ok.normalize %s => %s",
+      "status": "each",
+      "bodyHash": "381567de5a84066a",
+      "literals": [
+        "foo",
+        "Foo",
+        "foo-bAr",
+        "FooBAr",
+        "FooBARb",
+        "FooBaRb",
+        "foo_bar-baz/qux",
+        "FooBarBazQux",
+        "FOO_BAR",
+        "FooBar",
+        "foo--bar-Baz",
+        "FooBarBaz"
+      ],
+      "keys": [
+        "normalize"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "camelCase.ok.normalize",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.normalize",
+      "file": "test/scule.test.ts",
+      "line": 59,
+      "title": "camelCase.ok.normalize %s => %s",
+      "status": "each",
+      "bodyHash": "a5091fb831375629",
+      "literals": [
+        "FooBarBaz",
+        "fooBarBaz",
+        "FOO_BAR",
+        "fooBar"
+      ],
+      "keys": [
+        "normalize"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.join",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.join",
+      "file": "test/scule.test.ts",
+      "line": 68,
+      "title": "kebabCase.ok.join %s => %s",
+      "status": "each",
+      "bodyHash": "dcfa0642ec41fa0f",
+      "literals": [
+        "foo",
+        "foo/Bar",
+        "foo-bar",
+        "foo-bAr",
+        "foo-b-ar",
+        "foo--bar",
+        "FooBAR",
+        "ALink",
+        "a-link",
+        "FOO_BAR"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.join",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.join",
+      "file": "test/scule.test.ts",
+      "line": 83,
+      "title": "snakeCase.ok.join %s => %s",
+      "status": "each",
+      "bodyHash": "a666d03e3847d3d8",
+      "literals": [
+        "FooBarBaz",
+        "foo_bar_baz",
+        "FOO_BAR",
+        "foo_bar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "upperFirst.ok.first",
+      "unitId": "upperFirst",
+      "guaranteeId": "ok.first",
+      "file": "test/scule.test.ts",
+      "line": 92,
+      "title": "upperFirst.ok.first %s => %s",
+      "status": "each",
+      "bodyHash": "8fc0ee514c5010b7",
+      "literals": [
+        "foo",
+        "Foo"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerFirst.ok.first",
+      "unitId": "lowerFirst",
+      "guaranteeId": "ok.first",
+      "file": "test/scule.test.ts",
+      "line": 102,
+      "title": "lowerFirst.ok.first %s => %s",
+      "status": "each",
+      "bodyHash": "b7cda9d067f9bfc2",
+      "literals": [
+        "foo",
+        "Foo"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "trainCase.ok.preserve",
+      "unitId": "trainCase",
+      "guaranteeId": "ok.preserve",
+      "file": "test/scule.test.ts",
+      "line": 112,
+      "title": "trainCase.ok.preserve %s => %s",
+      "status": "each",
+      "bodyHash": "30aa4becf818f5eb",
+      "literals": [
+        "f",
+        "F",
+        "foo",
+        "Foo",
+        "foo-bAr",
+        "Foo-B-Ar",
+        "AcceptCH",
+        "Accept-CH",
+        "foo_bar-baz/qux",
+        "Foo-Bar-Baz-Qux",
+        "FOO_BAR",
+        "FOO-BAR",
+        "foo--bar-Baz",
+        "Foo-Bar-Baz",
+        "WWW-authenticate",
+        "WWW-Authenticate",
+        "WWWAuthenticate"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "trainCase.ok.normalize",
+      "unitId": "trainCase",
+      "guaranteeId": "ok.normalize",
+      "file": "test/scule.test.ts",
+      "line": 127,
+      "title": "trainCase.ok.normalize %s => %s",
+      "status": "each",
+      "bodyHash": "5fbdda8f212353ab",
+      "literals": [
+        "AcceptCH",
+        "Accept-Ch",
+        "FOO_BAR",
+        "Foo-Bar",
+        "WWW-authenticate",
+        "Www-Authenticate"
+      ],
+      "keys": [
+        "normalize"
+      ],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "titleCase.ok.join",
+      "unitId": "titleCase",
+      "guaranteeId": "ok.join",
+      "file": "test/scule.test.ts",
+      "line": 137,
+      "title": "titleCase.ok.join %s => %s",
+      "status": "each",
+      "bodyHash": "20e9a2d7d7332624",
+      "literals": [
+        "f",
+        "F",
+        "foo",
+        "Foo",
+        "foo-bar",
+        "Foo Bar",
+        "this-IS-aTitle",
+        "This is a Title"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "flatCase.ok.join",
+      "unitId": "flatCase",
+      "guaranteeId": "ok.join",
+      "file": "test/scule.test.ts",
+      "line": 149,
+      "title": "flatCase.ok.join %s => %s",
+      "status": "each",
+      "bodyHash": "f409c809d3a3be13",
+      "literals": [
+        "foo",
+        "foo-bAr",
+        "foobar",
+        "FooBARb",
+        "foobarb",
+        "foo_bar-baz/qux",
+        "foobarbazqux",
+        "FOO_BAR",
+        "foo--bar-Baz",
+        "foobarbaz"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "operation-no-guarantee",
+      "message": "isUppercase has no guarantee (no doc comment)",
+      "file": "src/index.ts",
+      "line": 15,
+      "unit": "isUppercase",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "splitByCase.ok.default-splitters has no test naming it",
+      "file": "src/index.ts",
+      "line": 23,
+      "unit": "splitByCase",
+      "guarantee": "splitByCase.ok.default-splitters",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "splitByCase.ok.numbers has no test naming it",
+      "file": "src/index.ts",
+      "line": 25,
+      "unit": "splitByCase",
+      "guarantee": "splitByCase.ok.numbers",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "splitByCase.ok.custom-splitters has no test naming it",
+      "file": "src/index.ts",
+      "line": 26,
+      "unit": "splitByCase",
+      "guarantee": "splitByCase.ok.custom-splitters",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "pascalCase.ok.join has no test naming it",
+      "file": "src/index.ts",
+      "line": 104,
+      "unit": "pascalCase",
+      "guarantee": "pascalCase.ok.join",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "pascalCase.ok.preserve has no test naming it",
+      "file": "src/index.ts",
+      "line": 105,
+      "unit": "pascalCase",
+      "guarantee": "pascalCase.ok.preserve",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "camelCase.ok.join has no test naming it",
+      "file": "src/index.ts",
+      "line": 125,
+      "unit": "camelCase",
+      "guarantee": "camelCase.ok.join",
+      "severity": "fail"
+    },
+    {
+      "rule": "identifier-unresolved",
+      "message": "camelCase.ok.join: \"camelCase\" is not a parameter, declared port, entity or public operation",
+      "file": "src/index.ts",
+      "line": 125,
+      "unit": "camelCase",
+      "guarantee": "camelCase.ok.join",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "kebabCase.ok.lower has no test naming it",
+      "file": "src/index.ts",
+      "line": 145,
+      "unit": "kebabCase",
+      "guarantee": "kebabCase.ok.lower",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "trainCase.ok.join has no test naming it",
+      "file": "src/index.ts",
+      "line": 189,
+      "unit": "trainCase",
+      "guarantee": "trainCase.ok.join",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "titleCase.ok.minor-words has no test naming it",
+      "file": "src/index.ts",
+      "line": 213,
+      "unit": "titleCase",
+      "guarantee": "titleCase.ok.minor-words",
+      "severity": "fail"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "isUppercase: StringLiteral mutant: `\"Stryker was here!\"` is not run by any test",
+      "file": "src/index.ts",
+      "line": 15,
+      "unit": "isUppercase",
+      "mutant": {
+        "id": "1",
+        "mutator": "StringLiteral",
+        "replacement": "\"Stryker was here!\"",
+        "status": "NoCoverage",
+        "line": 15
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "isUppercase: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/index.ts",
+      "line": 16,
+      "unit": "isUppercase",
+      "mutant": {
+        "id": "4",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 16
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "isUppercase: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/index.ts",
+      "line": 16,
+      "unit": "isUppercase",
+      "mutant": {
+        "id": "5",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 16
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitByCase: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/index.ts",
+      "line": 40,
+      "unit": "splitByCase",
+      "mutant": {
+        "id": "17",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 40
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitByCase: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/index.ts",
+      "line": 60,
+      "unit": "splitByCase",
+      "mutant": {
+        "id": "29",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 60
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "pascalCase commits to output \"normalize\" and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 120,
+      "unit": "pascalCase",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "camelCase commits to output \"normalize\" and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 139,
+      "unit": "camelCase",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-untested",
+      "message": "trainCase commits to output \"normalize\" and the contract names it, but no linked test uses it; a test cannot fail when it changes",
+      "file": "src/index.ts",
+      "line": 205,
+      "unit": "trainCase",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "titleCase commits to output \"normalize\" in `\"normalize\"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/index.ts",
+      "line": 234,
+      "unit": "titleCase",
+      "severity": "warn"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 11,
+    "unitsWithoutGuarantee": 1,
+    "guarantees": 20,
+    "guaranteesWithoutTest": 9,
+    "tests": 11,
+    "orphanTests": 0,
+    "unlinkedTests": 0,
+    "findings": {
+      "fail": 11,
+      "warn": 9,
+      "info": 1
+    }
+  }
+}

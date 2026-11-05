@@ -167,8 +167,11 @@ export function resolveReferences(unit: Unit, text: string, scope: ResolutionSco
     // camelCase single tokens: parameters are the only thing they can legitimately name.
     if (/^[a-z][a-zA-Z0-9]*[A-Z][a-zA-Z0-9]*$/.test(token)) {
       const kind = resolveRoot(token);
+      const fn = unitIds.get(token);
       if (kind) pushRef(token, kind, token);
       else if (entityProps.has(token)) pushRef(token, "entity", token);
+      // A public free function, this unit's own name included (`camelCase` in camelCase's guarantee, #70).
+      else if (fn?.kind === "function") pushRef(token, "operation", fn.id);
       else pushRef(token, "unresolved");
     }
   }
