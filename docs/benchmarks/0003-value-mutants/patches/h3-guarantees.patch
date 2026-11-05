@@ -1,0 +1,125 @@
+diff --git a/src/utils/path.ts b/src/utils/path.ts
+index b0e9a58..ca475f1 100644
+--- a/src/utils/path.ts
++++ b/src/utils/path.ts
+@@ -123,6 +123,13 @@ const ENCODED_DOT_RE_G = /%(?:25)*2e/gi;
+  * and a consumer doing exact prefix matching should normalize its allowlist the
+  * same way. To collapse interior runs too (the reading a slash-merging
+  * downstream resolves), see {@link ResolveDotSegmentsOptions.mergeSlashes}.
++ * @guarantee ok.dot-segments resolves `.` and `..` segments without ever escaping above the root "/", and a trailing `.` or `..` keeps a trailing slash ("/a/b/.." gives "/a/" and "/a/." gives "/a/")
++ * @guarantee ok.single-leading-slash the result is always an absolute path with a single leading "/", so it is never protocol-relative (never starts with "//")
++ * @guarantee ok.encoded-dots decodes percent-encoded dot segments such as "%2e" and "%252e" at any `%25` nesting depth, so "%2e%2e/" is resolved like "../"
++ * @guarantee ok.backslash normalizes "\" to "/", so "..\..\" is resolved like "../"
++ * @guarantee ok.encoded-separators-kept by default "%2f" and "%5c" (encoded path separators) are left untouched
++ * @guarantee ok.other-encoding-kept every other percent-encoding such as "%20", "%3A" and non-ASCII characters is left intact
++ * @guarantee ok.interior-empty-segments interior empty segments are preserved, so "/a//b" stays "/a//b"
+  */
+ export function resolveDotSegments(path: string, opts?: ResolveDotSegmentsOptions): string {
+   // Normalize to a single leading slash (treating a leading `\` as a
+@@ -205,6 +212,8 @@ export function resolveDotSegments(path: string, opts?: ResolveDotSegmentsOption
+  * Takes a bare pathname. Like the resolver, it has no notion of a query or hash
+  * and scans one as if it were path, so `/a?next=/../b` is reported non-canonical
+  * (and would resolve to `/b`).
++ * @guarantee ok.exact returns `true` if and only if `resolveDotSegments(path, opts) === path`
++ * @guarantee ok.query-not-special takes a bare pathname and treats a query as path, so "/a?next=/../b" is reported non-canonical
+  */
+ export function isCanonicalPath(path: string, opts?: ResolveDotSegmentsOptions): boolean {
+   return (
+@@ -239,6 +248,13 @@ export function isCanonicalPath(path: string, opts?: ResolveDotSegmentsOptions):
+  *
+  * @example
+  * normalizeRoute("/について/**"); // "/%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/**"
++ * @guarantee ok.leading-slash adds a leading "/" when it is missing ("about" gives "/about")
++ * @guarantee ok.encode encodes characters that a request pathname always carries percent-encoded ("/café/**" gives "/caf%C3%A9/**", "/について/**" gives "/%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/**")
++ * @guarantee ok.decode decodes needless escapes ("/%40handle" gives "/@handle") while "%2F" and "%25" stay encoded
++ * @guarantee ok.dot-segments resolves `.` and `..` segments ("/a/b/../c" gives "/a/c")
++ * @guarantee ok.rou3-syntax leaves the rou3 pattern characters "?", "{", "}", "^" and "\" verbatim
++ * @guarantee ok.idempotent normalizing an already normalized route returns it unchanged
++ * @guarantee err.absolute-url throws on an absolute URL such as "http://example.com", because a route pattern is a pathname and never a URL
+  */
+ export function normalizeRoute(route: string): string {
+   return _normalizeRoute(route);
+diff --git a/src/utils/response.ts b/src/utils/response.ts
+index a0d787c..46e7094 100644
+--- a/src/utils/response.ts
++++ b/src/utils/response.ts
+@@ -37,6 +37,8 @@ export function onDispose(event: H3Event, cb: DisposeCallback): void {
+  * app.get("/", () => noContent());
+  *
+  * @param status status code to be send. By default, it is `204 No Content`.
++ * @guarantee ok.default-status responds with an empty payload and the status 204 when `status` is not given
++ * @guarantee ok.custom-status uses `status` as the response status when it is given
+  */
+ export function noContent(status: number = 204): HTTPResponse {
+   return new HTTPResponse(null, {
+@@ -67,6 +69,10 @@ export function noContent(status: number = 204): HTTPResponse {
+  * app.get("/", () => {
+  *   return redirect("https://example.com", 301); // Permanent redirect
+  * });
++ * @guarantee ok.location sets the `location` header of the response to `location`
++ * @guarantee ok.default-status the status code is 302 by default
++ * @guarantee ok.custom-status `redirect("https://example.com", 301)` is a permanent redirect with the status 301
++ * @guarantee ok.body the body is a simple HTML page with a meta refresh tag that redirects the client in case the headers are ignored
+  */
+ export function redirect(
+   location: string,
+@@ -100,6 +106,10 @@ export function redirect(
+  *   // process form...
+  *   return redirectBack(event, { fallback: "/form" });
+  * });
++ * @guarantee ok.referer redirects the client back to the previous page using the `referer` header
++ * @guarantee ok.default-fallback when the `referer` header is missing or is a different origin, falls back to `fallback`, which is "/" by default
++ * @guarantee ok.pathname-only by default only the pathname of the referer is used, so its query string and hash are stripped
++ * @guarantee ok.allow-query with `allowQuery` set to `true` the query string of the referer is preserved
+  */
+ export function redirectBack(
+   event: H3Event,
+@@ -132,6 +142,8 @@ export function redirectBack(
+  *
+  * In runtimes that don't support early hints natively, this function
+  * falls back to setting response headers which can be used by CDN.
++ * @guarantee ok.early-hints writes "HTTP/1.1 103 Early Hints" to the client
++ * @guarantee ok.header-fallback in runtimes without native early hints support, falls back to setting response headers
+  */
+ export function writeEarlyHints(
+   event: H3Event,
+@@ -213,6 +225,10 @@ export function writeEarlyHints(
+  * async function delay(ms) {
+  *   return new Promise((resolve) => setTimeout(resolve, ms));
+  * }
++ * @guarantee ok.in-order iterates a source of chunks and sends back each chunk in order
++ * @guarantee ok.chunk-types each chunk must be a string or a buffer
++ * @guarantee ok.generator-return for generator functions, the returned value is treated the same as yielded values
++ * @guarantee ok.first-chunk-headers the first chunk is awaited before the response is created, so status and headers set while producing it (`event.res.status`, `event.res.headers`) are applied
+  */
+ export async function iterable<Value = unknown, Return = unknown>(
+   iterable: IterationSource<Value, Return>,
+@@ -320,6 +336,7 @@ export function html(
+  * @example
+  * // Send a trusted markup string as-is:
+  * app.get("/", () => html(raw("<h1>Hello, World!</h1>")));
++ * @guarantee ok.trusted-html marks a string as trusted, pre-escaped HTML so that the `html` util uses it without escaping (`html(raw("<h1>Hello, World!</h1>"))` sends the markup as is)
+  */
+ export function raw(value: string): RawHTML {
+   return { [kRawHTML]: true, value } as RawHTML;
+diff --git a/src/utils/sanitize.ts b/src/utils/sanitize.ts
+index 3c8d6bf..1867602 100644
+--- a/src/utils/sanitize.ts
++++ b/src/utils/sanitize.ts
+@@ -6,6 +6,7 @@ const DISALLOWED_STATUS_CHARS = /[^\u0009\u0020-\u007E]/g;
+  * Make sure the status message is safe to use in a response.
+  *
+  * Allowed characters: horizontal tabs, spaces or visible ascii characters: https://www.rfc-editor.org/rfc/rfc7230#section-3.1.2
++ * @guarantee ok.allowed-characters the allowed characters are horizontal tabs, spaces and visible ASCII characters, so the result is safe to use in a response
+  */
+ export function sanitizeStatusMessage(statusMessage = ""): string {
+   return statusMessage.replace(DISALLOWED_STATUS_CHARS, "");
+@@ -13,6 +14,8 @@ export function sanitizeStatusMessage(statusMessage = ""): string {
+ 
+ /**
+  * Make sure the status code is a valid HTTP status code.
++ * @guarantee ok.valid-status-code makes sure the result is a valid HTTP status code
++ * @guarantee ok.default-status `defaultStatusCode` is 200 when it is not given
+  */
+ export function sanitizeStatusCode(statusCode?: string | number, defaultStatusCode = 200): number {
+   if (!statusCode) {

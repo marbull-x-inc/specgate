@@ -1,0 +1,62 @@
+diff --git a/source/ip-key-generator.ts b/source/ip-key-generator.ts
+index a381813..ea08e97 100644
+--- a/source/ip-key-generator.ts
++++ b/source/ip-key-generator.ts
+@@ -20,6 +20,10 @@ const ipv4CompatibleSubnet = new Address6('::/96')
+  * @returns {string} - The key generated from the IP address
+  *
+  * @public
++ * @guarantee ok.ipv4-unchanged An IPv4 address is returned unchanged.
++ * @guarantee ok.default-ipv6-subnet-56 When `ipv6Subnet` is not given it defaults to 56, so an IPv6 address is returned as the network address of its /56 subnet in CIDR notation.
++ * @guarantee ok.ipv6-subnet-false With `ipv6Subnet` set to `false`, an IPv6 address is also returned unchanged.
++ * @guarantee ok.ipv4-mapped-ipv6 An IPv4-mapped IPv6 address (the "::ffff:0:0/96" range) is returned as the IPv4 address it contains, whichever notation it arrives in.
+  */
+ export function ipKeyGenerator(ip: string, ipv6Subnet: number | false = 56) {
+ 	if (isIPv6(ip)) {
+diff --git a/source/rate-limit.ts b/source/rate-limit.ts
+index d24bbf6..ab652a6 100644
+--- a/source/rate-limit.ts
++++ b/source/rate-limit.ts
+@@ -343,6 +343,14 @@ const handleAsyncErrors =
+  * @returns {RateLimitRequestHandler} - The middleware that rate-limits clients based on your configuration.
+  *
+  * @public
++ * @guarantee ok.default-window-ms `windowMs` defaults to 60000 milliseconds (1 minute).
++ * @guarantee ok.default-limit `limit` defaults to 5.
++ * @guarantee ok.zero-limit-blocks-all Setting `limit` to 0 blocks all requests instead of disabling the rate limiter.
++ * @guarantee ok.default-message `message` defaults to "Too many requests, please try again later.".
++ * @guarantee ok.default-status-code `statusCode` defaults to 429.
++ * @guarantee ok.default-legacy-headers `legacyHeaders` defaults to true, which sends the "X-RateLimit-Limit", "X-RateLimit-Remaining" and (if the store provides it) "X-RateLimit-Reset" headers on all responses.
++ * @guarantee ok.default-standard-headers `standardHeaders` defaults to false.
++ * @guarantee ok.default-request-property-name `requestPropertyName` defaults to "rateLimit", the name of the property on the request that holds the rate limit info.
+  */
+ const rateLimit = (
+ 	passedOptions?: Partial<Options>,
+diff --git a/source/time-constants.ts b/source/time-constants.ts
+index 6ece610..5167894 100644
+--- a/source/time-constants.ts
++++ b/source/time-constants.ts
+@@ -1,19 +1,23 @@
+ /**
+  * @deprecated these are being replaced in the next major version
++ * @guarantee ok.second-ms `SECOND` is one second in milliseconds, usable for `windowMs`.
+  */
+ export const SECOND: number = 1000
+ 
+ /**
+  * @deprecated these are being replaced in the next major version
++ * @guarantee ok.minute-ms `MINUTE` is 60000, a duration in milliseconds (1 minute, the default `windowMs`).
+  */
+ export const MINUTE: number = 60 * SECOND
+ 
+ /**
+  * @deprecated these are being replaced in the next major version
++ * @guarantee ok.hour-ms `HOUR` is one hour in milliseconds, so `3 * HOUR` is a 3 hour `windowMs`.
+  */
+ export const HOUR: number = 60 * MINUTE
+ 
+ /**
+  * @deprecated these are being replaced in the next major version
++ * @guarantee ok.day-ms `DAY` is one day in milliseconds.
+  */
+ export const DAY: number = 24 * HOUR

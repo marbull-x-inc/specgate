@@ -1,0 +1,52 @@
+[
+  {
+    "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+    "symbol": "useHotkeys",
+    "tags": [
+      "@guarantee ok.option-defaults The `options` defaults are `enabled` true, `enableOnFormTags` false, `enableOnContentEditable` false, `splitKey` \"+\", `delimiter` \",\", `scopes` \"*\", `keydown` true, `preventDefault` false, `ignoreModifiers` false, `useKey` false, `sequenceTimeoutMs` 1000 and `sequenceSplitKey` \">\".",
+      "@guarantee ok.keyup-only Setting `keyup` to `true` without setting `keydown` listens to `keyup` only; to listen to both, `keydown` and `keyup` must both be `true`.",
+      "@guarantee ok.delimiters With the default `delimiter` \",\", the keys \"ctrl+a, shift+b\" listen for either combination, and with the default `splitKey` \"+\", \"shift+a\" fires when Shift and A are pressed together.",
+      "@guarantee ok.sequence-timeout With the keys \"g>h>i\" the user must press g, then h, then i in order, and the sequence resets if the next key is not pressed within `sequenceTimeoutMs`, which is 1000 milliseconds by default.",
+      "@guarantee ok.case-insensitive The `keys` argument is case-insensitive: \"CTRL+S\", \"Ctrl+s\" and \"ctrl+S\" all listen for the `ctrl` and `s` keys, and an uppercase letter is treated as lowercase.",
+      "@guarantee ok.modifiers The modifiers are \"shift\", \"alt\", \"ctrl\", \"meta\" and \"mod\", where \"mod\" triggers when either `ctrl` or `meta` is pressed, and \"alt\" and \"option\" are treated as identical.",
+      "@guarantee ok.enabled-modes When `enabled` is the boolean `false` the event listeners are removed, and when `enabled` is a function that returns `false` the listeners stay attached but the callback is skipped.",
+      "@guarantee ok.returns-ref It returns a React ref callback; when it is attached to an element, the hotkey fires only when that element or one of its children has focus."
+    ]
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts",
+    "symbol": "isHotkeyPressed",
+    "tags": [
+      "@guarantee ok.all-keys-pressed When several keys are given, `isHotkeyPressed` returns `true` only if all of them are pressed down, and `false` otherwise.",
+      "@guarantee ok.key-forms The `key` argument may be a single keycode such as \"a\", a delimited string such as \"shift,a\", or an array such as [\"shift\", \"a\"].",
+      "@guarantee ok.default-delimiter The `delimiter` used to split multiple keys from a single string is \",\" by default."
+    ]
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts",
+    "symbol": "useRecordHotkeys",
+    "tags": [
+      "@guarantee ok.default-key-codes By default `useKey` is `false` and the hook records key codes, so pressing Shift+1 records \"shift+1\".",
+      "@guarantee ok.use-key-true With `useKey` set to `true` the hook records the produced character, so pressing Shift+1 on a US layout records \"!\".",
+      "@guarantee ok.blacklist The `blacklist` is empty by default, and keys named in it, such as \"tab\" and \"enter\", are not added to the recorded keys and keep their default behavior.",
+      "@guarantee ok.keys-is-set The first returned value is a `Set` of strings in which each recorded key appears only once.",
+      "@guarantee ok.controls The second returned value has `start`, `stop`, `resetKeys` and `isRecording`, where `isRecording` is `true` while recording is active and `false` otherwise.",
+      "@guarantee ok.reset-keys Calling `resetKeys` clears the recorded keys."
+    ]
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+    "symbol": "HotkeysProvider",
+    "tags": [
+      "@guarantee ok.wildcard-default Wrapping the app in `HotkeysProvider` enables the wildcard scope \"*\" by default.",
+      "@guarantee ok.initially-active-scopes When `initiallyActiveScopes` is set, the wildcard scope \"*\" is not active unless it is in the array, so [\"scopeA\", \"*\"] activates both."
+    ]
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+    "symbol": "useHotkeysContext",
+    "tags": [
+      "@guarantee ok.scope-controls It provides `enableScope`, `disableScope` and `toggleScope` to control scopes by name, and `activeScopes` to read the scopes that are currently enabled."
+    ]
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "file": "src/useForm.ts",
+    "symbol": "useForm",
+    "tags": [
+      "@guarantee ok.default-mode without `mode`, validation first runs on submit (`mode` defaults to \"onSubmit\")",
+      "@guarantee ok.default-revalidate without `reValidateMode`, fields are re-validated on change after a submit (`reValidateMode` defaults to \"onChange\")",
+      "@guarantee ok.default-criteria without `criteriaMode`, only the first error of a field is kept (`criteriaMode` defaults to \"firstError\")",
+      "@guarantee ok.criteria-all with `criteriaMode` set to \"all\", all the errors of a field are collected",
+      "@guarantee ok.default-focus-error without `shouldFocusError`, the first field with an error is focused after a failed submit (`shouldFocusError` defaults to `true`)",
+      "@guarantee ok.default-unregister without `shouldUnregister`, unmounted fields keep their values (`shouldUnregister` defaults to `false`)",
+      "@guarantee ok.default-disabled without `disabled`, the form is not disabled (`disabled` defaults to `false`)",
+      "@guarantee ok.resolver-skips-validate when `resolver` is set, the `validate` option does not run"
+    ]
+  },
+  {
+    "file": "src/useFieldArray.ts",
+    "symbol": "useFieldArray",
+    "tags": [
+      "@guarantee ok.default-key-name each entry of `fields` carries a generated identifier under the key \"id\" unless `keyName` names another key",
+      "@guarantee ok.append `append` adds the given value or values to the end of the array",
+      "@guarantee ok.prepend `prepend` adds the given value or values to the start of the array",
+      "@guarantee ok.insert `insert(index, value)` adds the given value or values at position `index`",
+      "@guarantee ok.swap `swap(from, to)` swaps the entries at the two positions",
+      "@guarantee ok.remove-index `remove(index)` removes the entry at `index`, and accepts a number or an array of numbers",
+      "@guarantee ok.remove-all `remove()` without an argument removes all entries",
+      "@guarantee ok.disabled with `disabled` set to `true`, each entry of `fields` has `disabled` equal to `true` and the mutation methods do nothing"
+    ]
+  },
+  {
+    "file": "src/useWatch.ts",
+    "symbol": "useWatch",
+    "tags": [
+      "@guarantee ok.name-string with `name` as a string, returns the single value of that field",
+      "@guarantee ok.name-array with `name` as an array, returns an array of the values of those fields",
+      "@guarantee ok.no-name without `name`, returns an object of all form values keyed by field name",
+      "@guarantee ok.default-value `defaultValue` is returned only before the form has a value for the field, and the form value takes precedence afterwards",
+      "@guarantee ok.exact-false with `exact` `false` (the default), watching \"users\" receives updates of \"users.0.name\"",
+      "@guarantee ok.exact-true with `exact` `true`, watching \"users\" does not receive updates of \"users.0.name\"",
+      "@guarantee ok.disabled with `disabled` set to `true`, the subscription is turned off (`disabled` defaults to `false`)"
+    ]
+  },
+  {
+    "file": "src/useController.ts",
+    "symbol": "useController",
+    "tags": [
+      "@guarantee ok.default-unregister without `shouldUnregister`, the field is not unregistered after unmount (`shouldUnregister` defaults to `false`)",
+      "@guarantee ok.default-disabled without `disabled`, the field is not disabled (`disabled` defaults to `false`)",
+      "@guarantee ok.default-exact `exact` defaults to `true`, so the field does not update when a nested child path changes",
+      "@guarantee ok.exact-false with `exact` set to `false`, the field also receives nested updates",
+      "@guarantee ok.field-props the returned `field` has `onChange`, `onBlur`, `value`, `disabled`, `name` and `ref`, and `name` is the registered name",
+      "@guarantee ok.field-state the returned `fieldState` has `invalid`, `isTouched`, `isDirty`, `isValidating` and `error`",
+      "@guarantee ok.disabled-omitted a disabled input's value is omitted from the submitted data"
+    ]
+  },
+  {
+    "file": "src/useFormContext.tsx",
+    "symbol": "useFormContext",
+    "tags": [
+      "@guarantee ok.returns-methods returns the methods and props of `useForm` passed to the nearest `FormProvider`",
+      "@guarantee ok.nearest-provider with nested providers, the nearest `FormProvider` is used",
+      "@guarantee err.no-provider outside a `FormProvider`, returns `null`"
+    ]
+  }
+]

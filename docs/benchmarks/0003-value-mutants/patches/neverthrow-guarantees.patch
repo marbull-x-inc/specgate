@@ -1,0 +1,183 @@
+diff --git a/src/result.ts b/src/result.ts
+index ad447ca..f80b0f7 100644
+--- a/src/result.ts
++++ b/src/result.ts
+@@ -61,12 +61,20 @@ export namespace Result {
+ 
+ export type Result<T, E> = Ok<T, E> | Err<T, E>
+ 
++/**
++ * @guarantee ok.constructs-ok `ok(value)` constructs an `Ok` variant of `Result`.
++ * @guarantee ok.is-ok-true `ok({ myData: "test" }).isOk()` is `true` and `.isErr()` is `false`.
++ */
+ export function ok<T, E = never>(value: T): Ok<T, E>
+ export function ok<T extends void = void, E = never>(value: void): Ok<void, E>
+ export function ok<T, E = never>(value: T): Ok<T, E> {
+   return new Ok(value)
+ }
+ 
++/**
++ * @guarantee ok.constructs-err `err(error)` constructs an `Err` variant of `Result`.
++ * @guarantee ok.is-err-true `err("Oh noooo").isOk()` is `false` and `.isErr()` is `true`.
++ */
+ export function err<T = never, E extends string = string>(err: E): Err<T, E>
+ export function err<T = never, E = unknown>(err: E): Err<T, E>
+ export function err<T = never, E extends void = void>(err: void): Err<T, void>
+@@ -312,23 +320,40 @@ interface IResult<T, E> {
+ export class Ok<T, E> implements IResult<T, E> {
+   constructor(readonly value: T) {}
+ 
++  /**
++   * @guarantee ok.true-for-ok `isOk` returns `true` when the result is an `Ok` variant.
++   */
+   isOk(): this is Ok<T, E> {
+     return true
+   }
+ 
++  /**
++   * @guarantee ok.false-for-ok `isErr` returns `false` when the result is an `Ok` variant.
++   */
+   isErr(): this is Err<T, E> {
+     return !this.isOk()
+   }
+ 
++  /**
++   * @guarantee ok.applies-callback `map` applies the callback to the contained `Ok` value and returns a `Result` holding the callback's return value as `Ok`.
++   */
+   map<A>(f: (t: T) => A): Result<A, E> {
+     return ok(f(this.value))
+   }
+ 
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
++  /**
++   * @guarantee ok.leaves-ok `mapErr` leaves an `Ok` value untouched.
++   */
+   mapErr<U>(_f: (e: E) => U): Result<T, U> {
+     return ok(this.value)
+   }
+ 
++  /**
++   * @guarantee ok.chains-results `andThen` calls the callback with the `Ok` value and returns the `Result` the callback returns.
++   * @guarantee ok.chain-examples With `sq` returning `ok(n ** 2)`, `ok(2).andThen(sq).andThen(sq)` is `Ok(16)`, `ok(2).andThen(sq).andThen(err)` is `Err(4)` and `ok(2).andThen(err).andThen(sq)` is `Err(2)`.
++   * @guarantee ok.flattens-nested `ok(ok(1234)).andThen` with a callback returning its argument gives `Ok(1234)`.
++   */
+   andThen<R extends Result<unknown, unknown>>(
+     f: (t: T) => R,
+   ): Result<InferOkTypes<R>, InferErrTypes<R> | E>
+@@ -338,6 +363,9 @@ export class Ok<T, E> implements IResult<T, E> {
+     return f(this.value)
+   }
+ 
++  /**
++   * @guarantee ok.passes-error-along When the function passed to `andThrough` returns an error, that error is passed along.
++   */
+   andThrough<R extends Result<unknown, unknown>>(f: (t: T) => R): Result<T, InferErrTypes<R> | E>
+   andThrough<F>(f: (t: T) => Result<unknown, F>): Result<T, E | F>
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+@@ -345,6 +373,9 @@ export class Ok<T, E> implements IResult<T, E> {
+     return f(this.value).map((_value: unknown) => this.value)
+   }
+ 
++  /**
++   * @guarantee ok.passes-through `andTee` lets the original `Ok` result pass through regardless of the result of the passed-in function.
++   */
+   andTee(f: (t: T) => unknown): Result<T, E> {
+     try {
+       f(this.value)
+@@ -385,11 +416,17 @@ export class Ok<T, E> implements IResult<T, E> {
+   }
+ 
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
++  /**
++   * @guarantee ok.unwraps-value `unwrapOr` returns the `Ok` value, not the default.
++   */
+   unwrapOr<A>(_v: A): T | A {
+     return this.value
+   }
+ 
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
++  /**
++   * @guarantee ok.runs-ok-callback `match` executes the first function (the `Ok` callback) with the value and returns its return value, without requiring it to return a `Result`.
++   */
+   match<A, B = A>(ok: (t: T) => A, _err: (e: E) => B): A | B {
+     return ok(this.value)
+   }
+@@ -419,19 +456,31 @@ export class Ok<T, E> implements IResult<T, E> {
+ export class Err<T, E> implements IResult<T, E> {
+   constructor(readonly error: E) {}
+ 
++  /**
++   * @guarantee ok.false-for-err `isOk` returns `false` when the result is an `Err` variant.
++   */
+   isOk(): this is Ok<T, E> {
+     return false
+   }
+ 
++  /**
++   * @guarantee ok.true-for-err `isErr` returns `true` when the result is an `Err` variant.
++   */
+   isErr(): this is Err<T, E> {
+     return !this.isOk()
+   }
+ 
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
++  /**
++   * @guarantee ok.leaves-err `map` leaves an `Err` value untouched and does not apply the callback.
++   */
+   map<A>(_f: (t: T) => A): Result<A, E> {
+     return err(this.error)
+   }
+ 
++  /**
++   * @guarantee ok.applies-callback `mapErr` applies the callback to the contained `Err` value and returns a `Result` holding the callback's return value as `Err`.
++   */
+   mapErr<U>(f: (e: E) => U): Result<T, U> {
+     return err(f(this.error))
+   }
+@@ -444,6 +493,9 @@ export class Err<T, E> implements IResult<T, E> {
+     return err(this.error)
+   }
+ 
++  /**
++   * @guarantee ok.passes-through `orTee` lets the original `Err` result pass through regardless of the result of the passed-in function.
++   */
+   orTee(f: (t: E) => unknown): Result<T, E> {
+     try {
+       f(this.error)
+@@ -453,6 +505,9 @@ export class Err<T, E> implements IResult<T, E> {
+     return err<T, E>(this.error)
+   }
+ 
++  /**
++   * @guarantee ok.keeps-err With `sq` returning `ok(n ** 2)`, `err(3).andThen(sq).andThen(sq)` is `Err(3)`.
++   */
+   andThen<R extends Result<unknown, unknown>>(
+     _f: (t: T) => R,
+   ): Result<InferOkTypes<R>, InferErrTypes<R> | E>
+@@ -462,6 +517,9 @@ export class Err<T, E> implements IResult<T, E> {
+     return err(this.error)
+   }
+ 
++  /**
++   * @guarantee ok.recovers `orElse` takes the `Err` value and maps it to the `Result` returned by the callback, so a callback returning `ok("User does not exist")` recovers the error into an `Ok`.
++   */
+   orElse<R extends Result<unknown, unknown>>(
+     f: (e: E) => R,
+   ): Result<InferOkTypes<R> | T, InferErrTypes<R>>
+@@ -485,10 +543,16 @@ export class Err<T, E> implements IResult<T, E> {
+     return errAsync<U, E>(this.error)
+   }
+ 
++  /**
++   * @guarantee ok.returns-default `unwrapOr` returns the given default when the result is an `Err`, so `err("Oh noooo").map(multiply).unwrapOr(10)` gives 10.
++   */
+   unwrapOr<A>(v: A): T | A {
+     return v
+   }
+ 
++  /**
++   * @guarantee ok.runs-err-callback `match` executes the second function (the `Err` callback) with the error and returns its return value, without requiring it to return a `Result`.
++   */
+   match<A, B = A>(_ok: (t: T) => A, err: (e: E) => B): A | B {
+     return err(this.error)
+   }

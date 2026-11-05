@@ -1,0 +1,202 @@
+diff --git a/library/src/actions/bytes/bytes.ts b/library/src/actions/bytes/bytes.ts
+index 20c8b72..6818211 100644
+--- a/library/src/actions/bytes/bytes.ts
++++ b/library/src/actions/bytes/bytes.ts
+@@ -68,6 +68,8 @@ export interface BytesAction<
+  * @param requirement The required bytes.
+  *
+  * @returns A bytes action.
++ * @guarantee ok.exact-bytes `v.bytes(8)` on a string requires exactly 8 bytes.
++ * @guarantee err.bytes-mismatch `v.bytes(8)` reports an issue for a string whose byte count is not 8, using `message` as the error message when given.
+  */
+ export function bytes<TInput extends string, const TRequirement extends number>(
+   requirement: TRequirement
+diff --git a/library/src/actions/empty/empty.ts b/library/src/actions/empty/empty.ts
+index a9d0399..e512f1e 100644
+--- a/library/src/actions/empty/empty.ts
++++ b/library/src/actions/empty/empty.ts
+@@ -58,6 +58,9 @@ export interface EmptyAction<
+  * Creates an empty validation action.
+  *
+  * @returns An empty action.
++ * @guarantee ok.empty-string `v.empty()` on a string accepts only the empty string "".
++ * @guarantee ok.empty-array `v.empty()` on an array accepts only an array with no items.
++ * @guarantee err.not-empty `v.empty()` reports an issue for a non-empty string or array, using `message` as the error message when given.
+  */
+ export function empty<TInput extends LengthInput>(): EmptyAction<
+   TInput,
+diff --git a/library/src/actions/gtValue/gtValue.ts b/library/src/actions/gtValue/gtValue.ts
+index 58b5c28..ee408df 100644
+--- a/library/src/actions/gtValue/gtValue.ts
++++ b/library/src/actions/gtValue/gtValue.ts
+@@ -67,6 +67,8 @@ export interface GtValueAction<
+  * @param requirement The greater than value.
+  *
+  * @returns A greater than value action.
++ * @guarantee ok.greater-than-number `v.gtValue(100)` on a number requires a value greater than 100.
++ * @guarantee err.not-greater `v.gtValue(100)` reports an issue for a number that is not greater than 100, using `message` as the error message when given.
+  */
+ export function gtValue<
+   TInput extends ValueInput,
+diff --git a/library/src/actions/length/length.ts b/library/src/actions/length/length.ts
+index 8657fba..af806e5 100644
+--- a/library/src/actions/length/length.ts
++++ b/library/src/actions/length/length.ts
+@@ -71,6 +71,9 @@ export interface LengthAction<
+  * @param requirement The required length.
+  *
+  * @returns A length action.
++ * @guarantee ok.string-length `v.length(8)` on a string requires a length of 8 UTF-16 code units.
++ * @guarantee ok.array-length `v.length(100)` on an array requires exactly 100 items.
++ * @guarantee err.length-mismatch `v.length(8)` reports an issue for a string whose length is not 8, using `message` as the error message when given.
+  */
+ export function length<
+   TInput extends LengthInput,
+diff --git a/library/src/actions/ltValue/ltValue.ts b/library/src/actions/ltValue/ltValue.ts
+index d83f4f8..ab095cf 100644
+--- a/library/src/actions/ltValue/ltValue.ts
++++ b/library/src/actions/ltValue/ltValue.ts
+@@ -67,6 +67,8 @@ export interface LtValueAction<
+  * @param requirement The less than value.
+  *
+  * @returns A less than value action.
++ * @guarantee ok.less-than-number `v.ltValue(100)` on a number requires a value less than 100.
++ * @guarantee err.not-less `v.ltValue(100)` reports an issue for a number that is not less than 100, using `message` as the error message when given.
+  */
+ export function ltValue<
+   TInput extends ValueInput,
+diff --git a/library/src/actions/maxLength/maxLength.ts b/library/src/actions/maxLength/maxLength.ts
+index 79dfa90..4a89d2d 100644
+--- a/library/src/actions/maxLength/maxLength.ts
++++ b/library/src/actions/maxLength/maxLength.ts
+@@ -73,6 +73,9 @@ export interface MaxLengthAction<
+  * @param requirement The maximum length.
+  *
+  * @returns A max length action.
++ * @guarantee ok.max-string `v.maxLength(32)` on a string measures its length in UTF-16 code units and allows a length of at most 32.
++ * @guarantee ok.max-array `v.maxLength(5)` on an array counts the items and allows at most 5 items.
++ * @guarantee err.max-string-long `v.maxLength(32)` reports an issue for a string longer than 32 UTF-16 code units, using `message` as the error message when given.
+  */
+ export function maxLength<
+   TInput extends LengthInput,
+diff --git a/library/src/actions/maxValue/maxValue.ts b/library/src/actions/maxValue/maxValue.ts
+index 860d64c..2bd356e 100644
+--- a/library/src/actions/maxValue/maxValue.ts
++++ b/library/src/actions/maxValue/maxValue.ts
+@@ -69,6 +69,8 @@ export interface MaxValueAction<
+  * @param requirement The maximum value.
+  *
+  * @returns A max value action.
++ * @guarantee ok.max-number `v.maxValue(100)` on a number allows a value of at most 100, that is it must not exceed 100.
++ * @guarantee err.max-number-above `v.maxValue(100)` reports an issue for a number above 100, using `message` as the error message when given.
+  */
+ export function maxValue<
+   TInput extends ValueInput,
+diff --git a/library/src/actions/minBytes/minBytes.ts b/library/src/actions/minBytes/minBytes.ts
+index 27ce27e..f8bbd12 100644
+--- a/library/src/actions/minBytes/minBytes.ts
++++ b/library/src/actions/minBytes/minBytes.ts
+@@ -72,6 +72,8 @@ export interface MinBytesAction<
+  * @param requirement The minimum bytes.
+  *
+  * @returns A min bytes action.
++ * @guarantee ok.min-bytes `v.minBytes(64)` on a string requires a minimum of 64 bytes.
++ * @guarantee err.too-few-bytes `v.minBytes(64)` reports an issue for a string with fewer than 64 bytes, using `message` as the error message when given.
+  */
+ export function minBytes<
+   TInput extends string,
+diff --git a/library/src/actions/minLength/minLength.ts b/library/src/actions/minLength/minLength.ts
+index 1aa002a..9c4259c 100644
+--- a/library/src/actions/minLength/minLength.ts
++++ b/library/src/actions/minLength/minLength.ts
+@@ -73,6 +73,9 @@ export interface MinLengthAction<
+  * @param requirement The minimum length.
+  *
+  * @returns A min length action.
++ * @guarantee ok.min-string `v.minLength(3)` on a string measures its length like JavaScript's `value.length` (UTF-16 code units) and requires a length of at least 3.
++ * @guarantee ok.min-array `v.minLength(5)` on an array counts the items and requires at least 5 items.
++ * @guarantee err.min-string-short `v.minLength(3)` reports an issue for a string with fewer than 3 UTF-16 code units, using `message` as the error message when given.
+  */
+ export function minLength<
+   TInput extends LengthInput,
+diff --git a/library/src/actions/minValue/minValue.ts b/library/src/actions/minValue/minValue.ts
+index 64fcdf6..30c3fb7 100644
+--- a/library/src/actions/minValue/minValue.ts
++++ b/library/src/actions/minValue/minValue.ts
+@@ -69,6 +69,8 @@ export interface MinValueAction<
+  * @param requirement The minimum value.
+  *
+  * @returns A min value action.
++ * @guarantee ok.min-number `v.minValue(100)` on a number requires a value of at least 100.
++ * @guarantee err.min-number-below `v.minValue(100)` reports an issue for a number below 100, using `message` as the error message when given.
+  */
+ export function minValue<
+   TInput extends ValueInput,
+diff --git a/library/src/actions/multipleOf/multipleOf.ts b/library/src/actions/multipleOf/multipleOf.ts
+index 9d543a8..97d0058 100644
+--- a/library/src/actions/multipleOf/multipleOf.ts
++++ b/library/src/actions/multipleOf/multipleOf.ts
+@@ -81,6 +81,8 @@ export interface MultipleOfAction<
+  * @param requirement The divisor.
+  *
+  * @returns A multiple of action.
++ * @guarantee ok.even-number `v.multipleOf(2)` on a number accepts even numbers.
++ * @guarantee err.not-multiple `v.multipleOf(2)` reports an issue for an odd number, using `message` as the error message when given.
+  */
+ export function multipleOf<
+   TInput extends number,
+diff --git a/library/src/actions/nonEmpty/nonEmpty.ts b/library/src/actions/nonEmpty/nonEmpty.ts
+index 3c946a8..7e9479d 100644
+--- a/library/src/actions/nonEmpty/nonEmpty.ts
++++ b/library/src/actions/nonEmpty/nonEmpty.ts
+@@ -58,6 +58,9 @@ export interface NonEmptyAction<
+  * Creates a non-empty validation action.
+  *
+  * @returns A non-empty action.
++ * @guarantee ok.non-empty-string `v.nonEmpty()` on a string requires at least one character.
++ * @guarantee ok.non-empty-array `v.nonEmpty()` on an array requires at least one item.
++ * @guarantee err.empty-input `v.nonEmpty()` reports an issue for an empty string or an empty array, using `message` as the error message when given.
+  */
+ export function nonEmpty<TInput extends LengthInput>(): NonEmptyAction<
+   TInput,
+diff --git a/library/src/actions/notLength/notLength.ts b/library/src/actions/notLength/notLength.ts
+index 613273d..8257951 100644
+--- a/library/src/actions/notLength/notLength.ts
++++ b/library/src/actions/notLength/notLength.ts
+@@ -73,6 +73,9 @@ export interface NotLengthAction<
+  * @param requirement The not required length.
+  *
+  * @returns A not length action.
++ * @guarantee ok.string-not-length `v.notLength(8)` on a string accepts any length other than 8.
++ * @guarantee ok.array-not-length `v.notLength(10)` on an array accepts any item count other than 10.
++ * @guarantee err.length-equal `v.notLength(8)` reports an issue for a string of length 8, using `message` as the error message when given.
+  */
+ export function notLength<
+   TInput extends LengthInput,
+diff --git a/library/src/actions/notValue/notValue.ts b/library/src/actions/notValue/notValue.ts
+index 0fda446..c8a98b8 100644
+--- a/library/src/actions/notValue/notValue.ts
++++ b/library/src/actions/notValue/notValue.ts
+@@ -69,6 +69,8 @@ export interface NotValueAction<
+  * @param requirement The not required value.
+  *
+  * @returns A not value action.
++ * @guarantee ok.not-number `v.notValue(100)` on a number accepts every value that is more or less than 100.
++ * @guarantee err.value-equal `v.notValue(100)` reports an issue for the number 100, using `message` as the error message when given.
+  */
+ export function notValue<
+   TInput extends ValueInput,
+diff --git a/library/src/actions/value/value.ts b/library/src/actions/value/value.ts
+index 37f0889..e50ca2e 100644
+--- a/library/src/actions/value/value.ts
++++ b/library/src/actions/value/value.ts
+@@ -67,6 +67,9 @@ export interface ValueAction<
+  * @param requirement The required value.
+  *
+  * @returns A value action.
++ * @guarantee ok.exact-number `v.value(100)` on a number requires the value to be 100.
++ * @guarantee err.value-differs `v.value(100)` reports an issue for a number other than 100, using `message` as the error message when given.
++ * @guarantee ok.type-unchanged `v.value` does not change the type of the pipeline.
+  */
+ export function value<
+   TInput extends ValueInput,

@@ -1,0 +1,104 @@
+[
+  {
+    "file": "src/utils/path.ts",
+    "symbol": "resolveDotSegments",
+    "tags": [
+      "@guarantee ok.dot-segments resolves `.` and `..` segments without ever escaping above the root \"/\", and a trailing `.` or `..` keeps a trailing slash (\"/a/b/..\" gives \"/a/\" and \"/a/.\" gives \"/a/\")",
+      "@guarantee ok.single-leading-slash the result is always an absolute path with a single leading \"/\", so it is never protocol-relative (never starts with \"//\")",
+      "@guarantee ok.encoded-dots decodes percent-encoded dot segments such as \"%2e\" and \"%252e\" at any `%25` nesting depth, so \"%2e%2e/\" is resolved like \"../\"",
+      "@guarantee ok.backslash normalizes \"\\\" to \"/\", so \"..\\..\\\" is resolved like \"../\"",
+      "@guarantee ok.encoded-separators-kept by default \"%2f\" and \"%5c\" (encoded path separators) are left untouched",
+      "@guarantee ok.other-encoding-kept every other percent-encoding such as \"%20\", \"%3A\" and non-ASCII characters is left intact",
+      "@guarantee ok.interior-empty-segments interior empty segments are preserved, so \"/a//b\" stays \"/a//b\""
+    ]
+  },
+  {
+    "file": "src/utils/path.ts",
+    "symbol": "isCanonicalPath",
+    "tags": [
+      "@guarantee ok.exact returns `true` if and only if `resolveDotSegments(path, opts) === path`",
+      "@guarantee ok.query-not-special takes a bare pathname and treats a query as path, so \"/a?next=/../b\" is reported non-canonical"
+    ]
+  },
+  {
+    "file": "src/utils/path.ts",
+    "symbol": "normalizeRoute",
+    "tags": [
+      "@guarantee ok.leading-slash adds a leading \"/\" when it is missing (\"about\" gives \"/about\")",
+      "@guarantee ok.encode encodes characters that a request pathname always carries percent-encoded (\"/café/**\" gives \"/caf%C3%A9/**\", \"/について/**\" gives \"/%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/**\")",
+      "@guarantee ok.decode decodes needless escapes (\"/%40handle\" gives \"/@handle\") while \"%2F\" and \"%25\" stay encoded",
+      "@guarantee ok.dot-segments resolves `.` and `..` segments (\"/a/b/../c\" gives \"/a/c\")",
+      "@guarantee ok.rou3-syntax leaves the rou3 pattern characters \"?\", \"{\", \"}\", \"^\" and \"\\\" verbatim",
+      "@guarantee ok.idempotent normalizing an already normalized route returns it unchanged",
+      "@guarantee err.absolute-url throws on an absolute URL such as \"http://example.com\", because a route pattern is a pathname and never a URL"
+    ]
+  },
+  {
+    "file": "src/utils/sanitize.ts",
+    "symbol": "sanitizeStatusMessage",
+    "tags": [
+      "@guarantee ok.allowed-characters the allowed characters are horizontal tabs, spaces and visible ASCII characters, so the result is safe to use in a response"
+    ]
+  },
+  {
+    "file": "src/utils/sanitize.ts",
+    "symbol": "sanitizeStatusCode",
+    "tags": [
+      "@guarantee ok.valid-status-code makes sure the result is a valid HTTP status code",
+      "@guarantee ok.default-status `defaultStatusCode` is 200 when it is not given"
+    ]
+  },
+  {
+    "file": "src/utils/response.ts",
+    "symbol": "noContent",
+    "tags": [
+      "@guarantee ok.default-status responds with an empty payload and the status 204 when `status` is not given",
+      "@guarantee ok.custom-status uses `status` as the response status when it is given"
+    ]
+  },
+  {
+    "file": "src/utils/response.ts",
+    "symbol": "redirect",
+    "tags": [
+      "@guarantee ok.location sets the `location` header of the response to `location`",
+      "@guarantee ok.default-status the status code is 302 by default",
+      "@guarantee ok.custom-status `redirect(\"https://example.com\", 301)` is a permanent redirect with the status 301",
+      "@guarantee ok.body the body is a simple HTML page with a meta refresh tag that redirects the client in case the headers are ignored"
+    ]
+  },
+  {
+    "file": "src/utils/response.ts",
+    "symbol": "redirectBack",
+    "tags": [
+      "@guarantee ok.referer redirects the client back to the previous page using the `referer` header",
+      "@guarantee ok.default-fallback when the `referer` header is missing or is a different origin, falls back to `fallback`, which is \"/\" by default",
+      "@guarantee ok.pathname-only by default only the pathname of the referer is used, so its query string and hash are stripped",
+      "@guarantee ok.allow-query with `allowQuery` set to `true` the query string of the referer is preserved"
+    ]
+  },
+  {
+    "file": "src/utils/response.ts",
+    "symbol": "raw",
+    "tags": [
+      "@guarantee ok.trusted-html marks a string as trusted, pre-escaped HTML so that the `html` util uses it without escaping (`html(raw(\"<h1>Hello, World!</h1>\"))` sends the markup as is)"
+    ]
+  },
+  {
+    "file": "src/utils/response.ts",
+    "symbol": "iterable",
+    "tags": [
+      "@guarantee ok.in-order iterates a source of chunks and sends back each chunk in order",
+      "@guarantee ok.chunk-types each chunk must be a string or a buffer",
+      "@guarantee ok.generator-return for generator functions, the returned value is treated the same as yielded values",
+      "@guarantee ok.first-chunk-headers the first chunk is awaited before the response is created, so status and headers set while producing it (`event.res.status`, `event.res.headers`) are applied"
+    ]
+  },
+  {
+    "file": "src/utils/response.ts",
+    "symbol": "writeEarlyHints",
+    "tags": [
+      "@guarantee ok.early-hints writes \"HTTP/1.1 103 Early Hints\" to the client",
+      "@guarantee ok.header-fallback in runtimes without native early hints support, falls back to setting response headers"
+    ]
+  }
+]

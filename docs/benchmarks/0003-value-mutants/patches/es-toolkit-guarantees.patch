@@ -1,0 +1,270 @@
+diff --git a/src/string/camelCase.ts b/src/string/camelCase.ts
+index 5f72aec..2bedfc0 100644
+--- a/src/string/camelCase.ts
++++ b/src/string/camelCase.ts
+@@ -16,6 +16,10 @@ import { words as getWords } from './words.ts';
+  * const convertedStr3 = camelCase('hyphen-text') // returns 'hyphenText'
+  * const convertedStr4 = camelCase('HTTPRequest') // returns 'httpRequest'
+  * const convertedStr5 = camelCase('Keep unicode 😅') // returns 'keepUnicode😅'
++ * @guarantee ok.words-joined "hello world" gives "helloWorld" and "some-hyphen-text" gives "someHyphenText"
++ * @guarantee ok.from-other-cases "CONSTANT_CASE" gives "constantCase" and "PascalCase" gives "pascalCase"
++ * @guarantee ok.mixed-case-kept "mixed   SpAcE" gives "mixedSpAcE"
++ * @guarantee ok.unicode-kept "keep unicode 😅" gives "keepUnicode😅" and "한글-테스트" gives "한글테스트"
+  */
+ export function camelCase(str: string): string {
+   const words = getWords(str);
+diff --git a/src/string/capitalize.ts b/src/string/capitalize.ts
+index 17828cf..45e3477 100644
+--- a/src/string/capitalize.ts
++++ b/src/string/capitalize.ts
+@@ -10,6 +10,11 @@
+  * const result2 = capitalize('FRED') // returns 'Fred'
+  */
+ 
++/**
++ * @guarantee ok.first-upper-rest-lower "hello" gives "Hello", "WORLD" gives "World" and "javaScript" gives "Javascript"
++ * @guarantee ok.short-strings "" gives "", "a" gives "A" and "A" gives "A"
++ * @guarantee ok.only-first-word "welcome to our website" gives "Welcome to our website"
++ */
+ export function capitalize<T extends string>(str: T): Capitalize<T> {
+   return (str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()) as Capitalize<T>;
+ }
+diff --git a/src/string/constantCase.ts b/src/string/constantCase.ts
+index 2f586a2..1aafc5d 100644
+--- a/src/string/constantCase.ts
++++ b/src/string/constantCase.ts
+@@ -15,6 +15,12 @@ import { words as getWords } from './words.ts';
+  * const convertedStr4 = constantCase('HTTPRequest') // returns 'HTTP_REQUEST'
+  */
+ 
++/**
++ * @guarantee ok.upper-with-underscores "hello world" gives "HELLO_WORLD" and "some-kebab-case" gives "SOME_KEBAB_CASE"
++ * @guarantee ok.from-camel-pascal-snake "camelCase" gives "CAMEL_CASE", "PascalCase" gives "PASCAL_CASE" and "snake_case" gives "SNAKE_CASE"
++ * @guarantee ok.acronym-word "HTTP Request" gives "HTTP_REQUEST"
++ * @guarantee ok.extra-spaces-dropped "  multiple   spaces  " gives "MULTIPLE_SPACES"
++ */
+ export function constantCase(str: string): string {
+   const words = getWords(str);
+   return words.map(word => word.toUpperCase()).join('_');
+diff --git a/src/string/deburr.ts b/src/string/deburr.ts
+index ea98839..dd26dcd 100644
+--- a/src/string/deburr.ts
++++ b/src/string/deburr.ts
+@@ -56,6 +56,10 @@ const deburrMap = new Map<string, string>([
+  * // Letters of other scripts are kept as they are:
+  * deburr('한국어') // returns '한국어'
+  * deburr('йогурт') // returns 'йогурт'
++ * @guarantee ok.accents-removed "café" gives "cafe", "résumé" gives "resume", "naïve" gives "naive" and "Zürich" gives "Zurich"
++ * @guarantee ok.other-languages "München" gives "Munchen", "Crème brûlée" gives "Creme brulee" and "mañana" gives "manana"
++ * @guarantee ok.non-latin-kept "한국어" gives "한국어" and "йогурт" gives "йогурт"
++ * @guarantee ok.mixed-scripts "Café Москва 한국어" gives "Cafe Москва 한국어"
+  */
+ export function deburr(str: string): string {
+   let result = '';
+diff --git a/src/string/escape.ts b/src/string/escape.ts
+index 6be46f5..5eda783 100644
+--- a/src/string/escape.ts
++++ b/src/string/escape.ts
+@@ -18,6 +18,10 @@ const htmlEscapes: Record<string, string> = {
+  * escape('This is a "quote"'); // returns 'This is a &quot;quote&quot;'
+  * escape("This is a 'quote'"); // returns 'This is a &#39;quote&#39;'
+  * escape('This is a & symbol'); // returns 'This is a &amp; symbol'
++ * @guarantee ok.tags-escaped "<div>Hello World</div>" gives "&lt;div&gt;Hello World&lt;/div&gt;"
++ * @guarantee ok.ampersand-escaped "Tom & Jerry" gives "Tom &amp; Jerry"
++ * @guarantee ok.double-quote-escaped "\"Hello\"" (the word Hello in double quotes) gives "&quot;Hello&quot;"
++ * @guarantee ok.single-quote-escaped the word Hello in single quotes gives the word Hello surrounded by "&#39;" on both sides
+  */
+ export function escape(str: string): string {
+   return str.replace(/[&<>"']/g, match => htmlEscapes[match]);
+diff --git a/src/string/escapeRegExp.ts b/src/string/escapeRegExp.ts
+index 07b44ad..3a5f0ac 100644
+--- a/src/string/escapeRegExp.ts
++++ b/src/string/escapeRegExp.ts
+@@ -8,6 +8,10 @@
+  * import { escapeRegExp } from 'es-toolkit/string';
+  *
+  * escapeRegExp('[es-toolkit](https://es-toolkit.dev/)'); // returns '\[es-toolkit\]\(https://es-toolkit\.dev/\)'
++ * @guarantee ok.dot-escaped "Hello." gives "Hello" followed by one backslash and a dot
++ * @guarantee ok.parentheses-escaped "(test)" gives "test" wrapped in an escaped opening parenthesis and an escaped closing parenthesis, each preceded by one backslash
++ * @guarantee ok.brackets-escaped "[abc]" gives "abc" wrapped in an escaped opening bracket and an escaped closing bracket, each preceded by one backslash
++ * @guarantee ok.at-sign-not-escaped "user@domain.com" gives "user@domain" followed by one backslash and ".com"
+  */
+ export function escapeRegExp(str: string): string {
+   return str.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&');
+diff --git a/src/string/kebabCase.ts b/src/string/kebabCase.ts
+index a615f4e..f59b97c 100644
+--- a/src/string/kebabCase.ts
++++ b/src/string/kebabCase.ts
+@@ -15,6 +15,12 @@ import { words as getWords } from './words.ts';
+  * const convertedStr4 = kebabCase('HTTPRequest') // returns 'http-request'
+  */
+ 
++/**
++ * @guarantee ok.camel-to-kebab "camelCase" gives "camel-case"
++ * @guarantee ok.whitespace-to-dash "some whitespace" gives "some-whitespace"
++ * @guarantee ok.kebab-unchanged "hyphen-text" gives "hyphen-text"
++ * @guarantee ok.acronym-split "HTTPRequest" gives "http-request"
++ */
+ export function kebabCase(str: string): string {
+   const words = getWords(str);
+   return words.map(word => word.toLowerCase()).join('-');
+diff --git a/src/string/lowerCase.ts b/src/string/lowerCase.ts
+index 25e3419..2510ed5 100644
+--- a/src/string/lowerCase.ts
++++ b/src/string/lowerCase.ts
+@@ -13,6 +13,10 @@ import { words as getWords } from './words.ts';
+  * const convertedStr2 = lowerCase('some whitespace') // returns 'some whitespace'
+  * const convertedStr3 = lowerCase('hyphen-text') // returns 'hyphen text'
+  * const convertedStr4 = lowerCase('HTTPRequest') // returns 'http request'
++ * @guarantee ok.lower-with-spaces "Hello World" gives "hello world" and "camelCase" gives "camel case"
++ * @guarantee ok.from-other-cases "some-kebab-case" gives "some kebab case", "PascalCase" gives "pascal case" and "SCREAMING_SNAKE_CASE" gives "screaming snake case"
++ * @guarantee ok.acronym-split "HTTPSConnection" gives "https connection"
++ * @guarantee ok.mixed-separators "user_profile-settings" gives "user profile settings" and "  mixed   CASE   text  " gives "mixed case text"
+  */
+ export function lowerCase(str: string): string {
+   const words = getWords(str);
+diff --git a/src/string/pad.ts b/src/string/pad.ts
+index a4e1f81..1a91774 100644
+--- a/src/string/pad.ts
++++ b/src/string/pad.ts
+@@ -13,6 +13,10 @@
+  * const result3 = pad('abc', 3);         // result will be 'abc'
+  * const result4 = pad('abc', 2);         // result will be 'abc'
+  *
++ * @guarantee ok.default-chars-space "abc" padded to `length` 8 without `chars` gives "abc" with two spaces on the left and three spaces on the right
++ * @guarantee ok.custom-chars "abc" padded to `length` 8 with `chars` "_-" gives "_-abc_-_"
++ * @guarantee ok.longer-or-equal-unchanged "abc" with `length` 3 gives "abc" and "abcdef" with `length` 3 gives "abcdef"
++ * @guarantee ok.right-gets-extra "abc" padded to `length` 9 with `chars` "123" gives "123abc123" and to `length` 10 gives "123abc1231"
+  */
+ export function pad(str: string, length: number, chars = ' '): string {
+   return str.padStart(Math.floor((length - str.length) / 2) + str.length, chars).padEnd(length, chars);
+diff --git a/src/string/pascalCase.ts b/src/string/pascalCase.ts
+index d008f77..30df6a7 100644
+--- a/src/string/pascalCase.ts
++++ b/src/string/pascalCase.ts
+@@ -14,6 +14,11 @@ import { words as getWords } from './words.ts';
+  * const convertedStr2 = pascalCase('some whitespace') // returns 'SomeWhitespace'
+  * const convertedStr3 = pascalCase('hyphen-text') // returns 'HyphenText'
+  * const convertedStr4 = pascalCase('HTTPRequest') // returns 'HttpRequest'
++ * @guarantee ok.basic "pascalCase" gives "PascalCase" and "some whitespace" gives "SomeWhitespace"
++ * @guarantee ok.hyphen-underscore "hyphen-text" gives "HyphenText" and "snake_case" gives "SnakeCase"
++ * @guarantee ok.consecutive-uppercase "HTTPRequest" gives "HttpRequest" and "XMLHttpRequest" gives "XmlHttpRequest"
++ * @guarantee ok.mixed-separators "camelCase-with_mixed.separators" gives "CamelCaseWithMixedSeparators"
++ * @guarantee ok.numbers-and-symbols "version2.1.0" gives "Version210" and "user@email.com" gives "UserEmailCom"
+  */
+ export function pascalCase(str: string): string {
+   const words = getWords(str);
+diff --git a/src/string/reverseString.ts b/src/string/reverseString.ts
+index f055449..5854fb2 100644
+--- a/src/string/reverseString.ts
++++ b/src/string/reverseString.ts
+@@ -10,6 +10,10 @@
+  * const reversedStr1 = reverseString('hello') // returns 'olleh'
+  * const reversedStr2 = reverseString('PascalCase') // returns 'esaClacsaP'
+  * const reversedStr3 = reverseString('foo 😄 bar') // returns 'rab 😄 oof'
++ * @guarantee ok.basic "hello" gives "olleh", "world" gives "dlrow" and "hello world" gives "dlrow olleh"
++ * @guarantee ok.case-kept "PascalCase" gives "esaClacsaP"
++ * @guarantee ok.emoji-intact "foo 😄 bar" gives "rab 😄 oof"
++ * @guarantee ok.hangul-and-symbols "안녕하세요" gives "요세하녕안", "12345" gives "54321" and "a-b-c" gives "c-b-a"
+  */
+ export function reverseString(value: string): string {
+   return [...value].reverse().join('');
+diff --git a/src/string/snakeCase.ts b/src/string/snakeCase.ts
+index c320266..542558c 100644
+--- a/src/string/snakeCase.ts
++++ b/src/string/snakeCase.ts
+@@ -15,6 +15,13 @@ import { words as getWords } from './words.ts';
+  * const convertedStr4 = snakeCase('HTTPRequest') // returns 'http_request'
+  */
+ 
++/**
++ * @guarantee ok.basic "camelCase" gives "camel_case" and "some whitespace" gives "some_whitespace"
++ * @guarantee ok.hyphen-pascal "hyphen-text" gives "hyphen_text" and "PascalCase" gives "pascal_case"
++ * @guarantee ok.consecutive-uppercase "HTTPRequest" gives "http_request" and "XMLHttpRequest" gives "xml_http_request"
++ * @guarantee ok.mixed-separators "camelCase-with_mixed.separators" gives "camel_case_with_mixed_separators"
++ * @guarantee ok.numbers-split "version2.1.0" gives "version_2_1_0" and "user@email.com" gives "user_email_com"
++ */
+ export function snakeCase(str: string): string {
+   const words = getWords(str);
+   return words.map(word => word.toLowerCase()).join('_');
+diff --git a/src/string/startCase.ts b/src/string/startCase.ts
+index 25d0a92..c87d621 100644
+--- a/src/string/startCase.ts
++++ b/src/string/startCase.ts
+@@ -12,6 +12,12 @@ import { words as getWords } from './words.ts';
+  * const result2 = startCase('HELLO WORLD');  // result will be 'Hello World'
+  * const result3 = startCase('hello-world');  // result will be 'Hello World'
+  * const result4 = startCase('hello_world');  // result will be 'Hello World'
++ * @guarantee ok.capitalized-words "hello world" gives "Hello World" and "HELLO WORLD" gives "Hello World"
++ * @guarantee ok.from-camel-pascal "fooBar" gives "Foo Bar" and "PascalCase" gives "Pascal Case"
++ * @guarantee ok.hyphen-underscore "hello-world" gives "Hello World" and "hello_world" gives "Hello World"
++ * @guarantee ok.delimiters-trimmed "--foo-bar--" gives "Foo Bar" and "__FOO_BAR__" gives "Foo Bar"
++ * @guarantee ok.acronym-and-numbers "XMLHttpRequest" gives "Xml Http Request", "_abc_123_def" gives "Abc 123 Def" and "12abc 12ABC" gives "12 Abc 12 Abc"
++ * @guarantee ok.only-delimiters-empty "_-_-_-_" gives ""
+  */
+ export function startCase(str: string): string {
+   const words = getWords(str.trim());
+diff --git a/src/string/trim.ts b/src/string/trim.ts
+index 1748229..10740e3 100644
+--- a/src/string/trim.ts
++++ b/src/string/trim.ts
+@@ -12,6 +12,12 @@ import { trimStart } from './trimStart.ts';
+  * trim("  hello  "); // "hello"
+  * trim("--hello--", "-"); // "hello"
+  * trim("##hello##", ["#", "o"]); // "hell"
++ * @guarantee ok.default-whitespace "  hello  " gives "hello" and a tab, newline and spaces around "hello" are removed too
++ * @guarantee ok.single-char "--hello--" with `chars` "-" gives "hello" and "***hello***" with `chars` "*" gives "hello"
++ * @guarantee ok.array-chars "!!@@hello@@!!" with `chars` ["!", "@"] gives "hello" and "123abc123" with `chars` ["1", "2", "3"] gives "abc"
++ * @guarantee ok.array-chars-both-ends "##hello##world##" with `chars` ["#", "d"] gives "hello##worl"
++ * @guarantee ok.chars-and-space "  __hello__  " with `chars` ["_", " "] gives "hello"
++ * @guarantee err.multi-char-string throws an error when `chars` is a string whose length is not 1
+  */
+ export function trim(str: string, chars?: string | string[]): string {
+   if (chars === undefined) {
+diff --git a/src/string/unescape.ts b/src/string/unescape.ts
+index a25e6bb..5d563cc 100644
+--- a/src/string/unescape.ts
++++ b/src/string/unescape.ts
+@@ -18,6 +18,11 @@ const htmlUnescapes: Record<string, string> = {
+  * unescape('This is a &quot;quote&quot;'); // returns 'This is a "quote"'
+  * unescape('This is a &#39;quote&#39;'); // returns 'This is a 'quote''
+  * unescape('This is a &amp; symbol'); // returns 'This is a & symbol'
++ * @guarantee ok.tags-restored "This is a &lt;div&gt; element." gives "This is a <div> element."
++ * @guarantee ok.double-quote-restored "This is a &quot;quote&quot;" gives "This is a \"quote\"" (with plain double quotes)
++ * @guarantee ok.single-quote-restored "&#39;" is converted to a plain single quote
++ * @guarantee ok.ampersand-restored "This is a &amp; symbol" gives "This is a & symbol"
++ * @guarantee ok.mixed-entities "&quot;Hello &amp; Welcome&quot; &lt;says the &gt; user" gives "\"Hello & Welcome\" <says the > user"
+  */
+ export function unescape(str: string): string {
+   return str.replace(/&(?:amp|lt|gt|quot|#(0+)?39);/g, match => htmlUnescapes[match] || "'");
+diff --git a/src/string/upperCase.ts b/src/string/upperCase.ts
+index 0916c44..0bb23d5 100644
+--- a/src/string/upperCase.ts
++++ b/src/string/upperCase.ts
+@@ -13,6 +13,10 @@ import { words as getWords } from './words.ts';
+  * const convertedStr2 = upperCase('some whitespace') // returns 'SOME WHITESPACE'
+  * const convertedStr3 = upperCase('hyphen-text') // returns 'HYPHEN TEXT'
+  * const convertedStr4 = upperCase('HTTPRequest') // returns 'HTTP REQUEST'
++ * @guarantee ok.upper-with-spaces "camelCase" gives "CAMEL CASE" and "some whitespace" gives "SOME WHITESPACE"
++ * @guarantee ok.kebab "hyphen-text" gives "HYPHEN TEXT"
++ * @guarantee ok.acronym-split "HTTPSRequest" gives "HTTPS REQUEST"
++ * @guarantee ok.snake-and-email "user_name" gives "USER NAME" and "email-address" gives "EMAIL ADDRESS"
+  */
+ export function upperCase(str: string): string {
+   const words = getWords(str);
+diff --git a/src/string/words.ts b/src/string/words.ts
+index c374afb..0b0fcd2 100644
+--- a/src/string/words.ts
++++ b/src/string/words.ts
+@@ -34,6 +34,11 @@ export const CASE_SPLIT_PATTERN =
+  *
+  * words('Lunedì 18 Set')
+  * // => ['Lunedì', '18', 'Set']
++ * @guarantee ok.punctuation-split "fred, barney, & pebbles" gives ["fred", "barney", "pebbles"]
++ * @guarantee ok.camel-acronym-emoji "camelCaseHTTPRequest🚀" gives ["camel", "Case", "HTTP", "Request", "🚀"]
++ * @guarantee ok.unicode-and-numbers "Lunedì 18 Set" gives ["Lunedì", "18", "Set"]
++ * @guarantee ok.identifier-styles "getUserProfile" gives ["get", "User", "Profile"] and "user_profile_data" gives ["user", "profile", "data"]
++ * @guarantee ok.complex "XMLHttpRequest2.0_parser-v1.2" gives ["XML", "Http", "Request", "2", "0", "parser", "v", "1", "2"]
+  */
+ export function words(str: string): string[] {
+   return Array.from(str.match(CASE_SPLIT_PATTERN) ?? []);

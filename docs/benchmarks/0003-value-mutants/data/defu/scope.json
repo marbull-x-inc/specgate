@@ -1,0 +1,7 @@
+{
+  "files": ["src/defu.ts"],
+  "operations": ["defu", "createDefu", "defuFn", "defuArrayFn"],
+  "docs": ["README.md"],
+  "group": "README Usage, Custom Merger, Function Merger, Array Function Merger, Remarks",
+  "why": "defu is a small library; all four documented runtime exports live in src/defu.ts and the README states concrete example inputs and outputs, skipped keys and merge rules."
+}

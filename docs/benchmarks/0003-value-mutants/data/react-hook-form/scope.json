@@ -1,0 +1,20 @@
+{
+  "files": [
+    "src/useForm.ts",
+    "src/useFieldArray.ts",
+    "src/useWatch.ts",
+    "src/useController.ts",
+    "src/useFormContext.tsx"
+  ],
+  "operations": ["useForm", "useFieldArray", "useWatch", "useController", "useFormContext"],
+  "docs": [
+    "README.md",
+    "https://react-hook-form.com/docs/useform",
+    "https://react-hook-form.com/docs/usefieldarray",
+    "https://react-hook-form.com/docs/usewatch",
+    "https://react-hook-form.com/docs/usecontroller",
+    "https://react-hook-form.com/docs/useformcontext"
+  ],
+  "group": "React hooks API (react-hook-form.com/docs)",
+  "why": "The repo's own docs are thin and nearly all helpers under src/logic and src/utils are anonymous default exports, so the documented hooks were taken; their pages state concrete defaults, return shapes and examples."
+}

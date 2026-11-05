@@ -1,0 +1,99 @@
+[
+  {
+    "file": "src/vanilla/utils/atomWithStorage.ts",
+    "symbol": "atomWithStorage",
+    "tags": [
+      "@guarantee ok.default-storage When no `storage` is given, the atom uses `localStorage` for storage and retrieval, with `JSON.stringify()` and `JSON.parse()` for serialization and deserialization.",
+      "@guarantee ok.get-on-init-default The `getOnInit` option is `false` by default, so on initialization the atom holds `initialValue` rather than the stored value.",
+      "@guarantee ok.get-on-init-true With `getOnInit` set to `true` the atom returns the stored value immediately on initialization instead of `initialValue`.",
+      "@guarantee ok.cross-tab The default storage subscribes to `storage` events for cross-tab synchronization.",
+      "@guarantee ok.reset-deletes Writing the `RESET` symbol to the atom deletes the item from storage.",
+      "@guarantee ok.async-storage With an asynchronous storage the atom value becomes async, so an updater function receives a promise or a value."
+    ]
+  },
+  {
+    "file": "src/vanilla/utils/atomWithStorage.ts",
+    "symbol": "createJSONStorage",
+    "tags": [
+      "@guarantee ok.json-serialization The storage it creates serializes with `JSON.stringify()` and deserializes with `JSON.parse()`.",
+      "@guarantee ok.string-storage-getter It takes a getter function that returns the underlying string storage, such as `window.localStorage` or `window.sessionStorage`.",
+      "@guarantee ok.replacer-reviver Its optional `replacer` option is used for `JSON.stringify` and its optional `reviver` option is used for `JSON.parse`."
+    ]
+  },
+  {
+    "file": "src/vanilla/utils/atomWithReset.ts",
+    "symbol": "atomWithReset",
+    "tags": [
+      "@guarantee ok.primitive-like It works exactly like a primitive atom with `initialValue`, and can also be set to `RESET`.",
+      "@guarantee ok.reset-to-initial Setting the atom to `RESET` returns it to its `initialValue`."
+    ]
+  },
+  {
+    "file": "src/vanilla/utils/constants.ts",
+    "symbol": "RESET",
+    "tags": [
+      "@guarantee ok.unique-symbol `RESET` is a unique symbol, so `typeof RESET` is \"symbol\".",
+      "@guarantee ok.accepted-by-resettable Atoms created with `atomWithReset` and `atomWithDefault` accept `RESET` on write."
+    ]
+  },
+  {
+    "file": "src/react/utils/useResetAtom.ts",
+    "symbol": "useResetAtom",
+    "tags": [
+      "@guarantee ok.returns-function It returns a function that, when called, resets a resettable atom to its initial value."
+    ]
+  },
+  {
+    "file": "src/vanilla/utils/atomWithDefault.ts",
+    "symbol": "atomWithDefault",
+    "tags": [
+      "@guarantee ok.read-default The default value comes from the read function, so `atomWithDefault((get) => get(count1Atom) * 2)` with `count1Atom` equal to 1 has the value 2.",
+      "@guarantee ok.overwritten-detaches After the value is overwritten with `set`, the read function is no longer used and a change in dependency atoms does not update the value.",
+      "@guarantee ok.reset-restores Setting the atom to `RESET` discards changes made with `set` and restores the value computed by the read function."
+    ]
+  },
+  {
+    "file": "src/vanilla/utils/atomWithRefresh.ts",
+    "symbol": "atomWithRefresh",
+    "tags": [
+      "@guarantee ok.refresh-on-no-args Calling `set` with zero arguments forces the read function to be reevaluated.",
+      "@guarantee ok.write-on-args Calling `set` with one or more arguments calls the `write` function."
+    ]
+  },
+  {
+    "file": "src/vanilla/utils/atomWithLazy.ts",
+    "symbol": "atomWithLazy",
+    "tags": [
+      "@guarantee ok.lazy-first-use The initial value is computed at the first use of the atom in the store, not when the atom is defined.",
+      "@guarantee ok.once-per-store The initial value is recreated exactly once per store, so a new store created with `createStore()` computes a new initial value.",
+      "@guarantee ok.writable-after-init After initialization the atom behaves like a regular primitive atom and can be written to."
+    ]
+  },
+  {
+    "file": "src/vanilla/utils/unwrap.ts",
+    "symbol": "unwrap",
+    "tags": [
+      "@guarantee ok.pending-undefined While the promise is pending, the unwrapped atom has the value `undefined` when no fallback is given.",
+      "@guarantee ok.fallback With the fallback `(prev) => prev ?? 0` the value is `0` initially, and after an update the previous resolved value is kept while pending.",
+      "@guarantee err.errors-thrown Errors from the async atom are not caught and are thrown when the unwrapped atom is read."
+    ]
+  },
+  {
+    "file": "src/vanilla/utils/selectAtom.ts",
+    "symbol": "selectAtom",
+    "tags": [
+      "@guarantee ok.default-equality The default `equalityFn` is `Object.is`, which is reference equality.",
+      "@guarantee ok.update-only-on-change The derived atom is updated only if `equalityFn` reports that the selected value has changed.",
+      "@guarantee ok.selector-runs-on-change The `selector` runs whenever the original atom changes."
+    ]
+  },
+  {
+    "file": "src/vanilla/utils/splitAtom.ts",
+    "symbol": "splitAtom",
+    "tags": [
+      "@guarantee ok.list-of-atoms It returns an atom holding a list of atoms, one for each element of the list in the original atom.",
+      "@guarantee ok.dispatch-actions The returned atom accepts a dispatch function on write with the actions \"remove\", \"insert\" and \"move\", for example `{ type: \"remove\", atom }`.",
+      "@guarantee ok.key-extractor The optional second argument `keyExtractor` is used to keep the sub-atoms stable and to prevent recreating a sub-atom when indexes shift in the source array."
+    ]
+  }
+]

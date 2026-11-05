@@ -1,0 +1,20 @@
+{
+  "files": [
+    "src/CronExpressionParser.ts",
+    "src/CronExpression.ts",
+    "src/CronFieldCollection.ts",
+    "src/CronFileParser.ts"
+  ],
+  "operations": [
+    "CronExpressionParser#parse",
+    "CronExpression#next",
+    "CronExpression#take",
+    "CronExpression#stringify",
+    "CronFieldCollection#from",
+    "CronFileParser#parseFile",
+    "CronFileParser#parseFileSync"
+  ],
+  "docs": ["README.md"],
+  "group": "README sections Cron Format, Predefined Expressions, Options, Date Range Handling, Strict Mode, Hash support, Field Manipulation and Crontab File Operations",
+  "why": "The README states concrete values for predefined expressions, strict mode error messages, date-range handling and field-override results; these are the value-heavy operations of the parser, expression, field collection and file parser classes."
+}

@@ -1,0 +1,37 @@
+{
+  "files": [
+    "src/react/utils/useResetAtom.ts",
+    "src/vanilla/utils/atomWithDefault.ts",
+    "src/vanilla/utils/atomWithLazy.ts",
+    "src/vanilla/utils/atomWithRefresh.ts",
+    "src/vanilla/utils/atomWithReset.ts",
+    "src/vanilla/utils/atomWithStorage.ts",
+    "src/vanilla/utils/constants.ts",
+    "src/vanilla/utils/selectAtom.ts",
+    "src/vanilla/utils/splitAtom.ts",
+    "src/vanilla/utils/unwrap.ts"
+  ],
+  "operations": [
+    "atomWithStorage",
+    "createJSONStorage",
+    "atomWithReset",
+    "RESET",
+    "useResetAtom",
+    "atomWithDefault",
+    "atomWithRefresh",
+    "atomWithLazy",
+    "unwrap",
+    "selectAtom",
+    "splitAtom"
+  ],
+  "docs": [
+    "docs/utilities/storage.mdx",
+    "docs/utilities/resettable.mdx",
+    "docs/utilities/lazy.mdx",
+    "docs/utilities/async.mdx",
+    "docs/utilities/select.mdx",
+    "docs/utilities/split.mdx"
+  ],
+  "group": "jotai/utils (the docs/utilities pages: storage, resettable, lazy, async, select, split)",
+  "why": "The utilities pages state concrete defaults and behaviours (default storage, getOnInit false, RESET, unwrap fallback, selectAtom Object.is default, splitAtom actions). Operations whose docs only show usage without stated outcomes (atomWithReducer, atomWithObservable, freezeAtom) were left out."
+}

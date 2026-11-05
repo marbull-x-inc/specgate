@@ -1,0 +1,60 @@
+[
+  {
+    "file": "src/CronExpressionParser.ts",
+    "symbol": "CronExpressionParser#parse",
+    "tags": [
+      "@guarantee ok.predefined-periodic The predefined expressions are equivalent to these six-field expressions: \"@yearly\" to \"0 0 0 1 1 *\", \"@monthly\" to \"0 0 0 1 * *\", \"@weekly\" to \"0 0 0 * * 0\", \"@daily\" to \"0 0 0 * * *\", \"@hourly\" to \"0 0 * * * *\", \"@minutely\" to \"0 * * * * *\" and \"@secondly\" to \"* * * * * *\".",
+      "@guarantee ok.predefined-weekdays-weekends \"@weekdays\" is equivalent to \"0 0 0 * * 1-5\" (every weekday at midnight) and \"@weekends\" is equivalent to \"0 0 0 * * 0,6\" (every weekend at midnight).",
+      "@guarantee ok.sunday-zero-or-seven In the day of week field the values `0` and `7` both mean Sunday, and the alias \"SUN\" means Sunday.",
+      "@guarantee ok.start-date-as-current-date When `currentDate` is not provided but `startDate` is, `startDate` is used as `currentDate`, so \"2023-01-01T00:00:00Z\" given as `startDate` becomes the `currentDate`.",
+      "@guarantee ok.current-date-clamped-to-start A `currentDate` before `startDate` is clamped to `startDate`: with `currentDate` \"2022-01-01T00:00:00Z\" and `startDate` \"2023-01-01T00:00:00Z\" the current date becomes \"2023-01-01T00:00:00Z\".",
+      "@guarantee err.strict-day-of-month-and-week With `strict` set to true, parsing \"0 0 12 1-31 * 1\" throws an error with the message \"Cannot use both dayOfMonth and dayOfWeek together in strict mode!\".",
+      "@guarantee err.strict-requires-six-fields With `strict` set to true, parsing the five-field expression \"0 20 15 * *\" throws an error with the message \"Invalid cron expression, expected 6 fields\".",
+      "@guarantee err.strict-hash-step-wider-than-range With `strict` set to true, parsing \"0 H(1-5)/10 * * * *\" throws an error with the message \"Invalid step: 10, wider than the 1-5 range of the minute field\"."
+    ]
+  },
+  {
+    "file": "src/CronExpression.ts",
+    "symbol": "CronExpression#next",
+    "tags": [
+      "@guarantee err.next-beyond-end-date When the next date would exceed `endDate`, `next` throws an error with the message \"Out of the time span range\"; for \"0 0 * * *\" with `currentDate` \"2023-12-31T00:00:00Z\" and `endDate` \"2024-01-01T00:00:00Z\" the first call returns a date and the second call throws.",
+      "@guarantee ok.next-within-end-date For \"0 0 * * *\" with `currentDate` \"2023-12-31T00:00:00Z\" and `endDate` \"2024-01-01T00:00:00Z\", the first call of `next` returns a date without throwing."
+    ]
+  },
+  {
+    "file": "src/CronExpression.ts",
+    "symbol": "CronExpression#take",
+    "tags": [
+      "@guarantee ok.take-count `take` with a limit of 3 returns an array of the next 3 dates, and `take` with a limit of 5 returns an array of the next 5 dates."
+    ]
+  },
+  {
+    "file": "src/CronExpression.ts",
+    "symbol": "CronExpression#stringify",
+    "tags": [
+      "@guarantee ok.hash-seed-deterministic Parsing \"H * * * H\" with `hashSeed` \"main-backup\" gives an expression whose `stringify` is \"12 * * * 4\", and parsing it again with the same `hashSeed` gives the same \"12 * * * 4\"."
+    ]
+  },
+  {
+    "file": "src/CronFieldCollection.ts",
+    "symbol": "CronFieldCollection#from",
+    "tags": [
+      "@guarantee ok.override-raw-values Starting from the fields of \"0 7 * * 1-5\" and overriding `hour` with [8], `minute` with [30] and `dayOfWeek` with [1, 3, 5], the result stringifies to \"30 8 * * 1,3,5\".",
+      "@guarantee ok.override-field-instances Starting from the fields of \"0 7 * * 1-5\" and overriding `hour` with a CronHour of [15] and `minute` with a CronMinute of [30], the result stringifies to \"30 15 * * 1-5\" and the `dayOfWeek` field is unchanged."
+    ]
+  },
+  {
+    "file": "src/CronFileParser.ts",
+    "symbol": "CronFileParser#parseFile",
+    "tags": [
+      "@guarantee ok.parse-file-result-shape `parseFile` resolves to a result object with the properties `variables`, `expressions` and `errors`."
+    ]
+  },
+  {
+    "file": "src/CronFileParser.ts",
+    "symbol": "CronFileParser#parseFileSync",
+    "tags": [
+      "@guarantee ok.parse-file-sync-result-shape `parseFileSync` returns a result object with the properties `variables`, `expressions` and `errors`."
+    ]
+  }
+]
