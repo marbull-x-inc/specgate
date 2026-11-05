@@ -9,9 +9,7 @@
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "tests/**/*.test.ts"
-    ],
+    "include": ["tests/**/*.test.ts"],
     "adapter": "jest"
   },
   "tsdoc": {

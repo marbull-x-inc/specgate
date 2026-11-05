@@ -20,9 +20,7 @@
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "library/src/**/*.test.ts"
-    ],
+    "include": ["library/src/**/*.test.ts"],
     "adapter": "vitest"
   },
   "tsconfig": "library/tsconfig.json",
@@ -36,9 +34,6 @@
     "dir": ".specgate-mutation"
   },
   "mutation": {
-    "report": [
-      "library/reports/mutation/mutation.json",
-      "reports/value/value.json"
-    ]
+    "report": ["library/reports/mutation/mutation.json", "reports/value/value.json"]
   }
 }

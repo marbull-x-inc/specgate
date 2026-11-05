@@ -1,0 +1,7545 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "generatedAt": "2026-11-05T22:53:53.720Z",
+  "root": "<work-0001>/zustand",
+  "revision": "382d29c485e67018c06e75ec7235130d0968522c",
+  "configHash": "3e0601416359d43f",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "createJSONStorage",
+      "kind": "function",
+      "operation": "createJSONStorage",
+      "file": "src/middleware/persist.ts",
+      "line": 35,
+      "endLine": 65,
+      "referencedBy": [
+        "src/middleware.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "getStorage",
+          "type": "() => StateStorage<R>",
+          "optional": false
+        },
+        {
+          "name": "options",
+          "type": "JsonStorageOptions",
+          "optional": true
+        }
+      ],
+      "returns": "PersistStorage<S, unknown> | undefined",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "helperRanges": [
+        {
+          "line": 48,
+          "endLine": 53
+        }
+      ],
+      "implHash": "6a53980b868a547f",
+      "guarantees": [
+        {
+          "id": "ok.json",
+          "key": "createJSONStorage.ok.json",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "reads values with `JSON.parse` and writes them with `JSON.stringify` through the storage the getter returns",
+          "textHash": "0a9170fe43d5c2aa",
+          "line": 32,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.lazy",
+          "key": "createJSONStorage.ok.lazy",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the getter is called only when the storage is first accessed, not when `createJSONStorage` is called",
+          "textHash": "166113174e9d0cc1",
+          "line": 33,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "persist",
+      "kind": "function",
+      "operation": "persist",
+      "file": "src/middleware/persist.ts",
+      "line": 418,
+      "endLine": 418,
+      "referencedBy": [
+        "src/middleware.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "initializer",
+          "type": "StateCreator<T, [...Mps, [\"zustand/persist\", unknown]], Mcs>",
+          "optional": false
+        },
+        {
+          "name": "options",
+          "type": "PersistOptions<T, U, unknown>",
+          "optional": false
+        }
+      ],
+      "returns": "StateCreator<T, Mps, [[\"zustand/persist\", U], ...Mcs]>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "createJSONStorage"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "helperRanges": [
+        {
+          "line": 162,
+          "endLine": 189
+        },
+        {
+          "line": 191,
+          "endLine": 380
+        },
+        {
+          "line": 225,
+          "endLine": 231
+        },
+        {
+          "line": 257,
+          "endLine": 339
+        }
+      ],
+      "implHash": "0674f02ffe7842f4",
+      "guarantees": [
+        {
+          "id": "ok.name",
+          "key": "persist.ok.name",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the state is written to the storage under the key `name`",
+          "textHash": "e03eb570127d6299",
+          "line": 408,
+          "references": [],
+          "tests": [
+            "tests/middlewareTypes.test.tsx:274",
+            "tests/middlewareTypes.test.tsx:329",
+            "tests/middlewareTypes.test.tsx:502",
+            "tests/middlewareTypes.test.tsx:533",
+            "tests/middlewareTypes.test.tsx:597",
+            "tests/middlewareTypes.test.tsx:636",
+            "tests/middlewareTypes.test.tsx:678",
+            "tests/middlewareTypes.test.tsx:728",
+            "tests/middlewareTypes.test.tsx:770",
+            "tests/persistAsync.test.tsx:935",
+            "tests/persistAsync.test.tsx:1082",
+            "tests/persistAsync.test.tsx:1137",
+            "tests/persistAsync.test.tsx:1174",
+            "tests/persistSync.test.tsx:424",
+            "tests/persistSync.test.tsx:441",
+            "tests/persistSync.test.tsx:478",
+            "tests/persistSync.test.tsx:541",
+            "tests/persistSync.test.tsx:739",
+            "tests/types.test.tsx:199",
+            "tests/types.test.tsx:219"
+          ]
+        },
+        {
+          "id": "ok.shape",
+          "key": "persist.ok.shape",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the stored value holds the state and the `version`",
+          "textHash": "f1148d692e256327",
+          "line": 409,
+          "references": [],
+          "tests": [
+            "tests/devtools.test.tsx:199",
+            "tests/persistAsync.test.tsx:148",
+            "tests/persistAsync.test.tsx:861",
+            "tests/persistSync.test.tsx:98",
+            "tests/persistSync.test.tsx:691"
+          ]
+        },
+        {
+          "id": "ok.default-storage",
+          "key": "persist.ok.default-storage",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "without `storage`, uses `createJSONStorage` over `localStorage`",
+          "textHash": "9cadb138721ea37c",
+          "line": 410,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.partialize",
+          "key": "persist.ok.partialize",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "with `partialize`, only the state it returns is persisted",
+          "textHash": "b1fa791d0256df95",
+          "line": 411,
+          "references": [],
+          "tests": [
+            "tests/middlewareTypes.test.tsx:302",
+            "tests/persistSync.test.tsx:359"
+          ]
+        },
+        {
+          "id": "ok.version",
+          "key": "persist.ok.version",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a stored state whose version differs from `version` is not used as is",
+          "textHash": "d1607543343b46cd",
+          "line": 412,
+          "references": [],
+          "tests": [
+            "tests/persistAsync.test.tsx:334",
+            "tests/persistSync.test.tsx:173"
+          ]
+        },
+        {
+          "id": "ok.migrate",
+          "key": "persist.ok.migrate",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "when the versions differ, `migrate` is called with the persisted state and its version, and its result is used",
+          "textHash": "680112c84327faa0",
+          "line": 413,
+          "references": [],
+          "tests": [
+            "tests/persistAsync.test.tsx:216",
+            "tests/persistAsync.test.tsx:375",
+            "tests/persistAsync.test.tsx:1023",
+            "tests/persistAsync.test.tsx:1109",
+            "tests/persistSync.test.tsx:136",
+            "tests/persistSync.test.tsx:200"
+          ]
+        },
+        {
+          "id": "ok.merge",
+          "key": "persist.ok.merge",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "without `merge`, the persisted state is shallow-merged into the current state on rehydration",
+          "textHash": "00d29da74e6a14f4",
+          "line": 414,
+          "references": [],
+          "tests": [
+            "tests/persistAsync.test.tsx:55",
+            "tests/persistAsync.test.tsx:271",
+            "tests/persistAsync.test.tsx:474",
+            "tests/persistAsync.test.tsx:518",
+            "tests/persistAsync.test.tsx:573",
+            "tests/persistAsync.test.tsx:612",
+            "tests/persistAsync.test.tsx:814",
+            "tests/persistAsync.test.tsx:981",
+            "tests/persistSync.test.tsx:41",
+            "tests/persistSync.test.tsx:266",
+            "tests/persistSync.test.tsx:295",
+            "tests/persistSync.test.tsx:335",
+            "tests/persistSync.test.tsx:498",
+            "tests/persistSync.test.tsx:659"
+          ]
+        },
+        {
+          "id": "ok.skip-hydration",
+          "key": "persist.ok.skip-hydration",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`skipHydration` defaults to false; when true, the state is not rehydrated on initialisation until `rehydrate` is called",
+          "textHash": "e1ae5f2fa4f449bf",
+          "line": 415,
+          "references": [],
+          "tests": [
+            "tests/persistAsync.test.tsx:643",
+            "tests/persistAsync.test.tsx:669",
+            "tests/persistSync.test.tsx:521",
+            "tests/persistSync.test.tsx:589"
+          ]
+        },
+        {
+          "id": "ok.on-rehydrate",
+          "key": "persist.ok.on-rehydrate",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`onRehydrateStorage` is called before rehydration, and the function it returns is called after it",
+          "textHash": "e85b85f58cdec60d",
+          "line": 416,
+          "references": [],
+          "tests": [
+            "tests/persistAsync.test.tsx:109",
+            "tests/persistAsync.test.tsx:422",
+            "tests/persistAsync.test.tsx:720",
+            "tests/persistAsync.test.tsx:760",
+            "tests/persistAsync.test.tsx:1195",
+            "tests/persistSync.test.tsx:77",
+            "tests/persistSync.test.tsx:232",
+            "tests/persistSync.test.tsx:635"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "createStore",
+      "kind": "function",
+      "operation": "createStore",
+      "file": "src/vanilla.ts",
+      "line": 107,
+      "endLine": 108,
+      "referencedBy": [
+        "src/react.ts",
+        "src/traditional.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "createState",
+          "type": "StateCreator<T, [], Mos, T>",
+          "optional": false
+        }
+      ],
+      "returns": "CreateStoreImpl | Mutate<StoreApi<T>, Mos>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "helperRanges": [
+        {
+          "line": 60,
+          "endLine": 97
+        }
+      ],
+      "implHash": "fdeae9ff5d5bc079",
+      "guarantees": [
+        {
+          "id": "ok.api",
+          "key": "createStore.ok.api",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns a store exposing `setState`, `getState`, `getInitialState` and `subscribe`",
+          "textHash": "8c7cab1a088e6b86",
+          "line": 100,
+          "references": [],
+          "tests": [
+            "tests/devtools.test.tsx:132",
+            "tests/devtools.test.tsx:155",
+            "tests/devtools.test.tsx:161",
+            "tests/devtools.test.tsx:168",
+            "tests/devtools.test.tsx:249",
+            "tests/devtools.test.tsx:278",
+            "tests/devtools.test.tsx:370",
+            "tests/devtools.test.tsx:426",
+            "tests/devtools.test.tsx:441",
+            "tests/devtools.test.tsx:454",
+            "tests/devtools.test.tsx:471",
+            "tests/devtools.test.tsx:491",
+            "tests/devtools.test.tsx:539",
+            "tests/devtools.test.tsx:557",
+            "tests/devtools.test.tsx:576",
+            "tests/devtools.test.tsx:598",
+            "tests/devtools.test.tsx:635",
+            "tests/devtools.test.tsx:652",
+            "tests/devtools.test.tsx:685",
+            "tests/devtools.test.tsx:702",
+            "tests/devtools.test.tsx:735",
+            "tests/devtools.test.tsx:759",
+            "tests/devtools.test.tsx:796",
+            "tests/devtools.test.tsx:811",
+            "tests/devtools.test.tsx:831",
+            "tests/devtools.test.tsx:858",
+            "tests/devtools.test.tsx:925",
+            "tests/devtools.test.tsx:936",
+            "tests/devtools.test.tsx:948",
+            "tests/devtools.test.tsx:979",
+            "tests/devtools.test.tsx:992",
+            "tests/devtools.test.tsx:1010",
+            "tests/devtools.test.tsx:1031",
+            "tests/devtools.test.tsx:1062",
+            "tests/devtools.test.tsx:1081",
+            "tests/devtools.test.tsx:1125",
+            "tests/devtools.test.tsx:1190",
+            "tests/devtools.test.tsx:1230",
+            "tests/devtools.test.tsx:1326",
+            "tests/devtools.test.tsx:1381",
+            "tests/devtools.test.tsx:1426",
+            "tests/devtools.test.tsx:1456",
+            "tests/devtools.test.tsx:1501",
+            "tests/devtools.test.tsx:1555",
+            "tests/devtools.test.tsx:1692",
+            "tests/devtools.test.tsx:1739",
+            "tests/devtools.test.tsx:1788",
+            "tests/devtools.test.tsx:1867",
+            "tests/devtools.test.tsx:1968",
+            "tests/devtools.test.tsx:2034",
+            "tests/devtools.test.tsx:2129",
+            "tests/devtools.test.tsx:2196",
+            "tests/devtools.test.tsx:2284",
+            "tests/devtools.test.tsx:2375",
+            "tests/devtools.test.tsx:2488",
+            "tests/devtools.test.tsx:2526",
+            "tests/devtools.test.tsx:2580",
+            "tests/devtools.test.tsx:2636",
+            "tests/devtools.test.tsx:2684",
+            "tests/devtools.test.tsx:2742",
+            "tests/devtools.test.tsx:2770",
+            "tests/devtools.test.tsx:2806",
+            "tests/devtools.test.tsx:2843",
+            "tests/devtools.test.tsx:2872",
+            "tests/devtools.test.tsx:2881",
+            "tests/devtools.test.tsx:2909",
+            "tests/middlewareTypes.test.tsx:60",
+            "tests/middlewareTypes.test.tsx:118",
+            "tests/middlewareTypes.test.tsx:153",
+            "tests/middlewareTypes.test.tsx:223",
+            "tests/middlewareTypes.test.tsx:251",
+            "tests/vanilla/basic.test.ts:13"
+          ]
+        },
+        {
+          "id": "ok.initial",
+          "key": "createStore.ok.initial",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`getState` and `getInitialState` return the state the state creator returned, before any update",
+          "textHash": "d3a5af5c898820f5",
+          "line": 101,
+          "references": [],
+          "tests": [
+            "tests/vanilla/basic.test.ts:56",
+            "tests/vanilla/basic.test.ts:73"
+          ]
+        },
+        {
+          "id": "ok.merge",
+          "key": "createStore.ok.merge",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`setState` with an object shallow-merges it into the current state by default",
+          "textHash": "a038d4c78d89f7f1",
+          "line": 102,
+          "references": [],
+          "tests": [
+            "tests/vanilla/basic.test.ts:80",
+            "tests/vanilla/basic.test.ts:122",
+            "tests/vanilla/basic.test.ts:132"
+          ]
+        },
+        {
+          "id": "ok.replace",
+          "key": "createStore.ok.replace",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`setState` with `replace` true replaces the state with the given one",
+          "textHash": "0e6207ca6444c7e9",
+          "line": 103,
+          "references": [],
+          "tests": [
+            "tests/vanilla/basic.test.ts:109"
+          ]
+        },
+        {
+          "id": "ok.updater",
+          "key": "createStore.ok.updater",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`setState` with a function calls it with the current state and merges what it returns",
+          "textHash": "cfa42ca8c01128dc",
+          "line": 104,
+          "references": [],
+          "tests": [
+            "tests/immer.test.tsx:64",
+            "tests/vanilla/basic.test.ts:46",
+            "tests/vanilla/basic.test.ts:140"
+          ]
+        },
+        {
+          "id": "ok.subscribe",
+          "key": "createStore.ok.subscribe",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "a listener passed to `subscribe` is called whenever the state updates, and the function `subscribe` returns removes it",
+          "textHash": "3e6f34a80a321095",
+          "line": 105,
+          "references": [],
+          "tests": [
+            "tests/vanilla/basic.test.ts:99",
+            "tests/vanilla/subscribe.test.tsx:6",
+            "tests/vanilla/subscribe.test.tsx:16",
+            "tests/vanilla/subscribe.test.tsx:26",
+            "tests/vanilla/subscribe.test.tsx:38",
+            "tests/vanilla/subscribe.test.tsx:51",
+            "tests/vanilla/subscribe.test.tsx:63",
+            "tests/vanilla/subscribe.test.tsx:76",
+            "tests/vanilla/subscribe.test.tsx:93",
+            "tests/vanilla/subscribe.test.tsx:124"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "shallow",
+      "kind": "function",
+      "operation": "shallow",
+      "file": "src/vanilla/shallow.ts",
+      "line": 56,
+      "endLine": 82,
+      "referencedBy": [
+        "src/react/shallow.ts",
+        "src/shallow.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "valueA",
+          "type": "T",
+          "optional": false
+        },
+        {
+          "name": "valueB",
+          "type": "T",
+          "optional": false
+        }
+      ],
+      "returns": "boolean",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "helperRanges": [
+        {
+          "line": 1,
+          "endLine": 2
+        },
+        {
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "line": 12,
+          "endLine": 27
+        },
+        {
+          "line": 30,
+          "endLine": 46
+        }
+      ],
+      "implHash": "b498cbc49c086607",
+      "guarantees": [
+        {
+          "id": "ok.primitives",
+          "key": "shallow.ok.primitives",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "for primitive values returns true when they are the same value and false otherwise, like `Object.is`",
+          "textHash": "384d1f320007de3a",
+          "line": 49,
+          "references": [],
+          "tests": [
+            "tests/vanilla/shallow.test.tsx:5",
+            "tests/vanilla/shallow.test.tsx:129",
+            "tests/vanilla/shallow.test.tsx:199",
+            "tests/vanilla/shallow.test.tsx:208"
+          ]
+        },
+        {
+          "id": "ok.objects",
+          "key": "shallow.ok.objects",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "for two objects returns true when they have the same top-level keys and each top-level value is the same by reference",
+          "textHash": "2add04af8d12de6e",
+          "line": 50,
+          "references": [],
+          "tests": [
+            "tests/vanilla/shallow.test.tsx:16",
+            "tests/vanilla/shallow.test.tsx:30",
+            "tests/vanilla/shallow.test.tsx:169",
+            "tests/vanilla/shallow.test.tsx:174",
+            "tests/vanilla/shallow.test.tsx:228"
+          ]
+        },
+        {
+          "id": "ok.nested",
+          "key": "shallow.ok.nested",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns false when a top-level value is a different object with equal contents",
+          "textHash": "cb3d2ac4d1f9912b",
+          "line": 51,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.prototype",
+          "key": "shallow.ok.prototype",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "returns false when the two objects have different prototypes",
+          "textHash": "df203372b97ab4cf",
+          "line": 52,
+          "references": [],
+          "tests": [
+            "tests/vanilla/shallow.test.tsx:188"
+          ]
+        },
+        {
+          "id": "ok.sets",
+          "key": "shallow.ok.sets",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "for two Sets returns true when they hold the same entries",
+          "textHash": "ee79f6214f381277",
+          "line": 53,
+          "references": [],
+          "tests": [
+            "tests/vanilla/shallow.test.tsx:108"
+          ]
+        },
+        {
+          "id": "ok.maps",
+          "key": "shallow.ok.maps",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "for two Maps returns true when they hold the same keys mapped to the same values",
+          "textHash": "105fbe9fc97dd432",
+          "line": 54,
+          "references": [],
+          "tests": [
+            "tests/vanilla/shallow.test.tsx:44",
+            "tests/vanilla/shallow.test.tsx:145"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 132,
+      "title": "createStore.ok.api connects to the extension by passing the options and initializes",
+      "status": "test",
+      "bodyHash": "d591bb0727073487",
+      "literals": [
+        "test",
+        "bar",
+        "subscribers",
+        "api"
+      ],
+      "keys": [
+        "name",
+        "foo",
+        "count",
+        "enabled",
+        "connect",
+        "subscribe",
+        "unsubscribe",
+        "send",
+        "init",
+        "error",
+        "subscribers",
+        "api"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 155,
+      "title": "createStore.ok.api does not throw",
+      "status": "test",
+      "bodyHash": "b6305d7717cf7c6a",
+      "literals": [],
+      "keys": [
+        "count"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 161,
+      "title": "createStore.ok.api does not warn",
+      "status": "test",
+      "bodyHash": "2100e7a7c170e9f0",
+      "literals": [],
+      "keys": [
+        "count"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 168,
+      "title": "createStore.ok.api sends { type: setStateName || 'anonymous`, ...rest } as the action with current state",
+      "status": "test",
+      "bodyHash": "62209b26c580b03c",
+      "literals": [
+        "testOptionsName",
+        "bar",
+        "10",
+        "testSetStateName",
+        "15",
+        "5",
+        "baz",
+        "anonymous"
+      ],
+      "keys": [
+        "name",
+        "enabled",
+        "count",
+        "foo",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.shape",
+      "unitId": "persist",
+      "guaranteeId": "ok.shape",
+      "file": "tests/devtools.test.tsx",
+      "line": 199,
+      "title": "persist.ok.shape preserves external action names and payloads with persist",
+      "status": "test",
+      "bodyHash": "bcbfddb4b79a5906",
+      "literals": [
+        "stored",
+        "bar",
+        "test-storage",
+        "persist-test",
+        "test-store",
+        "10",
+        "increment",
+        "test-store/increment",
+        "11",
+        "baz",
+        "reset",
+        "test-store/reset"
+      ],
+      "keys": [
+        "count",
+        "foo",
+        "name",
+        "storage",
+        "getItem",
+        "setItem",
+        "removeItem",
+        "skipHydration",
+        "store",
+        "enabled",
+        "type",
+        "test-store",
+        "state",
+        "version",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 249,
+      "title": "createStore.ok.api sends { type: setStateName || 'setCount`, ...rest } as the action with current state",
+      "status": "test",
+      "bodyHash": "a6a7acb86390affd",
+      "literals": [
+        "testOptionsName",
+        "10"
+      ],
+      "keys": [
+        "name",
+        "enabled",
+        "count",
+        "setCount",
+        "type"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 278,
+      "title": "createStore.ok.api infers caller name from V8 stack format — $label",
+      "status": "each",
+      "bodyHash": "c973ef30e3d9abdb",
+      "literals": [
+        "stack",
+        "testOptionsName",
+        "10",
+        "webpack namespace with space",
+        "    at api.setState (webpack://devtools.ts:200:5)",
+        "    at Object.increment (webpack://my app/./src/store.js:10:5)",
+        "\n",
+        "Object.increment",
+        "Windows path with space",
+        "    at api.setState (C:\\app\\devtools.ts:200:5)",
+        "    at increment (C:\\Program Files\\app\\store.js:10:5)",
+        "increment",
+        "space-free path (regression)",
+        "    at api.setState (http://localhost/devtools.ts:200:5)",
+        "    at Object.setCount (http://localhost/app.ts:10:5)",
+        "Object.setCount",
+        "async function — strips async keyword",
+        "    at api.setState (file.js:200:5)",
+        "    at async Object.increment (file.js:10:5)",
+        "constructor — strips new keyword",
+        "    at new Foo (file.js:10:5)",
+        "Foo"
+      ],
+      "keys": [
+        "value",
+        "configurable",
+        "writable",
+        "name",
+        "enabled",
+        "count",
+        "setCount",
+        "type",
+        "label",
+        "stack",
+        "expected"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        5,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 370,
+      "title": "createStore.ok.api infers caller name from Firefox/SpiderMonkey stack format",
+      "status": "test",
+      "bodyHash": "fa1aaa741044530f",
+      "literals": [
+        "api.setState@http://localhost/devtools.ts:200:5",
+        "setCount@http://localhost/app.ts:10:5",
+        "\n",
+        "stack",
+        "testOptionsName",
+        "10",
+        "setCount"
+      ],
+      "keys": [
+        "value",
+        "configurable",
+        "writable",
+        "name",
+        "enabled",
+        "count",
+        "setCount",
+        "type"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 426,
+      "title": "createStore.ok.api does nothing",
+      "status": "test",
+      "bodyHash": "f9c2a9f84e4e5361",
+      "literals": [
+        "setState",
+        "ACTION",
+        "{ \"type\": \"INCREMENT\" }"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 441,
+      "title": "createStore.ok.api unless action type is __setState",
+      "status": "test",
+      "bodyHash": "ba2de2c49bf37dba",
+      "literals": [
+        "ACTION",
+        "{ \"type\": \"__setState\", \"state\": { \"foo\": \"bar\" } }",
+        "bar"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload",
+        "foo"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 454,
+      "title": "createStore.ok.api does nothing even if there is `api.dispatch`",
+      "status": "test",
+      "bodyHash": "792cb1b36f36827e",
+      "literals": [
+        "setState",
+        "ACTION",
+        "{ \"type\": \"INCREMENT\" }"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 471,
+      "title": "createStore.ok.api dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true",
+      "status": "test",
+      "bodyHash": "9a10cf31bd7107d9",
+      "literals": [
+        "setState",
+        "ACTION",
+        "{ \"type\": \"INCREMENT\" }",
+        "INCREMENT"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 491,
+      "title": "createStore.ok.api does not throw for unsupported payload",
+      "status": "test",
+      "bodyHash": "4d61d2d5272157dd",
+      "literals": [
+        "setState",
+        "ACTION",
+        "this.increment()",
+        "[zustand devtools middleware] Could not parse the received json",
+        "increment",
+        "[zustand devtools middleware] Unsupported action format"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload",
+        "name",
+        "args"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 539,
+      "title": "createStore.ok.api RESET, it inits with initial state",
+      "status": "test",
+      "bodyHash": "4b14c72454624050",
+      "literals": [
+        "DISPATCH",
+        "RESET"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 557,
+      "title": "createStore.ok.api COMMIT, it inits with current state",
+      "status": "test",
+      "bodyHash": "436f7e18cb1c0b62",
+      "literals": [
+        "2",
+        "DISPATCH",
+        "COMMIT"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 576,
+      "title": "createStore.ok.api updates state without recording and inits with `message.state`",
+      "status": "test",
+      "bodyHash": "3ee7118d2a7ea962",
+      "literals": [
+        "bar",
+        "DISPATCH",
+        "ROLLBACK"
+      ],
+      "keys": [
+        "count",
+        "increment",
+        "enabled",
+        "foo",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 598,
+      "title": "createStore.ok.api does not throw for unparsable `message.state`",
+      "status": "test",
+      "bodyHash": "dc58272ea4803aad",
+      "literals": [
+        "DISPATCH",
+        "ROLLBACK",
+        "foobar",
+        "[zustand devtools middleware] Could not parse the received json"
+      ],
+      "keys": [
+        "count",
+        "increment",
+        "enabled",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 635,
+      "title": "createStore.ok.api updates state without recording with `message.state`",
+      "status": "test",
+      "bodyHash": "1c6aece857904abf",
+      "literals": [
+        "bar",
+        "DISPATCH",
+        "JUMP_TO_STATE"
+      ],
+      "keys": [
+        "count",
+        "increment",
+        "enabled",
+        "foo",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 652,
+      "title": "createStore.ok.api does not throw for unparsable `message.state`",
+      "status": "test",
+      "bodyHash": "83477f7a248f10d3",
+      "literals": [
+        "DISPATCH",
+        "JUMP_TO_STATE",
+        "foobar",
+        "[zustand devtools middleware] Could not parse the received json"
+      ],
+      "keys": [
+        "count",
+        "increment",
+        "enabled",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 685,
+      "title": "createStore.ok.api updates state without recording with `message.state`",
+      "status": "test",
+      "bodyHash": "af65308ba2fc799f",
+      "literals": [
+        "bar",
+        "DISPATCH",
+        "JUMP_TO_ACTION"
+      ],
+      "keys": [
+        "count",
+        "increment",
+        "enabled",
+        "foo",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 702,
+      "title": "createStore.ok.api does not throw for unparsable `message.state`",
+      "status": "test",
+      "bodyHash": "174a89406dab42f6",
+      "literals": [
+        "DISPATCH",
+        "JUMP_TO_ACTION",
+        "foobar",
+        "[zustand devtools middleware] Could not parse the received json"
+      ],
+      "keys": [
+        "count",
+        "increment",
+        "enabled",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 735,
+      "title": "createStore.ok.api IMPORT_STATE, it updates state without recording and inits the last computedState",
+      "status": "test",
+      "bodyHash": "1eb0a0cc513a2d79",
+      "literals": [
+        "4",
+        "5",
+        "DISPATCH",
+        "IMPORT_STATE"
+      ],
+      "keys": [
+        "count",
+        "increment",
+        "enabled",
+        "computedStates",
+        "state",
+        "type",
+        "payload",
+        "nextLiftedState"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 759,
+      "title": "createStore.ok.api PAUSE_RECORDING, it toggles the sending of actions",
+      "status": "test",
+      "bodyHash": "f2f917b7a2519af6",
+      "literals": [
+        "increment",
+        "DISPATCH",
+        "PAUSE_RECORDING",
+        "2",
+        "3"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 796,
+      "title": "createStore.ok.api applies reviver to ACTION `__setState` payload",
+      "status": "test",
+      "bodyHash": "5b0afc97fa7777fa",
+      "literals": [
+        "count",
+        "10",
+        "ACTION",
+        "{ \"type\": \"__setState\", \"state\": { \"count\": 5 } }",
+        "50"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "serialize",
+        "reviver",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 811,
+      "title": "createStore.ok.api applies reviver to `message.state` on JUMP_TO_STATE",
+      "status": "test",
+      "bodyHash": "538caeebf27dad8f",
+      "literals": [
+        "count",
+        "10",
+        "5",
+        "DISPATCH",
+        "JUMP_TO_STATE",
+        "50"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "serialize",
+        "reviver",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 831,
+      "title": "createStore.ok.api applies reviver to `message.state` on ROLLBACK",
+      "status": "test",
+      "bodyHash": "fda7fe6cfbe25cd8",
+      "literals": [
+        "count",
+        "10",
+        "5",
+        "DISPATCH",
+        "ROLLBACK",
+        "50"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "serialize",
+        "reviver",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 858,
+      "title": "createStore.ok.api works as expected",
+      "status": "test",
+      "bodyHash": "590d15d1ecfe6d6d",
+      "literals": [
+        "INCREMENT",
+        "DECREMENT",
+        "ACTION",
+        "2"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "redux",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1,
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 925,
+      "title": "createStore.ok.api works in non-browser env",
+      "status": "test",
+      "bodyHash": "a76b8fd8c93d606d",
+      "literals": [],
+      "keys": [
+        "count",
+        "enabled"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 936,
+      "title": "createStore.ok.api works in react native env",
+      "status": "test",
+      "bodyHash": "cef79f363e6c03b5",
+      "literals": [],
+      "keys": [
+        "count",
+        "enabled"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 948,
+      "title": "createStore.ok.api preserves isRecording after setting from devtools",
+      "status": "test",
+      "bodyHash": "2f5d5e50afa91faa",
+      "literals": [
+        "DISPATCH",
+        "PAUSE_RECORDING",
+        "ACTION",
+        "{ \"type\": \"__setState\", \"state\": { \"foo\": \"bar\" } }"
+      ],
+      "keys": [
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 979,
+      "title": "createStore.ok.api should create separate connection for each devtools store with .connect call",
+      "status": "test",
+      "bodyHash": "d659088d1737ea8e",
+      "literals": [
+        "bar",
+        "asdf",
+        "barr",
+        "123asd",
+        "subscribers",
+        "api",
+        "2"
+      ],
+      "keys": [
+        "foo",
+        "testConnectionId",
+        "count",
+        "count1",
+        "enabled",
+        "connect",
+        "subscribe",
+        "unsubscribe",
+        "send",
+        "init",
+        "error",
+        "subscribers",
+        "api"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 992,
+      "title": "createStore.ok.api should call .init on each different connection object",
+      "status": "test",
+      "bodyHash": "413e76055a618c8f",
+      "literals": [
+        "bar",
+        "asdf",
+        "barr",
+        "123asd"
+      ],
+      "keys": [
+        "foo",
+        "testConnectionId",
+        "count",
+        "count1",
+        "enabled"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1010,
+      "title": "createStore.ok.api should create single connection for all internal calls of .connect and `store` is not passed to .connect",
+      "status": "test",
+      "bodyHash": "863fb1679ee2cff0",
+      "literals": [
+        "zustand/middleware",
+        "store1123",
+        "bar1",
+        "store2313132",
+        "bar2",
+        "subscribers",
+        "api"
+      ],
+      "keys": [
+        "store",
+        "foo",
+        "count",
+        "count1",
+        "enabled",
+        "connect",
+        "subscribe",
+        "unsubscribe",
+        "send",
+        "init",
+        "error",
+        "subscribers",
+        "api"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts"
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1031,
+      "title": "createStore.ok.api should call `.init` on single connection with combined states after each `create(devtools` call",
+      "status": "test",
+      "bodyHash": "56e41c9106ee8894",
+      "literals": [
+        "zustand/middleware",
+        "store12",
+        "store21",
+        "subscribers",
+        "api",
+        "2"
+      ],
+      "keys": [
+        "store",
+        "count1",
+        "count2",
+        "enabled",
+        "connect",
+        "subscribe",
+        "unsubscribe",
+        "send",
+        "init",
+        "error",
+        "subscribers",
+        "api"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts"
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1062,
+      "title": "createStore.ok.api should call .connect of redux extension with `name` that was passed from `devtools` options",
+      "status": "test",
+      "bodyHash": "737d666c122a4ef8",
+      "literals": [
+        "test",
+        "store1123",
+        "bar1",
+        "store1414",
+        "2",
+        "subscribers",
+        "api"
+      ],
+      "keys": [
+        "name",
+        "store",
+        "foo",
+        "count",
+        "enabled",
+        "connect",
+        "subscribe",
+        "unsubscribe",
+        "send",
+        "init",
+        "error",
+        "subscribers",
+        "api"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1081,
+      "title": "createStore.ok.api should call .connect of redux extension with `name` that was passed from `devtools` options",
+      "status": "test",
+      "bodyHash": "d2958c10f834f031",
+      "literals": [
+        "test1",
+        "test2",
+        "store1123",
+        "bar2",
+        "store1232",
+        "bar3",
+        "store61661",
+        "bar4",
+        "store14632",
+        "bar5",
+        "2",
+        "5",
+        "7",
+        "subscribers",
+        "api"
+      ],
+      "keys": [
+        "name",
+        "store",
+        "foo",
+        "count",
+        "enabled",
+        "connect",
+        "subscribe",
+        "unsubscribe",
+        "send",
+        "init",
+        "error",
+        "subscribers",
+        "api"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1125,
+      "title": "createStore.ok.api should call `.init` on single connection with combined states after each `create(devtools` call",
+      "status": "test",
+      "bodyHash": "cdc805b3077d777f",
+      "literals": [
+        "zustand/middleware",
+        "test1",
+        "test2",
+        "store1123",
+        "bar2",
+        "store1232",
+        "bar3",
+        "store61661",
+        "bar4",
+        "store14632",
+        "bar5",
+        "2",
+        "5",
+        "7",
+        "subscribers",
+        "api"
+      ],
+      "keys": [
+        "name",
+        "store",
+        "foo",
+        "count",
+        "enabled",
+        "connect",
+        "subscribe",
+        "unsubscribe",
+        "send",
+        "init",
+        "error",
+        "subscribers",
+        "api"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts"
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1190,
+      "title": "createStore.ok.api preserves isRecording after setting from devtools on proper connection subscriber",
+      "status": "test",
+      "bodyHash": "5663c71c83f7fda9",
+      "literals": [
+        "asdf1",
+        "asdf2",
+        "DISPATCH",
+        "PAUSE_RECORDING",
+        "ACTION",
+        "{ \"type\": \"__setState\", \"state\": { \"foo\": \"bar\" } }"
+      ],
+      "keys": [
+        "name",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1230,
+      "title": "createStore.ok.api works as expected",
+      "status": "test",
+      "bodyHash": "7ec0dea0ead9991f",
+      "literals": [
+        "asdf",
+        "2f",
+        "INCREMENT",
+        "DECREMENT",
+        "10",
+        "ACTION",
+        "2",
+        "11",
+        "12"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "redux",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1,
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1326,
+      "title": "createStore.ok.api sends { type: setStateName || 'anonymous`, ...rest } as the action with current state, isolated from other connections",
+      "status": "test",
+      "bodyHash": "c660d22e3375aebd",
+      "literals": [
+        "123",
+        "324",
+        "412",
+        "bar",
+        "bar1",
+        "bar2",
+        "10",
+        "testSetStateName",
+        "15",
+        "5",
+        "baz",
+        "anonymous"
+      ],
+      "keys": [
+        "enabled",
+        "testConnectionId",
+        "count",
+        "foo",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1381,
+      "title": "createStore.ok.api does nothing, connections isolated from each other",
+      "status": "test",
+      "bodyHash": "add8d35235b4b8ad",
+      "literals": [
+        "123",
+        "231",
+        "4342",
+        "2",
+        "3",
+        "setState",
+        "ACTION",
+        "{ \"type\": \"INCREMENT\" }"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1426,
+      "title": "createStore.ok.api unless action type is __setState, connections isolated from each other",
+      "status": "test",
+      "bodyHash": "3c01bb731be6ffd1",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "ACTION",
+        "{ \"type\": \"__setState\", \"state\": { \"foo\": \"bar\" } }",
+        "bar"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "enabled",
+        "type",
+        "payload",
+        "foo"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1456,
+      "title": "createStore.ok.api does nothing even if there is `api.dispatch`, connections isolated from each other",
+      "status": "test",
+      "bodyHash": "3beb443c42e5b14e",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "setState",
+        "ACTION",
+        "{ \"type\": \"INCREMENT\" }"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1501,
+      "title": "createStore.ok.api dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "2098153b5b4c85fd",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "setState",
+        "ACTION",
+        "{ \"type\": \"INCREMENT",
+        "INCREMENT1",
+        "INCREMENT2",
+        "INCREMENT3"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1555,
+      "title": "createStore.ok.api does not throw for unsupported payload, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "dc3fab8a52476445",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "setState",
+        "ACTION",
+        "this.increment1()",
+        "[zustand devtools middleware] Could not parse the received json",
+        "this.increment2()",
+        "this.increment3()",
+        "3",
+        "increment",
+        "4",
+        "[zustand devtools middleware] Unsupported action format",
+        "6"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "enabled",
+        "type",
+        "payload",
+        "name",
+        "args"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1692,
+      "title": "createStore.ok.api RESET, it inits with initial state, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "38f37212cb6012fa",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "3",
+        "10",
+        "DISPATCH",
+        "RESET"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1739,
+      "title": "createStore.ok.api COMMIT, it inits with current state, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "3f8eb5dbcd28b80b",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "3",
+        "10",
+        "DISPATCH",
+        "COMMIT"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1788,
+      "title": "createStore.ok.api updates state without recording and inits with `message.state, connections are isolated from each other`",
+      "status": "test",
+      "bodyHash": "53bb73b0cc4063b3",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "bar1",
+        "bar2",
+        "bar3",
+        "DISPATCH",
+        "ROLLBACK"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "increment",
+        "enabled",
+        "foo",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1867,
+      "title": "createStore.ok.api does not throw for unparsable `message.state`, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "99a0a894dfff7a6f",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "DISPATCH",
+        "ROLLBACK",
+        "foobar",
+        "[zustand devtools middleware] Could not parse the received json",
+        "foobar1",
+        "foobar3"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "increment",
+        "enabled",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 1968,
+      "title": "createStore.ok.api updates state without recording with `message.state`, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "7cc5d2b53a0c02f2",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "bar1",
+        "bar2",
+        "bar3",
+        "DISPATCH",
+        "JUMP_TO_STATE"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "increment",
+        "enabled",
+        "foo",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2034,
+      "title": "createStore.ok.api does not throw for unparsable `message.state`, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "29107c9c2b3cc798",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "DISPATCH",
+        "JUMP_TO_STATE",
+        "foobar",
+        "[zustand devtools middleware] Could not parse the received json",
+        "foobar2",
+        "foobar3"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "increment",
+        "enabled",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2129,
+      "title": "createStore.ok.api updates state without recording with `message.state`, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "023b3bef73a3fe71",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "bar1",
+        "bar2",
+        "bar3",
+        "DISPATCH",
+        "JUMP_TO_ACTION"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "increment",
+        "enabled",
+        "foo",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2196,
+      "title": "createStore.ok.api does not throw for unparsable `message.state`, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "a435cffa049108d3",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "DISPATCH",
+        "JUMP_TO_ACTION",
+        "foobar",
+        "[zustand devtools middleware] Could not parse the received json",
+        "foobar2",
+        "foobar3"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "increment",
+        "enabled",
+        "type",
+        "payload",
+        "state"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2284,
+      "title": "createStore.ok.api IMPORT_STATE, it updates state without recording and inits the last computedState, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "9666c2496535839c",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "5",
+        "4",
+        "20",
+        "8",
+        "12",
+        "100",
+        "DISPATCH",
+        "IMPORT_STATE"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "increment",
+        "enabled",
+        "computedStates",
+        "state",
+        "type",
+        "payload",
+        "nextLiftedState"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2375,
+      "title": "createStore.ok.api PAUSE_RECORDING, it toggles the sending of actions, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "33dc23bcd8132df4",
+      "literals": [
+        "asdf",
+        "2f",
+        "d2e",
+        "2",
+        "4",
+        "12",
+        "30",
+        "increment",
+        "DISPATCH",
+        "PAUSE_RECORDING",
+        "3"
+      ],
+      "keys": [
+        "testConnectionId",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2488,
+      "title": "createStore.ok.api sends { type: setStateName || 'anonymous`, ...rest } as the action with current state",
+      "status": "test",
+      "bodyHash": "ad4da808d6683e68",
+      "literals": [
+        "testOptionsName",
+        "someStore",
+        "bar",
+        "testSetStateName",
+        "10",
+        "15",
+        "5",
+        "baz",
+        "/anonymous"
+      ],
+      "keys": [
+        "name",
+        "store",
+        "enabled",
+        "count",
+        "foo",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2526,
+      "title": "createStore.ok.api does nothing, connections isolated from each other",
+      "status": "test",
+      "bodyHash": "92f494f12051b08f",
+      "literals": [
+        "123",
+        "store1",
+        "231",
+        "store2",
+        "2",
+        "5",
+        "6",
+        "setState",
+        "ACTION",
+        "{ \"type\": \"INCREMENT\" }"
+      ],
+      "keys": [
+        "testConnectionId",
+        "store",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2580,
+      "title": "createStore.ok.api unless action type is __setState, connections isolated from each other",
+      "status": "test",
+      "bodyHash": "d322f72f1f2df26a",
+      "literals": [
+        "name1",
+        "name2",
+        "someStore1",
+        "someStore2",
+        "2",
+        "ACTION",
+        "{ \"type\": \"__setState\", \"state\": { \"foo\": \"bar\", \"foo2\": \"bar2\" } }",
+        "[zustand devtools middleware] Unsupported __setState",
+        "{ \"type\": \"__setState\", \"state\": { \"",
+        "\": { \"foo\": \"bar\" } } }",
+        "bar"
+      ],
+      "keys": [
+        "name",
+        "store",
+        "testStore",
+        "count",
+        "enabled",
+        "type",
+        "payload",
+        "foo"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2636,
+      "title": "createStore.ok.api does nothing even if there is `api.dispatch`, connections isolated from each other",
+      "status": "test",
+      "bodyHash": "71aed8956409e86c",
+      "literals": [
+        "zustand/middleware",
+        "name1",
+        "name2",
+        "someStore1",
+        "someStore2",
+        "2",
+        "setState",
+        "ACTION",
+        "{ \"type\": \"INCREMENT\" }"
+      ],
+      "keys": [
+        "name",
+        "store",
+        "testStore",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2684,
+      "title": "createStore.ok.api dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other",
+      "status": "test",
+      "bodyHash": "be0e1c4405f6dd5a",
+      "literals": [
+        "zustand/middleware",
+        "name1",
+        "name2",
+        "someStore1",
+        "someStore2",
+        "2",
+        "setState",
+        "ACTION",
+        "{ \"type\": \"INCREMENT",
+        "INCREMENT1",
+        "INCREMENT2"
+      ],
+      "keys": [
+        "name",
+        "store",
+        "testStore",
+        "count",
+        "enabled",
+        "type",
+        "payload"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2742,
+      "title": "createStore.ok.api should preserve a replacement store when the original store is cleaned up",
+      "status": "test",
+      "bodyHash": "ab9ebf3ba3daca07",
+      "literals": [
+        "replacement-before-cleanup",
+        "shared",
+        "DISPATCH",
+        "JUMP_TO_STATE",
+        "20"
+      ],
+      "keys": [
+        "name",
+        "store",
+        "enabled",
+        "count",
+        "type",
+        "payload",
+        "state",
+        "shared"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2770,
+      "title": "createStore.ok.api should preserve other stores on a shared connection after %i cleanup calls",
+      "status": "each",
+      "bodyHash": "5237ac279f6da5fe",
+      "literals": [
+        "shared-cleanup-",
+        "first",
+        "second",
+        "DISPATCH",
+        "JUMP_TO_STATE",
+        "10",
+        "20",
+        "2"
+      ],
+      "keys": [
+        "count",
+        "name",
+        "store",
+        "enabled",
+        "type",
+        "payload",
+        "state",
+        "first",
+        "second"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2806,
+      "title": "createStore.ok.api should close a shared connection only after its last store is cleaned up",
+      "status": "test",
+      "bodyHash": "aa55f9a0f7ad3d72",
+      "literals": [
+        "last-store-cleanup",
+        "first",
+        "second",
+        "DISPATCH",
+        "JUMP_TO_STATE",
+        "30",
+        "subscribers",
+        "api"
+      ],
+      "keys": [
+        "count",
+        "name",
+        "store",
+        "enabled",
+        "type",
+        "payload",
+        "state",
+        "first",
+        "connect",
+        "subscribe",
+        "unsubscribe",
+        "send",
+        "init",
+        "error",
+        "subscribers",
+        "api"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2843,
+      "title": "createStore.ok.api should close an untracked connection while a tracked connection uses the same name",
+      "status": "test",
+      "bodyHash": "9e25e89d31890aea",
+      "literals": [
+        "mixed-connection-cleanup",
+        "untracked",
+        "tracked",
+        "|untracked",
+        "DISPATCH",
+        "JUMP_TO_STATE",
+        "20"
+      ],
+      "keys": [
+        "name",
+        "testStore",
+        "enabled",
+        "count",
+        "store",
+        "type",
+        "payload",
+        "state",
+        "tracked"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2872,
+      "title": "createStore.ok.api should unsubscribe from devtools when cleanup is called",
+      "status": "test",
+      "bodyHash": "dbf80240a0309123",
+      "literals": [
+        "test"
+      ],
+      "keys": [
+        "name",
+        "count"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2881,
+      "title": "createStore.ok.api should remove store from tracked connection after cleanup",
+      "status": "test",
+      "bodyHash": "72903d87f76b5c57",
+      "literals": [
+        "test-store-name",
+        "test-store-id",
+        "15",
+        "updateCount",
+        "/updateCount",
+        "20",
+        "ignoredAction",
+        "/ignoredAction"
+      ],
+      "keys": [
+        "name",
+        "store",
+        "enabled",
+        "count",
+        "type"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/devtools.test.tsx",
+      "line": 2909,
+      "title": "createStore.ok.api should pass actionsDenylist option to Redux DevTools",
+      "status": "test",
+      "bodyHash": "97a82fdf7b5181b9",
+      "literals": [
+        "test-filter",
+        "secret.*",
+        "subscribers",
+        "api"
+      ],
+      "keys": [
+        "name",
+        "enabled",
+        "actionsDenylist",
+        "count",
+        "connect",
+        "subscribe",
+        "unsubscribe",
+        "send",
+        "init",
+        "error",
+        "subscribers",
+        "api"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.updater",
+      "unitId": "createStore",
+      "guaranteeId": "ok.updater",
+      "file": "tests/immer.test.tsx",
+      "line": 64,
+      "title": "createStore.ok.updater should work with vanilla createStore",
+      "status": "test",
+      "bodyHash": "bafb43ef6f57849a",
+      "literals": [
+        "10"
+      ],
+      "keys": [
+        "count"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "immer",
+          "from": "src/middleware/immer.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 60,
+      "title": "createStore.ok.api immer",
+      "status": "test",
+      "bodyHash": "b9b827993b7d9ffe",
+      "literals": [
+        "2"
+      ],
+      "keys": [
+        "count",
+        "inc"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "immer",
+          "from": "src/middleware/immer.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "StoreApi",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 118,
+      "title": "createStore.ok.api redux",
+      "status": "test",
+      "bodyHash": "37dcde74731780a6",
+      "literals": [
+        "INC",
+        "2"
+      ],
+      "keys": [
+        "count",
+        "type"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "redux",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "StoreApi",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 153,
+      "title": "createStore.ok.api devtools",
+      "status": "test",
+      "bodyHash": "fb6e429a50943aa4",
+      "literals": [
+        "inc",
+        "prefix",
+        "2",
+        "reset"
+      ],
+      "keys": [
+        "count",
+        "inc",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "StoreApi",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 223,
+      "title": "createStore.ok.api subscribeWithSelector",
+      "status": "test",
+      "bodyHash": "08786218d08fedc9",
+      "literals": [
+        "2"
+      ],
+      "keys": [
+        "count",
+        "inc"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "StoreApi",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 251,
+      "title": "createStore.ok.api combine",
+      "status": "test",
+      "bodyHash": "35b354adaadc75a0",
+      "literals": [
+        "2"
+      ],
+      "keys": [
+        "count",
+        "inc"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "combine",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "StoreApi",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 274,
+      "title": "persist.ok.name persist",
+      "status": "test",
+      "bodyHash": "41ec787a726f5fb9",
+      "literals": [
+        "prefix",
+        "2"
+      ],
+      "keys": [
+        "count",
+        "inc",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "StoreApi",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.partialize",
+      "unitId": "persist",
+      "guaranteeId": "ok.partialize",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 302,
+      "title": "persist.ok.partialize persist with partialize",
+      "status": "test",
+      "bodyHash": "3d25a86856aa8216",
+      "literals": [
+        "prefix",
+        "2",
+        "not-a-number"
+      ],
+      "keys": [
+        "count",
+        "inc",
+        "name",
+        "partialize"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 329,
+      "title": "persist.ok.name persist without custom api (#638)",
+      "status": "test",
+      "bodyHash": "b7f4ec351db1f489",
+      "literals": [
+        "prefix",
+        "2"
+      ],
+      "keys": [
+        "count",
+        "inc",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 502,
+      "title": "persist.ok.name devtools & persist",
+      "status": "test",
+      "bodyHash": "856b68a10100ee8b",
+      "literals": [
+        "inc",
+        "count",
+        "prefix",
+        "2",
+        "reset"
+      ],
+      "keys": [
+        "count",
+        "inc",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 533,
+      "title": "persist.ok.name devtools & persist & immer",
+      "status": "test",
+      "bodyHash": "437804550d3baf2f",
+      "literals": [
+        "count",
+        "prefix",
+        "2",
+        "reset"
+      ],
+      "keys": [
+        "count",
+        "inc",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "immer",
+          "from": "src/middleware/immer.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 597,
+      "title": "persist.ok.name devtools & subscribeWithSelector & persist",
+      "status": "test",
+      "bodyHash": "02ce75f37aa78cde",
+      "literals": [
+        "count",
+        "prefix",
+        "2",
+        "reset"
+      ],
+      "keys": [
+        "count",
+        "inc",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 636,
+      "title": "persist.ok.name devtools & subscribeWithSelector & persist & immer (#616)",
+      "status": "test",
+      "bodyHash": "b0c1111d697da376",
+      "literals": [
+        "count",
+        "prefix",
+        "2",
+        "reset"
+      ],
+      "keys": [
+        "count",
+        "inc",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "devtools",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "immer",
+          "from": "src/middleware/immer.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 678,
+      "title": "persist.ok.name #619, #632",
+      "status": "test",
+      "bodyHash": "eef42cf85028414e",
+      "literals": [
+        "name"
+      ],
+      "keys": [
+        "foo",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 728,
+      "title": "persist.ok.name #650",
+      "status": "test",
+      "bodyHash": "37d8d8113af4c8af",
+      "literals": [
+        "auth-store",
+        "u",
+        "p"
+      ],
+      "keys": [
+        "token",
+        "authenticated",
+        "authenticate",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/middlewareTypes.test.tsx",
+      "line": 770,
+      "title": "persist.ok.name subscribeWithSelector & persist",
+      "status": "test",
+      "bodyHash": "e19e569a8179ac00",
+      "literals": [
+        "zustand/subscribeWithSelector",
+        "zustand/persist",
+        "count",
+        "2"
+      ],
+      "keys": [
+        "count",
+        "inc",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 55,
+      "title": "persist.ok.merge can rehydrate state",
+      "status": "test",
+      "bodyHash": "2ef1ce9b1ce5cda5",
+      "literals": [
+        "10",
+        "42",
+        "empty",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "name",
+        "version",
+        "setItem",
+        "removeItem",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.on-rehydrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.on-rehydrate",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 109,
+      "title": "persist.ok.on-rehydrate can throw rehydrate error",
+      "status": "test",
+      "bodyHash": "d315ed6a77311473",
+      "literals": [
+        "10",
+        "getItem error",
+        "test-storage",
+        "count: 0"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.shape",
+      "unitId": "persist",
+      "guaranteeId": "ok.shape",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 148,
+      "title": "persist.ok.shape can persist state",
+      "status": "test",
+      "bodyHash": "0de974785b2cdc0e",
+      "literals": [
+        "10",
+        "test-storage",
+        "count: 0",
+        "42",
+        "count: 42",
+        "count2: 42"
+      ],
+      "keys": [
+        "storage",
+        "getItem",
+        "setItem",
+        "removeItem",
+        "getItemSpy",
+        "setItemSpy",
+        "removeItemSpy",
+        "count",
+        "name",
+        "onRehydrateStorage",
+        "useBoundStore",
+        "onRehydrateStorageSpy",
+        "state",
+        "version"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.migrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.migrate",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 216,
+      "title": "persist.ok.migrate can async migrate persisted state",
+      "status": "test",
+      "bodyHash": "cb7baf0826073315",
+      "literals": [
+        "10",
+        "99",
+        "42",
+        "12",
+        "test-storage",
+        "13",
+        "count: 0",
+        "20",
+        "count: 99"
+      ],
+      "keys": [
+        "count",
+        "getItem",
+        "state",
+        "version",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "onRehydrateStorage",
+        "migrate"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 271,
+      "title": "persist.ok.merge can merge partial persisted state",
+      "status": "test",
+      "bodyHash": "60a234e258e87bef",
+      "literals": [
+        "10",
+        "42",
+        "unknown",
+        "test-storage",
+        "test"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "setItem",
+        "removeItem",
+        "name",
+        "setName",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.version",
+      "unitId": "persist",
+      "guaranteeId": "ok.version",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 334,
+      "title": "persist.ok.version can correctly handle a missing migrate function",
+      "status": "test",
+      "bodyHash": "16a4eea3e64408f6",
+      "literals": [
+        "10",
+        "42",
+        "12",
+        "test-storage",
+        "13",
+        "count: 0"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "version",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.migrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.migrate",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 375,
+      "title": "persist.ok.migrate can throw migrate error",
+      "status": "test",
+      "bodyHash": "e1d70199bf3e62e0",
+      "literals": [
+        "10",
+        "12",
+        "test-storage",
+        "13",
+        "migrate error",
+        "count: 0"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "version",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage",
+        "migrate",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.on-rehydrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.on-rehydrate",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 422,
+      "title": "persist.ok.on-rehydrate passes the latest state to onRehydrateStorage and onHydrate on first hydrate",
+      "status": "test",
+      "bodyHash": "015687427fd253f2",
+      "literals": [
+        "10",
+        "test-storage",
+        "count: 1"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 474,
+      "title": "persist.ok.merge gives the merged state to onRehydrateStorage",
+      "status": "test",
+      "bodyHash": "be361328f3b9f234",
+      "literals": [
+        "10",
+        "test-storage",
+        "count: 0"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "version",
+        "setItem",
+        "removeItem",
+        "unstorableMethod",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 518,
+      "title": "persist.ok.merge can custom merge the stored state",
+      "status": "test",
+      "bodyHash": "ab57537cafdd4bdd",
+      "literals": [
+        "10",
+        "test-storage",
+        "count: 1"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "actions",
+        "version",
+        "setItem",
+        "removeItem",
+        "unstorableMethod",
+        "name",
+        "storage",
+        "merge"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 573,
+      "title": "persist.ok.merge can merge the state when the storage item doesn't have a version",
+      "status": "test",
+      "bodyHash": "29ee1c4787dcc376",
+      "literals": [
+        "10",
+        "test-storage",
+        "count: 1"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 612,
+      "title": "persist.ok.merge can manually rehydrate through the api",
+      "status": "test",
+      "bodyHash": "71079dd35dc75d5d",
+      "literals": [
+        "{\"state\":{\"count\":1},\"version\":0}",
+        "10",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.skip-hydration",
+      "unitId": "persist",
+      "guaranteeId": "ok.skip-hydration",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 643,
+      "title": "persist.ok.skip-hydration can check if the store has been hydrated through the api",
+      "status": "test",
+      "bodyHash": "ed2eb7327aaeba34",
+      "literals": [
+        "10",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.skip-hydration",
+      "unitId": "persist",
+      "guaranteeId": "ok.skip-hydration",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 669,
+      "title": "persist.ok.skip-hydration can skip initial hydration",
+      "status": "test",
+      "bodyHash": "87a4289f1c645b79",
+      "literals": [
+        "10",
+        "42",
+        "empty",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "name",
+        "version",
+        "setItem",
+        "removeItem",
+        "storage",
+        "onRehydrateStorage",
+        "skipHydration"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.on-rehydrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.on-rehydrate",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 720,
+      "title": "persist.ok.on-rehydrate handles state updates during onRehydrateStorage",
+      "status": "test",
+      "bodyHash": "56602b89d2957358",
+      "literals": [
+        "10",
+        "test-storage",
+        "count: 2",
+        "2"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "setItem",
+        "removeItem",
+        "inc",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.on-rehydrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.on-rehydrate",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 760,
+      "title": "persist.ok.on-rehydrate passes latest state to post-rehydration callback after hydration-triggered updates",
+      "status": "test",
+      "bodyHash": "e10ca5db395f187e",
+      "literals": [
+        "10",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "bumped",
+        "version",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 814,
+      "title": "persist.ok.merge can rehydrate state with custom deserialized Map",
+      "status": "test",
+      "bodyHash": "cc854c1765c4a6bb",
+      "literals": [
+        "10",
+        "Map",
+        "foo",
+        "bar",
+        "test-storage",
+        "map: bar"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "map",
+        "type",
+        "value",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "replacer",
+        "reviver",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "replacer",
+          "from": "tests/test-utils.ts"
+        },
+        {
+          "name": "reviver",
+          "from": "tests/test-utils.ts"
+        }
+      ],
+      "lengths": [
+        1,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.shape",
+      "unitId": "persist",
+      "guaranteeId": "ok.shape",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 861,
+      "title": "persist.ok.shape can persist state with custom serialization of Map",
+      "status": "test",
+      "bodyHash": "1806f9a943946f95",
+      "literals": [
+        "10",
+        "test-storage",
+        "foo",
+        "map-content:",
+        "bar",
+        "map-content: bar",
+        "Map",
+        "map-content2: bar"
+      ],
+      "keys": [
+        "storage",
+        "getItem",
+        "setItem",
+        "removeItem",
+        "getItemSpy",
+        "setItemSpy",
+        "removeItemSpy",
+        "map",
+        "name",
+        "replacer",
+        "reviver",
+        "onRehydrateStorage",
+        "useBoundStore",
+        "onRehydrateStorageSpy",
+        "state",
+        "type",
+        "value",
+        "version"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts"
+        },
+        {
+          "name": "replacer",
+          "from": "tests/test-utils.ts"
+        },
+        {
+          "name": "reviver",
+          "from": "tests/test-utils.ts"
+        }
+      ],
+      "lengths": [
+        1,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 935,
+      "title": "persist.ok.name should handle multiple concurrent rehydrate calls (only last one wins)",
+      "status": "test",
+      "bodyHash": "ddb88da7a67cfd08",
+      "literals": [
+        "10",
+        "test-storage",
+        "30"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "version",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "skipHydration"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 981,
+      "title": "persist.ok.merge should not overwrite user state changes made during async hydration",
+      "status": "test",
+      "bodyHash": "952cd6e0fc8bf6b1",
+      "literals": [
+        "20",
+        "42",
+        "from-storage",
+        "initial",
+        "test-storage",
+        "10",
+        "100"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "userValue",
+        "version",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "merge"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.migrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.migrate",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 1023,
+      "title": "persist.ok.migrate should abort hydration with async migration when newer hydration starts",
+      "status": "test",
+      "bodyHash": "5bf21fe1cc7cfb6e",
+      "literals": [
+        "5",
+        "test-storage",
+        "10",
+        "20",
+        "2"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "version",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "migrate",
+        "skipHydration"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 1082,
+      "title": "persist.ok.name keeps a cleared delayed stored value from hydrating state",
+      "status": "test",
+      "bodyHash": "7acfbe05f739f329",
+      "literals": [
+        "test-storage"
+      ],
+      "keys": [
+        "promise",
+        "resolve",
+        "count",
+        "name",
+        "skipHydration",
+        "storage",
+        "getItem",
+        "removeItem",
+        "setItem",
+        "state",
+        "version"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.migrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.migrate",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 1109,
+      "title": "persist.ok.migrate keeps a cleared delayed migration from hydrating state",
+      "status": "test",
+      "bodyHash": "549f5d1c23ac1220",
+      "literals": [
+        "test-storage",
+        "2"
+      ],
+      "keys": [
+        "promise",
+        "resolve",
+        "count",
+        "migrate",
+        "name",
+        "skipHydration",
+        "storage",
+        "getItem",
+        "state",
+        "version",
+        "removeItem",
+        "setItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 1137,
+      "title": "persist.ok.name revokes the active hydration even when storage removal throws",
+      "status": "test",
+      "bodyHash": "093e11a3f15979b0",
+      "literals": [
+        "remove failed",
+        "test-storage",
+        "2"
+      ],
+      "keys": [
+        "promise",
+        "resolve",
+        "count",
+        "name",
+        "skipHydration",
+        "storage",
+        "getItem",
+        "state",
+        "version",
+        "removeItem",
+        "setItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 1174,
+      "title": "persist.ok.name does not reset live state when clearing after hydration",
+      "status": "test",
+      "bodyHash": "4bcecdbb8dac0fba",
+      "literals": [
+        "test-storage"
+      ],
+      "keys": [
+        "count",
+        "name",
+        "skipHydration",
+        "storage",
+        "getItem",
+        "state",
+        "version",
+        "removeItem",
+        "setItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.on-rehydrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.on-rehydrate",
+      "file": "tests/persistAsync.test.tsx",
+      "line": 1195,
+      "title": "persist.ok.on-rehydrate suppresses stale completion signals and allows a later hydration",
+      "status": "test",
+      "bodyHash": "441aa34f7068fc52",
+      "literals": [
+        "test-storage",
+        "2"
+      ],
+      "keys": [
+        "promise",
+        "resolve",
+        "count",
+        "name",
+        "onRehydrateStorage",
+        "skipHydration",
+        "storage",
+        "getItem",
+        "state",
+        "version",
+        "removeItem",
+        "setItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistSync.test.tsx",
+      "line": 41,
+      "title": "persist.ok.merge can rehydrate state",
+      "status": "test",
+      "bodyHash": "a6d9a362652e8d30",
+      "literals": [
+        "42",
+        "empty",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "name",
+        "version",
+        "setItem",
+        "removeItem",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.on-rehydrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.on-rehydrate",
+      "file": "tests/persistSync.test.tsx",
+      "line": 77,
+      "title": "persist.ok.on-rehydrate can throw rehydrate error",
+      "status": "test",
+      "bodyHash": "21a7bdb6e595c9e7",
+      "literals": [
+        "getItem error",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.shape",
+      "unitId": "persist",
+      "guaranteeId": "ok.shape",
+      "file": "tests/persistSync.test.tsx",
+      "line": 98,
+      "title": "persist.ok.shape can persist state",
+      "status": "test",
+      "bodyHash": "addc822f6ef71c97",
+      "literals": [
+        "test-storage",
+        "42"
+      ],
+      "keys": [
+        "storage",
+        "getItem",
+        "setItem",
+        "removeItem",
+        "getItemSpy",
+        "setItemSpy",
+        "count",
+        "name",
+        "onRehydrateStorage",
+        "useBoundStore",
+        "onRehydrateStorageSpy",
+        "state",
+        "version"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.migrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.migrate",
+      "file": "tests/persistSync.test.tsx",
+      "line": 136,
+      "title": "persist.ok.migrate can non-async migrate persisted state",
+      "status": "test",
+      "bodyHash": "988efdcab91b5519",
+      "literals": [
+        "99",
+        "42",
+        "12",
+        "test-storage",
+        "13"
+      ],
+      "keys": [
+        "count",
+        "getItem",
+        "state",
+        "version",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "onRehydrateStorage",
+        "migrate"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.version",
+      "unitId": "persist",
+      "guaranteeId": "ok.version",
+      "file": "tests/persistSync.test.tsx",
+      "line": 173,
+      "title": "persist.ok.version can correctly handle a missing migrate function",
+      "status": "test",
+      "bodyHash": "f5724a6d19f2d7e2",
+      "literals": [
+        "42",
+        "12",
+        "test-storage",
+        "13"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "version",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.migrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.migrate",
+      "file": "tests/persistSync.test.tsx",
+      "line": 200,
+      "title": "persist.ok.migrate can throw migrate error",
+      "status": "test",
+      "bodyHash": "e226991cd937305d",
+      "literals": [
+        "12",
+        "test-storage",
+        "13",
+        "migrate error"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "version",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage",
+        "migrate",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.on-rehydrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.on-rehydrate",
+      "file": "tests/persistSync.test.tsx",
+      "line": 232,
+      "title": "persist.ok.on-rehydrate passes the latest state to onRehydrateStorage and onHydrate on first hydrate",
+      "status": "test",
+      "bodyHash": "e2bc53344d2f18f0",
+      "literals": [
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistSync.test.tsx",
+      "line": 266,
+      "title": "persist.ok.merge gives the merged state to onRehydrateStorage",
+      "status": "test",
+      "bodyHash": "3cbcc335cd0313b4",
+      "literals": [
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "version",
+        "setItem",
+        "removeItem",
+        "unstorableMethod",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistSync.test.tsx",
+      "line": 295,
+      "title": "persist.ok.merge can custom merge the stored state",
+      "status": "test",
+      "bodyHash": "594bb4ac1b3b5b5e",
+      "literals": [
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "actions",
+        "version",
+        "setItem",
+        "removeItem",
+        "unstorableMethod",
+        "name",
+        "storage",
+        "merge"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistSync.test.tsx",
+      "line": 335,
+      "title": "persist.ok.merge can merge the state when the storage item doesn't have a version",
+      "status": "test",
+      "bodyHash": "df24ec4a8c48c3ae",
+      "literals": [
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.partialize",
+      "unitId": "persist",
+      "guaranteeId": "ok.partialize",
+      "file": "tests/persistSync.test.tsx",
+      "line": 359,
+      "title": "persist.ok.partialize can filter the persisted value",
+      "status": "test",
+      "bodyHash": "391a172ecc13b1c7",
+      "literals": [
+        "0",
+        "1",
+        "2",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "object",
+        "first",
+        "second",
+        "array",
+        "value",
+        "name",
+        "storage",
+        "partialize",
+        "state",
+        "version"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/persistSync.test.tsx",
+      "line": 424,
+      "title": "persist.ok.name can access the options through the api",
+      "status": "test",
+      "bodyHash": "4d1d24ee2b4b372e",
+      "literals": [
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/persistSync.test.tsx",
+      "line": 441,
+      "title": "persist.ok.name can change the options through the api",
+      "status": "test",
+      "bodyHash": "1fc963eb53a40aba",
+      "literals": [
+        "test-storage",
+        "{\"state\":{\"count\":0},\"version\":0}",
+        "test-storage-2",
+        "count",
+        "{\"state\":{},\"version\":0}"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage",
+        "partialize"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/persistSync.test.tsx",
+      "line": 478,
+      "title": "persist.ok.name can clear the storage through the api",
+      "status": "test",
+      "bodyHash": "c9d6c243d5ac2f0f",
+      "literals": [
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistSync.test.tsx",
+      "line": 498,
+      "title": "persist.ok.merge can manually rehydrate through the api",
+      "status": "test",
+      "bodyHash": "ca74fa556fb7017a",
+      "literals": [
+        "{\"state\":{\"count\":1},\"version\":0}",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.skip-hydration",
+      "unitId": "persist",
+      "guaranteeId": "ok.skip-hydration",
+      "file": "tests/persistSync.test.tsx",
+      "line": 521,
+      "title": "persist.ok.skip-hydration can check if the store has been hydrated through the api",
+      "status": "test",
+      "bodyHash": "154eea8fef469bb7",
+      "literals": [
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/persistSync.test.tsx",
+      "line": 541,
+      "title": "persist.ok.name can wait for rehydration through the api",
+      "status": "test",
+      "bodyHash": "bf2d409c8018b3dc",
+      "literals": [
+        "{\"state\":{\"count\":1},\"version\":0}",
+        "{\"state\":{\"count\":2},\"version\":0}",
+        "test-storage",
+        "2"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "count",
+        "name",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.skip-hydration",
+      "unitId": "persist",
+      "guaranteeId": "ok.skip-hydration",
+      "file": "tests/persistSync.test.tsx",
+      "line": 589,
+      "title": "persist.ok.skip-hydration can skip initial hydration",
+      "status": "test",
+      "bodyHash": "3e863d01feda275e",
+      "literals": [
+        "42",
+        "empty",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "name",
+        "version",
+        "setItem",
+        "removeItem",
+        "storage",
+        "onRehydrateStorage",
+        "skipHydration"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.on-rehydrate",
+      "unitId": "persist",
+      "guaranteeId": "ok.on-rehydrate",
+      "file": "tests/persistSync.test.tsx",
+      "line": 635,
+      "title": "persist.ok.on-rehydrate handles state updates during onRehydrateStorage",
+      "status": "test",
+      "bodyHash": "a20ef4eb6a9a2b0c",
+      "literals": [
+        "test-storage",
+        "2"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "setItem",
+        "removeItem",
+        "inc",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.merge",
+      "unitId": "persist",
+      "guaranteeId": "ok.merge",
+      "file": "tests/persistSync.test.tsx",
+      "line": 659,
+      "title": "persist.ok.merge can rehydrate state with custom deserialized Map",
+      "status": "test",
+      "bodyHash": "94e783bf6c6767e5",
+      "literals": [
+        "Map",
+        "foo",
+        "bar",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "map",
+        "type",
+        "value",
+        "setItem",
+        "removeItem",
+        "name",
+        "storage",
+        "onRehydrateStorage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.shape",
+      "unitId": "persist",
+      "guaranteeId": "ok.shape",
+      "file": "tests/persistSync.test.tsx",
+      "line": 691,
+      "title": "persist.ok.shape can persist state with custom serialization of Map",
+      "status": "test",
+      "bodyHash": "a9a6dd8d8f136c10",
+      "literals": [
+        "test-storage",
+        "foo",
+        "bar",
+        "Map"
+      ],
+      "keys": [
+        "storage",
+        "getItem",
+        "setItem",
+        "removeItem",
+        "getItemSpy",
+        "setItemSpy",
+        "map",
+        "name",
+        "replacer",
+        "reviver",
+        "onRehydrateStorage",
+        "useBoundStore",
+        "onRehydrateStorageSpy",
+        "state",
+        "type",
+        "value",
+        "version"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "replacer",
+          "from": "tests/test-utils.ts"
+        },
+        {
+          "name": "reviver",
+          "from": "tests/test-utils.ts"
+        }
+      ],
+      "lengths": [
+        1,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/persistSync.test.tsx",
+      "line": 739,
+      "title": "persist.ok.name does not call setItem when hydrating from its own storage",
+      "status": "test",
+      "bodyHash": "c8d26d1b5a46b22f",
+      "literals": [
+        "42",
+        "test-storage"
+      ],
+      "keys": [
+        "getItem",
+        "state",
+        "count",
+        "name",
+        "version",
+        "setItem",
+        "removeItem",
+        "storage"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/types.test.tsx",
+      "line": 199,
+      "title": "persist.ok.name StateCreator<T, [StoreMutatorIdentfier, unknown][]> is StateCreator<T, []>",
+      "status": "test",
+      "bodyHash": "5759689bb1076fc1",
+      "literals": [
+        "prefix"
+      ],
+      "keys": [
+        "count",
+        "increment",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "StoreMutatorIdentifier",
+          "from": "src/index.ts"
+        },
+        {
+          "name": "StateCreator",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "persist.ok.name",
+      "unitId": "persist",
+      "guaranteeId": "ok.name",
+      "file": "tests/types.test.tsx",
+      "line": 219,
+      "title": "persist.ok.name StateCreator subtyping",
+      "status": "test",
+      "bodyHash": "f4e34d4b88df43e2",
+      "literals": [
+        "prefix",
+        "zustand/persist"
+      ],
+      "keys": [
+        "count",
+        "increment",
+        "name"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "create",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "persist",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "StateCreator",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.api",
+      "unitId": "createStore",
+      "guaranteeId": "ok.api",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 13,
+      "title": "createStore.ok.api create a store",
+      "status": "test",
+      "bodyHash": "d4ca5f95fe28942c",
+      "literals": [
+        "\n    {\n      \"params\": [\n        [Function],\n        [Function],\n        {\n          \"getInitialState\": [Function],\n          \"getState\": [Function],\n          \"setState\": [Function],\n          \"subscribe\": [Function],\n        },\n      ],\n      \"result\": {\n        \"getInitialState\": [Function],\n        \"getState\": [Function],\n        \"setState\": [Function],\n        \"subscribe\": [Function],\n      },\n    }\n  "
+      ],
+      "keys": [
+        "value",
+        "params",
+        "result"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.updater",
+      "unitId": "createStore",
+      "guaranteeId": "ok.updater",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 46,
+      "title": "createStore.ok.updater uses the store",
+      "status": "test",
+      "bodyHash": "ca91829bf314c59b",
+      "literals": [],
+      "keys": [
+        "count",
+        "inc"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.initial",
+      "unitId": "createStore",
+      "guaranteeId": "ok.initial",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 56,
+      "title": "createStore.ok.initial can get the store",
+      "status": "test",
+      "bodyHash": "97526ff8f13b6fd1",
+      "literals": [],
+      "keys": [
+        "value",
+        "getState1",
+        "getState2"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.initial",
+      "unitId": "createStore",
+      "guaranteeId": "ok.initial",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 73,
+      "title": "createStore.ok.initial can get the initial state",
+      "status": "test",
+      "bodyHash": "21a811e11fc71d92",
+      "literals": [
+        "2"
+      ],
+      "keys": [
+        "value"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.merge",
+      "unitId": "createStore",
+      "guaranteeId": "ok.merge",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 80,
+      "title": "createStore.ok.merge can set the store",
+      "status": "test",
+      "bodyHash": "bd6611f6d1d1536c",
+      "literals": [
+        "setState",
+        "2",
+        "3"
+      ],
+      "keys": [
+        "value",
+        "setState1",
+        "setState2"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "StoreApi",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 99,
+      "title": "createStore.ok.subscribe both NaN should not update",
+      "status": "test",
+      "bodyHash": "71a3dd4b361df428",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.replace",
+      "unitId": "createStore",
+      "guaranteeId": "ok.replace",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 109,
+      "title": "createStore.ok.replace can set the store without merging",
+      "status": "test",
+      "bodyHash": "d89f2c620543937f",
+      "literals": [
+        "2"
+      ],
+      "keys": [
+        "a",
+        "b"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.merge",
+      "unitId": "createStore",
+      "guaranteeId": "ok.merge",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 122,
+      "title": "createStore.ok.merge can set the object store to null",
+      "status": "test",
+      "bodyHash": "4c067dd4db22ab3c",
+      "literals": [],
+      "keys": [
+        "a"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.merge",
+      "unitId": "createStore",
+      "guaranteeId": "ok.merge",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 132,
+      "title": "createStore.ok.merge can set the non-object store to null",
+      "status": "test",
+      "bodyHash": "1a68a696e29cba41",
+      "literals": [
+        "value"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.updater",
+      "unitId": "createStore",
+      "guaranteeId": "ok.updater",
+      "file": "tests/vanilla/basic.test.ts",
+      "line": 140,
+      "title": "createStore.ok.updater works with non-object state",
+      "status": "test",
+      "bodyHash": "96ff4d70a0c6914d",
+      "literals": [
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.primitives",
+      "unitId": "shallow",
+      "guaranteeId": "ok.primitives",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 5,
+      "title": "shallow.ok.primitives compares primitive values",
+      "status": "test",
+      "bodyHash": "398985225f766907",
+      "literals": [
+        "2",
+        "zustand",
+        "redux"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.objects",
+      "unitId": "shallow",
+      "guaranteeId": "ok.objects",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 16,
+      "title": "shallow.ok.objects compares objects",
+      "status": "test",
+      "bodyHash": "4847eb318d5eac78",
+      "literals": [
+        "bar",
+        "123"
+      ],
+      "keys": [
+        "foo",
+        "asd",
+        "foobar"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.objects",
+      "unitId": "shallow",
+      "guaranteeId": "ok.objects",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 30,
+      "title": "shallow.ok.objects compares arrays",
+      "status": "test",
+      "bodyHash": "02d8704a543a7c21",
+      "literals": [
+        "2",
+        "3",
+        "4",
+        "bar",
+        "123"
+      ],
+      "keys": [
+        "foo",
+        "asd"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3,
+        2,
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.maps",
+      "unitId": "shallow",
+      "guaranteeId": "ok.maps",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 44,
+      "title": "shallow.ok.maps compares Maps",
+      "status": "test",
+      "bodyHash": "6d32435efe4659da",
+      "literals": [
+        "foo",
+        "bar",
+        "asd",
+        "123",
+        "foobar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2,
+        3,
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.sets",
+      "unitId": "shallow",
+      "guaranteeId": "ok.sets",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 108,
+      "title": "shallow.ok.sets compares Sets",
+      "status": "test",
+      "bodyHash": "fe528e059e68fe09",
+      "literals": [
+        "bar",
+        "123",
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2,
+        3,
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.primitives",
+      "unitId": "shallow",
+      "guaranteeId": "ok.primitives",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 129,
+      "title": "shallow.ok.primitives compares functions",
+      "status": "test",
+      "bodyHash": "8f8d6d62f49c2812",
+      "literals": [
+        "bar"
+      ],
+      "keys": [
+        "foo"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.maps",
+      "unitId": "shallow",
+      "guaranteeId": "ok.maps",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 145,
+      "title": "shallow.ok.maps compares URLSearchParams",
+      "status": "test",
+      "bodyHash": "7f14fbf92dbe5964",
+      "literals": [
+        "a",
+        "b"
+      ],
+      "keys": [
+        "a",
+        "b"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.objects",
+      "unitId": "shallow",
+      "guaranteeId": "ok.objects",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 169,
+      "title": "shallow.ok.objects should work with nested arrays (#2794)",
+      "status": "test",
+      "bodyHash": "491dd8ad80082a56",
+      "literals": [
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.objects",
+      "unitId": "shallow",
+      "guaranteeId": "ok.objects",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 174,
+      "title": "shallow.ok.objects should work with undefined (#3204)",
+      "status": "test",
+      "bodyHash": "354680a9742049fa",
+      "literals": [],
+      "keys": [
+        "a",
+        "b"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.prototype",
+      "unitId": "shallow",
+      "guaranteeId": "ok.prototype",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 188,
+      "title": "shallow.ok.prototype compares different data structures",
+      "status": "test",
+      "bodyHash": "e971a43807460859",
+      "literals": [
+        "foo",
+        "bar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.primitives",
+      "unitId": "shallow",
+      "guaranteeId": "ok.primitives",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 199,
+      "title": "shallow.ok.primitives pure iterable",
+      "status": "test",
+      "bodyHash": "a7d20431b66035ef",
+      "literals": [
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.primitives",
+      "unitId": "shallow",
+      "guaranteeId": "ok.primitives",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 208,
+      "title": "shallow.ok.primitives pure iterable with different values returns false",
+      "status": "test",
+      "bodyHash": "d246695781449722",
+      "literals": [
+        "2",
+        "3"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "shallow.ok.objects",
+      "unitId": "shallow",
+      "guaranteeId": "ok.objects",
+      "file": "tests/vanilla/shallow.test.tsx",
+      "line": 228,
+      "title": "shallow.ok.objects date",
+      "status": "test",
+      "bodyHash": "a36917016dab1d3c",
+      "literals": [
+        "2022-07-19T00:00:00.000Z",
+        "2022-07-20T00:00:00.000Z"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "shallow",
+          "from": "src/shallow.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/subscribe.test.tsx",
+      "line": 6,
+      "title": "createStore.ok.subscribe should not be called if new state identity is the same",
+      "status": "test",
+      "bodyHash": "bb3777a73e8b19d4",
+      "literals": [
+        "a"
+      ],
+      "keys": [
+        "value",
+        "other"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/subscribe.test.tsx",
+      "line": 16,
+      "title": "createStore.ok.subscribe should be called if new state identity is different",
+      "status": "test",
+      "bodyHash": "9a906d86dc1d3daa",
+      "literals": [
+        "a"
+      ],
+      "keys": [
+        "value",
+        "other"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/subscribe.test.tsx",
+      "line": 26,
+      "title": "createStore.ok.subscribe should not be called when state slice is the same",
+      "status": "test",
+      "bodyHash": "c1933ada86467113",
+      "literals": [
+        "a",
+        "b"
+      ],
+      "keys": [
+        "value",
+        "other"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/subscribe.test.tsx",
+      "line": 38,
+      "title": "createStore.ok.subscribe should be called when state slice changes",
+      "status": "test",
+      "bodyHash": "6fdcc6501584a9a3",
+      "literals": [
+        "a"
+      ],
+      "keys": [
+        "value",
+        "other"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/subscribe.test.tsx",
+      "line": 51,
+      "title": "createStore.ok.subscribe should not be called when equality checker returns true",
+      "status": "test",
+      "bodyHash": "1bfecc338bbffec3",
+      "literals": [
+        "a",
+        "2"
+      ],
+      "keys": [
+        "value",
+        "other",
+        "equalityFn"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/subscribe.test.tsx",
+      "line": 63,
+      "title": "createStore.ok.subscribe should be called when equality checker returns false",
+      "status": "test",
+      "bodyHash": "b0fcaf3614f229bd",
+      "literals": [
+        "a",
+        "2"
+      ],
+      "keys": [
+        "value",
+        "other",
+        "equalityFn"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/subscribe.test.tsx",
+      "line": 76,
+      "title": "createStore.ok.subscribe should unsubscribe correctly",
+      "status": "test",
+      "bodyHash": "4c18b0b36e859ee0",
+      "literals": [
+        "a",
+        "2"
+      ],
+      "keys": [
+        "value",
+        "other"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/subscribe.test.tsx",
+      "line": 93,
+      "title": "createStore.ok.subscribe should keep consistent behavior with equality check",
+      "status": "test",
+      "bodyHash": "82d111ebcc52002d",
+      "literals": [
+        "a",
+        "0.5"
+      ],
+      "keys": [
+        "value",
+        "other",
+        "equalityFn"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createStore.ok.subscribe",
+      "unitId": "createStore",
+      "guaranteeId": "ok.subscribe",
+      "file": "tests/vanilla/subscribe.test.tsx",
+      "line": 124,
+      "title": "createStore.ok.subscribe should call listener immediately when fireImmediately is true",
+      "status": "test",
+      "bodyHash": "7bfa8510576e44fe",
+      "literals": [],
+      "keys": [
+        "value",
+        "fireImmediately"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "subscribeWithSelector",
+          "from": "src/middleware.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "guarantee-no-test",
+      "message": "createJSONStorage.ok.json has no test naming it",
+      "file": "src/middleware/persist.ts",
+      "line": 32,
+      "unit": "createJSONStorage",
+      "guarantee": "createJSONStorage.ok.json",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "createJSONStorage.ok.lazy has no test naming it",
+      "file": "src/middleware/persist.ts",
+      "line": 33,
+      "unit": "createJSONStorage",
+      "guarantee": "createJSONStorage.ok.lazy",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "persist.ok.default-storage has no test naming it",
+      "file": "src/middleware/persist.ts",
+      "line": 410,
+      "unit": "persist",
+      "guarantee": "persist.ok.default-storage",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "shallow.ok.nested has no test naming it",
+      "file": "src/vanilla/shallow.ts",
+      "line": 51,
+      "unit": "shallow",
+      "guarantee": "shallow.ok.nested",
+      "severity": "fail"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 4,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 23,
+    "guaranteesWithoutTest": 4,
+    "tests": 165,
+    "orphanTests": 0,
+    "unlinkedTests": 63,
+    "findings": {
+      "fail": 4,
+      "warn": 0,
+      "info": 1
+    }
+  }
+}

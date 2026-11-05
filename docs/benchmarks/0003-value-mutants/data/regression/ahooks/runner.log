@@ -1,0 +1,9 @@
+baseline run 8270 ms; timeout 41350 ms
+value-3 Survived   packages/hooks/src/useCounter/index.ts:62 the default `delta` 1 → 2
+value-2 Killed     packages/hooks/src/useCounter/index.ts:58 the default `delta` 1 → 2
+value-1 Survived   packages/hooks/src/useCounter/index.ts:38 the default `initialValue` 0 → 1
+value-mutants: 3 mutant(s): 2 Survived, 1 Killed; 20341 ms (baseline run 8270 ms)
+wrote <work-0001>/ahooks/reports/value/value.json
+real 20.40
+user 130.12
+sys 71.45

@@ -25,7 +25,12 @@ for (const [file, entry] of Object.entries(value.files)) {
     );
     process.stdout.write(
       `${m.id} ${m.status} ${file}:${line} | ${m.description}\n    ${lines[line - 1]?.trim().slice(0, 140)}\n` +
-        near.map((s) => `    stryker ${s.id} ${s.status} ${s.mutator} L${s.line}-${s.endLine} ${JSON.stringify(s.replacement)?.slice(0, 60)}\n`).join(""),
+        near
+          .map(
+            (s) =>
+              `    stryker ${s.id} ${s.status} ${s.mutator} L${s.line}-${s.endLine} ${JSON.stringify(s.replacement)?.slice(0, 60)}\n`,
+          )
+          .join(""),
     );
   }
 }

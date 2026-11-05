@@ -27,7 +27,13 @@ export const PROJECTS = {
     tests: ["library/src/**/*.test.ts"],
     tsconfig: "library/tsconfig.json",
   },
-  "cron-parser": { runner: "jest", cwd: ".", test: "TZ=UTC npx jest --watchman=false", tests: ["tests/**/*.test.ts"], env: { TZ: "UTC" } },
+  "cron-parser": {
+    runner: "jest",
+    cwd: ".",
+    test: "TZ=UTC npx jest --watchman=false",
+    tests: ["tests/**/*.test.ts"],
+    env: { TZ: "UTC" },
+  },
   neverthrow: { runner: "vitest", cwd: ".", test: "npx vitest run", tests: ["tests/**/*.test.ts"] },
   jotai: { runner: "vitest", cwd: ".", test: "npx vitest run", tests: ["tests/**/*.test.ts", "tests/**/*.test.tsx"] },
   "react-hook-form": {
@@ -70,7 +76,12 @@ function configs(name, p) {
     plugins: [`@stryker-mutator/${p.runner}-runner`],
     ...(p.vitestConfig ? { vitest: { configFile: p.vitestConfig } } : {}),
     ...(p.runner === "jest"
-      ? { jest: { ...(p.jestConfig ? { configFile: p.jestConfig } : {}), config: { watchman: false, ...(p.jestExtra ?? {}) } } }
+      ? {
+          jest: {
+            ...(p.jestConfig ? { configFile: p.jestConfig } : {}),
+            config: { watchman: false, ...(p.jestExtra ?? {}) },
+          },
+        }
       : {}),
   };
   const specgate = (out, report) => ({

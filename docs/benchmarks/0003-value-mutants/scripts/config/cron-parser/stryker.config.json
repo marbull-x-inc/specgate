@@ -8,16 +8,12 @@
     "src/CronFieldCollection.ts",
     "src/CronFileParser.ts"
   ],
-  "reporters": [
-    "json"
-  ],
+  "reporters": ["json"],
   "jsonReporter": {
     "fileName": "reports/mutation/mutation.json"
   },
   "tempDirName": ".stryker-tmp",
-  "plugins": [
-    "@stryker-mutator/jest-runner"
-  ],
+  "plugins": ["@stryker-mutator/jest-runner"],
   "jest": {
     "config": {
       "watchman": false

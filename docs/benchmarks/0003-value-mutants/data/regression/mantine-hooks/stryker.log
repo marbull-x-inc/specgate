@@ -1,0 +1,740 @@
+[32m07:57:35 (3923) INFO ProjectReader[39m Found 6 of 5838 file(s) to be mutated.
+Browserslist: browsers data (caniuse-lite) is 25 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[32m07:57:35 (3923) INFO Instrumenter[39m Instrumented 6 source file(s) with 221 mutant(s)
+[32m07:57:38 (3923) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m07:57:39 (3923) INFO DryRunExecutor[39m Starting initial test run (jest test runner with "perTest" coverage analysis). This may take a while.
+[32m07:57:40 (3923) INFO DryRunExecutor[39m Initial test run succeeded. Ran 36 tests in 1 second (net 72 ms, overhead 1538 ms).
+
+All tests
+  use-counter/use-counter.test.ts
+    ✓ @mantine/hooks/use-counter useCounter.ok.initial correctly returns initial state [line 3] (killed 2)
+    ✓ @mantine/hooks/use-counter useCounter.ok.initial correctly performs operations without initialValue or options [line 7] (killed 10)
+    ✓ @mantine/hooks/use-counter useCounter.ok.increment correctly increments and decrements by custom step [line 19] (killed 1)
+    ~ @mantine/hooks/use-counter useCounter.ok.bounds clamps step increment/decrement to min/max [line 29] (covered 16)
+    ~ @mantine/hooks/use-counter useCounter.ok.bounds correctly performs operations with initialValue and options [line 39] (covered 16)
+  use-disclosure/use-disclosure.test.ts
+    ✓ @mantine/hooks/use-disclosure useDisclosure.ok.handlers handles close correctly [line 3] (killed 9)
+    ✓ @mantine/hooks/use-disclosure useDisclosure.ok.handlers handles open correctly [line 9] (killed 7)
+    ✓ @mantine/hooks/use-disclosure useDisclosure.ok.handlers handles toggle correctly [line 15] (killed 2)
+    ✓ @mantine/hooks/use-disclosure useDisclosure.ok.callbacks calls onClose when close is called [line 23] (killed 1)
+    ✓ @mantine/hooks/use-disclosure useDisclosure.ok.callbacks calls onOpen when open is called [line 32] (killed 1)
+    ~ @mantine/hooks/use-disclosure useDisclosure.ok.callbacks calls onOpen and onClose correctly when toggle is called [line 41] (covered 22)
+  use-pagination/use-pagination.test.ts
+    ✓ @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page [line 3] (killed 17)
+    ✓ @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state [line 12] (killed 26)
+    ✓ @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes [line 17] (killed 21)
+    ✓ @mantine/hooks/use-pagination usePagination.ok.siblings returns correct initial state with custom parameters [line 24] (killed 4)
+    ✓ @mantine/hooks/use-pagination usePagination.ok.controlled calls onChange correctly with active page [line 36] (killed 2)
+    ✓ @mantine/hooks/use-pagination usePagination.ok.siblings does not change range length between page changes with custom parameters [line 51] (killed 1)
+    ✓ @mantine/hooks/use-pagination usePagination.ok.range does not hide a single page behind dots [line 65] (killed 1)
+    ~ @mantine/hooks/use-pagination usePagination.ok.boundaries does not hide a single page behind dots with custom parameters [line 69] (covered 68)
+    ~ @mantine/hooks/use-pagination usePagination.ok.range truncates total value [line 80] (covered 65)
+    ✓ @mantine/hooks/use-pagination usePagination.ok.range handles negative total value correctly [line 84] (killed 2)
+    ✓ @mantine/hooks/use-pagination usePagination.ok.start-value handles startValue correctly [line 88] (killed 4)
+  use-queue/use-queue.test.ts
+    ✓ @mantine/hooks/use-queue useQueue.ok.initial correctly distributes initial values when limit is not reached [line 3] (killed 4)
+    ✓ @mantine/hooks/use-queue useQueue.ok.initial correctly distributes initial values when limit is reached [line 8] (killed 1)
+    ✓ @mantine/hooks/use-queue useQueue.ok.add adds items to the state when limit is not reached [line 13] (killed 5)
+    ✓ @mantine/hooks/use-queue useQueue.ok.add adds items to the queue when limit is reached [line 19] (killed 1)
+    ✓ @mantine/hooks/use-queue useQueue.ok.update correctly applies given update to state without queue [line 25] (killed 5)
+    ✓ @mantine/hooks/use-queue useQueue.ok.update correctly applies given update to state with queue [line 31] (killed 1)
+    ~ @mantine/hooks/use-queue useQueue.ok.update puts extra items to the queue if state has extra items after update [line 37] (covered 13)
+    ✓ @mantine/hooks/use-queue useQueue.ok.clean cleans queue with cleanQueue handlers [line 43] (killed 4)
+  use-toggle/use-toggle.test.ts
+    ✓ @mantine/hooks/use-toggle useToggle.ok.first returns correct initial state [line 3] (killed 2)
+    ✓ @mantine/hooks/use-toggle useToggle.ok.cycle correctly toggles value [line 7] (killed 2)
+    ✓ @mantine/hooks/use-toggle useToggle.ok.cycle correctly toggles more than two values [line 14] (killed 1)
+    ~ @mantine/hooks/use-toggle useToggle.ok.force allows to set value [line 27] (covered 5)
+    ~ @mantine/hooks/use-toggle useToggle.ok.force allows to set value with callback function [line 34] (covered 5)
+    ~ @mantine/hooks/use-toggle useToggle.ok.boolean allows to use hook without options [line 39] (covered 5)
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-counter/use-counter.ts:50:5
+-       [initialValue, min, max]
++       []
+Tests ran:
+    @mantine/hooks/use-counter useCounter.ok.initial correctly returns initial state
+    @mantine/hooks/use-counter useCounter.ok.initial correctly performs operations without initialValue or options
+    @mantine/hooks/use-counter useCounter.ok.increment correctly increments and decrements by custom step
+  and 2 more tests!
+
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-counter/use-counter.ts:43:5
+-       [min, max, step]
++       []
+Tests ran:
+    @mantine/hooks/use-counter useCounter.ok.initial correctly returns initial state
+    @mantine/hooks/use-counter useCounter.ok.initial correctly performs operations without initialValue or options
+    @mantine/hooks/use-counter useCounter.ok.increment correctly increments and decrements by custom step
+  and 2 more tests!
+
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-counter/use-counter.ts:38:5
+-       [min, max, step]
++       []
+Tests ran:
+    @mantine/hooks/use-counter useCounter.ok.initial correctly returns initial state
+    @mantine/hooks/use-counter useCounter.ok.initial correctly performs operations without initialValue or options
+    @mantine/hooks/use-counter useCounter.ok.increment correctly increments and decrements by custom step
+  and 2 more tests!
+
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-counter/use-counter.ts:46:80
+-     const set = useCallback((value: number) => setCount(clamp(value, min, max)), [min, max]);
++     const set = useCallback((value: number) => setCount(clamp(value, min, max)), []);
+Tests ran:
+    @mantine/hooks/use-counter useCounter.ok.initial correctly returns initial state
+    @mantine/hooks/use-counter useCounter.ok.initial correctly performs operations without initialValue or options
+    @mantine/hooks/use-counter useCounter.ok.increment correctly increments and decrements by custom step
+  and 2 more tests!
+
+
+[Survived] ObjectLiteral
+packages/@mantine/hooks/src/use-counter/use-counter.ts:4:25
+-   const DEFAULT_OPTIONS = {
+-     min: -Infinity,
+-     max: Infinity,
+-   };
++   const DEFAULT_OPTIONS = {};
+Ran all tests for this mutant.
+
+[NoCoverage] BooleanLiteral
+packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts:24:18
+-     initialState = false,
++     initialState = true,
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts:37:6
+-     }, [options.onOpen]);
++     }, []);
+Tests ran:
+    @mantine/hooks/use-disclosure useDisclosure.ok.handlers handles close correctly
+    @mantine/hooks/use-disclosure useDisclosure.ok.handlers handles open correctly
+    @mantine/hooks/use-disclosure useDisclosure.ok.handlers handles toggle correctly
+  and 3 more tests!
+
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts:47:6
+-     }, [options.onClose]);
++     }, []);
+Tests ran:
+    @mantine/hooks/use-disclosure useDisclosure.ok.handlers handles close correctly
+    @mantine/hooks/use-disclosure useDisclosure.ok.handlers handles open correctly
+    @mantine/hooks/use-disclosure useDisclosure.ok.handlers handles toggle correctly
+  and 3 more tests!
+
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:13:46
+-   function isMacOS(userAgent: string): boolean {
+-     const macosPattern = /(Macintosh)|(MacIntel)|(MacPPC)|(Mac68K)/i;
+-     return macosPattern.test(userAgent);
+-   }
++   function isMacOS(userAgent: string): boolean {}
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:19:44
+-   function isIOS(userAgent: string): boolean {
+-     const iosPattern = /(iPhone)|(iPad)|(iPod)/i;
+-     return iosPattern.test(userAgent);
+-   }
++   function isIOS(userAgent: string): boolean {}
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:25:48
+-   function isWindows(userAgent: string): boolean {
+-     const windowsPattern = /(Win32)|(Win64)|(Windows)|(WinCE)/i;
+-     return windowsPattern.test(userAgent);
+-   }
++   function isWindows(userAgent: string): boolean {}
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:31:48
+-   function isAndroid(userAgent: string): boolean {
+-     const androidPattern = /Android/i;
+-     return androidPattern.test(userAgent);
+-   }
++   function isAndroid(userAgent: string): boolean {}
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:37:46
+-   function isLinux(userAgent: string): boolean {
+-     const linuxPattern = /Linux/i;
+-     return linuxPattern.test(userAgent);
+-   }
++   function isLinux(userAgent: string): boolean {}
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:43:49
+-   function isChromeOS(userAgent: string): boolean {
+-     const chromePattern = /CrOS/i;
+-     return chromePattern.test(userAgent);
+-   }
++   function isChromeOS(userAgent: string): boolean {}
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:48:36
+-   function getOS(): UseOSReturnValue {
+-     if (typeof window === 'undefined') {
+-       return 'undetermined';
+-     }
+-     const { userAgent } = window.navigator;
+-     if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {
+-       return 'ios';
+-     }
+-     if (isMacOS(userAgent)) {
+-       return 'macos';
+-     }
+-     if (isWindows(userAgent)) {
+-       return 'windows';
+-     }
+-     if (isAndroid(userAgent)) {
+-       return 'android';
+-     }
+-     if (isChromeOS(userAgent)) {
+-       return 'chromeos';
+-     }
+-     if (isLinux(userAgent)) {
+-       return 'linux';
+-     }
+-     return 'undetermined';
+-   }
++   function getOS(): UseOSReturnValue {}
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:49:7
+-     if (typeof window === 'undefined') {
++     if (true) {
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:49:7
+-     if (typeof window === 'undefined') {
++     if (false) {
+
+[NoCoverage] EqualityOperator
+packages/@mantine/hooks/src/use-os/use-os.ts:49:7
+-     if (typeof window === 'undefined') {
++     if (typeof window !== 'undefined') {
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:49:25
+-     if (typeof window === 'undefined') {
++     if (typeof window === "") {
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:49:38
+-     if (typeof window === 'undefined') {
+-       return 'undetermined';
+-     }
++     if (typeof window === 'undefined') {}
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:50:12
+-       return 'undetermined';
++       return "";
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:55:7
+-     if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {
++     if (true) {
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:55:7
+-     if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {
++     if (false) {
+
+[NoCoverage] LogicalOperator
+packages/@mantine/hooks/src/use-os/use-os.ts:55:7
+-     if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {
++     if (isIOS(userAgent) && isMacOS(userAgent) && 'ontouchend' in document) {
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:55:28
+-     if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {
++     if (isIOS(userAgent) || (false)) {
+
+[NoCoverage] LogicalOperator
+packages/@mantine/hooks/src/use-os/use-os.ts:55:28
+-     if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {
++     if (isIOS(userAgent) || (isMacOS(userAgent) || 'ontouchend' in document)) {
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:55:50
+-     if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {
++     if (isIOS(userAgent) || (isMacOS(userAgent) && "" in document)) {
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:55:77
+-     if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {
+-       return 'ios';
+-     }
++     if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {}
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:56:12
+-       return 'ios';
++       return "";
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:58:7
+-     if (isMacOS(userAgent)) {
++     if (true) {
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:58:7
+-     if (isMacOS(userAgent)) {
++     if (false) {
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:58:27
+-     if (isMacOS(userAgent)) {
+-       return 'macos';
+-     }
++     if (isMacOS(userAgent)) {}
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:59:12
+-       return 'macos';
++       return "";
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:61:7
+-     if (isWindows(userAgent)) {
++     if (true) {
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:61:7
+-     if (isWindows(userAgent)) {
++     if (false) {
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:61:29
+-     if (isWindows(userAgent)) {
+-       return 'windows';
+-     }
++     if (isWindows(userAgent)) {}
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:62:12
+-       return 'windows';
++       return "";
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:64:7
+-     if (isAndroid(userAgent)) {
++     if (true) {
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:64:7
+-     if (isAndroid(userAgent)) {
++     if (false) {
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:64:29
+-     if (isAndroid(userAgent)) {
+-       return 'android';
+-     }
++     if (isAndroid(userAgent)) {}
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:65:12
+-       return 'android';
++       return "";
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:67:7
+-     if (isChromeOS(userAgent)) {
++     if (true) {
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:67:7
+-     if (isChromeOS(userAgent)) {
++     if (false) {
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:67:30
+-     if (isChromeOS(userAgent)) {
+-       return 'chromeos';
+-     }
++     if (isChromeOS(userAgent)) {}
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:68:12
+-       return 'chromeos';
++       return "";
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:70:7
+-     if (isLinux(userAgent)) {
++     if (true) {
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:70:7
+-     if (isLinux(userAgent)) {
++     if (false) {
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:70:27
+-     if (isLinux(userAgent)) {
+-       return 'linux';
+-     }
++     if (isLinux(userAgent)) {}
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:71:12
+-       return 'linux';
++       return "";
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:74:10
+-     return 'undetermined';
++     return "";
+
+[NoCoverage] ObjectLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:85:47
+-   export function useOs(options: UseOsOptions = { getValueInEffect: true }): UseOSReturnValue {
++   export function useOs(options: UseOsOptions = {}): UseOSReturnValue {
+
+[NoCoverage] BooleanLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:85:67
+-   export function useOs(options: UseOsOptions = { getValueInEffect: true }): UseOSReturnValue {
++   export function useOs(options: UseOsOptions = { getValueInEffect: false }): UseOSReturnValue {
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:85:93
+-   export function useOs(options: UseOsOptions = { getValueInEffect: true }): UseOSReturnValue {
+-     const [value, setValue] = useState<UseOSReturnValue>(
+-       options.getValueInEffect ? 'undetermined' : getOS()
+-     );
+-     useIsomorphicEffect(() => {
+-       if (options.getValueInEffect) {
+-         setValue(getOS);
+-       }
+-     }, []);
+-     return value;
+-   }
++   export function useOs(options: UseOsOptions = { getValueInEffect: true }): UseOSReturnValue {}
+
+[NoCoverage] StringLiteral
+packages/@mantine/hooks/src/use-os/use-os.ts:87:32
+-       options.getValueInEffect ? 'undetermined' : getOS()
++       options.getValueInEffect ? "" : getOS()
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:90:29
+-     useIsomorphicEffect(() => {
+-       if (options.getValueInEffect) {
+-         setValue(getOS);
+-       }
+-     }, []);
++     useIsomorphicEffect(() => {}, []);
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:91:9
+-       if (options.getValueInEffect) {
++       if (true) {
+
+[NoCoverage] ConditionalExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:91:9
+-       if (options.getValueInEffect) {
++       if (false) {
+
+[NoCoverage] BlockStatement
+packages/@mantine/hooks/src/use-os/use-os.ts:91:35
+-       if (options.getValueInEffect) {
+-         setValue(getOS);
+-       }
++       if (options.getValueInEffect) {}
+
+[NoCoverage] CallExpression
+packages/@mantine/hooks/src/use-os/use-os.ts:92:7
+-         setValue(getOS);
++         ;
+
+[NoCoverage] ArrayDeclaration
+packages/@mantine/hooks/src/use-os/use-os.ts:94:6
+-     }, []);
++     }, ["Stryker was here"]);
+
+[NoCoverage] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:101:46
+-     const previous = useCallback(() => setPage(activePage - 1), [activePage, setPage]);
++     const previous = useCallback(() => setPage(activePage + 1), [activePage, setPage]);
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:77:18
+-     const _total = _endValue - _startValue + 1;
++     const _total = _endValue - _startValue - 1;
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:77:18
+-     const _total = _endValue - _startValue + 1;
++     const _total = _endValue + _startValue + 1;
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] EqualityOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:89:11
+-         if (pageNumber < _startValue) {
++         if (pageNumber <= _startValue) {
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+    @mantine/hooks/use-pagination usePagination.ok.controlled calls onChange correctly with active page
+  and 2 more tests!
+
+
+[Survived] EqualityOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:91:18
+-         } else if (pageNumber > _endValue) {
++         } else if (pageNumber >= _endValue) {
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+    @mantine/hooks/use-pagination usePagination.ok.controlled calls onChange correctly with active page
+  and 2 more tests!
+
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:97:5
+-       [_startValue, _endValue, setActivePage]
++       []
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:100:59
+-     const next = useCallback(() => setPage(activePage + 1), [activePage, setPage]);
++     const next = useCallback(() => setPage(activePage + 1), []);
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArrowFunction
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:101:32
+-     const previous = useCallback(() => setPage(activePage - 1), [activePage, setPage]);
++     const previous = useCallback(() => undefined, [activePage, setPage]);
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:102:57
+-     const first = useCallback(() => setPage(_startValue), [setPage, _startValue]);
++     const first = useCallback(() => setPage(_startValue), []);
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:101:63
+-     const previous = useCallback(() => setPage(activePage - 1), [activePage, setPage]);
++     const previous = useCallback(() => setPage(activePage - 1), []);
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArrayDeclaration
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:103:54
+-     const last = useCallback(() => setPage(_endValue), [_endValue, setPage]);
++     const last = useCallback(() => setPage(_endValue), []);
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106:30
+-       const totalPageNumbers = siblings * 2 + 3 + boundaries * 2;
++       const totalPageNumbers = siblings * 2 - 3 + boundaries * 2;
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106:30
+-       const totalPageNumbers = siblings * 2 + 3 + boundaries * 2;
++       const totalPageNumbers = siblings * 2 + 3 - boundaries * 2;
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106:30
+-       const totalPageNumbers = siblings * 2 + 3 + boundaries * 2;
++       const totalPageNumbers = siblings / 2 + 3 + boundaries * 2;
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106:49
+-       const totalPageNumbers = siblings * 2 + 3 + boundaries * 2;
++       const totalPageNumbers = siblings * 2 + 3 + boundaries / 2;
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] EqualityOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:107:9
+-       if (totalPageNumbers >= _total) {
++       if (totalPageNumbers > _total) {
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 8 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:111:62
+-       const leftSiblingIndex = Math.max(activePage - siblings, _startValue + boundaries - 1);
++       const leftSiblingIndex = Math.max(activePage - siblings, _startValue + boundaries + 1);
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 7 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:111:62
+-       const leftSiblingIndex = Math.max(activePage - siblings, _startValue + boundaries - 1);
++       const leftSiblingIndex = Math.max(activePage - siblings, _startValue - boundaries - 1);
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 7 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:112:63
+-       const rightSiblingIndex = Math.min(activePage + siblings, _endValue - boundaries);
++       const rightSiblingIndex = Math.min(activePage + siblings, _endValue + boundaries);
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 7 more tests!
+
+
+[Survived] EqualityOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:114:32
+-       const shouldShowLeftDots = leftSiblingIndex > _startValue + boundaries + 1;
++       const shouldShowLeftDots = leftSiblingIndex >= _startValue + boundaries + 1;
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 7 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:114:51
+-       const shouldShowLeftDots = leftSiblingIndex > _startValue + boundaries + 1;
++       const shouldShowLeftDots = leftSiblingIndex > _startValue + boundaries - 1;
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 7 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:114:51
+-       const shouldShowLeftDots = leftSiblingIndex > _startValue + boundaries + 1;
++       const shouldShowLeftDots = leftSiblingIndex > _startValue - boundaries + 1;
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 7 more tests!
+
+
+[Survived] ArithmeticOperator
+packages/@mantine/hooks/src/use-pagination/use-pagination.ts:122:18
+-           ...range(_endValue - (boundaries - 1), _endValue),
++           ...range(_endValue + (boundaries - 1), _endValue),
+Tests ran:
+    @mantine/hooks/use-pagination usePagination.ok.range setPage function sets active page
+    @mantine/hooks/use-pagination usePagination.ok.range returns correct initial state
+    @mantine/hooks/use-pagination usePagination.ok.range does not change range length between page changes
+  and 2 more tests!
+
+
+[NoCoverage] ArrayDeclaration
+packages/@mantine/hooks/src/use-queue/use-queue.ts:35:19
+-     initialValues = [],
++     initialValues = ["Stryker was here"],
+
+Ran 5.13 tests per mutant on average.
+--------------------|------------------|----------|-----------|------------|----------|----------|
+                    | % Mutation score |          |           |            |          |          |
+File                |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+--------------------|--------|---------|----------|-----------|------------|----------|----------|
+All files           |  61.99 |   82.53 |      137 |         0 |         29 |       55 |        0 |
+ use-counter        |  72.22 |   72.22 |       13 |         0 |          5 |        0 |        0 |
+  use-counter.ts    |  72.22 |   72.22 |       13 |         0 |          5 |        0 |        0 |
+ use-disclosure     |  86.96 |   90.91 |       20 |         0 |          2 |        1 |        0 |
+  use-disclosure.ts |  86.96 |   90.91 |       20 |         0 |          2 |        1 |        0 |
+ use-os             |   0.00 |    0.00 |        0 |         0 |          0 |       52 |        0 |
+  use-os.ts         |   0.00 |    0.00 |        0 |         0 |          0 |       52 |        0 |
+ use-pagination     |  77.23 |   78.00 |       78 |         0 |         22 |        1 |        0 |
+  use-pagination.ts |  77.23 |   78.00 |       78 |         0 |         22 |        1 |        0 |
+ use-queue          |  95.45 |  100.00 |       21 |         0 |          0 |        1 |        0 |
+  use-queue.ts      |  95.45 |  100.00 |       21 |         0 |          0 |        1 |        0 |
+ use-toggle         | 100.00 |  100.00 |        5 |         0 |          0 |        0 |        0 |
+  use-toggle.ts     | 100.00 |  100.00 |        5 |         0 |          0 |        0 |        0 |
+--------------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m07:57:49 (3923) INFO JsonReporter[39m Your report can be found at: file://<work-0001>/mantine-hooks/reports/mutation/mutation.json
+[32m07:57:49 (3923) INFO MutationTestExecutor[39m Done in 15 seconds.
+real 17.40
+user 55.67
+sys 57.73

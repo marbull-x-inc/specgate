@@ -10,10 +10,7 @@
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "src/**/*.test.ts",
-      "src/**/*.test.tsx"
-    ],
+    "include": ["src/**/*.test.ts", "src/**/*.test.tsx"],
     "adapter": "jest"
   },
   "tsdoc": {
@@ -26,9 +23,6 @@
     "dir": ".specgate-mutation"
   },
   "mutation": {
-    "report": [
-      "reports/mutation/mutation.json",
-      "reports/value/value.json"
-    ]
+    "report": ["reports/mutation/mutation.json", "reports/value/value.json"]
   }
 }

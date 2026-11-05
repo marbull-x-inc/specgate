@@ -2,29 +2,18 @@
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "testRunner": "jest",
   "coverageAnalysis": "perTest",
-  "mutate": [
-    "source/rate-limit.ts",
-    "source/ip-key-generator.ts",
-    "source/time-constants.ts"
-  ],
-  "reporters": [
-    "json"
-  ],
+  "mutate": ["source/rate-limit.ts", "source/ip-key-generator.ts", "source/time-constants.ts"],
+  "reporters": ["json"],
   "jsonReporter": {
     "fileName": "reports/mutation/mutation.json"
   },
   "tempDirName": ".stryker-tmp",
-  "plugins": [
-    "@stryker-mutator/jest-runner"
-  ],
+  "plugins": ["@stryker-mutator/jest-runner"],
   "jest": {
     "configFile": "jest.config.json",
     "config": {
       "watchman": false,
-      "testPathIgnorePatterns": [
-        "/node_modules/",
-        "types-test"
-      ]
+      "testPathIgnorePatterns": ["/node_modules/", "types-test"]
     }
   }
 }

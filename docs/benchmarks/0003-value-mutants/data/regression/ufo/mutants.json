@@ -1,0 +1,422 @@
+{
+  "schemaVersion": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "files": {
+    "src/query.ts": {
+      "sha256": "6689f4cca7892b8fc93d18f43ebf162855184e01dcdfd73d139051383e0f7d5e"
+    },
+    "src/parse.ts": {
+      "sha256": "f4d5eb04df0824b74000f707d47aabb7c369abe72f734acfb1ffb10ecb435b2b"
+    }
+  },
+  "mutants": [
+    {
+      "id": "value-1",
+      "unit": "parseURL",
+      "file": "src/parse.ts",
+      "line": 4,
+      "column": 37,
+      "endLine": 4,
+      "endColumn": 59,
+      "start": 113,
+      "end": 135,
+      "kind": "string",
+      "original": "\"ufo:protocolRelative\"",
+      "replacement": "\"ufo:protocolRelative_x\"",
+      "description": "`Symbol.for(\"ufo:protocolRelative\")`: \"ufo:protocolRelative\" → \"ufo:protocolRelative_x\""
+    },
+    {
+      "id": "value-2",
+      "unit": "parseURL",
+      "file": "src/parse.ts",
+      "line": 77,
+      "column": 23,
+      "endLine": 77,
+      "endColumn": 26,
+      "start": 2499,
+      "end": 2502,
+      "kind": "string",
+      "original": "\"/\"",
+      "replacement": "\"/_x\"",
+      "description": "`input .replace(/\\\\/g, \"/\")`: \"/\" → \"/_x\""
+    },
+    {
+      "id": "value-3",
+      "unit": "parseURL",
+      "file": "src/parse.ts",
+      "line": 83,
+      "column": 20,
+      "endLine": 83,
+      "endColumn": 27,
+      "start": 2709,
+      "end": 2716,
+      "kind": "string",
+      "original": "\"file:\"",
+      "replacement": "\"file:_x\"",
+      "description": "`protocol === \"file:\"`: \"file:\" → \"file:_x\"",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "file:"
+        ]
+      }
+    },
+    {
+      "id": "value-4",
+      "unit": "parseURL",
+      "file": "src/parse.ts",
+      "line": 91,
+      "column": 29,
+      "endLine": 91,
+      "endColumn": 30,
+      "start": 2905,
+      "end": 2906,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`auth.slice(0, Math.max(0, auth.length -…`: 0 → 1"
+    },
+    {
+      "id": "value-5",
+      "unit": "parseURL",
+      "file": "src/parse.ts",
+      "line": 91,
+      "column": 41,
+      "endLine": 91,
+      "endColumn": 42,
+      "start": 2917,
+      "end": 2918,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`Math.max(0, auth.length - 1)`: 0 → 1"
+    },
+    {
+      "id": "value-6",
+      "unit": "parseURL",
+      "file": "src/parse.ts",
+      "line": 91,
+      "column": 58,
+      "endLine": 91,
+      "endColumn": 59,
+      "start": 2934,
+      "end": 2935,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`auth.length - 1`: 1 → 2"
+    },
+    {
+      "id": "value-7",
+      "unit": "parsePath",
+      "file": "src/parse.ts",
+      "line": 119,
+      "column": 12,
+      "endLine": 119,
+      "endColumn": 13,
+      "start": 3820,
+      "end": 3821,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`( input.match(/([^#?]*)(\\?[^#]*)?(#.*)?…`: 1 → 2"
+    },
+    {
+      "id": "value-8",
+      "unit": "parseAuth",
+      "file": "src/parse.ts",
+      "line": 139,
+      "column": 44,
+      "endLine": 139,
+      "endColumn": 47,
+      "start": 4323,
+      "end": 4326,
+      "kind": "string",
+      "original": "\":\"",
+      "replacement": "\":_x\"",
+      "description": "`input.split(\":\")`: \":\" → \":_x\""
+    },
+    {
+      "id": "value-9",
+      "unit": "parseHost",
+      "file": "src/parse.ts",
+      "line": 164,
+      "column": 75,
+      "endLine": 164,
+      "endColumn": 76,
+      "start": 5025,
+      "end": 5026,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`(input.match(/([^/:]*):?(\\d+)?/) || [])…`: 1 → 2"
+    },
+    {
+      "id": "value-10",
+      "unit": "stringifyParsedURL",
+      "file": "src/parse.ts",
+      "line": 192,
+      "column": 33,
+      "endLine": 192,
+      "endColumn": 36,
+      "start": 5868,
+      "end": 5871,
+      "kind": "string",
+      "original": "\"?\"",
+      "replacement": "\"?_x\"",
+      "description": "`parsed.search.startsWith(\"?\")`: \"?\" → \"?_x\""
+    },
+    {
+      "id": "value-11",
+      "unit": "stringifyParsedURL",
+      "file": "src/parse.ts",
+      "line": 192,
+      "column": 45,
+      "endLine": 192,
+      "endColumn": 48,
+      "start": 5880,
+      "end": 5883,
+      "kind": "string",
+      "original": "\"?\"",
+      "replacement": "\"?_x\"",
+      "description": "`parsed.search.startsWith(\"?\") ? \"\" : \"?\"`: \"?\" → \"?_x\""
+    },
+    {
+      "id": "value-12",
+      "unit": "stringifyParsedURL",
+      "file": "src/parse.ts",
+      "line": 195,
+      "column": 44,
+      "endLine": 195,
+      "endColumn": 47,
+      "start": 5988,
+      "end": 5991,
+      "kind": "string",
+      "original": "\"@\"",
+      "replacement": "\"@_x\"",
+      "description": "`parsed.auth + \"@\"`: \"@\" → \"@_x\""
+    },
+    {
+      "id": "value-13",
+      "unit": "stringifyParsedURL",
+      "file": "src/parse.ts",
+      "line": 199,
+      "column": 35,
+      "endLine": 199,
+      "endColumn": 39,
+      "start": 6130,
+      "end": 6134,
+      "kind": "string",
+      "original": "\"//\"",
+      "replacement": "\"//_x\"",
+      "description": "`(parsed.protocol || \"\") + \"//\"`: \"//\" → \"//_x\""
+    },
+    {
+      "id": "value-14",
+      "unit": "parseFilename",
+      "file": "src/parse.ts",
+      "line": 237,
+      "column": 28,
+      "endLine": 237,
+      "endColumn": 29,
+      "start": 7412,
+      "end": 7413,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`matches[1]`: 1 → 2"
+    },
+    {
+      "id": "value-15",
+      "unit": "parseQuery",
+      "file": "src/query.ts",
+      "line": 56,
+      "column": 24,
+      "endLine": 56,
+      "endColumn": 25,
+      "start": 1722,
+      "end": 1723,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`parametersString[0]`: 0 → 1"
+    },
+    {
+      "id": "value-16",
+      "unit": "parseQuery",
+      "file": "src/query.ts",
+      "line": 56,
+      "column": 31,
+      "endLine": 56,
+      "endColumn": 34,
+      "start": 1729,
+      "end": 1732,
+      "kind": "string",
+      "original": "\"?\"",
+      "replacement": "\"?_x\"",
+      "description": "`parametersString[0] === \"?\"`: \"?\" → \"?_x\"",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "value-17",
+      "unit": "parseQuery",
+      "file": "src/query.ts",
+      "line": 57,
+      "column": 47,
+      "endLine": 57,
+      "endColumn": 48,
+      "start": 1782,
+      "end": 1783,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`parametersString.slice(1)`: 1 → 2"
+    },
+    {
+      "id": "value-18",
+      "unit": "parseQuery",
+      "file": "src/query.ts",
+      "line": 59,
+      "column": 50,
+      "endLine": 59,
+      "endColumn": 53,
+      "start": 1839,
+      "end": 1842,
+      "kind": "string",
+      "original": "\"&\"",
+      "replacement": "\"&_x\"",
+      "description": "`parametersString.split(\"&\")`: \"&\" → \"&_x\""
+    },
+    {
+      "id": "value-19",
+      "unit": "parseQuery",
+      "file": "src/query.ts",
+      "line": 61,
+      "column": 20,
+      "endLine": 61,
+      "endColumn": 21,
+      "start": 1920,
+      "end": 1921,
+      "kind": "number",
+      "original": "2",
+      "replacement": "3",
+      "description": "`s.length < 2`: 2 → 3",
+      "decision": {
+        "kind": "boundary",
+        "values": [
+          "2"
+        ]
+      }
+    },
+    {
+      "id": "value-20",
+      "unit": "parseQuery",
+      "file": "src/query.ts",
+      "line": 64,
+      "column": 34,
+      "endLine": 64,
+      "endColumn": 35,
+      "start": 1980,
+      "end": 1981,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`s[1]`: 1 → 2"
+    },
+    {
+      "id": "value-21",
+      "unit": "parseQuery",
+      "file": "src/query.ts",
+      "line": 65,
+      "column": 17,
+      "endLine": 65,
+      "endColumn": 28,
+      "start": 2001,
+      "end": 2012,
+      "kind": "string",
+      "original": "\"__proto__\"",
+      "replacement": "\"__proto___x\"",
+      "description": "`key === \"__proto__\"`: \"__proto__\" → \"__proto___x\"",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "__proto__"
+        ]
+      }
+    },
+    {
+      "id": "value-22",
+      "unit": "parseQuery",
+      "file": "src/query.ts",
+      "line": 65,
+      "column": 40,
+      "endLine": 65,
+      "endColumn": 53,
+      "start": 2024,
+      "end": 2037,
+      "kind": "string",
+      "original": "\"constructor\"",
+      "replacement": "\"constructor_x\"",
+      "description": "`key === \"constructor\"`: \"constructor\" → \"constructor_x\"",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "constructor"
+        ]
+      }
+    },
+    {
+      "id": "value-23",
+      "unit": "parseQuery",
+      "file": "src/query.ts",
+      "line": 68,
+      "column": 38,
+      "endLine": 68,
+      "endColumn": 39,
+      "start": 2100,
+      "end": 2101,
+      "kind": "number",
+      "original": "2",
+      "replacement": "3",
+      "description": "`s[2]`: 2 → 3"
+    },
+    {
+      "id": "value-24",
+      "unit": "encodeQueryItem",
+      "file": "src/query.ts",
+      "line": 116,
+      "column": 13,
+      "endLine": 116,
+      "endColumn": 16,
+      "start": 3466,
+      "end": 3469,
+      "kind": "string",
+      "original": "\"&\"",
+      "replacement": "\"&_x\"",
+      "description": "`value .map( (_value: QueryValue) => `${…`: \"&\" → \"&_x\""
+    },
+    {
+      "id": "value-25",
+      "unit": "stringifyQuery",
+      "file": "src/query.ts",
+      "line": 144,
+      "column": 11,
+      "endLine": 144,
+      "endColumn": 14,
+      "start": 4275,
+      "end": 4278,
+      "kind": "string",
+      "original": "\"&\"",
+      "replacement": "\"&_x\"",
+      "description": "`Object.keys(query) .filter((k) => query…`: \"&\" → \"&_x\""
+    }
+  ]
+}

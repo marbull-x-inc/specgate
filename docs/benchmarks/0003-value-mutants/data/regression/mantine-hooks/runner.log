@@ -1,0 +1,78 @@
+baseline run 4577 ms; timeout 30000 ms
+value-5 NoCoverage packages/@mantine/hooks/src/use-os/use-os.ts:50 `return 'undetermined';`: 'undetermined' → 'undetermined_x'
+value-6 NoCoverage packages/@mantine/hooks/src/use-os/use-os.ts:56 `return 'ios';`: 'ios' → 'ios_x'
+value-7 NoCoverage packages/@mantine/hooks/src/use-os/use-os.ts:59 `return 'macos';`: 'macos' → 'macos_x'
+value-8 NoCoverage packages/@mantine/hooks/src/use-os/use-os.ts:62 `return 'windows';`: 'windows' → 'windows_x'
+value-9 NoCoverage packages/@mantine/hooks/src/use-os/use-os.ts:65 `return 'android';`: 'android' → 'android_x'
+value-10 NoCoverage packages/@mantine/hooks/src/use-os/use-os.ts:68 `return 'chromeos';`: 'chromeos' → 'chromeos_x'
+value-11 NoCoverage packages/@mantine/hooks/src/use-os/use-os.ts:71 `return 'linux';`: 'linux' → 'linux_x'
+value-12 NoCoverage packages/@mantine/hooks/src/use-os/use-os.ts:74 `return 'undetermined';`: 'undetermined' → 'undetermined_x'
+value-13 NoCoverage packages/@mantine/hooks/src/use-os/use-os.ts:87 `options.getValueInEffect ? 'undetermine…`: 'undetermined' → 'undetermined_x'
+value-22 NoCoverage packages/@mantine/hooks/src/use-pagination/use-pagination.ts:101 `activePage - 1`: 1 → 2
+value-4 Timeout    packages/@mantine/hooks/src/use-counter/use-counter.ts:32 the default `_step` 1 → 2
+value-14 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:5 `end - start + 1`: 1 → 2
+value-1 Timeout    packages/@mantine/hooks/src/use-counter/use-counter.ts:5 `min: -Infinity` removed from `DEFAULT_OPTIONS`
+value-19 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:75 `Math.max(Math.trunc(startValue), 1)`: 1 → 2
+value-20 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:77 `_endValue - _startValue + 1`: 1 → 2
+value-21 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:100 `activePage + 1`: 1 → 2
+value-23 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106 `siblings * 2`: 2 → 3
+value-24 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106 `siblings * 2 + 3`: 3 → 4
+value-25 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106 `boundaries * 2`: 2 → 3
+value-26 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:111 `_startValue + boundaries - 1`: 1 → 2
+value-27 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:114 `_startValue + boundaries + 1`: 1 → 2
+value-2 Timeout    packages/@mantine/hooks/src/use-counter/use-counter.ts:5 `max: Infinity` removed from `DEFAULT_OPTIONS`
+value-28 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:115 `boundaries + 1`: 1 → 2
+value-29 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:118 `siblings * 2`: 2 → 3
+value-30 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:118 `siblings * 2 + boundaries + 2`: 2 → 3
+value-31 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:120 `_startValue + leftItemCount - 1`: 1 → 2
+value-32 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:122 `boundaries - 1`: 1 → 2
+value-33 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:127 `boundaries + 1`: 1 → 2
+value-34 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:127 `2 * siblings`: 2 → 3
+value-35 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:129 `_startValue + boundaries - 1`: 1 → 2
+value-36 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:136 `_startValue + boundaries - 1`: 1 → 2
+value-3 Timeout    packages/@mantine/hooks/src/use-counter/use-counter.ts:31 the default `initialValue` 0 → 1
+value-37 Timeout    packages/@mantine/hooks/src/use-pagination/use-pagination.ts:140 `_endValue - boundaries + 1`: 1 → 2
+value-38 Timeout    packages/@mantine/hooks/src/use-queue/use-queue.ts:39 `initialValues.slice(0, limit)`: 0 → 1
+value-39 Timeout    packages/@mantine/hooks/src/use-queue/use-queue.ts:48 `results.slice(0, limit)`: 0 → 1
+value-40 Timeout    packages/@mantine/hooks/src/use-queue/use-queue.ts:58 `results.slice(0, limit)`: 0 → 1
+value-43 Timeout    packages/@mantine/hooks/src/use-toggle/use-toggle.ts:16 `state[0]`: 0 → 1
+value-44 Timeout    packages/@mantine/hooks/src/use-toggle/use-toggle.ts:19 `state.slice(0, index)`: 0 → 1
+value-15 Killed     packages/@mantine/hooks/src/use-pagination/use-pagination.ts:9 `DOTS` 'dots' → 'dots_x'
+value-16 Killed     packages/@mantine/hooks/src/use-pagination/use-pagination.ts:68 the default `siblings` 1 → 2
+value-17 Killed     packages/@mantine/hooks/src/use-pagination/use-pagination.ts:69 the default `boundaries` 1 → 2
+value-18 Killed     packages/@mantine/hooks/src/use-pagination/use-pagination.ts:73 the default `startValue` 1 → 2
+value-41 Killed     packages/@mantine/hooks/src/use-toggle/use-toggle.ts:13 `false` removed from the list `[false, true]`
+value-42 Killed     packages/@mantine/hooks/src/use-toggle/use-toggle.ts:13 `true` removed from the list `[false, true]`
+value-1 Survived   (rerun alone) packages/@mantine/hooks/src/use-counter/use-counter.ts:5
+value-2 Survived   (rerun alone) packages/@mantine/hooks/src/use-counter/use-counter.ts:5
+value-3 Killed     (rerun alone) packages/@mantine/hooks/src/use-counter/use-counter.ts:31
+value-4 Killed     (rerun alone) packages/@mantine/hooks/src/use-counter/use-counter.ts:32
+value-14 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:5
+value-19 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:75
+value-20 Survived   (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:77
+value-21 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:100
+value-23 Survived   (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106
+value-24 Survived   (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106
+value-25 Survived   (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106
+value-26 Survived   (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:111
+value-27 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:114
+value-28 Survived   (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:115
+value-29 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:118
+value-30 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:118
+value-31 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:120
+value-32 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:122
+value-33 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:127
+value-34 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:127
+value-35 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:129
+value-36 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:136
+value-37 Killed     (rerun alone) packages/@mantine/hooks/src/use-pagination/use-pagination.ts:140
+value-38 Killed     (rerun alone) packages/@mantine/hooks/src/use-queue/use-queue.ts:39
+value-39 Killed     (rerun alone) packages/@mantine/hooks/src/use-queue/use-queue.ts:48
+value-40 Killed     (rerun alone) packages/@mantine/hooks/src/use-queue/use-queue.ts:58
+value-43 Killed     (rerun alone) packages/@mantine/hooks/src/use-toggle/use-toggle.ts:16
+value-44 Killed     (rerun alone) packages/@mantine/hooks/src/use-toggle/use-toggle.ts:19
+value-mutants: 44 mutant(s): 8 Survived, 26 Killed, 10 NoCoverage; 257314 ms (baseline run 4577 ms)
+wrote <work-0001>/mantine-hooks/reports/value/value.json
+real 257.40
+user 800.10
+sys 509.87

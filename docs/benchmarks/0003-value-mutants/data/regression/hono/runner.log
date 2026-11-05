@@ -1,0 +1,145 @@
+baseline run 566 ms; timeout 30000 ms
+value-7 NoCoverage src/middleware/body-limit/index.ts:75 `c.req.raw.headers.get('content-length')…`: '0' → '0_x'
+value-9 Killed     src/middleware/body-limit/index.ts:84 `size` 0 → 1
+value-10 Killed     src/middleware/body-limit/index.ts:108 `duplex` 'half' → 'half_x'
+value-5 Survived   src/middleware/body-limit/index.ts:71 `c.req.raw.headers.has('content-length')`: 'content-length' → 'content-length_x'
+value-4 Killed     src/middleware/body-limit/index.ts:70 `c.req.raw.headers.has('transfer-encodin…`: 'transfer-encoding' → 'transfer-encoding_x'
+value-3 Killed     src/middleware/body-limit/index.ts:60 `new HTTPException(413, { res })`: 413 → 414
+value-2 Survived   src/middleware/body-limit/index.ts:58 `status` 413 → 414
+value-8 Killed     src/middleware/body-limit/index.ts:75 `parseInt(c.req.raw.headers.get('content…`: 10 → 11
+value-6 Killed     src/middleware/body-limit/index.ts:75 `c.req.raw.headers.get('content-length')`: 'content-length' → 'content-length_x'
+value-1 Killed     src/middleware/body-limit/index.ts:10 `ERROR_MESSAGE` 'Payload Too Large' → 'Payload Too Large_x'
+value-24 Killed     src/middleware/cors/index.ts:115 `c.req.header('origin')`: 'origin' → 'origin_x'
+value-25 Killed     src/middleware/cors/index.ts:117 `set('Access-Control-Allow-Origin', allo…`: 'Access-Control-Allow-Origin' → 'Access-Control-Allow-Origin_x'
+value-22 Killed     src/middleware/cors/index.ts:101 `(await optsAllowMethods(origin, c)).joi…`: ',' → ',_x'
+value-11 Killed     src/middleware/cors/index.ts:75 `origin` '*' → '*_x'
+value-26 Killed     src/middleware/cors/index.ts:121 `set('Access-Control-Allow-Credentials',…`: 'Access-Control-Allow-Credentials' → 'Access-Control-Allow-Credentials_x'
+value-28 Killed     src/middleware/cors/index.ts:125 `set('Access-Control-Expose-Headers', ex…`: 'Access-Control-Expose-Headers' → 'Access-Control-Expose-Headers_x'
+value-27 Killed     src/middleware/cors/index.ts:121 `set('Access-Control-Allow-Credentials',…`: 'true' → 'true_x'
+value-29 Killed     src/middleware/cors/index.ts:128 `c.req.method === 'OPTIONS'`: 'OPTIONS' → 'OPTIONS_x'
+value-12 Killed     src/middleware/cors/index.ts:76 `'GET'` removed from `allowMethods`
+value-30 Survived   src/middleware/cors/index.ts:129 `opts.origin !== '*'`: '*' → '*_x'
+value-31 Killed     src/middleware/cors/index.ts:130 `c.res.headers.append('Vary', 'Origin')`: 'Vary' → 'Vary_x'
+value-32 Killed     src/middleware/cors/index.ts:130 `c.res.headers.append('Vary', 'Origin')`: 'Origin' → 'Origin_x'
+value-33 Killed     src/middleware/cors/index.ts:134 `set('Access-Control-Max-Age', opts.maxA…`: 'Access-Control-Max-Age' → 'Access-Control-Max-Age_x'
+value-34 Killed     src/middleware/cors/index.ts:137 `c.req.header('origin')`: 'origin' → 'origin_x'
+value-13 Killed     src/middleware/cors/index.ts:76 `'HEAD'` removed from `allowMethods`
+value-36 Killed     src/middleware/cors/index.ts:144 `c.req.header('Access-Control-Request-He…`: 'Access-Control-Request-Headers' → 'Access-Control-Request-Headers_x'
+value-35 Killed     src/middleware/cors/index.ts:139 `set('Access-Control-Allow-Methods', all…`: 'Access-Control-Allow-Methods' → 'Access-Control-Allow-Methods_x'
+value-37 Killed     src/middleware/cors/index.ts:147 `requestHeaders .split(',')`: ',' → ',_x'
+value-38 Killed     src/middleware/cors/index.ts:149 `requestHeaders .split(',') .map((h) => …`: ',' → ',_x'
+value-39 Killed     src/middleware/cors/index.ts:153 `set('Access-Control-Allow-Headers', hea…`: 'Access-Control-Allow-Headers' → 'Access-Control-Allow-Headers_x'
+value-14 Killed     src/middleware/cors/index.ts:76 `'PUT'` removed from `allowMethods`
+value-40 Killed     src/middleware/cors/index.ts:154 `c.res.headers.append('Vary', 'Access-Co…`: 'Vary' → 'Vary_x'
+value-45 Killed     src/middleware/cors/index.ts:163 `statusText` 'No Content' → 'No Content_x'
+value-41 Killed     src/middleware/cors/index.ts:154 `c.res.headers.append('Vary', 'Access-Co…`: 'Access-Control-Request-Headers' → 'Access-Control-Request-Headers_x'
+value-42 Survived   src/middleware/cors/index.ts:157 `c.res.headers.delete('Content-Length')`: 'Content-Length' → 'Content-Length_x'
+value-43 Survived   src/middleware/cors/index.ts:158 `c.res.headers.delete('Content-Type')`: 'Content-Type' → 'Content-Type_x'
+value-44 Killed     src/middleware/cors/index.ts:162 `status` 204 → 205
+value-15 Killed     src/middleware/cors/index.ts:76 `'POST'` removed from `allowMethods`
+value-46 Killed     src/middleware/cors/index.ts:170 `opts.origin !== '*'`: '*' → '*_x'
+value-47 Killed     src/middleware/cors/index.ts:171 `c.header('Vary', 'Origin', { append: tr…`: 'Vary' → 'Vary_x'
+value-51 Killed     src/middleware/request-id/request-id.ts:57 `c.set('requestId', reqId)`: 'requestId' → 'requestId_x'
+value-48 Killed     src/middleware/cors/index.ts:171 `c.header('Vary', 'Origin', { append: tr…`: 'Origin' → 'Origin_x'
+value-16 Killed     src/middleware/cors/index.ts:76 `'DELETE'` removed from `allowMethods`
+value-17 Killed     src/middleware/cors/index.ts:76 `'PATCH'` removed from `allowMethods`
+value-18 Killed     src/middleware/cors/index.ts:76 `'QUERY'` removed from `allowMethods`
+value-19 Killed     src/middleware/cors/index.ts:82 `opts.exposeHeaders.join(',')`: ',' → ',_x'
+value-20 Killed     src/middleware/cors/index.ts:83 `opts.allowHeaders.join(',')`: ',' → ',_x'
+value-21 Killed     src/middleware/cors/index.ts:87 `optsOrigin === '*'`: '*' → '*_x'
+value-23 Killed     src/middleware/cors/index.ts:103 `optsAllowMethods.join(',')`: ',' → ',_x'
+value-49 Killed     src/middleware/request-id/request-id.ts:46 the default `limitLength` 255 → 256
+value-50 Killed     src/middleware/request-id/request-id.ts:47 the default `headerName` 'X-Request-Id' → 'X-Request-Id_x'
+value-52 Killed     src/middleware/secure-headers/secure-headers.ts:95 `crossOriginEmbedderPolicy: ['Cross-Origin-Embedde…` removed from `HEADERS_MAP`
+value-53 Killed     src/middleware/secure-headers/secure-headers.ts:95 `'Cross-Origin-Embedder-Policy'` removed from `crossOriginEmbedderPolicy`
+value-54 Killed     src/middleware/secure-headers/secure-headers.ts:95 `'require-corp'` removed from `crossOriginEmbedderPolicy`
+value-55 Killed     src/middleware/secure-headers/secure-headers.ts:96 `crossOriginResourcePolicy: ['Cross-Origin-Resourc…` removed from `HEADERS_MAP`
+value-56 Killed     src/middleware/secure-headers/secure-headers.ts:96 `'Cross-Origin-Resource-Policy'` removed from `crossOriginResourcePolicy`
+value-57 Killed     src/middleware/secure-headers/secure-headers.ts:96 `'same-origin'` removed from `crossOriginResourcePolicy`
+value-58 Killed     src/middleware/secure-headers/secure-headers.ts:97 `crossOriginOpenerPolicy: ['Cross-Origin-Opener-Po…` removed from `HEADERS_MAP`
+value-59 Killed     src/middleware/secure-headers/secure-headers.ts:97 `'Cross-Origin-Opener-Policy'` removed from `crossOriginOpenerPolicy`
+value-60 Killed     src/middleware/secure-headers/secure-headers.ts:97 `'same-origin'` removed from `crossOriginOpenerPolicy`
+value-61 Killed     src/middleware/secure-headers/secure-headers.ts:98 `originAgentCluster: ['Origin-Agent-Cluster', '?1']` removed from `HEADERS_MAP`
+value-62 Killed     src/middleware/secure-headers/secure-headers.ts:98 `'Origin-Agent-Cluster'` removed from `originAgentCluster`
+value-63 Killed     src/middleware/secure-headers/secure-headers.ts:98 `'?1'` removed from `originAgentCluster`
+value-64 Killed     src/middleware/secure-headers/secure-headers.ts:99 `referrerPolicy: ['Referrer-Policy', 'no-referrer']` removed from `HEADERS_MAP`
+value-65 Killed     src/middleware/secure-headers/secure-headers.ts:99 `'Referrer-Policy'` removed from `referrerPolicy`
+value-66 Killed     src/middleware/secure-headers/secure-headers.ts:99 `'no-referrer'` removed from `referrerPolicy`
+value-67 Killed     src/middleware/secure-headers/secure-headers.ts:100 `strictTransportSecurity: ['Strict-Transport-Secur…` removed from `HEADERS_MAP`
+value-68 Killed     src/middleware/secure-headers/secure-headers.ts:100 `'Strict-Transport-Security'` removed from `strictTransportSecurity`
+value-69 Killed     src/middleware/secure-headers/secure-headers.ts:100 `'max-age=15552000; includeSubDomains'` removed from `strictTransportSecurity`
+value-70 Killed     src/middleware/secure-headers/secure-headers.ts:101 `xContentTypeOptions: ['X-Content-Type-Options', '…` removed from `HEADERS_MAP`
+value-71 Killed     src/middleware/secure-headers/secure-headers.ts:101 `'X-Content-Type-Options'` removed from `xContentTypeOptions`
+value-72 Killed     src/middleware/secure-headers/secure-headers.ts:101 `'nosniff'` removed from `xContentTypeOptions`
+value-73 Killed     src/middleware/secure-headers/secure-headers.ts:102 `xDnsPrefetchControl: ['X-DNS-Prefetch-Control', '…` removed from `HEADERS_MAP`
+value-74 Killed     src/middleware/secure-headers/secure-headers.ts:102 `'X-DNS-Prefetch-Control'` removed from `xDnsPrefetchControl`
+value-75 Killed     src/middleware/secure-headers/secure-headers.ts:102 `'off'` removed from `xDnsPrefetchControl`
+value-76 Killed     src/middleware/secure-headers/secure-headers.ts:103 `xDownloadOptions: ['X-Download-Options', 'noopen']` removed from `HEADERS_MAP`
+value-77 Killed     src/middleware/secure-headers/secure-headers.ts:103 `'X-Download-Options'` removed from `xDownloadOptions`
+value-78 Killed     src/middleware/secure-headers/secure-headers.ts:103 `'noopen'` removed from `xDownloadOptions`
+value-79 Killed     src/middleware/secure-headers/secure-headers.ts:104 `xFrameOptions: ['X-Frame-Options', 'SAMEORIGIN']` removed from `HEADERS_MAP`
+value-80 Killed     src/middleware/secure-headers/secure-headers.ts:104 `'X-Frame-Options'` removed from `xFrameOptions`
+value-81 Killed     src/middleware/secure-headers/secure-headers.ts:104 `'SAMEORIGIN'` removed from `xFrameOptions`
+value-82 Killed     src/middleware/secure-headers/secure-headers.ts:105 `xPermittedCrossDomainPolicies: ['X-Permitted-Cros…` removed from `HEADERS_MAP`
+value-83 Killed     src/middleware/secure-headers/secure-headers.ts:105 `'X-Permitted-Cross-Domain-Policies'` removed from `xPermittedCrossDomainPolicies`
+value-84 Killed     src/middleware/secure-headers/secure-headers.ts:105 `'none'` removed from `xPermittedCrossDomainPolicies`
+value-85 Killed     src/middleware/secure-headers/secure-headers.ts:105 `xXssProtection: ['X-XSS-Protection', '0']` removed from `HEADERS_MAP`
+value-86 Killed     src/middleware/secure-headers/secure-headers.ts:106 `'X-XSS-Protection'` removed from `xXssProtection`
+value-87 Killed     src/middleware/secure-headers/secure-headers.ts:106 `'0'` removed from `xXssProtection`
+value-88 Survived   src/middleware/secure-headers/secure-headers.ts:110 `crossOriginEmbedderPolicy: false` removed from `DEFAULT_OPTIONS`
+value-102 Survived   src/middleware/secure-headers/secure-headers.ts:132 `new Uint8Array(16)`: 16 → 17
+value-103 Killed     src/middleware/secure-headers/secure-headers.ts:141 `key` 'secureHeadersNonce' → 'secureHeadersNonce_x'
+value-89 Killed     src/middleware/secure-headers/secure-headers.ts:111 `crossOriginResourcePolicy: true` removed from `DEFAULT_OPTIONS`
+value-104 Killed     src/middleware/secure-headers/secure-headers.ts:200 `getCSPDirectives( options.contentSecuri…`: 'Content-Security-Policy' → 'Content-Security-Policy_x'
+value-90 Killed     src/middleware/secure-headers/secure-headers.ts:112 `crossOriginOpenerPolicy: true` removed from `DEFAULT_OPTIONS`
+value-106 Killed     src/middleware/secure-headers/secure-headers.ts:211 `getCSPDirectives( options.contentSecuri…`: 'Content-Security-Policy-Report-Only' → 'Content-Security-Policy-Report-Only_x'
+value-105 Killed     src/middleware/secure-headers/secure-headers.ts:205 `['Content-Security-Policy', value as st…`: 'Content-Security-Policy' → 'Content-Security-Policy_x'
+value-107 Killed     src/middleware/secure-headers/secure-headers.ts:216 `['Content-Security-Policy-Report-Only',…`: 'Content-Security-Policy-Report-Only' → 'Content-Security-Policy-Report-Only_x'
+value-111 Killed     src/middleware/secure-headers/secure-headers.ts:231 `['Report-To', getReportToOptions(option…`: 'Report-To' → 'Report-To_x'
+value-91 Killed     src/middleware/secure-headers/secure-headers.ts:113 `originAgentCluster: true` removed from `DEFAULT_OPTIONS`
+value-109 Killed     src/middleware/secure-headers/secure-headers.ts:221 `[ 'Permissions-Policy', getPermissionsP…`: 'Permissions-Policy' → 'Permissions-Policy_x'
+value-110 Killed     src/middleware/secure-headers/secure-headers.ts:227 `['Reporting-Endpoints', getReportingEnd…`: 'Reporting-Endpoints' → 'Reporting-Endpoints_x'
+value-108 Killed     src/middleware/secure-headers/secure-headers.ts:219 `Object.keys(options.permissionsPolicy).…`: 0 → 1
+value-92 Killed     src/middleware/secure-headers/secure-headers.ts:114 `referrerPolicy: true` removed from `DEFAULT_OPTIONS`
+value-113 Killed     src/middleware/secure-headers/secure-headers.ts:245 `ctx.res.headers.delete('X-Powered-By')`: 'X-Powered-By' → 'X-Powered-By_x'
+value-112 Killed     src/middleware/secure-headers/secure-headers.ts:238 `callbacks.length === 0`: 0 → 1
+value-114 Killed     src/middleware/secure-headers/secure-headers.ts:255 `defaultValue[0]`: 0 → 1
+value-116 Killed     src/middleware/secure-headers/secure-headers.ts:271 `i * 2 + 2`: 2 → 3
+value-115 Killed     src/middleware/secure-headers/secure-headers.ts:271 `i * 2`: 2 → 3
+value-93 Killed     src/middleware/secure-headers/secure-headers.ts:115 `strictTransportSecurity: true` removed from `DEFAULT_OPTIONS`
+value-119 Killed     src/middleware/secure-headers/secure-headers.ts:283 `resultValues.push( directive.replace(/[…`: '; ' → '; _x'
+value-120 Killed     src/middleware/secure-headers/secure-headers.ts:288 `callbacks.length === 0`: 0 → 1
+value-117 Killed     src/middleware/secure-headers/secure-headers.ts:280 `'-' + match.toLowerCase()`: '-' → '-_x'
+value-118 Killed     src/middleware/secure-headers/secure-headers.ts:282 `[' ', value]`: ' ' → ' _x'
+value-122 Killed     src/middleware/secure-headers/secure-headers.ts:294 `values[1]`: 1 → 2
+value-121 Killed     src/middleware/secure-headers/secure-headers.ts:293 `values[0]`: 0 → 1
+value-94 Killed     src/middleware/secure-headers/secure-headers.ts:116 `xContentTypeOptions: true` removed from `DEFAULT_OPTIONS`
+value-123 Killed     src/middleware/secure-headers/secure-headers.ts:298 `values[0]`: 0 → 1
+value-127 Killed     src/middleware/secure-headers/secure-headers.ts:320 `value.length === 1`: 1 → 2
+value-124 Killed     src/middleware/secure-headers/secure-headers.ts:313 `value ? '*' : '()'`: '*' → '*_x'
+value-126 Killed     src/middleware/secure-headers/secure-headers.ts:317 `value.length === 0`: 0 → 1
+value-128 Killed     src/middleware/secure-headers/secure-headers.ts:320 `value[0]`: 0 → 1
+value-125 Killed     src/middleware/secure-headers/secure-headers.ts:313 `value ? '*' : '()'`: '()' → '()_x'
+value-129 Killed     src/middleware/secure-headers/secure-headers.ts:320 `value[0] === '*'`: '*' → '*_x'
+value-95 Killed     src/middleware/secure-headers/secure-headers.ts:117 `xDnsPrefetchControl: true` removed from `DEFAULT_OPTIONS`
+value-130 Killed     src/middleware/secure-headers/secure-headers.ts:323 `value.length === 1`: 1 → 2
+value-133 Killed     src/middleware/secure-headers/secure-headers.ts:326 `'self'` removed from the list `['self', 'src']`
+value-136 Killed     src/middleware/secure-headers/secure-headers.ts:333 `Object.entries(policy) .map(([directive…`: ', ' → ', _x'
+value-132 Killed     src/middleware/secure-headers/secure-headers.ts:323 `value[0] === 'none'`: 'none' → 'none_x'
+value-131 Killed     src/middleware/secure-headers/secure-headers.ts:323 `value[0]`: 0 → 1
+value-134 Killed     src/middleware/secure-headers/secure-headers.ts:326 `'src'` removed from the list `['self', 'src']`
+value-137 Killed     src/middleware/secure-headers/secure-headers.ts:337 `str.replace(/([a-z\d])([A-Z])/g, '$1-$2…`: '$1-$2' → '$1-$2_x'
+value-135 Killed     src/middleware/secure-headers/secure-headers.ts:327 `allowlist.join(' ')`: ' ' → ' _x'
+value-96 Killed     src/middleware/secure-headers/secure-headers.ts:118 `xDownloadOptions: true` removed from `DEFAULT_OPTIONS`
+value-139 Killed     src/middleware/secure-headers/secure-headers.ts:347 `reportTo.map((option) => JSON.stringify…`: ', ' → ', _x'
+value-138 Killed     src/middleware/secure-headers/secure-headers.ts:343 `reportingEndpoints.map((endpoint) => `$…`: ', ' → ', _x'
+value-97 Killed     src/middleware/secure-headers/secure-headers.ts:119 `xFrameOptions: true` removed from `DEFAULT_OPTIONS`
+value-98 Killed     src/middleware/secure-headers/secure-headers.ts:120 `xPermittedCrossDomainPolicies: true` removed from `DEFAULT_OPTIONS`
+value-99 Killed     src/middleware/secure-headers/secure-headers.ts:121 `xXssProtection: true` removed from `DEFAULT_OPTIONS`
+value-100 Killed     src/middleware/secure-headers/secure-headers.ts:122 `removePoweredBy: true` removed from `DEFAULT_OPTIONS`
+value-101 Survived   src/middleware/secure-headers/secure-headers.ts:122 `permissionsPolicy: {}` removed from `DEFAULT_OPTIONS`
+value-mutants: 139 mutant(s): 130 Killed, 8 Survived, 1 NoCoverage; 1473334 ms (baseline run 566 ms)
+wrote <work-0001>/hono/reports/value/value.json
+real 1473.40
+user 122.42
+sys 39.61

@@ -1,14 +1,10 @@
 {
   "surface": {
-    "include": [
-      "src/defu.ts"
-    ],
+    "include": ["src/defu.ts"],
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "test/**/*.test.ts"
-    ],
+    "include": ["test/**/*.test.ts"],
     "adapter": "vitest"
   },
   "tsdoc": {

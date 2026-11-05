@@ -1,0 +1,42 @@
+specgate check (advisory): 4 units, 23 guarantees, 165 linked tests
+  fail 4 · warn 31 · info 1
+  ❌ [guarantee-no-test] src/middleware/persist.ts:32 createJSONStorage.ok.json has no test naming it
+  ❌ [guarantee-no-test] src/middleware/persist.ts:33 createJSONStorage.ok.lazy has no test naming it
+  ❌ [guarantee-no-test] src/middleware/persist.ts:410 persist.ok.default-storage has no test naming it
+  ❌ [guarantee-no-test] src/vanilla/shallow.ts:51 shallow.ok.nested has no test naming it
+  ⚠️ [mutant-survived] src/middleware/persist.ts:42 createJSONStorage: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/persist.ts:49 createJSONStorage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:49 createJSONStorage: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:175 persist: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:194 persist: ArrowFunction mutant in a helper it calls: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:207 persist: `hydrationVersion` 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:212 persist: BlockStatement mutant in a helper it calls: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/persist.ts:212 persist: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:214 persist: BlockStatement mutant in a helper it calls: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/persist.ts:216 persist: StringLiteral mutant in a helper it calls: ```` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/persist.ts:218 persist: CallExpression mutant in a helper it calls: `;` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/persist.ts:249 persist: ArrowFunction mutant in a helper it calls: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:258 persist: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:266 persist: UpdateOperator mutant in a helper it calls: `--hydrationVersion` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:292 persist: StringLiteral mutant in a helper it calls: ```` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:311 persist: BooleanLiteral mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:334 persist: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:334 persist: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:337 persist: OptionalChaining mutant in a helper it calls: `postRehydrationCallback(undefined, e)` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:348 persist: BlockStatement mutant in a helper it calls: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/persist.ts:348 persist: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:353 persist: UpdateOperator mutant in a helper it calls: `--hydrationVersion` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/persist.ts:354 persist: OptionalChaining mutant in a helper it calls: `storage.removeItem` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/shallow.ts:38 shallow: LogicalOperator mutant in a helper it calls: `!nextA.done || !nextB.done` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/shallow.ts:45 shallow: ConditionalExpression mutant in a helper it calls: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/shallow.ts:45 shallow: LogicalOperator mutant in a helper it calls: `!!nextA.done || !!nextB.done` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/shallow.ts:62 shallow: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/shallow.ts:63 shallow: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/shallow.ts:64 shallow: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/shallow.ts:71 shallow: LogicalOperator mutant: `isIterable(valueA) || isIterable(valueB)` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/vanilla/shallow.ts:72 shallow: LogicalOperator mutant: `hasIterableEntries(valueA) || hasIterableEntries(valueB)` survived; no linked test fails when the code changes like this
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work-0001>/zustand/.specgate-regression/report.json
+      <work-0001>/zustand/.specgate-regression/summary.md
+      <work-0001>/zustand/.specgate-regression/report.sarif

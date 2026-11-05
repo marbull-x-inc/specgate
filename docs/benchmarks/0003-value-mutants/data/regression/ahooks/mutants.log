@@ -1,0 +1,5 @@
+mutants: 3 value change(s) in 1 file(s) (3 number)
+wrote <work-0001>/ahooks/.specgate/mutants.json
+real 1.68
+user 3.59
+sys 0.33

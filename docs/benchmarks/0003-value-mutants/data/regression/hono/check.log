@@ -1,0 +1,149 @@
+specgate check (advisory): 5 units, 28 guarantees, 72 linked tests
+  fail 6 · warn 56 · info 81
+  ❌ [guarantee-no-test] src/middleware/cors/index.ts:68 cors.ok.headers has no test naming it
+  ❌ [guarantee-no-test] src/middleware/cors/index.ts:69 cors.ok.max-age has no test naming it
+  ❌ [guarantee-no-test] src/middleware/cors/index.ts:70 cors.ok.credentials has no test naming it
+  ❌ [guarantee-no-test] src/middleware/cors/index.ts:71 cors.ok.expose has no test naming it
+  ❌ [guarantee-no-test] src/middleware/secure-headers/secure-headers.ts:138 NONCE.ok.value has no test naming it
+  ❌ [identifier-unresolved] src/middleware/secure-headers/secure-headers.ts:186 secureHeaders.ok.csp: "camelCase" is not a parameter, declared port, entity or public operation
+  ⚠️ [mutant-survived] src/middleware/body-limit/index.ts:57 bodyLimit: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/body-limit/index.ts:58 bodyLimit: `status` 413 → 414 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/body-limit/index.ts:71 bodyLimit: `c.req.raw.headers.has('content-length')`: 'content-length' → 'content-length_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/body-limit/index.ts:73 bodyLimit: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/body-limit/index.ts:73 bodyLimit: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/body-limit/index.ts:75 bodyLimit: StringLiteral mutant: `""` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/body-limit/index.ts:75 bodyLimit: `c.req.raw.headers.get('content-length')…`: '0' → '0_x' is not run by any test
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:78 cors: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:82 cors: OptionalChaining mutant: `opts.exposeHeaders.length` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:83 cors: OptionalChaining mutant: `opts.allowHeaders.length` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:102 cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:105 cors: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:106 cors: ArrowFunction mutant: `() => undefined` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:106 cors: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:115 cors: StringLiteral mutant: `"Stryker was here!"` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:120 cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:124 cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:129 cors: ConditionalExpression mutant (the match "*"): `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:129 cors: StringLiteral mutant (the match "*"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:129 cors: `opts.origin !== '*'`: '*' → '*_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:137 cors: StringLiteral mutant: `"Stryker was here!"` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:143 cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:152 cors: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:157 cors: `c.res.headers.delete('Content-Length')`: 'Content-Length' → 'Content-Length_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/cors/index.ts:158 cors: `c.res.headers.delete('Content-Type')`: 'Content-Type' → 'Content-Type_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:110 secureHeaders: BooleanLiteral mutant in DEFAULT_OPTIONS: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:110 secureHeaders: `crossOriginEmbedderPolicy: false` removed from `DEFAULT_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:122 secureHeaders: `permissionsPolicy: {}` removed from `DEFAULT_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:131 NONCE: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:132 NONCE: `new Uint8Array(16)`: 16 → 17 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:133 NONCE: CallExpression mutant in a helper it calls: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:143 NONCE: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:143 NONCE: LogicalOperator mutant: `init && generateNonce()` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:143 NONCE: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:144 NONCE: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:226 secureHeaders: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:230 secureHeaders: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:238 secureHeaders: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:244 secureHeaders: OptionalChaining mutant: `options.removePoweredBy` survived; no linked test fails when the code changes like this
+  ⚠️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:271 secureHeaders commits to constant "2" in `i * 2 + 2`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:279 secureHeaders: Regex mutant in a helper it calls: `/[A-Z](?![a-z])|[A-Z]/g` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:279 secureHeaders: Regex mutant in a helper it calls: `/[A-Z]+(?=[a-z])|[A-Z]/g` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:279 secureHeaders: Regex mutant in a helper it calls: `/[A-Z]+(?![^a-z])|[A-Z]/g` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:280 secureHeaders: MethodExpression mutant in a helper it calls: `match.toUpperCase()` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:288 secureHeaders: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:308 secureHeaders: MethodExpression mutant in a helper it calls: `Object.entries(policy).map(([directive, value]) => { const …` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:316 secureHeaders: ConditionalExpression mutant in a helper it calls: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:317 secureHeaders: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:317 secureHeaders: BlockStatement mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:320 secureHeaders: ConditionalExpression mutant in a helper it calls (the match "*"): `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:323 secureHeaders: ConditionalExpression mutant in a helper it calls (the match "none"): `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:330 secureHeaders: StringLiteral mutant in a helper it calls: `"Stryker was here!"` is not run by any test
+  ⚠️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:337 secureHeaders commits to output "$1-$2" in `'$1-$2'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:337 secureHeaders: Regex mutant in a helper it calls (the output "$1-$2"): `/([a-z\D])([A-Z])/g` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:341 secureHeaders: ArrayDeclaration mutant in a helper it calls: `["Stryker was here"]` is not run by any test
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:346 secureHeaders: ArrayDeclaration mutant in a helper it calls: `["Stryker was here"]` is not run by any test
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./request" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./types" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./hono-base" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./tiny" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./quick" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./http-exception" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./basic-auth" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./bearer-auth" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./body-limit" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./ip-restriction" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./cache" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./route" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./mount" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./cookie" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./accepts" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./compress" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./context-storage" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./cors" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./csrf" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./etag" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./trailing-slash" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./html" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./css" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx/jsx-dev-runtime" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx/jsx-runtime" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx/streaming" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx-renderer" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx/dom" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx/dom/jsx-dev-runtime" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx/dom/jsx-runtime" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx/dom/client" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx/dom/css" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jsx/dom/server" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jwt" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./jwk" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./timeout" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./timing" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./logger" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./method-not-allowed" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./method-override" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./powered-by" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./pretty-json" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./request-id" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./language" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./secure-headers" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./combine" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./ssg" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./streaming" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./validator" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./router" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./router/reg-exp-router" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./router/smart-router" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./router/trie-router" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./router/pattern-router" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./router/linear-router" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./utils/jwt" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./client" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./adapter" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./factory" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./serve-static" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./cloudflare-workers" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./cloudflare-pages" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./deno" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./bun" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./aws-lambda" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./vercel" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./netlify" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./lambda-edge" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./service-worker" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./testing" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./dev" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./ws" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./conninfo" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [entry-unmapped] package.json package.json#exports "./proxy" points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [decision-unspecified] src/middleware/cors/index.ts:128 cors commits to match "OPTIONS" in `c.req.method === 'OPTIONS'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] src/middleware/cors/index.ts:163 cors commits to output "No Content" in `'No Content'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:320 secureHeaders commits to match "*" in `value[0] === '*'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:326 secureHeaders commits to output "self" in `'self'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:326 secureHeaders commits to output "src" in `'src'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+
+wrote <work-0001>/hono/.specgate-regression/report.json
+      <work-0001>/hono/.specgate-regression/summary.md
+      <work-0001>/hono/.specgate-regression/report.sarif

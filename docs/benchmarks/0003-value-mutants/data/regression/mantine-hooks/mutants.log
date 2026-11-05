@@ -1,0 +1,5 @@
+mutants: 44 value change(s) in 5 file(s) (2 entry, 30 number, 10 string, 2 element)
+wrote <work-0001>/mantine-hooks/.specgate/mutants.json
+real 6.16
+user 12.40
+sys 1.31

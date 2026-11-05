@@ -9,16 +9,12 @@
     "src/useController.ts",
     "src/useFormContext.tsx"
   ],
-  "reporters": [
-    "json"
-  ],
+  "reporters": ["json"],
   "jsonReporter": {
     "fileName": "reports/mutation/mutation.json"
   },
   "tempDirName": ".stryker-tmp",
-  "plugins": [
-    "@stryker-mutator/jest-runner"
-  ],
+  "plugins": ["@stryker-mutator/jest-runner"],
   "jest": {
     "configFile": "jest.stryker.config.js",
     "config": {

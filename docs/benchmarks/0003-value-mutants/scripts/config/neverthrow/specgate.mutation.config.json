@@ -1,14 +1,10 @@
 {
   "surface": {
-    "include": [
-      "src/result.ts"
-    ],
+    "include": ["src/result.ts"],
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "tests/**/*.test.ts"
-    ],
+    "include": ["tests/**/*.test.ts"],
     "adapter": "vitest"
   },
   "tsdoc": {
@@ -21,9 +17,6 @@
     "dir": ".specgate-mutation"
   },
   "mutation": {
-    "report": [
-      "reports/mutation/mutation.json",
-      "reports/value/value.json"
-    ]
+    "report": ["reports/mutation/mutation.json", "reports/value/value.json"]
   }
 }

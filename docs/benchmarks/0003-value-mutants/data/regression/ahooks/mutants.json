@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "files": {
+    "packages/hooks/src/useCounter/index.ts": {
+      "sha256": "e6b8ba735d4047694e89a2dc2a7985eeef63f34d71946544db3d37196ca72726"
+    }
+  },
+  "mutants": [
+    {
+      "id": "value-1",
+      "unit": "useCounter",
+      "file": "packages/hooks/src/useCounter/index.ts",
+      "line": 38,
+      "column": 44,
+      "endLine": 38,
+      "endColumn": 45,
+      "start": 1154,
+      "end": 1155,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "the default `initialValue` 0 → 1"
+    },
+    {
+      "id": "value-2",
+      "unit": "useCounter",
+      "file": "packages/hooks/src/useCounter/index.ts",
+      "line": 58,
+      "column": 32,
+      "endLine": 58,
+      "endColumn": 33,
+      "start": 1587,
+      "end": 1588,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "the default `delta` 1 → 2"
+    },
+    {
+      "id": "value-3",
+      "unit": "useCounter",
+      "file": "packages/hooks/src/useCounter/index.ts",
+      "line": 62,
+      "column": 32,
+      "endLine": 62,
+      "endColumn": 33,
+      "start": 1664,
+      "end": 1665,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "the default `delta` 1 → 2"
+    }
+  ]
+}

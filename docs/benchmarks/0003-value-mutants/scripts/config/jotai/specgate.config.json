@@ -15,10 +15,7 @@
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "tests/**/*.test.ts",
-      "tests/**/*.test.tsx"
-    ],
+    "include": ["tests/**/*.test.ts", "tests/**/*.test.tsx"],
     "adapter": "vitest"
   },
   "tsdoc": {

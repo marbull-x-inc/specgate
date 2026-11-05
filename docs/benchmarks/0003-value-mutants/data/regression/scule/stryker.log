@@ -1,0 +1,138 @@
+[32m07:55:27 (55186) INFO ProjectReader[39m Found 1 of 26 file(s) to be mutated.
+[32m07:55:27 (55186) INFO Instrumenter[39m Instrumented 1 source file(s) with 78 mutant(s)
+[32m07:55:27 (55186) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m07:55:28 (55186) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m07:55:28 (55186) INFO DryRunExecutor[39m Initial test run succeeded. Ran 63 tests in 0 seconds (net 8 ms, overhead 234 ms).
+
+All tests/scule.test.ts
+  ✓ splitByCase splitByCase.ok.case-change  => [] (killed 6)
+  ✓ splitByCase splitByCase.ok.case-change foo => [ 'foo' ] (killed 22)
+  ✓ splitByCase splitByCase.ok.case-change fooBar => [ 'foo', 'Bar' ] (killed 14)
+  ~ splitByCase splitByCase.ok.case-change FooBarBaz => [ 'Foo', 'Bar', 'Baz' ] (covered 53)
+  ✓ splitByCase splitByCase.ok.case-change FooBARb => [ 'Foo', 'BA', 'Rb' ] (killed 15)
+  ✓ splitByCase splitByCase.ok.case-change foo_bar-baz/qux => [ 'foo', 'bar', 'baz', 'qux' ] (killed 3)
+  ~ splitByCase splitByCase.ok.case-change foo--bar-Baz => [ 'foo', '', 'bar', 'Baz' ] (covered 54)
+  ~ splitByCase splitByCase.ok.case-change FOO_BAR => [ 'FOO', 'BAR' ] (covered 48)
+  ~ splitByCase splitByCase.ok.case-change foo123-bar => [ 'foo123', 'bar' ] (covered 49)
+  ~ splitByCase splitByCase.ok.case-change FOOBar => [ 'FOO', 'Bar' ] (covered 58)
+  ~ splitByCase splitByCase.ok.case-change ALink => [ 'A', 'Link' ] (covered 58)
+  ~ splitByCase splitByCase.ok.case-change foo\Bar.fuzz-FIZz => [ 'foo', 'Bar', 'fuzz', 'FI', 'Zz' ] (covered 60)
+  ~ splitByCase splitByCase.ok.case-change new-name-value => [ 'new-name-value' ] (covered 46)
+  ✓ pascalCase pascalCase.ok.normalize  => (killed 2)
+  ✓ pascalCase pascalCase.ok.normalize foo => Foo (killed 1)
+  ~ pascalCase pascalCase.ok.normalize foo-bAr => FooBAr (covered 57)
+  ~ pascalCase pascalCase.ok.normalize FooBARb => FooBaRb (covered 61)
+  ~ pascalCase pascalCase.ok.normalize foo_bar-baz/qux => FooBarBazQux (covered 50)
+  ~ pascalCase pascalCase.ok.normalize FOO_BAR => FooBar (covered 50)
+  ~ pascalCase pascalCase.ok.normalize foo--bar-Baz => FooBarBaz (covered 56)
+  ✓ camelCase camelCase.ok.normalize FooBarBaz => fooBarBaz (killed 2)
+  ~ camelCase camelCase.ok.normalize FOO_BAR => fooBar (covered 52)
+  ✓ kebabCase kebabCase.ok.join  => (killed 2)
+  ~ kebabCase kebabCase.ok.join foo => foo (covered 47)
+  ~ kebabCase kebabCase.ok.join foo/Bar => foo-bar (covered 55)
+  ~ kebabCase kebabCase.ok.join foo-bAr => foo-b-ar (covered 56)
+  ~ kebabCase kebabCase.ok.join foo--bar => foo--bar (covered 49)
+  ~ kebabCase kebabCase.ok.join FooBAR => foo-bar (covered 54)
+  ~ kebabCase kebabCase.ok.join ALink => a-link (covered 59)
+  ~ kebabCase kebabCase.ok.join FOO_BAR => foo-bar (covered 49)
+  ✓ snakeCase snakeCase.ok.join FooBarBaz => foo_bar_baz (killed 1)
+  ~ snakeCase snakeCase.ok.join FOO_BAR => foo_bar (covered 50)
+  ~ upperFirst upperFirst.ok.first  => (covered 1)
+  ~ upperFirst upperFirst.ok.first foo => Foo (covered 1)
+  ~ upperFirst upperFirst.ok.first Foo => Foo (covered 1)
+  ~ lowerFirst lowerFirst.ok.first  => (covered 1)
+  ~ lowerFirst lowerFirst.ok.first foo => foo (covered 1)
+  ~ lowerFirst lowerFirst.ok.first Foo => foo (covered 1)
+  ✓ trainCase trainCase.ok.preserve  => (killed 1)
+  ~ trainCase trainCase.ok.preserve f => F (covered 30)
+  ~ trainCase trainCase.ok.preserve foo => Foo (covered 48)
+  ~ trainCase trainCase.ok.preserve foo-bAr => Foo-B-Ar (covered 57)
+  ~ trainCase trainCase.ok.preserve AcceptCH => Accept-CH (covered 55)
+  ~ trainCase trainCase.ok.preserve foo_bar-baz/qux => Foo-Bar-Baz-Qux (covered 50)
+  ~ trainCase trainCase.ok.preserve FOO_BAR => FOO-BAR (covered 50)
+  ~ trainCase trainCase.ok.preserve foo--bar-Baz => Foo-Bar-Baz (covered 56)
+  ~ trainCase trainCase.ok.preserve WWW-authenticate => WWW-Authenticate (covered 53)
+  ~ trainCase trainCase.ok.preserve WWWAuthenticate => WWW-Authenticate (covered 60)
+  ~ trainCase trainCase.ok.normalize AcceptCH => Accept-Ch (covered 55)
+  ~ trainCase trainCase.ok.normalize FOO_BAR => Foo-Bar (covered 50)
+  ~ trainCase trainCase.ok.normalize WWW-authenticate => Www-Authenticate (covered 53)
+  ✓ titleCase titleCase.ok.join  => (killed 1)
+  ~ titleCase titleCase.ok.join f => F (covered 30)
+  ~ titleCase titleCase.ok.join foo => Foo (covered 48)
+  ~ titleCase titleCase.ok.join foo-bar => Foo Bar (covered 50)
+  ✓ titleCase titleCase.ok.join this-IS-aTitle => This is a Title (killed 1)
+  ✓ flatCase flatCase.ok.join  => (killed 1)
+  ~ flatCase flatCase.ok.join foo => foo (covered 48)
+  ~ flatCase flatCase.ok.join foo-bAr => foobar (covered 57)
+  ~ flatCase flatCase.ok.join FooBARb => foobarb (covered 61)
+  ~ flatCase flatCase.ok.join foo_bar-baz/qux => foobarbazqux (covered 50)
+  ~ flatCase flatCase.ok.join FOO_BAR => foobar (covered 50)
+  ~ flatCase flatCase.ok.join foo--bar-Baz => foobarbaz (covered 56)
+
+[NoCoverage] StringLiteral
+src/index.ts:15:36
+-   export function isUppercase(char = ""): boolean | undefined {
++   export function isUppercase(char = "Stryker was here!"): boolean | undefined {
+
+[Survived] ConditionalExpression
+src/index.ts:16:7
+-     if (NUMBER_CHAR_RE.test(char)) {
++     if (false) {
+Tests ran:
+    splitByCase splitByCase.ok.case-change foo => [ 'foo' ]
+    splitByCase splitByCase.ok.case-change fooBar => [ 'foo', 'Bar' ]
+    splitByCase splitByCase.ok.case-change FooBarBaz => [ 'Foo', 'Bar', 'Baz' ]
+  and 48 more tests!
+
+
+[Survived] BlockStatement
+src/index.ts:16:34
+-     if (NUMBER_CHAR_RE.test(char)) {
+-       return undefined;
+-     }
++     if (NUMBER_CHAR_RE.test(char)) {}
+Tests ran:
+    splitByCase splitByCase.ok.case-change foo123-bar => [ 'foo123', 'bar' ]
+
+
+[Survived] ConditionalExpression
+src/index.ts:40:15
+-     if (!str || typeof str !== "string") {
++     if (!str || false) {
+Tests ran:
+    splitByCase splitByCase.ok.case-change foo => [ 'foo' ]
+    splitByCase splitByCase.ok.case-change fooBar => [ 'foo', 'Bar' ]
+    splitByCase splitByCase.ok.case-change FooBarBaz => [ 'Foo', 'Bar', 'Baz' ]
+  and 48 more tests!
+
+
+[Survived] ConditionalExpression
+src/index.ts:60:9
+-       if (previousSplitter === false) {
++       if (true) {
+Tests ran:
+    splitByCase splitByCase.ok.case-change foo => [ 'foo' ]
+    splitByCase splitByCase.ok.case-change fooBar => [ 'foo', 'Bar' ]
+    splitByCase splitByCase.ok.case-change FooBarBaz => [ 'Foo', 'Bar', 'Baz' ]
+  and 48 more tests!
+
+
+[Survived] Regex
+src/index.ts:209:3
+-     /^(a|an|and|as|at|but|by|for|if|in|is|nor|of|on|or|the|to|with)$/i;
++     /^(a|an|and|as|at|but|by|for|if|in|is|nor|of|on|or|the|to|with)/i;
+Ran all tests for this mutant.
+
+Ran 4.94 tests per mutant on average.
+----------|------------------|----------|-----------|------------|----------|----------|
+          | % Mutation score |          |           |            |          |          |
+File      |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+----------|--------|---------|----------|-----------|------------|----------|----------|
+All files |  92.31 |   93.51 |       72 |         0 |          5 |        1 |        0 |
+ index.ts |  92.31 |   93.51 |       72 |         0 |          5 |        1 |        0 |
+----------|--------|---------|----------|-----------|------------|----------|----------|
+[32m07:55:31 (55186) INFO JsonReporter[39m Your report can be found at: file://<work-0001>/scule/reports/mutation/mutation.json
+[32m07:55:31 (55186) INFO MutationTestExecutor[39m Done in 4 seconds.
+real 6.34
+user 31.25
+sys 7.02

@@ -26,9 +26,6 @@
     "dir": ".specgate-mutation"
   },
   "mutation": {
-    "report": [
-      "packages/react-hotkeys-hook/reports/mutation/mutation.json",
-      "reports/value/value.json"
-    ]
+    "report": ["packages/react-hotkeys-hook/reports/mutation/mutation.json", "reports/value/value.json"]
   }
 }

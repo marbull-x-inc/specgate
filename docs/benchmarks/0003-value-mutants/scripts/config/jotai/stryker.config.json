@@ -14,14 +14,10 @@
     "src/vanilla/utils/splitAtom.ts",
     "src/vanilla/utils/unwrap.ts"
   ],
-  "reporters": [
-    "json"
-  ],
+  "reporters": ["json"],
   "jsonReporter": {
     "fileName": "reports/mutation/mutation.json"
   },
   "tempDirName": ".stryker-tmp",
-  "plugins": [
-    "@stryker-mutator/vitest-runner"
-  ]
+  "plugins": ["@stryker-mutator/vitest-runner"]
 }

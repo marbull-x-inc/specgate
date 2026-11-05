@@ -1,0 +1,456 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "generatedAt": "2026-11-05T22:54:00.806Z",
+  "root": "<work-0001>/ahooks",
+  "revision": "a0c33c21caefda40753fe4b3cbb3b1efbabd1a79",
+  "configHash": "4c35944cfac31402",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "useBoolean",
+      "kind": "function",
+      "operation": "useBoolean",
+      "file": "packages/hooks/src/useBoolean/index.ts",
+      "line": 15,
+      "endLine": 30,
+      "referencedBy": [
+        "packages/hooks/src/useHover/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "defaultValue",
+          "type": "boolean",
+          "optional": true
+        }
+      ],
+      "returns": "[boolean, Actions]",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "useToggle"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "f96c76fc0b7f591f",
+      "guarantees": [
+        {
+          "id": "ok.default",
+          "key": "useBoolean.ok.default",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the state starts at `defaultValue`, false when it is not given",
+          "textHash": "0bbc1afb672e3c40",
+          "line": 12,
+          "references": [],
+          "tests": [
+            "packages/hooks/src/useBoolean/__tests__/index.spec.ts:47"
+          ]
+        },
+        {
+          "id": "ok.actions",
+          "key": "useBoolean.ok.actions",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`toggle` switches the state, `set` sets it to the given value, `setTrue` to true and `setFalse` to false",
+          "textHash": "7699ff4ed0f66f1a",
+          "line": 13,
+          "references": [],
+          "tests": [
+            "packages/hooks/src/useBoolean/__tests__/index.spec.ts:8"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "useCounter",
+      "kind": "function",
+      "operation": "useCounter",
+      "file": "packages/hooks/src/useCounter/index.ts",
+      "line": 38,
+      "endLine": 83,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "initialValue",
+          "type": "number",
+          "optional": true
+        },
+        {
+          "name": "options",
+          "type": "Options",
+          "optional": true
+        }
+      ],
+      "returns": "readonly [number, { readonly inc: (this: unknown, delta?: number | undefined) => void; readonly dec: (this: unknown, delta?: number | undefined) => void; readonly set: (this: unknown, value: ValueParam) => void; readonly reset: (this: unknown) => void; }]",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "helperRanges": [
+        {
+          "line": 19,
+          "endLine": 29
+        },
+        {
+          "line": 48,
+          "endLine": 56
+        }
+      ],
+      "implHash": "1fbc2bb530506f59",
+      "guarantees": [
+        {
+          "id": "ok.initial",
+          "key": "useCounter.ok.initial",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the value starts at `initialValue`, 0 when it is not given",
+          "textHash": "d7181c2e05a0c953",
+          "line": 32,
+          "references": [],
+          "tests": [
+            "packages/hooks/src/useCounter/__tests__/index.spec.ts:9"
+          ]
+        },
+        {
+          "id": "ok.inc",
+          "key": "useCounter.ok.inc",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`inc` adds `delta` to the value, 1 when it is not given; `dec` subtracts it",
+          "textHash": "d2a3bf232f4dda9c",
+          "line": 33,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.bounds",
+          "key": "useCounter.ok.bounds",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the value never goes above `max` or below `min`",
+          "textHash": "a5b8a051d8e1c7b9",
+          "line": 34,
+          "references": [],
+          "tests": [
+            "packages/hooks/src/useCounter/__tests__/index.spec.ts:15"
+          ]
+        },
+        {
+          "id": "ok.set",
+          "key": "useCounter.ok.set",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`set` sets the value to a number, or to what a function of the current value returns",
+          "textHash": "c83b70823a74e3ac",
+          "line": 35,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.reset",
+          "key": "useCounter.ok.reset",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`reset` sets the value back to `initialValue`",
+          "textHash": "62e231bf425639d3",
+          "line": 36,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "useToggle",
+      "kind": "function",
+      "operation": "useToggle",
+      "file": "packages/hooks/src/useToggle/index.ts",
+      "line": 16,
+      "endLine": 44,
+      "referencedBy": [
+        "packages/hooks/src/useBoolean/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "defaultValue",
+          "type": "D",
+          "optional": true
+        },
+        {
+          "name": "reverseValue",
+          "type": "R",
+          "optional": true
+        }
+      ],
+      "returns": "(D | R | { toggle: () => void; set: (value: D | R) => void; setLeft: () => void; setRight: () => void; })[]",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "069045dcd298ce8a",
+      "guarantees": [
+        {
+          "id": "ok.default",
+          "key": "useToggle.ok.default",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the state starts at `defaultValue`, false when it is not given",
+          "textHash": "0bbc1afb672e3c40",
+          "line": 11,
+          "references": [],
+          "tests": [
+            "packages/hooks/src/useToggle/__tests__/index.spec.ts:12"
+          ]
+        },
+        {
+          "id": "ok.toggle",
+          "key": "useToggle.ok.toggle",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`toggle` switches the state between `defaultValue` and `reverseValue`",
+          "textHash": "79f8424d1a8f46a1",
+          "line": 12,
+          "references": [],
+          "tests": [
+            "packages/hooks/src/useToggle/__tests__/index.spec.ts:32"
+          ]
+        },
+        {
+          "id": "ok.set",
+          "key": "useToggle.ok.set",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`set` sets the state to the given value",
+          "textHash": "81bafa94dd2797a8",
+          "line": 13,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.left-right",
+          "key": "useToggle.ok.left-right",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`setLeft` sets the state to `defaultValue`; `setRight` sets it to `reverseValue`, or to the reverse of `defaultValue` when `reverseValue` is not given",
+          "textHash": "5319ac80047b9bf9",
+          "line": 14,
+          "references": [],
+          "tests": [
+            "packages/hooks/src/useToggle/__tests__/index.spec.ts:17"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "useBoolean.ok.actions",
+      "unitId": "useBoolean",
+      "guaranteeId": "ok.actions",
+      "file": "packages/hooks/src/useBoolean/__tests__/index.spec.ts",
+      "line": 8,
+      "title": "useBoolean.ok.actions test on methods",
+      "status": "test",
+      "bodyHash": "47221066ae87997a",
+      "literals": [
+        "a"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useBoolean.ok.default",
+      "unitId": "useBoolean",
+      "guaranteeId": "ok.default",
+      "file": "packages/hooks/src/useBoolean/__tests__/index.spec.ts",
+      "line": 47,
+      "title": "useBoolean.ok.default test on default value",
+      "status": "test",
+      "bodyHash": "d04482d6d0f39a20",
+      "literals": [
+        "hello"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useCounter.ok.initial",
+      "unitId": "useCounter",
+      "guaranteeId": "ok.initial",
+      "file": "packages/hooks/src/useCounter/__tests__/index.spec.ts",
+      "line": 9,
+      "title": "useCounter.ok.initial should init counter",
+      "status": "test",
+      "bodyHash": "112c210c84417970",
+      "literals": [
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "reads": [
+        {
+          "name": "Options",
+          "from": "packages/hooks/src/useCounter/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useCounter.ok.bounds",
+      "unitId": "useCounter",
+      "guaranteeId": "ok.bounds",
+      "file": "packages/hooks/src/useCounter/__tests__/index.spec.ts",
+      "line": 15,
+      "title": "useCounter.ok.bounds should max, min, actions work",
+      "status": "test",
+      "bodyHash": "72627c6f6482a0f1",
+      "literals": [
+        "100",
+        "10",
+        "2",
+        "-1000",
+        "1000",
+        "3",
+        "6"
+      ],
+      "keys": [
+        "max",
+        "min"
+      ],
+      "iterates": [],
+      "reads": [
+        {
+          "name": "Options",
+          "from": "packages/hooks/src/useCounter/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.default",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.default",
+      "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
+      "line": 12,
+      "title": "useToggle.ok.default test on init",
+      "status": "test",
+      "bodyHash": "ae413890add132e5",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.left-right",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.left-right",
+      "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
+      "line": 17,
+      "title": "useToggle.ok.left-right test on methods",
+      "status": "test",
+      "bodyHash": "921350b618dec0b4",
+      "literals": [
+        "Hello"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    },
+    {
+      "key": "useToggle.ok.toggle",
+      "unitId": "useToggle",
+      "guaranteeId": "ok.toggle",
+      "file": "packages/hooks/src/useToggle/__tests__/index.spec.ts",
+      "line": 32,
+      "title": "useToggle.ok.toggle test on optional",
+      "status": "test",
+      "bodyHash": "d2fb1000b91f970f",
+      "literals": [
+        "Hello",
+        "World"
+      ],
+      "keys": [],
+      "iterates": [],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "guarantee-no-test",
+      "message": "useCounter.ok.inc has no test naming it",
+      "file": "packages/hooks/src/useCounter/index.ts",
+      "line": 33,
+      "unit": "useCounter",
+      "guarantee": "useCounter.ok.inc",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "useCounter.ok.set has no test naming it",
+      "file": "packages/hooks/src/useCounter/index.ts",
+      "line": 35,
+      "unit": "useCounter",
+      "guarantee": "useCounter.ok.set",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "useCounter.ok.reset has no test naming it",
+      "file": "packages/hooks/src/useCounter/index.ts",
+      "line": 36,
+      "unit": "useCounter",
+      "guarantee": "useCounter.ok.reset",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "useToggle.ok.set has no test naming it",
+      "file": "packages/hooks/src/useToggle/index.ts",
+      "line": 13,
+      "unit": "useToggle",
+      "guarantee": "useToggle.ok.set",
+      "severity": "fail"
+    }
+  ],
+  "summary": {
+    "units": 3,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 11,
+    "guaranteesWithoutTest": 4,
+    "tests": 7,
+    "orphanTests": 0,
+    "unlinkedTests": 431,
+    "findings": {
+      "fail": 4,
+      "warn": 0,
+      "info": 0
+    }
+  }
+}

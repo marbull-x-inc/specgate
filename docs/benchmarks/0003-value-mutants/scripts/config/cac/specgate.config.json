@@ -1,16 +1,10 @@
 {
   "surface": {
-    "include": [
-      "src/index.ts",
-      "src/cac.ts",
-      "src/command.ts"
-    ],
+    "include": ["src/index.ts", "src/cac.ts", "src/command.ts"],
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "tests/**/*.test.ts"
-    ],
+    "include": ["tests/**/*.test.ts"],
     "adapter": "vitest"
   },
   "tsdoc": {

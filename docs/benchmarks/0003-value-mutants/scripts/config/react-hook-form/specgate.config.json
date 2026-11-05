@@ -10,10 +10,7 @@
     "mode": "exported"
   },
   "tests": {
-    "include": [
-      "src/**/*.test.ts",
-      "src/**/*.test.tsx"
-    ],
+    "include": ["src/**/*.test.ts", "src/**/*.test.tsx"],
     "adapter": "jest"
   },
   "tsdoc": {

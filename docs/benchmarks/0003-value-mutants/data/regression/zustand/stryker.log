@@ -1,0 +1,577 @@
+[32m07:56:24 (72462) INFO ProjectReader[39m Found 3 of 150 file(s) to be mutated.
+[32m07:56:24 (72462) INFO Instrumenter[39m Instrumented 3 source file(s) with 245 mutant(s)
+[32m07:56:24 (72462) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m07:56:25 (72462) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m07:56:32 (72462) INFO DryRunExecutor[39m Initial test run succeeded. Ran 233 tests in 7 seconds (net 214.10312200000203 ms, overhead 7182.896877999998 ms).
+
+All tests
+  vanilla
+    basic.test.ts
+      ~ createStore.ok.api create a store [line 13] (covered 4)
+      ~ createStore.ok.updater uses the store [line 46] (covered 23)
+      ~ createStore.ok.initial can get the store [line 56] (covered 4)
+      ~ createStore.ok.initial can get the initial state [line 73] (covered 23)
+      ~ createStore.ok.merge can set the store [line 80] (covered 23)
+      ~ createStore.ok.subscribe both NaN should not update [line 99] (covered 15)
+      ~ createStore.ok.replace can set the store without merging [line 109] (covered 15)
+      ✓ createStore.ok.merge can set the object store to null [line 122] (killed 1)
+      ~ createStore.ok.merge can set the non-object store to null [line 132] (covered 23)
+      ~ createStore.ok.updater works with non-object state [line 140] (covered 21)
+    shallow.test.tsx
+      ✓ shallow > shallow.ok.primitives compares primitive values [line 5] (killed 3)
+      ✓ shallow > shallow.ok.objects compares objects [line 16] (killed 5)
+      ~ shallow > shallow.ok.objects compares arrays [line 30] (covered 45)
+      ✓ shallow > shallow.ok.maps compares Maps [line 44] (killed 7)
+      ✓ shallow > shallow.ok.sets compares Sets [line 108] (killed 1)
+      ~ shallow > shallow.ok.primitives compares functions [line 129] (covered 17)
+      ~ shallow > shallow.ok.maps compares URLSearchParams [line 145] (covered 47)
+      ~ shallow > shallow.ok.objects should work with nested arrays (#2794) [line 169] (covered 43)
+      ~ shallow > shallow.ok.objects should work with undefined (#3204) [line 174] (covered 41)
+      ✓ mixed cases > shallow.ok.prototype compares different data structures [line 188] (killed 2)
+      ✓ generators > shallow.ok.primitives pure iterable [line 199] (killed 12)
+      ✓ generators > shallow.ok.primitives pure iterable with different values returns false [line 208] (killed 3)
+      ~ unsupported cases > shallow.ok.objects date [line 228] (covered 35)
+    subscribe.test.tsx
+      ~ subscribe() > createStore.ok.subscribe should not be called if new state identity is the same [line 6] (covered 15)
+      ~ subscribe() > createStore.ok.subscribe should be called if new state identity is different [line 16] (covered 26)
+      ~ subscribe() > createStore.ok.subscribe should not be called when state slice is the same [line 26] (covered 26)
+      ~ subscribe() > createStore.ok.subscribe should be called when state slice changes [line 38] (covered 26)
+      ~ subscribe() > createStore.ok.subscribe should not be called when equality checker returns true [line 51] (covered 26)
+      ~ subscribe() > createStore.ok.subscribe should be called when equality checker returns false [line 63] (covered 26)
+      ~ subscribe() > createStore.ok.subscribe should unsubscribe correctly [line 76] (covered 26)
+      ~ subscribe() > createStore.ok.subscribe should keep consistent behavior with equality check [line 93] (covered 26)
+      ~ subscribe() > createStore.ok.subscribe should call listener immediately when fireImmediately is true [line 124] (covered 7)
+  basic.test.tsx
+    ~ creates a store hook and api object [line 22] (covered 4)
+    ~ uses the store with no args [line 50] (covered 26)
+    ~ uses the store with selectors [line 71] (covered 26)
+    ~ uses the store with a selector and equality checker [line 93] (covered 26)
+    ~ only re-renders if selected state has changed [line 131] (covered 26)
+    ~ can batch updates [line 166] (covered 26)
+    ~ can update the selector [line 192] (covered 7)
+    ~ can update the equality checker [line 219] (covered 26)
+    ~ can call useBoundStore with progressively more arguments [line 262] (covered 26)
+    ~ can throw an error in selector [line 321] (covered 26)
+    ~ can throw an error in equality checker [line 370] (covered 26)
+    ~ can get the store [line 420] (covered 4)
+    ~ can set the store [line 436] (covered 23)
+    ✓ both NaN should not update [line 459] (killed 1)
+    ✓ can set the store without merging [line 470] (killed 1)
+    ~ only calls selectors when necessary with static selector [line 482] (covered 26)
+    ~ only calls selectors when necessary (traditional) [line 520] (covered 26)
+    ~ ensures parent components subscribe before children [line 564] (covered 26)
+    ~ ensures the correct subscriber is removed on unmount [line 614] (covered 26)
+    ~ ensures a subscriber is not mistakenly overwritten [line 659] (covered 26)
+    ✓ works with non-object state [line 703] (killed 3)
+    ~ works with "undefined" state [line 729] (covered 7)
+  devtools.test.tsx
+    ~ createStore.ok.api connects to the extension by passing the options and initializes [line 132] (covered 4)
+    ~ If there is no extension installed... > createStore.ok.api does not throw [line 155] (covered 4)
+    ~ If there is no extension installed... > createStore.ok.api does not warn [line 161] (covered 4)
+    ~ When state changes... > createStore.ok.api sends { type: setStateName || 'anonymous`, ...rest } as the action with current state [line 168] (covered 15)
+    ~ persist.ok.shape preserves external action names and payloads with persist [line 199] (covered 53)
+    ~ When state changes with automatic setter inferring... > createStore.ok.api sends { type: setStateName || 'setCount`, ...rest } as the action with current state [line 249] (covered 23)
+    ~ When state changes with automatic setter inferring... > createStore.ok.api infers caller name from V8 stack format — webpack namespace with space [line 319] (covered 23)
+    ~ When state changes with automatic setter inferring... > createStore.ok.api infers caller name from V8 stack format — Windows path with space [line 319] (covered 23)
+    ~ When state changes with automatic setter inferring... > createStore.ok.api infers caller name from V8 stack format — space-free path (regression) [line 319] (covered 23)
+    ~ When state changes with automatic setter inferring... > createStore.ok.api infers caller name from V8 stack format — async function — strips async keyword [line 319] (covered 23)
+    ~ When state changes with automatic setter inferring... > createStore.ok.api infers caller name from V8 stack format — constructor — strips new keyword [line 319] (covered 23)
+    ~ When state changes with automatic setter inferring... > createStore.ok.api infers caller name from Firefox/SpiderMonkey stack format [line 370] (covered 23)
+    ~ when it receives a message of type... > ACTION... > createStore.ok.api does nothing [line 426] (covered 4)
+    ~ when it receives a message of type... > ACTION... > createStore.ok.api unless action type is __setState [line 441] (covered 23)
+    ~ when it receives a message of type... > ACTION... > createStore.ok.api does nothing even if there is `api.dispatch` [line 454] (covered 4)
+    ~ when it receives a message of type... > ACTION... > createStore.ok.api dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true [line 471] (covered 4)
+    ~ when it receives a message of type... > ACTION... > createStore.ok.api does not throw for unsupported payload [line 491] (covered 4)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > createStore.ok.api RESET, it inits with initial state [line 539] (covered 23)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > createStore.ok.api COMMIT, it inits with current state [line 557] (covered 23)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > ROLLBACK... > createStore.ok.api updates state without recording and inits with `message.state` [line 576] (covered 23)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > ROLLBACK... > createStore.ok.api does not throw for unparsable `message.state` [line 598] (covered 4)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > JUMP_TO_STATE... > createStore.ok.api updates state without recording with `message.state` [line 635] (covered 23)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > JUMP_TO_STATE... > createStore.ok.api does not throw for unparsable `message.state` [line 652] (covered 4)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > JUMP_TO_ACTION... > createStore.ok.api updates state without recording with `message.state` [line 685] (covered 23)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > JUMP_TO_ACTION... > createStore.ok.api does not throw for unparsable `message.state` [line 702] (covered 4)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > createStore.ok.api IMPORT_STATE, it updates state without recording and inits the last computedState [line 735] (covered 23)
+    ~ when it receives a message of type... > DISPATCH and payload of type... > createStore.ok.api PAUSE_RECORDING, it toggles the sending of actions [line 759] (covered 15)
+    ~ when it receives a message of type... > serialize.reviver option... > createStore.ok.api applies reviver to ACTION `__setState` payload [line 796] (covered 23)
+    ~ when it receives a message of type... > serialize.reviver option... > createStore.ok.api applies reviver to `message.state` on JUMP_TO_STATE [line 811] (covered 23)
+    ~ when it receives a message of type... > serialize.reviver option... > createStore.ok.api applies reviver to `message.state` on ROLLBACK [line 831] (covered 23)
+    ~ with redux middleware > createStore.ok.api works as expected [line 858] (covered 15)
+    ~ with redux middleware > [DEV-ONLY] warns about misusage [line 902] (covered 11)
+    ~ different envs > createStore.ok.api works in non-browser env [line 925] (covered 4)
+    ~ different envs > createStore.ok.api works in react native env [line 936] (covered 4)
+    ~ createStore.ok.api preserves isRecording after setting from devtools [line 948] (covered 23)
+    ~ when redux connection was called on multiple stores with `name` undefined in `devtools` options > createStore.ok.api should create separate connection for each devtools store with .connect call [line 979] (covered 4)
+    ~ when redux connection was called on multiple stores with `name` undefined in `devtools` options > createStore.ok.api should call .init on each different connection object [line 992] (covered 4)
+    ~ when redux connection was called on multiple stores with `name` undefined in `devtools` options > when `store` property was provided in `devtools` call in options > createStore.ok.api should create single connection for all internal calls of .connect and `store` is not passed to .connect [line 1010] (covered 6)
+    ~ when redux connection was called on multiple stores with `name` undefined in `devtools` options > when `store` property was provided in `devtools` call in options > createStore.ok.api should call `.init` on single connection with combined states after each `create(devtools` call [line 1031] (covered 6)
+    ~ when redux connection was called on multiple stores with `name` provided in `devtools` options > when same `name` is provided to all stores in devtools options > createStore.ok.api should call .connect of redux extension with `name` that was passed from `devtools` options [line 1062] (covered 4)
+    ~ when redux connection was called on multiple stores with `name` provided in `devtools` options > when different `name` props were provided for different group of stores in devtools options > createStore.ok.api should call .connect of redux extension with `name` that was passed from `devtools` options [line 1081] (covered 4)
+    ~ when redux connection was called on multiple stores with `name` provided in `devtools` options > when different `name` props were provided for different group of stores in devtools options > createStore.ok.api should call `.init` on single connection with combined states after each `create(devtools` call [line 1125] (covered 6)
+    ~ when redux connection was called on multiple stores with `name` provided in `devtools` options > when different `name` props were provided for different group of stores in devtools options > createStore.ok.api preserves isRecording after setting from devtools on proper connection subscriber [line 1190] (covered 23)
+    ~ when redux connection was called on multiple stores with `name` provided in `devtools` options > when different `name` props were provided for different group of stores in devtools options > with redux middleware > createStore.ok.api works as expected [line 1230] (covered 15)
+    ~ when create devtools was called multiple times with `name` option undefined > When state changes... > createStore.ok.api sends { type: setStateName || 'anonymous`, ...rest } as the action with current state, isolated from other connections [line 1326] (covered 15)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > ACTION... > createStore.ok.api does nothing, connections isolated from each other [line 1381] (covered 4)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > ACTION... > createStore.ok.api unless action type is __setState, connections isolated from each other [line 1426] (covered 23)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > ACTION... > createStore.ok.api does nothing even if there is `api.dispatch`, connections isolated from each other [line 1456] (covered 4)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > ACTION... > createStore.ok.api dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other [line 1501] (covered 4)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > ACTION... > createStore.ok.api does not throw for unsupported payload, connections are isolated from each other [line 1555] (covered 4)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > DISPATCH and payload of type... > createStore.ok.api RESET, it inits with initial state, connections are isolated from each other [line 1692] (covered 23)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > DISPATCH and payload of type... > createStore.ok.api COMMIT, it inits with current state, connections are isolated from each other [line 1739] (covered 23)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > ROLLBACK... > createStore.ok.api updates state without recording and inits with `message.state, connections are isolated from each other` [line 1788] (covered 23)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > ROLLBACK... > createStore.ok.api does not throw for unparsable `message.state`, connections are isolated from each other [line 1867] (covered 4)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > JUMP_TO_STATE... > createStore.ok.api updates state without recording with `message.state`, connections are isolated from each other [line 1968] (covered 23)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > JUMP_TO_STATE... > createStore.ok.api does not throw for unparsable `message.state`, connections are isolated from each other [line 2034] (covered 4)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > JUMP_TO_ACTION... > createStore.ok.api updates state without recording with `message.state`, connections are isolated from each other [line 2129] (covered 23)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > JUMP_TO_ACTION... > createStore.ok.api does not throw for unparsable `message.state`, connections are isolated from each other [line 2196] (covered 4)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > JUMP_TO_ACTION... > createStore.ok.api IMPORT_STATE, it updates state without recording and inits the last computedState, connections are isolated from each other [line 2284] (covered 23)
+    ~ when create devtools was called multiple times with `name` option undefined > when it receives a message of type... > JUMP_TO_ACTION... > createStore.ok.api PAUSE_RECORDING, it toggles the sending of actions, connections are isolated from each other [line 2375] (covered 15)
+    ~ when create devtools was called multiple times with `name` and `store` options defined > when `type` was provided in store state methods as option > When state changes... > createStore.ok.api sends { type: setStateName || 'anonymous`, ...rest } as the action with current state [line 2488] (covered 15)
+    ~ when create devtools was called multiple times with `name` and `store` options defined > when `type` was provided in store state methods as option > when it receives a message of type... > ACTION... > createStore.ok.api does nothing, connections isolated from each other [line 2526] (covered 4)
+    ~ when create devtools was called multiple times with `name` and `store` options defined > when `type` was provided in store state methods as option > when it receives a message of type... > ACTION... > createStore.ok.api unless action type is __setState, connections isolated from each other [line 2580] (covered 23)
+    ~ when create devtools was called multiple times with `name` and `store` options defined > when `type` was provided in store state methods as option > when it receives a message of type... > ACTION... > createStore.ok.api does nothing even if there is `api.dispatch`, connections isolated from each other [line 2636] (covered 6)
+    ~ when create devtools was called multiple times with `name` and `store` options defined > when `type` was provided in store state methods as option > when it receives a message of type... > ACTION... > createStore.ok.api dispatches with `api.dispatch` when `api.dispatchFromDevtools` is set to true, connections are isolated from each other [line 2684] (covered 6)
+    ~ cleanup > createStore.ok.api should preserve a replacement store when the original store is cleaned up [line 2742] (covered 23)
+    ~ cleanup > createStore.ok.api should preserve other stores on a shared connection after 1 cleanup calls [line 2770] (covered 23)
+    ~ cleanup > createStore.ok.api should preserve other stores on a shared connection after 2 cleanup calls [line 2770] (covered 23)
+    ~ cleanup > createStore.ok.api should close a shared connection only after its last store is cleaned up [line 2806] (covered 23)
+    ~ cleanup > createStore.ok.api should close an untracked connection while a tracked connection uses the same name [line 2843] (covered 23)
+    ~ cleanup > createStore.ok.api should unsubscribe from devtools when cleanup is called [line 2872] (covered 4)
+    ~ cleanup > createStore.ok.api should remove store from tracked connection after cleanup [line 2881] (covered 15)
+    ~ actionsDenylist > createStore.ok.api should pass actionsDenylist option to Redux DevTools [line 2909] (covered 4)
+  immer.test.tsx
+    ~ immer middleware > should mutate state via an immer draft (function updater) [line 7] (covered 23)
+    ~ immer middleware > should not apply produce when updater is not a function [line 23] (covered 23)
+    ~ immer middleware > should replace the entire state when replace flag is true [line 33] (covered 15)
+    ~ immer middleware > should produce nested state updates via a draft without mutating the previous state [line 41] (covered 23)
+    ~ immer middleware > createStore.ok.updater should work with vanilla createStore [line 64] (covered 23)
+  middlewareTypes.test.tsx
+    ~ counter state spec (no middleware) > no middleware [line 41] (covered 4)
+    ~ counter state spec (single middleware) > createStore.ok.api immer [line 60] (covered 4)
+    ~ counter state spec (single middleware) > createStore.ok.api redux [line 118] (covered 4)
+    ~ counter state spec (single middleware) > createStore.ok.api devtools [line 153] (covered 4)
+    ~ counter state spec (single middleware) > devtools #2700 [line 183] (covered 4)
+    ~ counter state spec (single middleware) > devtools #3510 [line 201] (covered 4)
+    ~ counter state spec (single middleware) > createStore.ok.api subscribeWithSelector [line 223] (covered 4)
+    ~ counter state spec (single middleware) > createStore.ok.api combine [line 251] (covered 4)
+    ~ counter state spec (single middleware) > persist.ok.name persist [line 274] (covered 90)
+    ~ counter state spec (single middleware) > persist.ok.partialize persist with partialize [line 302] (covered 90)
+    ~ counter state spec (single middleware) > persist.ok.name persist without custom api (#638) [line 329] (covered 90)
+    ~ counter state spec (double middleware) > immer & devtools [line 353] (covered 4)
+    ~ counter state spec (double middleware) > devtools & redux [line 387] (covered 4)
+    ~ counter state spec (double middleware) > devtools & combine [line 423] (covered 4)
+    ~ counter state spec (double middleware) > subscribeWithSelector & combine [line 447] (covered 4)
+    ~ counter state spec (double middleware) > devtools & subscribeWithSelector [line 471] (covered 4)
+    ~ counter state spec (double middleware) > persist.ok.name devtools & persist [line 502] (covered 90)
+    ~ counter state spec (triple middleware) > persist.ok.name devtools & persist & immer [line 533] (covered 90)
+    ~ counter state spec (triple middleware) > devtools & subscribeWithSelector & combine [line 565] (covered 4)
+    ~ counter state spec (triple middleware) > persist.ok.name devtools & subscribeWithSelector & persist [line 597] (covered 90)
+    ~ counter state spec (quadruple middleware) > persist.ok.name devtools & subscribeWithSelector & persist & immer (#616) [line 636] (covered 90)
+    ~ more complex state spec with subscribeWithSelector > persist.ok.name #619, #632 [line 678] (covered 90)
+    ~ more complex state spec with subscribeWithSelector > #631 [line 703] (covered 4)
+    ~ more complex state spec with subscribeWithSelector > persist.ok.name #650 [line 728] (covered 90)
+    ~ create with explicitly annotated mutators > persist.ok.name subscribeWithSelector & persist [line 770] (covered 90)
+    ~ single middleware with sliced store > immer with slices where slice type differs from store (#3371) [line 812] (covered 4)
+  persistAsync.test.tsx
+    ✓ persist middleware with async configuration > persist.ok.merge can rehydrate state [line 55] (killed 62)
+    ✓ persist middleware with async configuration > persist.ok.on-rehydrate can throw rehydrate error [line 109] (killed 3)
+    ✓ persist middleware with async configuration > persist.ok.shape can persist state [line 148] (killed 10)
+    ✓ persist middleware with async configuration > persist.ok.migrate can async migrate persisted state [line 216] (killed 11)
+    ✓ persist middleware with async configuration > persist.ok.merge can merge partial persisted state [line 271] (killed 9)
+    ✓ persist middleware with async configuration > persist.ok.version can correctly handle a missing migrate function [line 334] (killed 1)
+    ~ persist middleware with async configuration > persist.ok.migrate can throw migrate error [line 375] (covered 81)
+    ✓ persist middleware with async configuration > persist.ok.on-rehydrate passes the latest state to onRehydrateStorage and onHydrate on first hydrate [line 422] (killed 1)
+    ~ persist middleware with async configuration > persist.ok.merge gives the merged state to onRehydrateStorage [line 474] (covered 102)
+    ~ persist middleware with async configuration > persist.ok.merge can custom merge the stored state [line 518] (covered 100)
+    ~ persist middleware with async configuration > persist.ok.merge can merge the state when the storage item doesn't have a version [line 573] (covered 99)
+    ✓ persist middleware with async configuration > persist.ok.merge can manually rehydrate through the api [line 612] (killed 2)
+    ✓ persist middleware with async configuration > persist.ok.skip-hydration can check if the store has been hydrated through the api [line 643] (killed 4)
+    ✓ persist middleware with async configuration > persist.ok.skip-hydration can skip initial hydration [line 669] (killed 1)
+    ✓ persist middleware with async configuration > persist.ok.on-rehydrate handles state updates during onRehydrateStorage [line 720] (killed 2)
+    ~ persist middleware with async configuration > persist.ok.on-rehydrate passes latest state to post-rehydration callback after hydration-triggered updates [line 760] (covered 116)
+    ~ persist middleware with async configuration > persist.ok.merge can rehydrate state with custom deserialized Map [line 814] (covered 100)
+    ~ persist middleware with async configuration > persist.ok.shape can persist state with custom serialization of Map [line 861] (covered 117)
+    ✓ persist middleware with async configuration > persist.ok.name should handle multiple concurrent rehydrate calls (only last one wins) [line 935] (killed 7)
+    ~ persist middleware with async configuration > persist.ok.merge should not overwrite user state changes made during async hydration [line 981] (covered 111)
+    ~ persist middleware with async configuration > persist.ok.migrate should abort hydration with async migration when newer hydration starts [line 1023] (covered 110)
+    ✓ persist clearStorage hydration generation > persist.ok.name keeps a cleared delayed stored value from hydrating state [line 1082] (killed 3)
+    ✓ persist clearStorage hydration generation > persist.ok.migrate keeps a cleared delayed migration from hydrating state [line 1109] (killed 3)
+    ~ persist clearStorage hydration generation > persist.ok.name revokes the active hydration even when storage removal throws [line 1137] (covered 95)
+    ~ persist clearStorage hydration generation > persist.ok.name does not reset live state when clearing after hydration [line 1174] (covered 92)
+    ~ persist clearStorage hydration generation > persist.ok.on-rehydrate suppresses stale completion signals and allows a later hydration [line 1195] (covered 98)
+  persistSync.test.tsx
+    ✓ persist middleware with sync configuration > persist.ok.merge can rehydrate state [line 41] (killed 1)
+    ✓ persist middleware with sync configuration > persist.ok.on-rehydrate can throw rehydrate error [line 77] (killed 4)
+    ~ persist middleware with sync configuration > persist.ok.shape can persist state [line 98] (covered 115)
+    ✓ persist middleware with sync configuration > persist.ok.migrate can non-async migrate persisted state [line 136] (killed 1)
+    ~ persist middleware with sync configuration > persist.ok.version can correctly handle a missing migrate function [line 173] (covered 103)
+    ~ persist middleware with sync configuration > persist.ok.migrate can throw migrate error [line 200] (covered 82)
+    ~ persist middleware with sync configuration > persist.ok.on-rehydrate passes the latest state to onRehydrateStorage and onHydrate on first hydrate [line 232] (covered 98)
+    ~ persist middleware with sync configuration > persist.ok.merge gives the merged state to onRehydrateStorage [line 266] (covered 100)
+    ~ persist middleware with sync configuration > persist.ok.merge can custom merge the stored state [line 295] (covered 98)
+    ~ persist middleware with sync configuration > persist.ok.merge can merge the state when the storage item doesn't have a version [line 335] (covered 97)
+    ~ persist middleware with sync configuration > persist.ok.partialize can filter the persisted value [line 359] (covered 89)
+    ✓ persist middleware with sync configuration > persist.ok.name can access the options through the api [line 424] (killed 1)
+    ✓ persist middleware with sync configuration > persist.ok.name can change the options through the api [line 441] (killed 3)
+    ✓ persist middleware with sync configuration > persist.ok.name can clear the storage through the api [line 478] (killed 1)
+    ~ persist middleware with sync configuration > persist.ok.merge can manually rehydrate through the api [line 498] (covered 108)
+    ~ persist middleware with sync configuration > persist.ok.skip-hydration can check if the store has been hydrated through the api [line 521] (covered 90)
+    ✓ persist middleware with sync configuration > persist.ok.name can wait for rehydration through the api [line 541] (killed 8)
+    ~ persist middleware with sync configuration > persist.ok.skip-hydration can skip initial hydration [line 589] (covered 90)
+    ~ persist middleware with sync configuration > persist.ok.on-rehydrate handles state updates during onRehydrateStorage [line 635] (covered 112)
+    ~ persist middleware with sync configuration > persist.ok.merge can rehydrate state with custom deserialized Map [line 659] (covered 98)
+    ~ persist middleware with sync configuration > persist.ok.shape can persist state with custom serialization of Map [line 691] (covered 115)
+    ~ persist middleware with sync configuration > persist.ok.name does not call setItem when hydrating from its own storage [line 739] (covered 91)
+  shallow.test.tsx
+    ~ types > works with useBoundStore and array selector (#1107) [line 9] (covered 4)
+    ~ types > works with useBoundStore and string selector (#1107) [line 20] (covered 4)
+    ✓ useShallow > input and output selectors always return shallow equal values [line 61] (killed 15)
+    ✓ useShallow > returns the previously computed instance when possible [line 91] (killed 15)
+    ~ useShallow > only re-renders if selector output has changed according to shallow [line 121] (covered 73)
+    ✓ useShallow > does not cause stale closure issues [line 160] (killed 5)
+  ssr.test.tsx
+    ✓ ssr behavior with react 18+ > should handle different states between server and client correctly [line 35] (killed 1)
+    ~ ssr behavior with react 18+ > should not have hydration errors [line 65] (covered 26)
+  subscribe.test.tsx
+    ~ subscribe() > should correctly have access to subscribe [line 6] (covered 4)
+    ~ subscribe() > should not be called if new state identity is the same [line 11] (covered 15)
+    ~ subscribe() > should be called if new state identity is different [line 21] (covered 26)
+    ~ subscribe() > should not be called when state slice is the same [line 31] (covered 26)
+    ~ subscribe() > should be called when state slice changes [line 41] (covered 26)
+    ~ subscribe() > should not be called when equality checker returns true [line 52] (covered 26)
+    ~ subscribe() > should be called when equality checker returns false [line 62] (covered 26)
+    ✓ subscribe() > should unsubscribe correctly [line 73] (killed 1)
+    ~ subscribe() > should call listener immediately when fireImmediately is true [line 88] (covered 7)
+    ~ subscribe() > should pass previous and current state to listener [line 99] (covered 26)
+    ~ subscribe() > should handle multiple subscribers [line 109] (covered 26)
+    ~ subscribe() > should not notify unsubscribed listener while other listeners remain [line 122] (covered 26)
+  types.test.tsx
+    ~ can use exposed types [line 11] (covered 4)
+    ~ should have correct (partial) types for setState [line 109] (covered 23)
+    ~ should allow for different partial keys to be returnable from setState [line 138] (covered 23)
+    ~ state is covariant [line 181] (covered 4)
+    ~ persist.ok.name StateCreator<T, [StoreMutatorIdentfier, unknown][]> is StateCreator<T, []> [line 199] (covered 90)
+    ~ persist.ok.name StateCreator subtyping [line 219] (covered 90)
+    ~ set state exists on store with readonly store [line 239] (covered 23)
+
+[NoCoverage] BlockStatement
+src/middleware/persist.ts:42:11
+-     } catch {
+-       // prevent error if the storage is not defined (e.g. when server side rendering a page)
+-       return
+-     }
++     } catch {}
+
+[NoCoverage] BlockStatement
+src/middleware/persist.ts:212:17
+-     if (!storage) {
+-       return config(
+-         (...args) => {
+-           console.warn(
+-             `[zustand persist middleware] Unable to update item '${options.name}', the given storage is currently unavailable.`,
+-           )
+-           set(...(args as Parameters<typeof set>))
+-         },
+-         get,
+-         api,
+-       )
+-     }
++     if (!storage) {}
+
+[NoCoverage] BlockStatement
+src/middleware/persist.ts:214:20
+-         (...args) => {
+-           console.warn(
+-             `[zustand persist middleware] Unable to update item '${options.name}', the given storage is currently unavailable.`,
+-           )
+-           set(...(args as Parameters<typeof set>))
+-         },
++         (...args) => {},
+
+[NoCoverage] StringLiteral
+src/middleware/persist.ts:216:11
+-             `[zustand persist middleware] Unable to update item '${options.name}', the given storage is currently unavailable.`,
++             ``,
+
+[NoCoverage] CallExpression
+src/middleware/persist.ts:218:9
+-           set(...(args as Parameters<typeof set>))
++           ;
+
+[NoCoverage] BlockStatement
+src/middleware/persist.ts:348:31
+-         if (newOptions.storage) {
+-           storage = newOptions.storage
+-         }
++         if (newOptions.storage) {}
+
+[Survived] BlockStatement
+src/middleware/persist.ts:49:27
+-           if (str === null) {
+-             return null
+-           }
++           if (str === null) {}
+Tests ran:
+    persist middleware with async configuration > persist.ok.shape can persist state
+    persist middleware with async configuration > persist.ok.skip-hydration can check if the store has been hydrated through the api
+    persist middleware with async configuration > persist.ok.shape can persist state with custom serialization of Map
+  and 18 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/persist.ts:49:13
+-           if (str === null) {
++           if (false) {
+Tests ran:
+    persist middleware with async configuration > persist.ok.merge can rehydrate state
+    persist middleware with async configuration > persist.ok.shape can persist state
+    persist middleware with async configuration > persist.ok.migrate can async migrate persisted state
+  and 47 more tests!
+
+
+[Survived] BlockStatement
+src/middleware/persist.ts:175:28
+-           catch(_onRejected) {
+-             return this as Thenable<any>
+-           },
++           catch(_onRejected) {},
+Tests ran:
+    persist clearStorage hydration generation > persist.ok.name revokes the active hydration even when storage removal throws
+    persist clearStorage hydration generation > persist.ok.name does not reset live state when clearing after hydration
+    persist clearStorage hydration generation > persist.ok.on-rehydrate suppresses stale completion signals and allows a later hydration
+  and 31 more tests!
+
+
+[Survived] ArrowFunction
+src/middleware/persist.ts:194:41
+-       storage: createJSONStorage<S, void>(() => window.localStorage),
++       storage: createJSONStorage<S, void>(() => undefined),
+Tests ran:
+    persist.ok.shape preserves external action names and payloads with persist
+    persist middleware with async configuration > persist.ok.merge can rehydrate state
+    persist middleware with async configuration > persist.ok.on-rehydrate can throw rehydrate error
+  and 58 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/persist.ts:212:7
+-     if (!storage) {
++     if (false) {
+Tests ran:
+    persist.ok.shape preserves external action names and payloads with persist
+    persist middleware with async configuration > persist.ok.merge can rehydrate state
+    persist middleware with async configuration > persist.ok.on-rehydrate can throw rehydrate error
+  and 58 more tests!
+
+
+[Survived] ConditionalExpression
+src/middleware/persist.ts:258:9
+-       if (!storage) return
++       if (false) return
+Tests ran:
+    persist middleware with async configuration > persist.ok.merge can rehydrate state
+    persist middleware with async configuration > persist.ok.on-rehydrate can throw rehydrate error
+    persist middleware with async configuration > persist.ok.shape can persist state
+  and 57 more tests!
+
+
+[Survived] UpdateOperator
+src/middleware/persist.ts:266:28
+-       const currentVersion = ++hydrationVersion
++       const currentVersion = --hydrationVersion
+Tests ran:
+    persist middleware with async configuration > persist.ok.merge can rehydrate state
+    persist middleware with async configuration > persist.ok.on-rehydrate can throw rehydrate error
+    persist middleware with async configuration > persist.ok.shape can persist state
+  and 57 more tests!
+
+
+[Survived] ArrowFunction
+src/middleware/persist.ts:249:25
+-     api.getInitialState = () => configResult
++     api.getInitialState = () => undefined
+Tests ran:
+    persist.ok.shape preserves external action names and payloads with persist
+    persist middleware with async configuration > persist.ok.merge can rehydrate state
+    persist middleware with async configuration > persist.ok.on-rehydrate can throw rehydrate error
+  and 58 more tests!
+
+
+[Survived] StringLiteral
+src/middleware/persist.ts:292:15
+-                 `State loaded from storage couldn't be migrated since no migrate function was provided`,
++                 ``,
+Tests ran:
+    persist middleware with async configuration > persist.ok.version can correctly handle a missing migrate function
+    persist middleware with sync configuration > persist.ok.version can correctly handle a missing migrate function
+
+
+[Survived] BlockStatement
+src/middleware/persist.ts:334:50
+-           if (currentVersion !== hydrationVersion) {
+-             return
+-           }
++           if (currentVersion !== hydrationVersion) {}
+Tests ran:
+    persist middleware with async configuration > persist.ok.merge can manually rehydrate through the api
+
+
+[Survived] ConditionalExpression
+src/middleware/persist.ts:348:11
+-         if (newOptions.storage) {
++         if (false) {
+Tests ran:
+    persist middleware with sync configuration > persist.ok.name can change the options through the api
+
+
+[Survived] ConditionalExpression
+src/middleware/persist.ts:334:13
+-           if (currentVersion !== hydrationVersion) {
++           if (false) {
+Tests ran:
+    persist middleware with async configuration > persist.ok.on-rehydrate can throw rehydrate error
+    persist middleware with async configuration > persist.ok.migrate can throw migrate error
+    persist middleware with async configuration > persist.ok.merge can manually rehydrate through the api
+  and 5 more tests!
+
+
+[Survived] OptionalChaining
+src/middleware/persist.ts:337:9
+-           postRehydrationCallback?.(undefined, e)
++           postRehydrationCallback(undefined, e)
+Tests ran:
+    persist middleware with async configuration > persist.ok.on-rehydrate can throw rehydrate error
+    persist middleware with async configuration > persist.ok.migrate can throw migrate error
+    persist middleware with sync configuration > persist.ok.on-rehydrate can throw rehydrate error
+  and 4 more tests!
+
+
+[Survived] UpdateOperator
+src/middleware/persist.ts:353:7
+-         ++hydrationVersion
++         --hydrationVersion
+Tests ran:
+    persist clearStorage hydration generation > persist.ok.name keeps a cleared delayed stored value from hydrating state
+    persist clearStorage hydration generation > persist.ok.migrate keeps a cleared delayed migration from hydrating state
+    persist clearStorage hydration generation > persist.ok.name revokes the active hydration even when storage removal throws
+  and 3 more tests!
+
+
+[Survived] OptionalChaining
+src/middleware/persist.ts:354:7
+-         storage?.removeItem(options.name)
++         storage.removeItem(options.name)
+Tests ran:
+    persist clearStorage hydration generation > persist.ok.name keeps a cleared delayed stored value from hydrating state
+    persist clearStorage hydration generation > persist.ok.migrate keeps a cleared delayed migration from hydrating state
+    persist clearStorage hydration generation > persist.ok.name revokes the active hydration even when storage removal throws
+  and 3 more tests!
+
+
+[Survived] BooleanLiteral
+src/middleware/persist.ts:311:36
+-           set(stateFromStorage as S, true)
++           set(stateFromStorage as S, false)
+Tests ran:
+    persist middleware with async configuration > persist.ok.merge can rehydrate state
+    persist middleware with async configuration > persist.ok.shape can persist state
+    persist middleware with async configuration > persist.ok.migrate can async migrate persisted state
+  and 50 more tests!
+
+
+[Survived] LogicalOperator
+src/vanilla/shallow.ts:38:10
+-     while (!nextA.done && !nextB.done) {
++     while (!nextA.done || !nextB.done) {
+Tests ran:
+    generators > shallow.ok.primitives pure iterable
+    generators > shallow.ok.primitives pure iterable with different values returns false
+
+
+[Survived] ConditionalExpression
+src/vanilla/shallow.ts:45:10
+-     return !!nextA.done && !!nextB.done
++     return true
+Tests ran:
+    generators > shallow.ok.primitives pure iterable
+
+
+[Survived] LogicalOperator
+src/vanilla/shallow.ts:45:10
+-     return !!nextA.done && !!nextB.done
++     return !!nextA.done || !!nextB.done
+Tests ran:
+    generators > shallow.ok.primitives pure iterable
+
+
+[Survived] ConditionalExpression
+src/vanilla/shallow.ts:62:5
+-       valueA === null ||
++       false ||
+Tests ran:
+    shallow > shallow.ok.objects compares objects
+    shallow > shallow.ok.objects compares arrays
+    shallow > shallow.ok.maps compares Maps
+  and 12 more tests!
+
+
+[Survived] ConditionalExpression
+src/vanilla/shallow.ts:63:5
+-       typeof valueB !== 'object' ||
++       false ||
+Tests ran:
+    shallow > shallow.ok.objects compares objects
+    shallow > shallow.ok.objects compares arrays
+    shallow > shallow.ok.maps compares Maps
+  and 12 more tests!
+
+
+[Survived] ConditionalExpression
+src/vanilla/shallow.ts:64:5
+-       valueB === null
++       false
+Tests ran:
+    shallow > shallow.ok.objects compares objects
+    shallow > shallow.ok.objects compares arrays
+    shallow > shallow.ok.maps compares Maps
+  and 12 more tests!
+
+
+[Survived] LogicalOperator
+src/vanilla/shallow.ts:71:7
+-     if (isIterable(valueA) && isIterable(valueB)) {
++     if (isIterable(valueA) || isIterable(valueB)) {
+Tests ran:
+    shallow > shallow.ok.objects compares objects
+    shallow > shallow.ok.objects compares arrays
+    shallow > shallow.ok.maps compares Maps
+  and 11 more tests!
+
+
+[Survived] LogicalOperator
+src/vanilla/shallow.ts:72:9
+-       if (hasIterableEntries(valueA) && hasIterableEntries(valueB)) {
++       if (hasIterableEntries(valueA) || hasIterableEntries(valueB)) {
+Tests ran:
+    shallow > shallow.ok.objects compares arrays
+    shallow > shallow.ok.maps compares Maps
+    shallow > shallow.ok.sets compares Sets
+  and 8 more tests!
+
+
+Ran 6.76 tests per mutant on average.
+-------------|------------------|----------|-----------|------------|----------|----------|
+             | % Mutation score |          |           |            |          |          |
+File         |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+-------------|--------|---------|----------|-----------|------------|----------|----------|
+All files    |  87.76 |   89.96 |      214 |         1 |         24 |        6 |        0 |
+ middleware  |  84.51 |   88.24 |      120 |         0 |         16 |        6 |        0 |
+  persist.ts |  84.51 |   88.24 |      120 |         0 |         16 |        6 |        0 |
+ vanilla     |  89.61 |   89.61 |       68 |         1 |          8 |        0 |        0 |
+  shallow.ts |  89.61 |   89.61 |       68 |         1 |          8 |        0 |        0 |
+ vanilla.ts  | 100.00 |  100.00 |       26 |         0 |          0 |        0 |        0 |
+-------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m07:57:23 (72462) INFO JsonReporter[39m Your report can be found at: file://<work-0001>/zustand/reports/mutation/mutation.json
+[32m07:57:23 (72462) INFO MutationTestExecutor[39m Done in 59 seconds.
+real 60.83
+user 419.60
+sys 184.93
