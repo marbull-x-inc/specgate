@@ -48,20 +48,23 @@ function runs(t: TestCase): boolean {
 
 const RESOLVED_MODULE = /\.(?:m|c)?tsx?$/;
 
-export function evaluateDecisionRules(
-  input: DecisionRuleInput,
-  emit: (rule: DecisionRuleId, draft: DecisionDraft) => void,
-): void {
+/**
+ * The tests linked to a unit: its own running tests plus those of every surface unit that
+ * reaches it through calls (transitively). A test of `ms("1d")` exercises the `parse` it
+ * delegates to.
+ */
+export function linkedTestsIndex(
+  tests: readonly TestCase[],
+  callersOf: ReadonlyMap<string, readonly string[]>,
+): (unitId: string) => TestCase[] {
   const testsByUnit = new Map<string, TestCase[]>();
-  for (const t of input.tests) {
+  for (const t of tests) {
     if (t.unitId === undefined || !runs(t)) continue;
     testsByUnit.set(t.unitId, [...(testsByUnit.get(t.unitId) ?? []), t]);
   }
-  // Tests of the unit or of any surface unit that reaches it: a test of `ms("1d")` exercises the
-  // `parse` it delegates to.
-  const linkedCache = new Map<string, TestCase[]>();
-  const linkedTests = (id: string): TestCase[] => {
-    const cached = linkedCache.get(id);
+  const cache = new Map<string, TestCase[]>();
+  return (id) => {
+    const cached = cache.get(id);
     if (cached) return cached;
     const seen = new Set<string>();
     const queue = [id];
@@ -71,11 +74,18 @@ export function evaluateDecisionRules(
       if (cur === undefined || seen.has(cur)) continue;
       seen.add(cur);
       out.push(...(testsByUnit.get(cur) ?? []));
-      queue.push(...(input.callersOf.get(cur) ?? []));
+      queue.push(...(callersOf.get(cur) ?? []));
     }
-    linkedCache.set(id, out);
+    cache.set(id, out);
     return out;
   };
+}
+
+export function evaluateDecisionRules(
+  input: DecisionRuleInput,
+  emit: (rule: DecisionRuleId, draft: DecisionDraft) => void,
+): void {
+  const linkedTests = linkedTestsIndex(input.tests, input.callersOf);
   const literalsOf = (id: string): string[] => linkedTests(id).flatMap((t) => t.literals);
   const ignored = (d: Decision): boolean =>
     d.values.some((v) => input.ignore.has(v)) || d.names.some((n) => input.ignore.has(n));

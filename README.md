@@ -118,6 +118,9 @@ export default defineConfig({
 | `decision-untested`                               | warn    | A value the contract names that no linked test writes as a literal: a test cannot fail when it changes                                                                                    |
 | `test-tautology`                                  | warn    | A linked test takes its cases from the collection the unit checks membership in, so removing an element cannot fail it                                                                    |
 | `decision-collection-truncated`                   | info    | A collection holds more elements than `decisions.collectionLimit`; the rest are not checked                                                                                               |
+| `mutant-survived`                                 | warn    | With `mutation.report`: a mutant no linked test failed on (Survived), or one no test ran in a unit the tests do run (NoCoverage). Names the decision on that line                         |
+| `unit-not-executed`                               | warn    | With `mutation.report`: a unit has linked tests, yet every mutant in it is NoCoverage (the tests stub it or call another implementation)                                                  |
+| `mutation-report-unreadable`                      | warn    | `mutation.report` is missing, not JSON, or not a mutation-testing-report-schema report; the mutation rules did not run                                                                    |
 | `guarantee-known-violation`                       | warn    | A linked test is `test.failing` / `test.fails`: the implementation is known not to keep it                                                                                                |
 | `entry-unmapped`                                  | info    | A `package.json#exports` subpath points only to build output; map it with `surface.entries`                                                                                               |
 | `guarantee-on-non-unit`                           | fail    | A `@guarantee` sits on a declaration that is not a unit (not exported, private, a type, …)                                                                                                |
@@ -186,6 +189,29 @@ example result) also counts for another (`100` as the input length limit), and a
 the contract may still be untested at a particular boundary. On `vercel/ms` with guarantees
 written from the README only, the 7 findings were all real holes (week and month conversion,
 their boundaries, the plural threshold) and covered 20 of the 44 mutants those tests missed.
+
+### Reading a mutation report
+
+The static checks above guess at the changes no test would notice. A mutation tool knows, and it
+also sees changes that are not values: a flipped condition, a removed call, a reordered route.
+specgate never runs mutants itself. Set `mutation.report` to the JSON report another tool wrote
+in the same CI job (Stryker's `mutation.json`, or any tool that writes the
+[mutation-testing-report-schema](https://github.com/stryker-mutator/mutation-testing-elements/tree/master/packages/report-schema)),
+and run it before `check`:
+
+```bash
+npx stryker run --reporters json   # writes reports/mutation/mutation.json
+npx specgate check                 # with mutation: { report: "reports/mutation/mutation.json" }
+```
+
+Each mutant is mapped to the unit whose lines it changed, to every unit that reaches it through a
+private helper or same-module function, and to every unit with a `member` decision on the
+collection it changed. `units[].mutation` holds the counts. `mutant-survived` reports each mutant
+the linked tests let through, and `unit-not-executed` a unit that its tests never run. An
+equivalent mutant (one no test can tell apart) is accepted with `check --accept-baseline`: the
+fingerprint holds the unit, the mutator and the replacement but not the line, so it stays
+accepted when code moves. specgate does not check that the report is newer than the sources.
+Design: `docs/design/0003-mutation-report.md`.
 
 ## The coding procedure specgate assumes
 

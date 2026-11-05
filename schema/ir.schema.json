@@ -247,7 +247,7 @@
                   }
                 },
                 "collection": {
-                  "description": "member decisions: the collection constant the element is declared in",
+                  "description": "member decisions: the collection constant the element is declared in, and its declaration lines",
                   "type": "object",
                   "properties": {
                     "name": {
@@ -255,11 +255,23 @@
                     },
                     "file": {
                       "type": "string"
+                    },
+                    "line": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "endLine": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
                     }
                   },
                   "required": [
                     "name",
-                    "file"
+                    "file",
+                    "line",
+                    "endLine"
                   ],
                   "additionalProperties": false
                 },
@@ -283,6 +295,63 @@
               ],
               "additionalProperties": false
             }
+          },
+          "helperRanges": {
+            "description": "Lines of the private helpers and same-module functions the body reaches",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "line": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "endLine": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "line",
+                "endLine"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "mutation": {
+            "description": "Mutants of the unit in the mutation report, when one was read",
+            "type": "object",
+            "properties": {
+              "killed": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "survived": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "noCoverage": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "ignored": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "killed",
+              "survived",
+              "noCoverage",
+              "ignored"
+            ],
+            "additionalProperties": false
           },
           "implHash": {
             "type": "string",
@@ -758,6 +827,36 @@
           "accepted": {
             "description": "Recorded in the accepted-findings file; reported as info",
             "type": "boolean"
+          },
+          "mutant": {
+            "description": "mutant-survived: the mutant the finding is about",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "mutator": {
+                "type": "string"
+              },
+              "replacement": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "line": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "id",
+              "mutator",
+              "status",
+              "line"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [

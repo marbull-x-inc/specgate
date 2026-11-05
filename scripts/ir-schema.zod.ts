@@ -66,6 +66,13 @@ export const zPortCall = z.object({ port: z.string(), member: z.string(), count:
 export const zUnitKind = z.enum(["function", "method", "port", "type", "entry"]);
 export type UnitKind = z.infer<typeof zUnitKind>;
 
+export const zMutationCounts = z.object({
+  killed: z.number().int(),
+  survived: z.number().int(),
+  noCoverage: z.number().int(),
+  ignored: z.number().int(),
+});
+
 export const zUnit = z.object({
   id: z.string().describe("Target#operation for methods, operation for functions, interface name for ports"),
   kind: zUnitKind,
@@ -93,15 +100,20 @@ export const zUnit = z.object({
       values: z.array(z.string()),
       names: z.array(z.string()),
       collection: z
-        .object({ name: z.string(), file: z.string() })
+        .object({ name: z.string(), file: z.string(), line: z.number().int(), endLine: z.number().int() })
         .optional()
-        .describe("member decisions: the collection constant the element is declared in"),
+        .describe("member decisions: the collection constant the element is declared in, and its declaration lines"),
       probe: z
         .enum(["exact", "prefix", "suffix", "contains"])
         .optional()
         .describe("member decisions: how the unit compares its input with the element"),
     }),
   ),
+  helperRanges: z
+    .array(z.object({ line: z.number().int(), endLine: z.number().int() }))
+    .optional()
+    .describe("Lines of the private helpers and same-module functions the body reaches"),
+  mutation: zMutationCounts.optional().describe("Mutants of the unit in the mutation report, when one was read"),
   implHash: z.string().describe("sha256 of the implementation body text"),
   guarantees: z.array(zGuarantee),
   examples: z.array(zExample),
@@ -173,6 +185,16 @@ export const zFinding = z.object({
   guarantee: z.string().optional(),
   test: z.string().optional(),
   accepted: z.boolean().optional().describe("Recorded in the accepted-findings file; reported as info"),
+  mutant: z
+    .object({
+      id: z.string(),
+      mutator: z.string(),
+      replacement: z.string().optional(),
+      status: z.string(),
+      line: z.number().int(),
+    })
+    .optional()
+    .describe("mutant-survived: the mutant the finding is about"),
 });
 export type Finding = z.infer<typeof zFinding>;
 

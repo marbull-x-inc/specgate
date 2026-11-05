@@ -18,6 +18,18 @@ export interface DecisionOptions {
   collectionLimit: number;
   /** Called once per collection cut at the limit. */
   onTruncated?: (collection: TruncatedCollection) => void;
+  /** Called with each helper or same-module function body the walk follows (`Unit.helperRanges`). */
+  onFollow?: (body: ts.Node) => void;
+}
+
+/** A literal element of a collection constant, with the constant it is written in. */
+interface CollectionElement {
+  value: string;
+  name: string;
+  file: string;
+  /** Lines of the constant's declaration */
+  line: number;
+  endLine: number;
 }
 
 const DEFAULT_OPTIONS: DecisionOptions = { root: ".", collectionLimit: 500 };
@@ -166,25 +178,27 @@ export function collectDecisions(
    * The literal elements of a collection constant, each with the constant it is written in.
    * `keys` selects object-literal keys (for `in` / `Object.hasOwn`) over array-like elements.
    */
-  const collectionElements = (
-    node: ts.Expression,
-    keys: boolean,
-    depth = 0,
-  ): Array<{ value: string; name: string; file: string }> | undefined => {
+  const collectionElements = (node: ts.Expression, keys: boolean, depth = 0): CollectionElement[] | undefined => {
     if (depth > 5) return undefined;
     const decl = moduleConstOf(node);
     if (!decl?.initializer || !ts.isIdentifier(decl.name)) return undefined;
-    const name = decl.name.text;
-    const file = relativeTo(options.root, decl.getSourceFile().fileName);
+    const declSf = decl.getSourceFile();
+    const statement = decl.parent.parent;
+    const where = {
+      name: decl.name.text,
+      file: relativeTo(options.root, declSf.fileName),
+      line: lineOf(declSf, statement.getStart(declSf)),
+      endLine: lineOf(declSf, statement.getEnd()),
+    };
     let init = unwrapExpression(decl.initializer);
-    const out: Array<{ value: string; name: string; file: string }> = [];
+    const out: CollectionElement[] = [];
     if (keys) {
       if (!ts.isObjectLiteralExpression(init)) return undefined;
       for (const p of init.properties) {
         if (ts.isSpreadAssignment(p)) out.push(...(collectionElements(p.expression, true, depth + 1) ?? []));
         else if (p.name) {
           const key = propertyKeyText(p.name);
-          if (key !== undefined) out.push({ value: key, name, file });
+          if (key !== undefined) out.push({ value: key, ...where });
         }
       }
       return out;
@@ -214,7 +228,7 @@ export function collectDecisions(
         el = unwrapExpression(el.elements[0]);
       }
       const value = literalText(el);
-      if (value !== undefined) out.push({ value, name, file });
+      if (value !== undefined) out.push({ value, ...where });
     }
     return out;
   };
@@ -246,7 +260,7 @@ export function collectDecisions(
         line: lineOf(sf, usage.getStart(sf)),
         values: [e.value],
         names: unique([...(receiverName ? [receiverName] : []), e.name]),
-        collection: { name: e.name, file: e.file },
+        collection: { name: e.name, file: e.file, line: e.line, endLine: e.endLine },
         probe,
       });
     }
@@ -357,6 +371,7 @@ export function collectDecisions(
         const helperBody = helpers.get(callee.name.text);
         if (helperBody && !visitedBodies.has(helperBody)) {
           visitedBodies.add(helperBody);
+          options.onFollow?.(helperBody);
           visit(helperBody, false);
         }
       } else if (ts.isIdentifier(callee)) {
@@ -364,6 +379,7 @@ export function collectDecisions(
           const local = localFunctionBody(decl, sf);
           if (local && !visitedBodies.has(local)) {
             visitedBodies.add(local);
+            options.onFollow?.(local);
             visit(local, false);
           }
         }
