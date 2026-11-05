@@ -1,5 +1,6 @@
 import { type Config, RULE_IDS, type RuleId, severityOf } from "../config/schema.ts";
 import type { Finding, Report, Severity, TestCase, Unit } from "../ir/schema.ts";
+import { applyAcceptTags } from "./accept-tags.ts";
 import { evaluateDecisionRules, linkedTestsIndex } from "./decisions.ts";
 import { evaluateMutationRules, type MutationRuleInput } from "./mutation.ts";
 
@@ -227,13 +228,14 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
 
   if (ctx.baseline) evaluateAgainstBaseline(ctx, ctx.baseline, emit);
 
-  const findings: Finding[] = [];
+  const raw: Finding[] = [];
   for (const { rule, draft } of drafts) {
     const { downgrade, ...finding } = draft;
     const configured = toIrSeverity(ctx.config, rule);
     const severity = configured && downgrade ? lowered(configured) : configured;
-    if (severity) findings.push({ ...finding, severity });
+    if (severity) raw.push({ ...finding, severity });
   }
+  const findings = applyAcceptTags(ctx.units, raw, (rule) => toIrSeverity(ctx.config, rule));
   const order: Record<Severity, number> = { fail: 0, warn: 1, info: 2 };
   return findings.sort(
     (a, b) =>

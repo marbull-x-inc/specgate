@@ -4,6 +4,7 @@ import { dirname, join } from "node:path";
 import { analyze } from "../../src/analyze.ts";
 import { defineConfig } from "../../src/config/schema.ts";
 import type { Decision } from "../../src/ir/schema.ts";
+import { toSarif } from "../../src/report/index.ts";
 import { valueUsed } from "../../src/rules/decisions.ts";
 import { workDir } from "../helpers/paths.ts";
 
@@ -222,5 +223,69 @@ it("echo.ok.echo", () => {
     expect(found.find((f) => f.severity === "info")?.message).toBe(
       'isAlpha commits to member "x" (ALPHA) and the contract names it, but no linked test uses it (a test of isBeta uses it); isAlpha\'s own tests cannot fail when it changes',
     );
+  });
+});
+
+describe("@acceptFinding (#40)", () => {
+  const RANGE = (tags: string) => `/**
+ * @guarantee ok.adult an \`age\` of 18 or more is adult
+${tags} */
+export function isAdult(age: number): boolean {
+  return age >= 18;
+}
+`;
+  const TEST = `import { expect, it } from "bun:test";
+import { isAdult } from "../src/adult";
+it("isAdult.ok.adult", () => {
+  expect(isAdult(30)).toBe(true);
+});
+`;
+  const run = async (tags: string) => {
+    const dir = project({ "src/adult.ts": RANGE(tags), "tests/adult.test.ts": TEST });
+    const config = defineConfig({
+      root: dir,
+      surface: { include: ["src/**/*.ts"], exclude: [], mode: "exported" },
+      tests: { include: ["tests/**/*.test.ts"] },
+    });
+    return (await analyze({ ...config, root: dir }, { provenance: false, baseline: null })).report;
+  };
+
+  test("a matching tag makes the finding info, accepted, with its reason in the report and in SARIF", async () => {
+    const report = await run(
+      ' * @acceptFinding decision-untested "18" the caller clamps ages to 21+, so 18 cannot reach this\n',
+    );
+    const f = report.findings.find((x) => x.rule === "decision-untested");
+    expect([f?.severity, f?.accepted, f?.acceptedReason]).toEqual([
+      "info",
+      true,
+      "the caller clamps ages to 21+, so 18 cannot reach this",
+    ]);
+    expect(report.units[0]?.accepts?.map((a) => [a.rule, a.target])).toEqual([["decision-untested", '"18"']]);
+    const result = (
+      toSarif(report) as { runs: Array<{ results: Array<Record<string, unknown>> }> }
+    ).runs[0]?.results.find((r) => r["ruleId"] === "decision-untested");
+    expect(result?.["suppressions"]).toEqual([
+      { kind: "inSource", justification: "the caller clamps ages to 21+, so 18 cannot reach this" },
+    ]);
+    expect(report.findings.filter((x) => x.rule.startsWith("accept-tag"))).toEqual([]);
+  });
+
+  test("a tag without a reason or with an unknown rule is accept-tag-invalid, and accepts nothing", async () => {
+    const report = await run(' * @acceptFinding decision-untested "18"\n * @acceptFinding no-such-rule x because\n');
+    expect(report.findings.filter((x) => x.rule === "accept-tag-invalid").map((x) => [x.severity, x.message])).toEqual([
+      ["fail", "@acceptFinding on isAdult gives no reason; write @acceptFinding <rule-id> <value> <reason>"],
+      [
+        "fail",
+        '@acceptFinding on isAdult names no rule specgate has ("no-such-rule"); write @acceptFinding <rule-id> <value> <reason>',
+      ],
+    ]);
+    expect(report.findings.find((x) => x.rule === "decision-untested")?.severity).toBe("warn");
+  });
+
+  test("a tag no finding matches any more is accept-tag-unused", async () => {
+    const report = await run(' * @acceptFinding decision-untested "21" an old boundary\n');
+    expect(report.findings.filter((x) => x.rule === "accept-tag-unused").map((x) => [x.severity, x.message])).toEqual([
+      ["warn", '@acceptFinding decision-untested "21" on isAdult matches no finding any more; remove it'],
+    ]);
   });
 });

@@ -119,6 +119,10 @@ export const zUnit = z.object({
   guarantees: z.array(zGuarantee),
   examples: z.array(zExample),
   supersedes: z.string().optional(),
+  accepts: z
+    .array(z.object({ rule: z.string(), target: z.string(), reason: z.string(), line: z.number().int() }))
+    .optional()
+    .describe("@acceptFinding tags: findings on this unit accepted in the source, with the reason"),
   hasDoc: z.boolean(),
   typeText: z.string().optional().describe("type units: the declared type text"),
   entry: z
@@ -190,7 +194,11 @@ export const zFinding = z.object({
   unit: z.string().optional(),
   guarantee: z.string().optional(),
   test: z.string().optional(),
-  accepted: z.boolean().optional().describe("Recorded in the accepted-findings file; reported as info"),
+  accepted: z
+    .boolean()
+    .optional()
+    .describe("Recorded in the accepted-findings file or by an @acceptFinding tag; reported as info"),
+  acceptedReason: z.string().optional().describe("The reason an @acceptFinding tag gives"),
   mutant: z
     .object({
       id: z.string(),

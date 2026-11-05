@@ -393,3 +393,25 @@ describe("mutation.findings, listLimit and exclude (#41)", () => {
     expect(byGlob.report.units.find((u) => u.id === "greet")?.mutation?.noCoverage).toBe(2);
   });
 });
+
+describe("@acceptFinding on a mutant (#40)", () => {
+  test('Mutator:"replacement" accepts that mutant next to the code, and only that one', async () => {
+    const tagged = POLICY.replace(
+      "/** @guarantee ok.adult an `age` of 18 or more is adult */",
+      '/**\n * @guarantee ok.adult an `age` of 18 or more is adult\n * @acceptFinding mutant-survived EqualityOperator:"age > 18" ages are whole years and 18 is tested in the caller\n */',
+    );
+    expect(tagged).not.toBe(POLICY);
+    const dir = project({
+      "src/policy.ts": tagged,
+      "tests/policy.test.ts": TESTS,
+      "reports/mutation.json": reportJson(tagged),
+    });
+    const report = await reportOf(dir);
+    const survived = report.findings.filter((f) => f.rule === "mutant-survived");
+    expect(survived.map((f) => [f.unit, f.mutant?.replacement, f.severity, f.acceptedReason ?? null])).toEqual([
+      ["isBlocked", '""', "warn", null],
+      ["isAdult", "age > 18", "info", "ages are whole years and 18 is tested in the caller"],
+    ]);
+    expect(report.findings.filter((f) => f.rule.startsWith("accept-tag"))).toEqual([]);
+  });
+});

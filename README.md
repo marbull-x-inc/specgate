@@ -121,6 +121,8 @@ export default defineConfig({
 | `mutant-survived`                                 | warn    | With `mutation.report`: a mutant no linked test failed on (Survived), or one no test ran in a unit the tests do run (NoCoverage). Names the decision on that line                         |
 | `unit-not-executed`                               | warn    | With `mutation.report`: a unit has linked tests, yet every mutant in it is NoCoverage (the tests stub it or call another implementation)                                                  |
 | `mutation-report-unreadable`                      | warn    | `mutation.report` is missing, not JSON, or not a mutation-testing-report-schema report; the mutation rules did not run                                                                    |
+| `accept-tag-invalid`                              | fail    | An `@acceptFinding` tag names an unknown rule, or gives no value or no reason                                                                                                             |
+| `accept-tag-unused`                               | warn    | An `@acceptFinding` tag no longer matches a finding on its unit; remove it                                                                                                                |
 | `guarantee-known-violation`                       | warn    | A linked test is `test.failing` / `test.fails`: the implementation is known not to keep it                                                                                                |
 | `entry-unmapped`                                  | info    | A `package.json#exports` subpath points only to build output; map it with `surface.entries`                                                                                               |
 | `guarantee-on-non-unit`                           | fail    | A `@guarantee` sits on a declaration that is not a unit (not exported, private, a type, …)                                                                                                |
@@ -143,6 +145,22 @@ make the first run useful instead of red:
   and fail only on new ones, so `mode: "blocking"` can be switched on the same day. Findings are
   matched by rule, file, unit, guarantee, test and message, not by line; rerun
   `--accept-baseline` after fixing some to shrink the file.
+- For a single finding you have reviewed and know to be wrong, prefer a tag on the unit, next to
+  the code and with the reason:
+
+  ```ts
+  /**
+   * @guarantee err.issuer returns `bad_issuer` when `iss` is not the expected issuer
+   * @acceptFinding decision-untested "iss" the test sets `iss` as an object key; swapping the claims fails it
+   */
+  ```
+
+  `@acceptFinding <rule-id> <value> <reason>`: the value as the finding quotes it, `Mutator` or
+  `Mutator:"replacement"` for `mutant-survived`, or `*` for every finding of the rule on the
+  unit. The matching finding becomes `info` with `accepted: true` and `acceptedReason` (in SARIF,
+  an in-source suppression). A tag with an unknown rule or no reason is `accept-tag-invalid`; one
+  that no longer matches a finding is `accept-tag-unused`. `--accept-baseline` does not record
+  findings a tag accepts.
 
 `scaffold` seeds the first guarantee from an existing `@returns` and does not repeat a
 documented `@throws`.
@@ -218,9 +236,10 @@ collection it changed. `units[].mutation` holds the counts; the Step Summary sho
 with a score (killed over killed, survived and not covered), and `specgate docs` adds them to
 each unit's page and a score column to the index. `mutant-survived` reports each mutant
 the linked tests let through, and `unit-not-executed` a unit that its tests never run. An
-equivalent mutant (one no test can tell apart) is accepted with `check --accept-baseline`: the
-fingerprint holds the unit, the mutator and the replacement but not the line, so it stays
-accepted when code moves. `mutation.findings: "unit"` gives one finding per unit instead of one per
+equivalent mutant (one no test can tell apart) is accepted next to the code with
+`@acceptFinding mutant-survived EqualityOperator:"age > 18" <reason>`, or with
+`check --accept-baseline`: the fingerprint holds the unit, the mutator and the replacement but not
+the line, so it stays accepted when code moves. `mutation.findings: "unit"` gives one finding per unit instead of one per
 mutant, and `mutation.exclude` keeps code tested outside this config out of the findings. specgate
 does not check that the report is newer than the sources.
 

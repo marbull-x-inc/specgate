@@ -80,12 +80,12 @@ instead. A `@guarantee` anywhere else is reported by `guarantee-on-non-unit`.
 
 ## `output`
 
-| Option     | Default                    | Meaning                                                                                                                                                        |
-| ---------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dir`      | `".specgate"`              | Where `check` writes `report.json`, `summary.md`, `report.sarif`.                                                                                              |
-| `docsDir`  | `"docs/spec"`              | Where `docs` writes Markdown.                                                                                                                                  |
-| `baseline` | `<dir>/report.json`        | Previous report used for change detection (`guarantee-changed-test-unchanged`, `impl-changed-spec-unchanged`, `operation-removed`).                            |
-| `accepted` | `"specgate.accepted.json"` | Findings accepted at adoption, written by `check --accept-baseline` and meant to be committed. Matching findings are reported as `info` with `accepted: true`. |
+| Option     | Default                    | Meaning                                                                                                                                                                                                                                                                                                                                      |
+| ---------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dir`      | `".specgate"`              | Where `check` writes `report.json`, `summary.md`, `report.sarif`.                                                                                                                                                                                                                                                                            |
+| `docsDir`  | `"docs/spec"`              | Where `docs` writes Markdown.                                                                                                                                                                                                                                                                                                                |
+| `baseline` | `<dir>/report.json`        | Previous report used for change detection (`guarantee-changed-test-unchanged`, `impl-changed-spec-unchanged`, `operation-removed`).                                                                                                                                                                                                          |
+| `accepted` | `"specgate.accepted.json"` | Findings accepted at adoption, written by `check --accept-baseline` and meant to be committed. Matching findings are reported as `info` with `accepted: true`. For one reviewed finding, prefer an `@acceptFinding <rule-id> <value> <reason>` tag on the unit (see the README); `--accept-baseline` does not record findings a tag accepts. |
 
 ## `provenance`
 

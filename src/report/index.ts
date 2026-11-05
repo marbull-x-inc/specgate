@@ -39,7 +39,8 @@ export function renderStepSummary(report: Report): string {
     lines.push("| | Rule | Where | Message |", "|---|---|---|---|");
     for (const f of report.findings.slice(0, 200)) {
       const where = f.file ? `${f.file}${f.line ? `:${f.line}` : ""}` : "";
-      lines.push(`| ${ICON[f.severity]} | \`${f.rule}\` | ${where} | ${escapeCell(f.message)} |`);
+      const accepted = f.acceptedReason !== undefined ? ` (accepted: ${f.acceptedReason})` : "";
+      lines.push(`| ${ICON[f.severity]} | \`${f.rule}\` | ${where} | ${escapeCell(`${f.message}${accepted}`)} |`);
     }
     if (report.findings.length > 200) lines.push("", `… ${report.findings.length - 200} more in report.json`);
     lines.push("");
@@ -113,6 +114,16 @@ function toSarifResult(f: Finding): Record<string, unknown> {
                 ...(f.line ? { region: { startLine: f.line } } : {}),
               },
             },
+          ],
+        }
+      : {}),
+    // SARIF's own field for an accepted result, so code scanning shows it as suppressed.
+    ...(f.accepted
+      ? {
+          suppressions: [
+            f.acceptedReason !== undefined
+              ? { kind: "inSource", justification: f.acceptedReason }
+              : { kind: "external", justification: "recorded in the accepted-findings file" },
           ],
         }
       : {}),

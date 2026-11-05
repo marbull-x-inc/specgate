@@ -167,11 +167,25 @@ export interface Unit {
   guarantees: Guarantee[];
   examples: Example[];
   supersedes?: string;
+  /**
+   * `@acceptFinding` tags: findings on this unit accepted in the source, with the reason. A field
+   * is empty when the tag leaves it out (reported by `accept-tag-invalid`).
+   */
+  accepts?: AcceptTag[];
   hasDoc: boolean;
   /** `type` units: the declared type text (not expanded) */
   typeText?: string;
   /** `entry` units */
   entry?: EntryInfo;
+}
+
+/** One `@acceptFinding <rule> <target> <reason>` tag. */
+export interface AcceptTag {
+  rule: string;
+  /** The value the finding quotes, `Mutator` / `Mutator:"replacement"` for a mutant, or `*` */
+  target: string;
+  reason: string;
+  line: number;
 }
 
 /**
@@ -262,8 +276,13 @@ export interface Finding {
   unit?: string;
   guarantee?: string;
   test?: string;
-  /** Recorded in the accepted-findings file; reported as `info` (see `check --accept-baseline`). */
+  /**
+   * Accepted: recorded in the accepted-findings file (`check --accept-baseline`) or by an
+   * `@acceptFinding` tag; reported as `info`.
+   */
   accepted?: boolean;
+  /** The reason an `@acceptFinding` tag gives; absent for the accepted-findings file. */
+  acceptedReason?: string;
   /** `mutant-survived`: the mutant the finding is about */
   mutant?: FindingMutant;
 }

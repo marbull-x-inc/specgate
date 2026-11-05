@@ -534,6 +534,36 @@
           "supersedes": {
             "type": "string"
           },
+          "accepts": {
+            "description": "@acceptFinding tags: findings on this unit accepted in the source, with the reason",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rule": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "rule",
+                "target",
+                "reason",
+                "line"
+              ],
+              "additionalProperties": false
+            }
+          },
           "hasDoc": {
             "type": "boolean"
           },
@@ -837,8 +867,12 @@
             "type": "string"
           },
           "accepted": {
-            "description": "Recorded in the accepted-findings file; reported as info",
+            "description": "Recorded in the accepted-findings file or by an @acceptFinding tag; reported as info",
             "type": "boolean"
+          },
+          "acceptedReason": {
+            "description": "The reason an @acceptFinding tag gives",
+            "type": "string"
           },
           "mutant": {
             "description": "mutant-survived: the mutant the finding is about",
