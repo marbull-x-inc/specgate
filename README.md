@@ -277,7 +277,8 @@ skipping type positions, imports, `typeof` checks, thrown messages and property 
 still runs no test: a runner outside the package applies each change, runs the tests and writes a
 mutation-testing-report-schema report with `mutatorName: "Value"`. This repository has one in
 `scripts/value-mutants/run.ts`. With Stryker's report it runs only the test files that cover the
-changed line (`coveredBy`).
+changed line (`coveredBy`), or, for a module-level constant, the code that reads it (`readers` in
+`mutants.json`); when nothing tells which tests run a site, it runs the whole command.
 
 ```bash
 npx stryker run --reporters json                       # reports/mutation/mutation.json
