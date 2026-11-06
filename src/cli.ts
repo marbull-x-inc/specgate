@@ -9,6 +9,7 @@ import { renderDocs, writeDocs } from "./docs/index.ts";
 import { generateTests } from "./gen/index.ts";
 import { listValueMutants, writeValueMutants } from "./mutants/index.ts";
 import { renderConsole, writeReportFiles } from "./report/index.ts";
+import { relativeTo } from "./util/paths.ts";
 
 const USAGE = `specgate <command> [options]
 
@@ -140,8 +141,14 @@ export async function main(argv: string[]): Promise<number> {
   }
 
   if (command === "mutants") {
-    const { report, host } = await analyze(config, { provenance: false, baseline: null, accepted: false });
-    const list = listValueMutants(report.units, host, config.root, TOOL);
+    const { report, host, testFiles } = await analyze(config, { provenance: false, baseline: null, accepted: false });
+    const list = listValueMutants(
+      report.units,
+      host,
+      config.root,
+      TOOL,
+      testFiles.map((f) => relativeTo(config.root, f)),
+    );
     const written = writeValueMutants(list, resolve(config.root, values.out ?? config.output.dir));
     const byKind = new Map<string, number>();
     for (const m of list.mutants) byKind.set(m.kind, (byKind.get(m.kind) ?? 0) + 1);

@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import ts from "typescript";
 import type { ProgramHost } from "../extract/program.ts";
+import { lineOf } from "../extract/program.ts";
 import type { Decision, Unit } from "../ir/schema.ts";
 import { sha256 } from "../util/hash.ts";
 import { relativeTo } from "../util/paths.ts";
@@ -44,6 +45,16 @@ export interface ValueMutant {
   description: string;
   /** The unit's decision on the same value, when there is one */
   decision?: { kind: Decision["kind"]; values: string[] };
+  /**
+   * The code of every unit that owns the site: its lines and the helpers it reaches, in its own
+   * file. A test that observes the change runs some of this code, so a runner can select tests
+   * by what covers it when nothing covers the site itself (a module-level constant).
+   */
+  readers?: Array<{ file: string; line: number; endLine: number }>;
+  /** Names of the module-level constants or collections the site is written in */
+  names?: string[];
+  /** Test files that reference the site's module-level constant directly */
+  tests?: string[];
 }
 
 export interface ValueMutantList {
@@ -62,6 +73,8 @@ interface Region {
   place: Place;
   line: number;
   endLine: number;
+  /** The constant or collection, for `constant` and `collection` regions */
+  name?: string;
 }
 
 /** A change before it is attributed to a unit. */
@@ -73,6 +86,8 @@ interface Site {
   /** The value as a decision would hold it (`"413"`, `"Content-Length"`), for `decision` */
   value?: string;
   description: string;
+  /** The node the change is made in */
+  at: ts.Node;
 }
 
 /** The code each unit with guarantees owns, per file. */
@@ -86,7 +101,7 @@ function regionsOf(units: readonly Unit[]): Map<string, Region[]> {
     push(unit.file, { unit, place: "body", line: unit.line, endLine: unit.endLine });
     for (const h of unit.helperRanges ?? []) push(unit.file, { unit, place: "helper", ...h });
     for (const c of unit.constantRanges ?? [])
-      push(c.file, { unit, place: "constant", line: c.line, endLine: c.endLine });
+      push(c.file, { unit, place: "constant", line: c.line, endLine: c.endLine, name: c.name });
     for (const d of unit.decisions)
       if (d.kind === "member" && d.collection)
         push(d.collection.file, {
@@ -94,6 +109,7 @@ function regionsOf(units: readonly Unit[]): Map<string, Region[]> {
           place: "collection",
           line: d.collection.line,
           endLine: d.collection.endLine,
+          name: d.collection.name,
         });
   }
   return out;
@@ -108,8 +124,10 @@ export function listValueMutants(
   host: ProgramHost,
   root: string,
   tool: { name: string; version: string },
+  testFiles: readonly string[] = [],
 ): ValueMutantList {
   const regions = regionsOf(units);
+  const references = referenceFinder(host, root, new Set(testFiles));
   const files: ValueMutantList["files"] = {};
   const mutants: Array<Omit<ValueMutant, "id">> = [];
   for (const sf of host.files) {
@@ -124,20 +142,25 @@ export function listValueMutants(
       const endPos = sf.getLineAndCharacterOfPosition(site.end);
       const line = startPos.line + 1;
       const endLine = endPos.line + 1;
-      const owner = fileRegions
-        .filter((r) => line >= r.line && endLine <= r.endLine)
-        .sort(
-          (a, b) =>
-            PLACE_ORDER[a.place] - PLACE_ORDER[b.place] ||
-            a.endLine - a.line - (b.endLine - b.line) ||
-            a.unit.id.localeCompare(b.unit.id),
-        )[0];
+      const containing = fileRegions.filter((r) => line >= r.line && endLine <= r.endLine);
+      const owner = [...containing].sort(
+        (a, b) =>
+          PLACE_ORDER[a.place] - PLACE_ORDER[b.place] ||
+          a.endLine - a.line - (b.endLine - b.line) ||
+          a.unit.id.localeCompare(b.unit.id),
+      )[0];
       if (!owner) continue;
       const key = `${site.start}|${site.end}|${site.replacement}`;
       if (seen.has(key)) continue;
       seen.add(key);
       any = true;
       const decision = site.value !== undefined ? decisionFor(owner.unit, site, file, line) : undefined;
+      // A site in a module-level constant runs at import; the code that reads the constant is what
+      // a test exercises. Every reference in the program counts, not only the units with guarantees.
+      const constant = moduleConstDeclaration(site.at);
+      const refs = constant ? references(constant) : undefined;
+      const readers = refs ? refs.readers : readersOf(containing);
+      const names = [...new Set(containing.flatMap((r) => (r.name !== undefined ? [r.name] : [])))].sort();
       mutants.push({
         unit: owner.unit.id,
         file,
@@ -152,6 +175,9 @@ export function listValueMutants(
         replacement: site.replacement,
         description: site.description,
         ...(decision ? { decision: { kind: decision.kind, values: decision.values } } : {}),
+        ...(readers ? { readers } : {}),
+        ...(names.length > 0 ? { names } : {}),
+        ...(refs && refs.tests.length > 0 ? { tests: refs.tests } : {}),
       });
     }
     if (any) files[file] = { sha256: sha256(text) };
@@ -163,6 +189,135 @@ export function listValueMutants(
     files,
     mutants: mutants.map((m, i) => ({ id: `value-${i + 1}`, ...m })),
   };
+}
+
+interface References {
+  /** Outermost functions that read the constant; `undefined` when some reference is not in one */
+  readers: NonNullable<ValueMutant["readers"]> | undefined;
+  tests: string[];
+}
+
+/**
+ * Finds every place the program reads a module-level constant: the outermost function around
+ * each reference (in any project file), and the test files that name it. A reference in another
+ * module-level constant is followed into that constant's references (three levels); any other
+ * reference outside a function (a module-level statement) leaves the readers unknown.
+ */
+function referenceFinder(
+  host: ProgramHost,
+  root: string,
+  testFiles: ReadonlySet<string>,
+): (decl: ts.VariableDeclaration) => References {
+  const cache = new Map<ts.VariableDeclaration, References>();
+  const checker = host.checker;
+  const symbolOf = (node: ts.Node): ts.Symbol | undefined => {
+    const parent = node.parent;
+    let sym =
+      parent && ts.isShorthandPropertyAssignment(parent) && parent.name === node
+        ? checker.getShorthandAssignmentValueSymbol(parent)
+        : checker.getSymbolAtLocation(node);
+    if (sym && sym.flags & ts.SymbolFlags.Alias) sym = checker.getAliasedSymbol(sym);
+    return sym;
+  };
+  const find = (decl: ts.VariableDeclaration, depth: number): References => {
+    const cached = cache.get(decl);
+    if (cached) return cached;
+    const result: References = { readers: [], tests: [] };
+    cache.set(decl, result);
+    if (!ts.isIdentifier(decl.name)) return { readers: undefined, tests: [] };
+    const name = decl.name.text;
+    const target = symbolOf(decl.name);
+    const readers = new Map<string, { file: string; line: number; endLine: number }>();
+    const tests = new Set<string>();
+    let complete = target !== undefined;
+    for (const sf of host.program.getSourceFiles()) {
+      if (sf.isDeclarationFile || /[\\/]node_modules[\\/]/.test(sf.fileName) || !sf.text.includes(name)) continue;
+      const file = relativeTo(root, sf.fileName);
+      const visit = (node: ts.Node): void => {
+        if (
+          ts.isIdentifier(node) &&
+          node.text === name &&
+          node !== decl.name &&
+          !ts.isImportSpecifier(node.parent) &&
+          !ts.isExportSpecifier(node.parent) &&
+          !ts.isImportClause(node.parent) &&
+          !inTypePosition(node) &&
+          symbolOf(node) === target
+        ) {
+          if (testFiles.has(file)) tests.add(file);
+          else {
+            const fn = outermostFunction(node);
+            if (fn) {
+              const line = lineOf(sf, fn.getStart(sf));
+              readers.set(`${file}:${line}`, { file, line, endLine: lineOf(sf, fn.getEnd()) });
+            } else {
+              const inner = moduleConstDeclaration(node);
+              const nested = inner && inner !== decl && depth < 3 ? find(inner, depth + 1) : undefined;
+              if (!nested?.readers) complete = false;
+              else {
+                for (const r of nested.readers) readers.set(`${r.file}:${r.line}`, r);
+                for (const t of nested.tests) tests.add(t);
+              }
+            }
+          }
+        }
+        ts.forEachChild(node, visit);
+      };
+      visit(sf);
+    }
+    result.readers = complete
+      ? [...readers.values()].sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line)
+      : undefined;
+    result.tests = [...tests].sort();
+    return result;
+  };
+  return (decl) => find(decl, 0);
+}
+
+/** Under a type node (`typeof X`, `keyof typeof X`): names the constant's type, reads no value. */
+function inTypePosition(node: ts.Node): boolean {
+  for (let cur: ts.Node | undefined = node.parent; cur && !ts.isSourceFile(cur); cur = cur.parent)
+    if (ts.isTypeNode(cur) && !ts.isExpressionWithTypeArguments(cur)) return true;
+  return false;
+}
+
+/** The outermost function, method or accessor around a node, below the module level. */
+function outermostFunction(node: ts.Node): ts.Node | undefined {
+  let found: ts.Node | undefined;
+  for (let cur: ts.Node | undefined = node.parent; cur && !ts.isSourceFile(cur); cur = cur.parent)
+    if (ts.isFunctionLike(cur)) found = cur;
+  return found;
+}
+
+/** The module-level `const` declaration whose initializer holds `node` (not through a function). */
+function moduleConstDeclaration(node: ts.Node): ts.VariableDeclaration | undefined {
+  for (let cur: ts.Node = node; !ts.isSourceFile(cur); cur = cur.parent) {
+    if (ts.isFunctionLike(cur) || ts.isClassLike(cur)) return undefined;
+    if (ts.isVariableDeclaration(cur)) {
+      const list = cur.parent;
+      return ts.isVariableDeclarationList(list) &&
+        (list.flags & ts.NodeFlags.Const) !== 0 &&
+        ts.isVariableStatement(list.parent) &&
+        ts.isSourceFile(list.parent.parent)
+        ? cur
+        : undefined;
+    }
+  }
+  return undefined;
+}
+
+/** The lines and helpers, in their own files, of every unit owning one of the regions. */
+function readersOf(regions: readonly Region[]): NonNullable<ValueMutant["readers"]> {
+  const seen = new Set<string>();
+  const out: NonNullable<ValueMutant["readers"]> = [];
+  for (const unit of new Set(regions.map((r) => r.unit)))
+    for (const r of [{ line: unit.line, endLine: unit.endLine }, ...(unit.helperRanges ?? [])]) {
+      const key = `${unit.file}:${r.line}:${r.endLine}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ file: unit.file, line: r.line, endLine: r.endLine });
+    }
+  return out.sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line || a.endLine - b.endLine);
 }
 
 /** Writes `<dir>/mutants.json`. @returns The path written. */
@@ -203,6 +358,7 @@ function sitesOf(sf: ts.SourceFile): Site[] {
         const changed = negative ? `-${String(next)}` : String(next);
         out.push({
           kind: "number",
+          at: node,
           start: node.getStart(sf),
           end: node.getEnd(),
           replacement: String(next),
@@ -222,6 +378,7 @@ function sitesOf(sf: ts.SourceFile): Site[] {
       const changed = `${raw.slice(0, -1)}_x${raw.slice(-1)}`;
       out.push({
         kind: "string",
+        at: node,
         start: node.getStart(sf),
         end: node.getEnd(),
         replacement: changed,
@@ -236,6 +393,7 @@ function sitesOf(sf: ts.SourceFile): Site[] {
         const u = unwrap(el);
         out.push({
           kind: "element",
+          at: node,
           ...span,
           replacement: "",
           ...(isStringLike(u) ? { value: u.text } : ts.isNumericLiteral(u) ? { value: String(Number(u.text)) } : {}),
@@ -256,6 +414,7 @@ function sitesOf(sf: ts.SourceFile): Site[] {
           const key = p.name && !ts.isComputedPropertyName(p.name) ? propertyNameText(p.name) : undefined;
           out.push({
             kind: "entry",
+            at: node,
             ...span,
             replacement: "",
             ...(key !== undefined ? { value: key } : {}),
@@ -292,6 +451,7 @@ function alternativesOf(node: ts.RegularExpressionLiteral, sf: ts.SourceFile): S
       const end = base + offset + word.length + (last ? 0 : 1);
       out.push({
         kind: "alternative",
+        at: node,
         start,
         end,
         replacement: "",
