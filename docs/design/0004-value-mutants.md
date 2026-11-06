@@ -122,6 +122,10 @@ It reads the same config as `check` and runs the same extraction; it never runs 
   with guarantees or not; references in type positions do not count; a reference in another
   module-level `const` is followed, three levels). Absent when some reference is outside any
   function (`export default X`, a module-level statement): then no reader set is complete.
+  Each reader that has a name (a function declaration, a `const` holding a function) lists its
+  `callers`, the same way and three levels deep; `callers` is absent when they cannot be traced
+  (a method, a callback, a reference outside a function). The test files that name a reader or a
+  caller are added to `tests`.
 - `names` (module-level sites): the constants the site is written in. `tests`: test files (from
   `tests.include`) that reference the constant directly.
 - Mutants are sorted by file and `start`; `id`s are `value-<n>` in that order. They are unique
@@ -158,8 +162,18 @@ When no mutant contains the site or it is static (module-level code: Stryker doe
 test), the runner uses `readers`: the tests covering the non-static mutants inside each reader,
 plus the `tests` that name the constant. A test that observes a module-level value either runs
 code that reads it or reads it by name. Each reader must lie in a file of the Stryker report and
-hold at least one non-static mutant with coverage; otherwise (or without `readers`, or without
-`coveredBy`) the whole command runs. Added after benchmark 0003's first measurement, where
+hold at least one non-static mutant with coverage, or, failing that (outside the report, or
+marked static), reach such mutants through all of its `callers`; otherwise (or without `readers`,
+or without `coveredBy`) the whole command runs. A test that runs a function either calls it by
+name or runs one of its callers; calls through a method or a callback are not traced, which is
+why such readers have no `callers`.
+
+**Selection check and timeouts.** Each distinct selection runs once without any change; a
+selection that fails falls back to the whole suite, and its run time sets the timeout of its
+mutants as Stryker does: net time × 1.5 + 5 s (the whole suite's for whole-suite runs). A run that
+times out while others share the machine is repeated alone. A test command should stop at the
+first failure (`vitest --bail=1`, `jest --bail`), as Stryker does: a killed mutant then costs one
+failing test file, not the suite. Added after benchmark 0003's first measurement, where
 es-toolkit ran 89 of 113 value mutants against its whole suite (deviation 10).
 
 **Concurrency.** `--concurrency <n>` runs `n` sandboxes, copies of the project without

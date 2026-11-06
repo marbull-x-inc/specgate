@@ -357,10 +357,44 @@ test("look.ok.look", () => {
     const ten = list.mutants.find((m) => m.kind === "number" && m.original === "10");
     expect(ten?.names).toEqual(["TABLE"]);
     // look (with guarantees), first (without) and total (another module); not the type position.
+    // No function calls them, so their callers are known and empty (only the test calls look).
     expect(ten?.readers).toEqual([
-      { file: "src/table.ts", line: 5, endLine: 7 },
-      { file: "src/table.ts", line: 9, endLine: 11 },
-      { file: "src/use.ts", line: 3, endLine: 3 },
+      { file: "src/table.ts", line: 5, endLine: 7, callers: [] },
+      { file: "src/table.ts", line: 9, endLine: 11, callers: [] },
+      { file: "src/use.ts", line: 3, endLine: 3, callers: [] },
+    ]);
+    expect(ten?.tests).toEqual(["tests/table.test.ts"]);
+  });
+
+  test("each reader lists the functions that call it, and the tests that name them", async () => {
+    const dir = project({
+      "src/table.ts": `const TABLE = { a: 10, b: 20 };
+
+function read(key: "a" | "b"): number {
+  return TABLE[key];
+}
+
+/** @guarantee ok.look returns the entry */
+export function look(key: "a" | "b"): number {
+  return read(key);
+}
+`,
+      "tests/table.test.ts": `import { expect, test } from "bun:test";
+import { look } from "../src/table";
+
+test("look.ok.look", () => {
+  expect(look("a")).toBe(10);
+});
+`,
+    });
+    const ten = (await mutantsOf(dir)).mutants.find((m) => m.kind === "number" && m.original === "10");
+    expect(ten?.readers).toEqual([
+      {
+        file: "src/table.ts",
+        line: 3,
+        endLine: 5,
+        callers: [{ file: "src/table.ts", line: 8, endLine: 10, callers: [] }],
+      },
     ]);
     expect(ten?.tests).toEqual(["tests/table.test.ts"]);
   });
@@ -415,6 +449,17 @@ test("look.ok.look", () => {
     expect(selectTests({ ...site, readers: [{ file: "src/other.ts", line: 1, endLine: 9 }] }, coverage([]))).toEqual({
       all: true,
     });
+    // A reader the report does not cover is reached through its callers.
+    const viaCallers = {
+      ...site,
+      readers: [{ file: "src/other.ts", line: 1, endLine: 9, callers: [{ file: "src/use.ts", line: 3, endLine: 3 }] }],
+    } as ValueMutant;
+    expect(selectTests(viaCallers, coverage([], [at(3, ["t2"])]))).toEqual({
+      files: ["tests/b.test.ts", "tests/direct.test.ts"],
+      tests: ["t2"],
+    });
+    const callersUnknown = { ...site, readers: [{ file: "src/other.ts", line: 1, endLine: 9 }] } as ValueMutant;
+    expect(selectTests(callersUnknown, coverage([], [at(3, ["t2"])]))).toEqual({ all: true });
     const { readers: _readers, ...noReaders } = site;
     expect(selectTests(noReaders as ValueMutant, coverage([at(6, ["t1"])]))).toEqual({ all: true });
     // Readers no test runs, and no test names the constant: not covered.
