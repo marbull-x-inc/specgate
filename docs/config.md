@@ -117,7 +117,7 @@ instead. A `@guarantee` anywhere else is reported by `guarantee-on-non-unit`.
 | ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ignore`          | `[]`    | Values (`"1000"`, `"__proto__"`) or constant names (`"RETRY_LIMIT"`) that `decision-unspecified` treats as named and `decision-untested` does not ask the tests for. Use it for values you deliberately leave out of the contract. |
 | `collectionLimit` | `500`   | Most `member` decisions recorded per collection. Beyond it, `decision-collection-truncated` reports the collection once. A collection name in `ignore` skips it entirely (generated route manifests, for example).                 |
-| `widen`           | `false` | Record the decisions listed under "Widened walk" below as well. It raises the static `decision-*` count; with a value-mutant report loaded, the decisions its killed mutants confirm are not reported (see `mutation`).            |
+| `widen`           | `false` | Record the decisions listed under "Widened walk" below as well. It raises the static `decision-*` count; with a value-mutant report loaded, the decisions it measured are not reported (see `mutation`).                           |
 
 A decision counts as named when a guarantee or `@example` of the unit, or of a surface unit that
 calls it, contains one of its values (numbers compared by value, so `86_400_000` and `8.64e7`
@@ -172,12 +172,14 @@ with it as the unit, `"10 years"` for `case "years":`.
 | `exclude`   | `[]`                                                    | Unit ids or file globs whose mutants are counted in `units[].mutation` but give no `mutant-survived` / `unit-not-executed`. Use it for code that tests outside this config exercise.                                                                                                                                                                                                                                                       |
 
 A value-mutant report (`mutatorName: "Value"`, written by a runner from `specgate mutants`) also
-confirms decisions: a decision whose value mutant the tests caught (a status in `detected`) gives
-neither `decision-unspecified` nor `decision-untested`, since a test failed when its value
-changed. A `member` is confirmed by the removal of its element, entry or regex alternative, any
-other decision by a change of each of its values on its own line. A report mutant is matched to
-today's sources by file, line, column and description, so a stale report confirms nothing. A
-survivor confirms nothing either; it is reported by `mutant-survived`.
+measures decisions. A decision whose value mutant has an outcome (a status in `detected`,
+`Survived` or `NoCoverage`) gives neither `decision-unspecified` nor `decision-untested`: the
+report has run what the static rules can only guess at. If the mutant was killed, a test fails
+when the value changes. If it survived or was not run, `mutant-survived` reports it. A `member`
+is measured by the removal of its element, entry or regex alternative, and any other decision by
+a change of each of its values on its own line. A report mutant is matched to today's sources by
+file, line, column and description, so a stale report measures nothing, and neither does an
+`Ignored` mutant.
 
 ## `resolve`
 

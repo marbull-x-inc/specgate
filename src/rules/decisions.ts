@@ -24,8 +24,10 @@ export interface DecisionRuleInput {
   truncatedCollections: ReadonlyArray<{ name: string; file: string; size: number }>;
   collectionLimit: number;
   /**
-   * Whether a value report confirms the decision: a test failed when its value changed (#61).
-   * A confirmed decision gives neither `decision-unspecified` nor `decision-untested`.
+   * Whether a value report measured the decision: a value mutant changing it was killed, survived
+   * or not run (#61). The report decides then, not the literals: a killed mutant means a test pins
+   * the value, a survivor is reported by `mutant-survived`. A measured decision gives neither
+   * `decision-unspecified` nor `decision-untested`.
    */
   measured?: (unit: Unit, decision: Decision) => boolean;
 }

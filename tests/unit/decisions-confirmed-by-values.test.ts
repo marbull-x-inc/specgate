@@ -97,8 +97,8 @@ async function decisionFindings(dir: string, report?: unknown) {
 
 const decidedValue = (m: ValueMutant): string | undefined => m.decision?.values[0];
 
-describe("a value report confirms decisions (#61)", () => {
-  test("killed value mutants clear their decisions; survivors and other members stay", async () => {
+describe("a value report measures decisions (#61)", () => {
+  test("a killed, survived or uncovered value mutant clears its decision; unmeasured members stay", async () => {
     const dir = project({ "src/m.ts": SOURCE, "tests/m.test.ts": TEST });
     const before = await decisionFindings(dir);
     const messages = before.findings.map((f) => `${f.rule} ${f.message}`);
@@ -106,37 +106,53 @@ describe("a value report confirms decisions (#61)", () => {
     expect(messages.some((m) => m.includes("members of MODES"))).toBe(true);
     expect(messages.some((m) => m.includes("members of regex at line 8"))).toBe(true);
 
-    const killed = new Set(["100", "fast", "on", "off"]);
-    const report = reportOf(before.mutants, (m) => (killed.has(decidedValue(m) ?? "") ? "Killed" : "Survived"));
-    const after = await decisionFindings(dir, report);
+    // "slow" has no mutant in the report: it is not measured.
+    const status: Record<string, string> = { "100": "Killed", fast: "Survived", on: "NoCoverage", off: "Killed" };
+    const listed = before.mutants.filter((m) => status[decidedValue(m) ?? ""] !== undefined);
+    const after = await decisionFindings(
+      dir,
+      reportOf(listed, (m) => status[decidedValue(m) ?? ""] ?? "Ignored"),
+    );
     const left = after.findings.map((f) => f.message);
     expect(left.some((m) => m.includes('boundary "100"'))).toBe(false);
     expect(left.some((m) => m.includes("regex at line 8"))).toBe(false);
-    // "slow" survived: the collection is still reported, with only the unconfirmed member.
+    // The collection is still reported, with only the unmeasured member.
     const modes = left.find((m) => m.includes("members of MODES"));
     expect(modes).toContain('"slow"');
     expect(modes).not.toContain('"fast"');
   });
 
-  test("a stale report, a survivor or another tool's killed mutant confirms nothing", async () => {
+  test("a survivor is left to mutant-survived", async () => {
+    const dir = project({ "src/m.ts": SOURCE, "tests/m.test.ts": TEST });
+    const before = await decisionFindings(dir);
+    writeFileSync(join(dir, "value.json"), JSON.stringify(reportOf(before.mutants, () => "Survived")));
+    const config = configOf(dir, { mutation: { report: "value.json" } });
+    const { report } = await analyze(config, { provenance: false, baseline: null });
+    expect(report.findings.filter((f) => f.rule.startsWith("decision-"))).toEqual([]);
+    expect(report.findings.some((f) => f.rule === "mutant-survived" && f.message.includes("100 → 101"))).toBe(true);
+  });
+
+  test("a stale report, an ignored mutant or another tool's mutant measures nothing", async () => {
     const dir = project({ "src/m.ts": SOURCE, "tests/m.test.ts": TEST });
     const before = await decisionFindings(dir);
     const count = before.findings.length;
-    const all = (m: ValueMutant): string => (decidedValue(m) !== undefined ? "Killed" : "Survived");
+    const killed = (): string => "Killed";
     // Columns that no longer match the source: the report is stale.
-    expect((await decisionFindings(dir, reportOf(before.mutants, all, "Value", 1))).findings.length).toBe(count);
-    // Survived everywhere.
+    expect((await decisionFindings(dir, reportOf(before.mutants, killed, "Value", 1))).findings.length).toBe(count);
+    // The runner could not apply the change (`Ignored`).
     expect(
       (
         await decisionFindings(
           dir,
-          reportOf(before.mutants, () => "Survived"),
+          reportOf(before.mutants, () => "Ignored"),
         )
       ).findings.length,
     ).toBe(count);
     // Killed, but not a value mutant.
-    expect((await decisionFindings(dir, reportOf(before.mutants, all, "StringLiteral"))).findings.length).toBe(count);
+    expect((await decisionFindings(dir, reportOf(before.mutants, killed, "StringLiteral"))).findings.length).toBe(
+      count,
+    );
     // And the same report, as a value report, clears them all.
-    expect((await decisionFindings(dir, reportOf(before.mutants, all))).findings).toEqual([]);
+    expect((await decisionFindings(dir, reportOf(before.mutants, killed))).findings).toEqual([]);
   });
 });

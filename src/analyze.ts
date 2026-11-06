@@ -139,11 +139,12 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
         };
   if (mutation && "mapped" in mutation.result)
     for (const [unit, counts] of countMutants(mutation.result.mapped)) unit.mutation = counts;
-  // A value mutant the tests caught confirms the decision on its value (#61).
+  // A value mutant with an outcome measures the decision on its value (#61): killed, a test pins
+  // it; survived or not run, `mutant-survived` reports it.
   const measuredValues =
     mutationRead && "mutants" in mutationRead
       ? mutationRead.mutants.filter(
-          (m) => m.mutator === VALUE_MUTATOR && outcomeOf(m.status, config.mutation.detected) === "killed",
+          (m) => m.mutator === VALUE_MUTATOR && outcomeOf(m.status, config.mutation.detected) !== "ignored",
         )
       : [];
   const decisionMeasured = measuredValues.length > 0 ? valueMeasurement(measuredValues, host, config.root) : undefined;

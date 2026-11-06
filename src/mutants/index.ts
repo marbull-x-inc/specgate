@@ -415,33 +415,33 @@ function decisionFor(unit: Unit, site: Site, file: string, line: number): Decisi
   return unit.decisions.find((d) => d.line === line && d.kind !== "member" && d.values.includes(value));
 }
 
-/** A value change a value report says the tests caught, with the value it changed. */
-interface KilledValue {
+/** A value change a value report gives an outcome for, with the value it changed. */
+interface MeasuredValue {
   kind: ValueMutantKind;
   line: number;
   value: string;
 }
 
 /**
- * Which decisions a value report (#60) confirms: a decision is confirmed when, for each of its
- * values, a `Value` mutant changing that value was caught by the tests (#61). A `member` is
- * confirmed by the removal of its element, entry or regex alternative within its collection's
- * lines; any other decision by a number or string change on its own line.
+ * Which decisions a value report (#60) measured: for each of the decision's values, a `Value`
+ * mutant changing that value has an outcome (#61). A `member` is measured by the removal of its
+ * element, entry or regex alternative within its collection's lines; any other decision by a
+ * number or string change on its own line.
  *
  * @remarks
  * A report mutant is matched to the site `specgate mutants` would list today by file, line and
  * column, and by its description when the report gives one. A report made from other sources
- * (stale) matches nothing and confirms nothing.
- * @param caught - The report's `Value` mutants whose status counts as detected.
+ * (stale) matches nothing and measures nothing.
+ * @param measured - The report's `Value` mutants with an outcome (killed, survived or not run).
  */
 export function valueMeasurement(
-  caught: readonly Mutant[],
+  measured: readonly Mutant[],
   host: ProgramHost,
   root: string,
 ): (unit: Unit, decision: Decision) => boolean {
-  const byFile = new Map<string, KilledValue[]>();
+  const byFile = new Map<string, MeasuredValue[]>();
   const wanted = new Map<string, Mutant[]>();
-  for (const m of caught) if (m.column !== undefined) wanted.set(m.file, [...(wanted.get(m.file) ?? []), m]);
+  for (const m of measured) if (m.column !== undefined) wanted.set(m.file, [...(wanted.get(m.file) ?? []), m]);
   for (const [file, mutants] of wanted) {
     const sf = host.program.getSourceFile(resolve(root, file));
     if (!sf) continue;
@@ -450,7 +450,7 @@ export function valueMeasurement(
       const pos = sf.getLineAndCharacterOfPosition(site.start);
       sites.set(`${pos.line + 1}:${pos.character + 1}`, site);
     }
-    const out: KilledValue[] = [];
+    const out: MeasuredValue[] = [];
     for (const m of mutants) {
       const site = sites.get(`${m.line}:${m.column}`);
       if (!site || site.value === undefined) continue;

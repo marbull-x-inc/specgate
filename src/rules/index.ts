@@ -30,7 +30,7 @@ export interface RuleContext {
   truncatedCollections?: ReadonlyArray<{ name: string; file: string; size: number }>;
   /** The default baseline came from another revision or config (see `baseline-stale`). */
   baselineStale?: { baseline: string; current: string };
-  /** Whether a loaded value report confirms a decision (#61); absent when none is loaded. */
+  /** Whether a loaded value report measured a decision (#61); absent when none is loaded. */
   decisionMeasured?: (unit: Unit, decision: Decision) => boolean;
   /** The mutation report (`mutation.report`), mapped to units; absent when none is configured. */
   mutation?: Omit<MutationRuleInput, "linkedTests">;
