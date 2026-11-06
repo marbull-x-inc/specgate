@@ -64,8 +64,20 @@
         {
           "file": "src/string/camelCase.ts",
           "line": 24,
-          "endLine": 34
+          "endLine": 34,
+          "callers": [
+            {
+              "file": "src/object/toCamelCaseKeys.ts",
+              "line": 52,
+              "endLine": 73,
+              "callers": []
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/object/toCamelCaseKeys.spec.ts",
+        "src/string/camelCase.spec.ts"
       ]
     },
     {
@@ -86,8 +98,50 @@
         {
           "file": "src/string/capitalize.ts",
           "line": 18,
-          "endLine": 20
+          "endLine": 20,
+          "callers": [
+            {
+              "file": "src/compat/string/camelCase.ts",
+              "line": 22,
+              "endLine": 32,
+              "callers": []
+            },
+            {
+              "file": "src/string/camelCase.ts",
+              "line": 24,
+              "endLine": 34,
+              "callers": [
+                {
+                  "file": "src/object/toCamelCaseKeys.ts",
+                  "line": 52,
+                  "endLine": 73,
+                  "callers": []
+                }
+              ]
+            },
+            {
+              "file": "src/string/pascalCase.ts",
+              "line": 23,
+              "endLine": 26,
+              "callers": [
+                {
+                  "file": "src/object/toPascalCaseKeys.ts",
+                  "line": 52,
+                  "endLine": 73,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/compat/string/camelCase.spec.ts",
+        "src/object/toCamelCaseKeys.spec.ts",
+        "src/object/toPascalCaseKeys.spec.ts",
+        "src/string/camelCase.spec.ts",
+        "src/string/capitalize.spec.ts",
+        "src/string/pascalCase.spec.ts"
       ]
     },
     {
@@ -108,8 +162,50 @@
         {
           "file": "src/string/capitalize.ts",
           "line": 18,
-          "endLine": 20
+          "endLine": 20,
+          "callers": [
+            {
+              "file": "src/compat/string/camelCase.ts",
+              "line": 22,
+              "endLine": 32,
+              "callers": []
+            },
+            {
+              "file": "src/string/camelCase.ts",
+              "line": 24,
+              "endLine": 34,
+              "callers": [
+                {
+                  "file": "src/object/toCamelCaseKeys.ts",
+                  "line": 52,
+                  "endLine": 73,
+                  "callers": []
+                }
+              ]
+            },
+            {
+              "file": "src/string/pascalCase.ts",
+              "line": 23,
+              "endLine": 26,
+              "callers": [
+                {
+                  "file": "src/object/toPascalCaseKeys.ts",
+                  "line": 52,
+                  "endLine": 73,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/compat/string/camelCase.spec.ts",
+        "src/object/toCamelCaseKeys.spec.ts",
+        "src/object/toPascalCaseKeys.spec.ts",
+        "src/string/camelCase.spec.ts",
+        "src/string/capitalize.spec.ts",
+        "src/string/pascalCase.spec.ts"
       ]
     },
     {
@@ -130,8 +226,20 @@
         {
           "file": "src/string/constantCase.ts",
           "line": 24,
-          "endLine": 27
+          "endLine": 27,
+          "callers": [
+            {
+              "file": "src/object/toConstantCaseKeys.ts",
+              "line": 52,
+              "endLine": 73,
+              "callers": []
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/object/toConstantCaseKeys.spec.ts",
+        "src/string/constantCase.spec.ts"
       ]
     },
     {
@@ -152,11 +260,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -177,11 +296,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -202,11 +332,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -227,11 +368,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -252,11 +404,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -277,11 +440,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -302,11 +476,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -327,11 +512,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -352,11 +548,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -377,11 +584,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -402,11 +620,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -427,11 +656,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -452,11 +692,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -477,11 +728,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -502,11 +764,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -527,11 +800,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -552,11 +836,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -577,11 +872,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -602,11 +908,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -627,11 +944,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -652,11 +980,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -677,11 +1016,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -702,11 +1052,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -727,11 +1088,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -752,11 +1124,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -777,11 +1160,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -802,11 +1196,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -827,11 +1232,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -852,11 +1268,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -877,11 +1304,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -902,11 +1340,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -927,11 +1376,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -952,11 +1412,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -977,11 +1448,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1002,11 +1484,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1027,11 +1520,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1052,11 +1556,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1077,11 +1592,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1102,11 +1628,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1127,11 +1664,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1152,11 +1700,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1177,11 +1736,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1202,11 +1772,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1227,11 +1808,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1252,11 +1844,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1277,11 +1880,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1302,11 +1916,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1327,11 +1952,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1352,11 +1988,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1377,11 +2024,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1402,11 +2060,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1427,11 +2096,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1452,11 +2132,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1477,11 +2168,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1502,11 +2204,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1527,11 +2240,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1552,11 +2276,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1577,11 +2312,22 @@
         {
           "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
       ],
       "names": [
         "deburrMap"
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1602,23 +2348,12 @@
         {
           "file": "src/string/deburr.ts",
           "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 72,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1638,24 +2373,20 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1681,24 +2412,20 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1718,24 +2445,20 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1755,24 +2478,20 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 108,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 64,
+              "endLine": 72,
+              "callers": []
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1798,24 +2517,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 112,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1841,24 +2563,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 112,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1884,24 +2609,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 112,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1927,24 +2655,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 112,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -1970,24 +2701,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 112,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -2013,24 +2747,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 114,
-          "endLine": 123
+          "endLine": 112,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -2056,24 +2793,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 114,
-          "endLine": 123
+          "endLine": 123,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -2099,24 +2839,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 114,
-          "endLine": 123
+          "endLine": 123,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -2142,24 +2885,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 114,
-          "endLine": 123
+          "endLine": 123,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -2185,24 +2931,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 114,
-          "endLine": 123
+          "endLine": 123,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -2228,24 +2977,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 114,
-          "endLine": 123
+          "endLine": 123,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -2271,24 +3023,27 @@
       "readers": [
         {
           "file": "src/string/deburr.ts",
-          "line": 64,
-          "endLine": 72
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 74,
-          "endLine": 108
-        },
-        {
-          "file": "src/string/deburr.ts",
-          "line": 110,
-          "endLine": 112
-        },
-        {
-          "file": "src/string/deburr.ts",
           "line": 114,
-          "endLine": 123
+          "endLine": 123,
+          "callers": [
+            {
+              "file": "src/string/deburr.ts",
+              "line": 74,
+              "endLine": 108,
+              "callers": [
+                {
+                  "file": "src/string/deburr.ts",
+                  "line": 64,
+                  "endLine": 72,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/string/deburr.spec.ts"
       ]
     },
     {
@@ -2309,11 +3064,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2334,11 +3094,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2359,11 +3124,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2384,11 +3154,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2409,11 +3184,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2434,11 +3214,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2459,11 +3244,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2484,11 +3274,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2509,11 +3304,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2534,11 +3334,16 @@
         {
           "file": "src/string/escape.ts",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": []
         }
       ],
       "names": [
         "htmlEscapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2559,8 +3364,12 @@
         {
           "file": "src/string/escapeRegExp.ts",
           "line": 16,
-          "endLine": 18
+          "endLine": 18,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/escapeRegExp.spec.ts"
       ]
     },
     {
@@ -2581,8 +3390,20 @@
         {
           "file": "src/string/kebabCase.ts",
           "line": 24,
-          "endLine": 27
+          "endLine": 27,
+          "callers": [
+            {
+              "file": "src/object/toKebabCaseKeys.ts",
+              "line": 52,
+              "endLine": 73,
+              "callers": []
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/object/toKebabCaseKeys.spec.ts",
+        "src/string/kebabCase.spec.ts"
       ]
     },
     {
@@ -2603,8 +3424,12 @@
         {
           "file": "src/string/lowerCase.ts",
           "line": 21,
-          "endLine": 24
+          "endLine": 24,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/lowerCase.spec.ts"
       ]
     },
     {
@@ -2625,8 +3450,12 @@
         {
           "file": "src/string/pad.ts",
           "line": 21,
-          "endLine": 23
+          "endLine": 23,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/pad.spec.ts"
       ]
     },
     {
@@ -2653,8 +3482,12 @@
         {
           "file": "src/string/pad.ts",
           "line": 21,
-          "endLine": 23
+          "endLine": 23,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/pad.spec.ts"
       ]
     },
     {
@@ -2675,8 +3508,20 @@
         {
           "file": "src/string/snakeCase.ts",
           "line": 25,
-          "endLine": 28
+          "endLine": 28,
+          "callers": [
+            {
+              "file": "src/object/toSnakeCaseKeys.ts",
+              "line": 52,
+              "endLine": 73,
+              "callers": []
+            }
+          ]
         }
+      ],
+      "tests": [
+        "src/object/toSnakeCaseKeys.spec.ts",
+        "src/string/snakeCase.spec.ts"
       ]
     },
     {
@@ -2697,8 +3542,12 @@
         {
           "file": "src/string/startCase.ts",
           "line": 22,
-          "endLine": 34
+          "endLine": 34,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/startCase.spec.ts"
       ]
     },
     {
@@ -2719,8 +3568,12 @@
         {
           "file": "src/string/startCase.ts",
           "line": 22,
-          "endLine": 34
+          "endLine": 34,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/startCase.spec.ts"
       ]
     },
     {
@@ -2741,8 +3594,12 @@
         {
           "file": "src/string/startCase.ts",
           "line": 22,
-          "endLine": 34
+          "endLine": 34,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/startCase.spec.ts"
       ]
     },
     {
@@ -2763,8 +3620,12 @@
         {
           "file": "src/string/startCase.ts",
           "line": 22,
-          "endLine": 34
+          "endLine": 34,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/startCase.spec.ts"
       ]
     },
     {
@@ -2785,11 +3646,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2810,11 +3676,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2835,11 +3706,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2860,11 +3736,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2885,11 +3766,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2910,11 +3796,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2935,11 +3826,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2960,11 +3856,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -2985,11 +3886,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -3010,11 +3916,16 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
       ],
       "names": [
         "htmlUnescapes"
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -3035,8 +3946,13 @@
         {
           "file": "src/string/unescape.ts",
           "line": 27,
-          "endLine": 29
+          "endLine": 29,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/escape.spec.ts",
+        "src/string/unescape.spec.ts"
       ]
     },
     {
@@ -3057,8 +3973,12 @@
         {
           "file": "src/string/upperCase.ts",
           "line": 21,
-          "endLine": 34
+          "endLine": 34,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/upperCase.spec.ts"
       ]
     },
     {
@@ -3079,8 +3999,12 @@
         {
           "file": "src/string/upperCase.ts",
           "line": 21,
-          "endLine": 34
+          "endLine": 34,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/upperCase.spec.ts"
       ]
     },
     {
@@ -3101,8 +4025,12 @@
         {
           "file": "src/string/upperCase.ts",
           "line": 21,
-          "endLine": 34
+          "endLine": 34,
+          "callers": []
         }
+      ],
+      "tests": [
+        "src/string/upperCase.spec.ts"
       ]
     }
   ]

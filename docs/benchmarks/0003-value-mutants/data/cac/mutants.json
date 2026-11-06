@@ -93,18 +93,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -125,18 +115,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -157,18 +137,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -189,18 +159,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -221,18 +181,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -253,18 +203,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -285,18 +225,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -317,18 +247,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -349,18 +269,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -381,18 +291,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -413,18 +313,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -445,18 +335,8 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
           "line": 198,
           "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 288,
-          "endLine": 364
         }
       ]
     },
@@ -475,16 +355,6 @@
       "replacement": "'--_x'",
       "description": "`argv.indexOf('--')`: '--' → '--_x'",
       "readers": [
-        {
-          "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 198,
-          "endLine": 286
-        },
         {
           "file": "src/cac.ts",
           "line": 288,
@@ -509,16 +379,6 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 198,
-          "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
           "line": 288,
           "endLine": 364
         }
@@ -539,16 +399,6 @@
       "replacement": "2",
       "description": "`doubleDashesIndex + 1`: 1 → 2",
       "readers": [
-        {
-          "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 198,
-          "endLine": 286
-        },
         {
           "file": "src/cac.ts",
           "line": 288,
@@ -573,16 +423,6 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 198,
-          "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
           "line": 288,
           "endLine": 364
         }
@@ -603,16 +443,6 @@
       "replacement": "1",
       "description": "`cliOption.config.type[0]`: 0 → 1",
       "readers": [
-        {
-          "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 198,
-          "endLine": 286
-        },
         {
           "file": "src/cac.ts",
           "line": 288,
@@ -643,16 +473,6 @@
       "readers": [
         {
           "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 198,
-          "endLine": 286
-        },
-        {
-          "file": "src/cac.ts",
           "line": 288,
           "endLine": 364
         }
@@ -673,16 +493,6 @@
       "replacement": "'._x'",
       "description": "`key.split('.')`: '.' → '._x'",
       "readers": [
-        {
-          "file": "src/cac.ts",
-          "line": 170,
-          "endLine": 184
-        },
-        {
-          "file": "src/cac.ts",
-          "line": 198,
-          "endLine": 286
-        },
         {
           "file": "src/cac.ts",
           "line": 288,

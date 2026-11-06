@@ -40,7 +40,7 @@
             "118",
             "119"
           ],
-          "duration": 11429
+          "duration": 6625
         }
       ]
     },
@@ -70,7 +70,7 @@
             "121",
             "122"
           ],
-          "duration": 10523
+          "duration": 6039
         }
       ]
     },
@@ -100,7 +100,7 @@
             "76",
             "126"
           ],
-          "duration": 11056
+          "duration": 6235
         },
         {
           "id": "value-4",
@@ -124,7 +124,7 @@
             "76",
             "126"
           ],
-          "duration": 11232
+          "duration": 6217
         },
         {
           "id": "value-5",
@@ -149,7 +149,7 @@
             "76",
             "126"
           ],
-          "duration": 11032
+          "duration": 6204
         },
         {
           "id": "value-6",
@@ -172,7 +172,7 @@
             "75",
             "76"
           ],
-          "duration": 11328
+          "duration": 6529
         },
         {
           "id": "value-7",
@@ -193,7 +193,7 @@
           "coveredBy": [
             "126"
           ],
-          "duration": 10410
+          "duration": 6062
         }
       ]
     },
@@ -221,7 +221,7 @@
             "37",
             "41"
           ],
-          "duration": 11844
+          "duration": 7059
         },
         {
           "id": "value-9",
@@ -243,7 +243,7 @@
           "coveredBy": [
             "39"
           ],
-          "duration": 11984
+          "duration": 6945
         },
         {
           "id": "value-10",
@@ -264,7 +264,7 @@
           "coveredBy": [
             "39"
           ],
-          "duration": 12116
+          "duration": 7043
         },
         {
           "id": "value-11",
@@ -306,7 +306,7 @@
             "50",
             "51"
           ],
-          "duration": 11925
+          "duration": 7260
         }
       ]
     },
@@ -373,7 +373,7 @@
             "79",
             "80"
           ],
-          "duration": 12353
+          "duration": 6681
         },
         {
           "id": "value-13",
@@ -434,7 +434,7 @@
             "79",
             "80"
           ],
-          "duration": 12381
+          "duration": 6650
         }
       ]
     },
@@ -468,7 +468,7 @@
             "62",
             "63"
           ],
-          "duration": 11304
+          "duration": 6687
         },
         {
           "id": "value-15",
@@ -492,7 +492,7 @@
             "64",
             "65"
           ],
-          "duration": 11389
+          "duration": 6704
         },
         {
           "id": "value-16",
@@ -514,7 +514,7 @@
           "coveredBy": [
             "57"
           ],
-          "duration": 4892
+          "duration": 2961
         },
         {
           "id": "value-17",
@@ -536,7 +536,7 @@
           "coveredBy": [
             "57"
           ],
-          "duration": 4858
+          "duration": 2767
         },
         {
           "id": "value-18",
@@ -565,7 +565,7 @@
             "64",
             "65"
           ],
-          "duration": 4654
+          "duration": 2827
         },
         {
           "id": "value-19",
@@ -589,7 +589,7 @@
             "59",
             "60"
           ],
-          "duration": 4570
+          "duration": 2762
         },
         {
           "id": "value-20",
@@ -611,7 +611,7 @@
           "coveredBy": [
             "58"
           ],
-          "duration": 4480
+          "duration": 2828
         },
         {
           "id": "value-21",
@@ -632,7 +632,7 @@
           "coveredBy": [
             "58"
           ],
-          "duration": 4813
+          "duration": 2824
         },
         {
           "id": "value-22",
@@ -654,7 +654,7 @@
           "coveredBy": [
             "58"
           ],
-          "duration": 4708
+          "duration": 2708
         },
         {
           "id": "value-23",
@@ -677,7 +677,7 @@
             "59",
             "60"
           ],
-          "duration": 4633
+          "duration": 2858
         },
         {
           "id": "value-24",
@@ -699,7 +699,7 @@
           "coveredBy": [
             "59"
           ],
-          "duration": 4582
+          "duration": 2835
         },
         {
           "id": "value-25",
@@ -721,7 +721,7 @@
           "coveredBy": [
             "59"
           ],
-          "duration": 4423
+          "duration": 2935
         },
         {
           "id": "value-26",
@@ -743,7 +743,7 @@
           "coveredBy": [
             "60"
           ],
-          "duration": 4342
+          "duration": 2915
         },
         {
           "id": "value-27",
@@ -765,7 +765,7 @@
           "coveredBy": [
             "60"
           ],
-          "duration": 4365
+          "duration": 2826
         },
         {
           "id": "value-28",
@@ -786,7 +786,7 @@
           "coveredBy": [
             "60"
           ],
-          "duration": 4239
+          "duration": 2714
         },
         {
           "id": "value-29",
@@ -808,7 +808,7 @@
           "coveredBy": [
             "60"
           ],
-          "duration": 4124
+          "duration": 2695
         },
         {
           "id": "value-30",
@@ -830,7 +830,7 @@
           "coveredBy": [
             "60"
           ],
-          "duration": 4093
+          "duration": 2502
         },
         {
           "id": "value-31",
@@ -852,7 +852,7 @@
           "coveredBy": [
             "60"
           ],
-          "duration": 2342
+          "duration": 1578
         },
         {
           "id": "value-32",
@@ -873,7 +873,7 @@
           "coveredBy": [
             "60"
           ],
-          "duration": 2255
+          "duration": 1587
         }
       ]
     },
@@ -913,7 +913,7 @@
             "103",
             "128"
           ],
-          "duration": 3968
+          "duration": 2827
         },
         {
           "id": "value-34",
@@ -944,7 +944,7 @@
             "101",
             "103"
           ],
-          "duration": 3911
+          "duration": 2811
         },
         {
           "id": "value-35",
@@ -978,7 +978,7 @@
             "103",
             "128"
           ],
-          "duration": 3877
+          "duration": 2785
         },
         {
           "id": "value-36",
@@ -1012,7 +1012,7 @@
             "103",
             "128"
           ],
-          "duration": 3588
+          "duration": 2522
         }
       ]
     }

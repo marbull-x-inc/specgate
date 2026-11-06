@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-06T00:46:52.741Z",
+  "generatedAt": "2026-11-06T03:09:44.733Z",
   "root": "<work>/react-hook-form",
   "revision": "7e65ad5271daf8db8b123fdd0f8edad9d2b4416f",
   "configHash": "3e248fdaf7ef2625",
@@ -1600,8 +1600,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 188,
-        "survived": 6,
+        "killed": 187,
+        "survived": 7,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -55236,6 +55236,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "useForm: `shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
+      "file": "src/useForm.ts",
+      "line": 27,
+      "unit": "useForm",
+      "mutant": {
+        "id": "2:value-50",
+        "mutator": "Value",
+        "replacement": "`shouldUseNativeValidation: undefined` removed from `RESET_…",
+        "status": "Survived",
+        "line": 27
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "useForm: `context: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
       "file": "src/useForm.ts",
       "line": 28,
@@ -55326,7 +55341,7 @@
     "unlinkedTests": 427,
     "findings": {
       "fail": 4,
-      "warn": 110,
+      "warn": 111,
       "info": 1
     },
     "mutantsUnmapped": 1

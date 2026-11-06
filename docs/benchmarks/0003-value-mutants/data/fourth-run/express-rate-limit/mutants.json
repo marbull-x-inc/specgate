@@ -1,0 +1,1966 @@
+{
+  "schemaVersion": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "files": {
+    "source/ip-key-generator.ts": {
+      "sha256": "09a11f5096c7b4d66cef7a882826d4f55c90774e4316d50b1df5f4c3699efe33"
+    },
+    "source/rate-limit.ts": {
+      "sha256": "efa8626eb1ae0445201602f97de8c9c96f198b01c4fffe8ba666bd90322fb74c"
+    }
+  },
+  "mutants": [
+    {
+      "id": "value-1",
+      "unit": "ipKeyGenerator",
+      "file": "source/ip-key-generator.ts",
+      "line": 7,
+      "column": 43,
+      "endLine": 7,
+      "endColumn": 50,
+      "start": 280,
+      "end": 287,
+      "kind": "string",
+      "original": "'::/96'",
+      "replacement": "'::/96_x'",
+      "description": "`new Address6('::/96')`: '::/96' → '::/96_x'",
+      "readers": [
+        {
+          "file": "source/ip-key-generator.ts",
+          "line": 28,
+          "endLine": 64,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 156,
+              "endLine": 315,
+              "callers": [
+                {
+                  "file": "source/rate-limit.ts",
+                  "line": 355,
+                  "endLine": 651
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "names": [
+        "ipv4CompatibleSubnet"
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/ip-key-generator-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts",
+        "test/library/validation-test.ts"
+      ]
+    },
+    {
+      "id": "value-2",
+      "unit": "ipKeyGenerator",
+      "file": "source/ip-key-generator.ts",
+      "line": 28,
+      "column": 73,
+      "endLine": 28,
+      "endColumn": 75,
+      "start": 1428,
+      "end": 1430,
+      "kind": "number",
+      "original": "56",
+      "replacement": "57",
+      "description": "the default `ipv6Subnet` 56 → 57",
+      "readers": [
+        {
+          "file": "source/ip-key-generator.ts",
+          "line": 28,
+          "endLine": 64,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 156,
+              "endLine": 315,
+              "callers": [
+                {
+                  "file": "source/rate-limit.ts",
+                  "line": 355,
+                  "endLine": 651
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/ip-key-generator-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts",
+        "test/library/validation-test.ts"
+      ]
+    },
+    {
+      "id": "value-3",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 202,
+      "column": 50,
+      "endLine": 202,
+      "endColumn": 59,
+      "start": 6296,
+      "end": 6305,
+      "kind": "string",
+      "original": "'draft-6'",
+      "replacement": "'draft-6_x'",
+      "description": "`standardHeaders = 'draft-6'`: 'draft-6' → 'draft-6_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-4",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 207,
+      "column": 13,
+      "endLine": 207,
+      "endColumn": 15,
+      "start": 6445,
+      "end": 6447,
+      "kind": "number",
+      "original": "60",
+      "replacement": "61",
+      "description": "`60 * 1000`: 60 → 61",
+      "decision": {
+        "kind": "constant",
+        "values": [
+          "60"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-5",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 207,
+      "column": 18,
+      "endLine": 207,
+      "endColumn": 22,
+      "start": 6450,
+      "end": 6454,
+      "kind": "number",
+      "original": "1000",
+      "replacement": "1001",
+      "description": "`60 * 1000`: 1000 → 1001",
+      "decision": {
+        "kind": "constant",
+        "values": [
+          "1000"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-6",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 208,
+      "column": 31,
+      "endLine": 208,
+      "endColumn": 32,
+      "start": 6486,
+      "end": 6487,
+      "kind": "number",
+      "original": "5",
+      "replacement": "6",
+      "description": "`passedOptions.max ?? 5`: 5 → 6",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-7",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 209,
+      "column": 12,
+      "endLine": 209,
+      "endColumn": 56,
+      "start": 6548,
+      "end": 6592,
+      "kind": "string",
+      "original": "'Too many requests, please try again later.'",
+      "replacement": "'Too many requests, please try again later._x'",
+      "description": "`message` 'Too many requests, please try again later.' → 'Too many requests, please try again later._x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-8",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 210,
+      "column": 15,
+      "endLine": 210,
+      "endColumn": 18,
+      "start": 6608,
+      "end": 6611,
+      "kind": "number",
+      "original": "429",
+      "replacement": "430",
+      "description": "`statusCode` 429 → 430",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-9",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 217,
+      "column": 38,
+      "endLine": 217,
+      "endColumn": 42,
+      "start": 6890,
+      "end": 6894,
+      "kind": "number",
+      "original": "1000",
+      "replacement": "1001",
+      "description": "`config.windowMs / 1000`: 1000 → 1001",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-10",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 218,
+      "column": 39,
+      "endLine": 218,
+      "endColumn": 43,
+      "start": 6933,
+      "end": 6937,
+      "kind": "number",
+      "original": "1000",
+      "replacement": "1001",
+      "description": "`1000 * 60`: 1000 → 1001",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-11",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 218,
+      "column": 46,
+      "endLine": 218,
+      "endColumn": 48,
+      "start": 6940,
+      "end": 6942,
+      "kind": "number",
+      "original": "60",
+      "replacement": "61",
+      "description": "`1000 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-12",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 219,
+      "column": 37,
+      "endLine": 219,
+      "endColumn": 41,
+      "start": 6980,
+      "end": 6984,
+      "kind": "number",
+      "original": "1000",
+      "replacement": "1001",
+      "description": "`1000 * 60`: 1000 → 1001",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-13",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 219,
+      "column": 44,
+      "endLine": 219,
+      "endColumn": 46,
+      "start": 6987,
+      "end": 6989,
+      "kind": "number",
+      "original": "60",
+      "replacement": "61",
+      "description": "`1000 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-14",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 219,
+      "column": 49,
+      "endLine": 219,
+      "endColumn": 51,
+      "start": 6992,
+      "end": 6994,
+      "kind": "number",
+      "original": "60",
+      "replacement": "61",
+      "description": "`1000 * 60 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-15",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 220,
+      "column": 36,
+      "endLine": 220,
+      "endColumn": 40,
+      "start": 7031,
+      "end": 7035,
+      "kind": "number",
+      "original": "1000",
+      "replacement": "1001",
+      "description": "`1000 * 60`: 1000 → 1001",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-16",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 220,
+      "column": 43,
+      "endLine": 220,
+      "endColumn": 45,
+      "start": 7038,
+      "end": 7040,
+      "kind": "number",
+      "original": "60",
+      "replacement": "61",
+      "description": "`1000 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-17",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 220,
+      "column": 48,
+      "endLine": 220,
+      "endColumn": 50,
+      "start": 7043,
+      "end": 7045,
+      "kind": "number",
+      "original": "60",
+      "replacement": "61",
+      "description": "`1000 * 60 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-18",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 220,
+      "column": 53,
+      "endLine": 220,
+      "endColumn": 55,
+      "start": 7048,
+      "end": 7050,
+      "kind": "number",
+      "original": "24",
+      "replacement": "25",
+      "description": "`1000 * 60 * 60 * 24`: 24 → 25",
+      "decision": {
+        "kind": "constant",
+        "values": [
+          "24"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-19",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 222,
+      "column": 18,
+      "endLine": 222,
+      "endColumn": 20,
+      "start": 7070,
+      "end": 7072,
+      "kind": "number",
+      "original": "60",
+      "replacement": "61",
+      "description": "`seconds < 60`: 60 → 61",
+      "decision": {
+        "kind": "boundary",
+        "values": [
+          "60"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-20",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 223,
+      "column": 23,
+      "endLine": 223,
+      "endColumn": 25,
+      "start": 7123,
+      "end": 7125,
+      "kind": "number",
+      "original": "60",
+      "replacement": "61",
+      "description": "`minutes < 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-21",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 224,
+      "column": 21,
+      "endLine": 224,
+      "endColumn": 23,
+      "start": 7174,
+      "end": 7176,
+      "kind": "number",
+      "original": "24",
+      "replacement": "25",
+      "description": "`hours < 24`: 24 → 25",
+      "decision": {
+        "kind": "boundary",
+        "values": [
+          "24"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-22",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 224,
+      "column": 57,
+      "endLine": 224,
+      "endColumn": 58,
+      "start": 7210,
+      "end": 7211,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`hours > 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-23",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 224,
+      "column": 61,
+      "endLine": 224,
+      "endColumn": 64,
+      "start": 7214,
+      "end": 7217,
+      "kind": "string",
+      "original": "'s'",
+      "replacement": "'s_x'",
+      "description": "`hours > 1 ? 's' : ''`: 's' → 's_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-24",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 225,
+      "column": 40,
+      "endLine": 225,
+      "endColumn": 41,
+      "start": 7264,
+      "end": 7265,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`days > 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-25",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 225,
+      "column": 44,
+      "endLine": 225,
+      "endColumn": 47,
+      "start": 7268,
+      "end": 7271,
+      "kind": "string",
+      "original": "'s'",
+      "replacement": "'s_x'",
+      "description": "`days > 1 ? 's' : ''`: 's' → 's_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-26",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 229,
+      "column": 24,
+      "endLine": 229,
+      "endColumn": 35,
+      "start": 7344,
+      "end": 7355,
+      "kind": "string",
+      "original": "'rateLimit'",
+      "replacement": "'rateLimit_x'",
+      "description": "`requestPropertyName` 'rateLimit' → 'rateLimit_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-27",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 233,
+      "column": 26,
+      "endLine": 233,
+      "endColumn": 29,
+      "start": 7520,
+      "end": 7523,
+      "kind": "number",
+      "original": "400",
+      "replacement": "401",
+      "description": "`response.statusCode < 400`: 400 → 401",
+      "decision": {
+        "kind": "boundary",
+        "values": [
+          "400"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-28",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 248,
+      "column": 33,
+      "endLine": 248,
+      "endColumn": 35,
+      "start": 8249,
+      "end": 8251,
+      "kind": "number",
+      "original": "56",
+      "replacement": "57",
+      "description": "`subnet` 56 → 57",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-29",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 264,
+      "column": 15,
+      "endLine": 264,
+      "endColumn": 17,
+      "start": 8758,
+      "end": 8760,
+      "kind": "number",
+      "original": "56",
+      "replacement": "57",
+      "description": "`ipv6Subnet` 56 → 57",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-30",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 363,
+      "column": 34,
+      "endLine": 363,
+      "endColumn": 54,
+      "start": 12506,
+      "end": 12526,
+      "kind": "string",
+      "original": "'express-rate-limit'",
+      "replacement": "'express-rate-limit_x'",
+      "description": "`createDebugLogger('express-rate-limit')`: 'express-rate-limit' → 'express-rate-limit_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-31",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 364,
+      "column": 8,
+      "endLine": 364,
+      "endColumn": 43,
+      "start": 12535,
+      "end": 12570,
+      "kind": "string",
+      "original": "'creating new rate limiter with %o'",
+      "replacement": "'creating new rate limiter with %o_x'",
+      "description": "`debug('creating new rate limiter with %…`: 'creating new rate limiter with %o' → 'creating new rate limiter with %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-32",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 368,
+      "column": 9,
+      "endLine": 368,
+      "endColumn": 23,
+      "start": 12719,
+      "end": 12733,
+      "kind": "string",
+      "original": "'set %s to %o'",
+      "replacement": "'set %s to %o_x'",
+      "description": "`debug('set %s to %o', key, val)`: 'set %s to %o' → 'set %s to %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-33",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 377,
+      "column": 9,
+      "endLine": 377,
+      "endColumn": 35,
+      "start": 13093,
+      "end": 13119,
+      "kind": "string",
+      "original": "'executing init for store'",
+      "replacement": "'executing init for store_x'",
+      "description": "`debug('executing init for store')`: 'executing init for store' → 'executing init for store_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-34",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 387,
+      "column": 7,
+      "endLine": 387,
+      "endColumn": 69,
+      "start": 13433,
+      "end": 13495,
+      "kind": "string",
+      "original": "'express-rate-limit: async error during store initialization.'",
+      "replacement": "'express-rate-limit: async error during store initialization._x'",
+      "description": "`config.logger.error( error, 'express-ra…`: 'express-rate-limit: async error during store ini… → 'express-rate-limit: async error during store ini…",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "express-rate-limit: async error during store initialization."
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-35",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 394,
+      "column": 5,
+      "endLine": 394,
+      "endColumn": 61,
+      "start": 13575,
+      "end": 13631,
+      "kind": "string",
+      "original": "'express-rate-limit: error during store initialization.'",
+      "replacement": "'express-rate-limit: error during store initialization._x'",
+      "description": "`config.logger.error( error, 'express-ra…`: 'express-rate-limit: error during store initializ… → 'express-rate-limit: error during store initializ…",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-36",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 406,
+      "column": 50,
+      "endLine": 406,
+      "endColumn": 57,
+      "start": 14045,
+      "end": 14052,
+      "kind": "string",
+      "original": "'close'",
+      "replacement": "'close_x'",
+      "description": "`response.once('close', resolve)`: 'close' → 'close_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "close"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-37",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 410,
+      "column": 50,
+      "endLine": 410,
+      "endColumn": 58,
+      "start": 14207,
+      "end": 14215,
+      "kind": "string",
+      "original": "'finish'",
+      "replacement": "'finish_x'",
+      "description": "`response.once('finish', resolve)`: 'finish' → 'finish_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "finish"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-38",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 414,
+      "column": 50,
+      "endLine": 414,
+      "endColumn": 57,
+      "start": 14334,
+      "end": 14341,
+      "kind": "string",
+      "original": "'error'",
+      "replacement": "'error_x'",
+      "description": "`response.once('error', resolve)`: 'error' → 'error_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "error"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-39",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 416,
+      "column": 10,
+      "endLine": 416,
+      "endColumn": 24,
+      "start": 14363,
+      "end": 14377,
+      "kind": "string",
+      "original": "'requested %o'",
+      "replacement": "'requested %o_x'",
+      "description": "`debug('requested %o', request.originalU…`: 'requested %o' → 'requested %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-40",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 417,
+      "column": 10,
+      "endLine": 417,
+      "endColumn": 30,
+      "start": 14409,
+      "end": 14429,
+      "kind": "string",
+      "original": "'request from ip %o'",
+      "replacement": "'request from ip %o_x'",
+      "description": "`debug('request from ip %o', request.ip)`: 'request from ip %o' → 'request from ip %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-41",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 422,
+      "column": 11,
+      "endLine": 422,
+      "endColumn": 29,
+      "start": 14570,
+      "end": 14588,
+      "kind": "string",
+      "original": "'skipping request'",
+      "replacement": "'skipping request_x'",
+      "description": "`debug('skipping request')`: 'skipping request' → 'skipping request_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-42",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 432,
+      "column": 10,
+      "endLine": 432,
+      "endColumn": 27,
+      "start": 14816,
+      "end": 14833,
+      "kind": "string",
+      "original": "'computed key %o'",
+      "replacement": "'computed key %o_x'",
+      "description": "`debug('computed key %o', key)`: 'computed key %o' → 'computed key %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-43",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 435,
+      "column": 10,
+      "endLine": 435,
+      "endColumn": 30,
+      "start": 14899,
+      "end": 14919,
+      "kind": "string",
+      "original": "'incrementing count'",
+      "replacement": "'incrementing count_x'",
+      "description": "`debug('incrementing count')`: 'incrementing count' → 'incrementing count_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-44",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 436,
+      "column": 20,
+      "endLine": 436,
+      "endColumn": 21,
+      "start": 14940,
+      "end": 14941,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`totalHits` 0 → 1",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-45",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 453,
+      "column": 7,
+      "endLine": 453,
+      "endColumn": 86,
+      "start": 15415,
+      "end": 15494,
+      "kind": "string",
+      "original": "'express-rate-limit: error from store, allowing request without rate-limiting.'",
+      "replacement": "'express-rate-limit: error from store, allowing request without rate-limiting._x'",
+      "description": "`config.logger.error( error, 'express-ra…`: 'express-rate-limit: error from store, allowing r… → 'express-rate-limit: error from store, allowing r…",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-46",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 480,
+      "column": 44,
+      "endLine": 480,
+      "endColumn": 45,
+      "start": 16203,
+      "end": 16204,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`Math.max(limit - totalHits, 0)`: 0 → 1",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-47",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 490,
+      "column": 7,
+      "endLine": 490,
+      "endColumn": 35,
+      "start": 16418,
+      "end": 16446,
+      "kind": "string",
+      "original": "'set request.%s.%s to be %o'",
+      "replacement": "'set request.%s.%s to be %o_x'",
+      "description": "`debug( 'set request.%s.%s to be %o', co…`: 'set request.%s.%s to be %o' → 'set request.%s.%s to be %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-48",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 499,
+      "column": 32,
+      "endLine": 499,
+      "endColumn": 41,
+      "start": 16696,
+      "end": 16705,
+      "kind": "string",
+      "original": "'current'",
+      "replacement": "'current_x'",
+      "description": "`Object.defineProperty(info, 'current', …`: 'current' → 'current_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-49",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 510,
+      "column": 11,
+      "endLine": 510,
+      "endColumn": 31,
+      "start": 17048,
+      "end": 17068,
+      "kind": "string",
+      "original": "'set legacy headers'",
+      "replacement": "'set legacy headers_x'",
+      "description": "`debug('set legacy headers')`: 'set legacy headers' → 'set legacy headers_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-50",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 518,
+      "column": 11,
+      "endLine": 518,
+      "endColumn": 20,
+      "start": 17309,
+      "end": 17318,
+      "kind": "string",
+      "original": "'draft-6'",
+      "replacement": "'draft-6_x'",
+      "description": "`case 'draft-6': { debug('set ietf draft…`: 'draft-6' → 'draft-6_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "draft-6"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-51",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 519,
+      "column": 13,
+      "endLine": 519,
+      "endColumn": 39,
+      "start": 17334,
+      "end": 17360,
+      "kind": "string",
+      "original": "'set ietf draft 6 headers'",
+      "replacement": "'set ietf draft 6 headers_x'",
+      "description": "`debug('set ietf draft 6 headers')`: 'set ietf draft 6 headers' → 'set ietf draft 6 headers_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-52",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 524,
+      "column": 11,
+      "endLine": 524,
+      "endColumn": 20,
+      "start": 17448,
+      "end": 17457,
+      "kind": "string",
+      "original": "'draft-7'",
+      "replacement": "'draft-7_x'",
+      "description": "`case 'draft-7': { debug('set ietf draft…`: 'draft-7' → 'draft-7_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "draft-7"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-53",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 525,
+      "column": 13,
+      "endLine": 525,
+      "endColumn": 39,
+      "start": 17473,
+      "end": 17499,
+      "kind": "string",
+      "original": "'set ietf draft 7 headers'",
+      "replacement": "'set ietf draft 7 headers_x'",
+      "description": "`debug('set ietf draft 7 headers')`: 'set ietf draft 7 headers' → 'set ietf draft 7 headers_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-54",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 531,
+      "column": 11,
+      "endLine": 531,
+      "endColumn": 20,
+      "start": 17645,
+      "end": 17654,
+      "kind": "string",
+      "original": "'draft-8'",
+      "replacement": "'draft-8_x'",
+      "description": "`case 'draft-8': { const retrieveName = …`: 'draft-8' → 'draft-8_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "draft-8"
+        ]
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-55",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 538,
+      "column": 13,
+      "endLine": 538,
+      "endColumn": 39,
+      "start": 17858,
+      "end": 17884,
+      "kind": "string",
+      "original": "'set ietf draft 8 headers'",
+      "replacement": "'set ietf draft 8 headers_x'",
+      "description": "`debug('set ietf draft 8 headers')`: 'set ietf draft 8 headers' → 'set ietf draft 8 headers_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-56",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 539,
+      "column": 13,
+      "endLine": 539,
+      "endColumn": 29,
+      "start": 17898,
+      "end": 17914,
+      "kind": "string",
+      "original": "'set name to %o'",
+      "replacement": "'set name to %o_x'",
+      "description": "`debug('set name to %o', name)`: 'set name to %o' → 'set name to %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-57",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 566,
+      "column": 13,
+      "endLine": 566,
+      "endColumn": 33,
+      "start": 18833,
+      "end": 18853,
+      "kind": "string",
+      "original": "'decrementing count'",
+      "replacement": "'decrementing count_x'",
+      "description": "`debug('decrementing count')`: 'decrementing count' → 'decrementing count_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-58",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 579,
+      "column": 14,
+      "endLine": 579,
+      "endColumn": 51,
+      "start": 19156,
+      "end": 19193,
+      "kind": "string",
+      "original": "'computed requestWasSuccessful as %o'",
+      "replacement": "'computed requestWasSuccessful as %o_x'",
+      "description": "`debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-59",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 608,
+      "column": 14,
+      "endLine": 608,
+      "endColumn": 51,
+      "start": 20054,
+      "end": 20091,
+      "kind": "string",
+      "original": "'computed requestWasSuccessful as %o'",
+      "replacement": "'computed requestWasSuccessful as %o_x'",
+      "description": "`debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-60",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 618,
+      "column": 11,
+      "endLine": 618,
+      "endColumn": 27,
+      "start": 20326,
+      "end": 20342,
+      "kind": "string",
+      "original": "'limit exceeded'",
+      "replacement": "'limit exceeded_x'",
+      "description": "`debug('limit exceeded')`: 'limit exceeded' → 'limit exceeded_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    },
+    {
+      "id": "value-61",
+      "unit": "rateLimit",
+      "file": "source/rate-limit.ts",
+      "line": 620,
+      "column": 12,
+      "endLine": 620,
+      "endColumn": 36,
+      "start": 20413,
+      "end": 20437,
+      "kind": "string",
+      "original": "'set retry-after header'",
+      "replacement": "'set retry-after header_x'",
+      "description": "`debug('set retry-after header')`: 'set retry-after header' → 'set retry-after header_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
+      ]
+    }
+  ]
+}

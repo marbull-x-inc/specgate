@@ -37,16 +37,30 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": [
+            {
+              "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+              "line": 48,
+              "endLine": 289,
+              "callers": []
+            }
+          ]
         },
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 39,
-          "endLine": 88
+          "endLine": 88,
+          "callers": []
         }
       ],
       "names": [
         "HotkeysContext"
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -67,16 +81,30 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": [
+            {
+              "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+              "line": 48,
+              "endLine": 289,
+              "callers": []
+            }
+          ]
         },
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 39,
-          "endLine": 88
+          "endLine": 88,
+          "callers": []
         }
       ],
       "names": [
         "HotkeysContext"
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -97,16 +125,30 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": [
+            {
+              "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+              "line": 48,
+              "endLine": 289,
+              "callers": []
+            }
+          ]
         },
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 39,
-          "endLine": 88
+          "endLine": 88,
+          "callers": []
         }
       ],
       "names": [
         "HotkeysContext"
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -127,16 +169,30 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": [
+            {
+              "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+              "line": 48,
+              "endLine": 289,
+              "callers": []
+            }
+          ]
         },
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 39,
-          "endLine": 88
+          "endLine": 88,
+          "callers": []
         }
       ],
       "names": [
         "HotkeysContext"
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -157,16 +213,30 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 26,
-          "endLine": 28
+          "endLine": 28,
+          "callers": [
+            {
+              "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+              "line": 48,
+              "endLine": 289,
+              "callers": []
+            }
+          ]
         },
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 39,
-          "endLine": 88
+          "endLine": 88,
+          "callers": []
         }
       ],
       "names": [
         "HotkeysContext"
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -187,8 +257,14 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 39,
-          "endLine": 88
+          "endLine": 88,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -209,8 +285,14 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 39,
-          "endLine": 88
+          "endLine": 88,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -231,8 +313,14 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
           "line": 39,
-          "endLine": 88
+          "endLine": 88,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -253,8 +341,29 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts",
           "line": 59,
-          "endLine": 63
+          "endLine": 63,
+          "callers": [
+            {
+              "file": "packages/react-hotkeys-hook/src/lib/validators.ts",
+              "line": 85,
+              "endLine": 159,
+              "callers": [
+                {
+                  "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+                  "line": 48,
+                  "endLine": 289,
+                  "callers": []
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -274,24 +383,15 @@
       "readers": [
         {
           "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 17,
-          "endLine": 21
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 27,
-          "endLine": 36
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
           "line": 48,
-          "endLine": 289
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 105,
-          "endLine": 208
+          "endLine": 289,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -311,24 +411,15 @@
       "readers": [
         {
           "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 17,
-          "endLine": 21
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 27,
-          "endLine": 36
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
           "line": 48,
-          "endLine": 289
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 105,
-          "endLine": 208
+          "endLine": 289,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -348,24 +439,15 @@
       "readers": [
         {
           "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 17,
-          "endLine": 21
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 27,
-          "endLine": 36
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
           "line": 48,
-          "endLine": 289
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 105,
-          "endLine": 208
+          "endLine": 289,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -385,24 +467,15 @@
       "readers": [
         {
           "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 17,
-          "endLine": 21
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 27,
-          "endLine": 36
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
           "line": 48,
-          "endLine": 289
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 105,
-          "endLine": 208
+          "endLine": 289,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -422,24 +495,15 @@
       "readers": [
         {
           "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 17,
-          "endLine": 21
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 27,
-          "endLine": 36
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
           "line": 48,
-          "endLine": 289
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 105,
-          "endLine": 208
+          "endLine": 289,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -459,24 +523,15 @@
       "readers": [
         {
           "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 17,
-          "endLine": 21
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 27,
-          "endLine": 36
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
           "line": 48,
-          "endLine": 289
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 105,
-          "endLine": 208
+          "endLine": 289,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -496,24 +551,15 @@
       "readers": [
         {
           "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 17,
-          "endLine": 21
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 27,
-          "endLine": 36
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
           "line": 48,
-          "endLine": 289
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 105,
-          "endLine": 208
+          "endLine": 289,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -533,24 +579,15 @@
       "readers": [
         {
           "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 17,
-          "endLine": 21
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 27,
-          "endLine": 36
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
           "line": 48,
-          "endLine": 289
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 105,
-          "endLine": 208
+          "endLine": 289,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -570,24 +607,15 @@
       "readers": [
         {
           "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 17,
-          "endLine": 21
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 27,
-          "endLine": 36
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
           "line": 48,
-          "endLine": 289
-        },
-        {
-          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
-          "line": 105,
-          "endLine": 208
+          "endLine": 289,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+        "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx"
       ]
     },
     {
@@ -608,8 +636,12 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts",
           "line": 12,
-          "endLine": 73
+          "endLine": 73,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx"
       ]
     },
     {
@@ -630,8 +662,12 @@
         {
           "file": "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts",
           "line": 12,
-          "endLine": 73
+          "endLine": 73,
+          "callers": []
         }
+      ],
+      "tests": [
+        "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx"
       ]
     }
   ]

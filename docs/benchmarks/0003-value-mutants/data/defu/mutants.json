@@ -28,13 +28,18 @@
         {
           "file": "src/defu.ts",
           "line": 5,
-          "endLine": 42
-        },
-        {
-          "file": "src/defu.ts",
-          "line": 49,
-          "endLine": 53
+          "endLine": 42,
+          "callers": [
+            {
+              "file": "src/defu.ts",
+              "line": 49,
+              "endLine": 53
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/defu.test.ts"
       ]
     },
     {
@@ -61,13 +66,18 @@
         {
           "file": "src/defu.ts",
           "line": 5,
-          "endLine": 42
-        },
-        {
-          "file": "src/defu.ts",
-          "line": 49,
-          "endLine": 53
+          "endLine": 42,
+          "callers": [
+            {
+              "file": "src/defu.ts",
+              "line": 49,
+              "endLine": 53
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/defu.test.ts"
       ]
     },
     {
@@ -94,13 +104,18 @@
         {
           "file": "src/defu.ts",
           "line": 5,
-          "endLine": 42
-        },
-        {
-          "file": "src/defu.ts",
-          "line": 49,
-          "endLine": 53
+          "endLine": 42,
+          "callers": [
+            {
+              "file": "src/defu.ts",
+              "line": 49,
+              "endLine": 53
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/defu.test.ts"
       ]
     }
   ]

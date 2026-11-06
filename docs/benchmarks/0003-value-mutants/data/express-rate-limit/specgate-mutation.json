@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-06T00:49:14.829Z",
+  "generatedAt": "2026-11-06T03:12:24.325Z",
   "root": "<work>/express-rate-limit",
   "revision": "b0d0c1f7cfaf44b8c73d6f82cbff0ce09bb3dffb",
   "configHash": "8ad07df10f4c021c",
@@ -4706,6 +4706,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "rateLimit: `debug('executing init for store')`: 'executing init for store' → 'executing init for store_x' survived; no linked test fails when the code changes like this",
+      "file": "source/rate-limit.ts",
+      "line": 377,
+      "unit": "rateLimit",
+      "mutant": {
+        "id": "2:value-33",
+        "mutator": "Value",
+        "replacement": "`debug('executing init for store')`: 'executing init for st…",
+        "status": "Survived",
+        "line": 377
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
       "file": "source/rate-limit.ts",
       "line": 409,
@@ -4827,21 +4842,6 @@
         "id": "1:248",
         "mutator": "StringLiteral",
         "replacement": "\"\"",
-        "status": "Survived",
-        "line": 417
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "rateLimit: `debug('request from ip %o', request.ip)`: 'request from ip %o' → 'request from ip %o_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 417,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-40",
-        "mutator": "Value",
-        "replacement": "`debug('request from ip %o', request.ip)`: 'request from ip…",
         "status": "Survived",
         "line": 417
       },

@@ -1,5 +1,5 @@
 mutants: 0 value change(s) in 0 file(s)
 wrote <work>/neverthrow/.specgate/mutants.json
-real 1.00
-user 2.93
-sys 0.14
+real 0.55
+user 1.64
+sys 0.08

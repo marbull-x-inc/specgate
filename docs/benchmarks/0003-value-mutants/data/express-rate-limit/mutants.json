@@ -31,11 +31,32 @@
         {
           "file": "source/ip-key-generator.ts",
           "line": 28,
-          "endLine": 64
+          "endLine": 64,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 156,
+              "endLine": 315,
+              "callers": [
+                {
+                  "file": "source/rate-limit.ts",
+                  "line": 355,
+                  "endLine": 651
+                }
+              ]
+            }
+          ]
         }
       ],
       "names": [
         "ipv4CompatibleSubnet"
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/ip-key-generator-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts",
+        "test/library/validation-test.ts"
       ]
     },
     {
@@ -56,8 +77,29 @@
         {
           "file": "source/ip-key-generator.ts",
           "line": 28,
-          "endLine": 64
+          "endLine": 64,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 156,
+              "endLine": 315,
+              "callers": [
+                {
+                  "file": "source/rate-limit.ts",
+                  "line": 355,
+                  "endLine": 651
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/ip-key-generator-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts",
+        "test/library/validation-test.ts"
       ]
     },
     {
@@ -77,39 +119,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -135,39 +159,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -193,39 +199,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -245,39 +233,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -297,39 +267,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -349,39 +301,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -401,39 +335,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -453,39 +369,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -505,39 +403,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -557,39 +437,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -609,39 +471,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -661,39 +505,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -713,39 +539,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -765,39 +573,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -817,39 +607,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -875,39 +647,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -933,39 +687,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -985,39 +721,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1043,39 +761,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1095,39 +795,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1147,39 +829,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1199,39 +863,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1251,39 +897,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1303,39 +931,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1361,39 +971,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1413,39 +1005,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1465,39 +1039,21 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 355,
-          "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
+          "endLine": 315,
+          "callers": [
+            {
+              "file": "source/rate-limit.ts",
+              "line": 355,
+              "endLine": 651
+            }
+          ]
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1517,39 +1073,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1569,39 +1100,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1621,39 +1127,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1673,39 +1154,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1731,39 +1187,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1783,39 +1214,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1841,39 +1247,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1899,39 +1280,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -1957,39 +1313,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2009,39 +1340,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2061,39 +1367,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2113,39 +1394,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2165,39 +1421,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2217,39 +1448,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2269,39 +1475,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2321,39 +1502,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2373,39 +1529,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2425,39 +1556,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2477,39 +1583,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2529,39 +1610,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2587,39 +1643,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2639,39 +1670,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2697,39 +1703,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2749,39 +1730,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2807,39 +1763,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2859,39 +1790,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2911,39 +1817,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -2963,39 +1844,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -3015,39 +1871,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -3067,39 +1898,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -3119,39 +1925,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     },
     {
@@ -3171,39 +1952,14 @@
       "readers": [
         {
           "file": "source/rate-limit.ts",
-          "line": 41,
-          "endLine": 45
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 54,
-          "endLine": 96
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 140,
-          "endLine": 147
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 156,
-          "endLine": 315
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 328,
-          "endLine": 335
-        },
-        {
-          "file": "source/rate-limit.ts",
           "line": 355,
           "endLine": 651
-        },
-        {
-          "file": "source/rate-limit.ts",
-          "line": 556,
-          "endLine": 570
         }
+      ],
+      "tests": [
+        "test/library/headers-test.ts",
+        "test/library/middleware-test.ts",
+        "test/library/options-test.ts"
       ]
     }
   ]

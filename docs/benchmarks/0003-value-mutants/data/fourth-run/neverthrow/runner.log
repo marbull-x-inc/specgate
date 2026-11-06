@@ -1,0 +1,6 @@
+baseline run 736 ms; whole-suite timeout 6104 ms alone
+value-mutants: 0 mutant(s): ; 939 ms (baseline run 736 ms)
+wrote <work>/neverthrow/reports/value/value.json
+real 1.00
+user 1.87
+sys 0.74

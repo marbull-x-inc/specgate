@@ -5,6 +5,6 @@ npm warn Unknown project config "min-release-age". This will stop working in the
 
  Test Files  5 passed (5)
       Tests  164 passed | 4 skipped (168)
-   Start at  09:46:53
-   Duration  17.17s (transform 407ms, setup 512ms, import 796ms, tests 16.30s, environment 3.48s)
+   Start at  12:09:45
+   Duration  17.07s (transform 386ms, setup 468ms, import 768ms, tests 16.18s, environment 3.71s)
 

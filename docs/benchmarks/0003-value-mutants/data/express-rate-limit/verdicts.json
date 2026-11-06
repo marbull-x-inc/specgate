@@ -74,9 +74,7 @@
     "expressedBy": [
       "216"
     ],
-    "status": "Survived",
-    "finalStatus": "Killed",
-    "note": "green in the first measurement, Killed in the final one; not counted (most likely a load-dependent test failure)"
+    "status": "Survived"
   },
   {
     "id": "value-38",
@@ -105,7 +103,9 @@
     "expressedBy": [
       "248"
     ],
-    "status": "Survived"
+    "status": "Survived",
+    "finalStatus": "Killed",
+    "note": "green in an earlier measurement, Killed in the final one although the change cannot fail a test; not counted (most likely a test that failed under load)"
   },
   {
     "id": "value-41",

@@ -74,6 +74,7 @@ specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
   ⚠️ [mutant-survived] source/rate-limit.ts:373 rateLimit: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:376 rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:377 rateLimit: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] source/rate-limit.ts:377 rateLimit: `debug('executing init for store')`: 'executing init for store' → 'executing init for store_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:409 rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [decision-unspecified] source/rate-limit.ts:410 rateLimit commits to output "finish" in `'finish'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
   ⚠️ [mutant-survived] source/rate-limit.ts:413 rateLimit: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
@@ -83,7 +84,6 @@ specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
   ⚠️ [mutant-survived] source/rate-limit.ts:416 rateLimit: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:416 rateLimit: `debug('requested %o', request.originalU…`: 'requested %o' → 'requested %o_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:417 rateLimit: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:417 rateLimit: `debug('request from ip %o', request.ip)`: 'request from ip %o' → 'request from ip %o_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:422 rateLimit: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:422 rateLimit: `debug('skipping request')`: 'skipping request' → 'skipping request_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:432 rateLimit: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this

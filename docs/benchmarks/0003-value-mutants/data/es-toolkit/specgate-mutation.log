@@ -1,5 +1,5 @@
 specgate check (advisory): 17 units, 75 guarantees, 152 linked tests
-  fail 24 · warn 32 · info 2
+  fail 24 · warn 33 · info 2
   ❌ [guarantee-no-test] src/string/camelCase.ts:21 camelCase.ok.mixed-case-kept has no test naming it
   ❌ [guarantee-no-test] src/string/capitalize.ts:16 capitalize.ok.only-first-word has no test naming it
   ❌ [guarantee-no-test] src/string/deburr.ts:60 deburr.ok.other-languages has no test naming it
@@ -26,6 +26,7 @@ specgate check (advisory): 17 units, 75 guarantees, 152 linked tests
   ❌ [guarantee-no-test] src/string/words.ts:41 words.ok.complex has no test naming it
   ⚠️ [decision-unspecified] src/string/deburr.ts:77 deburr commits to boundary "128" in `code < 0x80`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
   ⚠️ [mutant-survived] src/string/deburr.ts:77 deburr: BlockStatement mutant in a helper it calls (the boundary "128"): `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/string/deburr.ts:77 deburr: `code < 0x80`: 0x80 → 129 survived; no linked test fails when the code changes like this
   ⚠️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to boundary "563" in `code <= 0x233`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
   ⚠️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to boundary "7680" in `code >= 0x1e00`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
   ⚠️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to boundary "7929" in `code <= 0x1ef9`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right

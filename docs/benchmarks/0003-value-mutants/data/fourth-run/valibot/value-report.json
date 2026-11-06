@@ -1,0 +1,1761 @@
+{
+  "schemaVersion": "2",
+  "thresholds": {
+    "high": 80,
+    "low": 60
+  },
+  "projectRoot": "<work>/valibot",
+  "files": {
+    "library/src/actions/bytes/bytes.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue, _getByteCount } from '../../utils/index.ts';\n\n/**\n * Bytes issue interface.\n */\nexport interface BytesIssue<TInput extends string, TRequirement extends number>\n  extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'bytes';\n  /**\n   * The expected property.\n   */\n  readonly expected: `${TRequirement}`;\n  /**\n   * The received property.\n   */\n  readonly received: `${number}`;\n  /**\n   * The required bytes.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Bytes action interface.\n */\nexport interface BytesAction<\n  TInput extends string,\n  TRequirement extends number,\n  TMessage extends ErrorMessage<BytesIssue<TInput, TRequirement>> | undefined,\n> extends BaseValidation<TInput, TInput, BytesIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'bytes';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof bytes;\n  /**\n   * The expected property.\n   */\n  readonly expects: `${TRequirement}`;\n  /**\n   * The required bytes.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a [bytes](https://en.wikipedia.org/wiki/Byte) validation action.\n *\n * @param requirement The required bytes.\n *\n * @returns A bytes action.\n * @guarantee ok.exact-bytes `v.bytes(8)` on a string requires exactly 8 bytes.\n * @guarantee err.bytes-mismatch `v.bytes(8)` reports an issue for a string whose byte count is not 8, using `message` as the error message when given.\n */\nexport function bytes<TInput extends string, const TRequirement extends number>(\n  requirement: TRequirement\n): BytesAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a [bytes](https://en.wikipedia.org/wiki/Byte) validation action.\n *\n * @param requirement The required bytes.\n * @param message The error message.\n *\n * @returns A bytes action.\n */\nexport function bytes<\n  TInput extends string,\n  const TRequirement extends number,\n  const TMessage extends\n    | ErrorMessage<BytesIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): BytesAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function bytes(\n  requirement: number,\n  message?: ErrorMessage<BytesIssue<string, number>>\n): BytesAction<\n  string,\n  number,\n  ErrorMessage<BytesIssue<string, number>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'bytes',\n    reference: bytes,\n    async: false,\n    expects: `${requirement}`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed) {\n        const length = _getByteCount(dataset.value);\n        if (length !== this.requirement) {\n          _addIssue(this, 'bytes', dataset, config, {\n            received: `${length}`,\n          });\n        }\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-1",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 107,
+              "column": 11
+            },
+            "end": {
+              "line": 107,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "367",
+            "368",
+            "369",
+            "370",
+            "371"
+          ],
+          "duration": 3260
+        },
+        {
+          "id": "value-2",
+          "mutatorName": "Value",
+          "replacement": "`type` 'bytes' → 'bytes_x'",
+          "description": "`type` 'bytes' → 'bytes_x'",
+          "location": {
+            "start": {
+              "line": 108,
+              "column": 11
+            },
+            "end": {
+              "line": 108,
+              "column": 18
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "367",
+            "368",
+            "369",
+            "370",
+            "371"
+          ],
+          "duration": 3221
+        },
+        {
+          "id": "value-3",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'",
+          "description": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'",
+          "location": {
+            "start": {
+              "line": 118,
+              "column": 27
+            },
+            "end": {
+              "line": 118,
+              "column": 34
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "370",
+            "371"
+          ],
+          "duration": 3268
+        }
+      ]
+    },
+    "library/src/actions/empty/empty.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue } from '../../utils/index.ts';\nimport type { LengthInput } from '../types.ts';\n\n/**\n * Empty issue interface.\n */\nexport interface EmptyIssue<TInput extends LengthInput>\n  extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'empty';\n  /**\n   * The expected input.\n   */\n  readonly expected: '0';\n  /**\n   * The received input.\n   */\n  readonly received: `${number}`;\n}\n\n/**\n * Empty action interface.\n */\nexport interface EmptyAction<\n  TInput extends LengthInput,\n  TMessage extends ErrorMessage<EmptyIssue<TInput>> | undefined,\n> extends BaseValidation<TInput, TInput, EmptyIssue<TInput>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'empty';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof empty;\n  /**\n   * The expected property.\n   */\n  readonly expects: '0';\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates an empty validation action.\n *\n * @returns An empty action.\n * @guarantee ok.empty-string `v.empty()` on a string accepts only the empty string \"\".\n * @guarantee ok.empty-array `v.empty()` on an array accepts only an array with no items.\n * @guarantee err.not-empty `v.empty()` reports an issue for a non-empty string or array, using `message` as the error message when given.\n */\nexport function empty<TInput extends LengthInput>(): EmptyAction<\n  TInput,\n  undefined\n>;\n\n/**\n * Creates an empty validation action.\n *\n * @param message The error message.\n *\n * @returns An empty action.\n */\nexport function empty<\n  TInput extends LengthInput,\n  const TMessage extends ErrorMessage<EmptyIssue<TInput>> | undefined,\n>(message: TMessage): EmptyAction<TInput, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function empty(\n  message?: ErrorMessage<EmptyIssue<LengthInput>>\n): EmptyAction<LengthInput, ErrorMessage<EmptyIssue<LengthInput>> | undefined> {\n  return {\n    kind: 'validation',\n    type: 'empty',\n    reference: empty,\n    async: false,\n    expects: '0',\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && dataset.value.length > 0) {\n        _addIssue(this, 'length', dataset, config, {\n          received: `${dataset.value.length}`,\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-4",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 87,
+              "column": 11
+            },
+            "end": {
+              "line": 87,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "280",
+            "281",
+            "282",
+            "283",
+            "284"
+          ],
+          "duration": 3244
+        },
+        {
+          "id": "value-5",
+          "mutatorName": "Value",
+          "replacement": "`type` 'empty' → 'empty_x'",
+          "description": "`type` 'empty' → 'empty_x'",
+          "location": {
+            "start": {
+              "line": 88,
+              "column": 11
+            },
+            "end": {
+              "line": 88,
+              "column": 18
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "280",
+            "281",
+            "282",
+            "283",
+            "284"
+          ],
+          "duration": 3252
+        },
+        {
+          "id": "value-6",
+          "mutatorName": "Value",
+          "replacement": "`expects` '0' → '0_x'",
+          "description": "`expects` '0' → '0_x'",
+          "location": {
+            "start": {
+              "line": 91,
+              "column": 14
+            },
+            "end": {
+              "line": 91,
+              "column": 17
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "280",
+            "281",
+            "282",
+            "283",
+            "284"
+          ],
+          "duration": 3141
+        },
+        {
+          "id": "value-7",
+          "mutatorName": "Value",
+          "replacement": "`dataset.value.length > 0`: 0 → 1",
+          "description": "`dataset.value.length > 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 94,
+              "column": 51
+            },
+            "end": {
+              "line": 94,
+              "column": 52
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "280",
+            "281",
+            "282",
+            "283",
+            "284"
+          ],
+          "duration": 3291
+        },
+        {
+          "id": "value-8",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "location": {
+            "start": {
+              "line": 95,
+              "column": 25
+            },
+            "end": {
+              "line": 95,
+              "column": 33
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "283",
+            "284"
+          ],
+          "duration": 3252
+        }
+      ]
+    },
+    "library/src/actions/gtValue/gtValue.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue, _stringify } from '../../utils/index.ts';\nimport type { ValueInput } from '../types.ts';\n\n/**\n * Greater than value issue type.\n */\nexport interface GtValueIssue<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'gt_value';\n  /**\n   * The expected property.\n   */\n  readonly expected: `>${string}`;\n  /**\n   * The greater than value.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Greater than value action type.\n */\nexport interface GtValueAction<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n  TMessage extends ErrorMessage<GtValueIssue<TInput, TRequirement>> | undefined,\n> extends BaseValidation<TInput, TInput, GtValueIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'gt_value';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof gtValue;\n  /**\n   * The expected property.\n   */\n  readonly expects: `>${string}`;\n  /**\n   * The greater than value.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a greater than value validation action.\n *\n * @param requirement The greater than value.\n *\n * @returns A greater than value action.\n * @guarantee ok.greater-than-number `v.gtValue(100)` on a number requires a value greater than 100.\n * @guarantee err.not-greater `v.gtValue(100)` reports an issue for a number that is not greater than 100, using `message` as the error message when given.\n */\nexport function gtValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n>(requirement: TRequirement): GtValueAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a greater than value validation action.\n *\n * @param requirement The greater than value.\n * @param message The error message.\n *\n * @returns A greater than value action.\n */\nexport function gtValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n  const TMessage extends\n    | ErrorMessage<GtValueIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): GtValueAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function gtValue(\n  requirement: ValueInput,\n  message?: ErrorMessage<GtValueIssue<ValueInput, ValueInput>>\n): GtValueAction<\n  ValueInput,\n  ValueInput,\n  ErrorMessage<GtValueIssue<ValueInput, ValueInput>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'gt_value',\n    reference: gtValue,\n    async: false,\n    expects: `>${\n      requirement instanceof Date\n        ? requirement.toJSON()\n        : _stringify(requirement)\n    }`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && !(dataset.value > this.requirement)) {\n        _addIssue(this, 'value', dataset, config, {\n          received:\n            dataset.value instanceof Date\n              ? dataset.value.toJSON()\n              : _stringify(dataset.value),\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-9",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 107,
+              "column": 11
+            },
+            "end": {
+              "line": 107,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"
+          ],
+          "duration": 3304
+        },
+        {
+          "id": "value-10",
+          "mutatorName": "Value",
+          "replacement": "`type` 'gt_value' → 'gt_value_x'",
+          "description": "`type` 'gt_value' → 'gt_value_x'",
+          "location": {
+            "start": {
+              "line": 108,
+              "column": 11
+            },
+            "end": {
+              "line": 108,
+              "column": 21
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"
+          ],
+          "duration": 3265
+        },
+        {
+          "id": "value-11",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "location": {
+            "start": {
+              "line": 120,
+              "column": 25
+            },
+            "end": {
+              "line": 120,
+              "column": 32
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"
+          ],
+          "duration": 3261
+        }
+      ]
+    },
+    "library/src/actions/length/length.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue } from '../../utils/index.ts';\nimport type { LengthInput } from '../types.ts';\n\n/**\n * Length issue interface.\n */\nexport interface LengthIssue<\n  TInput extends LengthInput,\n  TRequirement extends number,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'length';\n  /**\n   * The expected property.\n   */\n  readonly expected: `${TRequirement}`;\n  /**\n   * The received property.\n   */\n  readonly received: `${number}`;\n  /**\n   * The required length.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Length action interface.\n */\nexport interface LengthAction<\n  TInput extends LengthInput,\n  TRequirement extends number,\n  TMessage extends ErrorMessage<LengthIssue<TInput, TRequirement>> | undefined,\n> extends BaseValidation<TInput, TInput, LengthIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'length';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof length;\n  /**\n   * The expected property.\n   */\n  readonly expects: `${TRequirement}`;\n  /**\n   * The required length.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a length validation action.\n *\n * @param requirement The required length.\n *\n * @returns A length action.\n * @guarantee ok.string-length `v.length(8)` on a string requires a length of 8 UTF-16 code units.\n * @guarantee ok.array-length `v.length(100)` on an array requires exactly 100 items.\n * @guarantee err.length-mismatch `v.length(8)` reports an issue for a string whose length is not 8, using `message` as the error message when given.\n */\nexport function length<\n  TInput extends LengthInput,\n  const TRequirement extends number,\n>(requirement: TRequirement): LengthAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a length validation action.\n *\n * @param requirement The required length.\n * @param message The error message.\n *\n * @returns A length action.\n */\nexport function length<\n  TInput extends LengthInput,\n  const TRequirement extends number,\n  const TMessage extends\n    | ErrorMessage<LengthIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): LengthAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function length(\n  requirement: number,\n  message?: ErrorMessage<LengthIssue<LengthInput, number>>\n): LengthAction<\n  LengthInput,\n  number,\n  ErrorMessage<LengthIssue<LengthInput, number>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'length',\n    reference: length,\n    async: false,\n    expects: `${requirement}`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && dataset.value.length !== this.requirement) {\n        _addIssue(this, 'length', dataset, config, {\n          received: `${dataset.value.length}`,\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-12",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 112,
+              "column": 11
+            },
+            "end": {
+              "line": 112,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "149",
+            "150",
+            "151",
+            "152",
+            "153"
+          ],
+          "duration": 3301
+        },
+        {
+          "id": "value-13",
+          "mutatorName": "Value",
+          "replacement": "`type` 'length' → 'length_x'",
+          "description": "`type` 'length' → 'length_x'",
+          "location": {
+            "start": {
+              "line": 113,
+              "column": 11
+            },
+            "end": {
+              "line": 113,
+              "column": 19
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "149",
+            "150",
+            "151",
+            "152",
+            "153"
+          ],
+          "duration": 3339
+        },
+        {
+          "id": "value-14",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "location": {
+            "start": {
+              "line": 121,
+              "column": 25
+            },
+            "end": {
+              "line": 121,
+              "column": 33
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "152",
+            "153"
+          ],
+          "duration": 3414
+        }
+      ]
+    },
+    "library/src/actions/ltValue/ltValue.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue, _stringify } from '../../utils/index.ts';\nimport type { ValueInput } from '../types.ts';\n\n/**\n * Less than value issue type.\n */\nexport interface LtValueIssue<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'lt_value';\n  /**\n   * The expected property.\n   */\n  readonly expected: `<${string}`;\n  /**\n   * The less than value.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Less than value action type.\n */\nexport interface LtValueAction<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n  TMessage extends ErrorMessage<LtValueIssue<TInput, TRequirement>> | undefined,\n> extends BaseValidation<TInput, TInput, LtValueIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'lt_value';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof ltValue;\n  /**\n   * The expected property.\n   */\n  readonly expects: `<${string}`;\n  /**\n   * The less than value.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a less than value validation action.\n *\n * @param requirement The less than value.\n *\n * @returns A less than value action.\n * @guarantee ok.less-than-number `v.ltValue(100)` on a number requires a value less than 100.\n * @guarantee err.not-less `v.ltValue(100)` reports an issue for a number that is not less than 100, using `message` as the error message when given.\n */\nexport function ltValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n>(requirement: TRequirement): LtValueAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a less than value validation action.\n *\n * @param requirement The less than value.\n * @param message The error message.\n *\n * @returns A less than value action.\n */\nexport function ltValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n  const TMessage extends\n    | ErrorMessage<LtValueIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): LtValueAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function ltValue(\n  requirement: ValueInput,\n  message?: ErrorMessage<LtValueIssue<ValueInput, ValueInput>>\n): LtValueAction<\n  ValueInput,\n  ValueInput,\n  ErrorMessage<LtValueIssue<ValueInput, ValueInput>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'lt_value',\n    reference: ltValue,\n    async: false,\n    expects: `<${\n      requirement instanceof Date\n        ? requirement.toJSON()\n        : _stringify(requirement)\n    }`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && !(dataset.value < this.requirement)) {\n        _addIssue(this, 'value', dataset, config, {\n          received:\n            dataset.value instanceof Date\n              ? dataset.value.toJSON()\n              : _stringify(dataset.value),\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-15",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 107,
+              "column": 11
+            },
+            "end": {
+              "line": 107,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "74",
+            "75",
+            "76",
+            "77",
+            "78",
+            "79",
+            "80",
+            "81",
+            "82",
+            "83",
+            "84",
+            "85",
+            "86",
+            "87",
+            "88",
+            "89",
+            "90",
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97"
+          ],
+          "duration": 3436
+        },
+        {
+          "id": "value-16",
+          "mutatorName": "Value",
+          "replacement": "`type` 'lt_value' → 'lt_value_x'",
+          "description": "`type` 'lt_value' → 'lt_value_x'",
+          "location": {
+            "start": {
+              "line": 108,
+              "column": 11
+            },
+            "end": {
+              "line": 108,
+              "column": 21
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "74",
+            "75",
+            "76",
+            "77",
+            "78",
+            "79",
+            "80",
+            "81",
+            "82",
+            "83",
+            "84",
+            "85",
+            "86",
+            "87",
+            "88",
+            "89",
+            "90",
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97"
+          ],
+          "duration": 3432
+        },
+        {
+          "id": "value-17",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "location": {
+            "start": {
+              "line": 120,
+              "column": 25
+            },
+            "end": {
+              "line": 120,
+              "column": 32
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "88",
+            "89",
+            "90",
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97"
+          ],
+          "duration": 3458
+        }
+      ]
+    },
+    "library/src/actions/maxLength/maxLength.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue } from '../../utils/index.ts';\nimport type { LengthInput } from '../types.ts';\n\n/**\n * Max length issue interface.\n */\nexport interface MaxLengthIssue<\n  TInput extends LengthInput,\n  TRequirement extends number,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'max_length';\n  /**\n   * The expected property.\n   */\n  readonly expected: `<=${TRequirement}`;\n  /**\n   * The received property.\n   */\n  readonly received: `${number}`;\n  /**\n   * The maximum length.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Max length action interface.\n */\nexport interface MaxLengthAction<\n  TInput extends LengthInput,\n  TRequirement extends number,\n  TMessage extends\n    | ErrorMessage<MaxLengthIssue<TInput, TRequirement>>\n    | undefined,\n> extends BaseValidation<TInput, TInput, MaxLengthIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'max_length';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof maxLength;\n  /**\n   * The expected property.\n   */\n  readonly expects: `<=${TRequirement}`;\n  /**\n   * The maximum length.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a max length validation action.\n *\n * @param requirement The maximum length.\n *\n * @returns A max length action.\n * @guarantee ok.max-string `v.maxLength(32)` on a string measures its length in UTF-16 code units and allows a length of at most 32.\n * @guarantee ok.max-array `v.maxLength(5)` on an array counts the items and allows at most 5 items.\n * @guarantee err.max-string-long `v.maxLength(32)` reports an issue for a string longer than 32 UTF-16 code units, using `message` as the error message when given.\n */\nexport function maxLength<\n  TInput extends LengthInput,\n  const TRequirement extends number,\n>(requirement: TRequirement): MaxLengthAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a max length validation action.\n *\n * @param requirement The maximum length.\n * @param message The error message.\n *\n * @returns A max length action.\n */\nexport function maxLength<\n  TInput extends LengthInput,\n  const TRequirement extends number,\n  const TMessage extends\n    | ErrorMessage<MaxLengthIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): MaxLengthAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function maxLength(\n  requirement: number,\n  message?: ErrorMessage<MaxLengthIssue<LengthInput, number>>\n): MaxLengthAction<\n  LengthInput,\n  number,\n  ErrorMessage<MaxLengthIssue<LengthInput, number>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'max_length',\n    reference: maxLength,\n    async: false,\n    expects: `<=${requirement}`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && dataset.value.length > this.requirement) {\n        _addIssue(this, 'length', dataset, config, {\n          received: `${dataset.value.length}`,\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-18",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 114,
+              "column": 11
+            },
+            "end": {
+              "line": 114,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "325",
+            "327",
+            "339",
+            "391",
+            "392",
+            "393",
+            "394",
+            "395"
+          ],
+          "duration": 16585
+        },
+        {
+          "id": "value-19",
+          "mutatorName": "Value",
+          "replacement": "`type` 'max_length' → 'max_length_x'",
+          "description": "`type` 'max_length' → 'max_length_x'",
+          "location": {
+            "start": {
+              "line": 115,
+              "column": 11
+            },
+            "end": {
+              "line": 115,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "325",
+            "327",
+            "339",
+            "391",
+            "392",
+            "393",
+            "394",
+            "395"
+          ],
+          "duration": 16708
+        },
+        {
+          "id": "value-20",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "location": {
+            "start": {
+              "line": 123,
+              "column": 25
+            },
+            "end": {
+              "line": 123,
+              "column": 33
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "325",
+            "327",
+            "339",
+            "394",
+            "395"
+          ],
+          "duration": 16848
+        }
+      ]
+    },
+    "library/src/actions/maxValue/maxValue.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue, _stringify } from '../../utils/index.ts';\nimport type { ValueInput } from '../types.ts';\n\n/**\n * Max value issue interface.\n */\nexport interface MaxValueIssue<\n  TInput extends ValueInput,\n  TRequirement extends ValueInput,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'max_value';\n  /**\n   * The expected property.\n   */\n  readonly expected: `<=${string}`;\n  /**\n   * The maximum value.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Max value action interface.\n */\nexport interface MaxValueAction<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n  TMessage extends\n    | ErrorMessage<MaxValueIssue<TInput, TRequirement>>\n    | undefined,\n> extends BaseValidation<TInput, TInput, MaxValueIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'max_value';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof maxValue;\n  /**\n   * The expected property.\n   */\n  readonly expects: `<=${string}`;\n  /**\n   * The maximum value.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a max value validation action.\n *\n * @param requirement The maximum value.\n *\n * @returns A max value action.\n * @guarantee ok.max-number `v.maxValue(100)` on a number allows a value of at most 100, that is it must not exceed 100.\n * @guarantee err.max-number-above `v.maxValue(100)` reports an issue for a number above 100, using `message` as the error message when given.\n */\nexport function maxValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n>(requirement: TRequirement): MaxValueAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a max value validation action.\n *\n * @param requirement The maximum value.\n * @param message The error message.\n *\n * @returns A max value action.\n */\nexport function maxValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n  const TMessage extends\n    | ErrorMessage<MaxValueIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): MaxValueAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function maxValue(\n  requirement: ValueInput,\n  message?: ErrorMessage<MaxValueIssue<ValueInput, ValueInput>>\n): MaxValueAction<\n  ValueInput,\n  ValueInput,\n  ErrorMessage<MaxValueIssue<ValueInput, ValueInput>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'max_value',\n    reference: maxValue,\n    async: false,\n    expects: `<=${\n      requirement instanceof Date\n        ? requirement.toJSON()\n        : _stringify(requirement)\n    }`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && !(dataset.value <= this.requirement)) {\n        _addIssue(this, 'value', dataset, config, {\n          received:\n            dataset.value instanceof Date\n              ? dataset.value.toJSON()\n              : _stringify(dataset.value),\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-21",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 109,
+              "column": 11
+            },
+            "end": {
+              "line": 109,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "122",
+            "123",
+            "124",
+            "125",
+            "126",
+            "127",
+            "128",
+            "129",
+            "130",
+            "131",
+            "132",
+            "133",
+            "134",
+            "135",
+            "136",
+            "137",
+            "138",
+            "139",
+            "140",
+            "141",
+            "142",
+            "143",
+            "144",
+            "145"
+          ],
+          "duration": 5382
+        },
+        {
+          "id": "value-22",
+          "mutatorName": "Value",
+          "replacement": "`type` 'max_value' → 'max_value_x'",
+          "description": "`type` 'max_value' → 'max_value_x'",
+          "location": {
+            "start": {
+              "line": 110,
+              "column": 11
+            },
+            "end": {
+              "line": 110,
+              "column": 22
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "122",
+            "123",
+            "124",
+            "125",
+            "126",
+            "127",
+            "128",
+            "129",
+            "130",
+            "131",
+            "132",
+            "133",
+            "134",
+            "135",
+            "136",
+            "137",
+            "138",
+            "139",
+            "140",
+            "141",
+            "142",
+            "143",
+            "144",
+            "145"
+          ],
+          "duration": 5390
+        },
+        {
+          "id": "value-23",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "location": {
+            "start": {
+              "line": 122,
+              "column": 25
+            },
+            "end": {
+              "line": 122,
+              "column": 32
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "136",
+            "137",
+            "138",
+            "139",
+            "140",
+            "141",
+            "142",
+            "143",
+            "144",
+            "145"
+          ],
+          "duration": 5361
+        }
+      ]
+    },
+    "library/src/actions/minBytes/minBytes.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue, _getByteCount } from '../../utils/index.ts';\n\n/**\n * Min bytes issue interface.\n */\nexport interface MinBytesIssue<\n  TInput extends string,\n  TRequirement extends number,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'min_bytes';\n  /**\n   * The expected property.\n   */\n  readonly expected: `>=${TRequirement}`;\n  /**\n   * The received property.\n   */\n  readonly received: `${number}`;\n  /**\n   * The minimum bytes.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Min bytes action interface.\n */\nexport interface MinBytesAction<\n  TInput extends string,\n  TRequirement extends number,\n  TMessage extends\n    | ErrorMessage<MinBytesIssue<TInput, TRequirement>>\n    | undefined,\n> extends BaseValidation<TInput, TInput, MinBytesIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'min_bytes';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof minBytes;\n  /**\n   * The expected property.\n   */\n  readonly expects: `>=${TRequirement}`;\n  /**\n   * The minimum bytes.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a min [bytes](https://en.wikipedia.org/wiki/Byte) validation action.\n *\n * @param requirement The minimum bytes.\n *\n * @returns A min bytes action.\n * @guarantee ok.min-bytes `v.minBytes(64)` on a string requires a minimum of 64 bytes.\n * @guarantee err.too-few-bytes `v.minBytes(64)` reports an issue for a string with fewer than 64 bytes, using `message` as the error message when given.\n */\nexport function minBytes<\n  TInput extends string,\n  const TRequirement extends number,\n>(requirement: TRequirement): MinBytesAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a min [bytes](https://en.wikipedia.org/wiki/Byte) validation action.\n *\n * @param requirement The minimum bytes.\n * @param message The error message.\n *\n * @returns A min bytes action.\n */\nexport function minBytes<\n  TInput extends string,\n  const TRequirement extends number,\n  const TMessage extends\n    | ErrorMessage<MinBytesIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): MinBytesAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function minBytes(\n  requirement: number,\n  message?: ErrorMessage<MinBytesIssue<string, number>>\n): MinBytesAction<\n  string,\n  number,\n  ErrorMessage<MinBytesIssue<string, number>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'min_bytes',\n    reference: minBytes,\n    async: false,\n    expects: `>=${requirement}`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed) {\n        const length = _getByteCount(dataset.value);\n        if (length < this.requirement) {\n          _addIssue(this, 'bytes', dataset, config, {\n            received: `${length}`,\n          });\n        }\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-24",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 112,
+              "column": 11
+            },
+            "end": {
+              "line": 112,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "435",
+            "436",
+            "437",
+            "438",
+            "439"
+          ],
+          "duration": 5316
+        },
+        {
+          "id": "value-25",
+          "mutatorName": "Value",
+          "replacement": "`type` 'min_bytes' → 'min_bytes_x'",
+          "description": "`type` 'min_bytes' → 'min_bytes_x'",
+          "location": {
+            "start": {
+              "line": 113,
+              "column": 11
+            },
+            "end": {
+              "line": 113,
+              "column": 22
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "435",
+            "436",
+            "437",
+            "438",
+            "439"
+          ],
+          "duration": 5311
+        },
+        {
+          "id": "value-26",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'",
+          "description": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'",
+          "location": {
+            "start": {
+              "line": 123,
+              "column": 27
+            },
+            "end": {
+              "line": 123,
+              "column": 34
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "438",
+            "439"
+          ],
+          "duration": 5298
+        }
+      ]
+    },
+    "library/src/actions/minLength/minLength.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue } from '../../utils/index.ts';\nimport type { LengthInput } from '../types.ts';\n\n/**\n * Min length issue interface.\n */\nexport interface MinLengthIssue<\n  TInput extends LengthInput,\n  TRequirement extends number,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'min_length';\n  /**\n   * The expected property.\n   */\n  readonly expected: `>=${TRequirement}`;\n  /**\n   * The received property.\n   */\n  readonly received: `${number}`;\n  /**\n   * The minimum length.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Min length action interface.\n */\nexport interface MinLengthAction<\n  TInput extends LengthInput,\n  TRequirement extends number,\n  TMessage extends\n    | ErrorMessage<MinLengthIssue<TInput, TRequirement>>\n    | undefined,\n> extends BaseValidation<TInput, TInput, MinLengthIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'min_length';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof minLength;\n  /**\n   * The expected property.\n   */\n  readonly expects: `>=${TRequirement}`;\n  /**\n   * The minimum length.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a min length validation action.\n *\n * @param requirement The minimum length.\n *\n * @returns A min length action.\n * @guarantee ok.min-string `v.minLength(3)` on a string measures its length like JavaScript's `value.length` (UTF-16 code units) and requires a length of at least 3.\n * @guarantee ok.min-array `v.minLength(5)` on an array counts the items and requires at least 5 items.\n * @guarantee err.min-string-short `v.minLength(3)` reports an issue for a string with fewer than 3 UTF-16 code units, using `message` as the error message when given.\n */\nexport function minLength<\n  TInput extends LengthInput,\n  const TRequirement extends number,\n>(requirement: TRequirement): MinLengthAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a min length validation action.\n *\n * @param requirement The minimum length.\n * @param message The error message.\n *\n * @returns A min length action.\n */\nexport function minLength<\n  TInput extends LengthInput,\n  const TRequirement extends number,\n  const TMessage extends\n    | ErrorMessage<MinLengthIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): MinLengthAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function minLength(\n  requirement: number,\n  message?: ErrorMessage<MinLengthIssue<LengthInput, number>>\n): MinLengthAction<\n  LengthInput,\n  number,\n  ErrorMessage<MinLengthIssue<LengthInput, number>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'min_length',\n    reference: minLength,\n    async: false,\n    expects: `>=${requirement}`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && dataset.value.length < this.requirement) {\n        _addIssue(this, 'length', dataset, config, {\n          received: `${dataset.value.length}`,\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-27",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 114,
+              "column": 11
+            },
+            "end": {
+              "line": 114,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "158",
+            "160",
+            "236",
+            "237",
+            "243",
+            "245",
+            "261",
+            "274",
+            "275",
+            "319",
+            "320",
+            "321",
+            "322",
+            "323",
+            "324",
+            "333",
+            "334",
+            "335",
+            "336",
+            "337",
+            "338",
+            "353",
+            "354",
+            "360",
+            "399",
+            "400",
+            "401",
+            "402",
+            "403",
+            "466",
+            "467",
+            "477",
+            "478",
+            "501",
+            "502"
+          ],
+          "duration": 17401
+        },
+        {
+          "id": "value-28",
+          "mutatorName": "Value",
+          "replacement": "`type` 'min_length' → 'min_length_x'",
+          "description": "`type` 'min_length' → 'min_length_x'",
+          "location": {
+            "start": {
+              "line": 115,
+              "column": 11
+            },
+            "end": {
+              "line": 115,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "158",
+            "160",
+            "236",
+            "237",
+            "243",
+            "245",
+            "261",
+            "274",
+            "275",
+            "319",
+            "320",
+            "321",
+            "322",
+            "323",
+            "324",
+            "333",
+            "334",
+            "335",
+            "336",
+            "337",
+            "338",
+            "353",
+            "354",
+            "360",
+            "399",
+            "400",
+            "401",
+            "402",
+            "403",
+            "466",
+            "467",
+            "477",
+            "478",
+            "501",
+            "502"
+          ],
+          "duration": 17204
+        },
+        {
+          "id": "value-29",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "location": {
+            "start": {
+              "line": 123,
+              "column": 25
+            },
+            "end": {
+              "line": 123,
+              "column": 33
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "158",
+            "160",
+            "236",
+            "237",
+            "243",
+            "245",
+            "261",
+            "274",
+            "275",
+            "320",
+            "321",
+            "322",
+            "323",
+            "324",
+            "334",
+            "335",
+            "336",
+            "337",
+            "338",
+            "354",
+            "360",
+            "402",
+            "403",
+            "467",
+            "478",
+            "502"
+          ],
+          "duration": 17168
+        }
+      ]
+    },
+    "library/src/actions/minValue/minValue.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue, _stringify } from '../../utils/index.ts';\nimport type { ValueInput } from '../types.ts';\n\n/**\n * Min value issue interface.\n */\nexport interface MinValueIssue<\n  TInput extends ValueInput,\n  TRequirement extends ValueInput,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'min_value';\n  /**\n   * The expected property.\n   */\n  readonly expected: `>=${string}`;\n  /**\n   * The minimum value.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Min value action interface.\n */\nexport interface MinValueAction<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n  TMessage extends\n    | ErrorMessage<MinValueIssue<TInput, TRequirement>>\n    | undefined,\n> extends BaseValidation<TInput, TInput, MinValueIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'min_value';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof minValue;\n  /**\n   * The expected property.\n   */\n  readonly expects: `>=${string}`;\n  /**\n   * The minimum value.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a min value validation action.\n *\n * @param requirement The minimum value.\n *\n * @returns A min value action.\n * @guarantee ok.min-number `v.minValue(100)` on a number requires a value of at least 100.\n * @guarantee err.min-number-below `v.minValue(100)` reports an issue for a number below 100, using `message` as the error message when given.\n */\nexport function minValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n>(requirement: TRequirement): MinValueAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a min value validation action.\n *\n * @param requirement The minimum value.\n * @param message The error message.\n *\n * @returns A min value action.\n */\nexport function minValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n  const TMessage extends\n    | ErrorMessage<MinValueIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): MinValueAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function minValue(\n  requirement: ValueInput,\n  message?: ErrorMessage<MinValueIssue<ValueInput, ValueInput>>\n): MinValueAction<\n  ValueInput,\n  ValueInput,\n  ErrorMessage<MinValueIssue<ValueInput, ValueInput>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'min_value',\n    reference: minValue,\n    async: false,\n    expects: `>=${\n      requirement instanceof Date\n        ? requirement.toJSON()\n        : _stringify(requirement)\n    }`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && !(dataset.value >= this.requirement)) {\n        _addIssue(this, 'value', dataset, config, {\n          received:\n            dataset.value instanceof Date\n              ? dataset.value.toJSON()\n              : _stringify(dataset.value),\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-30",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 109,
+              "column": 11
+            },
+            "end": {
+              "line": 109,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "236",
+            "237",
+            "274",
+            "330",
+            "331"
+          ],
+          "duration": 15832
+        },
+        {
+          "id": "value-31",
+          "mutatorName": "Value",
+          "replacement": "`type` 'min_value' → 'min_value_x'",
+          "description": "`type` 'min_value' → 'min_value_x'",
+          "location": {
+            "start": {
+              "line": 110,
+              "column": 11
+            },
+            "end": {
+              "line": 110,
+              "column": 22
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "236",
+            "237",
+            "274",
+            "330",
+            "331"
+          ],
+          "duration": 12710
+        },
+        {
+          "id": "value-32",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "location": {
+            "start": {
+              "line": 122,
+              "column": 25
+            },
+            "end": {
+              "line": 122,
+              "column": 32
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "236",
+            "237",
+            "274",
+            "331"
+          ],
+          "duration": 14393
+        }
+      ]
+    },
+    "library/src/actions/multipleOf/multipleOf.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue } from '../../utils/index.ts';\n\n/**\n * Input type\n */\ntype Input = number | bigint;\n\n/**\n * Multiple of issue interface.\n */\nexport interface MultipleOfIssue<\n  TInput extends Input,\n  TRequirement extends Input,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'multiple_of';\n  /**\n   * The expected property.\n   */\n  readonly expected: `%${TRequirement}`;\n  /**\n   * The received property.\n   */\n  readonly received: `${TInput}`;\n  /**\n   * The divisor.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Multiple of action interface.\n */\nexport interface MultipleOfAction<\n  TInput extends Input,\n  TRequirement extends Input,\n  TMessage extends\n    | ErrorMessage<MultipleOfIssue<TInput, TRequirement>>\n    | undefined,\n> extends BaseValidation<\n    TInput,\n    TInput,\n    MultipleOfIssue<TInput, TRequirement>\n  > {\n  /**\n   * The action type.\n   */\n  readonly type: 'multiple_of';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof multipleOf;\n  /**\n   * The expected property.\n   */\n  readonly expects: `%${TRequirement}`;\n  /**\n   * The divisor.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a [multiple](https://en.wikipedia.org/wiki/Multiple_(mathematics)) of validation action.\n *\n * @param requirement The divisor.\n *\n * @returns A multiple of action.\n * @guarantee ok.even-number `v.multipleOf(2)` on a number accepts even numbers.\n * @guarantee err.not-multiple `v.multipleOf(2)` reports an issue for an odd number, using `message` as the error message when given.\n */\nexport function multipleOf<\n  TInput extends number,\n  const TRequirement extends number,\n>(requirement: TRequirement): MultipleOfAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a [multiple](https://en.wikipedia.org/wiki/Multiple_(mathematics)) of validation action.\n *\n * @param requirement The divisor.\n *\n * @returns A multiple of action.\n */\nexport function multipleOf<\n  TInput extends bigint,\n  const TRequirement extends bigint,\n>(requirement: TRequirement): MultipleOfAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a [multiple](https://en.wikipedia.org/wiki/Multiple_(mathematics)) of validation action.\n *\n * @param requirement The divisor.\n * @param message The error message.\n *\n * @returns A multiple of action.\n */\nexport function multipleOf<\n  TInput extends number,\n  const TRequirement extends number,\n  const TMessage extends\n    | ErrorMessage<MultipleOfIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): MultipleOfAction<TInput, TRequirement, TMessage>;\n\n/**\n * Creates a [multiple](https://en.wikipedia.org/wiki/Multiple_(mathematics)) of validation action.\n *\n * @param requirement The divisor.\n * @param message The error message.\n *\n * @returns A multiple of action.\n */\nexport function multipleOf<\n  TInput extends bigint,\n  const TRequirement extends bigint,\n  const TMessage extends\n    | ErrorMessage<MultipleOfIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): MultipleOfAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function multipleOf(\n  requirement: Input,\n  message?: ErrorMessage<MultipleOfIssue<Input, Input>>\n): MultipleOfAction<\n  Input,\n  Input,\n  ErrorMessage<MultipleOfIssue<Input, Input>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'multiple_of',\n    reference: multipleOf,\n    async: false,\n    expects: `%${requirement}`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      // @ts-expect-error\n      if (dataset.typed && dataset.value % this.requirement != 0) {\n        _addIssue(this, 'multiple', dataset, config);\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-33",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 152,
+              "column": 11
+            },
+            "end": {
+              "line": 152,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "247",
+            "248",
+            "249",
+            "250",
+            "251",
+            "252",
+            "253",
+            "254",
+            "255",
+            "256"
+          ],
+          "duration": 7184
+        },
+        {
+          "id": "value-34",
+          "mutatorName": "Value",
+          "replacement": "`type` 'multiple_of' → 'multiple_of_x'",
+          "description": "`type` 'multiple_of' → 'multiple_of_x'",
+          "location": {
+            "start": {
+              "line": 153,
+              "column": 11
+            },
+            "end": {
+              "line": 153,
+              "column": 24
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "247",
+            "248",
+            "249",
+            "250",
+            "251",
+            "252",
+            "253",
+            "254",
+            "255",
+            "256"
+          ],
+          "duration": 7210
+        },
+        {
+          "id": "value-35",
+          "mutatorName": "Value",
+          "replacement": "`dataset.value % this.requirement != 0`: 0 → 1",
+          "description": "`dataset.value % this.requirement != 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 161,
+              "column": 64
+            },
+            "end": {
+              "line": 161,
+              "column": 65
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "250",
+            "251",
+            "252",
+            "253",
+            "254",
+            "255",
+            "256"
+          ],
+          "duration": 7179
+        },
+        {
+          "id": "value-36",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'multiple', dataset, co…`: 'multiple' → 'multiple_x'",
+          "description": "`_addIssue(this, 'multiple', dataset, co…`: 'multiple' → 'multiple_x'",
+          "location": {
+            "start": {
+              "line": 162,
+              "column": 25
+            },
+            "end": {
+              "line": 162,
+              "column": 35
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "253",
+            "254",
+            "255",
+            "256"
+          ],
+          "duration": 7402
+        }
+      ]
+    },
+    "library/src/actions/nonEmpty/nonEmpty.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue } from '../../utils/index.ts';\nimport type { LengthInput } from '../types.ts';\n\n/**\n * Non empty issue interface.\n */\nexport interface NonEmptyIssue<TInput extends LengthInput>\n  extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'non_empty';\n  /**\n   * The expected input.\n   */\n  readonly expected: '!0';\n  /**\n   * The received input.\n   */\n  readonly received: '0';\n}\n\n/**\n * Non empty action interface.\n */\nexport interface NonEmptyAction<\n  TInput extends LengthInput,\n  TMessage extends ErrorMessage<NonEmptyIssue<TInput>> | undefined,\n> extends BaseValidation<TInput, TInput, NonEmptyIssue<TInput>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'non_empty';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof nonEmpty;\n  /**\n   * The expected property.\n   */\n  readonly expects: '!0';\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a non-empty validation action.\n *\n * @returns A non-empty action.\n * @guarantee ok.non-empty-string `v.nonEmpty()` on a string requires at least one character.\n * @guarantee ok.non-empty-array `v.nonEmpty()` on an array requires at least one item.\n * @guarantee err.empty-input `v.nonEmpty()` reports an issue for an empty string or an empty array, using `message` as the error message when given.\n */\nexport function nonEmpty<TInput extends LengthInput>(): NonEmptyAction<\n  TInput,\n  undefined\n>;\n\n/**\n * Creates a non-empty validation action.\n *\n * @param message The error message.\n *\n * @returns A non-empty action.\n */\nexport function nonEmpty<\n  TInput extends LengthInput,\n  const TMessage extends ErrorMessage<NonEmptyIssue<TInput>> | undefined,\n>(message: TMessage): NonEmptyAction<TInput, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function nonEmpty(\n  message?: ErrorMessage<NonEmptyIssue<LengthInput>>\n): NonEmptyAction<\n  LengthInput,\n  ErrorMessage<NonEmptyIssue<LengthInput>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'non_empty',\n    reference: nonEmpty,\n    async: false,\n    expects: '!0',\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && dataset.value.length === 0) {\n        _addIssue(this, 'length', dataset, config, {\n          received: '0',\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-37",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 90,
+              "column": 11
+            },
+            "end": {
+              "line": 90,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "483",
+            "484",
+            "485",
+            "486",
+            "487"
+          ],
+          "duration": 7420
+        },
+        {
+          "id": "value-38",
+          "mutatorName": "Value",
+          "replacement": "`type` 'non_empty' → 'non_empty_x'",
+          "description": "`type` 'non_empty' → 'non_empty_x'",
+          "location": {
+            "start": {
+              "line": 91,
+              "column": 11
+            },
+            "end": {
+              "line": 91,
+              "column": 22
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "483",
+            "484",
+            "485",
+            "486",
+            "487"
+          ],
+          "duration": 7360
+        },
+        {
+          "id": "value-39",
+          "mutatorName": "Value",
+          "replacement": "`expects` '!0' → '!0_x'",
+          "description": "`expects` '!0' → '!0_x'",
+          "location": {
+            "start": {
+              "line": 94,
+              "column": 14
+            },
+            "end": {
+              "line": 94,
+              "column": 18
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "483",
+            "484",
+            "485",
+            "486",
+            "487"
+          ],
+          "duration": 2692
+        },
+        {
+          "id": "value-40",
+          "mutatorName": "Value",
+          "replacement": "`dataset.value.length === 0`: 0 → 1",
+          "description": "`dataset.value.length === 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 97,
+              "column": 53
+            },
+            "end": {
+              "line": 97,
+              "column": 54
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "483",
+            "484",
+            "485",
+            "486",
+            "487"
+          ],
+          "duration": 2797
+        },
+        {
+          "id": "value-41",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "location": {
+            "start": {
+              "line": 98,
+              "column": 25
+            },
+            "end": {
+              "line": 98,
+              "column": 33
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "486",
+            "487"
+          ],
+          "duration": 2735
+        },
+        {
+          "id": "value-42",
+          "mutatorName": "Value",
+          "replacement": "`received` '0' → '0_x'",
+          "description": "`received` '0' → '0_x'",
+          "location": {
+            "start": {
+              "line": 99,
+              "column": 21
+            },
+            "end": {
+              "line": 99,
+              "column": 24
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "486",
+            "487"
+          ],
+          "duration": 2634
+        }
+      ]
+    },
+    "library/src/actions/notLength/notLength.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue } from '../../utils/index.ts';\nimport type { LengthInput } from '../types.ts';\n\n/**\n * Not length issue interface.\n */\nexport interface NotLengthIssue<\n  TInput extends LengthInput,\n  TRequirement extends number,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'not_length';\n  /**\n   * The expected property.\n   */\n  readonly expected: `!${TRequirement}`;\n  /**\n   * The received property.\n   */\n  readonly received: `${TRequirement}`;\n  /**\n   * The not required length.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Not length action interface.\n */\nexport interface NotLengthAction<\n  TInput extends LengthInput,\n  TRequirement extends number,\n  TMessage extends\n    | ErrorMessage<NotLengthIssue<TInput, TRequirement>>\n    | undefined,\n> extends BaseValidation<TInput, TInput, NotLengthIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'not_length';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof notLength;\n  /**\n   * The expected property.\n   */\n  readonly expects: `!${TRequirement}`;\n  /**\n   * The not required length.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a not length validation action.\n *\n * @param requirement The not required length.\n *\n * @returns A not length action.\n * @guarantee ok.string-not-length `v.notLength(8)` on a string accepts any length other than 8.\n * @guarantee ok.array-not-length `v.notLength(10)` on an array accepts any item count other than 10.\n * @guarantee err.length-equal `v.notLength(8)` reports an issue for a string of length 8, using `message` as the error message when given.\n */\nexport function notLength<\n  TInput extends LengthInput,\n  const TRequirement extends number,\n>(requirement: TRequirement): NotLengthAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a not length validation action.\n *\n * @param requirement The not required length.\n * @param message The error message.\n *\n * @returns A not length action.\n */\nexport function notLength<\n  TInput extends LengthInput,\n  const TRequirement extends number,\n  const TMessage extends\n    | ErrorMessage<NotLengthIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): NotLengthAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function notLength(\n  requirement: number,\n  message?: ErrorMessage<NotLengthIssue<LengthInput, number>>\n): NotLengthAction<\n  LengthInput,\n  number,\n  ErrorMessage<NotLengthIssue<LengthInput, number>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'not_length',\n    reference: notLength,\n    async: false,\n    expects: `!${requirement}`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && dataset.value.length === this.requirement) {\n        _addIssue(this, 'length', dataset, config, {\n          received: `${dataset.value.length}`,\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-43",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 114,
+              "column": 11
+            },
+            "end": {
+              "line": 114,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "344",
+            "345",
+            "346",
+            "347",
+            "348"
+          ],
+          "duration": 4914
+        },
+        {
+          "id": "value-44",
+          "mutatorName": "Value",
+          "replacement": "`type` 'not_length' → 'not_length_x'",
+          "description": "`type` 'not_length' → 'not_length_x'",
+          "location": {
+            "start": {
+              "line": 115,
+              "column": 11
+            },
+            "end": {
+              "line": 115,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "344",
+            "345",
+            "346",
+            "347",
+            "348"
+          ],
+          "duration": 4872
+        },
+        {
+          "id": "value-45",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+          "location": {
+            "start": {
+              "line": 123,
+              "column": 25
+            },
+            "end": {
+              "line": 123,
+              "column": 33
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "347",
+            "348"
+          ],
+          "duration": 2505
+        }
+      ]
+    },
+    "library/src/actions/notValue/notValue.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue, _isValueMatch, _stringify } from '../../utils/index.ts';\nimport type { ValueInput } from '../types.ts';\n\n/**\n * Not value issue interface.\n */\nexport interface NotValueIssue<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'not_value';\n  /**\n   * The expected property.\n   */\n  readonly expected: `!${string}`;\n  /**\n   * The not required value.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Not value action interface.\n */\nexport interface NotValueAction<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n  TMessage extends\n    | ErrorMessage<NotValueIssue<TInput, TRequirement>>\n    | undefined,\n> extends BaseValidation<TInput, TInput, NotValueIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'not_value';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof notValue;\n  /**\n   * The expected property.\n   */\n  readonly expects: `!${string}`;\n  /**\n   * The not required value.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a not value validation action.\n *\n * @param requirement The not required value.\n *\n * @returns A not value action.\n * @guarantee ok.not-number `v.notValue(100)` on a number accepts every value that is more or less than 100.\n * @guarantee err.value-equal `v.notValue(100)` reports an issue for the number 100, using `message` as the error message when given.\n */\nexport function notValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n>(requirement: TRequirement): NotValueAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a not value validation action.\n *\n * @param requirement The not required value.\n * @param message The error message.\n *\n * @returns A not value action.\n */\nexport function notValue<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n  const TMessage extends\n    | ErrorMessage<NotValueIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): NotValueAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function notValue(\n  requirement: ValueInput,\n  message?: ErrorMessage<NotValueIssue<ValueInput, ValueInput>>\n): NotValueAction<\n  ValueInput,\n  ValueInput,\n  ErrorMessage<NotValueIssue<ValueInput, ValueInput>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'not_value',\n    reference: notValue,\n    async: false,\n    expects:\n      requirement instanceof Date\n        ? `!${requirement.toJSON()}`\n        : `!${_stringify(requirement)}`,\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && _isValueMatch(this.requirement, dataset.value)) {\n        _addIssue(this, 'value', dataset, config, {\n          received:\n            dataset.value instanceof Date\n              ? dataset.value.toJSON()\n              : _stringify(dataset.value),\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-46",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 109,
+              "column": 11
+            },
+            "end": {
+              "line": 109,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48"
+          ],
+          "duration": 3530
+        },
+        {
+          "id": "value-47",
+          "mutatorName": "Value",
+          "replacement": "`type` 'not_value' → 'not_value_x'",
+          "description": "`type` 'not_value' → 'not_value_x'",
+          "location": {
+            "start": {
+              "line": 110,
+              "column": 11
+            },
+            "end": {
+              "line": 110,
+              "column": 22
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48"
+          ],
+          "duration": 3499
+        },
+        {
+          "id": "value-48",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "location": {
+            "start": {
+              "line": 121,
+              "column": 25
+            },
+            "end": {
+              "line": 121,
+              "column": 32
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48"
+          ],
+          "duration": 3426
+        }
+      ]
+    },
+    "library/src/actions/value/value.ts": {
+      "language": "typescript",
+      "source": "import type {\n  BaseIssue,\n  BaseValidation,\n  ErrorMessage,\n} from '../../types/index.ts';\nimport { _addIssue, _isValueMatch, _stringify } from '../../utils/index.ts';\nimport type { ValueInput } from '../types.ts';\n\n/**\n * Value issue interface.\n */\nexport interface ValueIssue<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n> extends BaseIssue<TInput> {\n  /**\n   * The issue kind.\n   */\n  readonly kind: 'validation';\n  /**\n   * The issue type.\n   */\n  readonly type: 'value';\n  /**\n   * The expected property.\n   */\n  readonly expected: string;\n  /**\n   * The required value.\n   */\n  readonly requirement: TRequirement;\n}\n\n/**\n * Value action interface.\n */\nexport interface ValueAction<\n  TInput extends ValueInput,\n  TRequirement extends TInput,\n  TMessage extends ErrorMessage<ValueIssue<TInput, TRequirement>> | undefined,\n> extends BaseValidation<TInput, TInput, ValueIssue<TInput, TRequirement>> {\n  /**\n   * The action type.\n   */\n  readonly type: 'value';\n  /**\n   * The action reference.\n   */\n  readonly reference: typeof value;\n  /**\n   * The expected property.\n   */\n  readonly expects: string;\n  /**\n   * The required value.\n   */\n  readonly requirement: TRequirement;\n  /**\n   * The error message.\n   */\n  readonly message: TMessage;\n}\n\n/**\n * Creates a value validation action.\n *\n * @param requirement The required value.\n *\n * @returns A value action.\n * @guarantee ok.exact-number `v.value(100)` on a number requires the value to be 100.\n * @guarantee err.value-differs `v.value(100)` reports an issue for a number other than 100, using `message` as the error message when given.\n * @guarantee ok.type-unchanged `v.value` does not change the type of the pipeline.\n */\nexport function value<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n>(requirement: TRequirement): ValueAction<TInput, TRequirement, undefined>;\n\n/**\n * Creates a value validation action.\n *\n * @param requirement The required value.\n * @param message The error message.\n *\n * @returns A value action.\n */\nexport function value<\n  TInput extends ValueInput,\n  const TRequirement extends TInput,\n  const TMessage extends\n    | ErrorMessage<ValueIssue<TInput, TRequirement>>\n    | undefined,\n>(\n  requirement: TRequirement,\n  message: TMessage\n): ValueAction<TInput, TRequirement, TMessage>;\n\n// @__NO_SIDE_EFFECTS__\nexport function value(\n  requirement: ValueInput,\n  message?: ErrorMessage<ValueIssue<ValueInput, ValueInput>>\n): ValueAction<\n  ValueInput,\n  ValueInput,\n  ErrorMessage<ValueIssue<ValueInput, ValueInput>> | undefined\n> {\n  return {\n    kind: 'validation',\n    type: 'value',\n    reference: value,\n    async: false,\n    expects:\n      requirement instanceof Date\n        ? requirement.toJSON()\n        : _stringify(requirement),\n    requirement,\n    message,\n    '~run'(dataset, config) {\n      if (dataset.typed && !_isValueMatch(this.requirement, dataset.value)) {\n        _addIssue(this, 'value', dataset, config, {\n          received:\n            dataset.value instanceof Date\n              ? dataset.value.toJSON()\n              : _stringify(dataset.value),\n        });\n      }\n      return dataset;\n    },\n  };\n}\n",
+      "mutants": [
+        {
+          "id": "value-49",
+          "mutatorName": "Value",
+          "replacement": "`kind` 'validation' → 'validation_x'",
+          "description": "`kind` 'validation' → 'validation_x'",
+          "location": {
+            "start": {
+              "line": 108,
+              "column": 11
+            },
+            "end": {
+              "line": 108,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69",
+            "70",
+            "71",
+            "72",
+            "73"
+          ],
+          "duration": 2988
+        },
+        {
+          "id": "value-50",
+          "mutatorName": "Value",
+          "replacement": "`type` 'value' → 'value_x'",
+          "description": "`type` 'value' → 'value_x'",
+          "location": {
+            "start": {
+              "line": 109,
+              "column": 11
+            },
+            "end": {
+              "line": 109,
+              "column": 18
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69",
+            "70",
+            "71",
+            "72",
+            "73"
+          ],
+          "duration": 3002
+        },
+        {
+          "id": "value-51",
+          "mutatorName": "Value",
+          "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+          "location": {
+            "start": {
+              "line": 120,
+              "column": 25
+            },
+            "end": {
+              "line": 120,
+              "column": 32
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "64",
+            "65",
+            "66",
+            "67",
+            "68",
+            "69",
+            "70",
+            "71",
+            "72",
+            "73"
+          ],
+          "duration": 2461
+        }
+      ]
+    }
+  }
+}

@@ -1,5 +1,5 @@
 specgate check (advisory): 6 units, 33 guarantees, 1213 linked tests
-  fail 4 · warn 110 · info 1
+  fail 4 · warn 111 · info 1
   ❌ [guarantee-no-test] src/useFormContext.tsx:24 useFormContext.ok.returns-methods has no test naming it
   ❌ [guarantee-no-test] src/useFormContext.tsx:26 useFormContext.err.no-provider has no test naming it
   ❌ [operation-no-guarantee] src/useFormContext.tsx:52 FormProvider has no guarantee (doc without @guarantee / @throws)
@@ -109,6 +109,7 @@ specgate check (advisory): 6 units, 33 guarantees, 1213 linked tests
   ⚠️ [mutant-survived] src/useForm.ts:24 useForm: `criteriaMode: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useForm.ts:25 useForm: `delayError: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useForm.ts:26 useForm: `shouldUnregister: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useForm.ts:27 useForm: `shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useForm.ts:28 useForm: `context: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useWatch.ts:217 useWatch: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useWatch.ts:250 useWatch: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this

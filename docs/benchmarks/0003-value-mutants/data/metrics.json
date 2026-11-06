@@ -26,28 +26,28 @@
       }
     },
     "C2": {
-      "green": 109,
-      "reviewed": 109,
-      "real": 97,
-      "equivalent": 12,
-      "share": 0.8899082568807339,
+      "green": 111,
+      "reviewed": 111,
+      "real": 98,
+      "equivalent": 13,
+      "share": 0.8828828828828829,
       "holds": true,
       "excludingCategories": {
-        "real": 66,
-        "equivalent": 12,
-        "share": 0.8461538461538461
+        "real": 67,
+        "equivalent": 13,
+        "share": 0.8375
       }
     },
     "C3": {
       "strykerSeconds": 1261.9899999999998,
-      "runnerSeconds": 943.2499999999999,
-      "ratio": 0.7474306452507548,
+      "runnerSeconds": 612.85,
+      "ratio": 0.48562191459520293,
       "holds": true
     },
     "totals": {
       "valueMutants": 379,
-      "realNotExpressed": 36,
-      "holeSitesNotExpressed": 29,
+      "realNotExpressed": 37,
+      "holeSitesNotExpressed": 30,
       "namedByGuarantee": 26
     }
   },
@@ -63,13 +63,13 @@
         "entry": 10
       },
       "status": {
-        "Killed": 109,
-        "Survived": 4
+        "Killed": 108,
+        "Survived": 5
       },
-      "green": 4,
-      "reviewed": 4,
+      "green": 5,
+      "reviewed": 5,
       "real": 1,
-      "equivalent": 3,
+      "equivalent": 4,
       "realNotExpressed": 0,
       "holeSites": 1,
       "holeSitesNotExpressed": 0,
@@ -96,12 +96,12 @@
       "strykerSurvivedOrNoCoverage": 7,
       "seconds": {
         "stryker": 61.92,
-        "runner": 151.43,
-        "mutants": 1.88
+        "runner": 42.73,
+        "mutants": 1.9
       },
       "runnerConcurrency": 15,
-      "valueFindings": 4,
-      "valueFindingsWithUnit": 4
+      "valueFindings": 5,
+      "valueFindingsWithUnit": 5
     },
     {
       "name": "defu",
@@ -145,7 +145,7 @@
       "strykerSurvivedOrNoCoverage": 14,
       "seconds": {
         "stryker": 5.91,
-        "runner": 1.75,
+        "runner": 1.77,
         "mutants": 0.48
       },
       "runnerConcurrency": 15,
@@ -193,8 +193,8 @@
       "strykerSurvivedOrNoCoverage": 15,
       "seconds": {
         "stryker": 88.52,
-        "runner": 49.58,
-        "mutants": 1.32
+        "runner": 42.26,
+        "mutants": 1.66
       },
       "runnerConcurrency": 15,
       "valueFindings": 13,
@@ -244,8 +244,8 @@
       "strykerSurvivedOrNoCoverage": 115,
       "seconds": {
         "stryker": 97.57,
-        "runner": 119.69,
-        "mutants": 1.24
+        "runner": 25.18,
+        "mutants": 0.77
       },
       "runnerConcurrency": 15,
       "valueFindings": 10,
@@ -287,8 +287,8 @@
       "strykerSurvivedOrNoCoverage": 5,
       "seconds": {
         "stryker": 8.17,
-        "runner": 1.59,
-        "mutants": 1
+        "runner": 1,
+        "mutants": 0.55
       },
       "runnerConcurrency": 15,
       "valueFindings": 0,
@@ -338,8 +338,8 @@
       "strykerSurvivedOrNoCoverage": 99,
       "seconds": {
         "stryker": 120.97,
-        "runner": 31.26,
-        "mutants": 1.18
+        "runner": 18.51,
+        "mutants": 0.86
       },
       "runnerConcurrency": 15,
       "valueFindings": 18,
@@ -355,17 +355,16 @@
         "number": 5
       },
       "status": {
-        "Killed": 35,
-        "Survived": 15,
-        "Timeout": 3
+        "Killed": 37,
+        "Survived": 16
       },
-      "green": 15,
-      "reviewed": 15,
-      "real": 14,
+      "green": 16,
+      "reviewed": 16,
+      "real": 15,
       "equivalent": 1,
-      "realNotExpressed": 14,
-      "holeSites": 10,
-      "holeSitesNotExpressed": 10,
+      "realNotExpressed": 15,
+      "holeSites": 11,
+      "holeSitesNotExpressed": 11,
       "categories": {
         "nodeEnvSwitch": {
           "real": 0,
@@ -391,12 +390,12 @@
       "strykerSurvivedOrNoCoverage": 96,
       "seconds": {
         "stryker": 599.18,
-        "runner": 464.29,
-        "mutants": 1.59
+        "runner": 342.14,
+        "mutants": 1.43
       },
       "runnerConcurrency": 15,
-      "valueFindings": 15,
-      "valueFindingsWithUnit": 15
+      "valueFindings": 16,
+      "valueFindingsWithUnit": 16
     },
     {
       "name": "react-hotkeys-hook",
@@ -442,8 +441,8 @@
       "strykerSurvivedOrNoCoverage": 120,
       "seconds": {
         "stryker": 202.97,
-        "runner": 59.03,
-        "mutants": 0.54
+        "runner": 60.67,
+        "mutants": 0.61
       },
       "runnerConcurrency": 15,
       "valueFindings": 7,
@@ -494,8 +493,8 @@
       "strykerSurvivedOrNoCoverage": 86,
       "seconds": {
         "stryker": 66.54,
-        "runner": 58.12,
-        "mutants": 0.68
+        "runner": 72.08,
+        "mutants": 0.86
       },
       "runnerConcurrency": 15,
       "valueFindings": 27,
@@ -545,7 +544,7 @@
       "seconds": {
         "stryker": 10.24,
         "runner": 6.51,
-        "mutants": 0.53
+        "mutants": 0.67
       },
       "runnerConcurrency": 15,
       "valueFindings": 9,

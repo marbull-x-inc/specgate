@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "2",
+  "thresholds": {
+    "high": 80,
+    "low": 60
+  },
+  "projectRoot": "<work>/defu",
+  "files": {
+    "src/defu.ts": {
+      "language": "typescript",
+      "source": "import { isPlainObject } from \"./_utils\";\nimport type { Merger, DefuFn as DefuFunction, DefuInstance } from \"./types\";\n\n// Base function to apply defaults\nfunction _defu<T>(baseObject: T, defaults: any, namespace = \".\", merger?: Merger): T {\n  if (!isPlainObject(defaults)) {\n    return _defu(baseObject, {}, namespace, merger);\n  }\n\n  const object = { ...defaults };\n\n  for (const key of Object.keys(baseObject as Record<string, any>)) {\n    if (key === \"__proto__\" || key === \"constructor\") {\n      continue;\n    }\n\n    const value = (baseObject as Record<string, any>)[key];\n\n    if (value === null || value === undefined) {\n      continue;\n    }\n\n    if (merger && merger(object, key, value, namespace)) {\n      continue;\n    }\n\n    if (Array.isArray(value) && Array.isArray(object[key])) {\n      object[key] = [...value, ...object[key]];\n    } else if (isPlainObject(value) && isPlainObject(object[key])) {\n      object[key] = _defu(\n        value,\n        object[key],\n        (namespace ? `${namespace}.` : \"\") + key.toString(),\n        merger,\n      );\n    } else {\n      object[key] = value;\n    }\n  }\n\n  return object;\n}\n\n// Create defu wrapper with optional merger and multi arg support\n/**\n * @guarantee ok.custom-merger The `merger` function accepts `obj` (the source object), `key` and `value` (the current value) and returns `true` when it applied a custom merge.\n * @guarantee ok.sum-example A function created with `createDefu` whose merger adds numbers gives 25 for \"cost\" in `ext({ cost: 15 }, { cost: 10 })`.\n */\nexport function createDefu(merger?: Merger): DefuFunction {\n  return (...arguments_) =>\n    // eslint-disable-next-line unicorn/no-array-reduce\n    arguments_.reduce((p, c) => _defu(p, c, \"\", merger), {} as any);\n}\n\n// Standard version\n/**\n * @guarantee ok.nested-defaults \"defu({ a: { b: 2 } }, { a: { b: 1, c: 3 } })\" gives \"{ a: { b: 2, c: 3 } }\".\n * @guarantee ok.leftmost-priority The leftmost arguments have more priority when assigning defaults.\n * @guarantee ok.array-concat \"defu({ array: [\"b\", \"c\"] }, { array: [\"a\"] })\" gives \"{ array: [\"b\", \"c\", \"a\"] }\", so array values are concatenated with the object's items first when the default property is defined.\n * @guarantee ok.no-mutation The `object` and the `defaults` arguments are not modified.\n * @guarantee ok.skip-nullish Nullish values (`null` and `undefined`) are skipped.\n * @guarantee ok.skip-proto-keys Assignment of the \"__proto__\" and \"constructor\" keys is skipped to prevent object pollution.\n */\nexport const defu = createDefu() as DefuInstance;\nexport default defu;\n\n// Custom version with function merge support\n/**\n * @guarantee ok.function-called-with-default If the user provides a function for a key, it is called with the default value instead of being merged.\n * @guarantee ok.fn-example \"defuFn\" with `ignore` as a filter dropping \"dist\" and `count` as `count + 20`, over defaults `ignore` [\"node_modules\", \"dist\"] and `count` 10, gives `ignore` [\"node_modules\"] and `count` 30.\n * @guarantee ok.fn-undefined-default If the default value is not defined, the function is not called and is kept as the value.\n */\nexport const defuFn = createDefu((object, key, currentValue) => {\n  if (object[key] !== undefined && typeof currentValue === \"function\") {\n    object[key] = currentValue(object[key]);\n    return true;\n  }\n});\n\n// Custom version with function merge support only for defined arrays\n/**\n * @guarantee ok.array-only A function is called only when the value defined in the defaults is an array.\n * @guarantee ok.array-fn-example \"defuArrayFn\" with `ignore` as a filter dropping \"dist\" over the default [\"node_modules\", \"dist\"] gives `ignore` [\"node_modules\"].\n * @guarantee ok.non-array-kept With `count` as a function and the default `count` 10 (not an array), the function is not called and is kept as the value.\n */\nexport const defuArrayFn = createDefu((object, key, currentValue) => {\n  if (Array.isArray(object[key]) && typeof currentValue === \"function\") {\n    object[key] = currentValue(object[key]);\n    return true;\n  }\n});\n\nexport type { Defu, DefuFn, DefuInstance } from \"./types\";\n",
+      "mutants": [
+        {
+          "id": "value-1",
+          "mutatorName": "Value",
+          "replacement": "the default `namespace` \".\" → \"._x\"",
+          "description": "the default `namespace` \".\" → \"._x\"",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 61
+            },
+            "end": {
+              "line": 5,
+              "column": 64
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 4
+        },
+        {
+          "id": "value-2",
+          "mutatorName": "Value",
+          "replacement": "`key === \"__proto__\"`: \"__proto__\" → \"__proto___x\"",
+          "description": "`key === \"__proto__\"`: \"__proto__\" → \"__proto___x\"",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 17
+            },
+            "end": {
+              "line": 13,
+              "column": 28
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20"
+          ],
+          "duration": 1028
+        },
+        {
+          "id": "value-3",
+          "mutatorName": "Value",
+          "replacement": "`key === \"constructor\"`: \"constructor\" → \"constructor_x\"",
+          "description": "`key === \"constructor\"`: \"constructor\" → \"constructor_x\"",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 40
+            },
+            "end": {
+              "line": 13,
+              "column": 53
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20"
+          ],
+          "duration": 1024
+        }
+      ]
+    }
+  }
+}

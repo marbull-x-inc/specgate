@@ -4,9 +4,7 @@
     "status": "Survived",
     "verdict": "equivalent",
     "reason": "U+0080 now skips the early return, but it is not a combining mark, not in deburrMap and not a Latin letter, so it is returned unchanged either way",
-    "expressedBy": null,
-    "finalStatus": "Killed",
-    "note": "green in the first measurement, Killed in the final one; not counted (most likely a load-dependent test failure)"
+    "expressedBy": null
   },
   {
     "id": "value-69",

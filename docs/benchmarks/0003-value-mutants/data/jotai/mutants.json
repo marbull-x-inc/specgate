@@ -52,8 +52,13 @@
         {
           "file": "src/vanilla/utils/atomWithDefault.ts",
           "line": 19,
-          "endLine": 47
+          "endLine": 47,
+          "callers": []
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+        "tests/vanilla/utils/atomWithDefault.test.ts"
       ]
     },
     {
@@ -74,8 +79,12 @@
         {
           "file": "src/vanilla/utils/atomWithLazy.ts",
           "line": 9,
-          "endLine": 20
+          "endLine": 20,
+          "callers": []
         }
+      ],
+      "tests": [
+        "tests/vanilla/utils/atomWithLazy.test.ts"
       ]
     },
     {
@@ -95,9 +104,25 @@
       "readers": [
         {
           "file": "src/vanilla/utils/atomWithRefresh.ts",
-          "line": 19,
-          "endLine": 51
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
       ]
     },
     {
@@ -123,9 +148,25 @@
       "readers": [
         {
           "file": "src/vanilla/utils/atomWithRefresh.ts",
-          "line": 19,
-          "endLine": 51
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
       ]
     },
     {
@@ -145,9 +186,25 @@
       "readers": [
         {
           "file": "src/vanilla/utils/atomWithRefresh.ts",
-          "line": 19,
-          "endLine": 51
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
       ]
     },
     {
@@ -167,9 +224,25 @@
       "readers": [
         {
           "file": "src/vanilla/utils/atomWithRefresh.ts",
-          "line": 19,
-          "endLine": 51
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
       ]
     },
     {
@@ -189,9 +262,25 @@
       "readers": [
         {
           "file": "src/vanilla/utils/atomWithRefresh.ts",
-          "line": 19,
-          "endLine": 51
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
       ]
     },
     {
@@ -211,24 +300,46 @@
       "readers": [
         {
           "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 5,
-          "endLine": 6
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 93,
-          "endLine": 197
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 126,
-          "endLine": 137
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 153,
-          "endLine": 163
+          "line": 105,
+          "endLine": 197,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 93,
+              "endLine": 93
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 95,
+              "endLine": 98
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 100,
+              "endLine": 103
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 227,
+              "endLine": 278,
+              "callers": [
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 209,
+                  "endLine": 218
+                },
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 220,
+                  "endLine": 225
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx"
       ]
     },
     {
@@ -248,24 +359,46 @@
       "readers": [
         {
           "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 5,
-          "endLine": 6
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 93,
-          "endLine": 197
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 126,
-          "endLine": 137
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 153,
-          "endLine": 163
+          "line": 105,
+          "endLine": 197,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 93,
+              "endLine": 93
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 95,
+              "endLine": 98
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 100,
+              "endLine": 103
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 227,
+              "endLine": 278,
+              "callers": [
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 209,
+                  "endLine": 218
+                },
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 220,
+                  "endLine": 225
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx"
       ]
     },
     {
@@ -285,24 +418,46 @@
       "readers": [
         {
           "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 5,
-          "endLine": 6
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 93,
-          "endLine": 197
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 126,
-          "endLine": 137
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 153,
-          "endLine": 163
+          "line": 105,
+          "endLine": 197,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 93,
+              "endLine": 93
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 95,
+              "endLine": 98
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 100,
+              "endLine": 103
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 227,
+              "endLine": 278,
+              "callers": [
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 209,
+                  "endLine": 218
+                },
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 220,
+                  "endLine": 225
+                }
+              ]
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx"
       ]
     },
     {
@@ -328,14 +483,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 5,
-          "endLine": 6
-        },
-        {
-          "file": "src/vanilla/utils/atomWithStorage.ts",
-          "line": 209,
-          "endLine": 278
+          "line": 227,
+          "endLine": 278,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 209,
+              "endLine": 218
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 220,
+              "endLine": 225
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx"
       ]
     },
     {
@@ -356,22 +521,37 @@
         {
           "file": "src/react/utils/useResetAtom.ts",
           "line": 13,
-          "endLine": 20
+          "endLine": 20,
+          "callers": []
         },
         {
           "file": "src/vanilla/utils/atomWithDefault.ts",
           "line": 19,
-          "endLine": 47
+          "endLine": 47,
+          "callers": []
         },
         {
           "file": "src/vanilla/utils/atomWithReset.ts",
           "line": 18,
-          "endLine": 35
+          "endLine": 35,
+          "callers": []
         },
         {
           "file": "src/vanilla/utils/atomWithStorage.ts",
           "line": 227,
-          "endLine": 278
+          "endLine": 278,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 209,
+              "endLine": 218
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 220,
+              "endLine": 225
+            }
+          ]
         }
       ],
       "names": [
@@ -403,22 +583,37 @@
         {
           "file": "src/react/utils/useResetAtom.ts",
           "line": 13,
-          "endLine": 20
+          "endLine": 20,
+          "callers": []
         },
         {
           "file": "src/vanilla/utils/atomWithDefault.ts",
           "line": 19,
-          "endLine": 47
+          "endLine": 47,
+          "callers": []
         },
         {
           "file": "src/vanilla/utils/atomWithReset.ts",
           "line": 18,
-          "endLine": 35
+          "endLine": 35,
+          "callers": []
         },
         {
           "file": "src/vanilla/utils/atomWithStorage.ts",
           "line": 227,
-          "endLine": 278
+          "endLine": 278,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 209,
+              "endLine": 218
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 220,
+              "endLine": 225
+            }
+          ]
         }
       ],
       "names": [
@@ -449,34 +644,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -496,34 +681,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -543,34 +718,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -590,34 +755,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -643,34 +798,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -696,34 +841,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -743,34 +878,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -790,34 +915,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -837,34 +952,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -890,34 +995,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -937,34 +1032,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -984,34 +1069,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -1037,34 +1112,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -1084,34 +1149,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -1131,34 +1186,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -1178,34 +1223,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -1225,34 +1260,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -1272,34 +1297,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -1319,34 +1334,24 @@
       "readers": [
         {
           "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 11,
-          "endLine": 12
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 14,
-          "endLine": 17
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 20,
-          "endLine": 23
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 25,
-          "endLine": 26
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 46,
-          "endLine": 221
-        },
-        {
-          "file": "src/vanilla/utils/splitAtom.ts",
-          "line": 69,
-          "endLine": 141
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
       ]
     },
     {
@@ -1366,24 +1371,35 @@
       "readers": [
         {
           "file": "src/vanilla/utils/unwrap.ts",
-          "line": 4,
-          "endLine": 5
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 7,
-          "endLine": 10
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 12,
-          "endLine": 13
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 22,
-          "endLine": 144
+          "line": 40,
+          "endLine": 144,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 22,
+              "endLine": 24
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 26,
+              "endLine": 29
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 31,
+              "endLine": 33
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 35,
+              "endLine": 38
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/vanilla/utils/types.test.tsx",
+        "tests/vanilla/utils/unwrap.test.ts"
       ]
     },
     {
@@ -1403,24 +1419,35 @@
       "readers": [
         {
           "file": "src/vanilla/utils/unwrap.ts",
-          "line": 4,
-          "endLine": 5
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 7,
-          "endLine": 10
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 12,
-          "endLine": 13
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 22,
-          "endLine": 144
+          "line": 40,
+          "endLine": 144,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 22,
+              "endLine": 24
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 26,
+              "endLine": 29
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 31,
+              "endLine": 33
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 35,
+              "endLine": 38
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/vanilla/utils/types.test.tsx",
+        "tests/vanilla/utils/unwrap.test.ts"
       ]
     },
     {
@@ -1446,24 +1473,35 @@
       "readers": [
         {
           "file": "src/vanilla/utils/unwrap.ts",
-          "line": 4,
-          "endLine": 5
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 7,
-          "endLine": 10
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 12,
-          "endLine": 13
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 22,
-          "endLine": 144
+          "line": 40,
+          "endLine": 144,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 22,
+              "endLine": 24
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 26,
+              "endLine": 29
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 31,
+              "endLine": 33
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 35,
+              "endLine": 38
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/vanilla/utils/types.test.tsx",
+        "tests/vanilla/utils/unwrap.test.ts"
       ]
     },
     {
@@ -1483,24 +1521,35 @@
       "readers": [
         {
           "file": "src/vanilla/utils/unwrap.ts",
-          "line": 4,
-          "endLine": 5
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 7,
-          "endLine": 10
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 12,
-          "endLine": 13
-        },
-        {
-          "file": "src/vanilla/utils/unwrap.ts",
-          "line": 22,
-          "endLine": 144
+          "line": 40,
+          "endLine": 144,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 22,
+              "endLine": 24
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 26,
+              "endLine": 29
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 31,
+              "endLine": 33
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 35,
+              "endLine": 38
+            }
+          ]
         }
+      ],
+      "tests": [
+        "tests/vanilla/utils/types.test.tsx",
+        "tests/vanilla/utils/unwrap.test.ts"
       ]
     }
   ]

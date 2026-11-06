@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-06T00:34:56.681Z",
+  "generatedAt": "2026-11-06T03:01:58.774Z",
   "root": "<work>/es-toolkit",
   "revision": "4fb8c4e1e89c9009b887e5d917d65e42a9a16626",
   "configHash": "9e6d287d0178e1a5",
@@ -540,8 +540,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 254,
-        "survived": 6,
+        "killed": 253,
+        "survived": 7,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -6203,6 +6203,21 @@
       "severity": "warn"
     },
     {
+      "rule": "mutant-survived",
+      "message": "deburr: `code < 0x80`: 0x80 → 129 survived; no linked test fails when the code changes like this",
+      "file": "src/string/deburr.ts",
+      "line": 77,
+      "unit": "deburr",
+      "mutant": {
+        "id": "2:value-65",
+        "mutator": "Value",
+        "replacement": "`code < 0x80`: 0x80 → 129",
+        "status": "Survived",
+        "line": 77
+      },
+      "severity": "warn"
+    },
+    {
       "rule": "decision-unspecified",
       "message": "deburr commits to boundary \"563\" in `code <= 0x233`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
       "file": "src/string/deburr.ts",
@@ -6530,7 +6545,7 @@
     "unlinkedTests": 4965,
     "findings": {
       "fail": 24,
-      "warn": 32,
+      "warn": 33,
       "info": 2
     },
     "mutantsUnmapped": 0
