@@ -498,6 +498,7 @@ export function extractSurface(
   const decisionOptions: DecisionOptions = {
     root: config.root,
     collectionLimit: config.decisions.collectionLimit,
+    widen: config.decisions.widen,
     onTruncated: (c) => truncatedCollections.set(`${c.file}#${c.name}`, c),
   };
   const classPattern = config.surface.classPattern ? new RegExp(config.surface.classPattern) : undefined;
@@ -830,7 +831,9 @@ export function extractSurface(
             ),
             operationCalls: [],
             envInputs: scan.envInputs,
-            ...(member.body ? decisionsOf(member.body, sf, host, helpers, decisionOptions) : { decisions: [] }),
+            ...(member.body
+              ? decisionsOf(member.body, sf, host, helpers, { ...decisionOptions, ports: portMembers })
+              : { decisions: [] }),
             implHash: textHash(member.body ? member.body.getText(sf) : ""),
             guarantees: deriveThrowsIds(
               unitId,

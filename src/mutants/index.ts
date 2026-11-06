@@ -401,7 +401,8 @@ export function writeValueMutants(list: ValueMutantList, dir: string): string {
 function decisionFor(unit: Unit, site: Site, file: string, line: number): Decision | undefined {
   const value = site.value;
   if (value === undefined) return undefined;
-  if (site.kind === "element" || site.kind === "entry")
+  // A regex alternative is a member of the regex (`decisions.widen`), as an element is of its list.
+  if (site.kind === "element" || site.kind === "entry" || site.kind === "alternative")
     return unit.decisions.find(
       (d) =>
         d.kind === "member" &&

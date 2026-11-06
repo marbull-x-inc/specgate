@@ -16,6 +16,14 @@ export interface DecisionOptions {
   root: string;
   /** Most `member` decisions per collection (`decisions.collectionLimit`). */
   collectionLimit: number;
+  /**
+   * `decisions.widen` (#61): parameter defaults, offsets from a parameter, `Math.max` / `Math.min`
+   * limits, collections reached through a local, regex word groups and literal arguments of
+   * constructors and of calls on a parameter or port.
+   */
+  widen?: boolean;
+  /** Members holding injected ports (`this.<member>`), for `widen`'s calls on a port. */
+  ports?: ReadonlySet<string>;
   /** Called once per collection cut at the limit. */
   onTruncated?: (collection: TruncatedCollection) => void;
   /** Called with each helper or same-module function body the walk follows (`Unit.helperRanges`). */
@@ -231,6 +239,36 @@ export function collectDecisions(
   };
 
   /**
+   * The module collection a local reads: `const s = LIST`, `const s = p ?? LIST` (or `||`), a
+   * parameter `s = LIST`. The local is declared in the walked code, not at module level.
+   */
+  const localCollectionSource = (node: ts.Expression): ts.Expression | undefined => {
+    if (!ts.isIdentifier(node)) return undefined;
+    for (const d of host.declarationsOf(node)) {
+      if (d.getSourceFile() !== sf) continue;
+      let init: ts.Expression | undefined;
+      if (ts.isParameter(d)) init = d.initializer;
+      else if (
+        ts.isVariableDeclaration(d) &&
+        ts.isVariableDeclarationList(d.parent) &&
+        (d.parent.flags & ts.NodeFlags.Const) !== 0 &&
+        !ts.isSourceFile(d.parent.parent.parent)
+      )
+        init = d.initializer;
+      if (!init) continue;
+      let e = unwrapExpression(init);
+      if (
+        ts.isBinaryExpression(e) &&
+        (e.operatorToken.kind === ts.SyntaxKind.QuestionQuestionToken ||
+          e.operatorToken.kind === ts.SyntaxKind.BarBarToken)
+      )
+        e = unwrapExpression(e.right);
+      if (ts.isIdentifier(e) && moduleConstOf(e)) return e;
+    }
+    return undefined;
+  };
+
+  /**
    * The literal elements of a collection constant, each with the constant it is written in.
    * `keys` selects object-literal keys (for `in` / `Object.hasOwn`) over array-like elements.
    */
@@ -252,7 +290,12 @@ export function collectDecisions(
       });
     }
     const decl = moduleConstOf(node);
-    if (!decl?.initializer || !ts.isIdentifier(decl.name)) return undefined;
+    if (!decl) {
+      // `widen`: a local or a parameter default holding a module collection (`s = p ?? LIST`).
+      const source = depth === 0 && options.widen ? localCollectionSource(literal) : undefined;
+      return source ? collectionElements(source, keys, depth + 1) : undefined;
+    }
+    if (!decl.initializer || !ts.isIdentifier(decl.name)) return undefined;
     const declSf = decl.getSourceFile();
     const statement = decl.parent.parent;
     const where = {
@@ -337,7 +380,16 @@ export function collectDecisions(
     const elements = collectionElements(receiver, keys);
     if (!elements) return;
     const receiverName = ts.isIdentifier(receiver) ? receiver.text : undefined;
-    const readKey = keys ? undefined : collectionKeyOf(receiver);
+    pushMembers(usage, elements, receiverName, keys ? undefined : collectionKeyOf(receiver), probe);
+  };
+
+  const pushMembers = (
+    usage: ts.Node,
+    elements: readonly CollectionElement[],
+    receiverName: string | undefined,
+    readKey: string | undefined,
+    probe: MemberProbe,
+  ): void => {
     const sizes = new Map<string, number>();
     for (const e of elements) sizes.set(`${e.file}#${e.name}`, (sizes.get(`${e.file}#${e.name}`) ?? 0) + 1);
     for (const e of elements) {
@@ -394,8 +446,157 @@ export function collectDecisions(
     }
   };
 
+  /** The unit's function and the helpers the walk followed, whose parameters are the operation's input. */
+  const walkedFunctions = new Set<ts.Node>();
+
+  /** A parameter of a walked function, or a name bound by destructuring one. */
+  const isParameterRef = (node: ts.Expression): boolean => {
+    const e = unwrapExpression(node);
+    if (!ts.isIdentifier(e)) return false;
+    return host.declarationsOf(e).some((d) => {
+      for (let cur: ts.Node = d; ; cur = cur.parent) {
+        // Only the walked functions' own parameters: a callback's `i` in `map((x, i) => i + 1)` is not input.
+        if (ts.isParameter(cur)) return walkedFunctions.has(cur.parent);
+        if (!ts.isBindingElement(cur) && !ts.isObjectBindingPattern(cur) && !ts.isArrayBindingPattern(cur))
+          return false;
+      }
+    });
+  };
+
+  /** A number literal (`-n` included, `0` / `1` / `-1` too) as decision text. */
+  const anyNumberText = (node: ts.Expression): string | undefined => {
+    const e = unwrapExpression(node);
+    if (ts.isNumericLiteral(e)) return numberText(Number(e.text));
+    if (ts.isPrefixUnaryExpression(e) && e.operator === ts.SyntaxKind.MinusToken && ts.isNumericLiteral(e.operand))
+      return numberText(-Number(e.operand.text));
+    return undefined;
+  };
+
+  /** `widen`: the default of a parameter or destructured parameter is a `constant`, `0` and `1` included. */
+  const addDefault = (b: ts.ParameterDeclaration | ts.BindingElement): void => {
+    if (!b.initializer) return;
+    const init = unwrapExpression(b.initializer);
+    const value = isStringLike(init) ? (init.text.length > 0 ? init.text : undefined) : anyNumberText(init);
+    if (value !== undefined && value !== "NaN") add("constant", b, [value], []);
+  };
+
+  /** The parameters of a walked function: their defaults, and what the defaults compute with. */
+  const visitParameters = (body: ts.Node): void => {
+    const fn = body.parent;
+    if (!options.widen || !fn || !ts.isFunctionLike(fn)) return;
+    walkedFunctions.add(fn);
+    const visitBinding = (b: ts.ParameterDeclaration | ts.BindingElement): void => {
+      if (b.initializer) {
+        addDefault(b);
+        visit(b.initializer, false);
+      }
+      if (ts.isObjectBindingPattern(b.name) || ts.isArrayBindingPattern(b.name))
+        for (const el of b.name.elements) if (ts.isBindingElement(el)) visitBinding(el);
+    };
+    for (const p of fn.parameters) visitBinding(p);
+  };
+
+  /** A literal written as output: a non-empty string with a word character, or a number other than 0 / 1 / -1. */
+  const outputLiteral = (node: ts.Expression): string | undefined => {
+    const e = unwrapExpression(node);
+    if (isStringLike(e)) return hasWordCharacter(e.text) ? e.text : undefined;
+    return literalText(e);
+  };
+
+  /** Whether a call's receiver is a parameter (`c.res.headers.delete(…)`) or a port (`this.repo.save(…)`). */
+  const onParameterOrPort = (callee: ts.Expression): boolean => {
+    if (!ts.isPropertyAccessExpression(callee)) return false;
+    let cur = unwrapExpression(callee.expression);
+    for (;;) {
+      if (
+        ts.isPropertyAccessExpression(cur) &&
+        cur.expression.kind === ts.SyntaxKind.ThisKeyword &&
+        (options.ports?.has(cur.name.text) ?? false)
+      )
+        return true;
+      if (ts.isPropertyAccessExpression(cur) || ts.isElementAccessExpression(cur) || ts.isCallExpression(cur))
+        cur = unwrapExpression(cur.expression);
+      else break;
+    }
+    return isParameterRef(cur);
+  };
+
+  /** One `member` per word of each plain-word group of a regex (`/^(a|an|the)$/`), probe `exact`. */
+  const addRegexMembers = (
+    usage: ts.Node,
+    regex: ts.RegularExpressionLiteral,
+    constant?: ts.VariableDeclaration,
+  ): void => {
+    const groups = regexWordGroups(regex.text);
+    if (groups.length === 0) return;
+    const at = constant ? constant.parent.parent : regex;
+    const atSf = at.getSourceFile();
+    const line = lineOf(atSf, at.getStart(atSf));
+    const where = {
+      name: constant && ts.isIdentifier(constant.name) ? constant.name.text : `regex at line ${line}`,
+      file: relativeTo(options.root, atSf.fileName),
+      line,
+      endLine: lineOf(atSf, at.getEnd()),
+    };
+    pushMembers(
+      usage,
+      groups.flat().map((value) => ({ value, ...where })),
+      undefined,
+      undefined,
+      "exact",
+    );
+  };
+
+  /** `decisions.widen` (#61): the sites 0.5's walk does not reach. */
+  const visitWidened = (node: ts.Node): void => {
+    if ((ts.isParameter(node) || ts.isBindingElement(node)) && node.initializer) addDefault(node);
+    if (ts.isRegularExpressionLiteral(node) && !isInTypePosition(node)) addRegexMembers(node, node);
+    if (ts.isIdentifier(node) && !isDeclarationName(node)) {
+      const c = moduleConstOf(node);
+      const init = c?.initializer ? unwrapExpression(c.initializer) : undefined;
+      if (c && init && ts.isRegularExpressionLiteral(init)) addRegexMembers(node.parent, init, c);
+    }
+    if (ts.isCallExpression(node)) {
+      const callee = node.expression;
+      // `Math.max(0, …)`, `Math.min(n, 100)`: a limit, 0 and 1 included.
+      if (
+        ts.isPropertyAccessExpression(callee) &&
+        ts.isIdentifier(callee.expression) &&
+        callee.expression.text === "Math" &&
+        (callee.name.text === "max" || callee.name.text === "min")
+      ) {
+        for (const a of node.arguments) {
+          const v = anyNumberText(a);
+          if (v !== undefined) add("boundary", node, [v], []);
+        }
+      } else if (onParameterOrPort(callee)) {
+        node.arguments.forEach((a, i) => {
+          if (i === 1 && isReplacementPattern(a)) return;
+          const v = outputLiteral(a);
+          if (v !== undefined) add("output", node, [v], []);
+        });
+      }
+    }
+    if (ts.isNewExpression(node) && !/(?:Error|Exception)$/.test(node.expression.getText(sf))) {
+      for (const a of node.arguments ?? []) {
+        const arg = unwrapExpression(a);
+        if (ts.isObjectLiteralExpression(arg)) {
+          for (const p of arg.properties) {
+            if (!ts.isPropertyAssignment(p)) continue;
+            const v = outputLiteral(p.initializer);
+            if (v !== undefined) add("output", p, [v], []);
+          }
+          continue;
+        }
+        const v = outputLiteral(arg);
+        if (v !== undefined) add("output", node, [v], []);
+      }
+    }
+  };
+
   const visit = (node: ts.Node, inReturn: boolean): void => {
     visitMembership(node);
+    if (options.widen) visitWidened(node);
 
     if (ts.isIdentifier(node) && !isDeclarationName(node)) {
       const decl = constDeclarationOf(node);
@@ -454,7 +655,20 @@ export function collectDecisions(
         op === ts.SyntaxKind.PlusToken ||
         op === ts.SyntaxKind.MinusToken
       ) {
-        if (!isIndexArithmetic(node, host))
+        const offset =
+          options.widen && (op === ts.SyntaxKind.PlusToken || op === ts.SyntaxKind.MinusToken)
+            ? isParameterRef(node.left)
+              ? anyNumberText(node.right)
+              : isParameterRef(node.right)
+                ? anyNumberText(node.left)
+                : undefined
+            : undefined;
+        if (isIndexArithmetic(node, host)) {
+          // An index into an internal array (#68), offset or not.
+        } else if (offset !== undefined) {
+          // `widen`: `p + 1` offsets the input by a value the contract may state.
+          add("boundary", node, [offset], []);
+        } else
           for (const side of [node.left, node.right]) {
             if (ts.isNumericLiteral(side) && !isTrivialNumber(Number(side.text)))
               add("constant", node, [numberText(Number(side.text))], []);
@@ -500,6 +714,7 @@ export function collectDecisions(
         if (helperBody && !visitedBodies.has(helperBody)) {
           visitedBodies.add(helperBody);
           options.onFollow?.(helperBody);
+          visitParameters(helperBody);
           visit(helperBody, false);
         }
       } else if (ts.isIdentifier(callee)) {
@@ -508,6 +723,7 @@ export function collectDecisions(
           if (local && !visitedBodies.has(local)) {
             visitedBodies.add(local);
             options.onFollow?.(local);
+            visitParameters(local);
             visit(local, false);
           }
         }
@@ -526,6 +742,7 @@ export function collectDecisions(
   };
 
   // A function body itself or a concise arrow body expression.
+  visitParameters(body);
   visit(body, !ts.isBlock(body));
   for (const d of out) if (d.kind === "constant" && d.names.some((n) => lengthNames.has(n))) d.length = true;
   return out.sort((a, b) => a.line - b.line);
@@ -739,6 +956,17 @@ function isIndexArithmetic(node: ts.BinaryExpression, host: ProgramHost): boolea
   };
   walk(scope);
   return reads > 0 && reads === indexReads;
+}
+
+/**
+ * The plain-word groups of a regex literal's pattern: `/^(a|an|the)$/i` gives `[["a", "an", "the"]]`.
+ * The same groups `specgate mutants` removes one alternative of.
+ */
+export function regexWordGroups(literal: string): string[][] {
+  const pattern = literal.slice(0, literal.lastIndexOf("/") + 1);
+  return [...pattern.matchAll(/(?<!\\)\((\?:)?((?:[\p{L}\p{N}_]+\|)+[\p{L}\p{N}_]+)\)/gu)].map((m) =>
+    (m[2] ?? "").split("|"),
+  );
 }
 
 function isStringLike(node: ts.Node): node is ts.StringLiteral | ts.NoSubstitutionTemplateLiteral {
