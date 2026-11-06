@@ -54,12 +54,19 @@ export interface ValueMutant {
   original: string;
   replacement: string;
   description: string;
-  /** The code of the units that own the site (specgate mutants), for test selection */
-  readers?: Array<{ file: string; line: number; endLine: number }>;
+  /** The code that runs the site, with the callers of each piece when traced (specgate mutants) */
+  readers?: Reader[];
   /** Constants or collections the site is written in */
   names?: string[];
   /** Test files that reference the site's constant directly */
   tests?: string[];
+}
+
+export interface Reader {
+  file: string;
+  line: number;
+  endLine: number;
+  callers?: Reader[];
 }
 
 export interface ValueMutantList {
@@ -175,17 +182,35 @@ export function selectTests(m: ValueMutant, coverage: StrykerCoverage | undefine
   if (!m.readers || m.readers.length === 0) return { all: true };
   const tests = new Set<string>();
   for (const r of m.readers) {
-    const inReader = (coverage.mutants.get(r.file) ?? []).filter(
-      (s) => !s.static && s.coveredBy !== undefined && s.start.line >= r.line && s.end.line <= r.endLine,
-    );
-    if (inReader.length === 0) return { all: true };
-    for (const s of inReader) for (const id of s.coveredBy ?? []) tests.add(id);
+    const covered = testsRunning(r, coverage, 0);
+    if (!covered) return { all: true };
+    for (const id of covered) tests.add(id);
   }
   const byTests = filesOf([...tests].sort(), coverage);
   if (!byTests) return { all: true };
   const files = [...new Set([...byTests.files, ...(m.tests ?? [])])].sort();
   if (files.length === 0) return { none: true };
   return { files, tests: byTests.tests };
+}
+
+/**
+ * The tests that run a reader: those covering a non-static mutant inside it, or, when the report
+ * has none there (the reader is outside the report, or Stryker marked it static), the tests that
+ * run each of its callers. `undefined` when that cannot be told.
+ */
+function testsRunning(r: Reader, coverage: StrykerCoverage, depth: number): string[] | undefined {
+  const inReader = (coverage.mutants.get(r.file) ?? []).filter(
+    (s) => !s.static && s.coveredBy !== undefined && s.start.line >= r.line && s.end.line <= r.endLine,
+  );
+  if (inReader.length > 0) return inReader.flatMap((s) => s.coveredBy ?? []);
+  if (!r.callers || depth > 5) return undefined;
+  const out: string[] = [];
+  for (const c of r.callers) {
+    const covered = testsRunning(c, coverage, depth + 1);
+    if (!covered) return undefined;
+    out.push(...covered);
+  }
+  return out;
 }
 
 /** The test files of these test ids, or `undefined` when one has no file in the report. */
@@ -310,8 +335,10 @@ export async function runValueMutants(
   const baseline = await runCommand(commandFor(options.command, []), join(root, cwd), 30 * 60_000);
   const baselineMs = Date.now() - t0;
   if (baseline.code !== 0) throw new Error(`the test command fails before any change (exit ${baseline.code})`);
-  const timeoutMs = options.timeoutMs ?? Math.max(30_000, baselineMs * 5);
-  log(`baseline run ${baselineMs} ms; timeout ${timeoutMs} ms`);
+  // As Stryker: the run's own time × 1.5 + 5 s; for a selection, the time of its unchanged run.
+  const timeoutFor = (netMs: number): number => options.timeoutMs ?? Math.round(netMs * 1.5 + 5_000);
+  const timeoutMs = timeoutFor(baselineMs);
+  log(`baseline run ${baselineMs} ms; whole-suite timeout ${timeoutMs} ms`);
 
   const concurrency = Math.max(1, Math.floor(options.concurrency ?? 1));
   const sandboxBase = concurrency > 1 ? mkdtempSync(join(tmpdir(), "value-mutants-")) : undefined;
@@ -367,14 +394,16 @@ export async function runValueMutants(
     }
   };
   // Each distinct selection is run once without any change, in a clean directory.
-  const verified = new Map<string, Promise<boolean>>();
-  const verify = (files: readonly string[], dir: string): Promise<boolean> => {
+  const verified = new Map<string, Promise<{ ok: boolean; ms: number }>>();
+  const verify = (files: readonly string[], dir: string): Promise<{ ok: boolean; ms: number }> => {
     const key = files.join("\n");
     let done = verified.get(key);
     if (!done) {
-      done = runCommand(commandFor(options.command, files), join(dir, cwd), timeoutMs).then(
-        (r) => r.code === 0 && !r.timedOut,
-      );
+      const startedAt = Date.now();
+      done = runCommand(commandFor(options.command, files), join(dir, cwd), timeoutMs).then((r) => ({
+        ok: r.code === 0 && !r.timedOut,
+        ms: Date.now() - startedAt,
+      }));
       verified.set(key, done);
     }
     return done;
@@ -396,15 +425,17 @@ export async function runValueMutants(
     // change (a file the runner cannot find, a file that fails alone) falls back to the whole
     // suite, so a broken run is never read as a kill.
     let files = "files" in selection ? selection.files.map((f) => toPosix(relative(cwd, f))) : [];
-    const selectionWorks = files.length > 0 ? await verify(files, dir) : true;
+    const check = files.length > 0 ? await verify(files, dir) : undefined;
+    const selectionWorks = check?.ok ?? true;
     if (!selectionWorks) files = [];
+    const runTimeout = check?.ok ? timeoutFor(check.ms) : timeoutMs;
     const path = join(dir, m.file);
     const original = readFileSync(path, "utf8");
     dirty.set(path, original);
     try {
       writeFileSync(path, mutatedText(text, m));
       const run = (): Promise<{ code: number | null; timedOut: boolean }> =>
-        runCommand(commandFor(options.command, files), join(dir, cwd), timeoutMs);
+        runCommand(commandFor(options.command, files), join(dir, cwd), runTimeout);
       const { code, timedOut } = alone || files.length > 0 ? await run() : await exclusive(run);
       const coveredBy =
         "files" in selection && selectionWorks
