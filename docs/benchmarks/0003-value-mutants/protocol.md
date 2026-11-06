@@ -321,3 +321,9 @@ unchanged run time × 1.5 + 5 s, as Stryker's; the test commands stop at the fir
 unchanged. The runner step is repeated on the ten projects (fourth measurement) and every
 status is compared with the third measurement's; a value mutant moving from detected to green
 would mean the selection left out a test that kills it, and is listed in the report.
+
+Addendum (same day): the first pass of the fourth measurement used the Stryker-style limit for
+parallel runs too, and express-rate-limit had 17 timeouts under fifteen parallel runs, each
+repeated alone (58 s → 128 s). Parallel runs now get net time × 3 + 10 s; runs alone keep
+× 1.5 + 5 s. A stack overflow in react-hook-form's caller tree was fixed. The runner step was
+repeated on all ten projects with these settings; that run is the fourth measurement.

@@ -340,9 +340,13 @@ export async function runValueMutants(
   const baselineMs = Date.now() - t0;
   if (baseline.code !== 0) throw new Error(`the test command fails before any change (exit ${baseline.code})`);
   // As Stryker: the run's own time × 1.5 + 5 s; for a selection, the time of its unchanged run.
-  const timeoutFor = (netMs: number): number => options.timeoutMs ?? Math.round(netMs * 1.5 + 5_000);
-  const timeoutMs = timeoutFor(baselineMs);
-  log(`baseline run ${baselineMs} ms; whole-suite timeout ${timeoutMs} ms`);
+  // Alone (or with concurrency 1), as Stryker: net time × 1.5 + 5 s. While runs share the machine,
+  // looser (× 3 + 10 s): a timeout there is only a reason to run the mutant again alone.
+  const timeoutFor = (netMs: number, shared: boolean): number =>
+    options.timeoutMs ?? Math.round(shared ? netMs * 3 + 10_000 : netMs * 1.5 + 5_000);
+  // The unchanged run of a selection gets the whole suite's loose limit: it must not time out.
+  const timeoutMs = timeoutFor(baselineMs, true);
+  log(`baseline run ${baselineMs} ms; whole-suite timeout ${timeoutFor(baselineMs, false)} ms alone`);
 
   const concurrency = Math.max(1, Math.floor(options.concurrency ?? 1));
   const sandboxBase = concurrency > 1 ? mkdtempSync(join(tmpdir(), "value-mutants-")) : undefined;
@@ -432,7 +436,8 @@ export async function runValueMutants(
     const check = files.length > 0 ? await verify(files, dir) : undefined;
     const selectionWorks = check?.ok ?? true;
     if (!selectionWorks) files = [];
-    const runTimeout = check?.ok ? timeoutFor(check.ms) : timeoutMs;
+    const shared = concurrency > 1 && !alone;
+    const runTimeout = timeoutFor(check?.ok ? check.ms : baselineMs, shared);
     const path = join(dir, m.file);
     const original = readFileSync(path, "utf8");
     dirty.set(path, original);

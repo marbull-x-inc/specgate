@@ -170,8 +170,9 @@ why such readers have no `callers`.
 
 **Selection check and timeouts.** Each distinct selection runs once without any change; a
 selection that fails falls back to the whole suite, and its run time sets the timeout of its
-mutants as Stryker does: net time × 1.5 + 5 s (the whole suite's for whole-suite runs). A run that
-times out while others share the machine is repeated alone. A test command should stop at the
+mutants: net time × 1.5 + 5 s alone, as Stryker's (the whole suite's for whole-suite runs), and
+× 3 + 10 s while other runs share the machine, where a timeout only means the mutant is run again
+alone. A test command should stop at the
 first failure (`vitest --bail=1`, `jest --bail`), as Stryker does: a killed mutant then costs one
 failing test file, not the suite. Added after benchmark 0003's first measurement, where
 es-toolkit ran 89 of 113 value mutants against its whole suite (deviation 10).
