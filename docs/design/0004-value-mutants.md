@@ -96,7 +96,8 @@ It reads the same config as `check` and runs the same extraction; it never runs 
       "original": "0",
       "replacement": "1",
       "description": "the default `initialValue` 0 → 1",
-      "decision": { "kind": "constant", "values": ["0"] }
+      "decision": { "kind": "constant", "values": ["0"] },
+      "readers": [{ "file": "src/useCounter.ts", "line": 10, "endLine": 40 }]
     }
   ]
 }
@@ -115,6 +116,14 @@ It reads the same config as `check` and runs the same extraction; it never runs 
 `` `an`removed from the regex`/^(a|an|the)$/` ``.
 - `decision` is the unit's decision on the same line whose values hold the original value, when
   there is one.
+- `readers` is the code that runs the site, for test selection. For a site in a function, the
+  lines (and followed helpers) of the units that own it. For a site in a module-level `const`,
+  the outermost function around every reference to the constant in the program (any file, units
+  with guarantees or not; references in type positions do not count; a reference in another
+  module-level `const` is followed, three levels). Absent when some reference is outside any
+  function (`export default X`, a module-level statement): then no reader set is complete.
+- `names` (module-level sites): the constants the site is written in. `tests`: test files (from
+  `tests.include`) that reference the constant directly.
 - Mutants are sorted by file and `start`; `id`s are `value-<n>` in that order. They are unique
   within one file, not stable across runs.
 
@@ -143,8 +152,15 @@ For each mutant it:
 tests of the innermost Stryker mutant whose location contains the site cover the site (a test
 that reaches the site entered that mutant's code). Their test files are passed to the command
 (`{files}` in the command, or appended). When that mutant covers no test, the value mutant is
-`NoCoverage` without a run. When no mutant contains the site, or the mutant is static, or the
-report has no `coveredBy`, the whole command runs.
+`NoCoverage` without a run.
+
+When no mutant contains the site or it is static (module-level code: Stryker does not track it per
+test), the runner uses `readers`: the tests covering the non-static mutants inside each reader,
+plus the `tests` that name the constant. A test that observes a module-level value either runs
+code that reads it or reads it by name. Each reader must lie in a file of the Stryker report and
+hold at least one non-static mutant with coverage; otherwise (or without `readers`, or without
+`coveredBy`) the whole command runs. Added after benchmark 0003's first measurement, where
+es-toolkit ran 89 of 113 value mutants against its whole suite (deviation 10).
 
 **Concurrency.** `--concurrency <n>` runs `n` sandboxes, copies of the project without
 `node_modules` (symlinked) and `.git`, as Stryker does. The default is 1, in place.

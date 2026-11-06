@@ -1,6 +1,6 @@
 import { describe, expect, spyOn, test } from "bun:test";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, relative } from "node:path";
 import {
   commandFor,
   mutatedText,
@@ -44,8 +44,14 @@ function configOf(dir: string, overrides: ConfigInput = {}) {
 
 async function mutantsOf(dir: string): Promise<ValueMutantList> {
   const config = configOf(dir);
-  const { report, host } = await analyze(config, { provenance: false, baseline: null });
-  return listValueMutants(report.units, host, dir, TOOL);
+  const { report, host, testFiles } = await analyze(config, { provenance: false, baseline: null });
+  return listValueMutants(
+    report.units,
+    host,
+    dir,
+    TOOL,
+    testFiles.map((f) => relative(dir, f)),
+  );
 }
 
 /** The fixture of #60's acceptance, with each skipped position next to a site. */
@@ -271,6 +277,102 @@ describe("value-mutant runner", () => {
     expect(commandFor("npx vitest run", ["tests/a.test.ts"])).toBe("npx vitest run 'tests/a.test.ts'");
     expect(commandFor("npx jest {files} --ci", ["a b.ts"])).toBe("npx jest 'a b.ts' --ci");
     expect(commandFor("npx jest {files} --ci", [])).toBe("npx jest  --ci");
+  });
+});
+
+describe("test selection for module-level sites", () => {
+  const TABLE = `export const TABLE = { a: 10, b: 20 };
+type Key = keyof typeof TABLE;
+
+/** @guarantee ok.look returns the entry */
+export function look(key: Key): number {
+  return TABLE[key];
+}
+
+export function first(): number {
+  return TABLE.a;
+}
+`;
+  const USE = `import { TABLE } from "./table";
+
+export const total = (): number => TABLE.a + TABLE.b;
+`;
+  const TEST = `import { expect, test } from "bun:test";
+import { TABLE, look } from "../src/table";
+
+test("look.ok.look", () => {
+  expect(look("a")).toBe(TABLE.a);
+});
+`;
+
+  test("a site in a module-level constant lists every function that reads it and the tests that name it", async () => {
+    const dir = project({ "src/table.ts": TABLE, "src/use.ts": USE, "tests/table.test.ts": TEST });
+    const list = await mutantsOf(dir);
+    const ten = list.mutants.find((m) => m.kind === "number" && m.original === "10");
+    expect(ten?.names).toEqual(["TABLE"]);
+    // look (with guarantees), first (without) and total (another module); not the type position.
+    expect(ten?.readers).toEqual([
+      { file: "src/table.ts", line: 5, endLine: 7 },
+      { file: "src/table.ts", line: 9, endLine: 11 },
+      { file: "src/use.ts", line: 3, endLine: 3 },
+    ]);
+    expect(ten?.tests).toEqual(["tests/table.test.ts"]);
+  });
+
+  test("a reference outside any function leaves the readers unknown", async () => {
+    const dir = project({
+      "src/table.ts": TABLE,
+      "src/use.ts": `import { TABLE } from "./table";\n\nexport default TABLE;\n`,
+      "tests/table.test.ts": TEST,
+    });
+    const ten = (await mutantsOf(dir)).mutants.find((m) => m.kind === "number" && m.original === "10");
+    expect(ten?.readers).toBeUndefined();
+  });
+
+  test("the runner selects the tests covering the readers, plus the tests naming the constant", () => {
+    const site = {
+      file: "src/table.ts",
+      line: 1,
+      column: 30,
+      endLine: 1,
+      endColumn: 32,
+      readers: [
+        { file: "src/table.ts", line: 5, endLine: 7 },
+        { file: "src/use.ts", line: 3, endLine: 3 },
+      ],
+      tests: ["tests/direct.test.ts"],
+    } as ValueMutant;
+    const at = (line: number, coveredBy: string[] | undefined, isStatic = false) => ({
+      file: "",
+      start: { line, column: 1 },
+      end: { line, column: 40 },
+      static: isStatic,
+      ...(coveredBy ? { coveredBy } : {}),
+    });
+    const coverage = (table: StrykerCoverage["mutants"] extends Map<string, infer M> ? M : never, use = table) => ({
+      mutants: new Map([
+        ["src/table.ts", [at(1, ["t1", "t2", "t3"], true), ...table]],
+        ["src/use.ts", use],
+      ]),
+      testFile: new Map([
+        ["t1", "tests/a.test.ts"],
+        ["t2", "tests/b.test.ts"],
+        ["t3", "tests/c.test.ts"],
+      ]),
+    });
+    expect(selectTests(site, coverage([at(6, ["t1"])], [at(3, ["t2"])]))).toEqual({
+      files: ["tests/a.test.ts", "tests/b.test.ts", "tests/direct.test.ts"],
+      tests: ["t1", "t2"],
+    });
+    // A reader with no non-static, covered mutant: nothing is known about who runs it.
+    expect(selectTests(site, coverage([at(6, ["t1"], true)], [at(3, ["t2"])]))).toEqual({ all: true });
+    expect(selectTests({ ...site, readers: [{ file: "src/other.ts", line: 1, endLine: 9 }] }, coverage([]))).toEqual({
+      all: true,
+    });
+    const { readers: _readers, ...noReaders } = site;
+    expect(selectTests(noReaders as ValueMutant, coverage([at(6, ["t1"])]))).toEqual({ all: true });
+    // Readers no test runs, and no test names the constant: not covered.
+    expect(selectTests({ ...site, tests: [] }, coverage([at(6, [])], [at(3, [])]))).toEqual({ none: true });
   });
 });
 
