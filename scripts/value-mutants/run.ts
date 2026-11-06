@@ -12,7 +12,11 @@
  *
  *   node scripts/value-mutants/run.ts --command "npx vitest run {files}" \
  *     [--mutants .specgate/mutants.json] [--stryker reports/mutation/mutation.json] \
- *     [--out reports/mutation/value.json] [--root .] [--concurrency 1] [--timeout-ms <n>]
+ *     [--out reports/mutation/value.json] [--root .] [--cwd .] [--concurrency 1] [--timeout-ms <n>]
+ *
+ * `--cwd` is where the command runs, relative to `--root` (a package of a monorepo); selected test
+ * files are passed relative to it. Each distinct selection is run once without any change first;
+ * one that fails falls back to the whole suite.
  *
  * With `--stryker`, only the test files that cover the site (from `coveredBy` of the innermost
  * Stryker mutant whose location contains it) are run: they replace `{files}` in the command, or
@@ -269,6 +273,8 @@ function makeSandbox(root: string, target: string): void {
 export interface RunOptions {
   root: string;
   command: string;
+  /** Directory the command runs in, relative to root; selected test files are passed relative to it */
+  cwd?: string;
   coverage?: StrykerCoverage;
   concurrency?: number;
   timeoutMs?: number;
@@ -300,7 +306,8 @@ export async function runValueMutants(
   }
 
   const t0 = Date.now();
-  const baseline = await runCommand(commandFor(options.command, []), root, 30 * 60_000);
+  const cwd = options.cwd ?? ".";
+  const baseline = await runCommand(commandFor(options.command, []), join(root, cwd), 30 * 60_000);
   const baselineMs = Date.now() - t0;
   if (baseline.code !== 0) throw new Error(`the test command fails before any change (exit ${baseline.code})`);
   const timeoutMs = options.timeoutMs ?? Math.max(30_000, baselineMs * 5);
@@ -359,6 +366,19 @@ export async function runValueMutants(
       log(`${m.id} ${result.status.padEnd(10)} ${m.file}:${m.line} ${m.description}`);
     }
   };
+  // Each distinct selection is run once without any change, in a clean directory.
+  const verified = new Map<string, Promise<boolean>>();
+  const verify = (files: readonly string[], dir: string): Promise<boolean> => {
+    const key = files.join("\n");
+    let done = verified.get(key);
+    if (!done) {
+      done = runCommand(commandFor(options.command, files), join(dir, cwd), timeoutMs).then(
+        (r) => r.code === 0 && !r.timedOut,
+      );
+      verified.set(key, done);
+    }
+    return done;
+  };
   const runOne = async (
     m: ValueMutant,
     dir: string,
@@ -372,16 +392,26 @@ export async function runValueMutants(
       return { status: "Ignored", statusReason: "the original text is not at the listed offsets" };
     const selection = selectTests(m, options.coverage);
     if ("none" in selection) return { status: "NoCoverage", statusReason: "no test covers the site", coveredBy: [] };
-    const files = "files" in selection ? selection.files : [];
+    // Selected files, relative to where the command runs. A selection that fails without any
+    // change (a file the runner cannot find, a file that fails alone) falls back to the whole
+    // suite, so a broken run is never read as a kill.
+    let files = "files" in selection ? selection.files.map((f) => toPosix(relative(cwd, f))) : [];
+    const selectionWorks = files.length > 0 ? await verify(files, dir) : true;
+    if (!selectionWorks) files = [];
     const path = join(dir, m.file);
     const original = readFileSync(path, "utf8");
     dirty.set(path, original);
     try {
       writeFileSync(path, mutatedText(text, m));
       const run = (): Promise<{ code: number | null; timedOut: boolean }> =>
-        runCommand(commandFor(options.command, files), dir, timeoutMs);
+        runCommand(commandFor(options.command, files), join(dir, cwd), timeoutMs);
       const { code, timedOut } = alone || files.length > 0 ? await run() : await exclusive(run);
-      const coveredBy = "files" in selection ? { coveredBy: selection.tests } : {};
+      const coveredBy =
+        "files" in selection && selectionWorks
+          ? { coveredBy: selection.tests }
+          : !selectionWorks
+            ? { statusReason: "the selected tests fail without the change; the whole suite ran" }
+            : {};
       if (timedOut)
         return { status: "Timeout", ...(alone ? { statusReason: "timed out on its own" } : {}), ...coveredBy };
       return code === 0
@@ -453,6 +483,7 @@ async function main(argv: string[]): Promise<number> {
       stryker: { type: "string" },
       out: { type: "string", default: "reports/mutation/value.json" },
       root: { type: "string", default: "." },
+      cwd: { type: "string", default: "." },
       concurrency: { type: "string", default: "1" },
       "timeout-ms": { type: "string" },
       only: { type: "string" },
@@ -473,6 +504,7 @@ async function main(argv: string[]): Promise<number> {
   const { results, baselineMs } = await runValueMutants(list, {
     root,
     command: values.command,
+    cwd: values.cwd,
     ...(coverage ? { coverage } : {}),
     concurrency: Number(values.concurrency),
     ...(values["timeout-ms"] ? { timeoutMs: Number(values["timeout-ms"]) } : {}),
