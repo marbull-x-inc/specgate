@@ -234,6 +234,52 @@ describe("value-mutant runner", () => {
     });
   }, 60_000);
 
+  test("selected test files are passed relative to --cwd, and a selection that fails unchanged falls back to the whole suite", async () => {
+    const dir = fixture();
+    const list = await mutantsOf(dir);
+    const elements = { ...list, mutants: list.mutants.filter((m) => m.kind === "element") };
+    const coverageFor = (testFile: string): StrykerCoverage => ({
+      mutants: new Map([
+        [
+          "src/values.ts",
+          [
+            {
+              file: "src/values.ts",
+              start: { line: 4, column: 1 },
+              end: { line: 4, column: 60 },
+              static: false,
+              coveredBy: ["t1"],
+            },
+          ],
+        ],
+      ]),
+      testFile: new Map([["t1", testFile]]),
+    });
+    const command = `'${process.execPath}' test`;
+    // The command runs in tests/, so tests/values.test.ts is passed as values.test.ts.
+    const inTests = await runValueMutants(elements, {
+      root: dir,
+      cwd: "tests",
+      command,
+      coverage: coverageFor("tests/values.test.ts"),
+    });
+    expect(inTests.results.map((r) => [r.status, r.statusReason ?? "", r.coveredBy ?? []])).toEqual([
+      ["Killed", "exit 1", ["t1"]],
+      ["Survived", "", ["t1"]],
+      ["Survived", "", ["t1"]],
+      ["Survived", "", ["t1"]],
+    ]);
+    // A selection naming a file that does not exist fails without any change: the whole suite runs.
+    const broken = await runValueMutants(elements, {
+      root: dir,
+      command,
+      coverage: coverageFor("tests/missing.test.ts"),
+    });
+    expect(broken.results.map((r) => r.status)).toEqual(["Killed", "Survived", "Survived", "Survived"]);
+    expect(broken.results[1]?.statusReason).toBe("the selected tests fail without the change; the whole suite ran");
+    expect(broken.results[1]?.coveredBy).toBeUndefined();
+  }, 60_000);
+
   test("a stale list is not applied", async () => {
     const dir = fixture();
     const list = await mutantsOf(dir);
