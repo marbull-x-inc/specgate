@@ -9,7 +9,7 @@ import {
   selectTests,
   toReport,
   type ValueMutant,
-} from "../../scripts/value-mutants/run.ts";
+} from "../../packages/specgate-mutate/src/runner.ts";
 import { analyze, TOOL } from "../../src/analyze.ts";
 import { main } from "../../src/cli.ts";
 import { type ConfigInput, defineConfig, parseConfig } from "../../src/config/schema.ts";
