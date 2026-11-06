@@ -23,6 +23,13 @@ export interface DecisionRuleInput {
   stated: (unit: Unit) => boolean;
   truncatedCollections: ReadonlyArray<{ name: string; file: string; size: number }>;
   collectionLimit: number;
+  /**
+   * Whether a value report measured the decision: a value mutant changing it was killed, survived
+   * or not run (#61). The report decides then, not the literals: a killed mutant means a test pins
+   * the value, a survivor is reported by `mutant-survived`. A measured decision gives neither
+   * `decision-unspecified` nor `decision-untested`.
+   */
+  measured?: (unit: Unit, decision: Decision) => boolean;
 }
 
 export type DecisionRuleId =
@@ -90,6 +97,7 @@ export function evaluateDecisionRules(
   // Reports read from disk before `keys` existed have none.
   const keysOf = (id: string): string[] => linkedTests(id).flatMap((t) => t.keys ?? []);
   const lengthsOf = (id: string): number[] => linkedTests(id).flatMap((t) => t.lengths ?? []);
+  const measured = input.measured ?? (() => false);
   const ignored = (d: Decision): boolean =>
     d.values.some((v) => input.ignore.has(v)) || d.names.some((n) => input.ignore.has(n));
 
@@ -138,7 +146,7 @@ export function evaluateDecisionRules(
     // Unnamed members are reported per collection, not per element.
     const unnamedMembers = new Map<string, { decisions: Decision[]; allUsed: boolean }>();
     for (const d of unit.decisions) {
-      if (ignored(d)) continue;
+      if (ignored(d) || measured(unit, d)) continue;
       const used =
         d.kind === "member" ? memberUsed(d) : valueUsed(d, literals, keys, lengths) || quantityUnitUsed(d, ownLiterals);
       if (!decisionMentioned(d, corpus, input.ignore)) {

@@ -89,8 +89,12 @@ export interface Config {
    * `ignore`: values or constant names `decision-unspecified` treats as named by the contract and
    * `decision-untested` does not ask the tests for. `collectionLimit`: most `member` decisions
    * recorded per collection; the rest are reported once by `decision-collection-truncated`.
+   * `widen`: also record parameter defaults, offsets from a parameter, `Math.max` / `Math.min`
+   * limits, collections reached through a local, regex word groups and literal arguments of
+   * constructors and of calls on a parameter or port (#61). Off by default: it raises the static
+   * finding count, which a value-mutant report then confirms or clears.
    */
-  decisions: { ignore: string[]; collectionLimit: number };
+  decisions: { ignore: string[]; collectionLimit: number; widen: boolean };
   /**
    * `report`: a mutation-testing-report-schema JSON (Stryker's `mutation.json`) another tool
    * wrote, relative to root, or a list of them (Stryker's and a value-mutant runner's, read
@@ -170,7 +174,7 @@ export function defaultConfig(): Config {
     provenance: { enabled: true, prPattern: "\\(#(\\d+)\\)\\s*$" },
     requirementHeader: { enabled: false, pattern: "^\\s*(?:\\*|//)\\s*@requirement\\s+(\\S+)" },
     envInputs: { forbid: ["Date.now", "new Date", "Math.random", "fetch", "process.env"] },
-    decisions: { ignore: [], collectionLimit: 500 },
+    decisions: { ignore: [], collectionLimit: 500, widen: false },
     mutation: {
       detected: ["Killed", "Timeout", "RuntimeError", "CompileError"],
       findings: "mutant",
@@ -453,6 +457,9 @@ function applyInput(config: Config, input: unknown, label: string): void {
     });
     d.number("collectionLimit", (v) => {
       config.decisions.collectionLimit = v;
+    });
+    d.boolean("widen", (v) => {
+      config.decisions.widen = v;
     });
   });
   r.object("mutation", (m) => {

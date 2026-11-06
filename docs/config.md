@@ -117,6 +117,7 @@ instead. A `@guarantee` anywhere else is reported by `guarantee-on-non-unit`.
 | ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ignore`          | `[]`    | Values (`"1000"`, `"__proto__"`) or constant names (`"RETRY_LIMIT"`) that `decision-unspecified` treats as named and `decision-untested` does not ask the tests for. Use it for values you deliberately leave out of the contract. |
 | `collectionLimit` | `500`   | Most `member` decisions recorded per collection. Beyond it, `decision-collection-truncated` reports the collection once. A collection name in `ignore` skips it entirely (generated route manifests, for example).                 |
+| `widen`           | `false` | Record the decisions listed under "Widened walk" below as well. It raises the static `decision-*` count; with a value-mutant report loaded, the decisions it measured are not reported (see `mutation`).                           |
 
 A decision counts as named when a guarantee or `@example` of the unit, or of a surface unit that
 calls it, contains one of its values (numbers compared by value, so `86_400_000` and `8.64e7`
@@ -131,6 +132,26 @@ A `member` decision is one element of a module-level collection the unit tests m
 place (`["self", "src"].includes(item)`, collection `inline list at line N`). It is named when the
 guarantee names the collection in a code span. Members the contract never names are reported once per
 collection, not per element.
+
+**Widened walk (`widen: true`, #61).** These sites also become decisions:
+
+- the default of a parameter or of a destructured parameter (`initialValue = 0`,
+  `{ delta = 1 }`): `constant`, `0`, `1` and `-1` included
+- a number added to or subtracted from a parameter of the unit or of a helper it reaches
+  (`boundaries + 1`), and a number passed to `Math.max` / `Math.min` (`Math.max(0, …)`):
+  `boundary`, `0`, `1` and `-1` included. A callback's parameter does not count, and arithmetic
+  that only computes an array index is still skipped.
+- a local `const` or a parameter default that holds a module collection
+  (`const s = separators ?? STR_SPLITTERS; s.includes(c)`): probed as that collection, one
+  `member` per element
+- each word of a regex group of plain words (`/^(a|an|the)$/i`, inline or in a module `const`):
+  one `member` per word, probe `exact`, collection `regex at line N` or the constant's name
+- a literal argument of `new X(…)` (`new Uint8Array(16)`) or a literal property of an object
+  passed to it (`new Response(msg, { status: 413 })`), and a literal argument of a call on a
+  parameter or an injected port (`c.res.headers.delete("Content-Length")`,
+  `this.store.save("entry", 3600)`): `output`. Error and exception constructors are skipped.
+
+Elsewhere `0`, `1` and `-1` stay excluded.
 
 A decision counts as used by a test when a test linked to the unit, or to a surface unit that
 calls it, writes the value as a literal in its body, its `each` table or a module-level `const`
@@ -149,6 +170,16 @@ with it as the unit, `"10 years"` for `case "years":`.
 | `findings`  | `"mutant"`                                              | `"mutant"`: one `mutant-survived` per mutant the tests let through. `"unit"`: one per unit, with the counts and up to `listLimit` survivors by line, each with the decision it changed.                                                                                                                                                                                                                                                    |
 | `listLimit` | `5`                                                     | Survivors listed in a per-unit finding (`findings: "unit"`).                                                                                                                                                                                                                                                                                                                                                                               |
 | `exclude`   | `[]`                                                    | Unit ids or file globs whose mutants are counted in `units[].mutation` but give no `mutant-survived` / `unit-not-executed`. Use it for code that tests outside this config exercise.                                                                                                                                                                                                                                                       |
+
+A value-mutant report (`mutatorName: "Value"`, written by a runner from `specgate mutants`) also
+measures decisions. A decision whose value mutant has an outcome (a status in `detected`,
+`Survived` or `NoCoverage`) gives neither `decision-unspecified` nor `decision-untested`: the
+report has run what the static rules can only guess at. If the mutant was killed, a test fails
+when the value changes. If it survived or was not run, `mutant-survived` reports it. A `member`
+is measured by the removal of its element, entry or regex alternative, and any other decision by
+a change of each of its values on its own line. A report mutant is matched to today's sources by
+file, line, column and description, so a stale report measures nothing, and neither does an
+`Ignored` mutant.
 
 ## `resolve`
 

@@ -1,9 +1,10 @@
 import { mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import ts from "typescript";
 import type { ProgramHost } from "../extract/program.ts";
 import { lineOf } from "../extract/program.ts";
 import type { Decision, Unit } from "../ir/schema.ts";
+import type { Mutant } from "../mutation/report.ts";
 import { sha256 } from "../util/hash.ts";
 import { relativeTo } from "../util/paths.ts";
 
@@ -401,7 +402,8 @@ export function writeValueMutants(list: ValueMutantList, dir: string): string {
 function decisionFor(unit: Unit, site: Site, file: string, line: number): Decision | undefined {
   const value = site.value;
   if (value === undefined) return undefined;
-  if (site.kind === "element" || site.kind === "entry")
+  // A regex alternative is a member of the regex (`decisions.widen`), as an element is of its list.
+  if (site.kind === "element" || site.kind === "entry" || site.kind === "alternative")
     return unit.decisions.find(
       (d) =>
         d.kind === "member" &&
@@ -411,6 +413,71 @@ function decisionFor(unit: Unit, site: Site, file: string, line: number): Decisi
         d.values.includes(value),
     );
   return unit.decisions.find((d) => d.line === line && d.kind !== "member" && d.values.includes(value));
+}
+
+/** A value change a value report gives an outcome for, with the value it changed. */
+interface MeasuredValue {
+  kind: ValueMutantKind;
+  line: number;
+  value: string;
+}
+
+/**
+ * Which decisions a value report (#60) measured: for each of the decision's values, a `Value`
+ * mutant changing that value has an outcome (#61). A `member` is measured by the removal of its
+ * element, entry or regex alternative within its collection's lines; any other decision by a
+ * number or string change on its own line.
+ *
+ * @remarks
+ * A report mutant is matched to the site `specgate mutants` would list today by file, line and
+ * column, and by its description when the report gives one. A report made from other sources
+ * (stale) matches nothing and measures nothing.
+ * @param measured - The report's `Value` mutants with an outcome (killed, survived or not run).
+ */
+export function valueMeasurement(
+  measured: readonly Mutant[],
+  host: ProgramHost,
+  root: string,
+): (unit: Unit, decision: Decision) => boolean {
+  const byFile = new Map<string, MeasuredValue[]>();
+  const wanted = new Map<string, Mutant[]>();
+  for (const m of measured) if (m.column !== undefined) wanted.set(m.file, [...(wanted.get(m.file) ?? []), m]);
+  for (const [file, mutants] of wanted) {
+    const sf = host.program.getSourceFile(resolve(root, file));
+    if (!sf) continue;
+    const sites = new Map<string, Site>();
+    for (const site of sitesOf(sf)) {
+      const pos = sf.getLineAndCharacterOfPosition(site.start);
+      sites.set(`${pos.line + 1}:${pos.character + 1}`, site);
+    }
+    const out: MeasuredValue[] = [];
+    for (const m of mutants) {
+      const site = sites.get(`${m.line}:${m.column}`);
+      if (!site || site.value === undefined) continue;
+      if (m.description !== undefined && m.description !== site.description) continue;
+      out.push({ kind: site.kind, line: m.line, value: site.value });
+    }
+    byFile.set(file, out);
+  }
+  if (byFile.size === 0) return () => false;
+  return (unit, d) => {
+    if (d.kind === "member") {
+      const c = d.collection;
+      const value = d.values[0];
+      if (!c || value === undefined) return false;
+      return (byFile.get(c.file) ?? []).some(
+        (k) =>
+          (k.kind === "element" || k.kind === "entry" || k.kind === "alternative") &&
+          k.value === value &&
+          k.line >= c.line &&
+          k.line <= c.endLine,
+      );
+    }
+    const kills = (byFile.get(unit.file) ?? []).filter(
+      (k) => (k.kind === "number" || k.kind === "string") && k.line === d.line,
+    );
+    return d.values.length > 0 && d.values.every((v) => kills.some((k) => k.value === v));
+  };
 }
 
 /** Every value site of a module, before attribution. */

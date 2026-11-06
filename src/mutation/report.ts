@@ -24,6 +24,8 @@ export interface Mutant {
   /** Module relative to root, POSIX separators */
   file: string;
   line: number;
+  /** 1-based start column, when the report gives one */
+  column?: number;
   endLine: number;
 }
 
@@ -37,6 +39,12 @@ export function reportPaths(config: Config): string[] {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function columnOf(value: unknown): number | undefined {
+  if (!isRecord(value)) return undefined;
+  const column = value["column"];
+  return typeof column === "number" && Number.isInteger(column) && column > 0 ? column : undefined;
 }
 
 function position(value: unknown): number | undefined {
@@ -72,6 +80,7 @@ export function parseMutationReport(value: unknown, root: string): MutationReadR
       if (typeof mutator !== "string") return { error: `${at}.mutatorName is missing` };
       if (typeof status !== "string") return { error: `${at}.status is missing` };
       if (start === undefined) return { error: `${at}.location.start.line is missing` };
+      const column = isRecord(location) ? columnOf(location["start"]) : undefined;
       const replacement = m["replacement"];
       const description = m["description"];
       mutants.push({
@@ -82,6 +91,7 @@ export function parseMutationReport(value: unknown, root: string): MutationReadR
         status,
         file,
         line: start,
+        ...(column !== undefined ? { column } : {}),
         endLine: Math.max(start, end ?? start),
       });
     }

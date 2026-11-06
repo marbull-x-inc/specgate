@@ -1,5 +1,5 @@
 import { type Config, RULE_IDS, type RuleId, severityOf } from "../config/schema.ts";
-import type { Finding, Report, Severity, TestCase, Unit } from "../ir/schema.ts";
+import type { Decision, Finding, Report, Severity, TestCase, Unit } from "../ir/schema.ts";
 import { applyAcceptTags } from "./accept-tags.ts";
 import { evaluateDecisionRules, linkedTestsIndex } from "./decisions.ts";
 import { evaluateMutationRules, type MutationRuleInput } from "./mutation.ts";
@@ -30,6 +30,8 @@ export interface RuleContext {
   truncatedCollections?: ReadonlyArray<{ name: string; file: string; size: number }>;
   /** The default baseline came from another revision or config (see `baseline-stale`). */
   baselineStale?: { baseline: string; current: string };
+  /** Whether a loaded value report measured a decision (#61); absent when none is loaded. */
+  decisionMeasured?: (unit: Unit, decision: Decision) => boolean;
   /** The mutation report (`mutation.report`), mapped to units; absent when none is configured. */
   mutation?: Omit<MutationRuleInput, "linkedTests">;
 }
@@ -192,6 +194,7 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
       stated: (unit) => unit.guarantees.some((g) => g.id !== placeholder && g.id !== ""),
       truncatedCollections: ctx.truncatedCollections ?? [],
       collectionLimit: ctx.config.decisions.collectionLimit,
+      ...(ctx.decisionMeasured ? { measured: ctx.decisionMeasured } : {}),
     },
     emit,
   );
