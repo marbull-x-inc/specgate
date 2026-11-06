@@ -1,0 +1,47 @@
+{
+  "name": "@marbull-x-inc/specgate-mutate",
+  "version": "0.1.0",
+  "description": "Runs specgate's value mutants: applies each value change, runs the project's tests and writes a mutation-testing-report-schema report for specgate check.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "specgate-mutate": "./bin/specgate-mutate.mjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/runner.d.ts",
+      "bun": "./src/runner.ts",
+      "default": "./dist/runner.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "peerDependencies": {
+    "@marbull-x-inc/specgate": ">=0.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marbull-x-inc/specgate.git",
+    "directory": "packages/specgate-mutate"
+  },
+  "homepage": "https://github.com/marbull-x-inc/specgate/tree/main/packages/specgate-mutate#readme",
+  "keywords": [
+    "typescript",
+    "mutation-testing",
+    "specgate",
+    "stryker"
+  ],
+  "sideEffects": false
+}

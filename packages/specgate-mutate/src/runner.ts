@@ -10,7 +10,7 @@
  *
  * Usage (Node 24 runs the TypeScript directly; `bun` works too):
  *
- *   node scripts/value-mutants/run.ts --command "npx vitest run {files}" \
+ *   specgate-mutate run --command "npx vitest run {files}" \
  *     [--mutants .specgate/mutants.json] [--stryker reports/mutation/mutation.json] \
  *     [--out reports/mutation/value.json] [--root .] [--cwd .] [--concurrency 1] [--timeout-ms <n>]
  *
