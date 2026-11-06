@@ -1,0 +1,39 @@
+[
+  {
+    "id": "value-65",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "reason": "U+0080 now skips the early return, but it is not a combining mark, not in deburrMap and not a Latin letter, so it is returned unchanged either way",
+    "expressedBy": null
+  },
+  {
+    "id": "value-69",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "reason": "U+0234 now counts as a Latin letter, but NFD does not decompose it, so it is returned unchanged either way",
+    "expressedBy": null
+  },
+  {
+    "id": "value-70",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "U+1E00 (A with ring below) no longer counts as a Latin letter and is kept instead of becoming \"A\"",
+    "expressedBy": [
+      "161"
+    ]
+  },
+  {
+    "id": "value-71",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "reason": "U+1EFA now counts as a Latin letter, but NFD does not decompose it, so it is returned unchanged either way",
+    "expressedBy": null
+  },
+  {
+    "id": "value-108",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "reason": "without the entry, htmlUnescapes[\"&#39;\"] is undefined and the callback falls back to \"'\" (the same character)",
+    "expressedBy": null
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": "value-3",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid bytes: …\"), so the message changes",
+    "expressedBy": [
+      "15"
+    ]
+  },
+  {
+    "id": "value-8",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid length: …\"), so the message changes",
+    "expressedBy": [
+      "33"
+    ]
+  },
+  {
+    "id": "value-11",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid value: …\"), so the message changes",
+    "expressedBy": [
+      "53"
+    ]
+  },
+  {
+    "id": "value-14",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid length: …\"), so the message changes",
+    "expressedBy": [
+      "69"
+    ]
+  },
+  {
+    "id": "value-17",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid value: …\"), so the message changes",
+    "expressedBy": [
+      "89"
+    ]
+  },
+  {
+    "id": "value-23",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid value: …\"), so the message changes",
+    "expressedBy": [
+      "126"
+    ]
+  },
+  {
+    "id": "value-26",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid bytes: …\"), so the message changes",
+    "expressedBy": [
+      "144"
+    ]
+  },
+  {
+    "id": "value-32",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid value: …\"), so the message changes",
+    "expressedBy": [
+      "182"
+    ]
+  },
+  {
+    "id": "value-36",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid multiple: …\"), so the message changes",
+    "expressedBy": [
+      "199"
+    ]
+  },
+  {
+    "id": "value-41",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid length: …\"), so the message changes",
+    "expressedBy": [
+      "214"
+    ]
+  },
+  {
+    "id": "value-45",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid length: …\"), so the message changes",
+    "expressedBy": [
+      "231"
+    ]
+  },
+  {
+    "id": "value-48",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid value: …\"), so the message changes",
+    "expressedBy": [
+      "247"
+    ]
+  },
+  {
+    "id": "value-51",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the label passed to _addIssue is part of the default issue message (\"Invalid value: …\"), so the message changes",
+    "expressedBy": [
+      "261"
+    ]
+  }
+]

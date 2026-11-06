@@ -1,0 +1,20 @@
+[32m22:15:15 (51963) INFO ProjectReader[39m Found 4 of 69 file(s) to be mutated.
+[32m22:15:15 (51963) INFO Instrumenter[39m Instrumented 4 source file(s) with 1131 mutant(s)
+[32m22:15:16 (51963) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m22:15:16 (51963) INFO DryRunExecutor[39m Starting initial test run (jest test runner with "perTest" coverage analysis). This may take a while.
+[32m22:15:17 (51963) INFO DryRunExecutor[39m Initial test run succeeded. Ran 347 tests in 1 second (net 660 ms, overhead 649 ms).
+[33m22:15:20 (51963) WARN ChildProcessProxy[39m Child process [pid 52082] exited unexpectedly with exit code null (SIGSEGV). Stdout and stderr were empty. ChildProcessCrashedError: Child process [pid 52082] exited unexpectedly with exit code null (SIGSEGV). Stdout and stderr were empty.
+    at ChildProcess.handleUnexpectedExit (file://<work>/cron-parser/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:180:31)
+    at ChildProcess.emit (node:events:507:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:305:5) {
+  innerError: undefined,
+  pid: 52082,
+  exitCode: null,
+  signal: 'SIGSEGV'
+}
+[32m22:16:52 (51963) INFO JsonReporter[39m Your report can be found at: file://<work>/cron-parser/reports/mutation/mutation.json
+[32m22:16:52 (51963) INFO MutationTestExecutor[39m Done in 1 minute and 36 seconds.
+real 97.57
+user 1122.55
+sys 69.88

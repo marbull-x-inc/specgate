@@ -1,0 +1,986 @@
+[
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 5,
+    "title": "should return true if hotkey",
+    "key": "isHotkeyPressed.ok.all-keys-pressed",
+    "reason": "isHotkeyPressed; no closer match"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 14,
+    "title": "should return false if hotkey",
+    "key": "isHotkeyPressed.ok.all-keys-pressed",
+    "reason": "isHotkeyPressed; no closer match"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 36,
+    "title": "should support multiple hotkeys",
+    "key": "isHotkeyPressed.ok.all-keys-pressed",
+    "reason": "isHotkeyPressed; no closer match"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 52,
+    "title": "should support multiple hotkeys with modifiers",
+    "key": "isHotkeyPressed.ok.all-keys-pressed",
+    "reason": "isHotkeyPressed; no closer match"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 108,
+    "title": "Should clear pressed hotkeys when window blurs",
+    "key": "isHotkeyPressed.ok.all-keys-pressed",
+    "reason": "isHotkeyPressed; no closer match"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 123,
+    "title": "Should clear pressed hotkeys when document becomes hidden",
+    "key": "isHotkeyPressed.ok.all-keys-pressed",
+    "reason": "isHotkeyPressed; no closer match"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 143,
+    "title": "Should clear pressed hotkeys when window regains",
+    "key": "isHotkeyPressed.ok.all-keys-pressed",
+    "reason": "isHotkeyPressed; no closer match"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 157,
+    "title": "Should return true for shift and 1",
+    "key": "isHotkeyPressed.ok.all-keys-pressed",
+    "reason": "isHotkeyPressed; no closer match"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 167,
+    "title": "Should clear pressed hotkeys when contextmenu",
+    "key": "isHotkeyPressed.ok.all-keys-pressed",
+    "reason": "isHotkeyPressed; no closer match"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/isHotkeyPressed.test.tsx",
+    "line": 68,
+    "title": "should use , as delimiter",
+    "key": "isHotkeyPressed.ok.default-delimiter",
+    "reason": "delimiter test"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 6,
+    "title": "Should set record flag",
+    "key": "useRecordHotkeys.ok.controls",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 24,
+    "title": "Should record keys",
+    "key": "useRecordHotkeys.ok.keys-is-set",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 45,
+    "title": "Should record modifiers",
+    "key": "useRecordHotkeys.ok.default-key-codes",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 64,
+    "title": "Should record multiple keys only once",
+    "key": "useRecordHotkeys.ok.keys-is-set",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 84,
+    "title": "Should not record keys if recording",
+    "key": "useRecordHotkeys.ok.controls",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 95,
+    "title": "Should reset keys if recording is restarted",
+    "key": "useRecordHotkeys.ok.reset-keys",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 118,
+    "title": "Should stop recording",
+    "key": "useRecordHotkeys.ok.controls",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 141,
+    "title": "Should record steps",
+    "key": "useRecordHotkeys.ok.default-key-codes",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 160,
+    "title": "Should handle start being called",
+    "key": "useRecordHotkeys.ok.controls",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useRecordHotkeys.test.tsx",
+    "line": 190,
+    "title": "Should ignore blacklisted keys",
+    "key": "useRecordHotkeys.ok.blacklist",
+    "reason": "useRecordHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 7,
+    "title": "should render children",
+    "key": "HotkeysProvider.ok.wildcard-default",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 17,
+    "title": "should default to wildcard scope",
+    "key": "HotkeysProvider.ok.wildcard-default",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 25,
+    "title": "should return active scopes and scope modifying",
+    "key": "useHotkeysContext.ok.scope-controls",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 36,
+    "title": "should activate scope",
+    "key": "useHotkeysContext.ok.scope-controls",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 48,
+    "title": "should return multiple scopes",
+    "key": "useHotkeysContext.ok.scope-controls",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 66,
+    "title": "should deactivate scope",
+    "key": "useHotkeysContext.ok.scope-controls",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 88,
+    "title": "should toggle scope",
+    "key": "useHotkeysContext.ok.scope-controls",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 112,
+    "title": "should be able to disable wildcard",
+    "key": "useHotkeysContext.ok.scope-controls",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 124,
+    "title": "should return initially set scopes",
+    "key": "HotkeysProvider.ok.initially-active-scopes",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 135,
+    "title": "should return all bound hotkeys",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 152,
+    "title": "should update bound hotkeys when useHotkeys",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 180,
+    "title": "should return bound hotkeys when defined",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 197,
+    "title": "should return descriptions for bound",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 214,
+    "title": "should have no active scopes",
+    "key": "useHotkeysContext.ok.scope-controls",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/HotkeysProvider.test.tsx",
+    "line": 235,
+    "title": "should not disable other scopes",
+    "key": "useHotkeysContext.ok.scope-controls",
+    "reason": "provider/context; bound-hotkey tests call useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx",
+    "line": 6,
+    "title": "should return hotkey with correct keys",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "calls useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx",
+    "line": 25,
+    "title": "should return hotkey with correct scope",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "calls useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx",
+    "line": 44,
+    "title": "should not return hotkey with different scope",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "calls useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeysContext.test.tsx",
+    "line": 63,
+    "title": "should return hotkey with correct description",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "calls useHotkeys first"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 36,
+    "title": "should listen to esc modifier for escape key",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 48,
+    "title": "should work without a wrapped context provider when not using scopes",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 60,
+    "title": "should log a warning when trying to set a scope without a wrapped provider",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 69,
+    "title": "should call hotkey when scopes are set but activatedScopes includes wildcard scope",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 89,
+    "title": "should not call hotkey when scopes are set but activatedScopes does not include set scope",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 109,
+    "title": "should call hotkey when scopes are set and activatedScopes does include some set scopes",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 129,
+    "title": "should handle multiple scopes",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 149,
+    "title": "should update call behavior when set scopes change",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 175,
+    "title": "scope should take precedence over enabled flag/function",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 201,
+    "title": "should listen to key presses",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 212,
+    "title": "should ignore unregistered key events",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 610,
+    "title": "should default to keydown if neither keyup nor keydown is passed",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 621,
+    "title": "should not listen to keyup if keydown is passed",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 677,
+    "title": "should be disabled on form tags by default",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 699,
+    "title": "should be disabled on aria form roles by default",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 722,
+    "title": "should be enabled on given form tags",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 744,
+    "title": "should ignore case of form tags",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 766,
+    "title": "should ignore event when ignoreEventWhen",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 796,
+    "title": "shouldn",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 826,
+    "title": "should call ignoreEventWhen callback only when event is a hotkey match",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 850,
+    "title": "enabledOnTags should accept boolean",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 872,
+    "title": "should prevent pressed down key propagate to input field when preventDefault is set to true and form tag is enabled",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 894,
+    "title": "should be disabled on all other tags by default",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1129,
+    "title": "should allow * as a wildcard",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1140,
+    "title": "should listen to function keys f1-f16",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1174,
+    "title": "should parse options and dependencies correctly no matter their position",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1201,
+    "title": "should pass keyboard event and hotkey object to callback",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1371,
+    "title": "should reflect preventDefault option when set",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1387,
+    "title": "should not prevent default behavior when preventDefault option is not set",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1403,
+    "title": "should prevent default behavior if preventDefault option is set to a function that returns true",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1419,
+    "title": "should not prevent default behavior if preventDefault option is set to a function that returns false",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1435,
+    "title": "should call preventDefault option function with hotkey and keyboard event",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1458,
+    "title": "Should listen to space key",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1517,
+    "title": "should listen to keydown permanently",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1563,
+    "title": "should trigger a single-key hotkey with AltGraph when modifiers are ignored",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1581,
+    "title": "Should ignore modifiers if option is set",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1622,
+    "title": "should respect dependencies array if they are passed",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1647,
+    "title": "should use updated callback if no dependencies are passed",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1706,
+    "title": "Should listen to produced key and not to code",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1723,
+    "title": "Should not check produced key if useKey is not set",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1734,
+    "title": "Should check produced key if useKey is true",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1761,
+    "title": "Should remove listener on AbortSignal",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1791,
+    "title": "should be disabled on form tags inside custom elements by default",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1833,
+    "title": "should trigger Enter hotkey inside input with enableOnFormTags true",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1850,
+    "title": "should trigger ctrl+s hotkey inside input with enableOnFormTags true",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1867,
+    "title": "should trigger Enter hotkey inside form input with enableOnFormTags true",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1888,
+    "title": "Should trigger only produced key hotkeys",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1915,
+    "title": "Should not fire useKey hotkey with modifiers when only the bare key is pressed",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1926,
+    "title": "Should fire useKey hotkey with modifiers only when all modifiers are pressed",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1937,
+    "title": "Should not fire useKey hotkey when only some modifiers are pressed",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1948,
+    "title": "Should not fire useKey hotkey with alt modifier when alt is not pressed",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1991,
+    "title": "Should not re-trigger combo hotkey after visibilitychange clears stuck keys",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 2015,
+    "title": "Should not re-trigger combo hotkey after window focus clears stuck keys",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 223,
+    "title": "should listen to multiple hotkeys",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 243,
+    "title": "should be able to always output correct keys on multiple hotkeys",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 274,
+    "title": "should be able to parse first argument as string, array or readonly array",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 301,
+    "title": "should listen to combinations with modifiers",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 329,
+    "title": "should not trigger when combinations are incomplete",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 340,
+    "title": "should trigger on combinations without modifiers",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 355,
+    "title": "should listen to multiple combinations with modifiers",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 575,
+    "title": "should reflect set delimiter character",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 599,
+    "title": "should listen to + if the splitKey is set to something different then +",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1672,
+    "title": "Should trigger only callback for combination",
+    "key": "useHotkeys.ok.delimiters",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 385,
+    "title": "should listen to sequences",
+    "key": "useHotkeys.ok.sequence-timeout",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 420,
+    "title": "should not trigger when sequence is incomplete",
+    "key": "useHotkeys.ok.sequence-timeout",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 436,
+    "title": "should not trigger when sequence and combination are mixed",
+    "key": "useHotkeys.ok.sequence-timeout",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 458,
+    "title": "should work with sequences and other hotkeys together",
+    "key": "useHotkeys.ok.sequence-timeout",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 483,
+    "title": "should reset sequence when timeout occurs",
+    "key": "useHotkeys.ok.sequence-timeout",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 505,
+    "title": "should handle component unmount during sequence detection",
+    "key": "useHotkeys.ok.sequence-timeout",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 520,
+    "title": "should reset sequence when incorrect key is pressed",
+    "key": "useHotkeys.ok.sequence-timeout",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 549,
+    "title": "should trigger sequence with useKey",
+    "key": "useHotkeys.ok.sequence-timeout",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 562,
+    "title": "should not trigger sequence without useKey",
+    "key": "useHotkeys.ok.sequence-timeout",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 636,
+    "title": "should not listen to keydown if keyup is passed",
+    "key": "useHotkeys.ok.keyup-only",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 651,
+    "title": "should trigger on named keys when keyup is set to true",
+    "key": "useHotkeys.ok.keyup-only",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 666,
+    "title": "should trigger twice if keyup and keydown are passed",
+    "key": "useHotkeys.ok.keyup-only",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 917,
+    "title": "should not bind the event if enabled is set to false",
+    "key": "useHotkeys.ok.enabled-modes",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 928,
+    "title": "should bind the event and trigger if enabled is set to true",
+    "key": "useHotkeys.ok.enabled-modes",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 939,
+    "title": "should bind the event and execute the callback if enabled is set to a function and returns true",
+    "key": "useHotkeys.ok.enabled-modes",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 979,
+    "title": "should dynamically attach and detach listeners when enabled boolean changes",
+    "key": "useHotkeys.ok.enabled-modes",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1355,
+    "title": "should not stop propagation when enabled function resolves to false",
+    "key": "useHotkeys.ok.enabled-modes",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1959,
+    "title": "Should not disable later-registered handlers when one uses enabled callback returning false",
+    "key": "useHotkeys.ok.enabled-modes",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1977,
+    "title": "Should work when both scopes and enabled callback are set",
+    "key": "useHotkeys.ok.enabled-modes",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1019,
+    "title": "should return a ref",
+    "key": "useHotkeys.ok.returns-ref",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1027,
+    "title": "should only trigger when the element is focused if a ref is set",
+    "key": "useHotkeys.ok.returns-ref",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1083,
+    "title": "should trigger when the ref is re-attached to another element",
+    "key": "useHotkeys.ok.returns-ref",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1223,
+    "title": "should set shift to true in hotkey object if listening to shift",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1245,
+    "title": "should set ctrl to true in hotkey object if listening to ctrl",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1267,
+    "title": "should set alt to true in hotkey object if listening to alt",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1289,
+    "title": "should set mod to true in hotkey object if listening to mod",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1311,
+    "title": "should set meta to true in hotkey object if listening to meta",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1333,
+    "title": "should set multiple modifiers to true in hotkey object if listening to multiple modifiers",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1498,
+    "title": "should not call callback if meta is held down but other key is not present in combination is pressed",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1529,
+    "title": "Should test for modifiers by default",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1545,
+    "title": "should not trigger a single-key hotkey while AltGraph is active",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1597,
+    "title": "should not trigger callback twice when pressing a key and then a modifier",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1610,
+    "title": "should not trigger callback when modifier is pressed while holding unrelated key",
+    "key": "useHotkeys.ok.modifiers",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1745,
+    "title": "Should match mixed-case keys like PageUp with useKey option",
+    "key": "useHotkeys.ok.case-insensitive",
+    "reason": "useHotkeys"
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1152,
+    "title": "should allow named key",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "each",
+    "each": true
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1469,
+    "title": "Should map key",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "each",
+    "each": true
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1487,
+    "title": "Should listen to number key",
+    "key": "useHotkeys.ok.option-defaults",
+    "reason": "each",
+    "each": true
+  },
+  {
+    "file": "packages/react-hotkeys-hook/src/test/useHotkeys.test.tsx",
+    "line": 1695,
+    "title": "Should listen to %s on keyup",
+    "key": "useHotkeys.ok.keyup-only",
+    "reason": "each",
+    "each": true
+  }
+]

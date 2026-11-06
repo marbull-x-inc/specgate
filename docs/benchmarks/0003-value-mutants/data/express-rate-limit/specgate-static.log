@@ -1,0 +1,35 @@
+specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
+  fail 12 · warn 3 · info 14
+  ❌ [identifier-unresolved] source/ip-key-generator.ts:23 ipKeyGenerator.ok.ipv4-unchanged: "IPv4" is not a parameter, declared port, entity or public operation
+  ❌ [identifier-unresolved] source/ip-key-generator.ts:24 ipKeyGenerator.ok.default-ipv6-subnet-56: "IPv6" is not a parameter, declared port, entity or public operation
+  ❌ [identifier-unresolved] source/ip-key-generator.ts:25 ipKeyGenerator.ok.ipv6-subnet-false: "IPv6" is not a parameter, declared port, entity or public operation
+  ❌ [identifier-unresolved] source/ip-key-generator.ts:26 ipKeyGenerator.ok.ipv4-mapped-ipv6: "IPv6" is not a parameter, declared port, entity or public operation
+  ❌ [identifier-unresolved] source/ip-key-generator.ts:26 ipKeyGenerator.ok.ipv4-mapped-ipv6: "IPv4" is not a parameter, declared port, entity or public operation
+  ❌ [guarantee-no-test] source/rate-limit.ts:347 rateLimit.ok.default-limit has no test naming it
+  ❌ [guarantee-no-test] source/rate-limit.ts:349 rateLimit.ok.default-message has no test naming it
+  ❌ [guarantee-no-test] source/rate-limit.ts:352 rateLimit.ok.default-standard-headers has no test naming it
+  ❌ [guarantee-on-non-unit] source/time-constants.ts:1 SECOND has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked
+  ❌ [guarantee-on-non-unit] source/time-constants.ts:7 MINUTE has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked
+  ❌ [guarantee-on-non-unit] source/time-constants.ts:13 HOUR has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked
+  ❌ [guarantee-on-non-unit] source/time-constants.ts:19 DAY has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked
+  ⚠️ [tsdoc-syntax] source/ip-key-generator.ts:15 The TSDoc tag "@see" is not an inline tag; it must not be enclosed in "{ }" braces
+  ⚠️ [decision-unspecified] source/rate-limit.ts:410 rateLimit commits to output "finish" in `'finish'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [env-input-direct] source/rate-limit.ts:562 rateLimit reads an environment input directly (Date.now); route it through a port
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+  ℹ️ [decision-unspecified] source/rate-limit.ts:207 rateLimit commits to constant "60" in `60 * 1000`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:207 rateLimit commits to constant "1000" in `60 * 1000`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:220 rateLimit commits to constant "24" in `1000 * 60 * 60 * 24`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:222 rateLimit commits to boundary "60" in `seconds < 60`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:224 rateLimit commits to boundary "24" in `hours < 24`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:227 rateLimit commits to output "-in-" in ``${limit}-in-${duration}``, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:233 rateLimit commits to boundary "400" in `response.statusCode < 400`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:387 rateLimit commits to output "express-rate-limit: async error during store initialization." in `'express-rate-limit: async error during store initialization.'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:406 rateLimit commits to output "close" in `'close'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:414 rateLimit commits to output "error" in `'error'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:518 rateLimit commits to match "draft-6" in `'draft-6'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:524 rateLimit commits to match "draft-7" in `'draft-7'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] source/rate-limit.ts:531 rateLimit commits to match "draft-8" in `'draft-8'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+
+wrote <work>/express-rate-limit/.specgate-static/report.json
+      <work>/express-rate-limit/.specgate-static/summary.md
+      <work>/express-rate-limit/.specgate-static/report.sarif

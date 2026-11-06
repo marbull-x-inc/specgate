@@ -1,0 +1,2712 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "generatedAt": "2026-11-06T03:03:24.487Z",
+  "root": "<work>/neverthrow",
+  "revision": "5ef3a018bda74fb960e44b68fc3672635ee8037d",
+  "configHash": "44eb6dbf0b4cdcb1",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "ok",
+      "kind": "function",
+      "operation": "ok",
+      "file": "src/result.ts",
+      "line": 68,
+      "endLine": 72,
+      "referencedBy": [
+        "src/_internals/utils.ts",
+        "src/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "value",
+          "type": "T",
+          "optional": false
+        }
+      ],
+      "returns": "Ok<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "c002cc5c57f67b5b",
+      "guarantees": [
+        {
+          "id": "ok.constructs-ok",
+          "key": "ok.ok.constructs-ok",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`ok(value)` constructs an `Ok` variant of `Result`.",
+          "textHash": "e7409dc0155da637",
+          "line": 65,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:29",
+            "tests/index.test.ts:37",
+            "tests/index.test.ts:45"
+          ]
+        },
+        {
+          "id": "ok.is-ok-true",
+          "key": "ok.ok.is-ok-true",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`ok({ myData: \"test\" }).isOk()` is `true` and `.isErr()` is `false`.",
+          "textHash": "04319f79ce53d2ca",
+          "line": 66,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:21"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "err",
+      "kind": "function",
+      "operation": "err",
+      "file": "src/result.ts",
+      "line": 78,
+      "endLine": 83,
+      "referencedBy": [
+        "src/_internals/utils.ts",
+        "src/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "err",
+          "type": "E",
+          "optional": false
+        }
+      ],
+      "returns": "Err<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "051f1ff494c68acb",
+      "guarantees": [
+        {
+          "id": "ok.constructs-err",
+          "key": "err.ok.constructs-err",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`err(error)` constructs an `Err` variant of `Result`.",
+          "textHash": "5f7444b70ab3c299",
+          "line": 75,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:318"
+          ]
+        },
+        {
+          "id": "ok.is-err-true",
+          "key": "err.ok.is-err-true",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`err(\"Oh noooo\").isOk()` is `false` and `.isErr()` is `true`.",
+          "textHash": "19df1190432ca4f8",
+          "line": 76,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:310"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "safeTry",
+      "kind": "function",
+      "operation": "safeTry",
+      "file": "src/result.ts",
+      "line": 96,
+      "endLine": 140,
+      "referencedBy": [
+        "src/index.ts"
+      ],
+      "summary": "Evaluates the given generator to a Result returned or an Err yielded from it, whichever comes first. This function is intended to emulate Rust's ? operator. See `/tests/safeTry.test.ts` for examples.",
+      "params": [
+        {
+          "name": "body",
+          "type": "| (() => Generator<Err<never, E>, Result<T, E>>)\n    | (() => AsyncGenerator<Err<never, E>, Result<T, E>>)",
+          "optional": false,
+          "doc": "What is evaluated. In body, `yield* result` works as Rust's `result?` expression."
+        }
+      ],
+      "returns": "Result<T, E> | ResultAsync<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "8aef8922d7861471",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#isOk",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "isOk",
+      "file": "src/result.ts",
+      "line": 326,
+      "endLine": 328,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [],
+      "returns": "this is Ok<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "85e15b30fcd346bd",
+      "guarantees": [
+        {
+          "id": "ok.true-for-ok",
+          "key": "Ok#isOk.ok.true-for-ok",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`isOk` returns `true` when the result is an `Ok` variant.",
+          "textHash": "cb1317be8b737c88",
+          "line": 324,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#isErr",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "isErr",
+      "file": "src/result.ts",
+      "line": 333,
+      "endLine": 335,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [],
+      "returns": "this is Err<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "Ok#isOk"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "dad322e93225436c",
+      "guarantees": [
+        {
+          "id": "ok.false-for-ok",
+          "key": "Ok#isErr.ok.false-for-ok",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`isErr` returns `false` when the result is an `Ok` variant.",
+          "textHash": "d670a62fc1143547",
+          "line": 331,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:297"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#map",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "map",
+      "file": "src/result.ts",
+      "line": 340,
+      "endLine": 342,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "(t: T) => A",
+          "optional": false
+        }
+      ],
+      "returns": "Result<A, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "ok"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "f07076e565ecff28",
+      "guarantees": [
+        {
+          "id": "ok.applies-callback",
+          "key": "Ok#map.ok.applies-callback",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`map` applies the callback to the contained `Ok` value and returns a `Result` holding the callback's return value as `Ok`.",
+          "textHash": "c002dcfbc76073a2",
+          "line": 338,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:50"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#mapErr",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "mapErr",
+      "file": "src/result.ts",
+      "line": 348,
+      "endLine": 350,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "(e: E) => U",
+          "optional": false
+        }
+      ],
+      "returns": "Result<T, U>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "ok"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "c893b037aabd02ad",
+      "guarantees": [
+        {
+          "id": "ok.leaves-ok",
+          "key": "Ok#mapErr.ok.leaves-ok",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`mapErr` leaves an `Ok` value untouched.",
+          "textHash": "2580e10811e568ed",
+          "line": 346,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:61"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#andThen",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "andThen",
+      "file": "src/result.ts",
+      "line": 357,
+      "endLine": 364,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "returns": "any",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "315f6d8c8d94c674",
+      "guarantees": [
+        {
+          "id": "ok.chains-results",
+          "key": "Ok#andThen.ok.chains-results",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`andThen` calls the callback with the `Ok` value and returns the `Result` the callback returns.",
+          "textHash": "fd096ee816b1255f",
+          "line": 353,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:71"
+          ]
+        },
+        {
+          "id": "ok.chain-examples",
+          "key": "Ok#andThen.ok.chain-examples",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "With `sq` returning `ok(n ** 2)`, `ok(2).andThen(sq).andThen(sq)` is `Ok(16)`, `ok(2).andThen(sq).andThen(err)` is `Err(4)` and `ok(2).andThen(err).andThen(sq)` is `Err(2)`.",
+          "textHash": "f1a9b33f63353566",
+          "line": 354,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:85",
+            "tests/index.test.ts:116"
+          ]
+        },
+        {
+          "id": "ok.flattens-nested",
+          "key": "Ok#andThen.ok.flattens-nested",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`ok(ok(1234)).andThen` with a callback returning its argument gives `Ok(1234)`.",
+          "textHash": "55c56868eca0f035",
+          "line": 355,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#andThrough",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "andThrough",
+      "file": "src/result.ts",
+      "line": 369,
+      "endLine": 374,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "returns": "any",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "8ad083f507d40a6f",
+      "guarantees": [
+        {
+          "id": "ok.passes-error-along",
+          "key": "Ok#andThrough.ok.passes-error-along",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "When the function passed to `andThrough` returns an error, that error is passed along.",
+          "textHash": "1a9a2f55b7731b41",
+          "line": 367,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:106"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#andTee",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "andTee",
+      "file": "src/result.ts",
+      "line": 379,
+      "endLine": 386,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "(t: T) => unknown",
+          "optional": false
+        }
+      ],
+      "returns": "Result<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "ok"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "112a455b23eb12cd",
+      "guarantees": [
+        {
+          "id": "ok.passes-through",
+          "key": "Ok#andTee.ok.passes-through",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`andTee` lets the original `Ok` result pass through regardless of the result of the passed-in function.",
+          "textHash": "989e934dc02bee3d",
+          "line": 377,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:138",
+            "tests/index.test.ts:148"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#orTee",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "orTee",
+      "file": "src/result.ts",
+      "line": 388,
+      "endLine": 390,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "(t: E) => unknown",
+          "optional": false
+        }
+      ],
+      "returns": "Result<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "ok"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "bf0e09e930f409de",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Ok#orElse",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "orElse",
+      "file": "src/result.ts",
+      "line": 392,
+      "endLine": 399,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "returns": "any",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "ok"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "c893b037aabd02ad",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Ok#asyncAndThen",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "asyncAndThen",
+      "file": "src/result.ts",
+      "line": 401,
+      "endLine": 403,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "(t: T) => ResultAsync<U, F>",
+          "optional": false
+        }
+      ],
+      "returns": "ResultAsync<U, E | F>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "315f6d8c8d94c674",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Ok#asyncAndThrough",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "asyncAndThrough",
+      "file": "src/result.ts",
+      "line": 405,
+      "endLine": 412,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "(t: T) => ResultAsync<unknown, unknown>",
+          "optional": false
+        }
+      ],
+      "returns": "any",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "56582df63960724f",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Ok#asyncMap",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "asyncMap",
+      "file": "src/result.ts",
+      "line": 414,
+      "endLine": 416,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "(t: T) => Promise<U>",
+          "optional": false
+        }
+      ],
+      "returns": "ResultAsync<U, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "c210e9c202cdd867",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Ok#unwrapOr",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "unwrapOr",
+      "file": "src/result.ts",
+      "line": 422,
+      "endLine": 424,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_v",
+          "type": "A",
+          "optional": false
+        }
+      ],
+      "returns": "T | A",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "7decf71b4971c9f6",
+      "guarantees": [
+        {
+          "id": "ok.unwraps-value",
+          "key": "Ok#unwrapOr.ok.unwraps-value",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`unwrapOr` returns the `Ok` value, not the default.",
+          "textHash": "edf91e41f777dc0f",
+          "line": 420,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:231"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#match",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "match",
+      "file": "src/result.ts",
+      "line": 430,
+      "endLine": 432,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "ok",
+          "type": "(t: T) => A",
+          "optional": false
+        },
+        {
+          "name": "_err",
+          "type": "(e: E) => B",
+          "optional": false
+        }
+      ],
+      "returns": "A | B",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "c893b037aabd02ad",
+      "guarantees": [
+        {
+          "id": "ok.runs-ok-callback",
+          "key": "Ok#match.ok.runs-ok-callback",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`match` executes the first function (the `Ok` callback) with the value and returns its return value, without requiring it to return a `Result`.",
+          "textHash": "965b52a0320f9400",
+          "line": 428,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:280"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Ok#safeUnwrap",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "safeUnwrap",
+      "file": "src/result.ts",
+      "line": 434,
+      "endLine": 440,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [],
+      "returns": "Generator<Err<never, E>, T>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "fefed71fd7af5fd4",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Ok#_unsafeUnwrap",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "_unsafeUnwrap",
+      "file": "src/result.ts",
+      "line": 442,
+      "endLine": 444,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_",
+          "type": "ErrorConfig",
+          "optional": true
+        }
+      ],
+      "returns": "T",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "7decf71b4971c9f6",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Ok#_unsafeUnwrapErr",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "_unsafeUnwrapErr",
+      "file": "src/result.ts",
+      "line": 446,
+      "endLine": 448,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "config",
+          "type": "ErrorConfig",
+          "optional": true
+        }
+      ],
+      "returns": "E",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "23085b978dac9187",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Ok#[Symbol.iterator]",
+      "kind": "method",
+      "target": "Ok",
+      "operation": "[Symbol.iterator]",
+      "file": "src/result.ts",
+      "line": 451,
+      "endLine": 453,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [],
+      "returns": "Generator<Err<never, E>, T>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "value",
+          "type": "T",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "7decf71b4971c9f6",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Err#isOk",
+      "kind": "method",
+      "target": "Err",
+      "operation": "isOk",
+      "file": "src/result.ts",
+      "line": 462,
+      "endLine": 464,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [],
+      "returns": "this is Ok<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "6720c17c8e50a1ac",
+      "guarantees": [
+        {
+          "id": "ok.false-for-err",
+          "key": "Err#isOk.ok.false-for-err",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`isOk` returns `false` when the result is an `Err` variant.",
+          "textHash": "5ce8282761fd276e",
+          "line": 460,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Err#isErr",
+      "kind": "method",
+      "target": "Err",
+      "operation": "isErr",
+      "file": "src/result.ts",
+      "line": 469,
+      "endLine": 471,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [],
+      "returns": "this is Err<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "Err#isOk"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "dad322e93225436c",
+      "guarantees": [
+        {
+          "id": "ok.true-for-err",
+          "key": "Err#isErr.ok.true-for-err",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`isErr` returns `true` when the result is an `Err` variant.",
+          "textHash": "c268e5cec89f8312",
+          "line": 467,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Err#map",
+      "kind": "method",
+      "target": "Err",
+      "operation": "map",
+      "file": "src/result.ts",
+      "line": 477,
+      "endLine": 479,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "(t: T) => A",
+          "optional": false
+        }
+      ],
+      "returns": "Result<A, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "err"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "1c48daa116f11460",
+      "guarantees": [
+        {
+          "id": "ok.leaves-err",
+          "key": "Err#map.ok.leaves-err",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`map` leaves an `Err` value untouched and does not apply the callback.",
+          "textHash": "4fe09e1d485ace73",
+          "line": 475,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:323"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Err#mapErr",
+      "kind": "method",
+      "target": "Err",
+      "operation": "mapErr",
+      "file": "src/result.ts",
+      "line": 484,
+      "endLine": 486,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "(e: E) => U",
+          "optional": false
+        }
+      ],
+      "returns": "Result<T, U>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "err"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "a2d7cc06cf324dfe",
+      "guarantees": [
+        {
+          "id": "ok.applies-callback",
+          "key": "Err#mapErr.ok.applies-callback",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`mapErr` applies the callback to the contained `Err` value and returns a `Result` holding the callback's return value as `Err`.",
+          "textHash": "bcc046bf7baa45e1",
+          "line": 482,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:335"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Err#andThrough",
+      "kind": "method",
+      "target": "Err",
+      "operation": "andThrough",
+      "file": "src/result.ts",
+      "line": 488,
+      "endLine": 490,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "(t: T) => Result<unknown, F>",
+          "optional": false
+        }
+      ],
+      "returns": "Result<T, E | F>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "err"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "1c48daa116f11460",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Err#andTee",
+      "kind": "method",
+      "target": "Err",
+      "operation": "andTee",
+      "file": "src/result.ts",
+      "line": 492,
+      "endLine": 494,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "(t: T) => unknown",
+          "optional": false
+        }
+      ],
+      "returns": "Result<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "err"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "1c48daa116f11460",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Err#orTee",
+      "kind": "method",
+      "target": "Err",
+      "operation": "orTee",
+      "file": "src/result.ts",
+      "line": 499,
+      "endLine": 506,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "(t: E) => unknown",
+          "optional": false
+        }
+      ],
+      "returns": "Result<T, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "err"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "637bfa371b4e8c56",
+      "guarantees": [
+        {
+          "id": "ok.passes-through",
+          "key": "Err#orTee.ok.passes-through",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`orTee` lets the original `Err` result pass through regardless of the result of the passed-in function.",
+          "textHash": "4a2c28669bf1fd95",
+          "line": 497,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:163",
+            "tests/index.test.ts:173"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Err#andThen",
+      "kind": "method",
+      "target": "Err",
+      "operation": "andThen",
+      "file": "src/result.ts",
+      "line": 511,
+      "endLine": 518,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "returns": "any",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "err"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "1c48daa116f11460",
+      "guarantees": [
+        {
+          "id": "ok.keeps-err",
+          "key": "Err#andThen.ok.keeps-err",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "With `sq` returning `ok(n ** 2)`, `err(3).andThen(sq).andThen(sq)` is `Err(3)`.",
+          "textHash": "74147600d5cee2ec",
+          "line": 509,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:352"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Err#orElse",
+      "kind": "method",
+      "target": "Err",
+      "operation": "orElse",
+      "file": "src/result.ts",
+      "line": 523,
+      "endLine": 530,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "f",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "returns": "any",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "c87ed26c72976dda",
+      "guarantees": [
+        {
+          "id": "ok.recovers",
+          "key": "Err#orElse.ok.recovers",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`orElse` takes the `Err` value and maps it to the `Result` returned by the callback, so a callback returning `ok(\"User does not exist\")` recovers the error into an `Ok`.",
+          "textHash": "62d8c532d92ef2e5",
+          "line": 521,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:468"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Err#asyncAndThen",
+      "kind": "method",
+      "target": "Err",
+      "operation": "asyncAndThen",
+      "file": "src/result.ts",
+      "line": 533,
+      "endLine": 535,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "(t: T) => ResultAsync<U, F>",
+          "optional": false
+        }
+      ],
+      "returns": "ResultAsync<U, E | F>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "c7c434b5991a1d74",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Err#asyncAndThrough",
+      "kind": "method",
+      "target": "Err",
+      "operation": "asyncAndThrough",
+      "file": "src/result.ts",
+      "line": 537,
+      "endLine": 539,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "(t: T) => ResultAsync<unknown, F>",
+          "optional": false
+        }
+      ],
+      "returns": "ResultAsync<T, E | F>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "e8773477e45893f8",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Err#asyncMap",
+      "kind": "method",
+      "target": "Err",
+      "operation": "asyncMap",
+      "file": "src/result.ts",
+      "line": 542,
+      "endLine": 544,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_f",
+          "type": "(t: T) => Promise<U>",
+          "optional": false
+        }
+      ],
+      "returns": "ResultAsync<U, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "c7c434b5991a1d74",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Err#unwrapOr",
+      "kind": "method",
+      "target": "Err",
+      "operation": "unwrapOr",
+      "file": "src/result.ts",
+      "line": 549,
+      "endLine": 551,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "v",
+          "type": "A",
+          "optional": false
+        }
+      ],
+      "returns": "T | A",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "e6df26f2b1695aeb",
+      "guarantees": [
+        {
+          "id": "ok.returns-default",
+          "key": "Err#unwrapOr.ok.returns-default",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`unwrapOr` returns the given default when the result is an `Err`, so `err(\"Oh noooo\").map(multiply).unwrapOr(10)` gives 10.",
+          "textHash": "7dcb367cddb022a4",
+          "line": 547,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:347"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Err#match",
+      "kind": "method",
+      "target": "Err",
+      "operation": "match",
+      "file": "src/result.ts",
+      "line": 556,
+      "endLine": 558,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_ok",
+          "type": "(t: T) => A",
+          "optional": false
+        },
+        {
+          "name": "err",
+          "type": "(e: E) => B",
+          "optional": false
+        }
+      ],
+      "returns": "A | B",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "1c48daa116f11460",
+      "guarantees": [
+        {
+          "id": "ok.runs-err-callback",
+          "key": "Err#match.ok.runs-err-callback",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "`match` executes the second function (the `Err` callback) with the error and returns its return value, without requiring it to return a `Result`.",
+          "textHash": "952058f82e50a6b4",
+          "line": 554,
+          "references": [],
+          "tests": [
+            "tests/index.test.ts:442"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "Err#safeUnwrap",
+      "kind": "method",
+      "target": "Err",
+      "operation": "safeUnwrap",
+      "file": "src/result.ts",
+      "line": 560,
+      "endLine": 567,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [],
+      "returns": "Generator<Err<never, E>, T>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [
+        "err"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "72a65fff4e03cabd",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Err#_unsafeUnwrap",
+      "kind": "method",
+      "target": "Err",
+      "operation": "_unsafeUnwrap",
+      "file": "src/result.ts",
+      "line": 569,
+      "endLine": 571,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "config",
+          "type": "ErrorConfig",
+          "optional": true
+        }
+      ],
+      "returns": "T",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "03a00f1466c2f057",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Err#_unsafeUnwrapErr",
+      "kind": "method",
+      "target": "Err",
+      "operation": "_unsafeUnwrapErr",
+      "file": "src/result.ts",
+      "line": 573,
+      "endLine": 575,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "_",
+          "type": "ErrorConfig",
+          "optional": true
+        }
+      ],
+      "returns": "E",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "46f0c102289a48f7",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "Err#[Symbol.iterator]",
+      "kind": "method",
+      "target": "Err",
+      "operation": "[Symbol.iterator]",
+      "file": "src/result.ts",
+      "line": 577,
+      "endLine": 584,
+      "referencedBy": [
+        "src/index.ts",
+        "src/result-async.ts"
+      ],
+      "summary": "",
+      "params": [],
+      "returns": "Generator<Err<never, E>, T>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [
+        {
+          "member": "error",
+          "type": "E",
+          "members": []
+        }
+      ],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "d8504313bd4ffc52",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    },
+    {
+      "id": "fromThrowable",
+      "kind": "function",
+      "operation": "fromThrowable",
+      "file": "src/result.ts",
+      "line": 587,
+      "endLine": 587,
+      "referencedBy": [
+        "src/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "fn",
+          "type": "Fn",
+          "optional": false
+        },
+        {
+          "name": "errorFn",
+          "type": "((e: unknown) => E) | undefined",
+          "optional": true
+        }
+      ],
+      "returns": "(...args: Parameters<Fn>) => Result<ReturnType<Fn>, E>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "6ce282aeeb3c06b4",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "ok.ok.is-ok-true",
+      "guaranteeId": "ok.ok.is-ok-true",
+      "file": "tests/index.test.ts",
+      "line": 21,
+      "title": "ok.ok.is-ok-true Creates an Ok value",
+      "status": "test",
+      "bodyHash": "bb525096109059c9",
+      "literals": [
+        "12"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "Ok",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ok.ok.constructs-ok",
+      "guaranteeId": "ok.ok.constructs-ok",
+      "file": "tests/index.test.ts",
+      "line": 29,
+      "title": "ok.ok.constructs-ok Creates an Ok value with null",
+      "status": "test",
+      "bodyHash": "91cddc277d8322f0",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ok.ok.constructs-ok",
+      "guaranteeId": "ok.ok.constructs-ok",
+      "file": "tests/index.test.ts",
+      "line": 37,
+      "title": "ok.ok.constructs-ok Creates an Ok value with undefined",
+      "status": "test",
+      "bodyHash": "6b033942ca13f4c4",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "ok.ok.constructs-ok",
+      "guaranteeId": "ok.ok.constructs-ok",
+      "file": "tests/index.test.ts",
+      "line": 45,
+      "title": "ok.ok.constructs-ok Is comparable",
+      "status": "test",
+      "bodyHash": "a3e02e2904808244",
+      "literals": [
+        "42",
+        "43"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#map.ok.applies-callback",
+      "unitId": "Ok#map",
+      "guaranteeId": "ok.applies-callback",
+      "file": "tests/index.test.ts",
+      "line": 50,
+      "title": "Ok#map.ok.applies-callback Maps over an Ok value",
+      "status": "test",
+      "bodyHash": "565837a021c06218",
+      "literals": [
+        "12"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#mapErr.ok.leaves-ok",
+      "unitId": "Ok#mapErr",
+      "guaranteeId": "ok.leaves-ok",
+      "file": "tests/index.test.ts",
+      "line": 61,
+      "title": "Ok#mapErr.ok.leaves-ok Skips `mapErr`",
+      "status": "test",
+      "bodyHash": "64abe4c9ae9d042b",
+      "literals": [
+        "mapped error value",
+        "12"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#andThen.ok.chains-results",
+      "unitId": "Ok#andThen",
+      "guaranteeId": "ok.chains-results",
+      "file": "tests/index.test.ts",
+      "line": 71,
+      "title": "Ok#andThen.ok.chains-results Maps to an Ok",
+      "status": "test",
+      "bodyHash": "92d80a833d4b5632",
+      "literals": [
+        "12",
+        "why not"
+      ],
+      "keys": [
+        "data"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#andThen.ok.chain-examples",
+      "unitId": "Ok#andThen",
+      "guaranteeId": "ok.chain-examples",
+      "file": "tests/index.test.ts",
+      "line": 85,
+      "title": "Ok#andThen.ok.chain-examples Maps to an Err",
+      "status": "test",
+      "bodyHash": "1ac0b8912cf3f70e",
+      "literals": [
+        "12",
+        "Whoopsies!",
+        "noop"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#andThrough.ok.passes-error-along",
+      "unitId": "Ok#andThrough",
+      "guaranteeId": "ok.passes-error-along",
+      "file": "tests/index.test.ts",
+      "line": 106,
+      "title": "Ok#andThrough.ok.passes-error-along Calls the passed function but returns an original ok",
+      "status": "test",
+      "bodyHash": "eb3151153b79f287",
+      "literals": [
+        "12"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#andThen.ok.chain-examples",
+      "unitId": "Ok#andThen",
+      "guaranteeId": "ok.chain-examples",
+      "file": "tests/index.test.ts",
+      "line": 116,
+      "title": "Ok#andThen.ok.chain-examples Maps to an Err",
+      "status": "test",
+      "bodyHash": "594524349b0eb478",
+      "literals": [
+        "12",
+        "Whoopsies!",
+        "noop"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#andTee.ok.passes-through",
+      "unitId": "Ok#andTee",
+      "guaranteeId": "ok.passes-through",
+      "file": "tests/index.test.ts",
+      "line": 138,
+      "title": "Ok#andTee.ok.passes-through Calls the passed function but returns an original ok",
+      "status": "test",
+      "bodyHash": "8055075717e81c13",
+      "literals": [
+        "12"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#andTee.ok.passes-through",
+      "unitId": "Ok#andTee",
+      "guaranteeId": "ok.passes-through",
+      "file": "tests/index.test.ts",
+      "line": 148,
+      "title": "Ok#andTee.ok.passes-through returns an original ok even when the passed function fails",
+      "status": "test",
+      "bodyHash": "be80f72e0b08998d",
+      "literals": [
+        "12",
+        "OMG!"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Err#orTee.ok.passes-through",
+      "unitId": "Err#orTee",
+      "guaranteeId": "ok.passes-through",
+      "file": "tests/index.test.ts",
+      "line": 163,
+      "title": "Err#orTee.ok.passes-through Calls the passed function but returns an original err",
+      "status": "test",
+      "bodyHash": "75553cce55f9a155",
+      "literals": [
+        "12"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Err#orTee.ok.passes-through",
+      "unitId": "Err#orTee",
+      "guaranteeId": "ok.passes-through",
+      "file": "tests/index.test.ts",
+      "line": 173,
+      "title": "Err#orTee.ok.passes-through returns an original err even when the passed function fails",
+      "status": "test",
+      "bodyHash": "416dc0d59c43ac1a",
+      "literals": [
+        "12",
+        "OMG!"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#unwrapOr.ok.unwraps-value",
+      "unitId": "Ok#unwrapOr",
+      "guaranteeId": "ok.unwraps-value",
+      "file": "tests/index.test.ts",
+      "line": 231,
+      "title": "Ok#unwrapOr.ok.unwraps-value unwrapOr and return the Ok value",
+      "status": "test",
+      "bodyHash": "45d768c67ea2cf21",
+      "literals": [
+        "12"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#match.ok.runs-ok-callback",
+      "unitId": "Ok#match",
+      "guaranteeId": "ok.runs-ok-callback",
+      "file": "tests/index.test.ts",
+      "line": 280,
+      "title": "Ok#match.ok.runs-ok-callback Matches on an Ok",
+      "status": "test",
+      "bodyHash": "8434f7091d9659a2",
+      "literals": [
+        "weeeeee",
+        "wooooo",
+        "12"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Ok#isErr.ok.false-for-ok",
+      "unitId": "Ok#isErr",
+      "guaranteeId": "ok.false-for-ok",
+      "file": "tests/index.test.ts",
+      "line": 297,
+      "title": "Ok#isErr.ok.false-for-ok Can read the value after narrowing",
+      "status": "test",
+      "bodyHash": "083741d5765b92e1",
+      "literals": [
+        "safe to read"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "Result",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "err.ok.is-err-true",
+      "guaranteeId": "err.ok.is-err-true",
+      "file": "tests/index.test.ts",
+      "line": 310,
+      "title": "err.ok.is-err-true Creates an Err value",
+      "status": "test",
+      "bodyHash": "3aae29efe2d4e060",
+      "literals": [
+        "I have you now."
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "Err",
+          "from": "src/index.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "err.ok.constructs-err",
+      "guaranteeId": "err.ok.constructs-err",
+      "file": "tests/index.test.ts",
+      "line": 318,
+      "title": "err.ok.constructs-err Is comparable",
+      "status": "test",
+      "bodyHash": "9453e76c3972a44f",
+      "literals": [
+        "42",
+        "43"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Err#map.ok.leaves-err",
+      "unitId": "Err#map",
+      "guaranteeId": "ok.leaves-err",
+      "file": "tests/index.test.ts",
+      "line": 323,
+      "title": "Err#map.ok.leaves-err Skips `map`",
+      "status": "test",
+      "bodyHash": "6a1018a5bd91b2a9",
+      "literals": [
+        "I am your father",
+        "noooo"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Err#mapErr.ok.applies-callback",
+      "unitId": "Err#mapErr",
+      "guaranteeId": "ok.applies-callback",
+      "file": "tests/index.test.ts",
+      "line": 335,
+      "title": "Err#mapErr.ok.applies-callback Maps over an Err",
+      "status": "test",
+      "bodyHash": "5eec8f25186401a5",
+      "literals": [
+        "Round 1, Fight!",
+        "1",
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Err#unwrapOr.ok.returns-default",
+      "unitId": "Err#unwrapOr",
+      "guaranteeId": "ok.returns-default",
+      "file": "tests/index.test.ts",
+      "line": 347,
+      "title": "Err#unwrapOr.ok.returns-default unwrapOr and return the default value",
+      "status": "test",
+      "bodyHash": "28dc5a4674188ff4",
+      "literals": [
+        "Oh nooo"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Err#andThen.ok.keeps-err",
+      "unitId": "Err#andThen",
+      "guaranteeId": "ok.keeps-err",
+      "file": "tests/index.test.ts",
+      "line": 352,
+      "title": "Err#andThen.ok.keeps-err Skips over andThen",
+      "status": "test",
+      "bodyHash": "0f7259ae94d5038b",
+      "literals": [
+        "Yolo",
+        "yooyo"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        },
+        {
+          "name": "ok",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Err#match.ok.runs-err-callback",
+      "unitId": "Err#match",
+      "guaranteeId": "ok.runs-err-callback",
+      "file": "tests/index.test.ts",
+      "line": 442,
+      "title": "Err#match.ok.runs-err-callback Matches on an Err",
+      "status": "test",
+      "bodyHash": "be70fd1f47be6285",
+      "literals": [
+        "weeeeee",
+        "wooooo",
+        "12"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "Err#orElse.ok.recovers",
+      "unitId": "Err#orElse",
+      "guaranteeId": "ok.recovers",
+      "file": "tests/index.test.ts",
+      "line": 468,
+      "title": "Err#orElse.ok.recovers invokes the orElse callback on an Err value",
+      "status": "test",
+      "bodyHash": "40d94ab1e6a89b7a",
+      "literals": [
+        "BOOOM!"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "err",
+          "from": "src/index.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "operation-no-guarantee",
+      "message": "safeTry has no guarantee (doc without @guarantee / @throws)",
+      "file": "src/result.ts",
+      "line": 96,
+      "unit": "safeTry",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "Ok#isOk.ok.true-for-ok has no test naming it",
+      "file": "src/result.ts",
+      "line": 324,
+      "unit": "Ok#isOk",
+      "guarantee": "Ok#isOk.ok.true-for-ok",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "Ok#andThen.ok.flattens-nested has no test naming it",
+      "file": "src/result.ts",
+      "line": 355,
+      "unit": "Ok#andThen",
+      "guarantee": "Ok#andThen.ok.flattens-nested",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Ok#orTee has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 388,
+      "unit": "Ok#orTee",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Ok#orElse has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 392,
+      "unit": "Ok#orElse",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Ok#asyncAndThen has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 401,
+      "unit": "Ok#asyncAndThen",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Ok#asyncAndThrough has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 405,
+      "unit": "Ok#asyncAndThrough",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Ok#asyncMap has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 414,
+      "unit": "Ok#asyncMap",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Ok#safeUnwrap has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 434,
+      "unit": "Ok#safeUnwrap",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Ok#_unsafeUnwrap has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 442,
+      "unit": "Ok#_unsafeUnwrap",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Ok#_unsafeUnwrapErr has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 446,
+      "unit": "Ok#_unsafeUnwrapErr",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Ok#[Symbol.iterator] has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 451,
+      "unit": "Ok#[Symbol.iterator]",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "Err#isOk.ok.false-for-err has no test naming it",
+      "file": "src/result.ts",
+      "line": 460,
+      "unit": "Err#isOk",
+      "guarantee": "Err#isOk.ok.false-for-err",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "Err#isErr.ok.true-for-err has no test naming it",
+      "file": "src/result.ts",
+      "line": 467,
+      "unit": "Err#isErr",
+      "guarantee": "Err#isErr.ok.true-for-err",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Err#andThrough has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 488,
+      "unit": "Err#andThrough",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Err#andTee has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 492,
+      "unit": "Err#andTee",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Err#asyncAndThen has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 533,
+      "unit": "Err#asyncAndThen",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Err#asyncAndThrough has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 537,
+      "unit": "Err#asyncAndThrough",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Err#asyncMap has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 542,
+      "unit": "Err#asyncMap",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Err#safeUnwrap has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 560,
+      "unit": "Err#safeUnwrap",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Err#_unsafeUnwrap has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 569,
+      "unit": "Err#_unsafeUnwrap",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Err#_unsafeUnwrapErr has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 573,
+      "unit": "Err#_unsafeUnwrapErr",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "Err#[Symbol.iterator] has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 577,
+      "unit": "Err#[Symbol.iterator]",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "fromThrowable has no guarantee (no doc comment)",
+      "file": "src/result.ts",
+      "line": 587,
+      "unit": "fromThrowable",
+      "severity": "fail"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 40,
+    "unitsWithoutGuarantee": 20,
+    "guarantees": 24,
+    "guaranteesWithoutTest": 4,
+    "tests": 25,
+    "orphanTests": 0,
+    "unlinkedTests": 92,
+    "findings": {
+      "fail": 24,
+      "warn": 0,
+      "info": 1
+    }
+  }
+}

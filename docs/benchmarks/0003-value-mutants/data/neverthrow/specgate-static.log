@@ -1,0 +1,31 @@
+specgate check (advisory): 40 units, 24 guarantees, 25 linked tests
+  fail 24 · warn 0 · info 1
+  ❌ [operation-no-guarantee] src/result.ts:96 safeTry has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/result.ts:324 Ok#isOk.ok.true-for-ok has no test naming it
+  ❌ [guarantee-no-test] src/result.ts:355 Ok#andThen.ok.flattens-nested has no test naming it
+  ❌ [operation-no-guarantee] src/result.ts:388 Ok#orTee has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:392 Ok#orElse has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:401 Ok#asyncAndThen has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:405 Ok#asyncAndThrough has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:414 Ok#asyncMap has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:434 Ok#safeUnwrap has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:442 Ok#_unsafeUnwrap has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:446 Ok#_unsafeUnwrapErr has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:451 Ok#[Symbol.iterator] has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] src/result.ts:460 Err#isOk.ok.false-for-err has no test naming it
+  ❌ [guarantee-no-test] src/result.ts:467 Err#isErr.ok.true-for-err has no test naming it
+  ❌ [operation-no-guarantee] src/result.ts:488 Err#andThrough has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:492 Err#andTee has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:533 Err#asyncAndThen has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:537 Err#asyncAndThrough has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:542 Err#asyncMap has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:560 Err#safeUnwrap has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:569 Err#_unsafeUnwrap has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:573 Err#_unsafeUnwrapErr has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:577 Err#[Symbol.iterator] has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/result.ts:587 fromThrowable has no guarantee (no doc comment)
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work>/neverthrow/.specgate-static/report.json
+      <work>/neverthrow/.specgate-static/summary.md
+      <work>/neverthrow/.specgate-static/report.sarif

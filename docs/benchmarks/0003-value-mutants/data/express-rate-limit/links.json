@@ -1,0 +1,645 @@
+[
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 176,
+    "title": "should not modify the options object passed",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 182,
+    "title": "should call `init` even if no requests have come in",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 220,
+    "title": "should handle resolving async init",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 234,
+    "title": "should handle rejecting async init and log error",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 251,
+    "title": "should catch synchronous errors thrown from store.init()",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 269,
+    "title": "should let the first request through",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 275,
+    "title": "should refuse additional connections once IP has reached the max",
+    "key": "rateLimit.ok.default-status-code",
+    "reason": "asserts default 429"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 287,
+    "title": "should (eventually) accept new connections from a blocked IP",
+    "key": "rateLimit.ok.default-status-code",
+    "reason": "asserts default 429"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 302,
+    "title": "should work repeatedly",
+    "key": "rateLimit.ok.default-status-code",
+    "reason": "asserts default 429"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 321,
+    "title": "should block all requests if max is set to 0",
+    "key": "rateLimit.ok.zero-limit-blocks-all",
+    "reason": "limit 0 blocks"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 327,
+    "title": "should show the provided message instead of the default message when m",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 342,
+    "title": "should allow the error status code to be customized",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 354,
+    "title": "should allow responding with a JSON message",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 372,
+    "title": "should allow message to be a function",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 384,
+    "title": "should allow message to be a function that returns a promise",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 396,
+    "title": "should use a custom handler when specified",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 410,
+    "title": "should forward errors from %s using `next()`",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 464,
+    "title": "should allow custom key generators",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 483,
+    "title": "should allow custom skip function",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 497,
+    "title": "should allow custom skip function that returns a promise",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 510,
+    "title": "should allow max to be a function",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 522,
+    "title": "should allow max to be a function that returns a promise",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 534,
+    "title": "should calculate the remaining hits",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 556,
+    "title": "should call `increment` on the store (%s store)",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 571,
+    "title": "should call `resetKey` on the store (%s store)",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 585,
+    "title": "should call `get` on the store (%s store)",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 599,
+    "title": "should throw an error if `get` does not exist on the store (%s store)",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 609,
+    "title": "should decrement hits when requests succeed and `skipSuccessfulRequest",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 626,
+    "title": "should decrement hits when request finishes before `resetTime` with `s",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 648,
+    "title": "should not decrement hits when request finishes after `resetTime` with",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 670,
+    "title": "should not decrement hits when request finishes after window reset wit",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 725,
+    "title": "should not decrement hits when requests fail and `skipSuccessfulReques",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 742,
+    "title": "should decrement hits when requests succeed, `skipSuccessfulRequests` ",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 760,
+    "title": "should not decrement hits when requests fail, `skipSuccessfulRequests`",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 780,
+    "title": "should decrement hits when requests succeed, `skipSuccessfulRequests` ",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 799,
+    "title": "should not decrement hits when requests fail, `skipSuccessfulRequests`",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 818,
+    "title": "should decrement hits when requests fail and `skipFailedRequests` is s",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 835,
+    "title": "should not decrement hits when requests succeed and `skipFailedRequest",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 852,
+    "title": "should decrement hits when requests fail, `skipFailedRequests` is set ",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 869,
+    "title": "should decrement hits when response closes and `skipFailedRequests` is",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 938,
+    "title": "should decrement hits when response closes and `skipFailedRequests` is",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 980,
+    "title": "should decrement hits when response emits an error and `skipFailedRequ",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 997,
+    "title": "should decrement hits when rate limit is reached and `skipFailedReques",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1017,
+    "title": "should forward errors in the handler using `next()` (%s store)",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1053,
+    "title": "should forward errors in `skip()` using `next()` (%s store)",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok",
+    "each": true
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1088,
+    "title": "should pass the number of hits and the limit to the next request handl",
+    "key": "rateLimit.ok.default-request-property-name",
+    "reason": "reads request.rateLimit"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1130,
+    "title": "should pass the number of hits and the limit to the next request handl",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1170,
+    "title": "should handle two rate-limiters with different `requestPropertyNames` ",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1244,
+    "title": "should not pass if the store throws an error by default",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1254,
+    "title": "should pass if the store throws an error and passOnStoreError is true",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1271,
+    "title": "should only call next once when passOnStoreError causes it to skip lim",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1303,
+    "title": "should use the logger instead of the console on validation errors",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/middleware-test.ts",
+    "line": 1315,
+    "title": "should use the logger instead of the console when the store throws an ",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 25,
+    "title": "should send correct `x-ratelimit-limit`, `x-ratelimit-remaining`, and ",
+    "key": "rateLimit.ok.default-legacy-headers",
+    "reason": "asserts legacy headers"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 49,
+    "title": "should send correct `ratelimit-*` headers for the standard headers dra",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 67,
+    "title": "should send policy and combined ratelimit headers for the standard dra",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 83,
+    "title": "should send correct headers for the standard draft 8",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 103,
+    "title": "should send multiple headers correctly for the standard draft 8",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 145,
+    "title": "should override the quota name if specified for the standard draft 8",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 166,
+    "title": "should return the `retry-after` header once IP has reached the max",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 178,
+    "title": "should use the `retryAfter` option as the `retry-after` header value w",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 191,
+    "title": "should use the `retryAfter` option as the `retry-after` header value w",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 204,
+    "title": "should not set the `retry-after` header if all headers have been disab",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 245,
+    "title": "should not send headers for an incorrect draft number",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 284,
+    "title": "should set the `retry-after` header to the value of `windowMs` in seco",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 301,
+    "title": "should emit legacy headers that ratelimit-header-parser can read",
+    "key": "rateLimit.ok.default-legacy-headers",
+    "reason": "asserts legacy headers"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 321,
+    "title": "should emit standard draft-6 headers that ratelimit-header-parser can ",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 342,
+    "title": "should emit a standard draft 7 combined header that ratelimit-header-p",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/headers-test.ts",
+    "line": 364,
+    "title": "should send RateLimit-Reset header with value 0 when window has just e",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/options-test.ts",
+    "line": 32,
+    "title": "should allow an empty options object",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/options-test.ts",
+    "line": 36,
+    "title": "should ignore options that are set to `undefined`",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/options-test.ts",
+    "line": 47,
+    "title": "should allow the use of pre-6.x headers options",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/options-test.ts",
+    "line": 57,
+    "title": "should allow the use of the `max` option",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/options-test.ts",
+    "line": 67,
+    "title": "should allow the use of the `limit` option",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/options-test.ts",
+    "line": 77,
+    "title": "should not allow the use of an invalid store",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/options-test.ts",
+    "line": 90,
+    "title": "should not call `init` if it is not a function",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/options-test.ts",
+    "line": 114,
+    "title": "should not allow an invalid standardHeaders option",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/options-test.ts",
+    "line": 122,
+    "title": "should not allow an invalid logger implemenation to be provided",
+    "key": "rateLimit.ok.default-window-ms",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 4,
+    "title": "should return an IPv4 address unchanged",
+    "key": "ipKeyGenerator.ok.ipv4-unchanged",
+    "reason": "IPv4 unchanged"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 9,
+    "title": "should return an IPv4 address mapped to IPv6 as an IPv4 address",
+    "key": "ipKeyGenerator.ok.ipv4-mapped-ipv6",
+    "reason": "mapped address returned as IPv4"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 14,
+    "title": "should return an IPv4 address mapped to IPv6 as an IPv4 address regard",
+    "key": "ipKeyGenerator.ok.ipv4-mapped-ipv6",
+    "reason": "mapped address returned as IPv4"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 25,
+    "title": "should apply ipv6Subnet to an IPv6 address that merely ends in dotted-",
+    "key": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+    "reason": "asserts /56 default result"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 41,
+    "title": "should apply ipv6Subnet to addresses in the IPv4-compatible range that",
+    "key": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+    "reason": "asserts /56 default result"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 46,
+    "title": "should return an IPv6 address unchanged with ipv6Subnet set to false",
+    "key": "ipKeyGenerator.ok.ipv6-subnet-false",
+    "reason": "subnet false"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 52,
+    "title": "should apply ipv6Subnet only a true IPv6 address",
+    "key": "ipKeyGenerator.ok.ipv4-mapped-ipv6",
+    "reason": "mapped address returned as IPv4"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 58,
+    "title": "should apply a default /56 netmask to an IPv6 address",
+    "key": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+    "reason": "asserts /56 default result"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 64,
+    "title": "should apply a /63 netmask to an IPv6 address",
+    "key": "ipKeyGenerator.ok.ipv4-unchanged",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 70,
+    "title": "should accept abbreviated IPv6 addresses",
+    "key": "ipKeyGenerator.ok.default-ipv6-subnet-56",
+    "reason": "asserts /56 default result"
+  },
+  {
+    "file": "test/library/ip-key-generator-test.ts",
+    "line": 74,
+    "title": "should return an IPv6 address normalized but otherwise unchanged with ",
+    "key": "ipKeyGenerator.ok.ipv4-unchanged",
+    "reason": "fallback first ok"
+  }
+]

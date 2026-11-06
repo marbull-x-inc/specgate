@@ -1,0 +1,9 @@
+
+ RUN  v4.1.10 <work>/es-toolkit
+
+
+ Test Files  719 passed (719)
+      Tests  5219 passed | 2 skipped (5221)
+   Start at  12:01:01
+   Duration  9.04s (transform 18.67s, setup 0ms, import 48.37s, tests 17.47s, environment 537ms)
+

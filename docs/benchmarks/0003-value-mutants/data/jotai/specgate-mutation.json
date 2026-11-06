@@ -1,0 +1,6114 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "generatedAt": "2026-11-06T03:03:53.514Z",
+  "root": "<work>/jotai",
+  "revision": "c4e3bc34c4e53fb331cfc68c94b2b7a8ad7aa465",
+  "configHash": "a1719d40f8c628ba",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "useResetAtom",
+      "kind": "function",
+      "operation": "useResetAtom",
+      "file": "src/react/utils/useResetAtom.ts",
+      "line": 13,
+      "endLine": 20,
+      "referencedBy": [
+        "src/react/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "anAtom",
+          "type": "WritableAtom<unknown, [typeof RESET], T>",
+          "optional": false
+        },
+        {
+          "name": "options",
+          "type": "Options",
+          "optional": true
+        }
+      ],
+      "returns": "() => T",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "constantRanges": [
+        {
+          "name": "RESET",
+          "file": "src/vanilla/utils/constants.ts",
+          "line": 5,
+          "endLine": 7
+        }
+      ],
+      "implHash": "1b50378e60ea7072",
+      "guarantees": [
+        {
+          "id": "ok.returns-function",
+          "key": "useResetAtom.ok.returns-function",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "It returns a function that, when called, resets a resettable atom to its initial value.",
+          "textHash": "14a8768c2de2bb89",
+          "line": 11,
+          "references": [],
+          "tests": [
+            "tests/react/utils/useResetAtom.test.tsx:137"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 7,
+        "survived": 3,
+        "noCoverage": 1,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "atomWithDefault",
+      "kind": "function",
+      "operation": "atomWithDefault",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 19,
+      "endLine": 47,
+      "referencedBy": [
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "getDefault",
+          "type": "Read<Value, [DefaultSetStateAction<Value>], void>",
+          "optional": false
+        }
+      ],
+      "returns": "WritableAtom<Value, [DefaultSetStateAction<Value>], void>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [
+        {
+          "expression": "process.env.NODE_ENV",
+          "line": 25
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "match",
+          "expression": "process.env.NODE_ENV !== 'production'",
+          "line": 25,
+          "values": [
+            "production"
+          ],
+          "names": [],
+          "key": "NODE_ENV"
+        }
+      ],
+      "constantRanges": [
+        {
+          "name": "RESET",
+          "file": "src/vanilla/utils/constants.ts",
+          "line": 5,
+          "endLine": 7
+        }
+      ],
+      "implHash": "0ab70cfbfb97ecda",
+      "guarantees": [
+        {
+          "id": "ok.read-default",
+          "key": "atomWithDefault.ok.read-default",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The default value comes from the read function, so `atomWithDefault((get) => get(count1Atom) * 2)` with `count1Atom` equal to 1 has the value 2.",
+          "textHash": "0811e370b5d520db",
+          "line": 15,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithDefault.test.tsx:17",
+            "tests/react/vanilla-utils/atomWithDefault.test.tsx:53",
+            "tests/vanilla/utils/atomWithDefault.test.ts:30"
+          ]
+        },
+        {
+          "id": "ok.overwritten-detaches",
+          "key": "atomWithDefault.ok.overwritten-detaches",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "After the value is overwritten with `set`, the read function is no longer used and a change in dependency atoms does not update the value.",
+          "textHash": "8790611eb64e7078",
+          "line": 16,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithDefault.test.tsx:209",
+            "tests/vanilla/utils/atomWithDefault.test.ts:49",
+            "tests/vanilla/utils/atomWithDefault.test.ts:58"
+          ]
+        },
+        {
+          "id": "ok.reset-restores",
+          "key": "atomWithDefault.ok.reset-restores",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "Setting the atom to `RESET` discards changes made with `set` and restores the value computed by the read function.",
+          "textHash": "f4f9ba520140d99c",
+          "line": 17,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithDefault.test.tsx:104",
+            "tests/react/vanilla-utils/atomWithDefault.test.tsx:147",
+            "tests/vanilla/utils/atomWithDefault.test.ts:10",
+            "tests/vanilla/utils/atomWithDefault.test.ts:19",
+            "tests/vanilla/utils/atomWithDefault.test.ts:38",
+            "tests/vanilla/utils/atomWithDefault.test.ts:67"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 19,
+        "survived": 9,
+        "noCoverage": 1,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "atomWithLazy",
+      "kind": "function",
+      "operation": "atomWithLazy",
+      "file": "src/vanilla/utils/atomWithLazy.ts",
+      "line": 9,
+      "endLine": 20,
+      "referencedBy": [
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "makeInitial",
+          "type": "() => Value",
+          "optional": false
+        }
+      ],
+      "returns": "PrimitiveAtom<Value>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "5594c878d788114e",
+      "guarantees": [
+        {
+          "id": "ok.lazy-first-use",
+          "key": "atomWithLazy.ok.lazy-first-use",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The initial value is computed at the first use of the atom in the store, not when the atom is defined.",
+          "textHash": "8244472d9ea24e9c",
+          "line": 5,
+          "references": [],
+          "tests": [
+            "tests/vanilla/utils/atomWithLazy.test.ts:5"
+          ]
+        },
+        {
+          "id": "ok.once-per-store",
+          "key": "atomWithLazy.ok.once-per-store",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The initial value is recreated exactly once per store, so a new store created with `createStore()` computes a new initial value.",
+          "textHash": "14ef81076f8bfe47",
+          "line": 6,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.writable-after-init",
+          "key": "atomWithLazy.ok.writable-after-init",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "After initialization the atom behaves like a regular primitive atom and can be written to.",
+          "textHash": "1d9a02c79402ddfc",
+          "line": 7,
+          "references": [],
+          "tests": [
+            "tests/vanilla/utils/atomWithLazy.test.ts:25",
+            "tests/vanilla/utils/atomWithLazy.test.ts:34"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 5,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "atomWithRefresh",
+      "kind": "function",
+      "operation": "atomWithRefresh",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 19,
+      "endLine": 51,
+      "referencedBy": [
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "read",
+          "type": "Read<Value, Args, Result>",
+          "optional": false
+        },
+        {
+          "name": "write",
+          "type": "Write<Value, Args, Result>",
+          "optional": true
+        }
+      ],
+      "returns": "WritableAtom<Value, Args, Result | undefined>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [
+        {
+          "expression": "process.env.NODE_ENV",
+          "line": 33
+        },
+        {
+          "expression": "process.env.NODE_ENV",
+          "line": 46
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "match",
+          "expression": "process.env.NODE_ENV !== 'production'",
+          "line": 33,
+          "values": [
+            "production"
+          ],
+          "names": [],
+          "key": "NODE_ENV"
+        }
+      ],
+      "implHash": "bb5aaa2fed909347",
+      "guarantees": [
+        {
+          "id": "ok.refresh-on-no-args",
+          "key": "atomWithRefresh.ok.refresh-on-no-args",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "Calling `set` with zero arguments forces the read function to be reevaluated.",
+          "textHash": "5931b66a2cafcf3a",
+          "line": 16,
+          "references": [
+            {
+              "raw": "read",
+              "kind": "param",
+              "target": "read"
+            }
+          ],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithRefresh.test.tsx:16",
+            "tests/react/vanilla-utils/atomWithRefresh.test.tsx:47",
+            "tests/vanilla/utils/atomWithRefresh.test.ts:6"
+          ]
+        },
+        {
+          "id": "ok.write-on-args",
+          "key": "atomWithRefresh.ok.write-on-args",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "Calling `set` with one or more arguments calls the `write` function.",
+          "textHash": "7e5d5e52a17390f7",
+          "line": 17,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithRefresh.test.tsx:91"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 15,
+        "survived": 15,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "atomWithReset",
+      "kind": "function",
+      "operation": "atomWithReset",
+      "file": "src/vanilla/utils/atomWithReset.ts",
+      "line": 18,
+      "endLine": 35,
+      "referencedBy": [
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "initialValue",
+          "type": "Value",
+          "optional": false
+        }
+      ],
+      "returns": "WritableAtom<Value, [SetStateActionWithReset<Value>], void> &\n  WithInitialValue<Value>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "constantRanges": [
+        {
+          "name": "RESET",
+          "file": "src/vanilla/utils/constants.ts",
+          "line": 5,
+          "endLine": 7
+        }
+      ],
+      "implHash": "837f640278095405",
+      "guarantees": [
+        {
+          "id": "ok.primitive-like",
+          "key": "atomWithReset.ok.primitive-like",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "It works exactly like a primitive atom with `initialValue`, and can also be set to `RESET`.",
+          "textHash": "810d11fda0762ca5",
+          "line": 15,
+          "references": [],
+          "tests": [
+            "tests/vanilla/utils/atomWithReset.test.ts:23",
+            "tests/vanilla/utils/atomWithReset.test.ts:30"
+          ]
+        },
+        {
+          "id": "ok.reset-to-initial",
+          "key": "atomWithReset.ok.reset-to-initial",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "Setting the atom to `RESET` returns it to its `initialValue`.",
+          "textHash": "c99434c20a29aae8",
+          "line": 16,
+          "references": [],
+          "tests": [
+            "tests/react/utils/useResetAtom.test.tsx:9",
+            "tests/react/utils/useResetAtom.test.tsx:60",
+            "tests/react/utils/useResetAtom.test.tsx:102",
+            "tests/vanilla/utils/atomWithReset.test.ts:16"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 14,
+        "survived": 2,
+        "noCoverage": 1,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "withStorageValidator",
+      "kind": "function",
+      "operation": "withStorageValidator",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 52,
+      "endLine": 81,
+      "referencedBy": [
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "validator",
+          "type": "(value: unknown) => value is Value",
+          "optional": false
+        }
+      ],
+      "returns": "(unknownStorage: AsyncStorage<unknown> | SyncStorage<unknown>) => { getItem: (key: string, initialValue: Value) => Value | PromiseLike<Value>; setItem: (key: string, newValue: unknown) => PromiseLike<void>; removeItem: (key: string) => PromiseLike<void>; subscribe?: Subscribe<unknown>; } | { getItem: (key: string, initialValue: Value) => Value | PromiseLike<Value>; setItem: (key: string, newValue: unknown) => void; removeItem: (key: string) => void; subscribe?: Subscribe<unknown>; }",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "helperRanges": [
+        {
+          "line": 5,
+          "endLine": 6
+        },
+        {
+          "line": 66,
+          "endLine": 71
+        }
+      ],
+      "implHash": "9e0524170b82d347",
+      "guarantees": [],
+      "examples": [],
+      "hasDoc": false,
+      "mutation": {
+        "killed": 18,
+        "survived": 0,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "createJSONStorage",
+      "kind": "function",
+      "operation": "createJSONStorage",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 93,
+      "endLine": 197,
+      "referencedBy": [
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "getStringStorage",
+          "type": "() =>\n    AsyncStringStorage | SyncStringStorage | undefined",
+          "optional": true
+        },
+        {
+          "name": "options",
+          "type": "JsonStorageOptions",
+          "optional": true
+        }
+      ],
+      "returns": "AsyncStorage<Value> | SyncStorage<Value>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "helperRanges": [
+        {
+          "line": 5,
+          "endLine": 6
+        },
+        {
+          "line": 126,
+          "endLine": 137
+        },
+        {
+          "line": 153,
+          "endLine": 163
+        }
+      ],
+      "implHash": "29b284fa7963a78d",
+      "guarantees": [
+        {
+          "id": "ok.json-serialization",
+          "key": "createJSONStorage.ok.json-serialization",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The storage it creates serializes with `JSON.stringify()` and deserializes with `JSON.parse()`.",
+          "textHash": "0286f5c310b54eaa",
+          "line": 89,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:494",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:675",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:714",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:726",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:743",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:770",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:806",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:844",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:879"
+          ]
+        },
+        {
+          "id": "ok.string-storage-getter",
+          "key": "createJSONStorage.ok.string-storage-getter",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "It takes a getter function that returns the underlying string storage, such as `window.localStorage` or `window.sessionStorage`.",
+          "textHash": "05ce4fabf14e2b4c",
+          "line": 90,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:334",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:375",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:467",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:472",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:477"
+          ]
+        },
+        {
+          "id": "ok.replacer-reviver",
+          "key": "createJSONStorage.ok.replacer-reviver",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "Its optional `replacer` option is used for `JSON.stringify` and its optional `reviver` option is used for `JSON.parse`.",
+          "textHash": "655fb6b1f6184755",
+          "line": 91,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:940"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 75,
+        "survived": 22,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "atomWithStorage",
+      "kind": "function",
+      "operation": "atomWithStorage",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 209,
+      "endLine": 278,
+      "referencedBy": [
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "key",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "initialValue",
+          "type": "Value",
+          "optional": false
+        },
+        {
+          "name": "storage",
+          "type": "| SyncStorage<Value>\n    | AsyncStorage<Value>",
+          "optional": true
+        },
+        {
+          "name": "options",
+          "type": "{ getOnInit?: boolean }",
+          "optional": true
+        }
+      ],
+      "returns": "never",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "storage",
+          "member": "getItem",
+          "count": 2
+        },
+        {
+          "port": "storage",
+          "member": "subscribe",
+          "count": 1
+        },
+        {
+          "port": "storage",
+          "member": "removeItem",
+          "count": 1
+        },
+        {
+          "port": "storage",
+          "member": "setItem",
+          "count": 2
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [
+        {
+          "expression": "process.env.NODE_ENV",
+          "line": 242
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "match",
+          "expression": "process.env.NODE_ENV !== 'production'",
+          "line": 242,
+          "values": [
+            "production"
+          ],
+          "names": [],
+          "key": "NODE_ENV"
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 5,
+          "endLine": 6
+        }
+      ],
+      "constantRanges": [
+        {
+          "name": "RESET",
+          "file": "src/vanilla/utils/constants.ts",
+          "line": 5,
+          "endLine": 7
+        }
+      ],
+      "implHash": "188499de4a53d25f",
+      "guarantees": [
+        {
+          "id": "ok.default-storage",
+          "key": "atomWithStorage.ok.default-storage",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "When no `storage` is given, the atom uses `localStorage` for storage and retrieval, with `JSON.stringify()` and `JSON.parse()` for serialization and deserialization.",
+          "textHash": "4f0a500074a4c5d7",
+          "line": 202,
+          "references": [
+            {
+              "raw": "storage",
+              "kind": "param",
+              "target": "storage"
+            }
+          ],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:565",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:641"
+          ]
+        },
+        {
+          "id": "ok.get-on-init-default",
+          "key": "atomWithStorage.ok.get-on-init-default",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The `getOnInit` option is `false` by default, so on initialization the atom holds `initialValue` rather than the stored value.",
+          "textHash": "6cc7b2b7473e0056",
+          "line": 203,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:216"
+          ]
+        },
+        {
+          "id": "ok.get-on-init-true",
+          "key": "atomWithStorage.ok.get-on-init-true",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "With `getOnInit` set to `true` the atom returns the stored value immediately on initialization instead of `initialValue`.",
+          "textHash": "4cb22045575c1584",
+          "line": 204,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:126"
+          ]
+        },
+        {
+          "id": "ok.cross-tab",
+          "key": "atomWithStorage.ok.cross-tab",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The default storage subscribes to `storage` events for cross-tab synchronization.",
+          "textHash": "325df0905dab0f40",
+          "line": 205,
+          "references": [
+            {
+              "raw": "storage",
+              "kind": "param",
+              "target": "storage"
+            }
+          ],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:104"
+          ]
+        },
+        {
+          "id": "ok.reset-deletes",
+          "key": "atomWithStorage.ok.reset-deletes",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "Writing the `RESET` symbol to the atom deletes the item from storage.",
+          "textHash": "9c3a52aa9855846e",
+          "line": 206,
+          "references": [
+            {
+              "raw": "storage",
+              "kind": "param",
+              "target": "storage"
+            }
+          ],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:73",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:174"
+          ]
+        },
+        {
+          "id": "ok.async-storage",
+          "key": "atomWithStorage.ok.async-storage",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "With an asynchronous storage the atom value becomes async, so an updater function receives a promise or a value.",
+          "textHash": "ce4de1b899347d01",
+          "line": 207,
+          "references": [
+            {
+              "raw": "storage",
+              "kind": "param",
+              "target": "storage"
+            }
+          ],
+          "tests": [
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:256",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:298",
+            "tests/react/vanilla-utils/atomWithStorage.test.tsx:1031"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 33,
+        "survived": 9,
+        "noCoverage": 1,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "selectAtom",
+      "kind": "function",
+      "operation": "selectAtom",
+      "file": "src/vanilla/utils/selectAtom.ts",
+      "line": 23,
+      "endLine": 62,
+      "referencedBy": [
+        "benchmarks/select-atom.ts",
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "anAtom",
+          "type": "Atom<Value>",
+          "optional": false
+        },
+        {
+          "name": "selector",
+          "type": "(v: Value, prevSlice?: Slice) => Slice",
+          "optional": false
+        },
+        {
+          "name": "equalityFn",
+          "type": "(prevSlice: Slice, slice: Slice) => boolean",
+          "optional": true
+        }
+      ],
+      "returns": "Atom<Slice | unique symbol> & { init?: unique symbol; }",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "helperRanges": [
+        {
+          "line": 4,
+          "endLine": 5
+        },
+        {
+          "line": 7,
+          "endLine": 16
+        },
+        {
+          "line": 37,
+          "endLine": 46
+        }
+      ],
+      "constantRanges": [
+        {
+          "name": "cache1",
+          "file": "src/vanilla/utils/selectAtom.ts",
+          "line": 6,
+          "endLine": 6
+        }
+      ],
+      "implHash": "a1246bbf582871cf",
+      "guarantees": [
+        {
+          "id": "ok.default-equality",
+          "key": "selectAtom.ok.default-equality",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The default `equalityFn` is `Object.is`, which is reference equality.",
+          "textHash": "e1d187a50685fdbe",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/selectAtom.test.tsx:132",
+            "tests/vanilla/utils/types.test.tsx:6"
+          ]
+        },
+        {
+          "id": "ok.update-only-on-change",
+          "key": "selectAtom.ok.update-only-on-change",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The derived atom is updated only if `equalityFn` reports that the selected value has changed.",
+          "textHash": "7b269129503461ee",
+          "line": 20,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/selectAtom.test.tsx:56"
+          ]
+        },
+        {
+          "id": "ok.selector-runs-on-change",
+          "key": "selectAtom.ok.selector-runs-on-change",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The `selector` runs whenever the original atom changes.",
+          "textHash": "633a2a815cd3ffd4",
+          "line": 21,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/selectAtom.test.tsx:9"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 10,
+        "survived": 2,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "splitAtom",
+      "kind": "function",
+      "operation": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 46,
+      "endLine": 221,
+      "referencedBy": [
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "arrAtom",
+          "type": "WritableAtom<Item[], [Item[]], void> | Atom<Item[]>",
+          "optional": false
+        },
+        {
+          "name": "keyExtractor",
+          "type": "(item: Item) => Key",
+          "optional": true
+        }
+      ],
+      "returns": "Atom<(PrimitiveAtom<Item> | Atom<Item>)[]>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [
+        {
+          "expression": "process.env.NODE_ENV",
+          "line": 151
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "match",
+          "expression": "process.env.NODE_ENV !== 'production'",
+          "line": 151,
+          "values": [
+            "production"
+          ],
+          "names": [],
+          "key": "NODE_ENV"
+        },
+        {
+          "kind": "match",
+          "expression": "'remove'",
+          "line": 162,
+          "values": [
+            "remove"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'insert'",
+          "line": 173,
+          "values": [
+            "insert"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "'move'",
+          "line": 187,
+          "values": [
+            "move"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 11,
+          "endLine": 12
+        },
+        {
+          "line": 14,
+          "endLine": 17
+        },
+        {
+          "line": 20,
+          "endLine": 23
+        },
+        {
+          "line": 25,
+          "endLine": 26
+        },
+        {
+          "line": 69,
+          "endLine": 141
+        }
+      ],
+      "constantRanges": [
+        {
+          "name": "cache1",
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 13,
+          "endLine": 13
+        },
+        {
+          "name": "cacheKeyForEmptyKeyExtractor",
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 18,
+          "endLine": 18
+        }
+      ],
+      "implHash": "bf6fdda3f35edefe",
+      "guarantees": [
+        {
+          "id": "ok.list-of-atoms",
+          "key": "splitAtom.ok.list-of-atoms",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "It returns an atom holding a list of atoms, one for each element of the list in the original atom.",
+          "textHash": "a51a17226fde798a",
+          "line": 42,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/splitAtom.test.tsx:12",
+            "tests/react/vanilla-utils/splitAtom.test.tsx:349",
+            "tests/react/vanilla-utils/splitAtom.test.tsx:453",
+            "tests/react/vanilla-utils/splitAtom.test.tsx:488",
+            "tests/react/vanilla-utils/splitAtom.test.tsx:517"
+          ]
+        },
+        {
+          "id": "ok.dispatch-actions",
+          "key": "splitAtom.ok.dispatch-actions",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The returned atom accepts a dispatch function on write with the actions \"remove\", \"insert\" and \"move\", for example `{ type: \"remove\", atom }`.",
+          "textHash": "b3dc50fc657e7794",
+          "line": 43,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/splitAtom.test.tsx:91",
+            "tests/react/vanilla-utils/splitAtom.test.tsx:157",
+            "tests/react/vanilla-utils/splitAtom.test.tsx:246"
+          ]
+        },
+        {
+          "id": "ok.key-extractor",
+          "key": "splitAtom.ok.key-extractor",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The optional second argument `keyExtractor` is used to keep the sub-atoms stable and to prevent recreating a sub-atom when indexes shift in the source array.",
+          "textHash": "a37d6b746fb2aa23",
+          "line": 44,
+          "references": [],
+          "tests": [
+            "tests/react/vanilla-utils/splitAtom.test.tsx:395"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 139,
+        "survived": 33,
+        "noCoverage": 1,
+        "ignored": 0
+      }
+    },
+    {
+      "id": "unwrap",
+      "kind": "function",
+      "operation": "unwrap",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 22,
+      "endLine": 144,
+      "referencedBy": [
+        "src/vanilla/utils.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "anAtom",
+          "type": "WritableAtom<Value, Args, Result> | Atom<Value>",
+          "optional": false
+        },
+        {
+          "name": "fallback",
+          "type": "(prev?: Awaited<Value>) => PendingValue",
+          "optional": true
+        }
+      ],
+      "returns": "WritableAtom<Awaited<Value> | PendingValue, unknown[], unknown>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [
+        {
+          "expression": "process.env.NODE_ENV",
+          "line": 64
+        },
+        {
+          "expression": "process.env.NODE_ENV",
+          "line": 121
+        }
+      ],
+      "decisions": [
+        {
+          "kind": "match",
+          "expression": "process.env.NODE_ENV !== 'production'",
+          "line": 64,
+          "values": [
+            "production"
+          ],
+          "names": [],
+          "key": "NODE_ENV"
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 4,
+          "endLine": 5
+        },
+        {
+          "line": 7,
+          "endLine": 10
+        },
+        {
+          "line": 12,
+          "endLine": 13
+        }
+      ],
+      "constantRanges": [
+        {
+          "name": "cache1",
+          "file": "src/vanilla/utils/unwrap.ts",
+          "line": 6,
+          "endLine": 6
+        }
+      ],
+      "implHash": "e444d702f3b05195",
+      "guarantees": [
+        {
+          "id": "ok.pending-undefined",
+          "key": "unwrap.ok.pending-undefined",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "While the promise is pending, the unwrapped atom has the value `undefined` when no fallback is given.",
+          "textHash": "d07fc3d174cdefcc",
+          "line": 18,
+          "references": [
+            {
+              "raw": "fallback",
+              "kind": "param",
+              "target": "fallback"
+            }
+          ],
+          "tests": [
+            "tests/vanilla/utils/types.test.tsx:15",
+            "tests/vanilla/utils/unwrap.test.ts:20",
+            "tests/vanilla/utils/unwrap.test.ts:102",
+            "tests/vanilla/utils/unwrap.test.ts:136",
+            "tests/vanilla/utils/unwrap.test.ts:145",
+            "tests/vanilla/utils/unwrap.test.ts:238",
+            "tests/vanilla/utils/unwrap.test.ts:255",
+            "tests/vanilla/utils/unwrap.test.ts:265"
+          ]
+        },
+        {
+          "id": "ok.fallback",
+          "key": "unwrap.ok.fallback",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "With the fallback `(prev) => prev ?? 0` the value is `0` initially, and after an update the previous resolved value is kept while pending.",
+          "textHash": "27272d16bf80a929",
+          "line": 19,
+          "references": [
+            {
+              "raw": "fallback",
+              "kind": "param",
+              "target": "fallback"
+            }
+          ],
+          "tests": [
+            "tests/vanilla/utils/unwrap.test.ts:45",
+            "tests/vanilla/utils/unwrap.test.ts:70",
+            "tests/vanilla/utils/unwrap.test.ts:116",
+            "tests/vanilla/utils/unwrap.test.ts:199"
+          ]
+        },
+        {
+          "id": "err.errors-thrown",
+          "key": "unwrap.err.errors-thrown",
+          "kind": "err",
+          "source": "guarantee",
+          "text": "Errors from the async atom are not caught and are thrown when the unwrapped atom is read.",
+          "textHash": "c2bbf2870317f67a",
+          "line": 20,
+          "references": [],
+          "tests": [
+            "tests/vanilla/utils/unwrap.test.ts:155",
+            "tests/vanilla/utils/unwrap.test.ts:171"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true,
+      "mutation": {
+        "killed": 67,
+        "survived": 26,
+        "noCoverage": 0,
+        "ignored": 0
+      }
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "atomWithReset.ok.reset-to-initial",
+      "unitId": "atomWithReset",
+      "guaranteeId": "ok.reset-to-initial",
+      "file": "tests/react/utils/useResetAtom.test.tsx",
+      "line": 9,
+      "title": "atomWithReset.ok.reset-to-initial atomWithReset resets to its first value",
+      "status": "test",
+      "bodyHash": "cecbc7a0d4b3e411",
+      "literals": [],
+      "keys": [
+        "resetAtom"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithReset",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "useResetAtom",
+          "from": "src/react/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithReset.ok.reset-to-initial",
+      "unitId": "atomWithReset",
+      "guaranteeId": "ok.reset-to-initial",
+      "file": "tests/react/utils/useResetAtom.test.tsx",
+      "line": 60,
+      "title": "atomWithReset.ok.reset-to-initial atomWithReset reset based on previous value",
+      "status": "test",
+      "bodyHash": "46bd87b8909c1010",
+      "literals": [
+        "3"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithReset",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "RESET",
+          "from": "src/vanilla/utils.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithReset.ok.reset-to-initial",
+      "unitId": "atomWithReset",
+      "guaranteeId": "ok.reset-to-initial",
+      "file": "tests/react/utils/useResetAtom.test.tsx",
+      "line": 102,
+      "title": "atomWithReset.ok.reset-to-initial atomWithReset through read-write atom",
+      "status": "test",
+      "bodyHash": "a1ba1bc1089108aa",
+      "literals": [
+        "10"
+      ],
+      "keys": [
+        "resetAtom"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithReset",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "useResetAtom",
+          "from": "src/react/utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "RESET",
+          "from": "src/vanilla/utils.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "useResetAtom.ok.returns-function",
+      "unitId": "useResetAtom",
+      "guaranteeId": "ok.returns-function",
+      "file": "tests/react/utils/useResetAtom.test.tsx",
+      "line": 137,
+      "title": "useResetAtom.ok.returns-function useResetAtom with custom atom",
+      "status": "test",
+      "bodyHash": "010e29bf7262db03",
+      "literals": [
+        "INCREASE",
+        "unknown action"
+      ],
+      "keys": [
+        "resetAtom"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithReducer",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "useResetAtom",
+          "from": "src/react/utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "RESET",
+          "from": "src/vanilla/utils.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.read-default",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.read-default",
+      "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+      "line": 17,
+      "title": "atomWithDefault.ok.read-default simple sync get default",
+      "status": "test",
+      "bodyHash": "abf4ddf4709f5a0a",
+      "literals": [
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.read-default",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.read-default",
+      "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+      "line": 53,
+      "title": "atomWithDefault.ok.read-default simple async get default",
+      "status": "test",
+      "bodyHash": "c3670912b22b6db9",
+      "literals": [
+        "100",
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.reset-restores",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.reset-restores",
+      "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+      "line": 104,
+      "title": "atomWithDefault.ok.reset-restores refresh sync atoms to default values",
+      "status": "test",
+      "bodyHash": "abf4ddf4709f5a0a",
+      "literals": [
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.reset-restores",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.reset-restores",
+      "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+      "line": 147,
+      "title": "atomWithDefault.ok.reset-restores refresh async atoms to default values",
+      "status": "test",
+      "bodyHash": "ba7a4864fe8b2890",
+      "literals": [
+        "100",
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.overwritten-detaches",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.overwritten-detaches",
+      "file": "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+      "line": 209,
+      "title": "atomWithDefault.ok.overwritten-detaches can be set synchronously by passing value",
+      "status": "test",
+      "bodyHash": "db3fb1eb5774dbd9",
+      "literals": [
+        "10"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithRefresh.ok.refresh-on-no-args",
+      "unitId": "atomWithRefresh",
+      "guaranteeId": "ok.refresh-on-no-args",
+      "file": "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+      "line": 16,
+      "title": "atomWithRefresh.ok.refresh-on-no-args sync counter",
+      "status": "test",
+      "bodyHash": "07fbd2168a5fa3f4",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithRefresh",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithRefresh.ok.refresh-on-no-args",
+      "unitId": "atomWithRefresh",
+      "guaranteeId": "ok.refresh-on-no-args",
+      "file": "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+      "line": 47,
+      "title": "atomWithRefresh.ok.refresh-on-no-args async counter",
+      "status": "test",
+      "bodyHash": "137c0a64522cae4a",
+      "literals": [
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithRefresh",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithRefresh.ok.write-on-args",
+      "unitId": "atomWithRefresh",
+      "guaranteeId": "ok.write-on-args",
+      "file": "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+      "line": 91,
+      "title": "atomWithRefresh.ok.write-on-args writable counter",
+      "status": "test",
+      "bodyHash": "3c72f85ad344f687",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithRefresh",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.reset-deletes",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.reset-deletes",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 73,
+      "title": "atomWithStorage.ok.reset-deletes simple count",
+      "status": "test",
+      "bodyHash": "a829be362c7841a0",
+      "literals": [
+        "count"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "listeners",
+        "emitStorageEvent",
+        "subscribe"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.cross-tab",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.cross-tab",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 104,
+      "title": "atomWithStorage.ok.cross-tab storage updates before mount (#1079)",
+      "status": "test",
+      "bodyHash": "6d8286ed81b417bd",
+      "literals": [
+        "count",
+        "10",
+        "9",
+        "count: 9"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.get-on-init-true",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.get-on-init-true",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 126,
+      "title": "atomWithStorage.ok.get-on-init-true should get stored value on init with getOnInit option",
+      "status": "test",
+      "bodyHash": "ef5b2e72f6a7a51f",
+      "literals": [
+        "count",
+        "10"
+      ],
+      "keys": [
+        "getOnInit"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.reset-deletes",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.reset-deletes",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 174,
+      "title": "atomWithStorage.ok.reset-deletes simple count",
+      "status": "test",
+      "bodyHash": "a829be362c7841a0",
+      "literals": [
+        "count"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.get-on-init-default",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.get-on-init-default",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 216,
+      "title": "atomWithStorage.ok.get-on-init-default no entry (#1086)",
+      "status": "test",
+      "bodyHash": "1ff834c763139ef1",
+      "literals": [
+        "noentry",
+        "noentry: -1"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.async-storage",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.async-storage",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 256,
+      "title": "atomWithStorage.ok.async-storage async count",
+      "status": "test",
+      "bodyHash": "9cefa998cdfe4b93",
+      "literals": [
+        "count",
+        "100"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.async-storage",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.async-storage",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 298,
+      "title": "atomWithStorage.ok.async-storage async new count",
+      "status": "test",
+      "bodyHash": "f570fb144f6fc368",
+      "literals": [
+        "count2",
+        "20"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.string-storage-getter",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.string-storage-getter",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 334,
+      "title": "createJSONStorage.ok.string-storage-getter createJSONStorage with async string storage",
+      "status": "test",
+      "bodyHash": "a5dfde45424f49a5",
+      "literals": [
+        "100",
+        "count",
+        "10",
+        "loading",
+        "count: 10"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.string-storage-getter",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.string-storage-getter",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 375,
+      "title": "createJSONStorage.ok.string-storage-getter createJSONStorage without localStorage",
+      "status": "test",
+      "bodyHash": "1da25e0f3f1e11ae",
+      "literals": [
+        "count"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.string-storage-getter",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.string-storage-getter",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 467,
+      "title": "createJSONStorage.ok.string-storage-getter createJSONStorage with undefined window.addEventListener",
+      "status": "test",
+      "bodyHash": "d30c6ed01a270cc7",
+      "literals": [
+        "100"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.string-storage-getter",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.string-storage-getter",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 472,
+      "title": "createJSONStorage.ok.string-storage-getter createJSONStorage with localStorage",
+      "status": "test",
+      "bodyHash": "95aab046a548f642",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.string-storage-getter",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.string-storage-getter",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 477,
+      "title": "createJSONStorage.ok.string-storage-getter createJSONStorage with sessionStorage",
+      "status": "test",
+      "bodyHash": "f739c4e87819f181",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.json-serialization",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.json-serialization",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 494,
+      "title": "createJSONStorage.ok.json-serialization createJSONStorage subscribes to specific window storage events",
+      "status": "test",
+      "bodyHash": "69bb8b6a55d81eb1",
+      "literals": [
+        "setItem",
+        "getItem",
+        "removeItem",
+        "dummy",
+        "storage",
+        "2"
+      ],
+      "keys": [
+        "store",
+        "value",
+        "key",
+        "newValue",
+        "storageArea"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.default-storage",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.default-storage",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 565,
+      "title": "atomWithStorage.ok.default-storage should recompute dependents' state after onMount (#2098)",
+      "status": "test",
+      "bodyHash": "3b36aedc738bcbee",
+      "literals": [
+        "true",
+        "isDevModeStorageAtom",
+        "checkbox"
+      ],
+      "keys": [
+        "setItem",
+        "getItem",
+        "removeItem",
+        "store",
+        "value"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.default-storage",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.default-storage",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 641,
+      "title": "atomWithStorage.ok.default-storage initial value of atomWithStorage can be used when cookies are disabled",
+      "status": "test",
+      "bodyHash": "deea9e14dbc48ab4",
+      "literals": [
+        "counter",
+        "4"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.json-serialization",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.json-serialization",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 675,
+      "title": "createJSONStorage.ok.json-serialization createJSONStorage avoids attaching event handler for non-browser storage",
+      "status": "test",
+      "bodyHash": "8d796320fed33a37",
+      "literals": [
+        "setItem",
+        "getItem",
+        "removeItem",
+        "dummy",
+        "storage"
+      ],
+      "keys": [
+        "setItem",
+        "getItem",
+        "removeItem",
+        "store",
+        "value"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.json-serialization",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.json-serialization",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 714,
+      "title": "createJSONStorage.ok.json-serialization should use withStorageValidator with isNumber",
+      "status": "test",
+      "bodyHash": "4b37b1250e60b0b5",
+      "literals": [
+        "my-number",
+        "number"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "unstable_withStorageValidator",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.json-serialization",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.json-serialization",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 726,
+      "title": "createJSONStorage.ok.json-serialization should return initialValue when validator fails",
+      "status": "test",
+      "bodyHash": "e91ac0b3249933b0",
+      "literals": [
+        "not-a-number",
+        "my-number",
+        "42",
+        "number"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "unstable_withStorageValidator",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "SyncStringStorage",
+          "from": "src/vanilla/utils/atomWithStorage.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.json-serialization",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.json-serialization",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 743,
+      "title": "createJSONStorage.ok.json-serialization should return initialValue when sync validator fails with render",
+      "status": "test",
+      "bodyHash": "4033208c8e5f6ff0",
+      "literals": [
+        "not-a-number",
+        "my-number",
+        "42",
+        "number",
+        "count: 42"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "unstable_withStorageValidator",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "SyncStringStorage",
+          "from": "src/vanilla/utils/atomWithStorage.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.json-serialization",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.json-serialization",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 770,
+      "title": "createJSONStorage.ok.json-serialization should return stored value when async validator succeeds",
+      "status": "test",
+      "bodyHash": "4ed4894f1105d5d1",
+      "literals": [
+        "100",
+        "99",
+        "my-number",
+        "42",
+        "number",
+        "loading",
+        "count: 99"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "unstable_withStorageValidator",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.json-serialization",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.json-serialization",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 806,
+      "title": "createJSONStorage.ok.json-serialization should return initialValue when async validator fails",
+      "status": "test",
+      "bodyHash": "9165a7e7cf375455",
+      "literals": [
+        "100",
+        "invalid",
+        "my-number",
+        "42",
+        "number",
+        "loading",
+        "count: 42"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "unstable_withStorageValidator",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.json-serialization",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.json-serialization",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 844,
+      "title": "createJSONStorage.ok.json-serialization createJSONStorage subscriber is called correctly",
+      "status": "test",
+      "bodyHash": "2bfbe7311924f9c3",
+      "literals": [
+        "dummy"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem",
+        "subscribe",
+        "store",
+        "value"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.json-serialization",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.json-serialization",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 879,
+      "title": "createJSONStorage.ok.json-serialization createJSONStorage subscriber responds to events correctly",
+      "status": "test",
+      "bodyHash": "ed983767e48840de",
+      "literals": [
+        "10",
+        "dummystoragechange",
+        "count"
+      ],
+      "keys": [
+        "count",
+        "getItem",
+        "setItem",
+        "removeItem",
+        "subscribe"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "SyncStringStorage",
+          "from": "src/vanilla/utils/atomWithStorage.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createJSONStorage.ok.replacer-reviver",
+      "unitId": "createJSONStorage",
+      "guaranteeId": "ok.replacer-reviver",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 940,
+      "title": "createJSONStorage.ok.replacer-reviver createJSONStorage reviver is applied on subscription updates (#3101)",
+      "status": "test",
+      "bodyHash": "3797693b0040b8cf",
+      "literals": [
+        "42",
+        "2",
+        "object",
+        "n",
+        "revivertestchange",
+        "value",
+        "NOT_ITEM"
+      ],
+      "keys": [
+        "value",
+        "n",
+        "getItem",
+        "setItem",
+        "removeItem",
+        "subscribe",
+        "reviver",
+        "store"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createJSONStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "SyncStringStorage",
+          "from": "src/vanilla/utils/atomWithStorage.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithStorage.ok.async-storage",
+      "unitId": "atomWithStorage",
+      "guaranteeId": "ok.async-storage",
+      "file": "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+      "line": 1031,
+      "title": "atomWithStorage.ok.async-storage does not infinite loop (#2931)",
+      "status": "test",
+      "bodyHash": "42dedd7b430da77e",
+      "literals": [
+        "counter"
+      ],
+      "keys": [
+        "getItem",
+        "setItem",
+        "removeItem"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithStorage",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "selectAtom.ok.selector-runs-on-change",
+      "unitId": "selectAtom",
+      "guaranteeId": "ok.selector-runs-on-change",
+      "file": "tests/react/vanilla-utils/selectAtom.test.tsx",
+      "line": 9,
+      "title": "selectAtom.ok.selector-runs-on-change selectAtom works as expected",
+      "status": "test",
+      "bodyHash": "ba1a60e2a0f08446",
+      "literals": [
+        "othervalue"
+      ],
+      "keys": [
+        "a",
+        "b"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "selectAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useSetAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "selectAtom.ok.update-only-on-change",
+      "unitId": "selectAtom",
+      "guaranteeId": "ok.update-only-on-change",
+      "file": "tests/react/vanilla-utils/selectAtom.test.tsx",
+      "line": 56,
+      "title": "selectAtom.ok.update-only-on-change do not update unless equality function says value has changed",
+      "status": "test",
+      "bodyHash": "ff02aeec6d75f716",
+      "literals": [],
+      "keys": [
+        "a"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "selectAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useSetAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "selectAtom.ok.default-equality",
+      "unitId": "selectAtom",
+      "guaranteeId": "ok.default-equality",
+      "file": "tests/react/vanilla-utils/selectAtom.test.tsx",
+      "line": 132,
+      "title": "selectAtom.ok.default-equality creates fresh cache path when deps differ (memo3)",
+      "status": "test",
+      "bodyHash": "3769ee293ef7bd63",
+      "literals": [],
+      "keys": [
+        "a",
+        "b"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "selectAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "splitAtom.ok.list-of-atoms",
+      "unitId": "splitAtom",
+      "guaranteeId": "ok.list-of-atoms",
+      "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+      "line": 12,
+      "title": "splitAtom.ok.list-of-atoms no unnecessary updates when updating atoms",
+      "status": "test",
+      "bodyHash": "6fe78c28afaf51f3",
+      "literals": [
+        "get cat food",
+        "get dragon food",
+        "-checkbox",
+        "remove"
+      ],
+      "keys": [
+        "task",
+        "checked",
+        "type",
+        "atom"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "splitAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useCommitCount",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "Atom",
+          "from": "src/vanilla.ts"
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "splitAtom.ok.dispatch-actions",
+      "unitId": "splitAtom",
+      "guaranteeId": "ok.dispatch-actions",
+      "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+      "line": 91,
+      "title": "splitAtom.ok.dispatch-actions removing atoms",
+      "status": "test",
+      "bodyHash": "732e82f42fa8f03b",
+      "literals": [
+        "get cat food",
+        "get dragon food",
+        "help nana",
+        "-checkbox",
+        "remove"
+      ],
+      "keys": [
+        "task",
+        "checked",
+        "atoms",
+        "type",
+        "atom"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "splitAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "Atom",
+          "from": "src/vanilla.ts"
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "splitAtom.ok.dispatch-actions",
+      "unitId": "splitAtom",
+      "guaranteeId": "ok.dispatch-actions",
+      "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+      "line": 157,
+      "title": "splitAtom.ok.dispatch-actions inserting atoms",
+      "status": "test",
+      "bodyHash": "302a31dc0ef8e757",
+      "literals": [
+        "get cat food",
+        "get dragon food",
+        "help nana",
+        "list",
+        "-checkbox",
+        "insert"
+      ],
+      "keys": [
+        "task",
+        "atoms",
+        "type",
+        "value",
+        "before"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "splitAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "Atom",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "splitAtom.ok.dispatch-actions",
+      "unitId": "splitAtom",
+      "guaranteeId": "ok.dispatch-actions",
+      "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+      "line": 246,
+      "title": "splitAtom.ok.dispatch-actions moving atoms",
+      "status": "test",
+      "bodyHash": "3647b182d8217e43",
+      "literals": [
+        "get cat food",
+        "get dragon food",
+        "help nana",
+        "list",
+        "-checkbox",
+        "move"
+      ],
+      "keys": [
+        "task",
+        "atoms",
+        "type",
+        "atom",
+        "before"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "splitAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "Atom",
+          "from": "src/vanilla.ts"
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts"
+        },
+        {
+          "name": "PrimitiveAtom",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "splitAtom.ok.list-of-atoms",
+      "unitId": "splitAtom",
+      "guaranteeId": "ok.list-of-atoms",
+      "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+      "line": 349,
+      "title": "splitAtom.ok.list-of-atoms read-only array atom",
+      "status": "test",
+      "bodyHash": "62213727d1e78054",
+      "literals": [
+        "get cat food",
+        "get dragon food",
+        "-checkbox"
+      ],
+      "keys": [
+        "task",
+        "checked",
+        "atoms",
+        "anAtom"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "splitAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "Atom",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "splitAtom.ok.key-extractor",
+      "unitId": "splitAtom",
+      "guaranteeId": "ok.key-extractor",
+      "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+      "line": 395,
+      "title": "splitAtom.ok.key-extractor no error with cached atoms (fix 510)",
+      "status": "test",
+      "bodyHash": "22bed2d06ab48d17",
+      "literals": [
+        "all",
+        "2",
+        "3",
+        "4",
+        "even",
+        "number",
+        "expecting a number"
+      ],
+      "keys": [
+        "readOnlyItem",
+        "cachedAtoms",
+        "atom"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "splitAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts"
+        },
+        {
+          "name": "Atom",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "lengths": [
+        5
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "splitAtom.ok.list-of-atoms",
+      "unitId": "splitAtom",
+      "guaranteeId": "ok.list-of-atoms",
+      "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+      "line": 453,
+      "title": "splitAtom.ok.list-of-atoms variable sized split atom",
+      "status": "test",
+      "bodyHash": "5850f08c7818d929",
+      "literals": [
+        "3",
+        "2",
+        ","
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "splitAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtom",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "useSetAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0,
+        3,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "splitAtom.ok.list-of-atoms",
+      "unitId": "splitAtom",
+      "guaranteeId": "ok.list-of-atoms",
+      "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+      "line": 488,
+      "title": "splitAtom.ok.list-of-atoms should not update split atom when single item is set to identical value",
+      "status": "test",
+      "bodyHash": "e3dd4b78d8fe9e53",
+      "literals": [
+        "2",
+        "3"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "splitAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "useAtomValue",
+          "from": "src/react.ts",
+          "literals": []
+        },
+        {
+          "name": "useSetAtom",
+          "from": "src/react.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "splitAtom.ok.list-of-atoms",
+      "unitId": "splitAtom",
+      "guaranteeId": "ok.list-of-atoms",
+      "file": "tests/react/vanilla-utils/splitAtom.test.tsx",
+      "line": 517,
+      "title": "splitAtom.ok.list-of-atoms should throw error when writing to a removed item atom",
+      "status": "test",
+      "bodyHash": "3a5e504cda394ba2",
+      "literals": [
+        "2",
+        "3",
+        "10",
+        "splitAtom: index out of bounds for write"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "splitAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.reset-restores",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.reset-restores",
+      "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+      "line": 10,
+      "title": "atomWithDefault.ok.reset-restores should reset to initial value using RESET",
+      "status": "test",
+      "bodyHash": "f0168827413398ad",
+      "literals": [
+        "10",
+        "123"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "RESET",
+          "from": "src/vanilla/utils.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.reset-restores",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.reset-restores",
+      "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+      "line": 19,
+      "title": "atomWithDefault.ok.reset-restores should reset to initial value derived from another atom",
+      "status": "test",
+      "bodyHash": "c9a40396c8febf18",
+      "literals": [
+        "10",
+        "123",
+        "20"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "RESET",
+          "from": "src/vanilla/utils.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.read-default",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.read-default",
+      "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+      "line": 30,
+      "title": "atomWithDefault.ok.read-default should reflect changes to the initial value atom when main atom hasn't been manually changed",
+      "status": "test",
+      "bodyHash": "d898ffc48a692836",
+      "literals": [
+        "10",
+        "20"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.reset-restores",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.reset-restores",
+      "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+      "line": 38,
+      "title": "atomWithDefault.ok.reset-restores should reflect changes to the initial value atom when main atom has been manually changed but then RESET",
+      "status": "test",
+      "bodyHash": "f00ff82da221ca22",
+      "literals": [
+        "10",
+        "123",
+        "20"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "RESET",
+          "from": "src/vanilla/utils.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.overwritten-detaches",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.overwritten-detaches",
+      "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+      "line": 49,
+      "title": "atomWithDefault.ok.overwritten-detaches should update atom with a new value",
+      "status": "test",
+      "bodyHash": "7d427f0b56236e2a",
+      "literals": [
+        "10",
+        "123",
+        "30"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.overwritten-detaches",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.overwritten-detaches",
+      "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+      "line": 58,
+      "title": "atomWithDefault.ok.overwritten-detaches should update atom using a function",
+      "status": "test",
+      "bodyHash": "f21c502d18a5f27f",
+      "literals": [
+        "10",
+        "123",
+        "133"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithDefault.ok.reset-restores",
+      "unitId": "atomWithDefault",
+      "guaranteeId": "ok.reset-restores",
+      "file": "tests/vanilla/utils/atomWithDefault.test.ts",
+      "line": 67,
+      "title": "atomWithDefault.ok.reset-restores should reset with a function",
+      "status": "test",
+      "bodyHash": "b1b45866f70f6942",
+      "literals": [
+        "10",
+        "123"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithDefault",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "RESET",
+          "from": "src/vanilla/utils.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithLazy.ok.lazy-first-use",
+      "unitId": "atomWithLazy",
+      "guaranteeId": "ok.lazy-first-use",
+      "file": "tests/vanilla/utils/atomWithLazy.test.ts",
+      "line": 5,
+      "title": "atomWithLazy.ok.lazy-first-use initializes on first store get",
+      "status": "test",
+      "bodyHash": "b5a7c80a79964eb5",
+      "literals": [
+        "first",
+        "second",
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithLazy",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithLazy.ok.writable-after-init",
+      "unitId": "atomWithLazy",
+      "guaranteeId": "ok.writable-after-init",
+      "file": "tests/vanilla/utils/atomWithLazy.test.ts",
+      "line": 25,
+      "title": "atomWithLazy.ok.writable-after-init is writable",
+      "status": "test",
+      "bodyHash": "fed5ee75a843c9c1",
+      "literals": [
+        "123"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithLazy",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithLazy.ok.writable-after-init",
+      "unitId": "atomWithLazy",
+      "guaranteeId": "ok.writable-after-init",
+      "file": "tests/vanilla/utils/atomWithLazy.test.ts",
+      "line": 34,
+      "title": "atomWithLazy.ok.writable-after-init should work with a set state action",
+      "status": "test",
+      "bodyHash": "5ce0744888036cbf",
+      "literals": [
+        "4",
+        "16"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atomWithLazy",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithRefresh.ok.refresh-on-no-args",
+      "unitId": "atomWithRefresh",
+      "guaranteeId": "ok.refresh-on-no-args",
+      "file": "tests/vanilla/utils/atomWithRefresh.test.ts",
+      "line": 6,
+      "title": "atomWithRefresh.ok.refresh-on-no-args [DEV-ONLY] throws when refresh is called with extra arguments",
+      "status": "test",
+      "bodyHash": "63159dcd0a8f8064",
+      "literals": [
+        "some arg"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atomWithRefresh",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        },
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithReset.ok.reset-to-initial",
+      "unitId": "atomWithReset",
+      "guaranteeId": "ok.reset-to-initial",
+      "file": "tests/vanilla/utils/atomWithReset.test.ts",
+      "line": 16,
+      "title": "atomWithReset.ok.reset-to-initial should reset to initial value using RESET",
+      "status": "test",
+      "bodyHash": "01d86b18592ba866",
+      "literals": [
+        "123"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "RESET",
+          "from": "src/vanilla/utils.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithReset.ok.primitive-like",
+      "unitId": "atomWithReset",
+      "guaranteeId": "ok.primitive-like",
+      "file": "tests/vanilla/utils/atomWithReset.test.ts",
+      "line": 23,
+      "title": "atomWithReset.ok.primitive-like should update atom with a new value",
+      "status": "test",
+      "bodyHash": "8383bff073510ddf",
+      "literals": [
+        "123",
+        "30"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "atomWithReset.ok.primitive-like",
+      "unitId": "atomWithReset",
+      "guaranteeId": "ok.primitive-like",
+      "file": "tests/vanilla/utils/atomWithReset.test.ts",
+      "line": 30,
+      "title": "atomWithReset.ok.primitive-like should update atom using a function",
+      "status": "test",
+      "bodyHash": "d273c71027c7f50b",
+      "literals": [
+        "123",
+        "10",
+        "133"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "selectAtom.ok.default-equality",
+      "unitId": "selectAtom",
+      "guaranteeId": "ok.default-equality",
+      "file": "tests/vanilla/utils/types.test.tsx",
+      "line": 6,
+      "title": "selectAtom.ok.default-equality selectAtom() should return the correct types",
+      "status": "test",
+      "bodyHash": "4497d936694e7036",
+      "literals": [
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "selectAtom",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "Atom",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.pending-undefined",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.pending-undefined",
+      "file": "tests/vanilla/utils/types.test.tsx",
+      "line": 15,
+      "title": "unwrap.ok.pending-undefined unwrap() should return the correct types",
+      "status": "test",
+      "bodyHash": "e006cdf7de22d844",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "WritableAtom",
+          "from": "src/vanilla.ts"
+        },
+        {
+          "name": "SetStateAction",
+          "from": "src/vanilla.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.pending-undefined",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.pending-undefined",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 20,
+      "title": "unwrap.ok.pending-undefined should unwrap a promise with no fallback function",
+      "status": "test",
+      "bodyHash": "a37e7af5f5cbc795",
+      "literals": [
+        "100",
+        "2",
+        "4",
+        "3",
+        "6"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.fallback",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.fallback",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 45,
+      "title": "unwrap.ok.fallback should unwrap a promise with fallback function without prev",
+      "status": "test",
+      "bodyHash": "311e87a71abae279",
+      "literals": [
+        "100",
+        "2",
+        "4",
+        "3",
+        "6"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.fallback",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.fallback",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 70,
+      "title": "unwrap.ok.fallback should unwrap a promise with fallback function with prev",
+      "status": "test",
+      "bodyHash": "ca65eeab91aa7f5b",
+      "literals": [
+        "100",
+        "2",
+        "4",
+        "3",
+        "6",
+        "5",
+        "10"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "sleep",
+          "from": "tests/test-utils.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.pending-undefined",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.pending-undefined",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 102,
+      "title": "unwrap.ok.pending-undefined should unwrap a sync atom which is noop",
+      "status": "test",
+      "bodyHash": "f593a9dad19e01e8",
+      "literals": [
+        "2",
+        "3"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.fallback",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.fallback",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 116,
+      "title": "unwrap.ok.fallback should unwrap an async writable atom",
+      "status": "test",
+      "bodyHash": "d59ad0610def51ad",
+      "literals": [
+        "2",
+        "3"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.pending-undefined",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.pending-undefined",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 136,
+      "title": "unwrap.ok.pending-undefined should unwrap to a fulfilled value of an already resolved async atom",
+      "status": "test",
+      "bodyHash": "cdeab88a9eb95477",
+      "literals": [
+        "concrete"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.pending-undefined",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.pending-undefined",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 145,
+      "title": "unwrap.ok.pending-undefined should get a fulfilled value after the promise resolves",
+      "status": "test",
+      "bodyHash": "fed9ce0766a015e1",
+      "literals": [
+        "concrete"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.err.errors-thrown",
+      "unitId": "unwrap",
+      "guaranteeId": "err.errors-thrown",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 155,
+      "title": "unwrap.err.errors-thrown should throw an error if underlying promise is rejected",
+      "status": "test",
+      "bodyHash": "1c981b12bd5583bc",
+      "literals": [
+        "error",
+        "3"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.err.errors-thrown",
+      "unitId": "unwrap",
+      "guaranteeId": "err.errors-thrown",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 171,
+      "title": "unwrap.err.errors-thrown should not enter an infinite loop when a rejected source recomputes",
+      "status": "test",
+      "bodyHash": "fac29bd29b489cb4",
+      "literals": [
+        "boom",
+        "100"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.fallback",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.fallback",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 199,
+      "title": "unwrap.ok.fallback should pass the last value to fallback after an error state",
+      "status": "test",
+      "bodyHash": "2663e9707e868d3d",
+      "literals": [
+        "7",
+        "100",
+        "boom",
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.pending-undefined",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.pending-undefined",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 238,
+      "title": "unwrap.ok.pending-undefined should update dependents with the value of the unwrapped atom when the promise resolves",
+      "status": "test",
+      "bodyHash": "fd0c679314cdd2ae",
+      "literals": [
+        "value",
+        "effect ",
+        "effect undefined",
+        "effect value"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.pending-undefined",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.pending-undefined",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 255,
+      "title": "unwrap.ok.pending-undefined [DEV-ONLY] should not call store.set during atom read",
+      "status": "test",
+      "bodyHash": "84850fbe707ca2ad",
+      "literals": [
+        "Hello"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unwrap.ok.pending-undefined",
+      "unitId": "unwrap",
+      "guaranteeId": "ok.pending-undefined",
+      "file": "tests/vanilla/utils/unwrap.test.ts",
+      "line": 265,
+      "title": "unwrap.ok.pending-undefined should expose the latest value after a linked async read resolves (#3296)",
+      "status": "test",
+      "bodyHash": "45c14dd337597406",
+      "literals": [
+        "1"
+      ],
+      "keys": [
+        "someData"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createStore",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "atom",
+          "from": "src/vanilla.ts",
+          "literals": []
+        },
+        {
+          "name": "unwrap",
+          "from": "src/vanilla/utils.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "guarantee-no-test",
+      "message": "atomWithLazy.ok.once-per-store has no test naming it",
+      "file": "src/vanilla/utils/atomWithLazy.ts",
+      "line": 6,
+      "unit": "atomWithLazy",
+      "guarantee": "atomWithLazy.ok.once-per-store",
+      "severity": "fail"
+    },
+    {
+      "rule": "operation-no-guarantee",
+      "message": "withStorageValidator has no guarantee (no doc comment)",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 52,
+      "unit": "withStorageValidator",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-on-non-unit",
+      "message": "RESET has @guarantee but is not a unit (its value is not a function (or is excluded by surface.operationPattern)); its guarantees are not checked",
+      "file": "src/vanilla/utils/constants.ts",
+      "line": 1,
+      "severity": "fail"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "useResetAtom: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this",
+      "file": "src/react/utils/useResetAtom.ts",
+      "line": 18,
+      "unit": "useResetAtom",
+      "mutant": {
+        "id": "1:2",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[]",
+        "status": "Survived",
+        "line": 18
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "env-input-direct",
+      "message": "atomWithDefault reads an environment input directly (process.env.NODE_ENV); route it through a port",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 25,
+      "unit": "atomWithDefault",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "atomWithDefault commits to match \"production\" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 25,
+      "unit": "atomWithDefault",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: ConditionalExpression mutant (the match \"production\"): `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 25,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "1:5",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 25
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: EqualityOperator mutant (the match \"production\"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 25,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "1:6",
+        "mutator": "EqualityOperator",
+        "replacement": "process.env.NODE_ENV === 'production'",
+        "status": "Survived",
+        "line": 25
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: ConditionalExpression mutant (the match \"production\"): `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 25,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "1:4",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 25
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: StringLiteral mutant (the match \"production\"): `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 25,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "1:7",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 25
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: BlockStatement mutant (the match \"production\"): `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 25,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "1:8",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 25
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 25,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "2:value-1",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'pr…",
+        "status": "Survived",
+        "line": 25
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 26,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "1:9",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 26
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: `atom(0)`: 0 → 1 survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 32,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "2:value-3",
+        "mutator": "Value",
+        "replacement": "`atom(0)`: 0 → 1",
+        "status": "Survived",
+        "line": 32
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "env-input-direct",
+      "message": "atomWithRefresh reads an environment input directly (process.env.NODE_ENV); route it through a port",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 33,
+      "unit": "atomWithRefresh",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "atomWithRefresh commits to match \"production\" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 33,
+      "unit": "atomWithRefresh",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: EqualityOperator mutant (the match \"production\"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 33,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:32",
+        "mutator": "EqualityOperator",
+        "replacement": "process.env.NODE_ENV === 'production'",
+        "status": "Survived",
+        "line": 33
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: ConditionalExpression mutant (the match \"production\"): `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 33,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:31",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 33
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: StringLiteral mutant (the match \"production\"): `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 33,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:33",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 33
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: BlockStatement mutant (the match \"production\"): `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 33,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:34",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 33
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: ConditionalExpression mutant (the match \"production\"): `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 33,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:30",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 33
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 33,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "2:value-4",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'pr…",
+        "status": "Survived",
+        "line": 33
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 34,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:35",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 34
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: ArithmeticOperator mutant: `c - 1` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 43,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:45",
+        "mutator": "ArithmeticOperator",
+        "replacement": "c - 1",
+        "status": "Survived",
+        "line": 43
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: `c + 1`: 1 → 2 survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 43,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "2:value-6",
+        "mutator": "Value",
+        "replacement": "`c + 1`: 1 → 2",
+        "status": "Survived",
+        "line": 43
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 44,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:46",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 44
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "env-input-direct",
+      "message": "atomWithRefresh reads an environment input directly (process.env.NODE_ENV); route it through a port",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 46,
+      "unit": "atomWithRefresh",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 46,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:49",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 46
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 46,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:52",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 46
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 46,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "2:value-7",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'pr…",
+        "status": "Survived",
+        "line": 46
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithRefresh: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 47,
+      "unit": "atomWithRefresh",
+      "mutant": {
+        "id": "1:55",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 47
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 110,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:86",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 110
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 111,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:87",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 111
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 111,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:88",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 111
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 111,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:90",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 111
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: EqualityOperator mutant: `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 111,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:89",
+        "mutator": "EqualityOperator",
+        "replacement": "process.env.NODE_ENV === 'production'",
+        "status": "Survived",
+        "line": 111
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 111,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:91",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 111
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 111,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "2:value-8",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'pr…",
+        "status": "Survived",
+        "line": 111
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 112,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:95",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 112
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 112,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:92",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 112
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: EqualityOperator mutant: `typeof window === 'undefined'` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 112,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:94",
+        "mutator": "EqualityOperator",
+        "replacement": "typeof window === 'undefined'",
+        "status": "Survived",
+        "line": 112
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 112,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:93",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 112
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 112,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:96",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 112
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: CallExpression mutant: `;` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 113,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:97",
+        "mutator": "CallExpression",
+        "replacement": ";",
+        "status": "Survived",
+        "line": 113
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: StringLiteral mutant: `\"Stryker was here!\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 127,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:105",
+        "mutator": "StringLiteral",
+        "replacement": "\"Stryker was here!\"",
+        "status": "Survived",
+        "line": 127
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 128,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:106",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 128
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: OptionalChaining mutant: `getStringStorage().setItem` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 145,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:119",
+        "mutator": "OptionalChaining",
+        "replacement": "getStringStorage().setItem",
+        "status": "Survived",
+        "line": 145
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: OptionalChaining mutant: `getStringStorage().removeItem` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 149,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:122",
+        "mutator": "OptionalChaining",
+        "replacement": "getStringStorage().removeItem",
+        "status": "Survived",
+        "line": 149
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: StringLiteral mutant: `\"Stryker was here!\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 158,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:130",
+        "mutator": "StringLiteral",
+        "replacement": "\"Stryker was here!\"",
+        "status": "Survived",
+        "line": 158
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 182,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:162",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 182
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 187,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:168",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 187
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 188,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "1:170",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 188
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "createJSONStorage: `window.removeEventListener('storage', s…`: 'storage' → 'storage_x' survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 188,
+      "unit": "createJSONStorage",
+      "mutant": {
+        "id": "2:value-10",
+        "mutator": "Value",
+        "replacement": "`window.removeEventListener('storage', s…`: 'storage' → 'st…",
+        "status": "Survived",
+        "line": 188
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "env-input-direct",
+      "message": "atomWithStorage reads an environment input directly (process.env.NODE_ENV); route it through a port",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 242,
+      "unit": "atomWithStorage",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "atomWithStorage commits to match \"production\" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 242,
+      "unit": "atomWithStorage",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithStorage: ConditionalExpression mutant (the match \"production\"): `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 242,
+      "unit": "atomWithStorage",
+      "mutant": {
+        "id": "1:176",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 242
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithStorage: EqualityOperator mutant (the match \"production\"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 242,
+      "unit": "atomWithStorage",
+      "mutant": {
+        "id": "1:178",
+        "mutator": "EqualityOperator",
+        "replacement": "process.env.NODE_ENV === 'production'",
+        "status": "Survived",
+        "line": 242
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithStorage: ConditionalExpression mutant (the match \"production\"): `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 242,
+      "unit": "atomWithStorage",
+      "mutant": {
+        "id": "1:177",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 242
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithStorage: StringLiteral mutant (the match \"production\"): `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 242,
+      "unit": "atomWithStorage",
+      "mutant": {
+        "id": "1:179",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 242
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithStorage: BlockStatement mutant (the match \"production\"): `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 242,
+      "unit": "atomWithStorage",
+      "mutant": {
+        "id": "1:180",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 242
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithStorage: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 242,
+      "unit": "atomWithStorage",
+      "mutant": {
+        "id": "2:value-11",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'pr…",
+        "status": "Survived",
+        "line": 242
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithStorage: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 243,
+      "unit": "atomWithStorage",
+      "mutant": {
+        "id": "1:181",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 243
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: StringLiteral mutant in RESET: `\"Stryker was here!\"` is not run by any test; also reached from atomWithReset, atomWithStorage, useResetAtom",
+      "file": "src/vanilla/utils/constants.ts",
+      "line": 6,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "1:207",
+        "mutator": "StringLiteral",
+        "replacement": "\"Stryker was here!\"",
+        "status": "NoCoverage",
+        "line": 6
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this; also reached from atomWithReset, atomWithStorage, useResetAtom",
+      "file": "src/vanilla/utils/constants.ts",
+      "line": 6,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "2:value-12",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'pr…",
+        "status": "Survived",
+        "line": 6
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "atomWithDefault: `process.env.NODE_ENV !== 'production' ?…`: 'RESET' → 'RESET_x' survived; no linked test fails when the code changes like this; also reached from atomWithReset, atomWithStorage, useResetAtom",
+      "file": "src/vanilla/utils/constants.ts",
+      "line": 6,
+      "unit": "atomWithDefault",
+      "mutant": {
+        "id": "2:value-13",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production' ?…`: 'RESET' → 'RESE…",
+        "status": "Survived",
+        "line": 6
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "selectAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/selectAtom.ts",
+      "line": 41,
+      "unit": "selectAtom",
+      "mutant": {
+        "id": "1:216",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 41
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "selectAtom: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/selectAtom.ts",
+      "line": 41,
+      "unit": "selectAtom",
+      "mutant": {
+        "id": "1:218",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 41
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 71,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:235",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 71
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 71,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:236",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 71
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ArrayDeclaration mutant: `[\"Stryker was here\"]` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 76,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:241",
+        "mutator": "ArrayDeclaration",
+        "replacement": "[\"Stryker was here\"]",
+        "status": "Survived",
+        "line": 76
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 83,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:245",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 83
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 85,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:248",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 85
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 85,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:249",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 85
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: OptionalChaining mutant: `prev.arr` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 92,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:251",
+        "mutator": "OptionalChaining",
+        "replacement": "prev.arr",
+        "status": "Survived",
+        "line": 92
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 94,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:258",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 94
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: EqualityOperator mutant: `index > currArr.length` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 94,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:259",
+        "mutator": "EqualityOperator",
+        "replacement": "index > currArr.length",
+        "status": "Survived",
+        "line": 94
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 97,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:262",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 97
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: StringLiteral mutant: `\"\"` is not run by any test",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 100,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:266",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "NoCoverage",
+        "line": 100
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: OptionalChaining mutant: `prev.arr` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 111,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:268",
+        "mutator": "OptionalChaining",
+        "replacement": "prev.arr",
+        "status": "Survived",
+        "line": 111
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: EqualityOperator mutant: `index > arr.length` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 113,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:276",
+        "mutator": "EqualityOperator",
+        "replacement": "index > arr.length",
+        "status": "Survived",
+        "line": 113
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 113,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:275",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 113
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: MethodExpression mutant: `prevMapping.keyList.some((x, i) => x === keyList[i])` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 132,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:297",
+        "mutator": "MethodExpression",
+        "replacement": "prevMapping.keyList.some((x, i) => x === keyList[i])",
+        "status": "Survived",
+        "line": 132
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 132,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:299",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 132
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "env-input-direct",
+      "message": "splitAtom reads an environment input directly (process.env.NODE_ENV); route it through a port",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 151,
+      "unit": "splitAtom",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "splitAtom commits to match \"production\" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 151,
+      "unit": "splitAtom",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant (the match \"production\"): `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 151,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:309",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 151
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant (the match \"production\"): `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 151,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:308",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 151
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: EqualityOperator mutant (the match \"production\"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 151,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:310",
+        "mutator": "EqualityOperator",
+        "replacement": "process.env.NODE_ENV === 'production'",
+        "status": "Survived",
+        "line": 151
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: BlockStatement mutant (the match \"production\"): `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 151,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:312",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 151
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: StringLiteral mutant (the match \"production\"): `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 151,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:311",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 151
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 151,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "2:value-18",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'pr…",
+        "status": "Survived",
+        "line": 151
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 152,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:313",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 152
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 164,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:319",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 164
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: `arr.slice(0, index)`: 0 → 1 survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 167,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "2:value-21",
+        "mutator": "Value",
+        "replacement": "`arr.slice(0, index)`: 0 → 1",
+        "status": "Survived",
+        "line": 167
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 177,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:332",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 177
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 192,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:344",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 192
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: LogicalOperator mutant: `index1 >= 0 || index2 >= 0` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 192,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:346",
+        "mutator": "LogicalOperator",
+        "replacement": "index1 >= 0 || index2 >= 0",
+        "status": "Survived",
+        "line": 192
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 192,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:347",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 192
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 192,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:350",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 192
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: EqualityOperator mutant: `index2 > 0` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 192,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:351",
+        "mutator": "EqualityOperator",
+        "replacement": "index2 > 0",
+        "status": "Survived",
+        "line": 192
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: `index2 >= 0`: 0 → 1 survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 192,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "2:value-28",
+        "mutator": "Value",
+        "replacement": "`index2 >= 0`: 0 → 1",
+        "status": "Survived",
+        "line": 192
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: EqualityOperator mutant: `index1 <= index2` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 194,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "1:356",
+        "mutator": "EqualityOperator",
+        "replacement": "index1 <= index2",
+        "status": "Survived",
+        "line": 194
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "splitAtom: `index1 + 1`: 1 → 2 survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 206,
+      "unit": "splitAtom",
+      "mutant": {
+        "id": "2:value-32",
+        "mutator": "Value",
+        "replacement": "`index1 + 1`: 1 → 2",
+        "status": "Survived",
+        "line": 206
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: OptionalChaining mutant in a helper it calls: `(p as PromiseLike<unknown>).then` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 13,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:383",
+        "mutator": "OptionalChaining",
+        "replacement": "(p as PromiseLike<unknown>).then",
+        "status": "Survived",
+        "line": 13
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: `atom(0)`: 0 → 1 survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 56,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "2:value-33",
+        "mutator": "Value",
+        "replacement": "`atom(0)`: 0 → 1",
+        "status": "Survived",
+        "line": 56
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: ArithmeticOperator mutant: `c - 1` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 60,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:392",
+        "mutator": "ArithmeticOperator",
+        "replacement": "c - 1",
+        "status": "Survived",
+        "line": 60
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: `c + 1`: 1 → 2 survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 60,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "2:value-34",
+        "mutator": "Value",
+        "replacement": "`c + 1`: 1 → 2",
+        "status": "Survived",
+        "line": 60
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "env-input-direct",
+      "message": "unwrap reads an environment input directly (process.env.NODE_ENV); route it through a port",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 64,
+      "unit": "unwrap",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "unwrap commits to match \"production\" in `process.env.NODE_ENV !== 'production'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 64,
+      "unit": "unwrap",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: ConditionalExpression mutant (the match \"production\"): `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 64,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:393",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 64
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: ConditionalExpression mutant (the match \"production\"): `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 64,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:394",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 64
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: EqualityOperator mutant (the match \"production\"): `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 64,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:395",
+        "mutator": "EqualityOperator",
+        "replacement": "process.env.NODE_ENV === 'production'",
+        "status": "Survived",
+        "line": 64
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: BlockStatement mutant (the match \"production\"): `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 64,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:397",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 64
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: StringLiteral mutant (the match \"production\"): `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 64,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:396",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 64
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 64,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "2:value-35",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'pr…",
+        "status": "Survived",
+        "line": 64
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 65,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:398",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 65
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 66,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:399",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 66
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 98,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:424",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 98
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 98,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:428",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 98
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 98,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:429",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 98
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: EqualityOperator mutant: `prev.p !== promise` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 98,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:430",
+        "mutator": "EqualityOperator",
+        "replacement": "prev.p !== promise",
+        "status": "Survived",
+        "line": 98
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 98,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:431",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 98
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 102,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:432",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 102
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: LogicalOperator mutant: `prev || 'v' in prev` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 102,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:434",
+        "mutator": "LogicalOperator",
+        "replacement": "prev || 'v' in prev",
+        "status": "Survived",
+        "line": 102
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "env-input-direct",
+      "message": "unwrap reads an environment input directly (process.env.NODE_ENV); route it through a port",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 121,
+      "unit": "unwrap",
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 121,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:450",
+        "mutator": "ConditionalExpression",
+        "replacement": "true",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 121,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:451",
+        "mutator": "ConditionalExpression",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: EqualityOperator mutant: `process.env.NODE_ENV === 'production'` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 121,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:452",
+        "mutator": "EqualityOperator",
+        "replacement": "process.env.NODE_ENV === 'production'",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 121,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:453",
+        "mutator": "StringLiteral",
+        "replacement": "\"\"",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 121,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:454",
+        "mutator": "BlockStatement",
+        "replacement": "{}",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x' survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 121,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "2:value-36",
+        "mutator": "Value",
+        "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'pr…",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "unwrap: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 122,
+      "unit": "unwrap",
+      "mutant": {
+        "id": "1:455",
+        "mutator": "BooleanLiteral",
+        "replacement": "false",
+        "status": "Survived",
+        "line": 122
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./utils\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./vanilla\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./vanilla/utils\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./vanilla/internals\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./react\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \"./react/utils\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 11,
+    "unitsWithoutGuarantee": 1,
+    "guarantees": 29,
+    "guaranteesWithoutTest": 1,
+    "tests": 78,
+    "orphanTests": 0,
+    "unlinkedTests": 333,
+    "findings": {
+      "fail": 3,
+      "warn": 129,
+      "info": 7
+    },
+    "mutantsUnmapped": 0
+  }
+}

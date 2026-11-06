@@ -1,0 +1,1794 @@
+[
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 8,
+    "title": "value out of the range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 14,
+    "title": "second value out of the range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 20,
+    "title": "range order is invalid",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 24,
+    "title": "invalid range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 30,
+    "title": "range with more than two parts - %s",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok",
+    "each": true
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 42,
+    "title": "minute value out of the range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 48,
+    "title": "hour value out of the range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 54,
+    "title": "day of the month value out of the range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 60,
+    "title": "month value out of the range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 66,
+    "title": "day of the week value out of the range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 72,
+    "title": "invalid expression that contains too many fields",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 76,
+    "title": "expression named after an Object.prototype member %s is rejected as an",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok",
+    "each": true
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 83,
+    "title": "invalid expression that is too long",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 88,
+    "title": "invalid explicit day of month definition",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 95,
+    "title": "explicit day of month rescued by a restricted day of week",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 106,
+    "title": "invalid characters test - symbol",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 110,
+    "title": "invalid characters test - letter",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 114,
+    "title": "invalid characters test - parentheses",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 118,
+    "title": "interval with invalid characters test",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 122,
+    "title": "range with invalid characters test",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 126,
+    "title": "group with invalid characters test",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 130,
+    "title": "invalid expression which has repeat 0 times",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 136,
+    "title": "invalid expression which has repeat negative number times",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 142,
+    "title": "invalid expression which has multiple combined repeat cycles",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 146,
+    "title": "invalid days of week strings - wrong alias",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 152,
+    "title": "alias of another field is not resolved - %s",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok",
+    "each": true
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 162,
+    "title": "aliases of the field itself are resolved",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 168,
+    "title": "invalid list value without value",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 174,
+    "title": "invalid list value with right-side value",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 181,
+    "title": "cannot combine `-` range and # occurrence special characters",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 188,
+    "title": "cannot combine `/` repeat interval and # occurrence special characters",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 195,
+    "title": "cannot combine `,` list and # occurrence special characters",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 202,
+    "title": "invalid characters test - dot",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 207,
+    "title": "invalid occurrence value",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 216,
+    "title": "both dayOfMonth and dayOfWeek used together in strict mode",
+    "key": "CronExpressionParser#parse.err.strict-day-of-month-and-week",
+    "reason": "first operation called; strict dom+dow"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 221,
+    "title": "missing fields when in strict mode",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 226,
+    "title": "empty expression in strict mode",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 230,
+    "title": "duplicated zero values are rejected",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 245,
+    "title": "listing both sunday spellings is rejected as a duplicate",
+    "key": "CronExpressionParser#parse.ok.sunday-zero-or-seven",
+    "reason": "first operation called; sunday"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 254,
+    "title": "lists that contain a single zero are accepted",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 259,
+    "title": "expressions with duplicated zero values fail at parse instead of crash",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 268,
+    "title": "a long list of repeated wildcards is rejected in every field",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 278,
+    "title": "a list of hashed steps is rejected once it expands past the value cap",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 286,
+    "title": "step",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 302,
+    "title": "range",
+    "key": "CronExpression#take.ok.take-count",
+    "reason": "named by describe; take count"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 315,
+    "title": "incremental range with step",
+    "key": "CronExpression#take.ok.take-count",
+    "reason": "named by describe; take count"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 329,
+    "title": "limited with start and end date",
+    "key": "CronExpression#take.ok.take-count",
+    "reason": "named by describe; take count"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 352,
+    "title": "valid ES6 iterator should be returned",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 382,
+    "title": "valid ES6 iterator works with for..of loop",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 397,
+    "title": "empty expression",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 407,
+    "title": "default expression",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 417,
+    "title": "default expression (tab as field separator)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 427,
+    "title": "default expression (mixed tab and space usage)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 437,
+    "title": "incremental minutes expression test",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 444,
+    "title": "fixed expression test",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 454,
+    "title": "range test with non-standard value and repeat (second)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 470,
+    "title": "range test with non-standard value and repeat (second)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 486,
+    "title": "range with the same start and end value",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 491,
+    "title": "predefined expression",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; predefined expression"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 500,
+    "title": "limited with start and end date in forward direction",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 548,
+    "title": "limited with start and end date in backwards direction",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 581,
+    "title": "reset to given date",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 621,
+    "title": "using day of week string",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 632,
+    "title": "using days of week strings",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 643,
+    "title": "using mixed days of week strings",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 660,
+    "title": "using non-standard second field (wildcard)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 673,
+    "title": "using non-standard second field (step)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 686,
+    "title": "using non-standard second field (range)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 699,
+    "title": "pads a four field expression with a zero second and a wildcard minute",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 704,
+    "title": "pads a three field expression with a zero second and wildcard minutes ",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 709,
+    "title": "keeps five field expressions unchanged when padding",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 714,
+    "title": "advances occurrences one minute apart for a four field expression",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 725,
+    "title": "using explicit month definition and */5 day of month step",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 760,
+    "title": "drops day of month values that the month cannot contain",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 765,
+    "title": "drops day of month values outside the month from a stepped range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 770,
+    "title": "limits a wildcard day of month to the length of the month",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 776,
+    "title": "keeps day of month values when more than one month is given",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 781,
+    "title": "keeps the last day of month character when a single month is given",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 786,
+    "title": "renders a stepped day of month in a single month to a stable expressio",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 792,
+    "title": "day of month and week are both set",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 811,
+    "title": "day of month combined with nth day of week (OR)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 830,
+    "title": "day of month is unspecified",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 855,
+    "title": "day of week is unspecified",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 875,
+    "title": "day of month and week are both set and dow is 7",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 895,
+    "title": "day of month is wildcard, month and day of week are both set",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 910,
+    "title": "day of month contains multiple ranges and day of week is wildcard",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 938,
+    "title": "day of month and week are both set and dow is 6,0",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 961,
+    "title": "day of month and week are both set and dow is 6-7",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 995,
+    "title": "day of month validation should be ignored when day of month is wildcar",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1006,
+    "title": "day and date in week should match",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1022,
+    "title": "should sort ranges and values in ascending order",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1034,
+    "title": "dow 6,7 6,0 0,6 7,6 should be equivalent",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1053,
+    "title": "hour 0 9,11,1 * * * and 0 1,9,11 * * * should be equivalent",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1080,
+    "title": "it will work with #139 issue case",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1092,
+    "title": "should work for valid first/second/third/fourth/fifth occurrence dayOf",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1155,
+    "title": "should work for valid second sunday in May",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1183,
+    "title": "should work for valid second sunday at noon in May",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1193,
+    "title": "should work for valid second sunday at noon in May (UTC+3)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1203,
+    "title": "should work with both dayOfMonth and nth occurrence of dayOfWeek",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1231,
+    "title": "should correctly determine if a given expression includes a CronDate (",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1243,
+    "title": "correctly handle 0 12 1-31 * 1 (#284)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1257,
+    "title": "fields are accessible",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1269,
+    "title": "day-of-week step does not add Sunday when the step never reaches 7",
+    "key": "CronExpressionParser#parse.ok.sunday-zero-or-seven",
+    "reason": "first operation called; sunday"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1280,
+    "title": "handle leap year with starting date 0 0 29 2 *",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1289,
+    "title": "handle leap year without starting date 0 0 29 2 *",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1295,
+    "title": "handle leap year when day of month is set to 31",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1306,
+    "title": "currentDate: 0 starts from the epoch instead of the system time",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1312,
+    "title": "startDate: 0 is applied as the lower bound",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1318,
+    "title": "startDate: 0 is used as currentDate when none is given",
+    "key": "CronExpressionParser#parse.ok.start-date-as-current-date",
+    "reason": "first operation called; startDate fallback"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1324,
+    "title": "endDate: 0 is applied as the upper bound",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1332,
+    "title": "prev should match correctly (issue #98) when milliseconds are greater ",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1342,
+    "title": "prev should match correctly (issue #98) when milliseconds are equal to",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1360,
+    "title": "It works on DST start",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1481,
+    "title": "It works on DST end 2016-10-30 02:00:01 - 0 * * * *",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1505,
+    "title": "works on DST end 2016-10-30 02:00:01 - 0 3 * * *",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1526,
+    "title": "works on DST end 2016-10-30 02:00:01 - */20 3 * * *",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1559,
+    "title": "works on DST end 2016-10-30 00:00:01 - 0 * 30 * *",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1592,
+    "title": "works on DST end 2016-10-30 00:00:01 - 0 * * * *  DST offset via ISO 8",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1752,
+    "title": "it will work with #131 issue case",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1776,
+    "title": "works with #137 issue case",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1790,
+    "title": "handles DST transition day with hour jump using step-by-step method",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1805,
+    "title": "handles DST transition day with reverse hour jump using step-by-step m",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1820,
+    "title": "does not overshoot target hour on spring-forward DST day (forward)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1833,
+    "title": "does not overshoot target hour on spring-forward DST day (reverse)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1850,
+    "title": "compensates a schedule inside a two-hour gap instead of skipping the d",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1866,
+    "title": "compensates the second skipped hour of a two-hour gap",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1879,
+    "title": "does not repeat the compensated occurrence on later hours",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1895,
+    "title": "does not repeat the compensated occurrence when the minute rolls the h",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1911,
+    "title": "leaves a sub-hour transition alone",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1924,
+    "title": "keeps every occurrence when a sub-hour transition is crossed by an hou",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1944,
+    "title": "does not compensate when stepping backward over a fall-back",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1957,
+    "title": "compensates a gap that ends after midnight",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1975,
+    "title": "compensates a skipped midnight hour",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 1992,
+    "title": "leaves a skipped calendar day alone",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2030,
+    "title": "parses cron with last weekday of the month: ${expression}",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2036,
+    "title": "parses cron with last day in a month (wildcard month)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2055,
+    "title": "parses cron with last day in a month (explicit month)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2079,
+    "title": "parses cron with last day in feb",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2103,
+    "title": "parses cron with mix of sequence and range and last day in feb",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2119,
+    "title": "parses expression that runs on both last monday and friday of the mont",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2129,
+    "title": "parses expression that runs on both every monday and last friday of mo",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2142,
+    "title": "throws when parsing a standalone last weekday of the month marker",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2148,
+    "title": "throws when parsing a standalone last weekday of the month marker in a",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2158,
+    "title": "throws error for invalid step in H/step pattern",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2163,
+    "title": "throws error for invalid range in H(range) pattern",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2168,
+    "title": "throws error for invalid range in H(range)/step pattern",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2173,
+    "title": "throws error for invalid step in H(range)/step pattern",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2179,
+    "title": "parses without a seed every time",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2186,
+    "title": "is rejected without a seed in strict mode",
+    "key": "CronExpressionParser#parse.err.strict-hash-step-wider-than-range",
+    "reason": "first operation called; strict hash step"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2192,
+    "title": "H(range) always yields a value inside the field constraints",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2204,
+    "title": "H(range)/step always yields a value inside the range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2215,
+    "title": "H/step always yields a value inside the field constraints",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2231,
+    "title": "a range wider than the field is narrowed before the step is applied",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2242,
+    "title": "a range with no value inside the field is rejected",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2248,
+    "title": "keeps the same seed returning the same value",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2256,
+    "title": "leaves a step that fits inside the range untouched",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2263,
+    "title": "rejects H(range)/step",
+    "key": "CronExpressionParser#parse.err.strict-hash-step-wider-than-range",
+    "reason": "first operation called; strict hash step"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2271,
+    "title": "rejects H/step",
+    "key": "CronExpressionParser#parse.err.strict-hash-step-wider-than-range",
+    "reason": "first operation called; strict hash step"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2279,
+    "title": "rejects a range reaching outside the field, quoting the range as writt",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2290,
+    "title": "accepts a step that fits inside the range",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2302,
+    "title": "parses expressions using H on all fields",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpressionParser.test.ts",
+    "line": 2347,
+    "title": "parses expressions using H on all fields",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 36,
+    "title": "should return the next scheduled date",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 66,
+    "title": "should take a specified number of steps forward",
+    "key": "CronExpression#take.ok.take-count",
+    "reason": "first operation called; take count"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 72,
+    "title": "should take a specified number of steps backward",
+    "key": "CronExpression#take.ok.take-count",
+    "reason": "first operation called; take count"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 78,
+    "title": "should reset the current date to a new date",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 90,
+    "title": "should reset to startDate when no currentDate was provided",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 105,
+    "title": "should reset to the clamped initial currentDate",
+    "key": "CronExpressionParser#parse.ok.current-date-clamped-to-start",
+    "reason": "first operation called; clamp"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 119,
+    "title": "should preserve timezone after reset (issue #406)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 140,
+    "title": "should preserve timezone after reset with explicit new date (issue #40",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 158,
+    "title": "should set milliseconds to 0 on next scheduled date (issue #363)",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 166,
+    "title": "should set milliseconds to 0 on previous scheduled date (issue #363)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 181,
+    "title": "jumps to next allowed second without stepping via applyDateOperation()",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 192,
+    "title": "jumps to previous allowed second without stepping via applyDateOperati",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 203,
+    "title": "jumps to next allowed minute and resets seconds to minimum allowed",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 214,
+    "title": "when there is no later allowed minute, rolls to next hour then sets mi",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 226,
+    "title": "when past the last scheduled hour for the day, jumps a full day first",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 238,
+    "title": "jumps to next allowed hour without stepping via applyDateOperation()",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 249,
+    "title": "skips non-scheduled months instead of crawling day-by-day for sparse d",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 261,
+    "title": "does not exhaust the loop limit when the next match is decades away",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 270,
+    "title": "skips non-scheduled months when iterating backwards for sparse day-res",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 282,
+    "title": "when currentDate is exactly on a schedule, returns the next occurrence",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 289,
+    "title": "when currentDate is exactly on a schedule, returns the previous occurr",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 298,
+    "title": "should use startDate as currentDate when currentDate is not provided",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 307,
+    "title": "should clamp currentDate to startDate when currentDate is before start",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 327,
+    "title": "should retain the current date when it is within the bounds",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "first operation called; uses endDate"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 338,
+    "title": "should throw an error if the current date is after end date",
+    "key": "CronExpression#next.err.next-beyond-end-date",
+    "reason": "first operation called; end date bound"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 357,
+    "title": "should throw when the previous occurrence would land inside a sub-seco",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 366,
+    "title": "should throw when no occurrence exists within the loop limit",
+    "key": "CronExpression#next.ok.next-within-end-date",
+    "reason": "named by describe; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 377,
+    "title": "returns an occurrence on the end date when the current date carries mi",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 386,
+    "title": "keeps interleaved forward and backward iteration anchored to the last ",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 398,
+    "title": "stringify cron expression all stars no seconds 0 * * * * *",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 407,
+    "title": "stringify cron expression all stars no seconds (discard seconds)",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 416,
+    "title": "stringify cron expression all stars with seconds",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 425,
+    "title": "stringify cron expression all stars with seconds (discard seconds)",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 434,
+    "title": "stringify cron expression",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 443,
+    "title": "stringify cron expression (discard seconds)",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 452,
+    "title": "stringify cron expression with star range step",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 461,
+    "title": "stringify cron expression with multiple values and retain original val",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 470,
+    "title": "correctly stringify cron expression * * * * 0,2,4 and convert value to",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 479,
+    "title": "correctly stringify cron expression * * * * 0,2,4,6 convert value to *",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 488,
+    "title": "correctly stringify cron expression * * * * */2",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 497,
+    "title": "stringify cron expression with star range step (discard seconds)",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 506,
+    "title": "stringify cron expression with semi range step",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 515,
+    "title": "stringify cron expression with semi range step (discard seconds)",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 529,
+    "title": "stringify keeps explicit range bounds for stepped ranges not starting ",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 545,
+    "title": "stringify cron expression with L",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 554,
+    "title": "stringify cron expression with L (discard seconds)",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 563,
+    "title": "stringify cron expression with weekday L",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 572,
+    "title": "stringify cron expression with multiple weekday, one of them with an L",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 581,
+    "title": "stringify cron expression with multiple weekday, two of them with an L",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 590,
+    "title": "stringify cron expression with day of week #",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 605,
+    "title": "stringify cron expression with ?",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 612,
+    "title": "stringify cron expression with wildcard day of month and single month ",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 619,
+    "title": "stringify cron expression with wildcard day of month and month range",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 626,
+    "title": "stringify cron expression with day of month range and single month val",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 633,
+    "title": "stringify from fields out of order",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 648,
+    "title": "stringify from fields out of order (discard seconds)",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 663,
+    "title": "stringify cron expression with extended day of week range (0,7)",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 691,
+    "title": "stringify day of week that covers the whole week without collapsing it",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 697,
+    "title": "stringify day of month that covers the whole month without collapsing ",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 701,
+    "title": "stringify day field written as a wildcard collapses it",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 706,
+    "title": "stringify question mark day of week is unchanged",
+    "key": "CronExpression#stringify.ok.hash-seed-deterministic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 710,
+    "title": "parsing an expression from its own rendered form keeps the schedule",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "named by title; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 741,
+    "title": "should support last weekday of month",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 751,
+    "title": "should support nth day of week",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 762,
+    "title": "honors day of month when combined with an nth day of week",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 786,
+    "title": "should handle DST gap (02:30 does not exist)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 794,
+    "title": "should return valid occurrence after DST gap (03:00)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 801,
+    "title": "should return valid occurrence after DST gap (04:00)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 808,
+    "title": "should return valid occurrence after DST gap (05:00)",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 815,
+    "title": "should not stop iteration after DST boundary",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 827,
+    "title": "should NOT return undefined after DST gap",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 838,
+    "title": "iterator should remain stable across DST gap",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronExpression.test.ts",
+    "line": 863,
+    "title": "Europe/Rome vs UTC should differ correctly",
+    "key": "CronExpressionParser#parse.ok.predefined-periodic",
+    "reason": "first operation called; fallback first ok"
+  },
+  {
+    "file": "tests/CronFieldCollection.test.ts",
+    "line": 315,
+    "title": "should return same fields when no overrides provided",
+    "key": "CronFieldCollection#from.ok.override-raw-values",
+    "reason": "first operation called; raw override"
+  },
+  {
+    "file": "tests/CronFieldCollection.test.ts",
+    "line": 326,
+    "title": "should use provided CronField instances",
+    "key": "CronFieldCollection#from.ok.override-field-instances",
+    "reason": "first operation called; field instances"
+  },
+  {
+    "file": "tests/CronFieldCollection.test.ts",
+    "line": 340,
+    "title": "should create new fields from raw values",
+    "key": "CronFieldCollection#from.ok.override-raw-values",
+    "reason": "first operation called; raw override"
+  },
+  {
+    "file": "tests/CronFieldCollection.test.ts",
+    "line": 352,
+    "title": "should handle special characters (L)",
+    "key": "CronFieldCollection#from.ok.override-raw-values",
+    "reason": "first operation called; raw override"
+  },
+  {
+    "file": "tests/CronFieldCollection.test.ts",
+    "line": 365,
+    "title": "should throw when day of week is a standalone L",
+    "key": "CronFieldCollection#from.ok.override-raw-values",
+    "reason": "first operation called; raw override"
+  },
+  {
+    "file": "tests/CronFieldCollection.test.ts",
+    "line": 371,
+    "title": "should handle mix of CronField instances and raw values",
+    "key": "CronFieldCollection#from.ok.override-field-instances",
+    "reason": "first operation called; field instances"
+  },
+  {
+    "file": "tests/CronFieldCollection.test.ts",
+    "line": 384,
+    "title": "should handle multiple values in raw array",
+    "key": "CronFieldCollection#from.ok.override-raw-values",
+    "reason": "first operation called; raw override"
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 54,
+    "title": "preserves a weekday schedule with $name",
+    "key": "CronFileParser#parseFile.ok.parse-file-result-shape",
+    "reason": "first operation called; parseFile",
+    "each": true
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 84,
+    "title": "keeps a schedule whose command has $name",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "first operation called; parseFileSync",
+    "each": true
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 95,
+    "title": "splits a variable at the first =",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "first operation called; parseFileSync"
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 102,
+    "title": "allows spaces around the = of a variable",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "first operation called; parseFileSync"
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 116,
+    "title": "only removes the quotes around the whole value: $name",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "first operation called; parseFileSync",
+    "each": true
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 134,
+    "title": "reads and parses a valid crontab file",
+    "key": "CronFileParser#parseFile.ok.parse-file-result-shape",
+    "reason": "named by describe; parseFile"
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 150,
+    "title": "throws error for non-existing file",
+    "key": "CronFileParser#parseFile.ok.parse-file-result-shape",
+    "reason": "first operation called; parseFile"
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 157,
+    "title": "reads and parses a valid crontab file synchronously",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "named by describe; parseFileSync"
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 173,
+    "title": "keeps a line named __proto__ as an own property instead of replacing t",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "first operation called; parseFileSync"
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 183,
+    "title": "throws error for non-existing file",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "first operation called; parseFileSync"
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 188,
+    "title": "handles invalid expressions",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "first operation called; parseFileSync"
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 205,
+    "title": "parses %s followed by a command",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "first operation called; parseFileSync",
+    "each": true
+  },
+  {
+    "file": "tests/CronFileParser.test.ts",
+    "line": 213,
+    "title": "reports @reboot as an error because it has no schedule",
+    "key": "CronFileParser#parseFileSync.ok.parse-file-sync-result-shape",
+    "reason": "first operation called; parseFileSync"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "files": ["src/index.ts", "src/cac.ts", "src/command.ts"],
+  "operations": [
+    "cac",
+    "CAC#command",
+    "CAC#option",
+    "CAC#parse",
+    "CAC#version",
+    "CAC#help",
+    "CAC#outputHelp",
+    "CAC#usage",
+    "CAC#runMatchedCommand",
+    "Command#option",
+    "Command#action",
+    "Command#alias",
+    "Command#allowUnknownOptions",
+    "Command#example",
+    "Command#usage"
+  ],
+  "docs": ["README.md"],
+  "group": "README: Usage and References (CLI Instance and Command Instance)",
+  "why": "The README References section documents each CLI and Command method with its type, defaults (customFlags, argv) and example inputs. Methods are taken from the CAC and Command classes."
+}

@@ -1,0 +1,8 @@
+baseline run 2071 ms; timeout 30000 ms
+value-1 Killed     src/middleware/persist.ts:196 `version` 0 → 1
+value-2 Survived   src/middleware/persist.ts:207 `hydrationVersion` 0 → 1
+value-mutants: 2 mutant(s): 1 Killed, 1 Survived; 5333 ms (baseline run 2071 ms)
+wrote <work-0001>/zustand/reports/value/value.json
+real 5.40
+user 20.38
+sys 15.36

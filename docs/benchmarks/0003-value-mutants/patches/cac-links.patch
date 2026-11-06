@@ -1,0 +1,112 @@
+diff --git a/tests/index.test.ts b/tests/index.test.ts
+index 6927d44..9a86870 100644
+--- a/tests/index.test.ts
++++ b/tests/index.test.ts
+@@ -49,7 +49,7 @@ snapshotOutput({
+   args: ['build'],
+ })
+ 
+-test('negated option', () => {
++test('CAC#option.ok.negated-option negated option', () => {
+   const cli = cac()
+ 
+   cli.option('--foo [foo]', 'Set foo').option('--no-foo', 'Disable foo')
+@@ -64,7 +64,7 @@ test('negated option', () => {
+   })
+ })
+ 
+-test('double dashes', () => {
++test('CAC#parse.ok.parsed-argv double dashes', () => {
+   const cli = cac()
+ 
+   const { args, options } = cli.parse([
+@@ -81,7 +81,7 @@ test('double dashes', () => {
+   expect(options['--']).toEqual(['npm', 'test'])
+ })
+ 
+-test('default value for negated option', () => {
++test('CAC#option.ok.negated-option default value for negated option', () => {
+   const cli = cac()
+ 
+   cli.option('--no-clear-screen', 'no clear screen')
+@@ -92,7 +92,7 @@ test('default value for negated option', () => {
+   expect(options).toEqual({ '--': [], clearScreen: true, aB: true, cD: true })
+ })
+ 
+-test('negated option validation', () => {
++test('CAC#option.ok.negated-option negated option validation', () => {
+   const cli = cac()
+ 
+   cli.option('--config <config>', 'config file')
+@@ -104,7 +104,7 @@ test('negated option validation', () => {
+   expect(options.config).toBe(false)
+ })
+ 
+-test('array types without transformFunction', () => {
++test('CAC#option.ok.config-type-array array types without transformFunction', () => {
+   const cli = cac()
+ 
+   cli
+@@ -134,7 +134,7 @@ test('array types without transformFunction', () => {
+   expect(options3.externals).toEqual([{ env: ['foo', 'bar'] }])
+ })
+ 
+-test('array types are left absent when the option is omitted', () => {
++test('CAC#option.ok.config-type-array array types are left absent when the option is omitted', () => {
+   const cli = cac()
+ 
+   cli
+@@ -154,7 +154,7 @@ test('array types are left absent when the option is omitted', () => {
+   expect(options3.externals).toEqual(['foo'])
+ })
+ 
+-test('array types with transformFunction', () => {
++test('Command#option.ok.command-option array types with transformFunction', () => {
+   const cli = cac()
+ 
+   cli
+@@ -171,7 +171,7 @@ test('array types with transformFunction', () => {
+   expect(options.scale).toEqual(true)
+ })
+ 
+-test('throw on unknown options', () => {
++test('Command#option.ok.dash-camel-case throw on unknown options', () => {
+   const cli = cac()
+ 
+   cli
+@@ -185,7 +185,7 @@ test('throw on unknown options', () => {
+   }).toThrowError('Unknown option `--xx`')
+ })
+ 
+-test('throw on unused args', () => {
++test('CAC#command.ok.required-arguments throw on unused args', () => {
+   const cli = cac()
+ 
+   cli.command('build [entry]', 'Build your app').action(() => {})
+@@ -230,7 +230,7 @@ describe('default commands', () => {
+   })
+ })
+ 
+-test('ignore prototype polluting option names', () => {
++test('CAC#parse.ok.parsed-argv ignore prototype polluting option names', () => {
+   const cli = cac()
+ 
+   const { options } = cli.parse(
+@@ -244,7 +244,7 @@ test('ignore prototype polluting option names', () => {
+   expect(options).toEqual({ '--': [] })
+ })
+ 
+-test('dot-nested option names', () => {
++test('CAC#parse.ok.parsed-argv dot-nested option names', () => {
+   const cli = cac()
+ 
+   const { options } = cli.parse(
+@@ -263,7 +263,7 @@ test('dot-nested option names', () => {
+ // such as vite-node load cac first (their own CLI uses it) and only then
+ // rewrite `process.argv` for the script, so a later `parse()` saw the stale
+ // array and treated the script file as a positional argument.
+-test('reads process.argv when called, not when imported', () => {
++test('CAC#parse.ok.default-argv reads process.argv when called, not when imported', () => {
+   const original = process.argv
+   process.argv = ['node', 'cli.js', 'hello']
+ 

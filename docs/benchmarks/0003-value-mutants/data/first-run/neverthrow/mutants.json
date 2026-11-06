@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "files": {},
+  "mutants": []
+}

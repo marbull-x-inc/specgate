@@ -1,0 +1,65 @@
+specgate check (advisory): 17 units, 75 guarantees, 152 linked tests
+  fail 24 · warn 33 · info 2
+  ❌ [guarantee-no-test] src/string/camelCase.ts:21 camelCase.ok.mixed-case-kept has no test naming it
+  ❌ [guarantee-no-test] src/string/capitalize.ts:16 capitalize.ok.only-first-word has no test naming it
+  ❌ [guarantee-no-test] src/string/deburr.ts:60 deburr.ok.other-languages has no test naming it
+  ❌ [guarantee-no-test] src/string/escape.ts:22 escape.ok.ampersand-escaped has no test naming it
+  ❌ [guarantee-no-test] src/string/escape.ts:23 escape.ok.double-quote-escaped has no test naming it
+  ❌ [guarantee-no-test] src/string/escape.ts:24 escape.ok.single-quote-escaped has no test naming it
+  ❌ [guarantee-no-test] src/string/escapeRegExp.ts:12 escapeRegExp.ok.parentheses-escaped has no test naming it
+  ❌ [guarantee-no-test] src/string/escapeRegExp.ts:13 escapeRegExp.ok.brackets-escaped has no test naming it
+  ❌ [guarantee-no-test] src/string/escapeRegExp.ts:14 escapeRegExp.ok.at-sign-not-escaped has no test naming it
+  ❌ [guarantee-no-test] src/string/pad.ts:19 pad.ok.right-gets-extra has no test naming it
+  ❌ [guarantee-no-test] src/string/pascalCase.ts:20 pascalCase.ok.mixed-separators has no test naming it
+  ❌ [guarantee-no-test] src/string/reverseString.ts:14 reverseString.ok.case-kept has no test naming it
+  ❌ [guarantee-no-test] src/string/reverseString.ts:15 reverseString.ok.emoji-intact has no test naming it
+  ❌ [guarantee-no-test] src/string/snakeCase.ts:22 snakeCase.ok.mixed-separators has no test naming it
+  ❌ [guarantee-no-test] src/string/startCase.ts:17 startCase.ok.hyphen-underscore has no test naming it
+  ❌ [guarantee-no-test] src/string/trim.ts:18 trim.ok.array-chars-both-ends has no test naming it
+  ❌ [guarantee-no-test] src/string/trim.ts:20 trim.err.multi-char-string has no test naming it
+  ❌ [guarantee-no-test] src/string/unescape.ts:22 unescape.ok.double-quote-restored has no test naming it
+  ❌ [guarantee-no-test] src/string/unescape.ts:23 unescape.ok.single-quote-restored has no test naming it
+  ❌ [guarantee-no-test] src/string/unescape.ts:24 unescape.ok.ampersand-restored has no test naming it
+  ❌ [guarantee-no-test] src/string/unescape.ts:25 unescape.ok.mixed-entities has no test naming it
+  ❌ [guarantee-no-test] src/string/upperCase.ts:19 upperCase.ok.snake-and-email has no test naming it
+  ❌ [guarantee-no-test] src/string/words.ts:40 words.ok.identifier-styles has no test naming it
+  ❌ [guarantee-no-test] src/string/words.ts:41 words.ok.complex has no test naming it
+  ⚠️ [decision-unspecified] src/string/deburr.ts:77 deburr commits to boundary "128" in `code < 0x80`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/string/deburr.ts:77 deburr: BlockStatement mutant in a helper it calls (the boundary "128"): `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/string/deburr.ts:77 deburr: `code < 0x80`: 0x80 → 129 survived; no linked test fails when the code changes like this
+  ⚠️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to boundary "563" in `code <= 0x233`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to boundary "7680" in `code >= 0x1e00`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to boundary "7929" in `code <= 0x1ef9`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to match "8490" in `code === 0x212a`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to match "8491" in `code === 0x212b`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/string/deburr.ts:111 deburr: EqualityOperator mutant in a helper it calls (the boundary "192"): `code < 0x1ef9` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/string/deburr.ts:111 deburr: EqualityOperator mutant in a helper it calls (the boundary "192"): `code > 0x1e00` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/string/deburr.ts:111 deburr: `code <= 0x233`: 0x233 → 564 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/string/deburr.ts:111 deburr: `code >= 0x1e00`: 0x1e00 → 7681 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/string/deburr.ts:111 deburr: `code <= 0x1ef9`: 0x1ef9 → 7930 survived; no linked test fails when the code changes like this
+  ⚠️ [decision-unspecified] src/string/deburr.ts:117 deburr commits to boundary "768" in `code >= 0x300`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/string/deburr.ts:117 deburr commits to boundary "879" in `code <= 0x36f`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/string/deburr.ts:119 deburr commits to boundary "8400" in `code >= 0x20d0`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/string/deburr.ts:119 deburr commits to boundary "8447" in `code <= 0x20ff`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/string/deburr.ts:121 deburr commits to boundary "65056" in `code >= 0xfe20`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/string/deburr.ts:121 deburr commits to boundary "65071" in `code <= 0xfe2f`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [tsdoc-syntax] src/string/escapeRegExp.ts:14 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/string/escapeRegExp.ts:14 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/string/pascalCase.ts:21 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/string/snakeCase.ts:23 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [mutant-survived] src/string/startCase.ts:23 startCase: MethodExpression mutant: `str` survived; no linked test fails when the code changes like this
+  ⚠️ [tsdoc-syntax] src/string/trim.ts:17 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/string/trim.ts:17 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/string/trim.ts:17 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/string/trim.ts:17 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/string/trim.ts:17 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [mutant-survived] src/string/trim.ts:23 trim: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/string/trim.ts:23 trim: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/string/unescape.ts:5 unescape: `'&#39;': "'"` removed from `htmlUnescapes` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/string/words.ts:19 words: Regex mutant in CASE_SPLIT_PATTERN: `/\p{Lu}?\p{Ll}+|[0-9]+|\p{Lu}+(?!\p{Ll})|\p{Emoji_Presentat…` survived; no linked test fails when the code changes like this
+  ℹ️ [decision-unspecified] src/string/deburr.ts:111 deburr commits to boundary "192" in `code >= 0xc0`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] src/string/pad.ts:22 pad commits to constant "2" in `(length - str.length) / 2`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+
+wrote <work>/es-toolkit/.specgate-mutation/report.json
+      <work>/es-toolkit/.specgate-mutation/summary.md
+      <work>/es-toolkit/.specgate-mutation/report.sarif

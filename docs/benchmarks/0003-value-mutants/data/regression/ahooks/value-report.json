@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "2",
+  "thresholds": {
+    "high": 80,
+    "low": 60
+  },
+  "projectRoot": "<work-0001>/ahooks",
+  "files": {
+    "packages/hooks/src/useCounter/index.ts": {
+      "language": "typescript",
+      "source": "import { useState } from 'react';\nimport useMemoizedFn from '../useMemoizedFn';\nimport { isNumber } from '../utils';\n\nexport interface Options {\n  min?: number;\n  max?: number;\n}\n\nexport interface Actions {\n  inc: (delta?: number) => void;\n  dec: (delta?: number) => void;\n  set: (value: number | ((c: number) => number)) => void;\n  reset: () => void;\n}\n\nexport type ValueParam = number | ((c: number) => number);\n\nfunction getTargetValue(val: number, options: Options = {}) {\n  const { min, max } = options;\n  let target = val;\n  if (isNumber(max)) {\n    target = Math.min(max, target);\n  }\n  if (isNumber(min)) {\n    target = Math.max(min, target);\n  }\n  return target;\n}\n\n/**\n * @guarantee ok.initial the value starts at `initialValue`, 0 when it is not given\n * @guarantee ok.inc `inc` adds `delta` to the value, 1 when it is not given; `dec` subtracts it\n * @guarantee ok.bounds the value never goes above `max` or below `min`\n * @guarantee ok.set `set` sets the value to a number, or to what a function of the current value returns\n * @guarantee ok.reset `reset` sets the value back to `initialValue`\n */\nfunction useCounter(initialValue: number = 0, options: Options = {}) {\n  const { min, max } = options;\n\n  const [current, setCurrent] = useState(() => {\n    return getTargetValue(initialValue, {\n      min,\n      max,\n    });\n  });\n\n  const setValue = (value: ValueParam) => {\n    setCurrent((c) => {\n      const target = isNumber(value) ? value : value(c);\n      return getTargetValue(target, {\n        max,\n        min,\n      });\n    });\n  };\n\n  const inc = (delta: number = 1) => {\n    setValue((c) => c + delta);\n  };\n\n  const dec = (delta: number = 1) => {\n    setValue((c) => c - delta);\n  };\n\n  const set = (value: ValueParam) => {\n    setValue(value);\n  };\n\n  const reset = () => {\n    setValue(initialValue);\n  };\n\n  return [\n    current,\n    {\n      inc: useMemoizedFn(inc),\n      dec: useMemoizedFn(dec),\n      set: useMemoizedFn(set),\n      reset: useMemoizedFn(reset),\n    },\n  ] as const;\n}\n\nexport default useCounter;\n",
+      "mutants": [
+        {
+          "id": "value-1",
+          "mutatorName": "Value",
+          "replacement": "the default `initialValue` 0 → 1",
+          "description": "the default `initialValue` 0 → 1",
+          "location": {
+            "start": {
+              "line": 38,
+              "column": 44
+            },
+            "end": {
+              "line": 38,
+              "column": 45
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "2",
+            "3"
+          ],
+          "duration": 1925
+        },
+        {
+          "id": "value-2",
+          "mutatorName": "Value",
+          "replacement": "the default `delta` 1 → 2",
+          "description": "the default `delta` 1 → 2",
+          "location": {
+            "start": {
+              "line": 58,
+              "column": 32
+            },
+            "end": {
+              "line": 58,
+              "column": 33
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "2",
+            "3"
+          ],
+          "duration": 1921
+        },
+        {
+          "id": "value-3",
+          "mutatorName": "Value",
+          "replacement": "the default `delta` 1 → 2",
+          "description": "the default `delta` 1 → 2",
+          "location": {
+            "start": {
+              "line": 62,
+              "column": 32
+            },
+            "end": {
+              "line": 62,
+              "column": 33
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "2",
+            "3"
+          ],
+          "duration": 1921
+        }
+      ]
+    }
+  }
+}

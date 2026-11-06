@@ -1,0 +1,19 @@
+{
+  "files": ["src/utils/path.ts", "src/utils/sanitize.ts", "src/utils/response.ts"],
+  "operations": [
+    "resolveDotSegments",
+    "isCanonicalPath",
+    "normalizeRoute",
+    "sanitizeStatusMessage",
+    "sanitizeStatusCode",
+    "noContent",
+    "redirect",
+    "redirectBack",
+    "raw",
+    "iterable",
+    "writeEarlyHints"
+  ],
+  "docs": ["docs/2.utils/4.security.md", "docs/2.utils/2.response.md"],
+  "group": "Utils: Security > Path, plus Response > Sanitize and More Response Utils",
+  "why": "The Path utilities and the redirect and no-content helpers state many concrete values (status codes, header names, example inputs and outputs). The CORS and cookie sections of the docs state almost no values, so they were left out."
+}

@@ -8,7 +8,7 @@ import { type ExtractedUnit, extractSurface } from "./extract/surface.ts";
 import { extractTests } from "./extract/tests/index.ts";
 import { createTsdocParser } from "./extract/tsdoc-parser.ts";
 import { isReport, type Report, type Unit } from "./ir/schema.ts";
-import { countMutants, mapMutants, readMutationReport } from "./mutation/report.ts";
+import { countMutants, mapMutants, readMutationReports, reportPaths } from "./mutation/report.ts";
 import { attachProvenance } from "./provenance/git.ts";
 import { readRevision } from "./provenance/revision.ts";
 import { resolveReferences } from "./resolve/identifiers.ts";
@@ -121,14 +121,14 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
   }
   if (options.provenance !== false) attachProvenance(config, units);
 
-  const mutationRead = readMutationReport(config);
+  const mutationRead = readMutationReports(config);
   const mutation =
-    mutationRead === undefined || config.mutation.report === undefined
+    mutationRead === undefined
       ? undefined
       : {
-          path: config.mutation.report,
+          path: reportPaths(config).join(", "),
           result:
-            "error" in mutationRead
+            "errors" in mutationRead
               ? mutationRead
               : { mapped: mapMutants(units, mutationRead.mutants, config.mutation.detected) },
           findings: config.mutation.findings,

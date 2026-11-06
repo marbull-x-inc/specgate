@@ -1,0 +1,48 @@
+[
+  {
+    "file": "source/rate-limit.ts",
+    "symbol": "rateLimit",
+    "tags": [
+      "@guarantee ok.default-window-ms `windowMs` defaults to 60000 milliseconds (1 minute).",
+      "@guarantee ok.default-limit `limit` defaults to 5.",
+      "@guarantee ok.zero-limit-blocks-all Setting `limit` to 0 blocks all requests instead of disabling the rate limiter.",
+      "@guarantee ok.default-message `message` defaults to \"Too many requests, please try again later.\".",
+      "@guarantee ok.default-status-code `statusCode` defaults to 429.",
+      "@guarantee ok.default-legacy-headers `legacyHeaders` defaults to true, which sends the \"X-RateLimit-Limit\", \"X-RateLimit-Remaining\" and (if the store provides it) \"X-RateLimit-Reset\" headers on all responses.",
+      "@guarantee ok.default-standard-headers `standardHeaders` defaults to false.",
+      "@guarantee ok.default-request-property-name `requestPropertyName` defaults to \"rateLimit\", the name of the property on the request that holds the rate limit info."
+    ]
+  },
+  {
+    "file": "source/ip-key-generator.ts",
+    "symbol": "ipKeyGenerator",
+    "tags": [
+      "@guarantee ok.ipv4-unchanged An IPv4 address is returned unchanged.",
+      "@guarantee ok.default-ipv6-subnet-56 When `ipv6Subnet` is not given it defaults to 56, so an IPv6 address is returned as the network address of its /56 subnet in CIDR notation.",
+      "@guarantee ok.ipv6-subnet-false With `ipv6Subnet` set to `false`, an IPv6 address is also returned unchanged.",
+      "@guarantee ok.ipv4-mapped-ipv6 An IPv4-mapped IPv6 address (the \"::ffff:0:0/96\" range) is returned as the IPv4 address it contains, whichever notation it arrives in."
+    ]
+  },
+  {
+    "file": "source/time-constants.ts",
+    "symbol": "SECOND",
+    "tags": ["@guarantee ok.second-ms `SECOND` is one second in milliseconds, usable for `windowMs`."]
+  },
+  {
+    "file": "source/time-constants.ts",
+    "symbol": "MINUTE",
+    "tags": [
+      "@guarantee ok.minute-ms `MINUTE` is 60000, a duration in milliseconds (1 minute, the default `windowMs`)."
+    ]
+  },
+  {
+    "file": "source/time-constants.ts",
+    "symbol": "HOUR",
+    "tags": ["@guarantee ok.hour-ms `HOUR` is one hour in milliseconds, so `3 * HOUR` is a 3 hour `windowMs`."]
+  },
+  {
+    "file": "source/time-constants.ts",
+    "symbol": "DAY",
+    "tags": ["@guarantee ok.day-ms `DAY` is one day in milliseconds."]
+  }
+]

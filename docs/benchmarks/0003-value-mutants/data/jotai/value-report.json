@@ -1,0 +1,1020 @@
+{
+  "schemaVersion": "2",
+  "thresholds": {
+    "high": 80,
+    "low": 60
+  },
+  "projectRoot": "<work>/jotai",
+  "files": {
+    "src/vanilla/utils/atomWithDefault.ts": {
+      "language": "typescript",
+      "source": "import { atom } from '../../vanilla.js'\nimport type { WritableAtom } from '../../vanilla.js'\nimport { RESET } from './constants.js'\n\ntype Read<Value, Args extends unknown[], Result> = WritableAtom<\n  Value,\n  Args,\n  Result\n>['read']\n\ntype DefaultSetStateAction<Value> =\n  Value | typeof RESET | ((prev: Value) => Value | typeof RESET)\n\n/**\n * @guarantee ok.read-default The default value comes from the read function, so `atomWithDefault((get) => get(count1Atom) * 2)` with `count1Atom` equal to 1 has the value 2.\n * @guarantee ok.overwritten-detaches After the value is overwritten with `set`, the read function is no longer used and a change in dependency atoms does not update the value.\n * @guarantee ok.reset-restores Setting the atom to `RESET` discards changes made with `set` and restores the value computed by the read function.\n */\nexport function atomWithDefault<Value>(\n  getDefault: Read<Value, [DefaultSetStateAction<Value>], void>,\n): WritableAtom<Value, [DefaultSetStateAction<Value>], void> {\n  const EMPTY = Symbol()\n  const overwrittenAtom = atom<Value | typeof EMPTY>(EMPTY)\n\n  if (process.env.NODE_ENV !== 'production') {\n    overwrittenAtom.debugPrivate = true\n  }\n\n  const anAtom: WritableAtom<Value, [DefaultSetStateAction<Value>], void> =\n    atom(\n      (get, options) => {\n        const overwritten = get(overwrittenAtom)\n        if (overwritten !== EMPTY) {\n          return overwritten\n        }\n        return getDefault(get, options)\n      },\n      (get, set, update) => {\n        const newValue =\n          typeof update === 'function'\n            ? (update as (prev: Value) => Value)(get(anAtom))\n            : update\n        set(overwrittenAtom, newValue === RESET ? EMPTY : newValue)\n      },\n    )\n  return anAtom\n}\n",
+      "mutants": [
+        {
+          "id": "value-1",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "location": {
+            "start": {
+              "line": 25,
+              "column": 32
+            },
+            "end": {
+              "line": 25,
+              "column": 44
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119"
+          ],
+          "duration": 6625
+        }
+      ]
+    },
+    "src/vanilla/utils/atomWithLazy.ts": {
+      "language": "typescript",
+      "source": "import { atom } from '../../vanilla.js'\nimport type { PrimitiveAtom } from '../../vanilla.js'\n\n/**\n * @guarantee ok.lazy-first-use The initial value is computed at the first use of the atom in the store, not when the atom is defined.\n * @guarantee ok.once-per-store The initial value is recreated exactly once per store, so a new store created with `createStore()` computes a new initial value.\n * @guarantee ok.writable-after-init After initialization the atom behaves like a regular primitive atom and can be written to.\n */\nexport function atomWithLazy<Value>(\n  makeInitial: () => Value,\n): PrimitiveAtom<Value> {\n  const a = atom(undefined as unknown as Value)\n  delete (a as { init?: Value }).init\n  Object.defineProperty(a, 'init', {\n    get() {\n      return makeInitial()\n    },\n  })\n  return a\n}\n",
+      "mutants": [
+        {
+          "id": "value-2",
+          "mutatorName": "Value",
+          "replacement": "`Object.defineProperty(a, 'init', { get(…`: 'init' → 'init_x'",
+          "description": "`Object.defineProperty(a, 'init', { get(…`: 'init' → 'init_x'",
+          "location": {
+            "start": {
+              "line": 14,
+              "column": 28
+            },
+            "end": {
+              "line": 14,
+              "column": 34
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "120",
+            "121",
+            "122"
+          ],
+          "duration": 6039
+        }
+      ]
+    },
+    "src/vanilla/utils/atomWithRefresh.ts": {
+      "language": "typescript",
+      "source": "import { atom } from '../../vanilla.js'\nimport type { WritableAtom } from '../../vanilla.js'\n\ntype Read<Value, Args extends unknown[], Result> = WritableAtom<\n  Value,\n  Args,\n  Result\n>['read']\ntype Write<Value, Args extends unknown[], Result> = WritableAtom<\n  Value,\n  Args,\n  Result\n>['write']\n\n/**\n * @guarantee ok.refresh-on-no-args Calling `set` with zero arguments forces the read function to be reevaluated.\n * @guarantee ok.write-on-args Calling `set` with one or more arguments calls the `write` function.\n */\nexport function atomWithRefresh<Value, Args extends unknown[], Result>(\n  read: Read<Value, Args, Result>,\n  write: Write<Value, Args, Result>,\n): WritableAtom<Value, Args | [], Result | void>\n\nexport function atomWithRefresh<Value>(\n  read: Read<Value, [], void>,\n): WritableAtom<Value, [], void>\n\nexport function atomWithRefresh<Value, Args extends unknown[], Result>(\n  read: Read<Value, Args, Result>,\n  write?: Write<Value, Args, Result>,\n) {\n  const refreshAtom = atom(0)\n  if (process.env.NODE_ENV !== 'production') {\n    refreshAtom.debugPrivate = true\n  }\n  return atom(\n    (get, options) => {\n      get(refreshAtom)\n      return read(get, options as never)\n    },\n    (get, set, ...args: Args) => {\n      if (args.length === 0) {\n        set(refreshAtom, (c) => c + 1)\n      } else if (write) {\n        return write(get, set, ...args)\n      } else if (process.env.NODE_ENV !== 'production') {\n        throw new Error('refresh must be called without arguments')\n      }\n    },\n  )\n}\n",
+      "mutants": [
+        {
+          "id": "value-3",
+          "mutatorName": "Value",
+          "replacement": "`atom(0)`: 0 → 1",
+          "description": "`atom(0)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 32,
+              "column": 28
+            },
+            "end": {
+              "line": 32,
+              "column": 29
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "74",
+            "75",
+            "76",
+            "126"
+          ],
+          "duration": 6235
+        },
+        {
+          "id": "value-4",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "location": {
+            "start": {
+              "line": 33,
+              "column": 32
+            },
+            "end": {
+              "line": 33,
+              "column": 44
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "74",
+            "75",
+            "76",
+            "126"
+          ],
+          "duration": 6217
+        },
+        {
+          "id": "value-5",
+          "mutatorName": "Value",
+          "replacement": "`args.length === 0`: 0 → 1",
+          "description": "`args.length === 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 42,
+              "column": 27
+            },
+            "end": {
+              "line": 42,
+              "column": 28
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "74",
+            "75",
+            "76",
+            "126"
+          ],
+          "duration": 6204
+        },
+        {
+          "id": "value-6",
+          "mutatorName": "Value",
+          "replacement": "`c + 1`: 1 → 2",
+          "description": "`c + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 43,
+              "column": 37
+            },
+            "end": {
+              "line": 43,
+              "column": 38
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "74",
+            "75",
+            "76"
+          ],
+          "duration": 6529
+        },
+        {
+          "id": "value-7",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "location": {
+            "start": {
+              "line": 46,
+              "column": 43
+            },
+            "end": {
+              "line": 46,
+              "column": 55
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "126"
+          ],
+          "duration": 6062
+        }
+      ]
+    },
+    "src/vanilla/utils/atomWithStorage.ts": {
+      "language": "typescript",
+      "source": "import { atom } from '../../vanilla.js'\nimport type { WritableAtom } from '../../vanilla.js'\nimport { RESET } from './constants.js'\n\nconst isPromiseLike = (x: unknown): x is PromiseLike<unknown> =>\n  typeof (x as PromiseLike<unknown>)?.then === 'function'\n\ntype Unsubscribe = () => void\n\ntype Subscribe<Value> = (\n  key: string,\n  callback: (value: Value) => void,\n  initialValue: Value,\n) => Unsubscribe | undefined\n\ntype StringSubscribe = (\n  key: string,\n  callback: (value: string | null) => void,\n) => Unsubscribe | undefined\n\ntype SetStateActionWithReset<Value> =\n  Value | typeof RESET | ((prev: Value) => Value | typeof RESET)\n\nexport interface AsyncStorage<Value> {\n  getItem: (key: string, initialValue: Value) => PromiseLike<Value>\n  setItem: (key: string, newValue: Value) => PromiseLike<void>\n  removeItem: (key: string) => PromiseLike<void>\n  subscribe?: Subscribe<Value>\n}\n\nexport interface SyncStorage<Value> {\n  getItem: (key: string, initialValue: Value) => Value\n  setItem: (key: string, newValue: Value) => void\n  removeItem: (key: string) => void\n  subscribe?: Subscribe<Value>\n}\n\nexport interface AsyncStringStorage {\n  getItem: (key: string) => PromiseLike<string | null>\n  setItem: (key: string, newValue: string) => PromiseLike<void>\n  removeItem: (key: string) => PromiseLike<void>\n  subscribe?: StringSubscribe\n}\n\nexport interface SyncStringStorage {\n  getItem: (key: string) => string | null\n  setItem: (key: string, newValue: string) => void\n  removeItem: (key: string) => void\n  subscribe?: StringSubscribe\n}\n\nexport function withStorageValidator<Value>(\n  validator: (value: unknown) => value is Value,\n): {\n  (storage: AsyncStorage<unknown>): AsyncStorage<Value>\n  (storage: SyncStorage<unknown>): SyncStorage<Value>\n}\n\nexport function withStorageValidator<Value>(\n  validator: (value: unknown) => value is Value,\n) {\n  return (unknownStorage: AsyncStorage<unknown> | SyncStorage<unknown>) => {\n    const storage = {\n      ...unknownStorage,\n      getItem: (key: string, initialValue: Value) => {\n        const validate = (value: unknown) => {\n          if (!validator(value)) {\n            return initialValue\n          }\n          return value\n        }\n        const value = unknownStorage.getItem(key, initialValue)\n        if (isPromiseLike(value)) {\n          return value.then(validate)\n        }\n        return validate(value)\n      },\n    }\n    return storage\n  }\n}\n\ntype JsonStorageOptions = {\n  reviver?: (key: string, value: unknown) => unknown\n  replacer?: (key: string, value: unknown) => unknown\n}\n\n/**\n * @guarantee ok.json-serialization The storage it creates serializes with `JSON.stringify()` and deserializes with `JSON.parse()`.\n * @guarantee ok.string-storage-getter It takes a getter function that returns the underlying string storage, such as `window.localStorage` or `window.sessionStorage`.\n * @guarantee ok.replacer-reviver Its optional `replacer` option is used for `JSON.stringify` and its optional `reviver` option is used for `JSON.parse`.\n */\nexport function createJSONStorage<Value>(): SyncStorage<Value>\n\nexport function createJSONStorage<Value>(\n  getStringStorage: () => AsyncStringStorage,\n  options?: JsonStorageOptions,\n): AsyncStorage<Value>\n\nexport function createJSONStorage<Value>(\n  getStringStorage: () => SyncStringStorage,\n  options?: JsonStorageOptions,\n): SyncStorage<Value>\n\nexport function createJSONStorage<Value>(\n  getStringStorage: () =>\n    AsyncStringStorage | SyncStringStorage | undefined = () => {\n    try {\n      return window.localStorage\n    } catch (e) {\n      if (process.env.NODE_ENV !== 'production') {\n        if (typeof window !== 'undefined') {\n          console.warn(e)\n        }\n      }\n      return undefined\n    }\n  },\n  options?: JsonStorageOptions,\n): AsyncStorage<Value> | SyncStorage<Value> {\n  let lastStr: string | undefined\n  let lastValue: Value\n\n  const storage: AsyncStorage<Value> | SyncStorage<Value> = {\n    getItem: (key, initialValue) => {\n      const parse = (str: string | null) => {\n        str = str || ''\n        if (lastStr !== str) {\n          try {\n            lastValue = JSON.parse(str, options?.reviver)\n          } catch {\n            return initialValue\n          }\n          lastStr = str\n        }\n        return lastValue\n      }\n      const str = getStringStorage()?.getItem(key) ?? null\n      if (isPromiseLike(str)) {\n        return str.then(parse) as never\n      }\n      return parse(str) as never\n    },\n    setItem: (key, newValue) =>\n      getStringStorage()?.setItem(\n        key,\n        JSON.stringify(newValue, options?.replacer),\n      ),\n    removeItem: (key) => getStringStorage()?.removeItem(key),\n  }\n\n  const createHandleSubscribe =\n    (subscriber: StringSubscribe): Subscribe<Value> =>\n    (key, callback, initialValue) =>\n      subscriber(key, (v) => {\n        let newValue: Value\n        try {\n          newValue = JSON.parse(v || '', options?.reviver)\n        } catch {\n          newValue = initialValue\n        }\n        callback(newValue)\n      })\n\n  let subscriber: StringSubscribe | undefined\n  try {\n    subscriber = getStringStorage()?.subscribe\n  } catch {\n    // ignore\n  }\n  if (\n    !subscriber &&\n    typeof window !== 'undefined' &&\n    typeof window.addEventListener === 'function' &&\n    window.Storage\n  ) {\n    subscriber = (key, callback) => {\n      if (!(getStringStorage() instanceof window.Storage)) {\n        return () => {}\n      }\n      const storageEventCallback = (e: StorageEvent) => {\n        if (e.storageArea === getStringStorage() && e.key === key) {\n          callback(e.newValue)\n        }\n      }\n      window.addEventListener('storage', storageEventCallback)\n      return () => {\n        window.removeEventListener('storage', storageEventCallback)\n      }\n    }\n  }\n\n  if (subscriber) {\n    storage.subscribe = createHandleSubscribe(subscriber)\n  }\n  return storage\n}\n\nconst defaultStorage = createJSONStorage()\n\n/**\n * @guarantee ok.default-storage When no `storage` is given, the atom uses `localStorage` for storage and retrieval, with `JSON.stringify()` and `JSON.parse()` for serialization and deserialization.\n * @guarantee ok.get-on-init-default The `getOnInit` option is `false` by default, so on initialization the atom holds `initialValue` rather than the stored value.\n * @guarantee ok.get-on-init-true With `getOnInit` set to `true` the atom returns the stored value immediately on initialization instead of `initialValue`.\n * @guarantee ok.cross-tab The default storage subscribes to `storage` events for cross-tab synchronization.\n * @guarantee ok.reset-deletes Writing the `RESET` symbol to the atom deletes the item from storage.\n * @guarantee ok.async-storage With an asynchronous storage the atom value becomes async, so an updater function receives a promise or a value.\n */\nexport function atomWithStorage<Value>(\n  key: string,\n  initialValue: Value,\n  storage: AsyncStorage<Value>,\n  options?: { getOnInit?: boolean },\n): WritableAtom<\n  Value | Promise<Value>,\n  [SetStateActionWithReset<Value | Promise<Value>>],\n  Promise<void>\n>\n\nexport function atomWithStorage<Value>(\n  key: string,\n  initialValue: Value,\n  storage?: SyncStorage<Value>,\n  options?: { getOnInit?: boolean },\n): WritableAtom<Value, [SetStateActionWithReset<Value>], void>\n\nexport function atomWithStorage<Value>(\n  key: string,\n  initialValue: Value,\n  storage:\n    | SyncStorage<Value>\n    | AsyncStorage<Value> = defaultStorage as SyncStorage<Value>,\n  options?: { getOnInit?: boolean },\n) {\n  const getOnInit = options?.getOnInit\n  const baseAtom = atom(\n    getOnInit\n      ? (storage.getItem(key, initialValue) as Value | Promise<Value>)\n      : initialValue,\n  )\n\n  if (process.env.NODE_ENV !== 'production') {\n    baseAtom.debugPrivate = true\n  }\n\n  baseAtom.onMount = (setAtom) => {\n    setAtom(storage.getItem(key, initialValue) as Value | Promise<Value>)\n    return storage.subscribe?.(key, setAtom, initialValue)\n  }\n\n  const anAtom = atom(\n    (get) => get(baseAtom),\n    (get, set, update: SetStateActionWithReset<Value | Promise<Value>>) => {\n      const nextValue =\n        typeof update === 'function'\n          ? (\n              update as (\n                prev: Value | Promise<Value>,\n              ) => Value | Promise<Value> | typeof RESET\n            )(get(baseAtom))\n          : update\n      if (nextValue === RESET) {\n        set(baseAtom, initialValue)\n        return storage.removeItem(key)\n      }\n      if (isPromiseLike(nextValue)) {\n        return nextValue.then((resolvedValue) => {\n          set(baseAtom, resolvedValue)\n          return storage.setItem(key, resolvedValue)\n        })\n      }\n      set(baseAtom, nextValue)\n      return storage.setItem(key, nextValue)\n    },\n  )\n\n  return anAtom as never\n}\n",
+      "mutants": [
+        {
+          "id": "value-8",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "location": {
+            "start": {
+              "line": 111,
+              "column": 36
+            },
+            "end": {
+              "line": 111,
+              "column": 48
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "37",
+            "41"
+          ],
+          "duration": 7059
+        },
+        {
+          "id": "value-9",
+          "mutatorName": "Value",
+          "replacement": "`window.addEventListener('storage', stor…`: 'storage' → 'storage_x'",
+          "description": "`window.addEventListener('storage', stor…`: 'storage' → 'storage_x'",
+          "location": {
+            "start": {
+              "line": 186,
+              "column": 31
+            },
+            "end": {
+              "line": 186,
+              "column": 40
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "39"
+          ],
+          "duration": 6945
+        },
+        {
+          "id": "value-10",
+          "mutatorName": "Value",
+          "replacement": "`window.removeEventListener('storage', s…`: 'storage' → 'storage_x'",
+          "description": "`window.removeEventListener('storage', s…`: 'storage' → 'storage_x'",
+          "location": {
+            "start": {
+              "line": 188,
+              "column": 36
+            },
+            "end": {
+              "line": 188,
+              "column": 45
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "39"
+          ],
+          "duration": 7043
+        },
+        {
+          "id": "value-11",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "location": {
+            "start": {
+              "line": 242,
+              "column": 32
+            },
+            "end": {
+              "line": 242,
+              "column": 44
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51"
+          ],
+          "duration": 7260
+        }
+      ]
+    },
+    "src/vanilla/utils/constants.ts": {
+      "language": "typescript",
+      "source": "/**\n * @guarantee ok.unique-symbol `RESET` is a unique symbol, so `typeof RESET` is \"symbol\".\n * @guarantee ok.accepted-by-resettable Atoms created with `atomWithReset` and `atomWithDefault` accept `RESET` on write.\n */\nexport const RESET: unique symbol = Symbol(\n  process.env.NODE_ENV !== 'production' ? 'RESET' : '',\n)\n",
+      "mutants": [
+        {
+          "id": "value-12",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "location": {
+            "start": {
+              "line": 6,
+              "column": 28
+            },
+            "end": {
+              "line": 6,
+              "column": 40
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "123",
+            "124",
+            "125",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "77",
+            "78",
+            "79",
+            "80"
+          ],
+          "duration": 6681
+        },
+        {
+          "id": "value-13",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production' ?…`: 'RESET' → 'RESET_x'",
+          "description": "`process.env.NODE_ENV !== 'production' ?…`: 'RESET' → 'RESET_x'",
+          "location": {
+            "start": {
+              "line": 6,
+              "column": 43
+            },
+            "end": {
+              "line": 6,
+              "column": 50
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "123",
+            "124",
+            "125",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "77",
+            "78",
+            "79",
+            "80"
+          ],
+          "duration": 6650
+        }
+      ]
+    },
+    "src/vanilla/utils/splitAtom.ts": {
+      "language": "typescript",
+      "source": "import { atom } from '../../vanilla.js'\nimport type {\n  Atom,\n  Getter,\n  PrimitiveAtom,\n  SetStateAction,\n  Setter,\n  WritableAtom,\n} from '../../vanilla.js'\n\nconst getCached = <T>(c: () => T, m: WeakMap<object, unknown>, k: object): T =>\n  (m.has(k) ? m : m.set(k, c())).get(k) as T\nconst cache1 = new WeakMap<object, unknown>()\nconst memo2 = <T>(create: () => T, dep1: object, dep2: object): T => {\n  const cache2 = getCached(() => new WeakMap<object, unknown>(), cache1, dep1)\n  return getCached(create, cache2, dep2)\n}\nconst cacheKeyForEmptyKeyExtractor = {}\n\nconst isWritable = <Value, Args extends unknown[], Result>(\n  atom: Atom<Value> | WritableAtom<Value, Args, Result>,\n): atom is WritableAtom<Value, Args, Result> =>\n  !!(atom as WritableAtom<Value, Args, Result>).write\n\nconst isFunction = <T>(x: T): x is T & ((...args: never[]) => unknown) =>\n  typeof x === 'function'\n\ntype SplitAtomAction<Item> =\n  | { type: 'remove'; atom: PrimitiveAtom<Item> }\n  | {\n      type: 'insert'\n      value: Item\n      before?: PrimitiveAtom<Item>\n    }\n  | {\n      type: 'move'\n      atom: PrimitiveAtom<Item>\n      before?: PrimitiveAtom<Item>\n    }\n\n/**\n * @guarantee ok.list-of-atoms It returns an atom holding a list of atoms, one for each element of the list in the original atom.\n * @guarantee ok.dispatch-actions The returned atom accepts a dispatch function on write with the actions \"remove\", \"insert\" and \"move\", for example `{ type: \"remove\", atom }`.\n * @guarantee ok.key-extractor The optional second argument `keyExtractor` is used to keep the sub-atoms stable and to prevent recreating a sub-atom when indexes shift in the source array.\n */\nexport function splitAtom<Item, Key>(\n  arrAtom: WritableAtom<Item[], [Item[]], void>,\n  keyExtractor?: (item: Item) => Key,\n): WritableAtom<PrimitiveAtom<Item>[], [SplitAtomAction<Item>], void>\n\nexport function splitAtom<Item, Key>(\n  arrAtom: Atom<Item[]>,\n  keyExtractor?: (item: Item) => Key,\n): Atom<Atom<Item>[]>\n\nexport function splitAtom<Item, Key>(\n  arrAtom: WritableAtom<Item[], [Item[]], void> | Atom<Item[]>,\n  keyExtractor?: (item: Item) => Key,\n) {\n  return memo2(\n    () => {\n      type ItemAtom = PrimitiveAtom<Item> | Atom<Item>\n      type Mapping = {\n        arr: Item[]\n        atomList: ItemAtom[]\n        keyList: Key[]\n      }\n      const mappingCache = new WeakMap<Item[], Mapping>()\n      const getMapping = (arr: Item[], prev?: Item[]) => {\n        let mapping = mappingCache.get(arr)\n        if (mapping) {\n          return mapping\n        }\n        const prevMapping = prev && mappingCache.get(prev)\n        const atomList: Atom<Item>[] = []\n        const keyList: Key[] = []\n        arr.forEach((item, index) => {\n          const key = keyExtractor\n            ? keyExtractor(item)\n            : (index as unknown as Key)\n          keyList[index] = key\n          const cachedAtom =\n            prevMapping &&\n            prevMapping.atomList[prevMapping.keyList.indexOf(key)]\n          if (cachedAtom) {\n            atomList[index] = cachedAtom\n            return\n          }\n          const read = (get: Getter) => {\n            const prev = get(mappingAtom) as Mapping | undefined\n            const currArr = get(arrAtom)\n            const mapping = getMapping(currArr, prev?.arr)\n            const index = mapping.keyList.indexOf(key)\n            if (index < 0 || index >= currArr.length) {\n              // returning a stale value to avoid errors for use cases such as react-spring\n              const prevItem = arr[getMapping(arr).keyList.indexOf(key)]\n              if (prevItem) {\n                return prevItem\n              }\n              throw new Error('splitAtom: index out of bounds for read')\n            }\n            return currArr[index]!\n          }\n          const write = (\n            get: Getter,\n            set: Setter,\n            update: SetStateAction<Item>,\n          ) => {\n            const prev = get(mappingAtom) as Mapping | undefined\n            const arr = get(arrAtom)\n            const mapping = getMapping(arr, prev?.arr)\n            const index = mapping.keyList.indexOf(key)\n            if (index < 0 || index >= arr.length) {\n              throw new Error('splitAtom: index out of bounds for write')\n            }\n            const nextItem = isFunction(update)\n              ? (update as (prev: Item) => Item)(arr[index]!)\n              : update\n            if (!Object.is(arr[index], nextItem)) {\n              set(arrAtom as WritableAtom<Item[], [Item[]], void>, [\n                ...arr.slice(0, index),\n                nextItem,\n                ...arr.slice(index + 1),\n              ])\n            }\n          }\n          atomList[index] = isWritable(arrAtom) ? atom(read, write) : atom(read)\n        })\n        if (\n          prevMapping &&\n          prevMapping.keyList.length === keyList.length &&\n          prevMapping.keyList.every((x, i) => x === keyList[i])\n        ) {\n          // not changed\n          mapping = prevMapping\n        } else {\n          mapping = { arr, atomList, keyList }\n        }\n        mappingCache.set(arr, mapping)\n        return mapping\n      }\n      const mappingAtom: Atom<Mapping> & {\n        init?: undefined\n      } = atom((get) => {\n        const prev = get(mappingAtom) as Mapping | undefined\n        const arr = get(arrAtom)\n        const mapping = getMapping(arr, prev?.arr)\n        return mapping\n      })\n\n      if (process.env.NODE_ENV !== 'production') {\n        mappingAtom.debugPrivate = true\n      }\n\n      // HACK to read mapping atom before initialization\n      mappingAtom.init = undefined\n      const splittedAtom = isWritable(arrAtom)\n        ? atom(\n            (get) => get(mappingAtom).atomList,\n            (get, set, action: SplitAtomAction<Item>) => {\n              switch (action.type) {\n                case 'remove': {\n                  const index = get(splittedAtom).indexOf(action.atom)\n                  if (index >= 0) {\n                    const arr = get(arrAtom)\n                    set(arrAtom as WritableAtom<Item[], [Item[]], void>, [\n                      ...arr.slice(0, index),\n                      ...arr.slice(index + 1),\n                    ])\n                  }\n                  break\n                }\n                case 'insert': {\n                  const index = action.before\n                    ? get(splittedAtom).indexOf(action.before)\n                    : get(splittedAtom).length\n                  if (index >= 0) {\n                    const arr = get(arrAtom)\n                    set(arrAtom as WritableAtom<Item[], [Item[]], void>, [\n                      ...arr.slice(0, index),\n                      action.value,\n                      ...arr.slice(index),\n                    ])\n                  }\n                  break\n                }\n                case 'move': {\n                  const index1 = get(splittedAtom).indexOf(action.atom)\n                  const index2 = action.before\n                    ? get(splittedAtom).indexOf(action.before)\n                    : get(splittedAtom).length\n                  if (index1 >= 0 && index2 >= 0) {\n                    const arr = get(arrAtom)\n                    if (index1 < index2) {\n                      set(arrAtom as WritableAtom<Item[], [Item[]], void>, [\n                        ...arr.slice(0, index1),\n                        ...arr.slice(index1 + 1, index2),\n                        arr[index1]!,\n                        ...arr.slice(index2),\n                      ])\n                    } else {\n                      set(arrAtom as WritableAtom<Item[], [Item[]], void>, [\n                        ...arr.slice(0, index2),\n                        arr[index1]!,\n                        ...arr.slice(index2, index1),\n                        ...arr.slice(index1 + 1),\n                      ])\n                    }\n                  }\n                  break\n                }\n              }\n            },\n          )\n        : atom((get) => get(mappingAtom).atomList) // read-only atom\n      return splittedAtom\n    },\n    arrAtom,\n    keyExtractor || cacheKeyForEmptyKeyExtractor,\n  )\n}\n",
+      "mutants": [
+        {
+          "id": "value-14",
+          "mutatorName": "Value",
+          "replacement": "`index < 0`: 0 → 1",
+          "description": "`index < 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 94,
+              "column": 25
+            },
+            "end": {
+              "line": 94,
+              "column": 26
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63"
+          ],
+          "duration": 6687
+        },
+        {
+          "id": "value-15",
+          "mutatorName": "Value",
+          "replacement": "`index < 0`: 0 → 1",
+          "description": "`index < 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 113,
+              "column": 25
+            },
+            "end": {
+              "line": 113,
+              "column": 26
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "57",
+            "64",
+            "65"
+          ],
+          "duration": 6704
+        },
+        {
+          "id": "value-16",
+          "mutatorName": "Value",
+          "replacement": "`arr.slice(0, index)`: 0 → 1",
+          "description": "`arr.slice(0, index)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 121,
+              "column": 30
+            },
+            "end": {
+              "line": 121,
+              "column": 31
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "57"
+          ],
+          "duration": 2961
+        },
+        {
+          "id": "value-17",
+          "mutatorName": "Value",
+          "replacement": "`index + 1`: 1 → 2",
+          "description": "`index + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 123,
+              "column": 38
+            },
+            "end": {
+              "line": 123,
+              "column": 39
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "57"
+          ],
+          "duration": 2767
+        },
+        {
+          "id": "value-18",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "location": {
+            "start": {
+              "line": 151,
+              "column": 36
+            },
+            "end": {
+              "line": 151,
+              "column": 48
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64",
+            "65"
+          ],
+          "duration": 2827
+        },
+        {
+          "id": "value-19",
+          "mutatorName": "Value",
+          "replacement": "`case 'remove': { const index = get(spli…`: 'remove' → 'remove_x'",
+          "description": "`case 'remove': { const index = get(spli…`: 'remove' → 'remove_x'",
+          "location": {
+            "start": {
+              "line": 162,
+              "column": 22
+            },
+            "end": {
+              "line": 162,
+              "column": 30
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "58",
+            "59",
+            "60"
+          ],
+          "duration": 2762
+        },
+        {
+          "id": "value-20",
+          "mutatorName": "Value",
+          "replacement": "`index >= 0`: 0 → 1",
+          "description": "`index >= 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 164,
+              "column": 32
+            },
+            "end": {
+              "line": 164,
+              "column": 33
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "58"
+          ],
+          "duration": 2828
+        },
+        {
+          "id": "value-21",
+          "mutatorName": "Value",
+          "replacement": "`arr.slice(0, index)`: 0 → 1",
+          "description": "`arr.slice(0, index)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 167,
+              "column": 36
+            },
+            "end": {
+              "line": 167,
+              "column": 37
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "58"
+          ],
+          "duration": 2824
+        },
+        {
+          "id": "value-22",
+          "mutatorName": "Value",
+          "replacement": "`index + 1`: 1 → 2",
+          "description": "`index + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 168,
+              "column": 44
+            },
+            "end": {
+              "line": 168,
+              "column": 45
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "58"
+          ],
+          "duration": 2708
+        },
+        {
+          "id": "value-23",
+          "mutatorName": "Value",
+          "replacement": "`case 'insert': { const index = action.b…`: 'insert' → 'insert_x'",
+          "description": "`case 'insert': { const index = action.b…`: 'insert' → 'insert_x'",
+          "location": {
+            "start": {
+              "line": 173,
+              "column": 22
+            },
+            "end": {
+              "line": 173,
+              "column": 30
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "59",
+            "60"
+          ],
+          "duration": 2858
+        },
+        {
+          "id": "value-24",
+          "mutatorName": "Value",
+          "replacement": "`index >= 0`: 0 → 1",
+          "description": "`index >= 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 177,
+              "column": 32
+            },
+            "end": {
+              "line": 177,
+              "column": 33
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "59"
+          ],
+          "duration": 2835
+        },
+        {
+          "id": "value-25",
+          "mutatorName": "Value",
+          "replacement": "`arr.slice(0, index)`: 0 → 1",
+          "description": "`arr.slice(0, index)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 180,
+              "column": 36
+            },
+            "end": {
+              "line": 180,
+              "column": 37
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "59"
+          ],
+          "duration": 2935
+        },
+        {
+          "id": "value-26",
+          "mutatorName": "Value",
+          "replacement": "`case 'move': { const index1 = get(split…`: 'move' → 'move_x'",
+          "description": "`case 'move': { const index1 = get(split…`: 'move' → 'move_x'",
+          "location": {
+            "start": {
+              "line": 187,
+              "column": 22
+            },
+            "end": {
+              "line": 187,
+              "column": 28
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "60"
+          ],
+          "duration": 2915
+        },
+        {
+          "id": "value-27",
+          "mutatorName": "Value",
+          "replacement": "`index1 >= 0`: 0 → 1",
+          "description": "`index1 >= 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 192,
+              "column": 33
+            },
+            "end": {
+              "line": 192,
+              "column": 34
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "60"
+          ],
+          "duration": 2826
+        },
+        {
+          "id": "value-28",
+          "mutatorName": "Value",
+          "replacement": "`index2 >= 0`: 0 → 1",
+          "description": "`index2 >= 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 192,
+              "column": 48
+            },
+            "end": {
+              "line": 192,
+              "column": 49
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "60"
+          ],
+          "duration": 2714
+        },
+        {
+          "id": "value-29",
+          "mutatorName": "Value",
+          "replacement": "`arr.slice(0, index1)`: 0 → 1",
+          "description": "`arr.slice(0, index1)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 196,
+              "column": 38
+            },
+            "end": {
+              "line": 196,
+              "column": 39
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "60"
+          ],
+          "duration": 2695
+        },
+        {
+          "id": "value-30",
+          "mutatorName": "Value",
+          "replacement": "`index1 + 1`: 1 → 2",
+          "description": "`index1 + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 197,
+              "column": 47
+            },
+            "end": {
+              "line": 197,
+              "column": 48
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "60"
+          ],
+          "duration": 2502
+        },
+        {
+          "id": "value-31",
+          "mutatorName": "Value",
+          "replacement": "`arr.slice(0, index2)`: 0 → 1",
+          "description": "`arr.slice(0, index2)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 203,
+              "column": 38
+            },
+            "end": {
+              "line": 203,
+              "column": 39
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "60"
+          ],
+          "duration": 1578
+        },
+        {
+          "id": "value-32",
+          "mutatorName": "Value",
+          "replacement": "`index1 + 1`: 1 → 2",
+          "description": "`index1 + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 206,
+              "column": 47
+            },
+            "end": {
+              "line": 206,
+              "column": 48
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "60"
+          ],
+          "duration": 1587
+        }
+      ]
+    },
+    "src/vanilla/utils/unwrap.ts": {
+      "language": "typescript",
+      "source": "import { atom } from '../../vanilla.js'\nimport type { Atom, WritableAtom } from '../../vanilla.js'\n\nconst getCached = <T>(c: () => T, m: WeakMap<object, unknown>, k: object): T =>\n  (m.has(k) ? m : m.set(k, c())).get(k) as T\nconst cache1 = new WeakMap<object, unknown>()\nconst memo2 = <T>(create: () => T, dep1: object, dep2: object): T => {\n  const cache2 = getCached(() => new WeakMap<object, unknown>(), cache1, dep1)\n  return getCached(create, cache2, dep2)\n}\n\nconst isPromiseLike = (p: unknown): p is PromiseLike<unknown> =>\n  typeof (p as PromiseLike<unknown>)?.then === 'function'\n\nconst defaultFallback = () => undefined\n\n/**\n * @guarantee ok.pending-undefined While the promise is pending, the unwrapped atom has the value `undefined` when no fallback is given.\n * @guarantee ok.fallback With the fallback `(prev) => prev ?? 0` the value is `0` initially, and after an update the previous resolved value is kept while pending.\n * @guarantee err.errors-thrown Errors from the async atom are not caught and are thrown when the unwrapped atom is read.\n */\nexport function unwrap<Value, Args extends unknown[], Result>(\n  anAtom: WritableAtom<Value, Args, Result>,\n): WritableAtom<Awaited<Value> | undefined, Args, Result>\n\nexport function unwrap<Value, Args extends unknown[], Result, PendingValue>(\n  anAtom: WritableAtom<Value, Args, Result>,\n  fallback: (prev?: Awaited<Value>) => PendingValue,\n): WritableAtom<Awaited<Value> | PendingValue, Args, Result>\n\nexport function unwrap<Value>(\n  anAtom: Atom<Value>,\n): Atom<Awaited<Value> | undefined>\n\nexport function unwrap<Value, PendingValue>(\n  anAtom: Atom<Value>,\n  fallback: (prev?: Awaited<Value>) => PendingValue,\n): Atom<Awaited<Value> | PendingValue>\n\nexport function unwrap<Value, Args extends unknown[], Result, PendingValue>(\n  anAtom: WritableAtom<Value, Args, Result> | Atom<Value>,\n  fallback: (prev?: Awaited<Value>) => PendingValue = defaultFallback as never,\n) {\n  return memo2(\n    () => {\n      type PromiseAndValue = { readonly p?: PromiseLike<unknown> } & (\n        | { readonly v: Awaited<Value> }\n        | { readonly f: PendingValue; readonly v?: Awaited<Value> }\n        | { readonly e: unknown; readonly v?: Awaited<Value> }\n      )\n      const promiseErrorCache = new WeakMap<PromiseLike<unknown>, unknown>()\n      const promiseResultCache = new WeakMap<\n        PromiseLike<unknown>,\n        Awaited<Value>\n      >()\n      const refreshAtom = atom(0)\n      const triggerRefreshAtom = atom([] as [triggerRefresh?: () => void])\n      triggerRefreshAtom.INTERNAL_onInit = (store) => {\n        store.set(triggerRefreshAtom, [\n          () => store.set(refreshAtom, (c) => c + 1),\n        ])\n      }\n\n      if (process.env.NODE_ENV !== 'production') {\n        refreshAtom.debugPrivate = true\n        triggerRefreshAtom.debugPrivate = true\n      }\n\n      const promiseAndValueAtom: Atom<PromiseAndValue> & {\n        init?: undefined\n      } = atom((get) => {\n        get(refreshAtom)\n        let prev: PromiseAndValue | undefined\n        try {\n          prev = get(promiseAndValueAtom) as PromiseAndValue | undefined\n        } catch {\n          // ignore previous errors to avoid getting stuck in error state\n        }\n        const promise = get(anAtom)\n        if (!isPromiseLike(promise)) {\n          return { v: promise as Awaited<Value> }\n        }\n        if (promise !== prev?.p) {\n          promise.then(\n            (v) => {\n              promiseResultCache.set(promise, v as Awaited<Value>)\n              const [triggerRefresh] = get(triggerRefreshAtom)\n              triggerRefresh!()\n            },\n            (e) => {\n              promiseErrorCache.set(promise, e)\n              const [triggerRefresh] = get(triggerRefreshAtom)\n              triggerRefresh!()\n            },\n          )\n        }\n        if (promiseErrorCache.has(promise)) {\n          if (prev && 'e' in prev && prev.p === promise) {\n            return prev\n          }\n          const e = promiseErrorCache.get(promise)\n          if (prev && 'v' in prev) {\n            return { p: promise, e, v: prev.v }\n          }\n          return { p: promise, e }\n        }\n        if (promiseResultCache.has(promise)) {\n          return {\n            p: promise,\n            v: promiseResultCache.get(promise) as Awaited<Value>,\n          }\n        }\n        if (prev && 'v' in prev) {\n          return { p: promise, f: fallback(prev.v), v: prev.v }\n        }\n        return { p: promise, f: fallback() }\n      })\n      // HACK to read PromiseAndValue atom before initialization\n      promiseAndValueAtom.init = undefined\n\n      if (process.env.NODE_ENV !== 'production') {\n        promiseAndValueAtom.debugPrivate = true\n      }\n\n      return atom(\n        (get) => {\n          const state = get(promiseAndValueAtom)\n          if ('e' in state) {\n            throw state.e\n          }\n          if ('f' in state) {\n            // is pending\n            return state.f\n          }\n          return state.v\n        },\n        (_get, set, ...args) =>\n          set(anAtom as WritableAtom<Value, unknown[], unknown>, ...args),\n      )\n    },\n    anAtom,\n    fallback,\n  )\n}\n",
+      "mutants": [
+        {
+          "id": "value-33",
+          "mutatorName": "Value",
+          "replacement": "`atom(0)`: 0 → 1",
+          "description": "`atom(0)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 56,
+              "column": 32
+            },
+            "end": {
+              "line": 56,
+              "column": 33
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97",
+            "98",
+            "99",
+            "100",
+            "101",
+            "102",
+            "103",
+            "128"
+          ],
+          "duration": 2827
+        },
+        {
+          "id": "value-34",
+          "mutatorName": "Value",
+          "replacement": "`c + 1`: 1 → 2",
+          "description": "`c + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 60,
+              "column": 51
+            },
+            "end": {
+              "line": 60,
+              "column": 52
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "91",
+            "92",
+            "93",
+            "95",
+            "96",
+            "97",
+            "98",
+            "99",
+            "100",
+            "101",
+            "103"
+          ],
+          "duration": 2811
+        },
+        {
+          "id": "value-35",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "location": {
+            "start": {
+              "line": 64,
+              "column": 36
+            },
+            "end": {
+              "line": 64,
+              "column": 48
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97",
+            "98",
+            "99",
+            "100",
+            "101",
+            "102",
+            "103",
+            "128"
+          ],
+          "duration": 2785
+        },
+        {
+          "id": "value-36",
+          "mutatorName": "Value",
+          "replacement": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+          "location": {
+            "start": {
+              "line": 121,
+              "column": 36
+            },
+            "end": {
+              "line": 121,
+              "column": 48
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "91",
+            "92",
+            "93",
+            "94",
+            "95",
+            "96",
+            "97",
+            "98",
+            "99",
+            "100",
+            "101",
+            "102",
+            "103",
+            "128"
+          ],
+          "duration": 2522
+        }
+      ]
+    }
+  }
+}

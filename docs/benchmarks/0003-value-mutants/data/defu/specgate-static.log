@@ -1,0 +1,14 @@
+specgate check (advisory): 4 units, 14 guarantees, 21 linked tests
+  fail 5 · warn 2 · info 1
+  ❌ [guarantee-no-test] src/defu.ts:60 defu.ok.no-mutation has no test naming it
+  ❌ [guarantee-no-test] src/defu.ts:69 defuFn.ok.function-called-with-default has no test naming it
+  ❌ [guarantee-no-test] src/defu.ts:71 defuFn.ok.fn-undefined-default has no test naming it
+  ❌ [guarantee-no-test] src/defu.ts:82 defuArrayFn.ok.array-only has no test naming it
+  ❌ [guarantee-no-test] src/defu.ts:84 defuArrayFn.ok.non-array-kept has no test naming it
+  ⚠️ [decision-unspecified] src/defu.ts:13 createDefu commits to match "__proto__" in `key === "__proto__"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/defu.ts:13 createDefu commits to match "constructor" in `key === "constructor"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work>/defu/.specgate-static/report.json
+      <work>/defu/.specgate-static/summary.md
+      <work>/defu/.specgate-static/report.sarif

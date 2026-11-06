@@ -1,0 +1,51 @@
+diff --git a/src/defu.ts b/src/defu.ts
+index 1b2b84e..0f6a458 100644
+--- a/src/defu.ts
++++ b/src/defu.ts
+@@ -42,6 +42,10 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
+ }
+ 
+ // Create defu wrapper with optional merger and multi arg support
++/**
++ * @guarantee ok.custom-merger The `merger` function accepts `obj` (the source object), `key` and `value` (the current value) and returns `true` when it applied a custom merge.
++ * @guarantee ok.sum-example A function created with `createDefu` whose merger adds numbers gives 25 for "cost" in `ext({ cost: 15 }, { cost: 10 })`.
++ */
+ export function createDefu(merger?: Merger): DefuFunction {
+   return (...arguments_) =>
+     // eslint-disable-next-line unicorn/no-array-reduce
+@@ -49,10 +53,23 @@ export function createDefu(merger?: Merger): DefuFunction {
+ }
+ 
+ // Standard version
++/**
++ * @guarantee ok.nested-defaults "defu({ a: { b: 2 } }, { a: { b: 1, c: 3 } })" gives "{ a: { b: 2, c: 3 } }".
++ * @guarantee ok.leftmost-priority The leftmost arguments have more priority when assigning defaults.
++ * @guarantee ok.array-concat "defu({ array: ["b", "c"] }, { array: ["a"] })" gives "{ array: ["b", "c", "a"] }", so array values are concatenated with the object's items first when the default property is defined.
++ * @guarantee ok.no-mutation The `object` and the `defaults` arguments are not modified.
++ * @guarantee ok.skip-nullish Nullish values (`null` and `undefined`) are skipped.
++ * @guarantee ok.skip-proto-keys Assignment of the "__proto__" and "constructor" keys is skipped to prevent object pollution.
++ */
+ export const defu = createDefu() as DefuInstance;
+ export default defu;
+ 
+ // Custom version with function merge support
++/**
++ * @guarantee ok.function-called-with-default If the user provides a function for a key, it is called with the default value instead of being merged.
++ * @guarantee ok.fn-example "defuFn" with `ignore` as a filter dropping "dist" and `count` as `count + 20`, over defaults `ignore` ["node_modules", "dist"] and `count` 10, gives `ignore` ["node_modules"] and `count` 30.
++ * @guarantee ok.fn-undefined-default If the default value is not defined, the function is not called and is kept as the value.
++ */
+ export const defuFn = createDefu((object, key, currentValue) => {
+   if (object[key] !== undefined && typeof currentValue === "function") {
+     object[key] = currentValue(object[key]);
+@@ -61,6 +78,11 @@ export const defuFn = createDefu((object, key, currentValue) => {
+ });
+ 
+ // Custom version with function merge support only for defined arrays
++/**
++ * @guarantee ok.array-only A function is called only when the value defined in the defaults is an array.
++ * @guarantee ok.array-fn-example "defuArrayFn" with `ignore` as a filter dropping "dist" over the default ["node_modules", "dist"] gives `ignore` ["node_modules"].
++ * @guarantee ok.non-array-kept With `count` as a function and the default `count` 10 (not an array), the function is not called and is kept as the value.
++ */
+ export const defuArrayFn = createDefu((object, key, currentValue) => {
+   if (Array.isArray(object[key]) && typeof currentValue === "function") {
+     object[key] = currentValue(object[key]);

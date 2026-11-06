@@ -1,0 +1,24 @@
+{
+  "surface": {
+    "include": [
+      "src/CronExpressionParser.ts",
+      "src/CronExpression.ts",
+      "src/CronFieldCollection.ts",
+      "src/CronFileParser.ts"
+    ],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": ["tests/**/*.test.ts"],
+    "adapter": "jest"
+  },
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-static"
+  }
+}

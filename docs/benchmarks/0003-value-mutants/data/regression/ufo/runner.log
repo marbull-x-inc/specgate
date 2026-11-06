@@ -1,0 +1,31 @@
+baseline run 659 ms; timeout 30000 ms
+value-1 Survived   src/parse.ts:4 `Symbol.for("ufo:protocolRelative")`: "ufo:protocolRelative" → "ufo:protocolRelative_x"
+value-3 Killed     src/parse.ts:83 `protocol === "file:"`: "file:" → "file:_x"
+value-2 Killed     src/parse.ts:77 `input .replace(/\\/g, "/")`: "/" → "/_x"
+value-4 Killed     src/parse.ts:91 `auth.slice(0, Math.max(0, auth.length -…`: 0 → 1
+value-5 Survived   src/parse.ts:91 `Math.max(0, auth.length - 1)`: 0 → 1
+value-6 Killed     src/parse.ts:91 `auth.length - 1`: 1 → 2
+value-7 Killed     src/parse.ts:119 `( input.match(/([^#?]*)(\?[^#]*)?(#.*)?…`: 1 → 2
+value-8 Killed     src/parse.ts:139 `input.split(":")`: ":" → ":_x"
+value-10 Killed     src/parse.ts:192 `parsed.search.startsWith("?")`: "?" → "?_x"
+value-9 Killed     src/parse.ts:164 `(input.match(/([^/:]*):?(\d+)?/) || [])…`: 1 → 2
+value-11 Killed     src/parse.ts:192 `parsed.search.startsWith("?") ? "" : "?"`: "?" → "?_x"
+value-12 Killed     src/parse.ts:195 `parsed.auth + "@"`: "@" → "@_x"
+value-13 Killed     src/parse.ts:199 `(parsed.protocol || "") + "//"`: "//" → "//_x"
+value-19 Survived   src/query.ts:61 `s.length < 2`: 2 → 3
+value-16 Killed     src/query.ts:56 `parametersString[0] === "?"`: "?" → "?_x"
+value-14 Killed     src/parse.ts:237 `matches[1]`: 1 → 2
+value-17 Killed     src/query.ts:57 `parametersString.slice(1)`: 1 → 2
+value-18 Killed     src/query.ts:59 `parametersString.split("&")`: "&" → "&_x"
+value-15 Killed     src/query.ts:56 `parametersString[0]`: 0 → 1
+value-22 Survived   src/query.ts:65 `key === "constructor"`: "constructor" → "constructor_x"
+value-23 Killed     src/query.ts:68 `s[2]`: 2 → 3
+value-21 Survived   src/query.ts:65 `key === "__proto__"`: "__proto__" → "__proto___x"
+value-25 Killed     src/query.ts:144 `Object.keys(query) .filter((k) => query…`: "&" → "&_x"
+value-20 Killed     src/query.ts:64 `s[1]`: 1 → 2
+value-24 Killed     src/query.ts:116 `value .map( (_value: QueryValue) => `${…`: "&" → "&_x"
+value-mutants: 25 mutant(s): 5 Survived, 20 Killed; 6448 ms (baseline run 659 ms)
+wrote <work-0001>/ufo/reports/value/value.json
+real 6.52
+user 33.52
+sys 10.98

@@ -1,0 +1,19 @@
+{
+  "surface": {
+    "include": ["src/defu.ts"],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": ["test/**/*.test.ts"],
+    "adapter": "vitest"
+  },
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-static"
+  }
+}

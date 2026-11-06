@@ -1,0 +1,11 @@
+specgate check (advisory): 6 units, 33 guarantees, 1213 linked tests
+  fail 4 · warn 0 · info 1
+  ❌ [guarantee-no-test] src/useFormContext.tsx:24 useFormContext.ok.returns-methods has no test naming it
+  ❌ [guarantee-no-test] src/useFormContext.tsx:26 useFormContext.err.no-provider has no test naming it
+  ❌ [operation-no-guarantee] src/useFormContext.tsx:52 FormProvider has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/useWatch.ts:26 useWatch.ok.exact-false has no test naming it
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work>/react-hook-form/.specgate-static/report.json
+      <work>/react-hook-form/.specgate-static/summary.md
+      <work>/react-hook-form/.specgate-static/report.sarif

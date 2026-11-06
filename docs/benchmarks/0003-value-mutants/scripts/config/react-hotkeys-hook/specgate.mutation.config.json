@@ -1,0 +1,31 @@
+{
+  "surface": {
+    "include": [
+      "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts",
+      "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts"
+    ],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": [
+      "packages/react-hotkeys-hook/src/test/**/*.test.ts",
+      "packages/react-hotkeys-hook/src/test/**/*.test.tsx"
+    ],
+    "adapter": "vitest"
+  },
+  "tsconfig": "packages/react-hotkeys-hook/tsconfig.app.json",
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-mutation"
+  },
+  "mutation": {
+    "report": ["packages/react-hotkeys-hook/reports/mutation/mutation.json", "reports/value/value.json"]
+  }
+}

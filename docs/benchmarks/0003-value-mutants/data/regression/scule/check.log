@@ -1,0 +1,41 @@
+specgate check (advisory): 11 units, 20 guarantees, 11 linked tests
+  fail 10 · warn 24 · info 1
+  ❌ [operation-no-guarantee] src/index.ts:15 isUppercase has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] src/index.ts:23 splitByCase.ok.default-splitters has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:25 splitByCase.ok.numbers has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:26 splitByCase.ok.custom-splitters has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:104 pascalCase.ok.join has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:105 pascalCase.ok.preserve has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:125 camelCase.ok.join has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:145 kebabCase.ok.lower has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:189 trainCase.ok.join has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:213 titleCase.ok.minor-words has no test naming it
+  ⚠️ [mutant-survived] src/index.ts:13 splitByCase: `"."` removed from `STR_SPLITTERS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:15 isUppercase: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/index.ts:16 isUppercase: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:16 isUppercase: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:40 splitByCase: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:60 splitByCase: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:71 splitByCase: `Math.max(0, buff.length - 1)`: 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: Regex mutant in titleCaseExceptions: `/^(a|an|and|as|at|but|by|for|if|in|is|nor|of|on|or|the|to|w…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `an` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `and` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `as` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `at` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `but` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `by` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `for` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `if` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `in` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `nor` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `of` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `on` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `or` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `the` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `to` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:209 titleCase: `with` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work-0001>/scule/.specgate-regression/report.json
+      <work-0001>/scule/.specgate-regression/summary.md
+      <work-0001>/scule/.specgate-regression/report.sarif

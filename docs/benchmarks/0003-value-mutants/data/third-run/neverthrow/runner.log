@@ -1,0 +1,6 @@
+baseline run 1236 ms; timeout 30000 ms
+value-mutants: 0 mutant(s): ; 1498 ms (baseline run 1236 ms)
+wrote <work>/neverthrow/reports/value/value.json
+real 1.59
+user 3.32
+sys 1.11

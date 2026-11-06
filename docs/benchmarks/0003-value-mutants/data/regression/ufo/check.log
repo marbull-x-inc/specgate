@@ -1,0 +1,56 @@
+specgate check (advisory): 9 units, 16 guarantees, 5 linked tests
+  fail 11 · warn 38 · info 1
+  ❌ [guarantee-no-test] src/parse.ts:51 parseURL.ok.no-protocol has no test naming it
+  ❌ [guarantee-no-test] src/parse.ts:52 parseURL.ok.default-proto has no test naming it
+  ❌ [guarantee-no-test] src/parse.ts:114 parsePath.ok.split has no test naming it
+  ❌ [guarantee-no-test] src/parse.ts:136 parseAuth.ok.split has no test naming it
+  ❌ [guarantee-no-test] src/query.ts:46 parseQuery.ok.pairs has no test naming it
+  ❌ [guarantee-no-test] src/query.ts:47 parseQuery.ok.leading-question has no test naming it
+  ❌ [guarantee-no-test] src/query.ts:48 parseQuery.ok.repeated has no test naming it
+  ❌ [guarantee-no-test] src/query.ts:96 encodeQueryItem.ok.pair has no test naming it
+  ❌ [guarantee-no-test] src/query.ts:97 encodeQueryItem.ok.array has no test naming it
+  ❌ [guarantee-no-test] src/query.ts:136 stringifyQuery.ok.pairs has no test naming it
+  ❌ [guarantee-no-test] src/query.ts:137 stringifyQuery.ok.undefined has no test naming it
+  ⚠️ [mutant-survived] src/parse.ts:4 parseURL: StringLiteral mutant in protocolRelative: `""` survived; no linked test fails when the code changes like this; also reached from stringifyParsedURL
+  ⚠️ [mutant-survived] src/parse.ts:4 parseURL: `Symbol.for("ufo:protocolRelative")`: "ufo:protocolRelative" → "ufo:protocolRelative_x" survived; no linked test fails when the code changes like this; also reached from stringifyParsedURL
+  ⚠️ [mutant-survived] src/parse.ts:54 parseURL: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:56 parseURL: Regex mutant: `/[\s\0]*(blob:|data:|javascript:|vbscript:)(.*)/i` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/parse.ts:56 parseURL: Regex mutant: `/^[\S\0]*(blob:|data:|javascript:|vbscript:)(.*)/i` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/parse.ts:59 parseURL: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:72 parseURL: ArithmeticOperator mutant: `defaultProto - input` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:75 parseURL: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:78 parseURL: ArrayDeclaration mutant: `["Stryker was here"]` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:78 parseURL: Regex mutant: `/[\s\0]*([\w+.-]{2,}:)?\/\/([^/@]+@)?(.*)/` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/parse.ts:81 parseURL: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:81 parseURL: ArrayDeclaration mutant: `["Stryker was here"]` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:81 parseURL: Regex mutant: `/([^#/?]*)(.*)/` survived; no linked test fails when the code changes like this
+  ⚠️ [decision-unspecified] src/parse.ts:83 parseURL commits to match "file:" in `protocol === "file:"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/parse.ts:91 parseURL: `Math.max(0, auth.length - 1)`: 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/parse.ts:96 parseURL: BooleanLiteral mutant: `protocol` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/parse.ts:116 parsePath: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:117 parsePath: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:118 parsePath: ArrayDeclaration mutant: `["Stryker was here"]` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:163 parseHost: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:164 parseHost: ArrayDeclaration mutant: `["Stryker was here"]` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:199 stringifyParsedURL: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/parse.ts:230 parseFilename: StringLiteral mutant: `"Stryker was here!"` is not run by any test
+  ⚠️ [mutant-survived] src/query.ts:56 parseQuery: ConditionalExpression mutant (the match "?"): `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/query.ts:60 parseQuery: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [decision-unspecified] src/query.ts:61 parseQuery commits to boundary "2" in `s.length < 2`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/query.ts:61 parseQuery: EqualityOperator mutant (the boundary "2"): `s.length <= 2` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/query.ts:61 parseQuery: `s.length < 2`: 2 → 3 survived; no linked test fails when the code changes like this
+  ⚠️ [decision-unspecified] src/query.ts:65 parseQuery commits to match "__proto__" in `key === "__proto__"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/query.ts:65 parseQuery commits to match "constructor" in `key === "constructor"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/query.ts:65 parseQuery: StringLiteral mutant (the match "__proto__"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/query.ts:65 parseQuery: LogicalOperator mutant (the match "__proto__"): `key === "__proto__" && key === "constructor"` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/query.ts:65 parseQuery: ConditionalExpression mutant (the match "__proto__"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/query.ts:65 parseQuery: ConditionalExpression mutant (the match "__proto__"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/query.ts:65 parseQuery: StringLiteral mutant (the match "__proto__"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/query.ts:65 parseQuery: ConditionalExpression mutant (the match "__proto__"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/query.ts:65 parseQuery: `key === "__proto__"`: "__proto__" → "__proto___x" survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/query.ts:65 parseQuery: `key === "constructor"`: "constructor" → "constructor_x" survived; no linked test fails when the code changes like this
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work-0001>/ufo/.specgate-regression/report.json
+      <work-0001>/ufo/.specgate-regression/summary.md
+      <work-0001>/ufo/.specgate-regression/report.sarif

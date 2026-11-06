@@ -1,13 +1,15 @@
 import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { writeAccepted } from "./accepted.ts";
-import { analyze, exitCodeFor } from "./analyze.ts";
+import { analyze, exitCodeFor, TOOL } from "./analyze.ts";
 import { initRepo } from "./commands/init.ts";
 import { scaffoldDocs } from "./commands/scaffold.ts";
 import { loadConfig } from "./config/load.ts";
 import { renderDocs, writeDocs } from "./docs/index.ts";
 import { generateTests } from "./gen/index.ts";
+import { listValueMutants, writeValueMutants } from "./mutants/index.ts";
 import { renderConsole, writeReportFiles } from "./report/index.ts";
+import { relativeTo } from "./util/paths.ts";
 
 const USAGE = `specgate <command> [options]
 
@@ -17,6 +19,7 @@ Commands
   gen        Generate / append tests from guarantees
   check      Judge guarantees ↔ tests ↔ implementation; write IR JSON, Step Summary, SARIF
   docs       Render code-derived Markdown from the IR
+  mutants    List value changes for a mutation runner (.specgate/mutants.json); runs no test
 
 Options
   --cwd <dir>        Repository root (default: current directory)
@@ -28,7 +31,7 @@ Options
                      (default specgate.accepted.json); later runs report them as info
   --no-provenance    check: skip git blame / log
   --baseline <path>  check: previous report.json for change detection (default: .specgate/report.json)
-  --out <dir>        check: output directory (default: .specgate); docs: docs directory
+  --out <dir>        check / mutants: output directory (default: .specgate); docs: docs directory
   --ci               init: also write .github/workflows/specgate.yml
   --force            init: overwrite existing files
   --adapter <name>   init: bun | vitest | jest | playwright
@@ -134,6 +137,26 @@ export async function main(argv: string[]): Promise<number> {
       console.log(`${values["dry-run"] ? "would " : ""}${w.action.padEnd(11)} ${w.path}`);
       if (values["dry-run"] && w.action !== "unchanged") console.log(w.content);
     }
+    return 0;
+  }
+
+  if (command === "mutants") {
+    const { report, host, testFiles } = await analyze(config, { provenance: false, baseline: null, accepted: false });
+    const list = listValueMutants(
+      report.units,
+      host,
+      config.root,
+      TOOL,
+      testFiles.map((f) => relativeTo(config.root, f)),
+    );
+    const written = writeValueMutants(list, resolve(config.root, values.out ?? config.output.dir));
+    const byKind = new Map<string, number>();
+    for (const m of list.mutants) byKind.set(m.kind, (byKind.get(m.kind) ?? 0) + 1);
+    const kinds = [...byKind].map(([k, n]) => `${n} ${k}`).join(", ");
+    console.log(
+      `mutants: ${list.mutants.length} value change(s) in ${Object.keys(list.files).length} file(s)${kinds ? ` (${kinds})` : ""}`,
+    );
+    console.log(`wrote ${written}`);
     return 0;
   }
 

@@ -1,0 +1,122 @@
+specgate check (advisory): 6 units, 33 guarantees, 1213 linked tests
+  fail 4 · warn 111 · info 1
+  ❌ [guarantee-no-test] src/useFormContext.tsx:24 useFormContext.ok.returns-methods has no test naming it
+  ❌ [guarantee-no-test] src/useFormContext.tsx:26 useFormContext.err.no-provider has no test naming it
+  ❌ [operation-no-guarantee] src/useFormContext.tsx:52 FormProvider has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/useWatch.ts:26 useWatch.ok.exact-false has no test naming it
+  ⚠️ [mutant-survived] src/constants.ts:3 useController: `FOCUS_OUT: 'focusout'` removed from `EVENTS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/constants.ts:3 useController: `FOCUS_OUT` in `EVENTS` 'focusout' → 'focusout_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/constants.ts:5 useController: `SUBMIT: 'submit'` removed from `EVENTS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/constants.ts:5 useController: `SUBMIT` in `EVENTS` 'submit' → 'submit_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/constants.ts:6 useController: `TRIGGER: 'trigger'` removed from `EVENTS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/constants.ts:6 useController: `TRIGGER` in `EVENTS` 'trigger' → 'trigger_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/constants.ts:6 useController: `VALID: 'valid'` removed from `EVENTS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/constants.ts:7 useController: `VALID` in `EVENTS` 'valid' → 'valid_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:105 useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:146 useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:147 useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:170 useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:184 useController: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:188 useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:201 useController: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:201 useController: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:203 useController: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:206 useController: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:230 useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:250 useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:250 useController: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:250 useController: LogicalOperator mutant: `control._options.values && control._defaultValues` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:260 useController: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:260 useController: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:261 useController: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:265 useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:265 useController: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:265 useController: LogicalOperator mutant: `!isArrayField || control.register(name, { ..._props.current…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:265 useController: BooleanLiteral mutant: `isArrayField` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:269 useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:275 useController: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:275 useController: LogicalOperator mutant: `field || field._f` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:294 useController: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:295 useController: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useController.ts:299 useController: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:107 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:121 useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:130 useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:135 useFieldArray: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/useFieldArray.ts:135 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:135 useFieldArray: BooleanLiteral mutant: `deepEqual(fields, fieldValues)` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:135 useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:136 useFieldArray: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] src/useFieldArray.ts:139 useFieldArray: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:155 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:157 useFieldArray: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:163 useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:164 useFieldArray: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:165 useFieldArray: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:180 useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:206 useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:230 useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:246 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:246 useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:320 useFieldArray: BooleanLiteral mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:362 useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:376 useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:376 useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:377 useFieldArray: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:382 useFieldArray: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:385 useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:394 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:401 useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:411 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:412 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:415 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:415 useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:416 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:416 useFieldArray: LogicalOperator mutant: `existingError.message && existingError.root && existingErro…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:417 useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:420 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:421 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:421 useFieldArray: LogicalOperator mutant: `!error || existingErrorType` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:422 useFieldArray: LogicalOperator mutant: `error || existingErrorType !== error.type || existingErrorM…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:423 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:423 useFieldArray: EqualityOperator mutant: `existingErrorType === error.type` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:423 useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:425 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:427 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:428 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:428 useFieldArray: LogicalOperator mutant: `isObject(error) || !Object.keys(error).some(key => !Number.…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:429 useFieldArray: MethodExpression mutant: `Object.keys(error).every(key => !Number.isNaN(+key))` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:429 useFieldArray: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:429 useFieldArray: UnaryOperator mutant: `-key` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:440 useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:452 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:452 useFieldArray: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:452 useFieldArray: EqualityOperator mutant: `control._options.criteriaMode !== VALIDATION_MODE.all` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:459 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:462 useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:470 useFieldArray: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:473 useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:500 useFieldArray: `return 1;`: 1 → 2 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:505 useFieldArray: StringLiteral mutant: `"Stryker was here!"` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:521 useFieldArray: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:536 useFieldArray: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:545 useFieldArray: MethodExpression mutant: `[...control._state.actionArrayLengths.keys()].every(arrayNa…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:559 useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:561 useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useFieldArray.ts:568 useFieldArray: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useForm.ts:21 useForm: `reValidateMode: defaultOptions.reValidateMode` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useForm.ts:22 useForm: `shouldFocusError: defaultOptions.shouldFocusError` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useForm.ts:24 useForm: `criteriaMode: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useForm.ts:25 useForm: `delayError: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useForm.ts:26 useForm: `shouldUnregister: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useForm.ts:27 useForm: `shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useForm.ts:28 useForm: `context: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useWatch.ts:217 useWatch: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useWatch.ts:250 useWatch: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useWatch.ts:252 useWatch: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/useWatch.ts:266 useWatch: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work>/react-hook-form/.specgate-mutation/report.json
+      <work>/react-hook-form/.specgate-mutation/summary.md
+      <work>/react-hook-form/.specgate-mutation/report.sarif

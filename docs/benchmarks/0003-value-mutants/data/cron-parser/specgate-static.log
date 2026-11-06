@@ -1,0 +1,35 @@
+specgate check (advisory): 19 units, 18 guarantees, 255 linked tests
+  fail 16 · warn 12 · info 1
+  ❌ [operation-no-guarantee] src/CronExpression.ts:88 CronExpression#fieldsToExpression has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronExpression.ts:247 CronExpression#prev has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronExpression.ts:257 CronExpression#hasNext has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronExpression.ts:276 CronExpression#hasPrev has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronExpression.ts:325 CronExpression#reset has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronExpression.ts:346 CronExpression#includesDate has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronExpression.ts:372 CronExpression#toString has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronExpression.ts:583 CronExpression#[Symbol.iterator] has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/CronExpressionParser.ts:105 CronExpressionParser#parse.ok.predefined-weekdays-weekends has no test naming it
+  ❌ [guarantee-no-test] src/CronExpressionParser.ts:110 CronExpressionParser#parse.err.strict-requires-six-fields has no test naming it
+  ❌ [operation-no-guarantee] src/CronFieldCollection.ts:234 CronFieldCollection#compactField has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronFieldCollection.ts:388 CronFieldCollection#stringifyField has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronFieldCollection.ts:423 CronFieldCollection#stringify has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/CronFieldCollection.ts:443 CronFieldCollection#serialize has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/CronFileParser.ts:18 CronFileParser#parseFile.err.error has no test naming it
+  ❌ [guarantee-no-test] src/CronFileParser.ts:32 CronFileParser#parseFileSync.err.error has no test naming it
+  ⚠️ [decision-unspecified] src/CronExpression.ts:28 CronExpression#next commits to constant "10000" (LOOP_LIMIT) in `LOOP_LIMIT = 10000`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/CronExpression.ts:449 CronExpression#next commits to constant "24" in `(skipped + 1) % 24`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [decision-unspecified] src/CronExpression.ts:538 CronExpression#next commits to boundary "10000" (LOOP_LIMIT) in `++stepCount < LOOP_LIMIT`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:104 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:104 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:104 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:104 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:104 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:104 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:104 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:105 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ⚠️ [tsdoc-syntax] src/CronExpressionParser.ts:105 The "@" character looks like part of a TSDoc tag; use a backslash to escape it
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work>/cron-parser/.specgate-static/report.json
+      <work>/cron-parser/.specgate-static/summary.md
+      <work>/cron-parser/.specgate-static/report.sarif

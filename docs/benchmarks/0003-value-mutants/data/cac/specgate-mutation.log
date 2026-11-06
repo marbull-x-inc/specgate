@@ -1,0 +1,178 @@
+specgate check (advisory): 28 units, 38 guarantees, 12 linked tests
+  fail 45 · warn 126 · info 1
+  ❌ [guarantee-no-test] src/cac.ts:67 CAC#usage.ok.global-usage has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:76 CAC#command.ok.creates-command has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:78 CAC#command.ok.variadic has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:79 CAC#command.ok.default-command has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:80 CAC#command.ok.config-allow-unknown-options has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:81 CAC#command.ok.config-ignore-default has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:98 CAC#option.ok.global-option has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:99 CAC#option.ok.config-default has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:101 CAC#option.ok.camel-case has no test naming it
+  ❌ [identifier-unresolved] src/cac.ts:101 CAC#option.ok.camel-case: "camelCase" is not a parameter, declared port, entity or public operation
+  ❌ [guarantee-no-test] src/cac.ts:102 CAC#option.ok.option-brackets has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:104 CAC#option.ok.repeated-option has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:114 CAC#help.ok.help-flags has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:115 CAC#help.ok.callback has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:127 CAC#version.ok.default-flags has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:128 CAC#version.ok.custom-flags has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:129 CAC#version.ok.in-help has no test naming it
+  ❌ [operation-no-guarantee] src/cac.ts:142 CAC#example has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/cac.ts:152 CAC#outputHelp.ok.output has no test naming it
+  ❌ [operation-no-guarantee] src/cac.ts:166 CAC#outputVersion has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/cac.ts:186 CAC#unsetMatchedCommand has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] src/cac.ts:195 CAC#parse.ok.available-after-parse has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:196 CAC#parse.ok.run-false has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:367 CAC#runMatchedCommand.ok.run has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:69 Command#usage.ok.command-usage has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:77 Command#allowUnknownOptions.ok.allow has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:78 Command#allowUnknownOptions.ok.default-error has no test naming it
+  ❌ [operation-no-guarantee] src/command.ts:85 Command#ignoreOptionDefaultValue has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/command.ts:90 Command#version has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] src/command.ts:97 Command#example.ok.shown-in-help has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:98 Command#example.ok.example-type has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:120 Command#alias.ok.alias has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:121 Command#alias.err.alias-brackets has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:129 Command#action.ok.callback-args has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:130 Command#action.ok.variadic-last-arg has no test naming it
+  ❌ [operation-no-guarantee] src/command.ts:141 Command#isMatched has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/command.ts:157 Command#hasOption has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/command.ts:164 Command#outputHelp has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/command.ts:271 Command#outputVersion has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/command.ts:279 Command#checkRequiredArgs has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/command.ts:294 Command#checkUnknownOptions has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/command.ts:315 Command#checkOptionValue has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/command.ts:335 Command#checkUnusedArgs has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/index.ts:6 cac.ok.program-name has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:7 cac.ok.default-name has no test naming it
+  ⚠️ [uses-mismatch] src/cac.ts:69 CAC#usage calls ports not declared in @uses/@modifies: GlobalCommand
+  ⚠️ [uses-mismatch] src/cac.ts:83 CAC#command calls ports not declared in @uses/@modifies: Command[]
+  ⚠️ [mutant-survived] src/cac.ts:88 CAC#command: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:88 CAC#command: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:88 CAC#command: LogicalOperator mutant: `description && ''` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:88 CAC#command: StringLiteral mutant: `"Stryker was here!"` survived; no linked test fails when the code changes like this
+  ⚠️ [uses-mismatch] src/cac.ts:106 CAC#option calls ports not declared in @uses/@modifies: GlobalCommand
+  ⚠️ [uses-mismatch] src/cac.ts:117 CAC#help calls ports not declared in @uses/@modifies: GlobalCommand
+  ⚠️ [uses-mismatch] src/cac.ts:131 CAC#version calls ports not declared in @uses/@modifies: GlobalCommand
+  ⚠️ [uses-mismatch] src/cac.ts:154 CAC#outputHelp calls ports not declared in @uses/@modifies: Command, GlobalCommand
+  ⚠️ [unit-not-executed] src/cac.ts:154 CAC#outputHelp has 4 linked test(s), but none of them runs its code: all 7 mutant(s) in it are NoCoverage. The tests may replace it with a stub or call another implementation
+  ⚠️ [unit-not-executed] src/cac.ts:166 CAC#outputVersion has 4 linked test(s), but none of them runs its code: all 2 mutant(s) in it are NoCoverage. The tests may replace it with a stub or call another implementation
+  ⚠️ [mutant-survived] src/cac.ts:177 CAC#parse: ConditionalExpression mutant in a helper it calls: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:180 CAC#parse: ConditionalExpression mutant in a helper it calls: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [unit-not-executed] src/cac.ts:186 CAC#unsetMatchedCommand has 4 linked test(s), but none of them runs its code: all 1 mutant(s) in it are NoCoverage. The tests may replace it with a stub or call another implementation
+  ⚠️ [mutant-survived] src/cac.ts:209 CAC#parse: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:209 CAC#parse: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:211 CAC#parse: StringLiteral mutant: `""` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:218 CAC#parse: BooleanLiteral mutant: `this.name` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:218 CAC#parse: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:218 CAC#parse: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:218 CAC#parse: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:219 CAC#parse: StringLiteral mutant: `""` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:219 CAC#parse: `argv[1]`: 1 → 2 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:219 CAC#parse: `argv[1]`: 1 → 2 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:219 CAC#parse: `argv[1] ? getFileName(argv[1]) : 'cli'`: 'cli' → 'cli_x' is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:229 CAC#parse: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:237 CAC#parse: StringLiteral mutant: ```` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:237 CAC#parse: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:242 CAC#parse: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:242 CAC#parse: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:242 CAC#parse: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:244 CAC#parse: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:245 CAC#parse: ConditionalExpression mutant: `true` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:245 CAC#parse: ConditionalExpression mutant: `false` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:245 CAC#parse: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:246 CAC#parse: BooleanLiteral mutant: `true` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:247 CAC#parse: MethodExpression mutant: `argv` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:247 CAC#parse: `argv.slice(2)`: 2 → 3 is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:248 CAC#parse: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:249 CAC#parse: StringLiteral mutant: `""` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:249 CAC#parse: ObjectLiteral mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:249 CAC#parse: `new CustomEvent('command:!', { detail: …`: 'command:!' → 'command:!_x' is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:259 CAC#parse: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:259 CAC#parse: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:259 CAC#parse: LogicalOperator mutant: `this.options.help || this.showHelpOnExit` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:260 CAC#parse: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:261 CAC#parse: BooleanLiteral mutant: `true` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:262 CAC#parse: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:266 CAC#parse: LogicalOperator mutant: `this.options.version && this.showVersionOnExit || this.matc…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:266 CAC#parse: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:266 CAC#parse: LogicalOperator mutant: `this.options.version || this.showVersionOnExit` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:266 CAC#parse: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:268 CAC#parse: ConditionalExpression mutant: `true` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:268 CAC#parse: EqualityOperator mutant: `this.matchedCommandName != null` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:269 CAC#parse: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:270 CAC#parse: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:271 CAC#parse: BooleanLiteral mutant: `true` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:272 CAC#parse: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:277 CAC#parse: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:281 CAC#parse: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:281 CAC#parse: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:281 CAC#parse: BooleanLiteral mutant: `this.matchedCommand` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:281 CAC#parse: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:281 CAC#parse: LogicalOperator mutant: `!this.matchedCommand || this.args[0]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:281 CAC#parse: `this.args[0]`: 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:282 CAC#parse: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:282 CAC#parse: ObjectLiteral mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:282 CAC#parse: `new CustomEvent('command:*', { detail: …`: 'command:*' → 'command:*_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:282 CAC#parse: `this.args[0]`: 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:315 CAC#parse: ObjectLiteral mutant in a helper it calls: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:315 CAC#parse: ArrayDeclaration mutant in a helper it calls: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:326 CAC#parse: ConditionalExpression mutant in a helper it calls: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:342 CAC#parse: ConditionalExpression mutant in a helper it calls: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:347 CAC#parse: `cliOption.config.type[0]`: 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [decision-unspecified] src/cac.ts:353 CAC#parse commits to match "_" in `key !== '_'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [mutant-survived] src/cac.ts:376 CAC#runMatchedCommand: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:378 CAC#runMatchedCommand: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/cac.ts:382 CAC#runMatchedCommand: ArrayDeclaration mutant: `["Stryker was here"]` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:383 CAC#runMatchedCommand: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:384 CAC#runMatchedCommand: ConditionalExpression mutant: `true` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:384 CAC#runMatchedCommand: ConditionalExpression mutant: `false` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:384 CAC#runMatchedCommand: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:385 CAC#runMatchedCommand: MethodExpression mutant: `args` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:386 CAC#runMatchedCommand: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:387 CAC#runMatchedCommand: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] src/cac.ts:390 CAC#runMatchedCommand: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] src/command.ts:71 Command#usage: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [uses-mismatch] src/command.ts:100 Command#example calls ports not declared in @uses/@modifies: CommandExample[]
+  ⚠️ [uses-mismatch] src/command.ts:113 Command#option calls ports not declared in @uses/@modifies: Option[]
+  ⚠️ [uses-mismatch] src/command.ts:123 Command#alias calls ports not declared in @uses/@modifies: string[]
+  ⚠️ [mutant-survived] src/command.ts:142 Command#isMatched: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:279 Command#checkRequiredArgs: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:280 Command#checkRequiredArgs: MethodExpression mutant: `this.args` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:280 Command#checkRequiredArgs: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:282 Command#checkRequiredArgs: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/command.ts:282 Command#checkRequiredArgs: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:282 Command#checkRequiredArgs: EqualityOperator mutant: `this.cli.args.length <= minimalArgsCount` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:284 Command#checkRequiredArgs: StringLiteral mutant: ```` is not run by any test
+  ⚠️ [mutant-survived] src/command.ts:297 Command#checkUnknownOptions: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:305 Command#checkUnknownOptions: StringLiteral mutant: ```` is not run by any test
+  ⚠️ [mutant-survived] src/command.ts:305 Command#checkUnknownOptions: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:305 Command#checkUnknownOptions: EqualityOperator mutant: `name.length >= 1` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:315 Command#checkOptionValue: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:317 Command#checkOptionValue: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:318 Command#checkOptionValue: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:319 Command#checkOptionValue: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:321 Command#checkOptionValue: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:321 Command#checkOptionValue: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:321 Command#checkOptionValue: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:323 Command#checkOptionValue: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:323 Command#checkOptionValue: LogicalOperator mutant: `o.negated || o.names.includes(option.name)` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:325 Command#checkOptionValue: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] src/command.ts:325 Command#checkOptionValue: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:325 Command#checkOptionValue: LogicalOperator mutant: `value === true && value === false && !hasNegated` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:325 Command#checkOptionValue: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:325 Command#checkOptionValue: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:325 Command#checkOptionValue: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:325 Command#checkOptionValue: EqualityOperator mutant: `value !== false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:325 Command#checkOptionValue: BooleanLiteral mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:326 Command#checkOptionValue: StringLiteral mutant: ```` is not run by any test
+  ⚠️ [mutant-survived] src/command.ts:336 Command#checkUnusedArgs: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:336 Command#checkUnusedArgs: MethodExpression mutant: `this.args.every(arg => arg.variadic)` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:340 Command#checkUnusedArgs: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/command.ts:340 Command#checkUnusedArgs: EqualityOperator mutant: `maximumArgsCount <= this.cli.args.length` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/index.ts:9 cac: StringLiteral mutant: `"Stryker was here!"` survived; no linked test fails when the code changes like this
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work>/cac/.specgate-mutation/report.json
+      <work>/cac/.specgate-mutation/summary.md
+      <work>/cac/.specgate-mutation/report.sarif

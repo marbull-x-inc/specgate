@@ -1,0 +1,220 @@
+diff --git a/tests/index.test.ts b/tests/index.test.ts
+index 9f089a9..d18aa13 100644
+--- a/tests/index.test.ts
++++ b/tests/index.test.ts
+@@ -18,7 +18,7 @@ import {
+ import { vitest, describe, expect, it } from 'vitest'
+ 
+ describe('Result.Ok', () => {
+-  it('Creates an Ok value', () => {
++  it('ok.ok.is-ok-true Creates an Ok value', () => {
+     const okVal = ok(12)
+ 
+     expect(okVal.isOk()).toBe(true)
+@@ -26,7 +26,7 @@ describe('Result.Ok', () => {
+     expect(okVal).toBeInstanceOf(Ok)
+   })
+ 
+-  it('Creates an Ok value with null', () => {
++  it('ok.ok.constructs-ok Creates an Ok value with null', () => {
+     const okVal = ok(null)
+ 
+     expect(okVal.isOk()).toBe(true)
+@@ -34,7 +34,7 @@ describe('Result.Ok', () => {
+     expect(okVal._unsafeUnwrap()).toBe(null)
+   })
+ 
+-  it('Creates an Ok value with undefined', () => {
++  it('ok.ok.constructs-ok Creates an Ok value with undefined', () => {
+     const okVal = ok(undefined)
+ 
+     expect(okVal.isOk()).toBe(true)
+@@ -42,12 +42,12 @@ describe('Result.Ok', () => {
+     expect(okVal._unsafeUnwrap()).toBeUndefined()
+   })
+ 
+-  it('Is comparable', () => {
++  it('ok.ok.constructs-ok Is comparable', () => {
+     expect(ok(42)).toEqual(ok(42))
+     expect(ok(42)).not.toEqual(ok(43))
+   })
+ 
+-  it('Maps over an Ok value', () => {
++  it('Ok#map.ok.applies-callback Maps over an Ok value', () => {
+     const okVal = ok(12)
+     const mapFn = vitest.fn((number) => number.toString())
+ 
+@@ -58,7 +58,7 @@ describe('Result.Ok', () => {
+     expect(mapFn).toHaveBeenCalledTimes(1)
+   })
+ 
+-  it('Skips `mapErr`', () => {
++  it('Ok#mapErr.ok.leaves-ok Skips `mapErr`', () => {
+     const mapErrorFunc = vitest.fn((_error) => 'mapped error value')
+ 
+     const notMapped = ok(12).mapErr(mapErrorFunc)
+@@ -68,7 +68,7 @@ describe('Result.Ok', () => {
+   })
+ 
+   describe('andThen', () => {
+-    it('Maps to an Ok', () => {
++    it('Ok#andThen.ok.chains-results Maps to an Ok', () => {
+       const okVal = ok(12)
+ 
+       const flattened = okVal.andThen((_number) => {
+@@ -82,7 +82,7 @@ describe('Result.Ok', () => {
+       expect(flattened._unsafeUnwrap()).toStrictEqual({ data: 'why not' })
+     })
+ 
+-    it('Maps to an Err', () => {
++    it('Ok#andThen.ok.chain-examples Maps to an Err', () => {
+       const okval = ok(12)
+ 
+       const flattened = okval.andThen((_number) => {
+@@ -103,7 +103,7 @@ describe('Result.Ok', () => {
+   })
+ 
+   describe('andThrough', () => {
+-    it('Calls the passed function but returns an original ok', () => {
++    it('Ok#andThrough.ok.passes-error-along Calls the passed function but returns an original ok', () => {
+       const okVal = ok(12)
+       const passedFn = vitest.fn((_number) => ok(undefined))
+ 
+@@ -113,7 +113,7 @@ describe('Result.Ok', () => {
+       expect(thrued._unsafeUnwrap()).toStrictEqual(12)
+     })
+ 
+-    it('Maps to an Err', () => {
++    it('Ok#andThen.ok.chain-examples Maps to an Err', () => {
+       const okval = ok(12)
+ 
+       const thrued = okval.andThen((_number) => {
+@@ -135,7 +135,7 @@ describe('Result.Ok', () => {
+   })
+ 
+   describe('andTee', () => {
+-    it('Calls the passed function but returns an original ok', () => {
++    it('Ok#andTee.ok.passes-through Calls the passed function but returns an original ok', () => {
+       const okVal = ok(12)
+       const passedFn = vitest.fn((_number) => {})
+ 
+@@ -145,7 +145,7 @@ describe('Result.Ok', () => {
+       expect(passedFn).toHaveBeenCalledTimes(1)
+       expect(teed._unsafeUnwrap()).toStrictEqual(12)
+     })
+-    it('returns an original ok even when the passed function fails', () => {
++    it('Ok#andTee.ok.passes-through returns an original ok even when the passed function fails', () => {
+       const okVal = ok(12)
+       const passedFn = vitest.fn((_number) => {
+         throw new Error('OMG!')
+@@ -160,7 +160,7 @@ describe('Result.Ok', () => {
+   })
+ 
+   describe('orTee', () => {
+-    it('Calls the passed function but returns an original err', () => {
++    it('Err#orTee.ok.passes-through Calls the passed function but returns an original err', () => {
+       const errVal = err(12)
+       const passedFn = vitest.fn((_number) => {})
+ 
+@@ -170,7 +170,7 @@ describe('Result.Ok', () => {
+       expect(passedFn).toHaveBeenCalledTimes(1)
+       expect(teed._unsafeUnwrapErr()).toStrictEqual(12)
+     })
+-    it('returns an original err even when the passed function fails', () => {
++    it('Err#orTee.ok.passes-through returns an original err even when the passed function fails', () => {
+       const errVal = err(12)
+       const passedFn = vitest.fn((_number) => {
+         throw new Error('OMG!')
+@@ -228,7 +228,7 @@ describe('Result.Ok', () => {
+     })
+   })
+ 
+-  it('unwrapOr and return the Ok value', () => {
++  it('Ok#unwrapOr.ok.unwraps-value unwrapOr and return the Ok value', () => {
+     const okVal = ok(12)
+     expect(okVal.unwrapOr(1)).toEqual(12)
+   })
+@@ -277,7 +277,7 @@ describe('Result.Ok', () => {
+     expect(newResult._unsafeUnwrap()).toStrictEqual('Very Nice!')
+   })
+ 
+-  it('Matches on an Ok', () => {
++  it('Ok#match.ok.runs-ok-callback Matches on an Ok', () => {
+     const okMapper = vitest.fn((_val) => 'weeeeee')
+     const errMapper = vitest.fn((_val) => 'wooooo')
+ 
+@@ -294,7 +294,7 @@ describe('Result.Ok', () => {
+     expect(okVal._unsafeUnwrap()).toBe(12)
+   })
+ 
+-  it('Can read the value after narrowing', () => {
++  it('Ok#isErr.ok.false-for-ok Can read the value after narrowing', () => {
+     const fallible: () => Result<string, number> = () => ok('safe to read')
+     const val = fallible()
+ 
+@@ -307,7 +307,7 @@ describe('Result.Ok', () => {
+ })
+ 
+ describe('Result.Err', () => {
+-  it('Creates an Err value', () => {
++  it('err.ok.is-err-true Creates an Err value', () => {
+     const errVal = err('I have you now.')
+ 
+     expect(errVal.isOk()).toBe(false)
+@@ -315,12 +315,12 @@ describe('Result.Err', () => {
+     expect(errVal).toBeInstanceOf(Err)
+   })
+ 
+-  it('Is comparable', () => {
++  it('err.ok.constructs-err Is comparable', () => {
+     expect(err(42)).toEqual(err(42))
+     expect(err(42)).not.toEqual(err(43))
+   })
+ 
+-  it('Skips `map`', () => {
++  it('Err#map.ok.leaves-err Skips `map`', () => {
+     const errVal = err('I am your father')
+ 
+     const mapper = vitest.fn((_value) => 'noooo')
+@@ -332,7 +332,7 @@ describe('Result.Err', () => {
+     expect(hopefullyNotMapped._unsafeUnwrapErr()).toEqual(errVal._unsafeUnwrapErr())
+   })
+ 
+-  it('Maps over an Err', () => {
++  it('Err#mapErr.ok.applies-callback Maps over an Err', () => {
+     const errVal = err('Round 1, Fight!')
+ 
+     const mapper = vitest.fn((error: string) => error.replace('1', '2'))
+@@ -344,12 +344,12 @@ describe('Result.Err', () => {
+     expect(mapped._unsafeUnwrapErr()).not.toEqual(errVal._unsafeUnwrapErr())
+   })
+ 
+-  it('unwrapOr and return the default value', () => {
++  it('Err#unwrapOr.ok.returns-default unwrapOr and return the default value', () => {
+     const okVal = err<number, string>('Oh nooo')
+     expect(okVal.unwrapOr(1)).toEqual(1)
+   })
+ 
+-  it('Skips over andThen', () => {
++  it('Err#andThen.ok.keeps-err Skips over andThen', () => {
+     const errVal = err('Yolo')
+ 
+     const mapper = vitest.fn((_val) => ok<string, string>('yooyo'))
+@@ -439,7 +439,7 @@ describe('Result.Err', () => {
+     expect(sameResult._unsafeUnwrapErr()).toEqual(errVal._unsafeUnwrapErr())
+   })
+ 
+-  it('Matches on an Err', () => {
++  it('Err#match.ok.runs-err-callback Matches on an Err', () => {
+     const okMapper = vitest.fn((_val) => 'weeeeee')
+     const errMapper = vitest.fn((_val) => 'wooooo')
+ 
+@@ -465,7 +465,7 @@ describe('Result.Err', () => {
+   })
+ 
+   describe('orElse', () => {
+-    it('invokes the orElse callback on an Err value', () => {
++    it('Err#orElse.ok.recovers invokes the orElse callback on an Err value', () => {
+       const okVal = err('BOOOM!')
+       const errorCallback = vitest.fn((_errVal) => err(true))
+ 

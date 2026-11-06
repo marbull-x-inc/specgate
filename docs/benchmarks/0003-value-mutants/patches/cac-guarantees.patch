@@ -1,0 +1,163 @@
+diff --git a/src/cac.ts b/src/cac.ts
+index 375ff6c..9921eab 100644
+--- a/src/cac.ts
++++ b/src/cac.ts
+@@ -64,6 +64,7 @@ export class CAC extends EventTarget {
+    * Add a global usage text.
+    *
+    * This is not used by sub-commands.
++   * @guarantee ok.global-usage adds a global usage text, which is not used by sub-commands
+    */
+   usage(text: string): this {
+     this.globalCommand.usage(text)
+@@ -72,6 +73,12 @@ export class CAC extends EventTarget {
+ 
+   /**
+    * Add a sub-command
++   * @guarantee ok.creates-command creates and returns a command instance for `name` and `description`
++   * @guarantee ok.required-arguments in a command name, angled brackets indicate required arguments and square brackets indicate optional arguments ("deploy <folder>" requires `folder`, "build [project]" makes `project` optional)
++   * @guarantee ok.variadic only the last argument can be variadic, written with "..." at the start of its name ("build <entry> [...otherFiles]"), and then it is passed as an array
++   * @guarantee ok.default-command a command name with no name and only brackets ("[...files]") is the default command, used when no other command is matched
++   * @guarantee ok.config-allow-unknown-options `config.allowUnknownOptions` allows unknown options in this command
++   * @guarantee ok.config-ignore-default `config.ignoreOptionDefaultValue` leaves the default value of an option out of the parsed options and only displays it in the help message
+    */
+   command(
+     rawName: string,
+@@ -88,6 +95,13 @@ export class CAC extends EventTarget {
+    * Add a global CLI option.
+    *
+    * Which is also applied to sub-commands.
++   * @guarantee ok.global-option adds a global option
++   * @guarantee ok.config-default `config.default` is the default value of the option (`--type <type>` with `default: "node"` defaults `type` to "node")
++   * @guarantee ok.config-type-array when `config.type` is `[]`, the option value is an array, and a conversion function such as `[String]` is invoked on the option value
++   * @guarantee ok.camel-case an option in kebab-case is mapped to camelCase, so `--clear-screen` and `--clearScreen` both map to `options.clearScreen`
++   * @guarantee ok.option-brackets in an option name, angled brackets indicate that a string or number value is required and square brackets indicate that the value can also be `true`
++   * @guarantee ok.negated-option with `--no-config` and `--config <path>`, the default value of `config` is `true` and the flag `--no-config` sets it to `false`
++   * @guarantee ok.repeated-option an option given once gives a single value ("--include project-a" gives `{ include: "project-a" }`) and given twice gives an array (`{ include: ["project-a", "project-b"] }`)
+    */
+   option(rawName: string, description: string, config?: OptionConfig): this {
+     this.globalCommand.option(rawName, description, config)
+@@ -97,6 +111,8 @@ export class CAC extends EventTarget {
+   /**
+    * Show help message when `-h, --help` flags appear.
+    *
++   * @guarantee ok.help-flags outputs the help message when the `-h` or `--help` flag appears
++   * @guarantee ok.callback the optional `callback` receives the help sections, each with an optional `title` and a `body`, so the help text can be post-processed before it is displayed
+    */
+   help(callback?: HelpCallback): this {
+     this.globalCommand.option('-h, --help', 'Display this message')
+@@ -108,6 +124,9 @@ export class CAC extends EventTarget {
+   /**
+    * Show version number when `-v, --version` flags appear.
+    *
++   * @guarantee ok.default-flags outputs the version number when the `-v` or `--version` flag appears, because `customFlags` is "-v, --version" by default
++   * @guarantee ok.custom-flags `customFlags` replaces the flags that output the version number
++   * @guarantee ok.in-help the version number is also used in the help message
+    */
+   version(version: string, customFlags = '-v, --version'): this {
+     this.globalCommand.version(version, customFlags)
+@@ -130,6 +149,7 @@ export class CAC extends EventTarget {
+    * When a sub-command is matched, output the help message for the command
+    * Otherwise output the global one.
+    *
++   * @guarantee ok.output outputs the help message
+    */
+   outputHelp(): void {
+     if (this.matchedCommand) {
+@@ -170,6 +190,10 @@ export class CAC extends EventTarget {
+ 
+   /**
+    * Parse argv
++   * @guarantee ok.parsed-argv returns an object with `args`, an array of strings, and `options`, an object of the parsed options
++   * @guarantee ok.default-argv `argv` is `process.argv` by default
++   * @guarantee ok.available-after-parse after the call, `cli.rawArgs`, `cli.args`, `cli.options` and `cli.matchedCommand` are available
++   * @guarantee ok.run-false with `{ run: false }` it parses the arguments without running the command, which can then be run with `runMatchedCommand`
+    */
+   parse(
+     argv?: string[],
+@@ -339,6 +363,9 @@ export class CAC extends EventTarget {
+     }
+   }
+ 
++  /**
++   * @guarantee ok.run runs the matched command after `parse` was called with `{ run: false }`, and its result can be awaited when the command action returns a Promise
++   */
+   runMatchedCommand(): any {
+     const { args, options, matchedCommand: command } = this
+ 
+diff --git a/src/command.ts b/src/command.ts
+index a76d143..d1d79df 100644
+--- a/src/command.ts
++++ b/src/command.ts
+@@ -65,11 +65,18 @@ export class Command {
+     this.examples = []
+   }
+ 
++  /**
++   * @guarantee ok.command-usage adds a usage text for this command
++   */
+   usage(text: string): this {
+     this.usageText = text
+     return this
+   }
+ 
++  /**
++   * @guarantee ok.allow allows unknown options in this command
++   * @guarantee ok.default-error by default an error is logged when unknown options are used
++   */
+   allowUnknownOptions(): this {
+     this.config.allowUnknownOptions = true
+     return this
+@@ -86,6 +93,10 @@ export class Command {
+     return this
+   }
+ 
++  /**
++   * @guarantee ok.shown-in-help adds an example which is displayed at the end of the help message
++   * @guarantee ok.example-type `example` is either a string or a function that takes the command name and returns a string
++   */
+   example(example: CommandExample): this {
+     this.examples.push(example)
+     return this
+@@ -96,6 +107,8 @@ export class Command {
+    * @param rawName Raw option name(s)
+    * @param description Option description
+    * @param config Option config
++   * @guarantee ok.command-option adds the option to this specific command, like `cli.option` does for the CLI ("-r, --recursive" on "rm <dir>" gives `options.recursive`)
++   * @guarantee ok.dash-camel-case `--clear-screen` and `--clearScreen` are both mapped to `options.clearScreen`
+    */
+   option(rawName: string, description: string, config?: OptionConfig): this {
+     const option = new Option(rawName, description, config)
+@@ -103,11 +116,19 @@ export class Command {
+     return this
+   }
+ 
++  /**
++   * @guarantee ok.alias adds an alias name to this command
++   * @guarantee err.alias-brackets the alias `name` cannot contain brackets
++   */
+   alias(name: string): this {
+     this.aliasNames.push(name)
+     return this
+   }
+ 
++  /**
++   * @guarantee ok.callback-args uses the callback as the command action when the command matches the user inputs, called with the parsed CLI args first and the parsed CLI options last
++   * @guarantee ok.variadic-last-arg the last argument is an array when it is a variadic argument
++   */
+   action(callback: (...args: any[]) => any): this {
+     this.commandAction = callback
+     return this
+diff --git a/src/index.ts b/src/index.ts
+index 8d48a1e..5ddc890 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -3,6 +3,8 @@ import { Command } from './command.ts'
+ 
+ /**
+  * @param name The program name to display in help and version message
++ * @guarantee ok.program-name `cac(name)` creates a CLI instance, and the optional `name` is the program name displayed in the help and version messages
++ * @guarantee ok.default-name when `name` is not set, the program name is the basename of `argv[1]`
+  */
+ const cac = (name = ''): CAC => new CAC(name)
+ 

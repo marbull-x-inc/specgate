@@ -1,0 +1,129 @@
+[
+  {
+    "file": "library/src/actions/minLength/minLength.ts",
+    "symbol": "minLength",
+    "tags": [
+      "@guarantee ok.min-string `v.minLength(3)` on a string measures its length like JavaScript's `value.length` (UTF-16 code units) and requires a length of at least 3.",
+      "@guarantee ok.min-array `v.minLength(5)` on an array counts the items and requires at least 5 items.",
+      "@guarantee err.min-string-short `v.minLength(3)` reports an issue for a string with fewer than 3 UTF-16 code units, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/maxLength/maxLength.ts",
+    "symbol": "maxLength",
+    "tags": [
+      "@guarantee ok.max-string `v.maxLength(32)` on a string measures its length in UTF-16 code units and allows a length of at most 32.",
+      "@guarantee ok.max-array `v.maxLength(5)` on an array counts the items and allows at most 5 items.",
+      "@guarantee err.max-string-long `v.maxLength(32)` reports an issue for a string longer than 32 UTF-16 code units, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/length/length.ts",
+    "symbol": "length",
+    "tags": [
+      "@guarantee ok.string-length `v.length(8)` on a string requires a length of 8 UTF-16 code units.",
+      "@guarantee ok.array-length `v.length(100)` on an array requires exactly 100 items.",
+      "@guarantee err.length-mismatch `v.length(8)` reports an issue for a string whose length is not 8, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/notLength/notLength.ts",
+    "symbol": "notLength",
+    "tags": [
+      "@guarantee ok.string-not-length `v.notLength(8)` on a string accepts any length other than 8.",
+      "@guarantee ok.array-not-length `v.notLength(10)` on an array accepts any item count other than 10.",
+      "@guarantee err.length-equal `v.notLength(8)` reports an issue for a string of length 8, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+    "symbol": "nonEmpty",
+    "tags": [
+      "@guarantee ok.non-empty-string `v.nonEmpty()` on a string requires at least one character.",
+      "@guarantee ok.non-empty-array `v.nonEmpty()` on an array requires at least one item.",
+      "@guarantee err.empty-input `v.nonEmpty()` reports an issue for an empty string or an empty array, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/empty/empty.ts",
+    "symbol": "empty",
+    "tags": [
+      "@guarantee ok.empty-string `v.empty()` on a string accepts only the empty string \"\".",
+      "@guarantee ok.empty-array `v.empty()` on an array accepts only an array with no items.",
+      "@guarantee err.not-empty `v.empty()` reports an issue for a non-empty string or array, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.ts",
+    "symbol": "minValue",
+    "tags": [
+      "@guarantee ok.min-number `v.minValue(100)` on a number requires a value of at least 100.",
+      "@guarantee err.min-number-below `v.minValue(100)` reports an issue for a number below 100, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.ts",
+    "symbol": "maxValue",
+    "tags": [
+      "@guarantee ok.max-number `v.maxValue(100)` on a number allows a value of at most 100, that is it must not exceed 100.",
+      "@guarantee err.max-number-above `v.maxValue(100)` reports an issue for a number above 100, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.ts",
+    "symbol": "gtValue",
+    "tags": [
+      "@guarantee ok.greater-than-number `v.gtValue(100)` on a number requires a value greater than 100.",
+      "@guarantee err.not-greater `v.gtValue(100)` reports an issue for a number that is not greater than 100, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.ts",
+    "symbol": "ltValue",
+    "tags": [
+      "@guarantee ok.less-than-number `v.ltValue(100)` on a number requires a value less than 100.",
+      "@guarantee err.not-less `v.ltValue(100)` reports an issue for a number that is not less than 100, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/value/value.ts",
+    "symbol": "value",
+    "tags": [
+      "@guarantee ok.exact-number `v.value(100)` on a number requires the value to be 100.",
+      "@guarantee err.value-differs `v.value(100)` reports an issue for a number other than 100, using `message` as the error message when given.",
+      "@guarantee ok.type-unchanged `v.value` does not change the type of the pipeline."
+    ]
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.ts",
+    "symbol": "notValue",
+    "tags": [
+      "@guarantee ok.not-number `v.notValue(100)` on a number accepts every value that is more or less than 100.",
+      "@guarantee err.value-equal `v.notValue(100)` reports an issue for the number 100, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.ts",
+    "symbol": "multipleOf",
+    "tags": [
+      "@guarantee ok.even-number `v.multipleOf(2)` on a number accepts even numbers.",
+      "@guarantee err.not-multiple `v.multipleOf(2)` reports an issue for an odd number, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/minBytes/minBytes.ts",
+    "symbol": "minBytes",
+    "tags": [
+      "@guarantee ok.min-bytes `v.minBytes(64)` on a string requires a minimum of 64 bytes.",
+      "@guarantee err.too-few-bytes `v.minBytes(64)` reports an issue for a string with fewer than 64 bytes, using `message` as the error message when given."
+    ]
+  },
+  {
+    "file": "library/src/actions/bytes/bytes.ts",
+    "symbol": "bytes",
+    "tags": [
+      "@guarantee ok.exact-bytes `v.bytes(8)` on a string requires exactly 8 bytes.",
+      "@guarantee err.bytes-mismatch `v.bytes(8)` reports an issue for a string whose byte count is not 8, using `message` as the error message when given."
+    ]
+  }
+]

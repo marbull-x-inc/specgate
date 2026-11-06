@@ -1,0 +1,14 @@
+npm warn Unknown project config "min-release-age". This will stop working in the next major version of npm.
+[32m07:02:26 (99352) INFO ProjectReader[39m Found 4 of 27 file(s) to be mutated.
+Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[32m07:02:26 (99352) INFO Instrumenter[39m Instrumented 4 source file(s) with 414 mutant(s)
+[32m07:02:27 (99352) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m07:02:31 (99352) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m07:02:56 (99352) INFO DryRunExecutor[39m Initial test run succeeded. Ran 164 tests in 24 seconds (net 17558.319370000023 ms, overhead 7210.680629999977 ms).
+[32m07:05:45 (99352) INFO JsonReporter[39m Your report can be found at: file://<work>/react-hotkeys-hook/packages/react-hotkeys-hook/reports/mutation/mutation.json
+[32m07:05:45 (99352) INFO MutationTestExecutor[39m Done in 3 minutes and 19 seconds.
+real 202.97
+user 717.82
+sys 158.08

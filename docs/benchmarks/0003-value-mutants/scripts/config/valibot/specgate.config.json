@@ -1,0 +1,36 @@
+{
+  "surface": {
+    "include": [
+      "library/src/actions/minLength/minLength.ts",
+      "library/src/actions/maxLength/maxLength.ts",
+      "library/src/actions/length/length.ts",
+      "library/src/actions/notLength/notLength.ts",
+      "library/src/actions/nonEmpty/nonEmpty.ts",
+      "library/src/actions/empty/empty.ts",
+      "library/src/actions/minValue/minValue.ts",
+      "library/src/actions/maxValue/maxValue.ts",
+      "library/src/actions/gtValue/gtValue.ts",
+      "library/src/actions/ltValue/ltValue.ts",
+      "library/src/actions/value/value.ts",
+      "library/src/actions/notValue/notValue.ts",
+      "library/src/actions/multipleOf/multipleOf.ts",
+      "library/src/actions/minBytes/minBytes.ts",
+      "library/src/actions/bytes/bytes.ts"
+    ],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": ["library/src/**/*.test.ts"],
+    "adapter": "vitest"
+  },
+  "tsconfig": "library/tsconfig.json",
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-static"
+  }
+}

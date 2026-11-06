@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "vitest",
+  "coverageAnalysis": "perTest",
+  "mutate": [
+    "src/actions/minLength/minLength.ts",
+    "src/actions/maxLength/maxLength.ts",
+    "src/actions/length/length.ts",
+    "src/actions/notLength/notLength.ts",
+    "src/actions/nonEmpty/nonEmpty.ts",
+    "src/actions/empty/empty.ts",
+    "src/actions/minValue/minValue.ts",
+    "src/actions/maxValue/maxValue.ts",
+    "src/actions/gtValue/gtValue.ts",
+    "src/actions/ltValue/ltValue.ts",
+    "src/actions/value/value.ts",
+    "src/actions/notValue/notValue.ts",
+    "src/actions/multipleOf/multipleOf.ts",
+    "src/actions/minBytes/minBytes.ts",
+    "src/actions/bytes/bytes.ts"
+  ],
+  "reporters": ["json"],
+  "jsonReporter": {
+    "fileName": "reports/mutation/mutation.json"
+  },
+  "tempDirName": ".stryker-tmp",
+  "plugins": ["@stryker-mutator/vitest-runner"]
+}

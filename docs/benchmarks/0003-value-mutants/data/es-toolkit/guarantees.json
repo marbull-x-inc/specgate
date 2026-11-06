@@ -1,0 +1,179 @@
+[
+  {
+    "file": "src/string/camelCase.ts",
+    "symbol": "camelCase",
+    "tags": [
+      "@guarantee ok.words-joined \"hello world\" gives \"helloWorld\" and \"some-hyphen-text\" gives \"someHyphenText\"",
+      "@guarantee ok.from-other-cases \"CONSTANT_CASE\" gives \"constantCase\" and \"PascalCase\" gives \"pascalCase\"",
+      "@guarantee ok.mixed-case-kept \"mixed   SpAcE\" gives \"mixedSpAcE\"",
+      "@guarantee ok.unicode-kept \"keep unicode 😅\" gives \"keepUnicode😅\" and \"한글-테스트\" gives \"한글테스트\""
+    ]
+  },
+  {
+    "file": "src/string/capitalize.ts",
+    "symbol": "capitalize",
+    "tags": [
+      "@guarantee ok.first-upper-rest-lower \"hello\" gives \"Hello\", \"WORLD\" gives \"World\" and \"javaScript\" gives \"Javascript\"",
+      "@guarantee ok.short-strings \"\" gives \"\", \"a\" gives \"A\" and \"A\" gives \"A\"",
+      "@guarantee ok.only-first-word \"welcome to our website\" gives \"Welcome to our website\""
+    ]
+  },
+  {
+    "file": "src/string/constantCase.ts",
+    "symbol": "constantCase",
+    "tags": [
+      "@guarantee ok.upper-with-underscores \"hello world\" gives \"HELLO_WORLD\" and \"some-kebab-case\" gives \"SOME_KEBAB_CASE\"",
+      "@guarantee ok.from-camel-pascal-snake \"camelCase\" gives \"CAMEL_CASE\", \"PascalCase\" gives \"PASCAL_CASE\" and \"snake_case\" gives \"SNAKE_CASE\"",
+      "@guarantee ok.acronym-word \"HTTP Request\" gives \"HTTP_REQUEST\"",
+      "@guarantee ok.extra-spaces-dropped \"  multiple   spaces  \" gives \"MULTIPLE_SPACES\""
+    ]
+  },
+  {
+    "file": "src/string/deburr.ts",
+    "symbol": "deburr",
+    "tags": [
+      "@guarantee ok.accents-removed \"café\" gives \"cafe\", \"résumé\" gives \"resume\", \"naïve\" gives \"naive\" and \"Zürich\" gives \"Zurich\"",
+      "@guarantee ok.other-languages \"München\" gives \"Munchen\", \"Crème brûlée\" gives \"Creme brulee\" and \"mañana\" gives \"manana\"",
+      "@guarantee ok.non-latin-kept \"한국어\" gives \"한국어\" and \"йогурт\" gives \"йогурт\"",
+      "@guarantee ok.mixed-scripts \"Café Москва 한국어\" gives \"Cafe Москва 한국어\""
+    ]
+  },
+  {
+    "file": "src/string/escape.ts",
+    "symbol": "escape",
+    "tags": [
+      "@guarantee ok.tags-escaped \"<div>Hello World</div>\" gives \"&lt;div&gt;Hello World&lt;/div&gt;\"",
+      "@guarantee ok.ampersand-escaped \"Tom & Jerry\" gives \"Tom &amp; Jerry\"",
+      "@guarantee ok.double-quote-escaped \"\\\"Hello\\\"\" (the word Hello in double quotes) gives \"&quot;Hello&quot;\"",
+      "@guarantee ok.single-quote-escaped the word Hello in single quotes gives the word Hello surrounded by \"&#39;\" on both sides"
+    ]
+  },
+  {
+    "file": "src/string/escapeRegExp.ts",
+    "symbol": "escapeRegExp",
+    "tags": [
+      "@guarantee ok.dot-escaped \"Hello.\" gives \"Hello\" followed by one backslash and a dot",
+      "@guarantee ok.parentheses-escaped \"(test)\" gives \"test\" wrapped in an escaped opening parenthesis and an escaped closing parenthesis, each preceded by one backslash",
+      "@guarantee ok.brackets-escaped \"[abc]\" gives \"abc\" wrapped in an escaped opening bracket and an escaped closing bracket, each preceded by one backslash",
+      "@guarantee ok.at-sign-not-escaped \"user@domain.com\" gives \"user@domain\" followed by one backslash and \".com\""
+    ]
+  },
+  {
+    "file": "src/string/kebabCase.ts",
+    "symbol": "kebabCase",
+    "tags": [
+      "@guarantee ok.camel-to-kebab \"camelCase\" gives \"camel-case\"",
+      "@guarantee ok.whitespace-to-dash \"some whitespace\" gives \"some-whitespace\"",
+      "@guarantee ok.kebab-unchanged \"hyphen-text\" gives \"hyphen-text\"",
+      "@guarantee ok.acronym-split \"HTTPRequest\" gives \"http-request\""
+    ]
+  },
+  {
+    "file": "src/string/lowerCase.ts",
+    "symbol": "lowerCase",
+    "tags": [
+      "@guarantee ok.lower-with-spaces \"Hello World\" gives \"hello world\" and \"camelCase\" gives \"camel case\"",
+      "@guarantee ok.from-other-cases \"some-kebab-case\" gives \"some kebab case\", \"PascalCase\" gives \"pascal case\" and \"SCREAMING_SNAKE_CASE\" gives \"screaming snake case\"",
+      "@guarantee ok.acronym-split \"HTTPSConnection\" gives \"https connection\"",
+      "@guarantee ok.mixed-separators \"user_profile-settings\" gives \"user profile settings\" and \"  mixed   CASE   text  \" gives \"mixed case text\""
+    ]
+  },
+  {
+    "file": "src/string/pad.ts",
+    "symbol": "pad",
+    "tags": [
+      "@guarantee ok.default-chars-space \"abc\" padded to `length` 8 without `chars` gives \"abc\" with two spaces on the left and three spaces on the right",
+      "@guarantee ok.custom-chars \"abc\" padded to `length` 8 with `chars` \"_-\" gives \"_-abc_-_\"",
+      "@guarantee ok.longer-or-equal-unchanged \"abc\" with `length` 3 gives \"abc\" and \"abcdef\" with `length` 3 gives \"abcdef\"",
+      "@guarantee ok.right-gets-extra \"abc\" padded to `length` 9 with `chars` \"123\" gives \"123abc123\" and to `length` 10 gives \"123abc1231\""
+    ]
+  },
+  {
+    "file": "src/string/pascalCase.ts",
+    "symbol": "pascalCase",
+    "tags": [
+      "@guarantee ok.basic \"pascalCase\" gives \"PascalCase\" and \"some whitespace\" gives \"SomeWhitespace\"",
+      "@guarantee ok.hyphen-underscore \"hyphen-text\" gives \"HyphenText\" and \"snake_case\" gives \"SnakeCase\"",
+      "@guarantee ok.consecutive-uppercase \"HTTPRequest\" gives \"HttpRequest\" and \"XMLHttpRequest\" gives \"XmlHttpRequest\"",
+      "@guarantee ok.mixed-separators \"camelCase-with_mixed.separators\" gives \"CamelCaseWithMixedSeparators\"",
+      "@guarantee ok.numbers-and-symbols \"version2.1.0\" gives \"Version210\" and \"user@email.com\" gives \"UserEmailCom\""
+    ]
+  },
+  {
+    "file": "src/string/reverseString.ts",
+    "symbol": "reverseString",
+    "tags": [
+      "@guarantee ok.basic \"hello\" gives \"olleh\", \"world\" gives \"dlrow\" and \"hello world\" gives \"dlrow olleh\"",
+      "@guarantee ok.case-kept \"PascalCase\" gives \"esaClacsaP\"",
+      "@guarantee ok.emoji-intact \"foo 😄 bar\" gives \"rab 😄 oof\"",
+      "@guarantee ok.hangul-and-symbols \"안녕하세요\" gives \"요세하녕안\", \"12345\" gives \"54321\" and \"a-b-c\" gives \"c-b-a\""
+    ]
+  },
+  {
+    "file": "src/string/snakeCase.ts",
+    "symbol": "snakeCase",
+    "tags": [
+      "@guarantee ok.basic \"camelCase\" gives \"camel_case\" and \"some whitespace\" gives \"some_whitespace\"",
+      "@guarantee ok.hyphen-pascal \"hyphen-text\" gives \"hyphen_text\" and \"PascalCase\" gives \"pascal_case\"",
+      "@guarantee ok.consecutive-uppercase \"HTTPRequest\" gives \"http_request\" and \"XMLHttpRequest\" gives \"xml_http_request\"",
+      "@guarantee ok.mixed-separators \"camelCase-with_mixed.separators\" gives \"camel_case_with_mixed_separators\"",
+      "@guarantee ok.numbers-split \"version2.1.0\" gives \"version_2_1_0\" and \"user@email.com\" gives \"user_email_com\""
+    ]
+  },
+  {
+    "file": "src/string/startCase.ts",
+    "symbol": "startCase",
+    "tags": [
+      "@guarantee ok.capitalized-words \"hello world\" gives \"Hello World\" and \"HELLO WORLD\" gives \"Hello World\"",
+      "@guarantee ok.from-camel-pascal \"fooBar\" gives \"Foo Bar\" and \"PascalCase\" gives \"Pascal Case\"",
+      "@guarantee ok.hyphen-underscore \"hello-world\" gives \"Hello World\" and \"hello_world\" gives \"Hello World\"",
+      "@guarantee ok.delimiters-trimmed \"--foo-bar--\" gives \"Foo Bar\" and \"__FOO_BAR__\" gives \"Foo Bar\"",
+      "@guarantee ok.acronym-and-numbers \"XMLHttpRequest\" gives \"Xml Http Request\", \"_abc_123_def\" gives \"Abc 123 Def\" and \"12abc 12ABC\" gives \"12 Abc 12 Abc\"",
+      "@guarantee ok.only-delimiters-empty \"_-_-_-_\" gives \"\""
+    ]
+  },
+  {
+    "file": "src/string/trim.ts",
+    "symbol": "trim",
+    "tags": [
+      "@guarantee ok.default-whitespace \"  hello  \" gives \"hello\" and a tab, newline and spaces around \"hello\" are removed too",
+      "@guarantee ok.single-char \"--hello--\" with `chars` \"-\" gives \"hello\" and \"***hello***\" with `chars` \"*\" gives \"hello\"",
+      "@guarantee ok.array-chars \"!!@@hello@@!!\" with `chars` [\"!\", \"@\"] gives \"hello\" and \"123abc123\" with `chars` [\"1\", \"2\", \"3\"] gives \"abc\"",
+      "@guarantee ok.array-chars-both-ends \"##hello##world##\" with `chars` [\"#\", \"d\"] gives \"hello##worl\"",
+      "@guarantee ok.chars-and-space \"  __hello__  \" with `chars` [\"_\", \" \"] gives \"hello\"",
+      "@guarantee err.multi-char-string throws an error when `chars` is a string whose length is not 1"
+    ]
+  },
+  {
+    "file": "src/string/unescape.ts",
+    "symbol": "unescape",
+    "tags": [
+      "@guarantee ok.tags-restored \"This is a &lt;div&gt; element.\" gives \"This is a <div> element.\"",
+      "@guarantee ok.double-quote-restored \"This is a &quot;quote&quot;\" gives \"This is a \\\"quote\\\"\" (with plain double quotes)",
+      "@guarantee ok.single-quote-restored \"&#39;\" is converted to a plain single quote",
+      "@guarantee ok.ampersand-restored \"This is a &amp; symbol\" gives \"This is a & symbol\"",
+      "@guarantee ok.mixed-entities \"&quot;Hello &amp; Welcome&quot; &lt;says the &gt; user\" gives \"\\\"Hello & Welcome\\\" <says the > user\""
+    ]
+  },
+  {
+    "file": "src/string/upperCase.ts",
+    "symbol": "upperCase",
+    "tags": [
+      "@guarantee ok.upper-with-spaces \"camelCase\" gives \"CAMEL CASE\" and \"some whitespace\" gives \"SOME WHITESPACE\"",
+      "@guarantee ok.kebab \"hyphen-text\" gives \"HYPHEN TEXT\"",
+      "@guarantee ok.acronym-split \"HTTPSRequest\" gives \"HTTPS REQUEST\"",
+      "@guarantee ok.snake-and-email \"user_name\" gives \"USER NAME\" and \"email-address\" gives \"EMAIL ADDRESS\""
+    ]
+  },
+  {
+    "file": "src/string/words.ts",
+    "symbol": "words",
+    "tags": [
+      "@guarantee ok.punctuation-split \"fred, barney, & pebbles\" gives [\"fred\", \"barney\", \"pebbles\"]",
+      "@guarantee ok.camel-acronym-emoji \"camelCaseHTTPRequest🚀\" gives [\"camel\", \"Case\", \"HTTP\", \"Request\", \"🚀\"]",
+      "@guarantee ok.unicode-and-numbers \"Lunedì 18 Set\" gives [\"Lunedì\", \"18\", \"Set\"]",
+      "@guarantee ok.identifier-styles \"getUserProfile\" gives [\"get\", \"User\", \"Profile\"] and \"user_profile_data\" gives [\"user\", \"profile\", \"data\"]",
+      "@guarantee ok.complex \"XMLHttpRequest2.0_parser-v1.2\" gives [\"XML\", \"Http\", \"Request\", \"2\", \"0\", \"parser\", \"v\", \"1\", \"2\"]"
+    ]
+  }
+]

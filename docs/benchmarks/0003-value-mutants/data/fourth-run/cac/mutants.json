@@ -1,0 +1,504 @@
+{
+  "schemaVersion": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "files": {
+    "src/cac.ts": {
+      "sha256": "40ee3eaff1835e294fc90912bf2dd5ebf030d3b0b89e07430949b31f0f77b605"
+    }
+  },
+  "mutants": [
+    {
+      "id": "value-1",
+      "unit": "CAC#help",
+      "file": "src/cac.ts",
+      "line": 118,
+      "column": 31,
+      "endLine": 118,
+      "endColumn": 43,
+      "start": 4583,
+      "end": 4595,
+      "kind": "string",
+      "original": "'-h, --help'",
+      "replacement": "'-h, --help_x'",
+      "description": "`this.globalCommand.option('-h, --help',…`: '-h, --help' → '-h, --help_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 117,
+          "endLine": 122
+        }
+      ]
+    },
+    {
+      "id": "value-2",
+      "unit": "CAC#help",
+      "file": "src/cac.ts",
+      "line": 118,
+      "column": 45,
+      "endLine": 118,
+      "endColumn": 67,
+      "start": 4597,
+      "end": 4619,
+      "kind": "string",
+      "original": "'Display this message'",
+      "replacement": "'Display this message_x'",
+      "description": "`this.globalCommand.option('-h, --help',…`: 'Display this message' → 'Display this message_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 117,
+          "endLine": 122
+        }
+      ]
+    },
+    {
+      "id": "value-3",
+      "unit": "CAC#version",
+      "file": "src/cac.ts",
+      "line": 131,
+      "column": 42,
+      "endLine": 131,
+      "endColumn": 57,
+      "start": 5168,
+      "end": 5183,
+      "kind": "string",
+      "original": "'-v, --version'",
+      "replacement": "'-v, --version_x'",
+      "description": "the default `customFlags` '-v, --version' → '-v, --version_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 131,
+          "endLine": 135
+        }
+      ]
+    },
+    {
+      "id": "value-4",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 219,
+      "column": 24,
+      "endLine": 219,
+      "endColumn": 25,
+      "start": 7513,
+      "end": 7514,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`argv[1]`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-5",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 219,
+      "column": 46,
+      "endLine": 219,
+      "endColumn": 47,
+      "start": 7535,
+      "end": 7536,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`argv[1]`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-6",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 219,
+      "column": 52,
+      "endLine": 219,
+      "endColumn": 57,
+      "start": 7541,
+      "end": 7546,
+      "kind": "string",
+      "original": "'cli'",
+      "replacement": "'cli_x'",
+      "description": "`argv[1] ? getFileName(argv[1]) : 'cli'`: 'cli' → 'cli_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-7",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 226,
+      "column": 42,
+      "endLine": 226,
+      "endColumn": 43,
+      "start": 7693,
+      "end": 7694,
+      "kind": "number",
+      "original": "2",
+      "replacement": "3",
+      "description": "`argv.slice(2)`: 2 → 3",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-8",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 228,
+      "column": 39,
+      "endLine": 228,
+      "endColumn": 40,
+      "start": 7745,
+      "end": 7746,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`parsed.args[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-9",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 233,
+      "column": 35,
+      "endLine": 233,
+      "endColumn": 36,
+      "start": 7904,
+      "end": 7905,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`parsed.args.slice(1)`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-10",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 247,
+      "column": 46,
+      "endLine": 247,
+      "endColumn": 47,
+      "start": 8325,
+      "end": 8326,
+      "kind": "number",
+      "original": "2",
+      "replacement": "3",
+      "description": "`argv.slice(2)`: 2 → 3",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-11",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 249,
+      "column": 46,
+      "endLine": 249,
+      "endColumn": 57,
+      "start": 8429,
+      "end": 8440,
+      "kind": "string",
+      "original": "'command:!'",
+      "replacement": "'command:!_x'",
+      "description": "`new CustomEvent('command:!', { detail: …`: 'command:!' → 'command:!_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-12",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 255,
+      "column": 42,
+      "endLine": 255,
+      "endColumn": 43,
+      "start": 8553,
+      "end": 8554,
+      "kind": "number",
+      "original": "2",
+      "replacement": "3",
+      "description": "`argv.slice(2)`: 2 → 3",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-13",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 281,
+      "column": 43,
+      "endLine": 281,
+      "endColumn": 44,
+      "start": 9095,
+      "end": 9096,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`this.args[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-14",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 282,
+      "column": 42,
+      "endLine": 282,
+      "endColumn": 53,
+      "start": 9142,
+      "end": 9153,
+      "kind": "string",
+      "original": "'command:*'",
+      "replacement": "'command:*_x'",
+      "description": "`new CustomEvent('command:*', { detail: …`: 'command:*' → 'command:*_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-15",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 282,
+      "column": 75,
+      "endLine": 282,
+      "endColumn": 76,
+      "start": 9175,
+      "end": 9176,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`this.args[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        }
+      ]
+    },
+    {
+      "id": "value-16",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 301,
+      "column": 44,
+      "endLine": 301,
+      "endColumn": 48,
+      "start": 9655,
+      "end": 9659,
+      "kind": "string",
+      "original": "'--'",
+      "replacement": "'--_x'",
+      "description": "`argv.indexOf('--')`: '--' → '--_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
+    },
+    {
+      "id": "value-17",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 302,
+      "column": 32,
+      "endLine": 302,
+      "endColumn": 33,
+      "start": 9692,
+      "end": 9693,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`doubleDashesIndex !== -1`: -1 → -2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
+    },
+    {
+      "id": "value-18",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 303,
+      "column": 62,
+      "endLine": 303,
+      "endColumn": 63,
+      "start": 9758,
+      "end": 9759,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`doubleDashesIndex + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
+    },
+    {
+      "id": "value-19",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 304,
+      "column": 25,
+      "endLine": 304,
+      "endColumn": 26,
+      "start": 9785,
+      "end": 9786,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`argv.slice(0, doubleDashesIndex)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
+    },
+    {
+      "id": "value-20",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 347,
+      "column": 78,
+      "endLine": 347,
+      "endColumn": 79,
+      "start": 11007,
+      "end": 11008,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`cliOption.config.type[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
+    },
+    {
+      "id": "value-21",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 353,
+      "column": 19,
+      "endLine": 353,
+      "endColumn": 22,
+      "start": 11160,
+      "end": 11163,
+      "kind": "string",
+      "original": "'_'",
+      "replacement": "'__x'",
+      "description": "`key !== '_'`: '_' → '__x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "_"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
+    },
+    {
+      "id": "value-22",
+      "unit": "CAC#parse",
+      "file": "src/cac.ts",
+      "line": 354,
+      "column": 32,
+      "endLine": 354,
+      "endColumn": 35,
+      "start": 11198,
+      "end": 11201,
+      "kind": "string",
+      "original": "'.'",
+      "replacement": "'._x'",
+      "description": "`key.split('.')`: '.' → '._x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
+    }
+  ]
+}

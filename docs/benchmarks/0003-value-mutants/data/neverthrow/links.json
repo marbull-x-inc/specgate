@@ -1,0 +1,177 @@
+[
+  {
+    "file": "tests/index.test.ts",
+    "line": 21,
+    "title": "Creates an Ok value",
+    "key": "ok.ok.is-ok-true",
+    "reason": "isOk"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 29,
+    "title": "Creates an Ok value with null",
+    "key": "ok.ok.constructs-ok",
+    "reason": "first"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 37,
+    "title": "Creates an Ok value with undefined",
+    "key": "ok.ok.constructs-ok",
+    "reason": "first"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 45,
+    "title": "Is comparable",
+    "key": "ok.ok.constructs-ok",
+    "reason": "first"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 50,
+    "title": "Maps over an Ok value",
+    "key": "Ok#map.ok.applies-callback",
+    "reason": "map"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 61,
+    "title": "Skips `mapErr`",
+    "key": "Ok#mapErr.ok.leaves-ok",
+    "reason": "mapErr"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 71,
+    "title": "Maps to an Ok",
+    "key": "Ok#andThen.ok.chains-results",
+    "reason": "andThen"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 85,
+    "title": "Maps to an Err",
+    "key": "Ok#andThen.ok.chain-examples",
+    "reason": "andThen err"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 106,
+    "title": "Calls the passed function but returns an original ok",
+    "key": "Ok#andThrough.ok.passes-error-along",
+    "reason": "andThrough only guarantee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 116,
+    "title": "Maps to an Err",
+    "key": "Ok#andThen.ok.chain-examples",
+    "reason": "body calls andThen"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 138,
+    "title": "Calls the passed function but returns an original ok",
+    "key": "Ok#andTee.ok.passes-through",
+    "reason": "andTee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 148,
+    "title": "returns an original ok even when the passed function fails",
+    "key": "Ok#andTee.ok.passes-through",
+    "reason": "andTee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 163,
+    "title": "Calls the passed function but returns an original err",
+    "key": "Err#orTee.ok.passes-through",
+    "reason": "orTee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 173,
+    "title": "returns an original err even when the passed function fails",
+    "key": "Err#orTee.ok.passes-through",
+    "reason": "orTee"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 231,
+    "title": "unwrapOr and return the Ok value",
+    "key": "Ok#unwrapOr.ok.unwraps-value",
+    "reason": "unwrapOr"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 280,
+    "title": "Matches on an Ok",
+    "key": "Ok#match.ok.runs-ok-callback",
+    "reason": "match"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 297,
+    "title": "Can read the value after narrowing",
+    "key": "Ok#isErr.ok.false-for-ok",
+    "reason": "isErr on ok"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 310,
+    "title": "Creates an Err value",
+    "key": "err.ok.is-err-true",
+    "reason": "isErr"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 318,
+    "title": "Is comparable",
+    "key": "err.ok.constructs-err",
+    "reason": "compare"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 323,
+    "title": "Skips `map`",
+    "key": "Err#map.ok.leaves-err",
+    "reason": "map"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 335,
+    "title": "Maps over an Err",
+    "key": "Err#mapErr.ok.applies-callback",
+    "reason": "mapErr"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 347,
+    "title": "unwrapOr and return the default value",
+    "key": "Err#unwrapOr.ok.returns-default",
+    "reason": "unwrapOr"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 352,
+    "title": "Skips over andThen",
+    "key": "Err#andThen.ok.keeps-err",
+    "reason": "andThen"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 442,
+    "title": "Matches on an Err",
+    "key": "Err#match.ok.runs-err-callback",
+    "reason": "match"
+  },
+  {
+    "file": "tests/index.test.ts",
+    "line": 468,
+    "title": "invokes the orElse callback on an Err value",
+    "key": "Err#orElse.ok.recovers",
+    "reason": "orElse"
+  }
+]

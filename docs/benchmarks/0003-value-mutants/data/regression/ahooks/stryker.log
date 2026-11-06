@@ -1,0 +1,51 @@
+[32m08:02:21 (28211) INFO ProjectReader[39m Found 3 of 583 file(s) to be mutated.
+Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[32m08:02:21 (28211) INFO Instrumenter[39m Instrumented 3 source file(s) with 53 mutant(s)
+[32m08:02:21 (28211) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m08:02:22 (28211) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m08:02:25 (28211) INFO DryRunExecutor[39m Initial test run succeeded. Ran 8 tests in 2 seconds (net 48.51949999999988 ms, overhead 2866.4805 ms).
+
+All tests
+  useBoolean/__tests__/index.spec.ts
+    ✓ useBoolean useBoolean.ok.actions test on methods [line 8] (killed 22)
+    ~ useBoolean useBoolean.ok.default test on default value [line 47] (covered 20)
+  useCounter/__tests__/index.spec.ts
+    ✓ useCounter useCounter.ok.initial should init counter [line 9] (killed 5)
+    ✓ useCounter useCounter.ok.bounds should max, min, actions work [line 15] (killed 20)
+  useHover/__tests__/index.spec.tsx
+    ✓ useHover should work [line 6] (killed 2)
+  useToggle/__tests__/index.spec.ts
+    ~ useToggle useToggle.ok.default test on init [line 12] (covered 9)
+    ~ useToggle useToggle.ok.left-right test on methods [line 17] (covered 13)
+    ~ useToggle useToggle.ok.toggle test on optional [line 32] (covered 13)
+
+[Survived] ArrayDeclaration
+src/useBoolean/index.ts:27:6
+-     }, []);
++     }, ["Stryker was here"]);
+Tests ran:
+    useBoolean useBoolean.ok.actions test on methods
+    useBoolean useBoolean.ok.default test on default value
+    useHover should work
+
+
+Ran 1.04 tests per mutant on average.
+------------|------------------|----------|-----------|------------|----------|----------|
+            | % Mutation score |          |           |            |          |          |
+File        |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+------------|--------|---------|----------|-----------|------------|----------|----------|
+All files   |  98.11 |   98.11 |       49 |         3 |          1 |        0 |        0 |
+ useBoolean |  93.33 |   93.33 |       14 |         0 |          1 |        0 |        0 |
+  index.ts  |  93.33 |   93.33 |       14 |         0 |          1 |        0 |        0 |
+ useCounter | 100.00 |  100.00 |       25 |         0 |          0 |        0 |        0 |
+  index.ts  | 100.00 |  100.00 |       25 |         0 |          0 |        0 |        0 |
+ useToggle  | 100.00 |  100.00 |       10 |         3 |          0 |        0 |        0 |
+  index.ts  | 100.00 |  100.00 |       10 |         3 |          0 |        0 |        0 |
+------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m08:03:06 (28211) INFO JsonReporter[39m Your report can be found at: file://<work-0001>/ahooks/packages/hooks/reports/mutation/mutation.json
+[32m08:03:06 (28211) INFO MutationTestExecutor[39m Done in 45 seconds.
+real 47.45
+user 74.89
+sys 31.89

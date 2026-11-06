@@ -1,0 +1,28 @@
+{
+  "files": ["src/result.ts"],
+  "operations": [
+    "ok",
+    "err",
+    "Ok#isOk",
+    "Ok#isErr",
+    "Err#isOk",
+    "Err#isErr",
+    "Ok#map",
+    "Err#map",
+    "Ok#mapErr",
+    "Err#mapErr",
+    "Ok#unwrapOr",
+    "Err#unwrapOr",
+    "Ok#andThen",
+    "Err#andThen",
+    "Err#orElse",
+    "Ok#match",
+    "Err#match",
+    "Ok#andTee",
+    "Err#orTee",
+    "Ok#andThrough"
+  ],
+  "docs": ["README.md"],
+  "group": "Synchronous API (`Result`)",
+  "why": "The README's Synchronous API section documents ok, err and the Result methods; the methods are declared on the Ok and Err classes in src/result.ts, so each documented method is mapped to the variant whose behaviour the docs state."
+}

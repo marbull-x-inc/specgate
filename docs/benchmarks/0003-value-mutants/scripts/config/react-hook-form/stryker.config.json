@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "jest",
+  "coverageAnalysis": "perTest",
+  "mutate": [
+    "src/useForm.ts",
+    "src/useFieldArray.ts",
+    "src/useWatch.ts",
+    "src/useController.ts",
+    "src/useFormContext.tsx"
+  ],
+  "reporters": ["json"],
+  "jsonReporter": {
+    "fileName": "reports/mutation/mutation.json"
+  },
+  "tempDirName": ".stryker-tmp",
+  "plugins": ["@stryker-mutator/jest-runner"],
+  "jest": {
+    "configFile": "jest.stryker.config.js",
+    "config": {
+      "watchman": false
+    }
+  }
+}

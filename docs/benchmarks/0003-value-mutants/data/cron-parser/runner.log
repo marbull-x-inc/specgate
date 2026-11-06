@@ -1,0 +1,27 @@
+baseline run 1948 ms; whole-suite timeout 7922 ms alone
+value-5 Killed     src/CronExpression.ts:113 `reverse ? values.length - 1 : 0`: 0 → 1
+value-14 Killed     src/CronExpression.ts:531 `currentDate.setMilliseconds(0)`: 0 → 1
+value-8 Killed     src/CronExpression.ts:300 `i` 0 → 1
+value-6 Survived   src/CronExpression.ts:129 `currentDate.getMonth() + 1`: 1 → 2
+value-9 Killed     src/CronExpression.ts:308 `i` 0 → 1
+value-13 Survived   src/CronExpression.ts:530 `currentDate.getMilliseconds() > 0`: 0 → 1
+value-3 Survived   src/CronExpression.ts:28 `LOOP_LIMIT` 10000 → 10001
+value-4 Survived   src/CronExpression.ts:113 `values.length - 1`: 1 → 2
+value-1 Survived   src/CronExpression.ts:18 `TIME_SPAN_OUT_OF_BOUNDS_ERROR_MESSAGE` 'Out of the time span range' → 'Out of the time span range_x'
+value-2 Survived   src/CronExpression.ts:23 `LOOPS_LIMIT_EXCEEDED_ERROR_MESSAGE` 'Invalid expression, loop limit exceeded' → 'Invalid expression, loop limit exceeded_x'
+value-7 Survived   src/CronExpression.ts:299 `limit >= 0`: 0 → 1
+value-12 Killed     src/CronExpression.ts:482 `i` 0 → 1
+value-11 Survived   src/CronExpression.ts:449 `(skipped + 1) % 24`: 24 → 25
+value-15 Survived   src/CronExpression.ts:537 `stepCount` 0 → 1
+value-18 Killed     src/CronExpressionParser.ts:121 `rawFields.dayOfWeek === '*'`: '*' → '*_x'
+value-17 Survived   src/CronExpressionParser.ts:121 `rawFields.dayOfMonth === '*'`: '*' → '*_x'
+value-16 Killed     src/CronExpression.ts:541 `currentDate.getMonth() + 1`: 1 → 2
+value-19 Killed     src/CronFileParser.ts:24 `readFile(filePath, 'utf8')`: 'utf8' → 'utf8_x'
+value-20 Killed     src/CronFileParser.ts:38 `readFileSync(filePath, 'utf8')`: 'utf8' → 'utf8_x'
+value-10 Timeout    src/CronExpression.ts:449 `skipped + 1`: 1 → 2
+value-10 Timeout    (rerun alone) src/CronExpression.ts:449
+value-mutants: 20 mutant(s): 10 Survived, 9 Killed, 1 Timeout; 25088 ms (baseline run 1948 ms)
+wrote <work>/cron-parser/reports/value/value.json
+real 25.18
+user 62.23
+sys 15.13

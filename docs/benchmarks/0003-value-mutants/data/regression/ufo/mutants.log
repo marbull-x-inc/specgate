@@ -1,0 +1,5 @@
+mutants: 25 value change(s) in 2 file(s) (14 string, 11 number)
+wrote <work-0001>/ufo/.specgate/mutants.json
+real 0.54
+user 1.48
+sys 0.08

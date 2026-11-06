@@ -1,0 +1,1176 @@
+{
+  "schemaVersion": "2",
+  "thresholds": {
+    "high": 80,
+    "low": 60
+  },
+  "projectRoot": "<work-0001>/mantine-hooks",
+  "files": {
+    "packages/@mantine/hooks/src/use-counter/use-counter.ts": {
+      "language": "typescript",
+      "source": "import { useCallback, useState } from 'react';\nimport { clamp } from '../utils';\n\nconst DEFAULT_OPTIONS = {\n  min: -Infinity,\n  max: Infinity,\n};\n\nexport interface UseCounterOptions {\n  min?: number;\n  max?: number;\n  step?: number;\n}\n\nexport interface UseCounterHandlers {\n  increment: () => void;\n  decrement: () => void;\n  set: (value: number) => void;\n  reset: () => void;\n}\n\nexport type UseCounterReturnValue = [number, UseCounterHandlers];\n\n/**\n * @guarantee ok.initial the value starts at `initialValue`, 0 when it is not given\n * @guarantee ok.increment `increment` adds `step` to the value, `decrement` subtracts it\n * @guarantee ok.bounds the value never goes above `max` or below `min`\n * @guarantee ok.set `set` sets the value to the given number, within `min` and `max`\n * @guarantee ok.reset `reset` sets the value back to `initialValue`\n */\nexport function useCounter(initialValue = 0, options?: UseCounterOptions): UseCounterReturnValue {\n  const { min, max, step: _step = 1 } = { ...DEFAULT_OPTIONS, ...options };\n  const step = Math.abs(_step);\n  const [count, setCount] = useState<number>(clamp(initialValue, min, max));\n\n  const increment = useCallback(\n    () => setCount((current) => clamp(current + step, min, max)),\n    [min, max, step]\n  );\n\n  const decrement = useCallback(\n    () => setCount((current) => clamp(current - step, min, max)),\n    [min, max, step]\n  );\n\n  const set = useCallback((value: number) => setCount(clamp(value, min, max)), [min, max]);\n\n  const reset = useCallback(\n    () => setCount(clamp(initialValue, min, max)),\n    [initialValue, min, max]\n  );\n\n  return [count, { increment, decrement, set, reset }];\n}\n\nexport namespace useCounter {\n  export type Options = UseCounterOptions;\n  export type Handlers = UseCounterHandlers;\n  export type ReturnValue = UseCounterReturnValue;\n}\n",
+      "mutants": [
+        {
+          "id": "value-1",
+          "mutatorName": "Value",
+          "replacement": "`min: -Infinity` removed from `DEFAULT_OPTIONS`",
+          "description": "`min: -Infinity` removed from `DEFAULT_OPTIONS`",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3
+            },
+            "end": {
+              "line": 6,
+              "column": 3
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29"
+          ],
+          "duration": 14253
+        },
+        {
+          "id": "value-2",
+          "mutatorName": "Value",
+          "replacement": "`max: Infinity` removed from `DEFAULT_OPTIONS`",
+          "description": "`max: Infinity` removed from `DEFAULT_OPTIONS`",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 17
+            },
+            "end": {
+              "line": 6,
+              "column": 16
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29"
+          ],
+          "duration": 2378
+        },
+        {
+          "id": "value-3",
+          "mutatorName": "Value",
+          "replacement": "the default `initialValue` 0 → 1",
+          "description": "the default `initialValue` 0 → 1",
+          "location": {
+            "start": {
+              "line": 31,
+              "column": 43
+            },
+            "end": {
+              "line": 31,
+              "column": 44
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29"
+          ],
+          "duration": 2563
+        },
+        {
+          "id": "value-4",
+          "mutatorName": "Value",
+          "replacement": "the default `_step` 1 → 2",
+          "description": "the default `_step` 1 → 2",
+          "location": {
+            "start": {
+              "line": 32,
+              "column": 35
+            },
+            "end": {
+              "line": 32,
+              "column": 36
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29"
+          ],
+          "duration": 2610
+        }
+      ]
+    },
+    "packages/@mantine/hooks/src/use-os/use-os.ts": {
+      "language": "typescript",
+      "source": "import { useState } from 'react';\nimport { useIsomorphicEffect } from '../use-isomorphic-effect/use-isomorphic-effect';\n\nexport type UseOSReturnValue =\n  | 'undetermined'\n  | 'macos'\n  | 'ios'\n  | 'windows'\n  | 'android'\n  | 'linux'\n  | 'chromeos';\n\nfunction isMacOS(userAgent: string): boolean {\n  const macosPattern = /(Macintosh)|(MacIntel)|(MacPPC)|(Mac68K)/i;\n\n  return macosPattern.test(userAgent);\n}\n\nfunction isIOS(userAgent: string): boolean {\n  const iosPattern = /(iPhone)|(iPad)|(iPod)/i;\n\n  return iosPattern.test(userAgent);\n}\n\nfunction isWindows(userAgent: string): boolean {\n  const windowsPattern = /(Win32)|(Win64)|(Windows)|(WinCE)/i;\n\n  return windowsPattern.test(userAgent);\n}\n\nfunction isAndroid(userAgent: string): boolean {\n  const androidPattern = /Android/i;\n\n  return androidPattern.test(userAgent);\n}\n\nfunction isLinux(userAgent: string): boolean {\n  const linuxPattern = /Linux/i;\n\n  return linuxPattern.test(userAgent);\n}\n\nfunction isChromeOS(userAgent: string): boolean {\n  const chromePattern = /CrOS/i;\n  return chromePattern.test(userAgent);\n}\n\nfunction getOS(): UseOSReturnValue {\n  if (typeof window === 'undefined') {\n    return 'undetermined';\n  }\n\n  const { userAgent } = window.navigator;\n\n  if (isIOS(userAgent) || (isMacOS(userAgent) && 'ontouchend' in document)) {\n    return 'ios';\n  }\n  if (isMacOS(userAgent)) {\n    return 'macos';\n  }\n  if (isWindows(userAgent)) {\n    return 'windows';\n  }\n  if (isAndroid(userAgent)) {\n    return 'android';\n  }\n  if (isChromeOS(userAgent)) {\n    return 'chromeos';\n  }\n  if (isLinux(userAgent)) {\n    return 'linux';\n  }\n\n  return 'undetermined';\n}\n\nexport interface UseOsOptions {\n  getValueInEffect: boolean;\n}\n\n/**\n * @guarantee ok.values returns one of \"undetermined\", \"macos\", \"ios\", \"windows\", \"android\", \"linux\" and \"chromeos\", according to the user agent\n * @guarantee ok.undetermined returns \"undetermined\" when the OS cannot be identified, for example during server-side rendering\n */\nexport function useOs(options: UseOsOptions = { getValueInEffect: true }): UseOSReturnValue {\n  const [value, setValue] = useState<UseOSReturnValue>(\n    options.getValueInEffect ? 'undetermined' : getOS()\n  );\n\n  useIsomorphicEffect(() => {\n    if (options.getValueInEffect) {\n      setValue(getOS);\n    }\n  }, []);\n\n  return value;\n}\n\nexport namespace useOs {\n  export type Options = UseOsOptions;\n  export type ReturnValue = UseOSReturnValue;\n}\n",
+      "mutants": [
+        {
+          "id": "value-5",
+          "mutatorName": "Value",
+          "replacement": "`return 'undetermined';`: 'undetermined' → 'undetermined_x'",
+          "description": "`return 'undetermined';`: 'undetermined' → 'undetermined_x'",
+          "location": {
+            "start": {
+              "line": 50,
+              "column": 12
+            },
+            "end": {
+              "line": 50,
+              "column": 26
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 5
+        },
+        {
+          "id": "value-6",
+          "mutatorName": "Value",
+          "replacement": "`return 'ios';`: 'ios' → 'ios_x'",
+          "description": "`return 'ios';`: 'ios' → 'ios_x'",
+          "location": {
+            "start": {
+              "line": 56,
+              "column": 12
+            },
+            "end": {
+              "line": 56,
+              "column": 17
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 5
+        },
+        {
+          "id": "value-7",
+          "mutatorName": "Value",
+          "replacement": "`return 'macos';`: 'macos' → 'macos_x'",
+          "description": "`return 'macos';`: 'macos' → 'macos_x'",
+          "location": {
+            "start": {
+              "line": 59,
+              "column": 12
+            },
+            "end": {
+              "line": 59,
+              "column": 19
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 5
+        },
+        {
+          "id": "value-8",
+          "mutatorName": "Value",
+          "replacement": "`return 'windows';`: 'windows' → 'windows_x'",
+          "description": "`return 'windows';`: 'windows' → 'windows_x'",
+          "location": {
+            "start": {
+              "line": 62,
+              "column": 12
+            },
+            "end": {
+              "line": 62,
+              "column": 21
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 5
+        },
+        {
+          "id": "value-9",
+          "mutatorName": "Value",
+          "replacement": "`return 'android';`: 'android' → 'android_x'",
+          "description": "`return 'android';`: 'android' → 'android_x'",
+          "location": {
+            "start": {
+              "line": 65,
+              "column": 12
+            },
+            "end": {
+              "line": 65,
+              "column": 21
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 5
+        },
+        {
+          "id": "value-10",
+          "mutatorName": "Value",
+          "replacement": "`return 'chromeos';`: 'chromeos' → 'chromeos_x'",
+          "description": "`return 'chromeos';`: 'chromeos' → 'chromeos_x'",
+          "location": {
+            "start": {
+              "line": 68,
+              "column": 12
+            },
+            "end": {
+              "line": 68,
+              "column": 22
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 5
+        },
+        {
+          "id": "value-11",
+          "mutatorName": "Value",
+          "replacement": "`return 'linux';`: 'linux' → 'linux_x'",
+          "description": "`return 'linux';`: 'linux' → 'linux_x'",
+          "location": {
+            "start": {
+              "line": 71,
+              "column": 12
+            },
+            "end": {
+              "line": 71,
+              "column": 19
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 5
+        },
+        {
+          "id": "value-12",
+          "mutatorName": "Value",
+          "replacement": "`return 'undetermined';`: 'undetermined' → 'undetermined_x'",
+          "description": "`return 'undetermined';`: 'undetermined' → 'undetermined_x'",
+          "location": {
+            "start": {
+              "line": 74,
+              "column": 10
+            },
+            "end": {
+              "line": 74,
+              "column": 24
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 5
+        },
+        {
+          "id": "value-13",
+          "mutatorName": "Value",
+          "replacement": "`options.getValueInEffect ? 'undetermine…`: 'undetermined' → 'undetermined_x'",
+          "description": "`options.getValueInEffect ? 'undetermine…`: 'undetermined' → 'undetermined_x'",
+          "location": {
+            "start": {
+              "line": 87,
+              "column": 32
+            },
+            "end": {
+              "line": 87,
+              "column": 46
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 5
+        }
+      ]
+    },
+    "packages/@mantine/hooks/src/use-pagination/use-pagination.ts": {
+      "language": "typescript",
+      "source": "import { useCallback, useMemo } from 'react';\nimport { useUncontrolled } from '../use-uncontrolled/use-uncontrolled';\n\nfunction range(start: number, end: number) {\n  const length = end - start + 1;\n  return Array.from({ length }, (_, index) => index + start);\n}\n\nexport const DOTS = 'dots';\n\nexport interface UsePaginationOptions {\n  /** Page selected on initial render, defaults to 1 or startValue if provided */\n  initialPage?: number;\n\n  /** Controlled active page number */\n  page?: number;\n\n  /** Total amount of pages */\n  total: number;\n\n  /** Siblings amount on left/right side of selected page, defaults to 1 */\n  siblings?: number;\n\n  /** Amount of elements visible on left/right edges, defaults to 1  */\n  boundaries?: number;\n\n  /** Callback fired after change of each page */\n  onChange?: (page: number) => void;\n\n  /** Starting page number, defaults to 1 */\n  startValue?: number;\n}\n\nexport interface UsePaginationReturnValue {\n  /** Array of page numbers and dots */\n  range: (number | 'dots')[];\n\n  /** Active page number */\n  active: number;\n\n  /** Function to set active page */\n  setPage: (page: number) => void;\n\n  /** Function to go to next page */\n  next: () => void;\n\n  /** Function to go to previous page */\n  previous: () => void;\n\n  /** Function to go to first page */\n  first: () => void;\n\n  /** Function to go to last page */\n  last: () => void;\n}\n\n/**\n * @guarantee ok.range with total 10 and page 1, range is [1, 2, 3, 4, 5, \"dots\", 10]; on page 5 it is [1, \"dots\", 4, 5, 6, \"dots\", 10]; on page 6 [1, \"dots\", 5, 6, 7, \"dots\", 10]; on page 10 [1, \"dots\", 6, 7, 8, 9, 10]\n * @guarantee ok.defaults `siblings` and `boundaries` default to 1, and the first page defaults to 1 or `startValue`\n * @guarantee ok.navigation `next`, `previous`, `first` and `last` move the active page to the next, previous, first and last page\n * @guarantee ok.controlled with `page` and `onChange`, `setPage` calls `onChange` with the page and the active page follows `page`\n * @guarantee ok.siblings `siblings` sets how many pages are shown on each side of the active page\n * @guarantee ok.boundaries `boundaries` sets how many pages are shown at each edge\n * @guarantee ok.start-value with `startValue` 5 and `total` 15, the pages range from 5 to 15\n */\nexport function usePagination({\n  total,\n  siblings = 1,\n  boundaries = 1,\n  page,\n  initialPage,\n  onChange,\n  startValue = 1,\n}: UsePaginationOptions): UsePaginationReturnValue {\n  const _startValue = Math.max(Math.trunc(startValue), 1);\n  const _endValue = Math.max(Math.trunc(total), _startValue);\n  const _total = _endValue - _startValue + 1;\n  const _initialPage = initialPage ?? _startValue;\n\n  const [activePage, setActivePage] = useUncontrolled({\n    value: page,\n    onChange,\n    defaultValue: _initialPage,\n    finalValue: _initialPage,\n  });\n\n  const setPage = useCallback(\n    (pageNumber: number) => {\n      if (pageNumber < _startValue) {\n        setActivePage(_startValue);\n      } else if (pageNumber > _endValue) {\n        setActivePage(_endValue);\n      } else {\n        setActivePage(pageNumber);\n      }\n    },\n    [_startValue, _endValue, setActivePage]\n  );\n\n  const next = useCallback(() => setPage(activePage + 1), [activePage, setPage]);\n  const previous = useCallback(() => setPage(activePage - 1), [activePage, setPage]);\n  const first = useCallback(() => setPage(_startValue), [setPage, _startValue]);\n  const last = useCallback(() => setPage(_endValue), [_endValue, setPage]);\n\n  const paginationRange = useMemo((): (number | 'dots')[] => {\n    const totalPageNumbers = siblings * 2 + 3 + boundaries * 2;\n    if (totalPageNumbers >= _total) {\n      return range(_startValue, _endValue);\n    }\n\n    const leftSiblingIndex = Math.max(activePage - siblings, _startValue + boundaries - 1);\n    const rightSiblingIndex = Math.min(activePage + siblings, _endValue - boundaries);\n\n    const shouldShowLeftDots = leftSiblingIndex > _startValue + boundaries + 1;\n    const shouldShowRightDots = rightSiblingIndex < _endValue - (boundaries + 1);\n\n    if (!shouldShowLeftDots && shouldShowRightDots) {\n      const leftItemCount = siblings * 2 + boundaries + 2;\n      return [\n        ...range(_startValue, _startValue + leftItemCount - 1),\n        DOTS,\n        ...range(_endValue - (boundaries - 1), _endValue),\n      ];\n    }\n\n    if (shouldShowLeftDots && !shouldShowRightDots) {\n      const rightItemCount = boundaries + 1 + 2 * siblings;\n      return [\n        ...range(_startValue, _startValue + boundaries - 1),\n        DOTS,\n        ...range(_endValue - rightItemCount, _endValue),\n      ];\n    }\n\n    return [\n      ...range(_startValue, _startValue + boundaries - 1),\n      DOTS,\n      ...range(leftSiblingIndex, rightSiblingIndex),\n      DOTS,\n      ...range(_endValue - boundaries + 1, _endValue),\n    ];\n  }, [_total, siblings, activePage, _startValue, _endValue, boundaries]);\n\n  return {\n    range: paginationRange,\n    active: activePage,\n    setPage,\n    next,\n    previous,\n    first,\n    last,\n  };\n}\n\nexport namespace usePagination {\n  export type Options = UsePaginationOptions;\n  export type ReturnValue = UsePaginationReturnValue;\n}\n",
+      "mutants": [
+        {
+          "id": "value-14",
+          "mutatorName": "Value",
+          "replacement": "`end - start + 1`: 1 → 2",
+          "description": "`end - start + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 32
+            },
+            "end": {
+              "line": 5,
+              "column": 33
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "duration": 12070
+        },
+        {
+          "id": "value-15",
+          "mutatorName": "Value",
+          "replacement": "`DOTS` 'dots' → 'dots_x'",
+          "description": "`DOTS` 'dots' → 'dots_x'",
+          "location": {
+            "start": {
+              "line": 9,
+              "column": 21
+            },
+            "end": {
+              "line": 9,
+              "column": 27
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 2668
+        },
+        {
+          "id": "value-16",
+          "mutatorName": "Value",
+          "replacement": "the default `siblings` 1 → 2",
+          "description": "the default `siblings` 1 → 2",
+          "location": {
+            "start": {
+              "line": 68,
+              "column": 14
+            },
+            "end": {
+              "line": 68,
+              "column": 15
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 2633
+        },
+        {
+          "id": "value-17",
+          "mutatorName": "Value",
+          "replacement": "the default `boundaries` 1 → 2",
+          "description": "the default `boundaries` 1 → 2",
+          "location": {
+            "start": {
+              "line": 69,
+              "column": 16
+            },
+            "end": {
+              "line": 69,
+              "column": 17
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 34885
+        },
+        {
+          "id": "value-18",
+          "mutatorName": "Value",
+          "replacement": "the default `startValue` 1 → 2",
+          "description": "the default `startValue` 1 → 2",
+          "location": {
+            "start": {
+              "line": 73,
+              "column": 16
+            },
+            "end": {
+              "line": 73,
+              "column": 17
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 2453
+        },
+        {
+          "id": "value-19",
+          "mutatorName": "Value",
+          "replacement": "`Math.max(Math.trunc(startValue), 1)`: 1 → 2",
+          "description": "`Math.max(Math.trunc(startValue), 1)`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 75,
+              "column": 56
+            },
+            "end": {
+              "line": 75,
+              "column": 57
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "duration": 2482
+        },
+        {
+          "id": "value-20",
+          "mutatorName": "Value",
+          "replacement": "`_endValue - _startValue + 1`: 1 → 2",
+          "description": "`_endValue - _startValue + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 77,
+              "column": 44
+            },
+            "end": {
+              "line": 77,
+              "column": 45
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "duration": 2462
+        },
+        {
+          "id": "value-21",
+          "mutatorName": "Value",
+          "replacement": "`activePage + 1`: 1 → 2",
+          "description": "`activePage + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 100,
+              "column": 55
+            },
+            "end": {
+              "line": 100,
+              "column": 56
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "2",
+            "4",
+            "5"
+          ],
+          "duration": 2525
+        },
+        {
+          "id": "value-22",
+          "mutatorName": "Value",
+          "replacement": "`activePage - 1`: 1 → 2",
+          "description": "`activePage - 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 101,
+              "column": 59
+            },
+            "end": {
+              "line": 101,
+              "column": 60
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 0
+        },
+        {
+          "id": "value-23",
+          "mutatorName": "Value",
+          "replacement": "`siblings * 2`: 2 → 3",
+          "description": "`siblings * 2`: 2 → 3",
+          "location": {
+            "start": {
+              "line": 106,
+              "column": 41
+            },
+            "end": {
+              "line": 106,
+              "column": 42
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "duration": 3116
+        },
+        {
+          "id": "value-24",
+          "mutatorName": "Value",
+          "replacement": "`siblings * 2 + 3`: 3 → 4",
+          "description": "`siblings * 2 + 3`: 3 → 4",
+          "location": {
+            "start": {
+              "line": 106,
+              "column": 45
+            },
+            "end": {
+              "line": 106,
+              "column": 46
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "duration": 2678
+        },
+        {
+          "id": "value-25",
+          "mutatorName": "Value",
+          "replacement": "`boundaries * 2`: 2 → 3",
+          "description": "`boundaries * 2`: 2 → 3",
+          "location": {
+            "start": {
+              "line": 106,
+              "column": 62
+            },
+            "end": {
+              "line": 106,
+              "column": 63
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "duration": 2573
+        },
+        {
+          "id": "value-26",
+          "mutatorName": "Value",
+          "replacement": "`_startValue + boundaries - 1`: 1 → 2",
+          "description": "`_startValue + boundaries - 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 111,
+              "column": 89
+            },
+            "end": {
+              "line": 111,
+              "column": 90
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10"
+          ],
+          "duration": 27671
+        },
+        {
+          "id": "value-27",
+          "mutatorName": "Value",
+          "replacement": "`_startValue + boundaries + 1`: 1 → 2",
+          "description": "`_startValue + boundaries + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 114,
+              "column": 78
+            },
+            "end": {
+              "line": 114,
+              "column": 79
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10"
+          ],
+          "duration": 2621
+        },
+        {
+          "id": "value-28",
+          "mutatorName": "Value",
+          "replacement": "`boundaries + 1`: 1 → 2",
+          "description": "`boundaries + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 115,
+              "column": 79
+            },
+            "end": {
+              "line": 115,
+              "column": 80
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "10"
+          ],
+          "duration": 26462
+        },
+        {
+          "id": "value-29",
+          "mutatorName": "Value",
+          "replacement": "`siblings * 2`: 2 → 3",
+          "description": "`siblings * 2`: 2 → 3",
+          "location": {
+            "start": {
+              "line": 118,
+              "column": 40
+            },
+            "end": {
+              "line": 118,
+              "column": 41
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "8",
+            "10"
+          ],
+          "duration": 25588
+        },
+        {
+          "id": "value-30",
+          "mutatorName": "Value",
+          "replacement": "`siblings * 2 + boundaries + 2`: 2 → 3",
+          "description": "`siblings * 2 + boundaries + 2`: 2 → 3",
+          "location": {
+            "start": {
+              "line": 118,
+              "column": 57
+            },
+            "end": {
+              "line": 118,
+              "column": 58
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "8",
+            "10"
+          ],
+          "duration": 25669
+        },
+        {
+          "id": "value-31",
+          "mutatorName": "Value",
+          "replacement": "`_startValue + leftItemCount - 1`: 1 → 2",
+          "description": "`_startValue + leftItemCount - 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 120,
+              "column": 61
+            },
+            "end": {
+              "line": 120,
+              "column": 62
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "8",
+            "10"
+          ],
+          "duration": 25674
+        },
+        {
+          "id": "value-32",
+          "mutatorName": "Value",
+          "replacement": "`boundaries - 1`: 1 → 2",
+          "description": "`boundaries - 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 122,
+              "column": 44
+            },
+            "end": {
+              "line": 122,
+              "column": 45
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "2",
+            "8",
+            "10"
+          ],
+          "duration": 25909
+        },
+        {
+          "id": "value-33",
+          "mutatorName": "Value",
+          "replacement": "`boundaries + 1`: 1 → 2",
+          "description": "`boundaries + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 127,
+              "column": 43
+            },
+            "end": {
+              "line": 127,
+              "column": 44
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "6",
+            "7",
+            "10"
+          ],
+          "duration": 25801
+        },
+        {
+          "id": "value-34",
+          "mutatorName": "Value",
+          "replacement": "`2 * siblings`: 2 → 3",
+          "description": "`2 * siblings`: 2 → 3",
+          "location": {
+            "start": {
+              "line": 127,
+              "column": 47
+            },
+            "end": {
+              "line": 127,
+              "column": 48
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "6",
+            "7",
+            "10"
+          ],
+          "duration": 25753
+        },
+        {
+          "id": "value-35",
+          "mutatorName": "Value",
+          "replacement": "`_startValue + boundaries - 1`: 1 → 2",
+          "description": "`_startValue + boundaries - 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 129,
+              "column": 58
+            },
+            "end": {
+              "line": 129,
+              "column": 59
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "2",
+            "5",
+            "6",
+            "7",
+            "10"
+          ],
+          "duration": 25826
+        },
+        {
+          "id": "value-36",
+          "mutatorName": "Value",
+          "replacement": "`_startValue + boundaries - 1`: 1 → 2",
+          "description": "`_startValue + boundaries - 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 136,
+              "column": 56
+            },
+            "end": {
+              "line": 136,
+              "column": 57
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10"
+          ],
+          "duration": 25844
+        },
+        {
+          "id": "value-37",
+          "mutatorName": "Value",
+          "replacement": "`_endValue - boundaries + 1`: 1 → 2",
+          "description": "`_endValue - boundaries + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 140,
+              "column": 41
+            },
+            "end": {
+              "line": 140,
+              "column": 42
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10"
+          ],
+          "duration": 25848
+        }
+      ]
+    },
+    "packages/@mantine/hooks/src/use-queue/use-queue.ts": {
+      "language": "typescript",
+      "source": "import { useState } from 'react';\n\nexport interface UseQueueOptions<T> {\n  /** Initial values to be added to the queue */\n  initialValues?: T[];\n\n  /** Maximum number of items in the state */\n  limit: number;\n}\n\nexport interface UseQueueReturnValue<T> {\n  /** Array of items in the queue */\n  queue: T[];\n\n  /** Array of items in the state */\n  state: T[];\n\n  /** Function to add items to state or queue */\n  add: (...items: T[]) => void;\n\n  /** Function to apply updates to current items */\n  update: (fn: (state: T[]) => T[]) => void;\n\n  /** Function to clear the queue */\n  cleanQueue: () => void;\n}\n\n/**\n * @guarantee ok.initial `initialValues` (default empty) are divided between state and queue: the first `limit` items in state, the rest in queue\n * @guarantee ok.add `add` puts items in state while state holds fewer than `limit` items, and in queue after that\n * @guarantee ok.update `update` applies the function to all items of state and queue, then divides the result again by `limit`, keeping order\n * @guarantee ok.clean `cleanQueue` empties the queue and leaves state unchanged\n */\nexport function useQueue<T>({\n  initialValues = [],\n  limit,\n}: UseQueueOptions<T>): UseQueueReturnValue<T> {\n  const [state, setState] = useState({\n    state: initialValues.slice(0, limit),\n    queue: initialValues.slice(limit),\n  });\n\n  const add = (...items: T[]) =>\n    setState((current) => {\n      const results = [...current.state, ...current.queue, ...items];\n\n      return {\n        state: results.slice(0, limit),\n        queue: results.slice(limit),\n      };\n    });\n\n  const update = (fn: (state: T[]) => T[]) =>\n    setState((current) => {\n      const results = fn([...current.state, ...current.queue]);\n\n      return {\n        state: results.slice(0, limit),\n        queue: results.slice(limit),\n      };\n    });\n\n  const cleanQueue = () => setState((current) => ({ state: current.state, queue: [] }));\n\n  return {\n    state: state.state,\n    queue: state.queue,\n    add,\n    update,\n    cleanQueue,\n  };\n}\n\nexport namespace useQueue {\n  export type Options<T> = UseQueueOptions<T>;\n  export type ReturnValue<T> = UseQueueReturnValue<T>;\n}\n",
+      "mutants": [
+        {
+          "id": "value-38",
+          "mutatorName": "Value",
+          "replacement": "`initialValues.slice(0, limit)`: 0 → 1",
+          "description": "`initialValues.slice(0, limit)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 39,
+              "column": 32
+            },
+            "end": {
+              "line": 39,
+              "column": 33
+            }
+          },
+          "status": "Killed",
+          "statusReason": "the selected tests fail without the change; the whole suite ran",
+          "duration": 35939
+        },
+        {
+          "id": "value-39",
+          "mutatorName": "Value",
+          "replacement": "`results.slice(0, limit)`: 0 → 1",
+          "description": "`results.slice(0, limit)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 48,
+              "column": 30
+            },
+            "end": {
+              "line": 48,
+              "column": 31
+            }
+          },
+          "status": "Killed",
+          "statusReason": "the selected tests fail without the change; the whole suite ran",
+          "duration": 38471
+        },
+        {
+          "id": "value-40",
+          "mutatorName": "Value",
+          "replacement": "`results.slice(0, limit)`: 0 → 1",
+          "description": "`results.slice(0, limit)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 58,
+              "column": 30
+            },
+            "end": {
+              "line": 58,
+              "column": 31
+            }
+          },
+          "status": "Killed",
+          "statusReason": "the selected tests fail without the change; the whole suite ran",
+          "duration": 40900
+        }
+      ]
+    },
+    "packages/@mantine/hooks/src/use-toggle/use-toggle.ts": {
+      "language": "typescript",
+      "source": "import { useReducer } from 'react';\n\ntype UseToggleAction<T> = (value?: React.SetStateAction<T>) => void;\nexport type UseToggleReturnValue<T> = [T, UseToggleAction<T>];\n\n/**\n * @guarantee ok.first the value starts at the first element of `options`\n * @guarantee ok.cycle calling the toggle function with no argument moves the value to the next element of `options`, and from the last back to the first ([\"light\", \"dark\"]: \"dark\", then \"light\")\n * @guarantee ok.force calling the toggle function with a value sets the value to it\n * @guarantee ok.boolean without `options`, the value starts at false and toggles between false and true\n */\nexport function useToggle<T = boolean>(\n  options: readonly T[] = [false, true] as any\n): UseToggleReturnValue<T> {\n  const [[option], toggle] = useReducer((state: T[], action: React.SetStateAction<T>) => {\n    const value = action instanceof Function ? action(state[0]) : action;\n    const index = Math.abs(state.indexOf(value));\n\n    return state.slice(index).concat(state.slice(0, index));\n  }, options as T[]);\n\n  return [option, toggle as UseToggleAction<T>];\n}\n\nexport namespace useToggle {\n  export type ReturnValue<T> = UseToggleReturnValue<T>;\n}\n",
+      "mutants": [
+        {
+          "id": "value-41",
+          "mutatorName": "Value",
+          "replacement": "`false` removed from the list `[false, true]`",
+          "description": "`false` removed from the list `[false, true]`",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 28
+            },
+            "end": {
+              "line": 13,
+              "column": 35
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35"
+          ],
+          "duration": 32703
+        },
+        {
+          "id": "value-42",
+          "mutatorName": "Value",
+          "replacement": "`true` removed from the list `[false, true]`",
+          "description": "`true` removed from the list `[false, true]`",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 33
+            },
+            "end": {
+              "line": 13,
+              "column": 39
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35"
+          ],
+          "duration": 28169
+        },
+        {
+          "id": "value-43",
+          "mutatorName": "Value",
+          "replacement": "`state[0]`: 0 → 1",
+          "description": "`state[0]`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 16,
+              "column": 61
+            },
+            "end": {
+              "line": 16,
+              "column": 62
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "31",
+            "32",
+            "33",
+            "34",
+            "35"
+          ],
+          "duration": 11336
+        },
+        {
+          "id": "value-44",
+          "mutatorName": "Value",
+          "replacement": "`state.slice(0, index)`: 0 → 1",
+          "description": "`state.slice(0, index)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 19,
+              "column": 50
+            },
+            "end": {
+              "line": 19,
+              "column": 51
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "31",
+            "32",
+            "33",
+            "34",
+            "35"
+          ],
+          "duration": 11157
+        }
+      ]
+    }
+  }
+}

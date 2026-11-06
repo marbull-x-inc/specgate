@@ -1,0 +1,1083 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "generatedAt": "2026-11-06T03:02:00.113Z",
+  "root": "<work>/defu",
+  "revision": "82632b66f5914e9946edce300e10633a3d5c0cb7",
+  "configHash": "7e5a4df64aefb66e",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "createDefu",
+      "kind": "function",
+      "operation": "createDefu",
+      "file": "src/defu.ts",
+      "line": 49,
+      "endLine": 53,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "merger",
+          "type": "Merger",
+          "optional": true
+        }
+      ],
+      "returns": "DefuFunction",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "match",
+          "expression": "key === \"__proto__\"",
+          "line": 13,
+          "values": [
+            "__proto__"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "key === \"constructor\"",
+          "line": 13,
+          "values": [
+            "constructor"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 5,
+          "endLine": 42
+        }
+      ],
+      "implHash": "47502071c6b5465e",
+      "guarantees": [
+        {
+          "id": "ok.custom-merger",
+          "key": "createDefu.ok.custom-merger",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The `merger` function accepts `obj` (the source object), `key` and `value` (the current value) and returns `true` when it applied a custom merge.",
+          "textHash": "91d10dab492beb3d",
+          "line": 46,
+          "references": [],
+          "tests": [
+            "test/defu.test.ts:239"
+          ]
+        },
+        {
+          "id": "ok.sum-example",
+          "key": "createDefu.ok.sum-example",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "A function created with `createDefu` whose merger adds numbers gives 25 for \"cost\" in `ext({ cost: 15 }, { cost: 10 })`.",
+          "textHash": "9fb3547ef050daff",
+          "line": 47,
+          "references": [
+            {
+              "raw": "merger",
+              "kind": "param",
+              "target": "merger"
+            }
+          ],
+          "tests": [
+            "test/defu.test.ts:187"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "defu",
+      "kind": "function",
+      "operation": "defu",
+      "file": "src/defu.ts",
+      "line": 64,
+      "endLine": 64,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "source",
+          "type": "Source | import(\"<work>/defu/src/types\").IgnoredInput",
+          "optional": false
+        },
+        {
+          "name": "defaults",
+          "type": "Defaults",
+          "optional": true
+        }
+      ],
+      "returns": "import(\"<work>/defu/src/types\").Defu<Source, Defaults>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "168667cc8b866735",
+      "guarantees": [
+        {
+          "id": "ok.nested-defaults",
+          "key": "defu.ok.nested-defaults",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"defu({ a: { b: 2 } }, { a: { b: 1, c: 3 } })\" gives \"{ a: { b: 2, c: 3 } }\".",
+          "textHash": "f17da22d6b51c9ee",
+          "line": 57,
+          "references": [],
+          "tests": [
+            "test/defu.test.ts:26",
+            "test/defu.test.ts:52",
+            "test/defu.test.ts:61",
+            "test/defu.test.ts:68",
+            "test/defu.test.ts:78",
+            "test/defu.test.ts:84",
+            "test/defu.test.ts:119",
+            "test/defu.test.ts:138",
+            "test/defu.test.ts:145",
+            "test/defu.test.ts:165",
+            "test/defu.test.ts:258"
+          ]
+        },
+        {
+          "id": "ok.leftmost-priority",
+          "key": "defu.ok.leftmost-priority",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The leftmost arguments have more priority when assigning defaults.",
+          "textHash": "e286289055f10871",
+          "line": 58,
+          "references": [
+            {
+              "raw": "defaults",
+              "kind": "param",
+              "target": "defaults"
+            }
+          ],
+          "tests": [
+            "test/defu.test.ts:10",
+            "test/defu.test.ts:90"
+          ]
+        },
+        {
+          "id": "ok.array-concat",
+          "key": "defu.ok.array-concat",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"defu({ array: [\"b\", \"c\"] }, { array: [\"a\"] })\" gives \"{ array: [\"b\", \"c\", \"a\"] }\", so array values are concatenated with the object's items first when the default property is defined.",
+          "textHash": "193de965f95ff015",
+          "line": 59,
+          "references": [],
+          "tests": [
+            "test/defu.test.ts:34",
+            "test/defu.test.ts:42"
+          ]
+        },
+        {
+          "id": "ok.no-mutation",
+          "key": "defu.ok.no-mutation",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "The `object` and the `defaults` arguments are not modified.",
+          "textHash": "be9bb62a2c302043",
+          "line": 60,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.skip-nullish",
+          "key": "defu.ok.skip-nullish",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "Nullish values (`null` and `undefined`) are skipped.",
+          "textHash": "1e6d4cbc3e80098e",
+          "line": 61,
+          "references": [],
+          "tests": [
+            "test/defu.test.ts:16"
+          ]
+        },
+        {
+          "id": "ok.skip-proto-keys",
+          "key": "defu.ok.skip-proto-keys",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "Assignment of the \"__proto__\" and \"constructor\" keys is skipped to prevent object pollution.",
+          "textHash": "ca56852019bd179d",
+          "line": 62,
+          "references": [],
+          "tests": [
+            "test/defu.test.ts:104"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "defuFn",
+      "kind": "function",
+      "operation": "defuFn",
+      "file": "src/defu.ts",
+      "line": 73,
+      "endLine": 78,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "source",
+          "type": "Source",
+          "optional": false
+        },
+        {
+          "name": "defaults",
+          "type": "Defaults",
+          "optional": true
+        }
+      ],
+      "returns": "import(\"<work>/defu/src/types\").Defu<Source, Defaults>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "e54cfa1593474403",
+      "guarantees": [
+        {
+          "id": "ok.function-called-with-default",
+          "key": "defuFn.ok.function-called-with-default",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "If the user provides a function for a key, it is called with the default value instead of being merged.",
+          "textHash": "37bb2ffaf34a277c",
+          "line": 69,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.fn-example",
+          "key": "defuFn.ok.fn-example",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"defuFn\" with `ignore` as a filter dropping \"dist\" and `count` as `count + 20`, over defaults `ignore` [\"node_modules\", \"dist\"] and `count` 10, gives `ignore` [\"node_modules\"] and `count` 30.",
+          "textHash": "c0afdc774f36e39b",
+          "line": 70,
+          "references": [
+            {
+              "raw": "defaults",
+              "kind": "param",
+              "target": "defaults"
+            }
+          ],
+          "tests": [
+            "test/defu.test.ts:197"
+          ]
+        },
+        {
+          "id": "ok.fn-undefined-default",
+          "key": "defuFn.ok.fn-undefined-default",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "If the default value is not defined, the function is not called and is kept as the value.",
+          "textHash": "71b33d79544ca7ae",
+          "line": 71,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "defuArrayFn",
+      "kind": "function",
+      "operation": "defuArrayFn",
+      "file": "src/defu.ts",
+      "line": 86,
+      "endLine": 91,
+      "referencedBy": [],
+      "summary": "",
+      "params": [
+        {
+          "name": "source",
+          "type": "Source",
+          "optional": false
+        },
+        {
+          "name": "defaults",
+          "type": "Defaults",
+          "optional": true
+        }
+      ],
+      "returns": "import(\"<work>/defu/src/types\").Defu<Source, Defaults>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "dbc614c49b3f1a05",
+      "guarantees": [
+        {
+          "id": "ok.array-only",
+          "key": "defuArrayFn.ok.array-only",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "A function is called only when the value defined in the defaults is an array.",
+          "textHash": "0de613591219a532",
+          "line": 82,
+          "references": [
+            {
+              "raw": "defaults",
+              "kind": "param",
+              "target": "defaults"
+            }
+          ],
+          "tests": []
+        },
+        {
+          "id": "ok.array-fn-example",
+          "key": "defuArrayFn.ok.array-fn-example",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"defuArrayFn\" with `ignore` as a filter dropping \"dist\" over the default [\"node_modules\", \"dist\"] gives `ignore` [\"node_modules\"].",
+          "textHash": "5eb011b168b695ff",
+          "line": 83,
+          "references": [],
+          "tests": [
+            "test/defu.test.ts:219"
+          ]
+        },
+        {
+          "id": "ok.non-array-kept",
+          "key": "defuArrayFn.ok.non-array-kept",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "With `count` as a function and the default `count` 10 (not an array), the function is not called and is kept as the value.",
+          "textHash": "fcc53861bd7af60a",
+          "line": 84,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "defu.ok.leftmost-priority",
+      "unitId": "defu",
+      "guaranteeId": "ok.leftmost-priority",
+      "file": "test/defu.test.ts",
+      "line": 10,
+      "title": "defu.ok.leftmost-priority should copy only missing properties defaults",
+      "status": "test",
+      "bodyHash": "00f85b28e0e8f3d4",
+      "literals": [
+        "c",
+        "bbb"
+      ],
+      "keys": [
+        "a",
+        "d"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.skip-nullish",
+      "unitId": "defu",
+      "guaranteeId": "ok.skip-nullish",
+      "file": "test/defu.test.ts",
+      "line": 16,
+      "title": "defu.ok.skip-nullish should fill in values that are null",
+      "status": "test",
+      "bodyHash": "b41a2dda22403ffa",
+      "literals": [
+        "c"
+      ],
+      "keys": [
+        "a",
+        "d"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 26,
+      "title": "defu.ok.nested-defaults should copy nested values",
+      "status": "test",
+      "bodyHash": "a87c964268e749d0",
+      "literals": [
+        "c",
+        "e"
+      ],
+      "keys": [
+        "a",
+        "b",
+        "d"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.array-concat",
+      "unitId": "defu",
+      "guaranteeId": "ok.array-concat",
+      "file": "test/defu.test.ts",
+      "line": 34,
+      "title": "defu.ok.array-concat should concat array values by default",
+      "status": "test",
+      "bodyHash": "624ab6f8849f3e37",
+      "literals": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "keys": [
+        "array"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2,
+        4
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.array-concat",
+      "unitId": "defu",
+      "guaranteeId": "ok.array-concat",
+      "file": "test/defu.test.ts",
+      "line": 42,
+      "title": "defu.ok.array-concat should correctly type differing array values",
+      "status": "test",
+      "bodyHash": "a6a729578d6bd2bf",
+      "literals": [
+        "Name",
+        "21",
+        "42"
+      ],
+      "keys": [
+        "name",
+        "age",
+        "items"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 52,
+      "title": "defu.ok.nested-defaults should avoid merging objects with custom constructor",
+      "status": "test",
+      "bodyHash": "a6dd418c698ae10a",
+      "literals": [
+        "a",
+        "b"
+      ],
+      "keys": [
+        "test"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 61,
+      "title": "defu.ok.nested-defaults should assign date properly",
+      "status": "test",
+      "bodyHash": "f4acf16b9885e5c6",
+      "literals": [
+        "2020-01-01",
+        "2020-01-02"
+      ],
+      "keys": [
+        "date"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 68,
+      "title": "defu.ok.nested-defaults should correctly merge different object types",
+      "status": "test",
+      "bodyHash": "0ddc5b56037761a6",
+      "literals": [
+        "42"
+      ],
+      "keys": [
+        "a"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 78,
+      "title": "defu.ok.nested-defaults should handle non object first param",
+      "status": "test",
+      "bodyHash": "f722ec48da820860",
+      "literals": [
+        "123"
+      ],
+      "keys": [
+        "d"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        6,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 84,
+      "title": "defu.ok.nested-defaults should handle non object second param",
+      "status": "test",
+      "bodyHash": "c85e2fc363274560",
+      "literals": [
+        "123"
+      ],
+      "keys": [
+        "d"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        6,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.leftmost-priority",
+      "unitId": "defu",
+      "guaranteeId": "ok.leftmost-priority",
+      "file": "test/defu.test.ts",
+      "line": 90,
+      "title": "defu.ok.leftmost-priority multi defaults",
+      "status": "test",
+      "bodyHash": "a59ea29df475e4a7",
+      "literals": [
+        "2",
+        "x",
+        "3"
+      ],
+      "keys": [
+        "a",
+        "b",
+        "c"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.skip-proto-keys",
+      "unitId": "defu",
+      "guaranteeId": "ok.skip-proto-keys",
+      "file": "test/defu.test.ts",
+      "line": 104,
+      "title": "defu.ok.skip-proto-keys should not override Object prototype",
+      "status": "test",
+      "bodyHash": "082d93ea794151b5",
+      "literals": [
+        "{\"constructor\": {\"prototype\": {\"isAdmin\": true}}}",
+        "{\"__proto__\":{\"isAdmin\":true}}"
+      ],
+      "keys": [
+        "isAdmin"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 119,
+      "title": "defu.ok.nested-defaults should ignore inherited enumerable properties",
+      "status": "test",
+      "bodyHash": "452aab45a43269ee",
+      "literals": [
+        "pollutedEnum",
+        "123",
+        "nested"
+      ],
+      "keys": [
+        "value",
+        "enumerable",
+        "configurable",
+        "writable",
+        "nested"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1,
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 138,
+      "title": "defu.ok.nested-defaults should ignore non-object arguments",
+      "status": "test",
+      "bodyHash": "57399381cd65ef29",
+      "literals": [
+        "123",
+        "2"
+      ],
+      "keys": [
+        "foo",
+        "bar"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 145,
+      "title": "defu.ok.nested-defaults should merge types of more than two objects",
+      "status": "test",
+      "bodyHash": "37350c6a8fc111f4",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 165,
+      "title": "defu.ok.nested-defaults should allow partials within merge chain",
+      "status": "test",
+      "bodyHash": "7cde86a43c869e37",
+      "literals": [
+        "test",
+        "test2"
+      ],
+      "keys": [
+        "foo",
+        "bar"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createDefu.ok.sum-example",
+      "unitId": "createDefu",
+      "guaranteeId": "ok.sum-example",
+      "file": "test/defu.test.ts",
+      "line": 187,
+      "title": "createDefu.ok.sum-example custom merger",
+      "status": "test",
+      "bodyHash": "566e10d83ac99adf",
+      "literals": [
+        "number",
+        "15",
+        "10",
+        "25"
+      ],
+      "keys": [
+        "cost"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createDefu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defuFn.ok.fn-example",
+      "unitId": "defuFn",
+      "guaranteeId": "ok.fn-example",
+      "file": "test/defu.test.ts",
+      "line": 197,
+      "title": "defuFn.ok.fn-example defuFn()",
+      "status": "test",
+      "bodyHash": "da27c2c47d9e60a5",
+      "literals": [
+        "20",
+        "dist",
+        "node_modules",
+        "10"
+      ],
+      "keys": [
+        "ignore",
+        "num",
+        "ignored"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defuFn",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2,
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defuArrayFn.ok.array-fn-example",
+      "unitId": "defuArrayFn",
+      "guaranteeId": "ok.array-fn-example",
+      "file": "test/defu.test.ts",
+      "line": 219,
+      "title": "defuArrayFn.ok.array-fn-example defuArrayFn()",
+      "status": "test",
+      "bodyHash": "962d0115eaf3940e",
+      "literals": [
+        "20",
+        "c",
+        "a",
+        "b",
+        "10"
+      ],
+      "keys": [
+        "arr",
+        "num"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defuArrayFn",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1,
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "createDefu.ok.custom-merger",
+      "unitId": "createDefu",
+      "guaranteeId": "ok.custom-merger",
+      "file": "test/defu.test.ts",
+      "line": 239,
+      "title": "createDefu.ok.custom-merger custom merger with namespace",
+      "status": "test",
+      "bodyHash": "e45fc53088e538ed",
+      "literals": [
+        "modules",
+        ":",
+        ",",
+        "A",
+        "X",
+        "B",
+        "Y",
+        ":A,B",
+        "foo.bar:X,Y"
+      ],
+      "keys": [
+        "modules",
+        "foo",
+        "bar"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "createDefu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        1
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "defu.ok.nested-defaults",
+      "unitId": "defu",
+      "guaranteeId": "ok.nested-defaults",
+      "file": "test/defu.test.ts",
+      "line": 258,
+      "title": "defu.ok.nested-defaults works with asterisk-import",
+      "status": "test",
+      "bodyHash": "2eec53d41e7560c6",
+      "literals": [
+        "2"
+      ],
+      "keys": [
+        "a",
+        "exp",
+        "anotherNested",
+        "nested"
+      ],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "defu",
+          "from": "src/defu.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "guarantee-no-test",
+      "message": "defu.ok.no-mutation has no test naming it",
+      "file": "src/defu.ts",
+      "line": 60,
+      "unit": "defu",
+      "guarantee": "defu.ok.no-mutation",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "defuFn.ok.function-called-with-default has no test naming it",
+      "file": "src/defu.ts",
+      "line": 69,
+      "unit": "defuFn",
+      "guarantee": "defuFn.ok.function-called-with-default",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "defuFn.ok.fn-undefined-default has no test naming it",
+      "file": "src/defu.ts",
+      "line": 71,
+      "unit": "defuFn",
+      "guarantee": "defuFn.ok.fn-undefined-default",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "defuArrayFn.ok.array-only has no test naming it",
+      "file": "src/defu.ts",
+      "line": 82,
+      "unit": "defuArrayFn",
+      "guarantee": "defuArrayFn.ok.array-only",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "defuArrayFn.ok.non-array-kept has no test naming it",
+      "file": "src/defu.ts",
+      "line": 84,
+      "unit": "defuArrayFn",
+      "guarantee": "defuArrayFn.ok.non-array-kept",
+      "severity": "fail"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "createDefu commits to match \"__proto__\" in `key === \"__proto__\"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/defu.ts",
+      "line": 13,
+      "unit": "createDefu",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "createDefu commits to match \"constructor\" in `key === \"constructor\"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/defu.ts",
+      "line": 13,
+      "unit": "createDefu",
+      "severity": "warn"
+    },
+    {
+      "rule": "entry-unmapped",
+      "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
+      "file": "package.json",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 4,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 14,
+    "guaranteesWithoutTest": 5,
+    "tests": 21,
+    "orphanTests": 0,
+    "unlinkedTests": 2,
+    "findings": {
+      "fail": 5,
+      "warn": 2,
+      "info": 1
+    }
+  }
+}

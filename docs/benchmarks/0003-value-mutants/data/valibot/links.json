@@ -1,0 +1,1542 @@
+[
+  {
+    "file": "library/src/actions/minLength/minLength.test.ts",
+    "line": 22,
+    "title": "with undefined message",
+    "key": "minLength.ok.min-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minLength/minLength.test.ts",
+    "line": 31,
+    "title": "with string message",
+    "key": "minLength.ok.min-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minLength/minLength.test.ts",
+    "line": 38,
+    "title": "with function message",
+    "key": "minLength.ok.min-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minLength/minLength.test.ts",
+    "line": 50,
+    "title": "for untyped inputs",
+    "key": "minLength.ok.min-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minLength/minLength.test.ts",
+    "line": 70,
+    "title": "for valid strings",
+    "key": "minLength.ok.min-string",
+    "reason": "valid strings"
+  },
+  {
+    "file": "library/src/actions/minLength/minLength.test.ts",
+    "line": 79,
+    "title": "for valid arrays",
+    "key": "minLength.ok.min-array",
+    "reason": "valid arrays"
+  },
+  {
+    "file": "library/src/actions/minLength/minLength.test.ts",
+    "line": 94,
+    "title": "for invalid strings",
+    "key": "minLength.err.min-string-short",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/minLength/minLength.test.ts",
+    "line": 103,
+    "title": "for invalid arrays",
+    "key": "minLength.err.min-string-short",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/maxLength/maxLength.test.ts",
+    "line": 22,
+    "title": "with undefined message",
+    "key": "maxLength.ok.max-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxLength/maxLength.test.ts",
+    "line": 31,
+    "title": "with string message",
+    "key": "maxLength.ok.max-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxLength/maxLength.test.ts",
+    "line": 38,
+    "title": "with function message",
+    "key": "maxLength.ok.max-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxLength/maxLength.test.ts",
+    "line": 50,
+    "title": "for untyped inputs",
+    "key": "maxLength.ok.max-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxLength/maxLength.test.ts",
+    "line": 70,
+    "title": "for valid strings",
+    "key": "maxLength.ok.max-string",
+    "reason": "valid strings"
+  },
+  {
+    "file": "library/src/actions/maxLength/maxLength.test.ts",
+    "line": 74,
+    "title": "for valid arrays",
+    "key": "maxLength.ok.max-array",
+    "reason": "valid arrays"
+  },
+  {
+    "file": "library/src/actions/maxLength/maxLength.test.ts",
+    "line": 89,
+    "title": "for invalid strings",
+    "key": "maxLength.err.max-string-long",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/maxLength/maxLength.test.ts",
+    "line": 98,
+    "title": "for invalid arrays",
+    "key": "maxLength.err.max-string-long",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/length/length.test.ts",
+    "line": 18,
+    "title": "with undefined message",
+    "key": "length.ok.string-length",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/length/length.test.ts",
+    "line": 27,
+    "title": "with string message",
+    "key": "length.ok.string-length",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/length/length.test.ts",
+    "line": 34,
+    "title": "with function message",
+    "key": "length.ok.string-length",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/length/length.test.ts",
+    "line": 46,
+    "title": "for untyped inputs",
+    "key": "length.ok.string-length",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/length/length.test.ts",
+    "line": 66,
+    "title": "for valid strings",
+    "key": "length.ok.string-length",
+    "reason": "valid strings"
+  },
+  {
+    "file": "library/src/actions/length/length.test.ts",
+    "line": 80,
+    "title": "for valid arrays",
+    "key": "length.ok.array-length",
+    "reason": "valid arrays"
+  },
+  {
+    "file": "library/src/actions/length/length.test.ts",
+    "line": 102,
+    "title": "for invalid strings",
+    "key": "length.err.length-mismatch",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/length/length.test.ts",
+    "line": 130,
+    "title": "for invalid arrays",
+    "key": "length.err.length-mismatch",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/notLength/notLength.test.ts",
+    "line": 22,
+    "title": "with undefined message",
+    "key": "notLength.ok.string-not-length",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notLength/notLength.test.ts",
+    "line": 31,
+    "title": "with string message",
+    "key": "notLength.ok.string-not-length",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notLength/notLength.test.ts",
+    "line": 38,
+    "title": "with function message",
+    "key": "notLength.ok.string-not-length",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notLength/notLength.test.ts",
+    "line": 50,
+    "title": "for untyped inputs",
+    "key": "notLength.ok.string-not-length",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notLength/notLength.test.ts",
+    "line": 70,
+    "title": "for valid strings",
+    "key": "notLength.ok.string-not-length",
+    "reason": "valid strings"
+  },
+  {
+    "file": "library/src/actions/notLength/notLength.test.ts",
+    "line": 89,
+    "title": "for valid arrays",
+    "key": "notLength.ok.array-not-length",
+    "reason": "valid arrays"
+  },
+  {
+    "file": "library/src/actions/notLength/notLength.test.ts",
+    "line": 113,
+    "title": "for invalid strings",
+    "key": "notLength.err.length-equal",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/notLength/notLength.test.ts",
+    "line": 131,
+    "title": "for invalid arrays",
+    "key": "notLength.err.length-equal",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/nonEmpty/nonEmpty.test.ts",
+    "line": 21,
+    "title": "with undefined message",
+    "key": "nonEmpty.ok.non-empty-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/nonEmpty/nonEmpty.test.ts",
+    "line": 30,
+    "title": "with string message",
+    "key": "nonEmpty.ok.non-empty-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/nonEmpty/nonEmpty.test.ts",
+    "line": 37,
+    "title": "with function message",
+    "key": "nonEmpty.ok.non-empty-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/nonEmpty/nonEmpty.test.ts",
+    "line": 49,
+    "title": "for untyped inputs",
+    "key": "nonEmpty.ok.non-empty-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/nonEmpty/nonEmpty.test.ts",
+    "line": 69,
+    "title": "for valid strings",
+    "key": "nonEmpty.ok.non-empty-string",
+    "reason": "valid strings"
+  },
+  {
+    "file": "library/src/actions/nonEmpty/nonEmpty.test.ts",
+    "line": 73,
+    "title": "for valid arrays",
+    "key": "nonEmpty.ok.non-empty-array",
+    "reason": "valid arrays"
+  },
+  {
+    "file": "library/src/actions/nonEmpty/nonEmpty.test.ts",
+    "line": 87,
+    "title": "for invalid strings",
+    "key": "nonEmpty.err.empty-input",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/nonEmpty/nonEmpty.test.ts",
+    "line": 91,
+    "title": "for invalid arrays",
+    "key": "nonEmpty.err.empty-input",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/empty/empty.test.ts",
+    "line": 17,
+    "title": "with undefined message",
+    "key": "empty.ok.empty-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/empty/empty.test.ts",
+    "line": 26,
+    "title": "with string message",
+    "key": "empty.ok.empty-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/empty/empty.test.ts",
+    "line": 33,
+    "title": "with function message",
+    "key": "empty.ok.empty-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/empty/empty.test.ts",
+    "line": 45,
+    "title": "for untyped inputs",
+    "key": "empty.ok.empty-string",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/empty/empty.test.ts",
+    "line": 65,
+    "title": "for valid strings",
+    "key": "empty.ok.empty-string",
+    "reason": "valid strings"
+  },
+  {
+    "file": "library/src/actions/empty/empty.test.ts",
+    "line": 69,
+    "title": "for valid arrays",
+    "key": "empty.ok.empty-array",
+    "reason": "valid arrays"
+  },
+  {
+    "file": "library/src/actions/empty/empty.test.ts",
+    "line": 83,
+    "title": "for invalid strings",
+    "key": "empty.err.not-empty",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/empty/empty.test.ts",
+    "line": 92,
+    "title": "for invalid arrays",
+    "key": "empty.err.not-empty",
+    "reason": "invalid length"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 19,
+    "title": "with undefined message",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 28,
+    "title": "with string message",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 35,
+    "title": "with function message",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 45,
+    "title": "for untyped inputs",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 61,
+    "title": "for valid bigints",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 65,
+    "title": "for valid non-bigints",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 106,
+    "title": "for valid booleans",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 111,
+    "title": "for valid non-booleans",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 163,
+    "title": "for valid dates",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 172,
+    "title": "for valid non-dates",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 222,
+    "title": "for valid numbers",
+    "key": "minValue.ok.min-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 226,
+    "title": "for valid non-numbers",
+    "key": "minValue.ok.min-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 270,
+    "title": "for valid strings",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 274,
+    "title": "for valid non-strings",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 323,
+    "title": "for invalid bigints",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 331,
+    "title": "for invalid non-bigints",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 407,
+    "title": "for invalid booleans",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 415,
+    "title": "for invalid non-booleans",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 464,
+    "title": "for invalid dates",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 474,
+    "title": "for invalid non-dates",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 539,
+    "title": "for invalid numbers",
+    "key": "minValue.err.min-number-below",
+    "reason": "invalid numbers"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 547,
+    "title": "for invalid non-numbers",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 605,
+    "title": "for invalid strings",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minValue/minValue.test.ts",
+    "line": 613,
+    "title": "for invalid non-strings",
+    "key": "minValue.ok.min-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 19,
+    "title": "with undefined message",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 28,
+    "title": "with string message",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 35,
+    "title": "with function message",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 45,
+    "title": "for untyped inputs",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 61,
+    "title": "for valid bigints",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 65,
+    "title": "for valid non-bigints",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 124,
+    "title": "for valid booleans",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 129,
+    "title": "for valid non-booleans",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 172,
+    "title": "for valid dates",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 181,
+    "title": "for valid non-dates",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 249,
+    "title": "for valid numbers",
+    "key": "maxValue.ok.max-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 253,
+    "title": "for valid non-numbers",
+    "key": "maxValue.ok.max-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 309,
+    "title": "for valid strings",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 313,
+    "title": "for valid non-strings",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 373,
+    "title": "for invalid bigints",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 381,
+    "title": "for invalid non-bigints",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 428,
+    "title": "for invalid booleans",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 436,
+    "title": "for invalid non-booleans",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 452,
+    "title": "for invalid dates",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 462,
+    "title": "for invalid non-dates",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 499,
+    "title": "for invalid numbers",
+    "key": "maxValue.err.max-number-above",
+    "reason": "invalid numbers"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 507,
+    "title": "for invalid non-numbers",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 530,
+    "title": "for invalid strings",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/maxValue/maxValue.test.ts",
+    "line": 538,
+    "title": "for invalid non-strings",
+    "key": "maxValue.ok.max-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 19,
+    "title": "with undefined message",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 28,
+    "title": "with string message",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 35,
+    "title": "with function message",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 45,
+    "title": "for untyped inputs",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 61,
+    "title": "for valid bigints",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 65,
+    "title": "for valid non-bigints",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 116,
+    "title": "for valid booleans",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 120,
+    "title": "for valid non-booleans",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 168,
+    "title": "for valid dates",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 176,
+    "title": "for valid non-dates",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 244,
+    "title": "for valid numbers",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 248,
+    "title": "for valid non-numbers",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 301,
+    "title": "for valid strings",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 305,
+    "title": "for valid non-strings",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 359,
+    "title": "for invalid bigints",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 367,
+    "title": "for invalid non-bigints",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 446,
+    "title": "for invalid booleans",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 460,
+    "title": "for invalid non-booleans",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 511,
+    "title": "for invalid dates",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 521,
+    "title": "for invalid non-dates",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 598,
+    "title": "for invalid numbers",
+    "key": "gtValue.err.not-greater",
+    "reason": "invalid numbers"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 606,
+    "title": "for invalid non-numbers",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 676,
+    "title": "for invalid strings",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/gtValue/gtValue.test.ts",
+    "line": 684,
+    "title": "for invalid non-strings",
+    "key": "gtValue.ok.greater-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 19,
+    "title": "with undefined message",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 28,
+    "title": "with string message",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 35,
+    "title": "with function message",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 45,
+    "title": "for untyped inputs",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 61,
+    "title": "for valid bigints",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 65,
+    "title": "for valid non-bigints",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 115,
+    "title": "for valid booleans",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 119,
+    "title": "for valid non-booleans",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 149,
+    "title": "for valid dates",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 158,
+    "title": "for valid non-dates",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 207,
+    "title": "for valid numbers",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 211,
+    "title": "for valid non-numbers",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 252,
+    "title": "for valid strings",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 256,
+    "title": "for valid non-strings",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 307,
+    "title": "for invalid bigints",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 315,
+    "title": "for invalid non-bigints",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 382,
+    "title": "for invalid booleans",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 396,
+    "title": "for invalid non-booleans",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 443,
+    "title": "for invalid dates",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 453,
+    "title": "for invalid non-dates",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 522,
+    "title": "for invalid numbers",
+    "key": "ltValue.err.not-less",
+    "reason": "invalid numbers"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 530,
+    "title": "for invalid non-numbers",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 587,
+    "title": "for invalid strings",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/ltValue/ltValue.test.ts",
+    "line": 595,
+    "title": "for invalid non-strings",
+    "key": "ltValue.ok.less-than-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 19,
+    "title": "with undefined message",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 28,
+    "title": "with string message",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 35,
+    "title": "with function message",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 45,
+    "title": "for untyped inputs",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 65,
+    "title": "for valid bigints",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 69,
+    "title": "for valid non-bigints",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 90,
+    "title": "for valid booleans",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 95,
+    "title": "for valid non-booleans",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 118,
+    "title": "for valid dates",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 136,
+    "title": "for valid non-dates",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 167,
+    "title": "for valid numbers",
+    "key": "value.ok.exact-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 171,
+    "title": "for valid NaN",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 175,
+    "title": "for valid non-numbers",
+    "key": "value.ok.exact-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 196,
+    "title": "for valid strings",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 200,
+    "title": "for valid non-strings",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 216,
+    "title": "for invalid bigints",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 224,
+    "title": "for invalid non-bigints",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 260,
+    "title": "for invalid booleans",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 273,
+    "title": "for invalid non-booleans",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 300,
+    "title": "for invalid dates",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 310,
+    "title": "for invalid non-dates",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 349,
+    "title": "for invalid numbers",
+    "key": "value.err.value-differs",
+    "reason": "invalid numbers"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 368,
+    "title": "for invalid non-numbers",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 389,
+    "title": "for invalid strings",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/value/value.test.ts",
+    "line": 408,
+    "title": "for invalid non-strings",
+    "key": "value.ok.exact-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 19,
+    "title": "with undefined message",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 28,
+    "title": "with string message",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 35,
+    "title": "with function message",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 45,
+    "title": "for untyped inputs",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 65,
+    "title": "for valid bigints",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 69,
+    "title": "for valid non-bigints",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 106,
+    "title": "for valid booleans",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 111,
+    "title": "for valid non-booleans",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 154,
+    "title": "for valid dates",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 175,
+    "title": "for valid non-dates",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 214,
+    "title": "for valid numbers",
+    "key": "notValue.ok.not-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 229,
+    "title": "for valid non-numbers",
+    "key": "notValue.ok.not-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 263,
+    "title": "for valid strings",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 278,
+    "title": "for valid non-strings",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 306,
+    "title": "for invalid bigints",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 314,
+    "title": "for invalid non-bigints",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 335,
+    "title": "for invalid booleans",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 348,
+    "title": "for invalid non-booleans",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 363,
+    "title": "for invalid dates",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 386,
+    "title": "for invalid non-dates",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 410,
+    "title": "for invalid numbers",
+    "key": "notValue.err.value-equal",
+    "reason": "invalid numbers"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 418,
+    "title": "for invalid NaN",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 426,
+    "title": "for invalid non-numbers",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 447,
+    "title": "for invalid strings",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/notValue/notValue.test.ts",
+    "line": 455,
+    "title": "for invalid non-strings",
+    "key": "notValue.ok.not-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 18,
+    "title": "with undefined message",
+    "key": "multipleOf.ok.even-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 27,
+    "title": "with string message",
+    "key": "multipleOf.ok.even-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 34,
+    "title": "with function message",
+    "key": "multipleOf.ok.even-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 44,
+    "title": "for untyped inputs",
+    "key": "multipleOf.ok.even-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 64,
+    "title": "for valid numbers",
+    "key": "multipleOf.ok.even-number",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 68,
+    "title": "for valid bigints",
+    "key": "multipleOf.ok.even-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 81,
+    "title": "for invalid numbers",
+    "key": "multipleOf.err.not-multiple",
+    "reason": "invalid numbers"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 89,
+    "title": "for infinity",
+    "key": "multipleOf.ok.even-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 97,
+    "title": "for NaN",
+    "key": "multipleOf.ok.even-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/multipleOf/multipleOf.test.ts",
+    "line": 105,
+    "title": "for invalid bigints",
+    "key": "multipleOf.ok.even-number",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minBytes/minBytes.test.ts",
+    "line": 22,
+    "title": "with undefined message",
+    "key": "minBytes.ok.min-bytes",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minBytes/minBytes.test.ts",
+    "line": 31,
+    "title": "with string message",
+    "key": "minBytes.ok.min-bytes",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minBytes/minBytes.test.ts",
+    "line": 38,
+    "title": "with function message",
+    "key": "minBytes.ok.min-bytes",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minBytes/minBytes.test.ts",
+    "line": 50,
+    "title": "for untyped inputs",
+    "key": "minBytes.ok.min-bytes",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/minBytes/minBytes.test.ts",
+    "line": 70,
+    "title": "for valid strings",
+    "key": "minBytes.ok.min-bytes",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/minBytes/minBytes.test.ts",
+    "line": 74,
+    "title": "for valid chars",
+    "key": "minBytes.ok.min-bytes",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/minBytes/minBytes.test.ts",
+    "line": 95,
+    "title": "for invalid strings",
+    "key": "minBytes.err.too-few-bytes",
+    "reason": "invalid bytes"
+  },
+  {
+    "file": "library/src/actions/minBytes/minBytes.test.ts",
+    "line": 99,
+    "title": "for invalid chars",
+    "key": "minBytes.err.too-few-bytes",
+    "reason": "invalid bytes"
+  },
+  {
+    "file": "library/src/actions/bytes/bytes.test.ts",
+    "line": 18,
+    "title": "with undefined message",
+    "key": "bytes.ok.exact-bytes",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/bytes/bytes.test.ts",
+    "line": 27,
+    "title": "with string message",
+    "key": "bytes.ok.exact-bytes",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/bytes/bytes.test.ts",
+    "line": 34,
+    "title": "with function message",
+    "key": "bytes.ok.exact-bytes",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/bytes/bytes.test.ts",
+    "line": 46,
+    "title": "for untyped inputs",
+    "key": "bytes.ok.exact-bytes",
+    "reason": "fallback first ok"
+  },
+  {
+    "file": "library/src/actions/bytes/bytes.test.ts",
+    "line": 66,
+    "title": "for valid strings",
+    "key": "bytes.ok.exact-bytes",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/bytes/bytes.test.ts",
+    "line": 70,
+    "title": "for valid chars",
+    "key": "bytes.ok.exact-bytes",
+    "reason": "valid case"
+  },
+  {
+    "file": "library/src/actions/bytes/bytes.test.ts",
+    "line": 91,
+    "title": "for invalid strings",
+    "key": "bytes.err.bytes-mismatch",
+    "reason": "invalid bytes"
+  },
+  {
+    "file": "library/src/actions/bytes/bytes.test.ts",
+    "line": 100,
+    "title": "for invalid chars",
+    "key": "bytes.err.bytes-mismatch",
+    "reason": "invalid bytes"
+  }
+]

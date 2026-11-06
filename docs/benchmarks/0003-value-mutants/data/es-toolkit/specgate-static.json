@@ -1,0 +1,6270 @@
+{
+  "$schema": "https://raw.githubusercontent.com/marbull-x-inc/specgate/main/schema/ir.schema.json",
+  "version": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "generatedAt": "2026-11-06T03:01:12.261Z",
+  "root": "<work>/es-toolkit",
+  "revision": "4fb8c4e1e89c9009b887e5d917d65e42a9a16626",
+  "configHash": "5a8ca5bba94bf387",
+  "mode": "advisory",
+  "units": [
+    {
+      "id": "camelCase",
+      "kind": "function",
+      "operation": "camelCase",
+      "file": "src/string/camelCase.ts",
+      "line": 24,
+      "endLine": 34,
+      "referencedBy": [
+        "src/object/toCamelCaseKeys.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "Converts a string to camel case. Camel case is the naming convention in which the first word is written in lowercase and each subsequent word begins with a capital letter, concatenated without any separator characters.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string that is to be changed to camel case."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "capitalize",
+        "words"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "202f75924b5dfeec",
+      "guarantees": [
+        {
+          "id": "ok.words-joined",
+          "key": "camelCase.ok.words-joined",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hello world\" gives \"helloWorld\" and \"some-hyphen-text\" gives \"someHyphenText\"",
+          "textHash": "b28e4483a51d2d61",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "src/string/camelCase.spec.ts:9",
+            "src/string/camelCase.spec.ts:13",
+            "src/string/camelCase.spec.ts:21",
+            "src/string/camelCase.spec.ts:25",
+            "src/string/camelCase.spec.ts:29"
+          ]
+        },
+        {
+          "id": "ok.from-other-cases",
+          "key": "camelCase.ok.from-other-cases",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"CONSTANT_CASE\" gives \"constantCase\" and \"PascalCase\" gives \"pascalCase\"",
+          "textHash": "3b44927501f8c2e5",
+          "line": 20,
+          "references": [],
+          "tests": [
+            "src/string/camelCase.spec.ts:5",
+            "src/string/camelCase.spec.ts:17",
+            "src/string/camelCase.spec.ts:33"
+          ]
+        },
+        {
+          "id": "ok.mixed-case-kept",
+          "key": "camelCase.ok.mixed-case-kept",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"mixed SpAcE\" gives \"mixedSpAcE\"",
+          "textHash": "61eeb291245e66a3",
+          "line": 21,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.unicode-kept",
+          "key": "camelCase.ok.unicode-kept",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"keep unicode 😅\" gives \"keepUnicode😅\" and \"한글-테스트\" gives \"한글테스트\"",
+          "textHash": "2cd5897ef3bda8fa",
+          "line": 22,
+          "references": [],
+          "tests": [
+            "src/string/camelCase.spec.ts:37"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "capitalize",
+      "kind": "function",
+      "operation": "capitalize",
+      "file": "src/string/capitalize.ts",
+      "line": 18,
+      "endLine": 20,
+      "referencedBy": [
+        "src/compat/string/camelCase.ts",
+        "src/compat/string/capitalize.ts",
+        "src/string/camelCase.ts",
+        "src/string/index.ts",
+        "src/string/pascalCase.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "T",
+          "optional": false
+        }
+      ],
+      "returns": "Capitalize<T>",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "charAt",
+          "count": 1
+        },
+        {
+          "port": "str",
+          "member": "slice",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "74d0cbd254fbe2e8",
+      "guarantees": [
+        {
+          "id": "ok.first-upper-rest-lower",
+          "key": "capitalize.ok.first-upper-rest-lower",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hello\" gives \"Hello\", \"WORLD\" gives \"World\" and \"javaScript\" gives \"Javascript\"",
+          "textHash": "0737864680516494",
+          "line": 14,
+          "references": [],
+          "tests": [
+            "src/string/capitalize.spec.ts:5",
+            "src/string/capitalize.spec.ts:9",
+            "src/string/capitalize.spec.ts:13",
+            "src/string/capitalize.spec.ts:17",
+            "src/string/capitalize.spec.ts:21"
+          ]
+        },
+        {
+          "id": "ok.short-strings",
+          "key": "capitalize.ok.short-strings",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"\" gives \"\", \"a\" gives \"A\" and \"A\" gives \"A\"",
+          "textHash": "000f82145b570ddb",
+          "line": 15,
+          "references": [],
+          "tests": [
+            "src/string/capitalize.spec.ts:25",
+            "src/string/capitalize.spec.ts:29"
+          ]
+        },
+        {
+          "id": "ok.only-first-word",
+          "key": "capitalize.ok.only-first-word",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"welcome to our website\" gives \"Welcome to our website\"",
+          "textHash": "e80f8c765efb320b",
+          "line": 16,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "constantCase",
+      "kind": "function",
+      "operation": "constantCase",
+      "file": "src/string/constantCase.ts",
+      "line": 24,
+      "endLine": 27,
+      "referencedBy": [
+        "src/object/toConstantCaseKeys.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "words"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "279f242f93aeab3a",
+      "guarantees": [
+        {
+          "id": "ok.upper-with-underscores",
+          "key": "constantCase.ok.upper-with-underscores",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hello world\" gives \"HELLO_WORLD\" and \"some-kebab-case\" gives \"SOME_KEBAB_CASE\"",
+          "textHash": "72972d737305fb45",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "src/string/constantCase.spec.ts:9",
+            "src/string/constantCase.spec.ts:13",
+            "src/string/constantCase.spec.ts:25",
+            "src/string/constantCase.spec.ts:33"
+          ]
+        },
+        {
+          "id": "ok.from-camel-pascal-snake",
+          "key": "constantCase.ok.from-camel-pascal-snake",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"camelCase\" gives \"CAMEL_CASE\", \"PascalCase\" gives \"PASCAL_CASE\" and \"snake_case\" gives \"SNAKE_CASE\"",
+          "textHash": "fb722db954f02d88",
+          "line": 20,
+          "references": [],
+          "tests": [
+            "src/string/constantCase.spec.ts:5",
+            "src/string/constantCase.spec.ts:29",
+            "src/string/constantCase.spec.ts:37"
+          ]
+        },
+        {
+          "id": "ok.acronym-word",
+          "key": "constantCase.ok.acronym-word",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"HTTP Request\" gives \"HTTP_REQUEST\"",
+          "textHash": "e5890d62d8401d5b",
+          "line": 21,
+          "references": [],
+          "tests": [
+            "src/string/constantCase.spec.ts:17"
+          ]
+        },
+        {
+          "id": "ok.extra-spaces-dropped",
+          "key": "constantCase.ok.extra-spaces-dropped",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\" multiple spaces \" gives \"MULTIPLE_SPACES\"",
+          "textHash": "df2850fb39297ee3",
+          "line": 22,
+          "references": [],
+          "tests": [
+            "src/string/constantCase.spec.ts:21"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "deburr",
+      "kind": "function",
+      "operation": "deburr",
+      "file": "src/string/deburr.ts",
+      "line": 64,
+      "endLine": 72,
+      "referencedBy": [
+        "src/compat/string/deburr.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "Converts a string by replacing special characters and diacritical marks with their ASCII equivalents. For example, \"Crème brûlée\" becomes \"Creme brulee\". Only Latin letters are converted. Letters of other scripts, such as Hangul, Cyrillic, or Greek, are kept as they are, even if they carry diacritical marks.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The input string to be deburred."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "boundary",
+          "expression": "code < 0x80",
+          "line": 77,
+          "values": [
+            "128"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code >= 0xc0",
+          "line": 111,
+          "values": [
+            "192"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code <= 0x233",
+          "line": 111,
+          "values": [
+            "563"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code >= 0x1e00",
+          "line": 111,
+          "values": [
+            "7680"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code <= 0x1ef9",
+          "line": 111,
+          "values": [
+            "7929"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "code === 0x212a",
+          "line": 111,
+          "values": [
+            "8490"
+          ],
+          "names": []
+        },
+        {
+          "kind": "match",
+          "expression": "code === 0x212b",
+          "line": 111,
+          "values": [
+            "8491"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code >= 0x300",
+          "line": 117,
+          "values": [
+            "768"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code <= 0x36f",
+          "line": 117,
+          "values": [
+            "879"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code >= 0x20d0",
+          "line": 119,
+          "values": [
+            "8400"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code <= 0x20ff",
+          "line": 119,
+          "values": [
+            "8447"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code >= 0xfe20",
+          "line": 121,
+          "values": [
+            "65056"
+          ],
+          "names": []
+        },
+        {
+          "kind": "boundary",
+          "expression": "code <= 0xfe2f",
+          "line": 121,
+          "values": [
+            "65071"
+          ],
+          "names": []
+        }
+      ],
+      "helperRanges": [
+        {
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "line": 114,
+          "endLine": 123
+        }
+      ],
+      "constantRanges": [
+        {
+          "name": "deburrMap",
+          "file": "src/string/deburr.ts",
+          "line": 1,
+          "endLine": 31
+        }
+      ],
+      "implHash": "a29fe3b6317c50b6",
+      "guarantees": [
+        {
+          "id": "ok.accents-removed",
+          "key": "deburr.ok.accents-removed",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"café\" gives \"cafe\", \"résumé\" gives \"resume\", \"naïve\" gives \"naive\" and \"Zürich\" gives \"Zurich\"",
+          "textHash": "46b306de96917617",
+          "line": 59,
+          "references": [],
+          "tests": [
+            "src/string/deburr.spec.ts:9",
+            "src/string/deburr.spec.ts:15",
+            "src/string/deburr.spec.ts:20",
+            "src/string/deburr.spec.ts:27",
+            "src/string/deburr.spec.ts:35",
+            "src/string/deburr.spec.ts:51",
+            "src/string/deburr.spec.ts:60",
+            "src/string/deburr.spec.ts:84",
+            "src/string/deburr.spec.ts:91",
+            "src/string/deburr.spec.ts:95",
+            "src/string/deburr.spec.ts:104",
+            "src/string/deburr.spec.ts:108"
+          ]
+        },
+        {
+          "id": "ok.other-languages",
+          "key": "deburr.ok.other-languages",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"München\" gives \"Munchen\", \"Crème brûlée\" gives \"Creme brulee\" and \"mañana\" gives \"manana\"",
+          "textHash": "6857f4a7c857ce71",
+          "line": 60,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.non-latin-kept",
+          "key": "deburr.ok.non-latin-kept",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"한국어\" gives \"한국어\" and \"йогурт\" gives \"йогурт\"",
+          "textHash": "3758f8196d7d76bd",
+          "line": 61,
+          "references": [],
+          "tests": [
+            "src/string/deburr.spec.ts:65",
+            "src/string/deburr.spec.ts:71",
+            "src/string/deburr.spec.ts:78"
+          ]
+        },
+        {
+          "id": "ok.mixed-scripts",
+          "key": "deburr.ok.mixed-scripts",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"Café Москва 한국어\" gives \"Cafe Москва 한국어\"",
+          "textHash": "4369b418685c1c60",
+          "line": 62,
+          "references": [],
+          "tests": [
+            "src/string/deburr.spec.ts:100"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "escape",
+      "kind": "function",
+      "operation": "escape",
+      "file": "src/string/escape.ts",
+      "line": 26,
+      "endLine": 28,
+      "referencedBy": [
+        "src/compat/string/escape.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "Converts the characters \"&\", \"<\", \">\", '\"', and \"'\" in `str` to their corresponding HTML entities. For example, \"<\" becomes \"&lt;\".",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string to escape."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "replace",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "constantRanges": [
+        {
+          "name": "htmlEscapes",
+          "file": "src/string/escape.ts",
+          "line": 1,
+          "endLine": 7
+        }
+      ],
+      "implHash": "7fa7b6ab92049228",
+      "guarantees": [
+        {
+          "id": "ok.tags-escaped",
+          "key": "escape.ok.tags-escaped",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"<div>Hello World</div>\" gives \"&lt;div&gt;Hello World&lt;/div&gt;\"",
+          "textHash": "6278abc40282bc48",
+          "line": 21,
+          "references": [],
+          "tests": [
+            "src/string/escape.spec.ts:12",
+            "src/string/escape.spec.ts:16",
+            "src/string/escape.spec.ts:20",
+            "src/string/escape.spec.ts:25"
+          ]
+        },
+        {
+          "id": "ok.ampersand-escaped",
+          "key": "escape.ok.ampersand-escaped",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"Tom & Jerry\" gives \"Tom &amp; Jerry\"",
+          "textHash": "7d25cf501f8e1e97",
+          "line": 22,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.double-quote-escaped",
+          "key": "escape.ok.double-quote-escaped",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"\"Hello\"\" (the word Hello in double quotes) gives \"&quot;Hello&quot;\"",
+          "textHash": "3b3ace1cef7b0cb1",
+          "line": 23,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.single-quote-escaped",
+          "key": "escape.ok.single-quote-escaped",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "the word Hello in single quotes gives the word Hello surrounded by \"&#39;\" on both sides",
+          "textHash": "f37989890add4822",
+          "line": 24,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "escapeRegExp",
+      "kind": "function",
+      "operation": "escapeRegExp",
+      "file": "src/string/escapeRegExp.ts",
+      "line": 16,
+      "endLine": 18,
+      "referencedBy": [
+        "src/compat/string/escapeRegExp.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "Escapes the RegExp special characters \"^\", \"$\", \"\\\", \".\", \"*\", \"+\", \"?\", \"(\", \")\", \"[\", \"]\", \"{\", \"}\", and \"|\" in `str`.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string to escape."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "replace",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "38ae0f27be0760f5",
+      "guarantees": [
+        {
+          "id": "ok.dot-escaped",
+          "key": "escapeRegExp.ok.dot-escaped",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"Hello.\" gives \"Hello\" followed by one backslash and a dot",
+          "textHash": "639848b327891637",
+          "line": 11,
+          "references": [],
+          "tests": [
+            "src/string/escapeRegExp.spec.ts:8",
+            "src/string/escapeRegExp.spec.ts:12"
+          ]
+        },
+        {
+          "id": "ok.parentheses-escaped",
+          "key": "escapeRegExp.ok.parentheses-escaped",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"(test)\" gives \"test\" wrapped in an escaped opening parenthesis and an escaped closing parenthesis, each preceded by one backslash",
+          "textHash": "db383548b440205b",
+          "line": 12,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.brackets-escaped",
+          "key": "escapeRegExp.ok.brackets-escaped",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"[abc]\" gives \"abc\" wrapped in an escaped opening bracket and an escaped closing bracket, each preceded by one backslash",
+          "textHash": "41adfe5bee9803d0",
+          "line": 13,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.at-sign-not-escaped",
+          "key": "escapeRegExp.ok.at-sign-not-escaped",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"user@domain.com\" gives \"user@domain\" followed by one backslash and \".com\"",
+          "textHash": "62d8ab4ecb29565d",
+          "line": 14,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "kebabCase",
+      "kind": "function",
+      "operation": "kebabCase",
+      "file": "src/string/kebabCase.ts",
+      "line": 24,
+      "endLine": 27,
+      "referencedBy": [
+        "src/object/toKebabCaseKeys.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "words"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "7281365604e92df5",
+      "guarantees": [
+        {
+          "id": "ok.camel-to-kebab",
+          "key": "kebabCase.ok.camel-to-kebab",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"camelCase\" gives \"camel-case\"",
+          "textHash": "11fb9c3ccaf77003",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "src/string/kebabCase.spec.ts:5",
+            "src/string/kebabCase.spec.ts:25",
+            "src/string/kebabCase.spec.ts:33",
+            "src/string/kebabCase.spec.ts:37",
+            "src/string/kebabCase.spec.ts:41",
+            "src/string/kebabCase.spec.ts:45"
+          ]
+        },
+        {
+          "id": "ok.whitespace-to-dash",
+          "key": "kebabCase.ok.whitespace-to-dash",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"some whitespace\" gives \"some-whitespace\"",
+          "textHash": "63f66ea5c5c494c1",
+          "line": 20,
+          "references": [],
+          "tests": [
+            "src/string/kebabCase.spec.ts:9",
+            "src/string/kebabCase.spec.ts:21"
+          ]
+        },
+        {
+          "id": "ok.kebab-unchanged",
+          "key": "kebabCase.ok.kebab-unchanged",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hyphen-text\" gives \"hyphen-text\"",
+          "textHash": "26992001fc63fa7d",
+          "line": 21,
+          "references": [],
+          "tests": [
+            "src/string/kebabCase.spec.ts:13",
+            "src/string/kebabCase.spec.ts:29"
+          ]
+        },
+        {
+          "id": "ok.acronym-split",
+          "key": "kebabCase.ok.acronym-split",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"HTTPRequest\" gives \"http-request\"",
+          "textHash": "d5ce8c7a5c5c48b7",
+          "line": 22,
+          "references": [],
+          "tests": [
+            "src/string/kebabCase.spec.ts:17"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "lowerCase",
+      "kind": "function",
+      "operation": "lowerCase",
+      "file": "src/string/lowerCase.ts",
+      "line": 21,
+      "endLine": 24,
+      "referencedBy": [
+        "src/string/index.ts"
+      ],
+      "summary": "Converts a string to lower case. Lower case is the naming convention in which each word is written in lowercase and separated by an space ( ) character.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string that is to be changed to lower case."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "words"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "b9673ca60ace5f05",
+      "guarantees": [
+        {
+          "id": "ok.lower-with-spaces",
+          "key": "lowerCase.ok.lower-with-spaces",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"Hello World\" gives \"hello world\" and \"camelCase\" gives \"camel case\"",
+          "textHash": "9e3284875e2e82d5",
+          "line": 16,
+          "references": [],
+          "tests": [
+            "src/string/lowerCase.spec.ts:5",
+            "src/string/lowerCase.spec.ts:9",
+            "src/string/lowerCase.spec.ts:29",
+            "src/string/lowerCase.spec.ts:33"
+          ]
+        },
+        {
+          "id": "ok.from-other-cases",
+          "key": "lowerCase.ok.from-other-cases",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"some-kebab-case\" gives \"some kebab case\", \"PascalCase\" gives \"pascal case\" and \"SCREAMING_SNAKE_CASE\" gives \"screaming snake case\"",
+          "textHash": "56d5936fa91a6f4e",
+          "line": 17,
+          "references": [],
+          "tests": [
+            "src/string/lowerCase.spec.ts:13",
+            "src/string/lowerCase.spec.ts:37"
+          ]
+        },
+        {
+          "id": "ok.acronym-split",
+          "key": "lowerCase.ok.acronym-split",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"HTTPSConnection\" gives \"https connection\"",
+          "textHash": "81bc4ac0f88e1fa8",
+          "line": 18,
+          "references": [],
+          "tests": [
+            "src/string/lowerCase.spec.ts:17"
+          ]
+        },
+        {
+          "id": "ok.mixed-separators",
+          "key": "lowerCase.ok.mixed-separators",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"user_profile-settings\" gives \"user profile settings\" and \" mixed CASE text \" gives \"mixed case text\"",
+          "textHash": "e625448cec74dcfe",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "src/string/lowerCase.spec.ts:21",
+            "src/string/lowerCase.spec.ts:25"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "pad",
+      "kind": "function",
+      "operation": "pad",
+      "file": "src/string/pad.ts",
+      "line": 21,
+      "endLine": 23,
+      "referencedBy": [
+        "src/string/index.ts"
+      ],
+      "summary": "Pads string on the left and right sides if it's shorter than length. Padding characters are truncated if they can't be evenly divided by length. If the length is less than or equal to the original string's length, or if the padding character is an empty string, the original string is returned unchanged.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string to pad."
+        },
+        {
+          "name": "length",
+          "type": "number",
+          "optional": false,
+          "doc": "The length of the resulting string once padded."
+        },
+        {
+          "name": "chars",
+          "type": "string",
+          "optional": true,
+          "doc": "The character(s) to use for padding."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "padStart",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [
+        {
+          "kind": "constant",
+          "expression": "(length - str.length) / 2",
+          "line": 22,
+          "values": [
+            "2"
+          ],
+          "names": []
+        }
+      ],
+      "implHash": "e0e1a5e210d6eac4",
+      "guarantees": [
+        {
+          "id": "ok.default-chars-space",
+          "key": "pad.ok.default-chars-space",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"abc\" padded to `length` 8 without `chars` gives \"abc\" with two spaces on the left and three spaces on the right",
+          "textHash": "e1238f6a72f1990e",
+          "line": 16,
+          "references": [],
+          "tests": [
+            "src/string/pad.spec.ts:5",
+            "src/string/pad.spec.ts:22",
+            "src/string/pad.spec.ts:26",
+            "src/string/pad.spec.ts:30"
+          ]
+        },
+        {
+          "id": "ok.custom-chars",
+          "key": "pad.ok.custom-chars",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"abc\" padded to `length` 8 with `chars` \"_-\" gives \"_-abc_-_\"",
+          "textHash": "087e6a5821562dfe",
+          "line": 17,
+          "references": [],
+          "tests": [
+            "src/string/pad.spec.ts:9"
+          ]
+        },
+        {
+          "id": "ok.longer-or-equal-unchanged",
+          "key": "pad.ok.longer-or-equal-unchanged",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"abc\" with `length` 3 gives \"abc\" and \"abcdef\" with `length` 3 gives \"abcdef\"",
+          "textHash": "0e9fb501228f10bf",
+          "line": 18,
+          "references": [],
+          "tests": [
+            "src/string/pad.spec.ts:13",
+            "src/string/pad.spec.ts:17"
+          ]
+        },
+        {
+          "id": "ok.right-gets-extra",
+          "key": "pad.ok.right-gets-extra",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"abc\" padded to `length` 9 with `chars` \"123\" gives \"123abc123\" and to `length` 10 gives \"123abc1231\"",
+          "textHash": "8633fd2df3f6a7a5",
+          "line": 19,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "pascalCase",
+      "kind": "function",
+      "operation": "pascalCase",
+      "file": "src/string/pascalCase.ts",
+      "line": 23,
+      "endLine": 26,
+      "referencedBy": [
+        "src/object/toPascalCaseKeys.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "Converts a string to Pascal case. Pascal case is the naming convention in which each word is capitalized and concatenated without any separator characters.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string that is to be changed to pascal case."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "capitalize",
+        "words"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "470aae19974a8cb9",
+      "guarantees": [
+        {
+          "id": "ok.basic",
+          "key": "pascalCase.ok.basic",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"pascalCase\" gives \"PascalCase\" and \"some whitespace\" gives \"SomeWhitespace\"",
+          "textHash": "f8a7f8714b5b74f3",
+          "line": 17,
+          "references": [],
+          "tests": [
+            "src/string/pascalCase.spec.ts:5",
+            "src/string/pascalCase.spec.ts:17",
+            "src/string/pascalCase.spec.ts:25",
+            "src/string/pascalCase.spec.ts:29",
+            "src/string/pascalCase.spec.ts:33"
+          ]
+        },
+        {
+          "id": "ok.hyphen-underscore",
+          "key": "pascalCase.ok.hyphen-underscore",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hyphen-text\" gives \"HyphenText\" and \"snake_case\" gives \"SnakeCase\"",
+          "textHash": "147b7d36d6e27de5",
+          "line": 18,
+          "references": [],
+          "tests": [
+            "src/string/pascalCase.spec.ts:9"
+          ]
+        },
+        {
+          "id": "ok.consecutive-uppercase",
+          "key": "pascalCase.ok.consecutive-uppercase",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"HTTPRequest\" gives \"HttpRequest\" and \"XMLHttpRequest\" gives \"XmlHttpRequest\"",
+          "textHash": "94d976fe00eff5e2",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "src/string/pascalCase.spec.ts:13"
+          ]
+        },
+        {
+          "id": "ok.mixed-separators",
+          "key": "pascalCase.ok.mixed-separators",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"camelCase-with_mixed.separators\" gives \"CamelCaseWithMixedSeparators\"",
+          "textHash": "98bd1995d29b44f4",
+          "line": 20,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.numbers-and-symbols",
+          "key": "pascalCase.ok.numbers-and-symbols",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"version2.1.0\" gives \"Version210\" and \"user@email.com\" gives \"UserEmailCom\"",
+          "textHash": "c0348d509355587d",
+          "line": 21,
+          "references": [],
+          "tests": [
+            "src/string/pascalCase.spec.ts:21"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "reverseString",
+      "kind": "function",
+      "operation": "reverseString",
+      "file": "src/string/reverseString.ts",
+      "line": 18,
+      "endLine": 20,
+      "referencedBy": [
+        "src/string/index.ts"
+      ],
+      "summary": "Reverses a given string. This function takes a string as input and returns a new string that is the reverse of the input.",
+      "params": [
+        {
+          "name": "value",
+          "type": "string",
+          "optional": false,
+          "doc": "The string that is to be reversed."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "4d2f3ef4c0bca2fe",
+      "guarantees": [
+        {
+          "id": "ok.basic",
+          "key": "reverseString.ok.basic",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hello\" gives \"olleh\", \"world\" gives \"dlrow\" and \"hello world\" gives \"dlrow olleh\"",
+          "textHash": "d491b0b2beb4d25d",
+          "line": 13,
+          "references": [],
+          "tests": [
+            "src/string/reverseString.spec.ts:5",
+            "src/string/reverseString.spec.ts:9",
+            "src/string/reverseString.spec.ts:18"
+          ]
+        },
+        {
+          "id": "ok.case-kept",
+          "key": "reverseString.ok.case-kept",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"PascalCase\" gives \"esaClacsaP\"",
+          "textHash": "065c3b257b3f03ac",
+          "line": 14,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.emoji-intact",
+          "key": "reverseString.ok.emoji-intact",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"foo 😄 bar\" gives \"rab 😄 oof\"",
+          "textHash": "bcc181ff244f58b7",
+          "line": 15,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.hangul-and-symbols",
+          "key": "reverseString.ok.hangul-and-symbols",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"안녕하세요\" gives \"요세하녕안\", \"12345\" gives \"54321\" and \"a-b-c\" gives \"c-b-a\"",
+          "textHash": "d70d06df3099eb58",
+          "line": 16,
+          "references": [],
+          "tests": [
+            "src/string/reverseString.spec.ts:13",
+            "src/string/reverseString.spec.ts:22"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "snakeCase",
+      "kind": "function",
+      "operation": "snakeCase",
+      "file": "src/string/snakeCase.ts",
+      "line": 25,
+      "endLine": 28,
+      "referencedBy": [
+        "src/object/toSnakeCaseKeys.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "words"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "2905d3a4d8c73b1c",
+      "guarantees": [
+        {
+          "id": "ok.basic",
+          "key": "snakeCase.ok.basic",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"camelCase\" gives \"camel_case\" and \"some whitespace\" gives \"some_whitespace\"",
+          "textHash": "48312561b883416c",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "src/string/snakeCase.spec.ts:5",
+            "src/string/snakeCase.spec.ts:9",
+            "src/string/snakeCase.spec.ts:21",
+            "src/string/snakeCase.spec.ts:29",
+            "src/string/snakeCase.spec.ts:33",
+            "src/string/snakeCase.spec.ts:37"
+          ]
+        },
+        {
+          "id": "ok.hyphen-pascal",
+          "key": "snakeCase.ok.hyphen-pascal",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hyphen-text\" gives \"hyphen_text\" and \"PascalCase\" gives \"pascal_case\"",
+          "textHash": "10ec2246565d6069",
+          "line": 20,
+          "references": [],
+          "tests": [
+            "src/string/snakeCase.spec.ts:13"
+          ]
+        },
+        {
+          "id": "ok.consecutive-uppercase",
+          "key": "snakeCase.ok.consecutive-uppercase",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"HTTPRequest\" gives \"http_request\" and \"XMLHttpRequest\" gives \"xml_http_request\"",
+          "textHash": "4ced5eef558c6dff",
+          "line": 21,
+          "references": [],
+          "tests": [
+            "src/string/snakeCase.spec.ts:17"
+          ]
+        },
+        {
+          "id": "ok.mixed-separators",
+          "key": "snakeCase.ok.mixed-separators",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"camelCase-with_mixed.separators\" gives \"camel_case_with_mixed_separators\"",
+          "textHash": "9908a7bd240d4032",
+          "line": 22,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.numbers-split",
+          "key": "snakeCase.ok.numbers-split",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"version2.1.0\" gives \"version_2_1_0\" and \"user@email.com\" gives \"user_email_com\"",
+          "textHash": "5bc34569ca2ba482",
+          "line": 23,
+          "references": [],
+          "tests": [
+            "src/string/snakeCase.spec.ts:25"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "startCase",
+      "kind": "function",
+      "operation": "startCase",
+      "file": "src/string/startCase.ts",
+      "line": 22,
+      "endLine": 34,
+      "referencedBy": [
+        "src/string/index.ts"
+      ],
+      "summary": "Converts the first character of each word in a string to uppercase and the remaining characters to lowercase. Start case is the naming convention in which each word is written with an initial capital letter.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string to convert."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "trim",
+          "count": 1
+        }
+      ],
+      "operationCalls": [
+        "words"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "4691eaff1d0ff2f0",
+      "guarantees": [
+        {
+          "id": "ok.capitalized-words",
+          "key": "startCase.ok.capitalized-words",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hello world\" gives \"Hello World\" and \"HELLO WORLD\" gives \"Hello World\"",
+          "textHash": "5be3dfc3aef110d9",
+          "line": 15,
+          "references": [],
+          "tests": [
+            "src/string/startCase.spec.ts:5",
+            "src/string/startCase.spec.ts:46",
+            "src/string/startCase.spec.ts:51",
+            "src/string/startCase.spec.ts:57",
+            "src/string/startCase.spec.ts:62",
+            "src/string/startCase.spec.ts:67"
+          ]
+        },
+        {
+          "id": "ok.from-camel-pascal",
+          "key": "startCase.ok.from-camel-pascal",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"fooBar\" gives \"Foo Bar\" and \"PascalCase\" gives \"Pascal Case\"",
+          "textHash": "b5c4fb48956ad130",
+          "line": 16,
+          "references": [],
+          "tests": [
+            "src/string/startCase.spec.ts:11"
+          ]
+        },
+        {
+          "id": "ok.hyphen-underscore",
+          "key": "startCase.ok.hyphen-underscore",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hello-world\" gives \"Hello World\" and \"hello_world\" gives \"Hello World\"",
+          "textHash": "8ed0a9c9da988e5b",
+          "line": 17,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.delimiters-trimmed",
+          "key": "startCase.ok.delimiters-trimmed",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"--foo-bar--\" gives \"Foo Bar\" and \"__FOO_BAR__\" gives \"Foo Bar\"",
+          "textHash": "7062301823eac701",
+          "line": 18,
+          "references": [],
+          "tests": [
+            "src/string/startCase.spec.ts:17"
+          ]
+        },
+        {
+          "id": "ok.acronym-and-numbers",
+          "key": "startCase.ok.acronym-and-numbers",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"XMLHttpRequest\" gives \"Xml Http Request\", \"_abc_123_def\" gives \"Abc 123 Def\" and \"12abc 12ABC\" gives \"12 Abc 12 Abc\"",
+          "textHash": "9c5e18aed0c68a0a",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "src/string/startCase.spec.ts:32",
+            "src/string/startCase.spec.ts:36",
+            "src/string/startCase.spec.ts:41"
+          ]
+        },
+        {
+          "id": "ok.only-delimiters-empty",
+          "key": "startCase.ok.only-delimiters-empty",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"_-_-_-_\" gives \"\"",
+          "textHash": "81787121b5bf71b4",
+          "line": 20,
+          "references": [],
+          "tests": [
+            "src/string/startCase.spec.ts:24",
+            "src/string/startCase.spec.ts:28"
+          ]
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "trim",
+      "kind": "function",
+      "operation": "trim",
+      "file": "src/string/trim.ts",
+      "line": 22,
+      "endLine": 28,
+      "referencedBy": [
+        "src/compat/string/trim.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "Removes leading and trailing whitespace or specified characters from a string.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string from which characters will be trimmed."
+        },
+        {
+          "name": "chars",
+          "type": "string | string[]",
+          "optional": true,
+          "doc": "The character(s) to remove from the string. Can be a single character or an array of characters."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "trim",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "7e33d172b434304e",
+      "guarantees": [
+        {
+          "id": "ok.default-whitespace",
+          "key": "trim.ok.default-whitespace",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\" hello \" gives \"hello\" and a tab, newline and spaces around \"hello\" are removed too",
+          "textHash": "479be81e0f80884e",
+          "line": 15,
+          "references": [],
+          "tests": [
+            "src/string/trim.spec.ts:9",
+            "src/string/trim.spec.ts:13",
+            "src/string/trim.spec.ts:25",
+            "src/string/trim.spec.ts:33",
+            "src/string/trim.spec.ts:37",
+            "src/string/trim.spec.ts:41",
+            "src/string/trim.spec.ts:45"
+          ]
+        },
+        {
+          "id": "ok.single-char",
+          "key": "trim.ok.single-char",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"--hello--\" with `chars` \"-\" gives \"hello\" and \"***hello***\" with `chars` \"*\" gives \"hello\"",
+          "textHash": "a61236074dd8b8aa",
+          "line": 16,
+          "references": [],
+          "tests": [
+            "src/string/trim.spec.ts:5",
+            "src/string/trim.spec.ts:17"
+          ]
+        },
+        {
+          "id": "ok.array-chars",
+          "key": "trim.ok.array-chars",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"!!@@hello@@!!\" with `chars` [\"!\", \"@\"] gives \"hello\" and \"123abc123\" with `chars` [\"1\", \"2\", \"3\"] gives \"abc\"",
+          "textHash": "993fa180f1d6d0bf",
+          "line": 17,
+          "references": [],
+          "tests": [
+            "src/string/trim.spec.ts:21"
+          ]
+        },
+        {
+          "id": "ok.array-chars-both-ends",
+          "key": "trim.ok.array-chars-both-ends",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"##hello##world##\" with `chars` [\"#\", \"d\"] gives \"hello##worl\"",
+          "textHash": "212ecce005de323a",
+          "line": 18,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.chars-and-space",
+          "key": "trim.ok.chars-and-space",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\" __hello__ \" with `chars` [\"_\", \" \"] gives \"hello\"",
+          "textHash": "3c3f5d899f9376ae",
+          "line": 19,
+          "references": [],
+          "tests": [
+            "src/string/trim.spec.ts:29"
+          ]
+        },
+        {
+          "id": "err.multi-char-string",
+          "key": "trim.err.multi-char-string",
+          "kind": "err",
+          "source": "guarantee",
+          "text": "throws an error when `chars` is a string whose length is not 1",
+          "textHash": "37e2839bdde38b43",
+          "line": 20,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "unescape",
+      "kind": "function",
+      "operation": "unescape",
+      "file": "src/string/unescape.ts",
+      "line": 27,
+      "endLine": 29,
+      "referencedBy": [
+        "src/compat/string/unescape.ts",
+        "src/string/index.ts"
+      ],
+      "summary": "Converts the HTML entities `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `str` to their corresponding characters. It is the inverse of `escape`.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string to unescape."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "replace",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "constantRanges": [
+        {
+          "name": "htmlUnescapes",
+          "file": "src/string/unescape.ts",
+          "line": 1,
+          "endLine": 7
+        }
+      ],
+      "implHash": "2aaf455a16a9e595",
+      "guarantees": [
+        {
+          "id": "ok.tags-restored",
+          "key": "unescape.ok.tags-restored",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"This is a &lt;div&gt; element.\" gives \"This is a <div> element.\"",
+          "textHash": "e710f1e5f0518b7e",
+          "line": 21,
+          "references": [],
+          "tests": [
+            "src/string/unescape.spec.ts:12",
+            "src/string/unescape.spec.ts:16",
+            "src/string/unescape.spec.ts:20",
+            "src/string/unescape.spec.ts:24",
+            "src/string/unescape.spec.ts:28",
+            "src/string/unescape.spec.ts:35"
+          ]
+        },
+        {
+          "id": "ok.double-quote-restored",
+          "key": "unescape.ok.double-quote-restored",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"This is a &quot;quote&quot;\" gives \"This is a \"quote\"\" (with plain double quotes)",
+          "textHash": "1ae6e52e9e266f04",
+          "line": 22,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.single-quote-restored",
+          "key": "unescape.ok.single-quote-restored",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"&#39;\" is converted to a plain single quote",
+          "textHash": "d3b3182e07966bfd",
+          "line": 23,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.ampersand-restored",
+          "key": "unescape.ok.ampersand-restored",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"This is a &amp; symbol\" gives \"This is a & symbol\"",
+          "textHash": "7d0f684032995762",
+          "line": 24,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.mixed-entities",
+          "key": "unescape.ok.mixed-entities",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"&quot;Hello &amp; Welcome&quot; &lt;says the &gt; user\" gives \"\"Hello & Welcome\" <says the > user\"",
+          "textHash": "6f657b2b86ede201",
+          "line": 25,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "upperCase",
+      "kind": "function",
+      "operation": "upperCase",
+      "file": "src/string/upperCase.ts",
+      "line": 21,
+      "endLine": 34,
+      "referencedBy": [
+        "src/string/index.ts"
+      ],
+      "summary": "Converts a string to upper case. Upper case is the naming convention in which each word is written in uppercase and separated by an space ( ) character.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string that is to be changed to upper case."
+        }
+      ],
+      "returns": "string",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [],
+      "operationCalls": [
+        "words"
+      ],
+      "envInputs": [],
+      "decisions": [],
+      "implHash": "588a3a62f9671dfa",
+      "guarantees": [
+        {
+          "id": "ok.upper-with-spaces",
+          "key": "upperCase.ok.upper-with-spaces",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"camelCase\" gives \"CAMEL CASE\" and \"some whitespace\" gives \"SOME WHITESPACE\"",
+          "textHash": "b2a8a79cccb1cf1b",
+          "line": 16,
+          "references": [],
+          "tests": [
+            "src/string/upperCase.spec.ts:5",
+            "src/string/upperCase.spec.ts:9",
+            "src/string/upperCase.spec.ts:21",
+            "src/string/upperCase.spec.ts:25",
+            "src/string/upperCase.spec.ts:29",
+            "src/string/upperCase.spec.ts:33",
+            "src/string/upperCase.spec.ts:37"
+          ]
+        },
+        {
+          "id": "ok.kebab",
+          "key": "upperCase.ok.kebab",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"hyphen-text\" gives \"HYPHEN TEXT\"",
+          "textHash": "0e65ddff905d44a1",
+          "line": 17,
+          "references": [],
+          "tests": [
+            "src/string/upperCase.spec.ts:13"
+          ]
+        },
+        {
+          "id": "ok.acronym-split",
+          "key": "upperCase.ok.acronym-split",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"HTTPSRequest\" gives \"HTTPS REQUEST\"",
+          "textHash": "4e376cd423d12409",
+          "line": 18,
+          "references": [],
+          "tests": [
+            "src/string/upperCase.spec.ts:17"
+          ]
+        },
+        {
+          "id": "ok.snake-and-email",
+          "key": "upperCase.ok.snake-and-email",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"user_name\" gives \"USER NAME\" and \"email-address\" gives \"EMAIL ADDRESS\"",
+          "textHash": "825d28d43f490d53",
+          "line": 19,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [],
+      "hasDoc": true
+    },
+    {
+      "id": "words",
+      "kind": "function",
+      "operation": "words",
+      "file": "src/string/words.ts",
+      "line": 43,
+      "endLine": 45,
+      "referencedBy": [
+        "src/string/camelCase.ts",
+        "src/string/constantCase.ts",
+        "src/string/index.ts",
+        "src/string/kebabCase.ts",
+        "src/string/lowerCase.ts",
+        "src/string/pascalCase.ts",
+        "src/string/sentenceCase.ts",
+        "src/string/snakeCase.ts",
+        "src/string/startCase.ts",
+        "src/string/upperCase.ts"
+      ],
+      "summary": "Splits `string` into an array of its words, treating spaces and punctuation marks as separators.",
+      "params": [
+        {
+          "name": "str",
+          "type": "string",
+          "optional": false,
+          "doc": "The string to inspect."
+        }
+      ],
+      "returns": "string[]",
+      "uses": [],
+      "modifies": [],
+      "injectedPorts": [],
+      "portCalls": [
+        {
+          "port": "str",
+          "member": "match",
+          "count": 1
+        }
+      ],
+      "operationCalls": [],
+      "envInputs": [],
+      "decisions": [],
+      "constantRanges": [
+        {
+          "name": "CASE_SPLIT_PATTERN",
+          "file": "src/string/words.ts",
+          "line": 18,
+          "endLine": 19
+        }
+      ],
+      "implHash": "c25f44589cb7d7d6",
+      "guarantees": [
+        {
+          "id": "ok.punctuation-split",
+          "key": "words.ok.punctuation-split",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"fred, barney, & pebbles\" gives [\"fred\", \"barney\", \"pebbles\"]",
+          "textHash": "2450932ca65a3665",
+          "line": 37,
+          "references": [],
+          "tests": [
+            "src/string/words.spec.ts:5",
+            "src/string/words.spec.ts:10",
+            "src/string/words.spec.ts:15",
+            "src/string/words.spec.ts:37",
+            "src/string/words.spec.ts:43",
+            "src/string/words.spec.ts:55",
+            "src/string/words.spec.ts:61",
+            "src/string/words.spec.ts:67",
+            "src/string/words.spec.ts:73",
+            "src/string/words.spec.ts:79"
+          ]
+        },
+        {
+          "id": "ok.camel-acronym-emoji",
+          "key": "words.ok.camel-acronym-emoji",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"camelCaseHTTPRequest🚀\" gives [\"camel\", \"Case\", \"HTTP\", \"Request\", \"🚀\"]",
+          "textHash": "848ccc93db348ad5",
+          "line": 38,
+          "references": [],
+          "tests": [
+            "src/string/words.spec.ts:20",
+            "src/string/words.spec.ts:25",
+            "src/string/words.spec.ts:31",
+            "src/string/words.spec.ts:49",
+            "src/string/words.spec.ts:87"
+          ]
+        },
+        {
+          "id": "ok.unicode-and-numbers",
+          "key": "words.ok.unicode-and-numbers",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"Lunedì 18 Set\" gives [\"Lunedì\", \"18\", \"Set\"]",
+          "textHash": "1f225300c40249b1",
+          "line": 39,
+          "references": [],
+          "tests": [
+            "src/string/words.spec.ts:83",
+            "src/string/words.spec.ts:91"
+          ]
+        },
+        {
+          "id": "ok.identifier-styles",
+          "key": "words.ok.identifier-styles",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"getUserProfile\" gives [\"get\", \"User\", \"Profile\"] and \"user_profile_data\" gives [\"user\", \"profile\", \"data\"]",
+          "textHash": "c4f5facc1bb16c3c",
+          "line": 40,
+          "references": [],
+          "tests": []
+        },
+        {
+          "id": "ok.complex",
+          "key": "words.ok.complex",
+          "kind": "ok",
+          "source": "guarantee",
+          "text": "\"XMLHttpRequest2.0_parser-v1.2\" gives [\"XML\", \"Http\", \"Request\", \"2\", \"0\", \"parser\", \"v\", \"1\", \"2\"]",
+          "textHash": "96ae28841c344979",
+          "line": 41,
+          "references": [],
+          "tests": []
+        }
+      ],
+      "examples": [
+        {
+          "expression": "words('fred, barney, & pebbles');",
+          "expected": "['fred', 'barney', 'pebbles']",
+          "line": 28
+        },
+        {
+          "expression": "words('camelCaseHTTPRequest🚀');",
+          "expected": "['camel', 'Case', 'HTTP', 'Request', '🚀']",
+          "line": 32
+        },
+        {
+          "expression": "words('Lunedì 18 Set')",
+          "expected": "['Lunedì', '18', 'Set']",
+          "line": 35
+        }
+      ],
+      "hasDoc": true
+    }
+  ],
+  "vocabulary": {
+    "entities": [],
+    "ports": []
+  },
+  "tests": [
+    {
+      "key": "camelCase.ok.from-other-cases",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.from-other-cases",
+      "file": "src/string/camelCase.spec.ts",
+      "line": 5,
+      "title": "camelCase.ok.from-other-cases should change camel case to camel case",
+      "status": "test",
+      "bodyHash": "84d97a4c3d19bc14",
+      "literals": [
+        "camelCase"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "camelCase",
+          "from": "src/string/camelCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "camelCase.ok.words-joined",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.words-joined",
+      "file": "src/string/camelCase.spec.ts",
+      "line": 9,
+      "title": "camelCase.ok.words-joined should change space to camel case",
+      "status": "test",
+      "bodyHash": "028c4dfa3d67facd",
+      "literals": [
+        "some whitespace",
+        "someWhitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "camelCase",
+          "from": "src/string/camelCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "camelCase.ok.words-joined",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.words-joined",
+      "file": "src/string/camelCase.spec.ts",
+      "line": 13,
+      "title": "camelCase.ok.words-joined should change hyphen to camel case",
+      "status": "test",
+      "bodyHash": "4a8d45d2edca74af",
+      "literals": [
+        "hyphen-text",
+        "hyphenText"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "camelCase",
+          "from": "src/string/camelCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "camelCase.ok.from-other-cases",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.from-other-cases",
+      "file": "src/string/camelCase.spec.ts",
+      "line": 17,
+      "title": "camelCase.ok.from-other-cases should change Acronyms to small letter",
+      "status": "test",
+      "bodyHash": "7244974741d38291",
+      "literals": [
+        "HTTPRequest",
+        "httpRequest"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "camelCase",
+          "from": "src/string/camelCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "camelCase.ok.words-joined",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.words-joined",
+      "file": "src/string/camelCase.spec.ts",
+      "line": 21,
+      "title": "camelCase.ok.words-joined should handle leading and trailing whitespace",
+      "status": "test",
+      "bodyHash": "3467cdcfa9a2d73a",
+      "literals": [
+        "    leading and trailing whitespace    ",
+        "leadingAndTrailingWhitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "camelCase",
+          "from": "src/string/camelCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "camelCase.ok.words-joined",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.words-joined",
+      "file": "src/string/camelCase.spec.ts",
+      "line": 25,
+      "title": "camelCase.ok.words-joined should handle special characters correctly",
+      "status": "test",
+      "bodyHash": "f766526c6227c90e",
+      "literals": [
+        "special@characters!",
+        "specialCharacters"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "camelCase",
+          "from": "src/string/camelCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "camelCase.ok.words-joined",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.words-joined",
+      "file": "src/string/camelCase.spec.ts",
+      "line": 29,
+      "title": "camelCase.ok.words-joined should work with an empty string",
+      "status": "test",
+      "bodyHash": "ff171a2b8d368c93",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "camelCase",
+          "from": "src/string/camelCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "camelCase.ok.from-other-cases",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.from-other-cases",
+      "file": "src/string/camelCase.spec.ts",
+      "line": 33,
+      "title": "camelCase.ok.from-other-cases should work with screaming camel case",
+      "status": "test",
+      "bodyHash": "8eea889bc85d8b0f",
+      "literals": [
+        "FOO_BAR",
+        "fooBar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "camelCase",
+          "from": "src/string/camelCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "camelCase.ok.unicode-kept",
+      "unitId": "camelCase",
+      "guaranteeId": "ok.unicode-kept",
+      "file": "src/string/camelCase.spec.ts",
+      "line": 37,
+      "title": "camelCase.ok.unicode-kept should support emojis",
+      "status": "test",
+      "bodyHash": "00a445d19c89e1b1",
+      "literals": [
+        "Keep unicode 😅",
+        "keepUnicode😅"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "camelCase",
+          "from": "src/string/camelCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "capitalize.ok.first-upper-rest-lower",
+      "unitId": "capitalize",
+      "guaranteeId": "ok.first-upper-rest-lower",
+      "file": "src/string/capitalize.spec.ts",
+      "line": 5,
+      "title": "capitalize.ok.first-upper-rest-lower should converts the first character of string to upper case",
+      "status": "test",
+      "bodyHash": "f2a37fccd5cfb3ec",
+      "literals": [
+        "fred",
+        "Fred"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "capitalize",
+          "from": "src/string/capitalize.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "capitalize.ok.first-upper-rest-lower",
+      "unitId": "capitalize",
+      "guaranteeId": "ok.first-upper-rest-lower",
+      "file": "src/string/capitalize.spec.ts",
+      "line": 9,
+      "title": "capitalize.ok.first-upper-rest-lower should converts the first character of string to upper case and the remaining to lower case.",
+      "status": "test",
+      "bodyHash": "6b1e2ce5cccf2352",
+      "literals": [
+        "FRED",
+        "Fred"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "capitalize",
+          "from": "src/string/capitalize.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "capitalize.ok.first-upper-rest-lower",
+      "unitId": "capitalize",
+      "guaranteeId": "ok.first-upper-rest-lower",
+      "file": "src/string/capitalize.spec.ts",
+      "line": 13,
+      "title": "capitalize.ok.first-upper-rest-lower should handle special characters correctly",
+      "status": "test",
+      "bodyHash": "a7c2cfd064c6528a",
+      "literals": [
+        "special@characters!",
+        "Special@characters!"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "capitalize",
+          "from": "src/string/capitalize.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "capitalize.ok.first-upper-rest-lower",
+      "unitId": "capitalize",
+      "guaranteeId": "ok.first-upper-rest-lower",
+      "file": "src/string/capitalize.spec.ts",
+      "line": 17,
+      "title": "capitalize.ok.first-upper-rest-lower should handle hyphen correctly",
+      "status": "test",
+      "bodyHash": "a7dbbc84a1728132",
+      "literals": [
+        "hyphen-text",
+        "Hyphen-text"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "capitalize",
+          "from": "src/string/capitalize.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "capitalize.ok.first-upper-rest-lower",
+      "unitId": "capitalize",
+      "guaranteeId": "ok.first-upper-rest-lower",
+      "file": "src/string/capitalize.spec.ts",
+      "line": 21,
+      "title": "capitalize.ok.first-upper-rest-lower should handle leading whitespace",
+      "status": "test",
+      "bodyHash": "baad6dc989150daf",
+      "literals": [
+        " fred"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "capitalize",
+          "from": "src/string/capitalize.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "capitalize.ok.short-strings",
+      "unitId": "capitalize",
+      "guaranteeId": "ok.short-strings",
+      "file": "src/string/capitalize.spec.ts",
+      "line": 25,
+      "title": "capitalize.ok.short-strings should handle strings that are already in capitalize",
+      "status": "test",
+      "bodyHash": "491d81327c5ab15b",
+      "literals": [
+        "Fred"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "capitalize",
+          "from": "src/string/capitalize.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "capitalize.ok.short-strings",
+      "unitId": "capitalize",
+      "guaranteeId": "ok.short-strings",
+      "file": "src/string/capitalize.spec.ts",
+      "line": 29,
+      "title": "capitalize.ok.short-strings should work with an empty string",
+      "status": "test",
+      "bodyHash": "28baac73893699f0",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "capitalize",
+          "from": "src/string/capitalize.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "constantCase.ok.from-camel-pascal-snake",
+      "unitId": "constantCase",
+      "guaranteeId": "ok.from-camel-pascal-snake",
+      "file": "src/string/constantCase.spec.ts",
+      "line": 5,
+      "title": "constantCase.ok.from-camel-pascal-snake should change camel case to constant case",
+      "status": "test",
+      "bodyHash": "f5957d894899c99a",
+      "literals": [
+        "camelCase",
+        "CAMEL_CASE"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "constantCase",
+          "from": "src/string/constantCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "constantCase.ok.upper-with-underscores",
+      "unitId": "constantCase",
+      "guaranteeId": "ok.upper-with-underscores",
+      "file": "src/string/constantCase.spec.ts",
+      "line": 9,
+      "title": "constantCase.ok.upper-with-underscores should change space to underscore",
+      "status": "test",
+      "bodyHash": "352af09850e9a7d4",
+      "literals": [
+        "some whitespace",
+        "SOME_WHITESPACE"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "constantCase",
+          "from": "src/string/constantCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "constantCase.ok.upper-with-underscores",
+      "unitId": "constantCase",
+      "guaranteeId": "ok.upper-with-underscores",
+      "file": "src/string/constantCase.spec.ts",
+      "line": 13,
+      "title": "constantCase.ok.upper-with-underscores should change hyphen to underscore",
+      "status": "test",
+      "bodyHash": "203420cbc5aa605f",
+      "literals": [
+        "hyphen-text",
+        "HYPHEN_TEXT"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "constantCase",
+          "from": "src/string/constantCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "constantCase.ok.acronym-word",
+      "unitId": "constantCase",
+      "guaranteeId": "ok.acronym-word",
+      "file": "src/string/constantCase.spec.ts",
+      "line": 17,
+      "title": "constantCase.ok.acronym-word should change Acronyms to small letter",
+      "status": "test",
+      "bodyHash": "f9d82af26510366b",
+      "literals": [
+        "HTTPRequest",
+        "HTTP_REQUEST"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "constantCase",
+          "from": "src/string/constantCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "constantCase.ok.extra-spaces-dropped",
+      "unitId": "constantCase",
+      "guaranteeId": "ok.extra-spaces-dropped",
+      "file": "src/string/constantCase.spec.ts",
+      "line": 21,
+      "title": "constantCase.ok.extra-spaces-dropped should handle leading and trailing whitespace",
+      "status": "test",
+      "bodyHash": "56a8140ba261b2ce",
+      "literals": [
+        "    leading and trailing whitespace",
+        "LEADING_AND_TRAILING_WHITESPACE"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "constantCase",
+          "from": "src/string/constantCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "constantCase.ok.upper-with-underscores",
+      "unitId": "constantCase",
+      "guaranteeId": "ok.upper-with-underscores",
+      "file": "src/string/constantCase.spec.ts",
+      "line": 25,
+      "title": "constantCase.ok.upper-with-underscores should handle special characters correctly",
+      "status": "test",
+      "bodyHash": "fc8771f1fe9bf06e",
+      "literals": [
+        "special@characters!",
+        "SPECIAL_CHARACTERS"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "constantCase",
+          "from": "src/string/constantCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "constantCase.ok.from-camel-pascal-snake",
+      "unitId": "constantCase",
+      "guaranteeId": "ok.from-camel-pascal-snake",
+      "file": "src/string/constantCase.spec.ts",
+      "line": 29,
+      "title": "constantCase.ok.from-camel-pascal-snake should handle strings that are already in CONSTANT_CASE",
+      "status": "test",
+      "bodyHash": "1070916faf9c7ac8",
+      "literals": [
+        "CONSTANT_CASE"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "constantCase",
+          "from": "src/string/constantCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "constantCase.ok.upper-with-underscores",
+      "unitId": "constantCase",
+      "guaranteeId": "ok.upper-with-underscores",
+      "file": "src/string/constantCase.spec.ts",
+      "line": 33,
+      "title": "constantCase.ok.upper-with-underscores should work with an empty string",
+      "status": "test",
+      "bodyHash": "4b157147fa4b2434",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "constantCase",
+          "from": "src/string/constantCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "constantCase.ok.from-camel-pascal-snake",
+      "unitId": "constantCase",
+      "guaranteeId": "ok.from-camel-pascal-snake",
+      "file": "src/string/constantCase.spec.ts",
+      "line": 37,
+      "title": "constantCase.ok.from-camel-pascal-snake should work with screaming constant case",
+      "status": "test",
+      "bodyHash": "57549cd8daad6977",
+      "literals": [
+        "foo_bar",
+        "FOO_BAR"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "constantCase",
+          "from": "src/string/constantCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 9,
+      "title": "deburr.ok.accents-removed should convert examples correctly",
+      "status": "test",
+      "bodyHash": "776b0801eec14d9f",
+      "literals": [
+        "Æthelred",
+        "Aethelred",
+        "München",
+        "Munchen",
+        "Crème brûlée",
+        "Creme brulee"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 15,
+      "title": "deburr.ok.accents-removed should convert Latin Unicode letters to basic Latin",
+      "status": "test",
+      "bodyHash": "648c8a8414f1bbf0",
+      "literals": [],
+      "keys": [],
+      "iterates": [
+        {
+          "name": "burredLetters",
+          "from": "src/_internal/burredLetters.ts"
+        }
+      ],
+      "reads": [
+        {
+          "name": "burredLetters",
+          "from": "src/_internal/burredLetters.ts"
+        },
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts"
+        },
+        {
+          "name": "deburredLetters",
+          "from": "src/_internal/deburredLetters.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 20,
+      "title": "deburr.ok.accents-removed should not deburr Latin mathematical operators",
+      "status": "test",
+      "bodyHash": "634e89d997fb74ff",
+      "literals": [
+        "×",
+        "÷"
+      ],
+      "keys": [],
+      "iterates": [],
+      "reads": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts"
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 27,
+      "title": "deburr.ok.accents-removed should deburr combining diacritical marks",
+      "status": "test",
+      "bodyHash": "f3d67b28776cbc08",
+      "literals": [
+        "ei",
+        "e",
+        "i"
+      ],
+      "keys": [],
+      "iterates": [
+        {
+          "name": "comboMarks",
+          "from": "src/_internal/comboMarks.ts"
+        }
+      ],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "reads": [
+        {
+          "name": "comboMarks",
+          "from": "src/_internal/comboMarks.ts"
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 35,
+      "title": "deburr.ok.accents-removed should remove combining marks from every supported range",
+      "status": "test",
+      "bodyHash": "53924f2bb9c20a22",
+      "literals": [
+        "èi",
+        "ei",
+        "eͯi",
+        "e⃐i",
+        "e⃝i",
+        "e⃡i",
+        "e⃿i",
+        "e︠i",
+        "e︤i",
+        "e︦i",
+        "e︯i"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 51,
+      "title": "deburr.ok.accents-removed should preserve characters just outside the combining mark ranges",
+      "status": "test",
+      "bodyHash": "a6d84888f8ea2632",
+      "literals": [
+        "e˿i",
+        "eͰi",
+        "e⃏i",
+        "e℀i",
+        "e︟i",
+        "e︰i"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 60,
+      "title": "deburr.ok.accents-removed should remove consecutive marks spanning different ranges",
+      "status": "test",
+      "bodyHash": "96f69926b06c9715",
+      "literals": [
+        "á̧⃑",
+        "a",
+        "Æ⃝",
+        "Ae"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.non-latin-kept",
+      "unitId": "deburr",
+      "guaranteeId": "ok.non-latin-kept",
+      "file": "src/string/deburr.spec.ts",
+      "line": 65,
+      "title": "deburr.ok.non-latin-kept should not decompose Hangul syllables",
+      "status": "test",
+      "bodyHash": "3f6af621e9170d14",
+      "literals": [
+        "한국어",
+        "3",
+        "한국어 테스트"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.non-latin-kept",
+      "unitId": "deburr",
+      "guaranteeId": "ok.non-latin-kept",
+      "file": "src/string/deburr.spec.ts",
+      "line": 71,
+      "title": "deburr.ok.non-latin-kept should keep letters of other scripts as they are, even with diacritical marks",
+      "status": "test",
+      "bodyHash": "036bfc74b57d25e5",
+      "literals": [
+        "йогурт",
+        "Мой край",
+        "Ελληνικά",
+        "がぎぐ"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.non-latin-kept",
+      "unitId": "deburr",
+      "guaranteeId": "ok.non-latin-kept",
+      "file": "src/string/deburr.spec.ts",
+      "line": 78,
+      "title": "deburr.ok.non-latin-kept should not decompose Indic and Arabic letters",
+      "status": "test",
+      "bodyHash": "d86a7e1fae75571b",
+      "literals": [
+        "क़",
+        "ো",
+        "أ"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 84,
+      "title": "deburr.ok.accents-removed should deburr Latin letters outside the Latin-1 Supplement and Latin Extended-A blocks",
+      "status": "test",
+      "bodyHash": "4abc30e6a664ea73",
+      "literals": [
+        "Tiếng Việt",
+        "Tieng Viet",
+        "Ǎǎ",
+        "Aa",
+        "Ǯǯ",
+        "Ʒʒ",
+        "KÅ",
+        "KA"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 91,
+      "title": "deburr.ok.accents-removed should deburr letters that decompose into a special Latin letter",
+      "status": "test",
+      "bodyHash": "dbb8caf8c73119d8",
+      "literals": [
+        "ǢǣǼǽǾǿẛ",
+        "AeaeAeaeOos"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 95,
+      "title": "deburr.ok.accents-removed should keep non-letter symbols that decompose into ASCII",
+      "status": "test",
+      "bodyHash": "0434e24957d36730",
+      "literals": [
+        "≠",
+        ";"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.mixed-scripts",
+      "unitId": "deburr",
+      "guaranteeId": "ok.mixed-scripts",
+      "file": "src/string/deburr.spec.ts",
+      "line": 100,
+      "title": "deburr.ok.mixed-scripts should deburr only Latin letters in a mixed string",
+      "status": "test",
+      "bodyHash": "cc70e27625096921",
+      "literals": [
+        "Café Москва 한국어",
+        "Cafe Москва 한국어"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 104,
+      "title": "deburr.ok.accents-removed should keep surrogate pairs",
+      "status": "test",
+      "bodyHash": "68eddeb6b09e4895",
+      "literals": [
+        "😀é",
+        "😀e"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "deburr.ok.accents-removed",
+      "unitId": "deburr",
+      "guaranteeId": "ok.accents-removed",
+      "file": "src/string/deburr.spec.ts",
+      "line": 108,
+      "title": "deburr.ok.accents-removed should match the compat implementation for U+00C0 to U+017F",
+      "status": "test",
+      "bodyHash": "bc1e86d2a944c2bd",
+      "literals": [
+        "192",
+        "383"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "deburr",
+          "from": "src/string/deburr.ts",
+          "literals": []
+        },
+        {
+          "name": "deburr",
+          "from": "src/compat/string/deburr.ts",
+          "literals": [
+            "192",
+            "383",
+            "768",
+            "879",
+            "8400",
+            "8447",
+            "65056",
+            "65071"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "escape.ok.tags-escaped",
+      "unitId": "escape",
+      "guaranteeId": "ok.tags-escaped",
+      "file": "src/string/escape.spec.ts",
+      "line": 12,
+      "title": "escape.ok.tags-escaped should escape values",
+      "status": "test",
+      "bodyHash": "fc0ede2f6076730d",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "escape",
+          "from": "src/string/escape.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "escape.ok.tags-escaped",
+      "unitId": "escape",
+      "guaranteeId": "ok.tags-escaped",
+      "file": "src/string/escape.spec.ts",
+      "line": 16,
+      "title": "escape.ok.tags-escaped should handle strings with nothing to escape",
+      "status": "test",
+      "bodyHash": "3bb195f2df570667",
+      "literals": [
+        "abc"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "escape",
+          "from": "src/string/escape.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "escape.ok.tags-escaped",
+      "unitId": "escape",
+      "guaranteeId": "ok.tags-escaped",
+      "file": "src/string/escape.spec.ts",
+      "line": 20,
+      "title": "escape.ok.tags-escaped should escape the same characters unescaped by `_.unescape`",
+      "status": "test",
+      "bodyHash": "91081330660d596f",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "escape",
+          "from": "src/string/escape.ts",
+          "literals": []
+        },
+        {
+          "name": "unescape",
+          "from": "src/string/unescape.ts",
+          "literals": [
+            "'"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "escape.ok.tags-escaped",
+      "unitId": "escape",
+      "guaranteeId": "ok.tags-escaped",
+      "file": "src/string/escape.spec.ts",
+      "line": 25,
+      "title": "escape.ok.tags-escaped should not escape the \"${}\" character",
+      "status": "test",
+      "bodyHash": "9c5d0ffe1fbb9108",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "escape",
+          "from": "src/string/escape.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "escapeRegExp.ok.dot-escaped",
+      "unitId": "escapeRegExp",
+      "guaranteeId": "ok.dot-escaped",
+      "file": "src/string/escapeRegExp.spec.ts",
+      "line": 8,
+      "title": "escapeRegExp.ok.dot-escaped should escape values",
+      "status": "test",
+      "bodyHash": "61ae2c2c039f3799",
+      "literals": [
+        "^$.*+?()[]{}|\\",
+        "\\^\\$\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\\\"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "escapeRegExp",
+          "from": "src/string/escapeRegExp.ts",
+          "literals": [
+            "\\$&"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "escapeRegExp.ok.dot-escaped",
+      "unitId": "escapeRegExp",
+      "guaranteeId": "ok.dot-escaped",
+      "file": "src/string/escapeRegExp.spec.ts",
+      "line": 12,
+      "title": "escapeRegExp.ok.dot-escaped should handle strings with nothing to escape",
+      "status": "test",
+      "bodyHash": "12dff549bbc5b3a6",
+      "literals": [
+        "abc"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "escapeRegExp",
+          "from": "src/string/escapeRegExp.ts",
+          "literals": [
+            "\\$&"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.camel-to-kebab",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.camel-to-kebab",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 5,
+      "title": "kebabCase.ok.camel-to-kebab should change camel case to kebab case",
+      "status": "test",
+      "bodyHash": "8b32bea7ffdb83be",
+      "literals": [
+        "camelCase",
+        "camel-case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.whitespace-to-dash",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.whitespace-to-dash",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 9,
+      "title": "kebabCase.ok.whitespace-to-dash should change space to dash",
+      "status": "test",
+      "bodyHash": "8dce3069050b3c74",
+      "literals": [
+        "some whitespace",
+        "some-whitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.kebab-unchanged",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.kebab-unchanged",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 13,
+      "title": "kebabCase.ok.kebab-unchanged should change hyphen to dash",
+      "status": "test",
+      "bodyHash": "b78874b7376a08ef",
+      "literals": [
+        "hyphen-text"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.acronym-split",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.acronym-split",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 17,
+      "title": "kebabCase.ok.acronym-split should change Acronyms to small letter",
+      "status": "test",
+      "bodyHash": "2afd67c2438f1585",
+      "literals": [
+        "HTTPRequest",
+        "http-request"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.whitespace-to-dash",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.whitespace-to-dash",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 21,
+      "title": "kebabCase.ok.whitespace-to-dash should handle leading and trailing whitespace",
+      "status": "test",
+      "bodyHash": "95d95ee23f704c02",
+      "literals": [
+        "    leading and trailing whitespace    ",
+        "leading-and-trailing-whitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.camel-to-kebab",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.camel-to-kebab",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 25,
+      "title": "kebabCase.ok.camel-to-kebab should handle special characters correctly",
+      "status": "test",
+      "bodyHash": "a0e967d04e7011cb",
+      "literals": [
+        "special@characters!",
+        "special-characters"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.kebab-unchanged",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.kebab-unchanged",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 29,
+      "title": "kebabCase.ok.kebab-unchanged should handle strings that are already in snake_case",
+      "status": "test",
+      "bodyHash": "cf1d65fcb043952e",
+      "literals": [
+        "snake_case",
+        "snake-case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.camel-to-kebab",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.camel-to-kebab",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 33,
+      "title": "kebabCase.ok.camel-to-kebab should work with an empty string",
+      "status": "test",
+      "bodyHash": "266b6f2fa2e2256c",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.camel-to-kebab",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.camel-to-kebab",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 37,
+      "title": "kebabCase.ok.camel-to-kebab should work with an leading and trailing underscores",
+      "status": "test",
+      "bodyHash": "c92e60cea114f465",
+      "literals": [
+        "__foo_bar___",
+        "foo-bar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.camel-to-kebab",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.camel-to-kebab",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 41,
+      "title": "kebabCase.ok.camel-to-kebab should work with screaming snake case",
+      "status": "test",
+      "bodyHash": "c9005bd71dc4043f",
+      "literals": [
+        "FOO_BAR",
+        "foo-bar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "kebabCase.ok.camel-to-kebab",
+      "unitId": "kebabCase",
+      "guaranteeId": "ok.camel-to-kebab",
+      "file": "src/string/kebabCase.spec.ts",
+      "line": 45,
+      "title": "kebabCase.ok.camel-to-kebab should work with capitalized words",
+      "status": "test",
+      "bodyHash": "30aaebab2e0f8cd2",
+      "literals": [
+        "Foo Bar",
+        "foo-bar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "kebabCase",
+          "from": "src/string/kebabCase.ts",
+          "literals": [
+            "-"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerCase.ok.lower-with-spaces",
+      "unitId": "lowerCase",
+      "guaranteeId": "ok.lower-with-spaces",
+      "file": "src/string/lowerCase.spec.ts",
+      "line": 5,
+      "title": "lowerCase.ok.lower-with-spaces should change camel case to lower case",
+      "status": "test",
+      "bodyHash": "49e0dbf6ce06b526",
+      "literals": [
+        "camelCase",
+        "camel case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "lowerCase",
+          "from": "src/string/lowerCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerCase.ok.lower-with-spaces",
+      "unitId": "lowerCase",
+      "guaranteeId": "ok.lower-with-spaces",
+      "file": "src/string/lowerCase.spec.ts",
+      "line": 9,
+      "title": "lowerCase.ok.lower-with-spaces should change space to space",
+      "status": "test",
+      "bodyHash": "bfd3ac4a535f7653",
+      "literals": [
+        "some whitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "lowerCase",
+          "from": "src/string/lowerCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerCase.ok.from-other-cases",
+      "unitId": "lowerCase",
+      "guaranteeId": "ok.from-other-cases",
+      "file": "src/string/lowerCase.spec.ts",
+      "line": 13,
+      "title": "lowerCase.ok.from-other-cases should change hyphen to space",
+      "status": "test",
+      "bodyHash": "ac9f928ccf6892bc",
+      "literals": [
+        "hyphen-text",
+        "hyphen text"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "lowerCase",
+          "from": "src/string/lowerCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerCase.ok.acronym-split",
+      "unitId": "lowerCase",
+      "guaranteeId": "ok.acronym-split",
+      "file": "src/string/lowerCase.spec.ts",
+      "line": 17,
+      "title": "lowerCase.ok.acronym-split should change Acronyms to small letter",
+      "status": "test",
+      "bodyHash": "5bf60796248616fc",
+      "literals": [
+        "HTTPRequest",
+        "http request"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "lowerCase",
+          "from": "src/string/lowerCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerCase.ok.mixed-separators",
+      "unitId": "lowerCase",
+      "guaranteeId": "ok.mixed-separators",
+      "file": "src/string/lowerCase.spec.ts",
+      "line": 21,
+      "title": "lowerCase.ok.mixed-separators should handle leading and trailing whitespace",
+      "status": "test",
+      "bodyHash": "6827afd57d077356",
+      "literals": [
+        "    leading and trailing whitespace    ",
+        "leading and trailing whitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "lowerCase",
+          "from": "src/string/lowerCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerCase.ok.mixed-separators",
+      "unitId": "lowerCase",
+      "guaranteeId": "ok.mixed-separators",
+      "file": "src/string/lowerCase.spec.ts",
+      "line": 25,
+      "title": "lowerCase.ok.mixed-separators should handle special characters correctly",
+      "status": "test",
+      "bodyHash": "2add9f5bc3fbad6e",
+      "literals": [
+        "special@characters!",
+        "special characters"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "lowerCase",
+          "from": "src/string/lowerCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerCase.ok.lower-with-spaces",
+      "unitId": "lowerCase",
+      "guaranteeId": "ok.lower-with-spaces",
+      "file": "src/string/lowerCase.spec.ts",
+      "line": 29,
+      "title": "lowerCase.ok.lower-with-spaces should handle strings that are already in lower case",
+      "status": "test",
+      "bodyHash": "944498518432b161",
+      "literals": [
+        "lower_case",
+        "lower case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "lowerCase",
+          "from": "src/string/lowerCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerCase.ok.lower-with-spaces",
+      "unitId": "lowerCase",
+      "guaranteeId": "ok.lower-with-spaces",
+      "file": "src/string/lowerCase.spec.ts",
+      "line": 33,
+      "title": "lowerCase.ok.lower-with-spaces should work with an empty string",
+      "status": "test",
+      "bodyHash": "9604a3dc9aa61d7c",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "lowerCase",
+          "from": "src/string/lowerCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "lowerCase.ok.from-other-cases",
+      "unitId": "lowerCase",
+      "guaranteeId": "ok.from-other-cases",
+      "file": "src/string/lowerCase.spec.ts",
+      "line": 37,
+      "title": "lowerCase.ok.from-other-cases should work with screaming snake case",
+      "status": "test",
+      "bodyHash": "5057d7009f16d14a",
+      "literals": [
+        "FOO_BAR",
+        "foo bar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "lowerCase",
+          "from": "src/string/lowerCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pad.ok.default-chars-space",
+      "unitId": "pad",
+      "guaranteeId": "ok.default-chars-space",
+      "file": "src/string/pad.spec.ts",
+      "line": 5,
+      "title": "pad.ok.default-chars-space should pad a string on the left and right sides if it is shorter than the length",
+      "status": "test",
+      "bodyHash": "5f924d2d389960be",
+      "literals": [
+        "abc",
+        "8",
+        "  abc   "
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pad",
+          "from": "src/string/pad.ts",
+          "literals": [
+            "2"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pad.ok.custom-chars",
+      "unitId": "pad",
+      "guaranteeId": "ok.custom-chars",
+      "file": "src/string/pad.spec.ts",
+      "line": 9,
+      "title": "pad.ok.custom-chars should pad a string on the left and right sides with custom characters",
+      "status": "test",
+      "bodyHash": "cd176cd316f3a41c",
+      "literals": [
+        "abc",
+        "8",
+        "_-",
+        "_-abc_-_"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pad",
+          "from": "src/string/pad.ts",
+          "literals": [
+            "2"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pad.ok.longer-or-equal-unchanged",
+      "unitId": "pad",
+      "guaranteeId": "ok.longer-or-equal-unchanged",
+      "file": "src/string/pad.spec.ts",
+      "line": 13,
+      "title": "pad.ok.longer-or-equal-unchanged should not pad a string if it has the same length",
+      "status": "test",
+      "bodyHash": "7764ecc78a3d7c05",
+      "literals": [
+        "abc",
+        "3"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pad",
+          "from": "src/string/pad.ts",
+          "literals": [
+            "2"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pad.ok.longer-or-equal-unchanged",
+      "unitId": "pad",
+      "guaranteeId": "ok.longer-or-equal-unchanged",
+      "file": "src/string/pad.spec.ts",
+      "line": 17,
+      "title": "pad.ok.longer-or-equal-unchanged should not pad a string if the length is less than the string length",
+      "status": "test",
+      "bodyHash": "3c836c9f0c11462a",
+      "literals": [
+        "abc",
+        "2"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pad",
+          "from": "src/string/pad.ts",
+          "literals": [
+            "2"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pad.ok.default-chars-space",
+      "unitId": "pad",
+      "guaranteeId": "ok.default-chars-space",
+      "file": "src/string/pad.spec.ts",
+      "line": 22,
+      "title": "pad.ok.default-chars-space should not pad a string if the length is not a number",
+      "status": "test",
+      "bodyHash": "b79181b827e58f2d",
+      "literals": [
+        "abc"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pad",
+          "from": "src/string/pad.ts",
+          "literals": [
+            "2"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pad.ok.default-chars-space",
+      "unitId": "pad",
+      "guaranteeId": "ok.default-chars-space",
+      "file": "src/string/pad.spec.ts",
+      "line": 26,
+      "title": "pad.ok.default-chars-space should not pad a string if the length is not an integer",
+      "status": "test",
+      "bodyHash": "bcb35b73beff8d20",
+      "literals": [
+        "abc",
+        "3.5"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pad",
+          "from": "src/string/pad.ts",
+          "literals": [
+            "2"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pad.ok.default-chars-space",
+      "unitId": "pad",
+      "guaranteeId": "ok.default-chars-space",
+      "file": "src/string/pad.spec.ts",
+      "line": 30,
+      "title": "pad.ok.default-chars-space should not pad a string if the length is negative",
+      "status": "test",
+      "bodyHash": "0ef3f53449f89eb5",
+      "literals": [
+        "abc",
+        "-3",
+        "3"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pad",
+          "from": "src/string/pad.ts",
+          "literals": [
+            "2"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pascalCase.ok.basic",
+      "unitId": "pascalCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/pascalCase.spec.ts",
+      "line": 5,
+      "title": "pascalCase.ok.basic should change space to pascal case",
+      "status": "test",
+      "bodyHash": "03ef2e04d9964512",
+      "literals": [
+        "some whitespace",
+        "SomeWhitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pascalCase",
+          "from": "src/string/pascalCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pascalCase.ok.hyphen-underscore",
+      "unitId": "pascalCase",
+      "guaranteeId": "ok.hyphen-underscore",
+      "file": "src/string/pascalCase.spec.ts",
+      "line": 9,
+      "title": "pascalCase.ok.hyphen-underscore should change hyphen to pascal case",
+      "status": "test",
+      "bodyHash": "e373b3bb41bafd79",
+      "literals": [
+        "hyphen-text",
+        "HyphenText"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pascalCase",
+          "from": "src/string/pascalCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pascalCase.ok.consecutive-uppercase",
+      "unitId": "pascalCase",
+      "guaranteeId": "ok.consecutive-uppercase",
+      "file": "src/string/pascalCase.spec.ts",
+      "line": 13,
+      "title": "pascalCase.ok.consecutive-uppercase should change Acronyms to small letter",
+      "status": "test",
+      "bodyHash": "2cfbf4b42a5f4699",
+      "literals": [
+        "HTTPRequest",
+        "HttpRequest"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pascalCase",
+          "from": "src/string/pascalCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pascalCase.ok.basic",
+      "unitId": "pascalCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/pascalCase.spec.ts",
+      "line": 17,
+      "title": "pascalCase.ok.basic should handle leading and trailing whitespace",
+      "status": "test",
+      "bodyHash": "d0584cd3c3ce4a6e",
+      "literals": [
+        "    leading and trailing whitespace    ",
+        "LeadingAndTrailingWhitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pascalCase",
+          "from": "src/string/pascalCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pascalCase.ok.numbers-and-symbols",
+      "unitId": "pascalCase",
+      "guaranteeId": "ok.numbers-and-symbols",
+      "file": "src/string/pascalCase.spec.ts",
+      "line": 21,
+      "title": "pascalCase.ok.numbers-and-symbols should handle special characters correctly",
+      "status": "test",
+      "bodyHash": "ba957da81a3d4c56",
+      "literals": [
+        "special@characters!",
+        "SpecialCharacters"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pascalCase",
+          "from": "src/string/pascalCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pascalCase.ok.basic",
+      "unitId": "pascalCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/pascalCase.spec.ts",
+      "line": 25,
+      "title": "pascalCase.ok.basic should handle strings that are already in PascalCase",
+      "status": "test",
+      "bodyHash": "502856efdbfe0a6d",
+      "literals": [
+        "PascalCase"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pascalCase",
+          "from": "src/string/pascalCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pascalCase.ok.basic",
+      "unitId": "pascalCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/pascalCase.spec.ts",
+      "line": 29,
+      "title": "pascalCase.ok.basic should work with an empty string",
+      "status": "test",
+      "bodyHash": "a1c4010a5d08f9e7",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pascalCase",
+          "from": "src/string/pascalCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "pascalCase.ok.basic",
+      "unitId": "pascalCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/pascalCase.spec.ts",
+      "line": 33,
+      "title": "pascalCase.ok.basic should work with screaming camel case",
+      "status": "test",
+      "bodyHash": "bb3da1b87e6d9338",
+      "literals": [
+        "FOO_BAR",
+        "FooBar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "pascalCase",
+          "from": "src/string/pascalCase.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "reverseString.ok.basic",
+      "unitId": "reverseString",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/reverseString.spec.ts",
+      "line": 5,
+      "title": "reverseString.ok.basic should reverse a simple string",
+      "status": "test",
+      "bodyHash": "200d9ff64ac8d435",
+      "literals": [
+        "hello",
+        "olleh"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "reverseString",
+          "from": "src/string/reverseString.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "reverseString.ok.basic",
+      "unitId": "reverseString",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/reverseString.spec.ts",
+      "line": 9,
+      "title": "reverseString.ok.basic should reverse a string with spaces",
+      "status": "test",
+      "bodyHash": "f0965027159f165a",
+      "literals": [
+        "foo bar",
+        "rab oof"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "reverseString",
+          "from": "src/string/reverseString.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "reverseString.ok.hangul-and-symbols",
+      "unitId": "reverseString",
+      "guaranteeId": "ok.hangul-and-symbols",
+      "file": "src/string/reverseString.spec.ts",
+      "line": 13,
+      "title": "reverseString.ok.hangul-and-symbols should reverse a string with Unicode characters",
+      "status": "test",
+      "bodyHash": "38357c8e2943eb38",
+      "literals": [
+        "foo 😄 bar",
+        "rab 😄 oof",
+        "foo 𝌆 bar",
+        "rab 𝌆 oof"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "reverseString",
+          "from": "src/string/reverseString.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "reverseString.ok.basic",
+      "unitId": "reverseString",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/reverseString.spec.ts",
+      "line": 18,
+      "title": "reverseString.ok.basic should reverse an empty string",
+      "status": "test",
+      "bodyHash": "41699ec3ab34c086",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "reverseString",
+          "from": "src/string/reverseString.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "reverseString.ok.hangul-and-symbols",
+      "unitId": "reverseString",
+      "guaranteeId": "ok.hangul-and-symbols",
+      "file": "src/string/reverseString.spec.ts",
+      "line": 22,
+      "title": "reverseString.ok.hangul-and-symbols should reverse a numeric string",
+      "status": "test",
+      "bodyHash": "97d471f24a3d266c",
+      "literals": [
+        "12345",
+        "54321"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "reverseString",
+          "from": "src/string/reverseString.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.basic",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/snakeCase.spec.ts",
+      "line": 5,
+      "title": "snakeCase.ok.basic should change camel case to snake case",
+      "status": "test",
+      "bodyHash": "eaeae6847e1639ae",
+      "literals": [
+        "camelCase",
+        "camel_case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "snakeCase",
+          "from": "src/string/snakeCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.basic",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/snakeCase.spec.ts",
+      "line": 9,
+      "title": "snakeCase.ok.basic should change space to underscore",
+      "status": "test",
+      "bodyHash": "961a577e63f625c8",
+      "literals": [
+        "some whitespace",
+        "some_whitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "snakeCase",
+          "from": "src/string/snakeCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.hyphen-pascal",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.hyphen-pascal",
+      "file": "src/string/snakeCase.spec.ts",
+      "line": 13,
+      "title": "snakeCase.ok.hyphen-pascal should change hyphen to underscore",
+      "status": "test",
+      "bodyHash": "10014762b07afb36",
+      "literals": [
+        "hyphen-text",
+        "hyphen_text"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "snakeCase",
+          "from": "src/string/snakeCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.consecutive-uppercase",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.consecutive-uppercase",
+      "file": "src/string/snakeCase.spec.ts",
+      "line": 17,
+      "title": "snakeCase.ok.consecutive-uppercase should change Acronyms to small letter",
+      "status": "test",
+      "bodyHash": "d8085d26e0046104",
+      "literals": [
+        "HTTPRequest",
+        "http_request"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "snakeCase",
+          "from": "src/string/snakeCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.basic",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/snakeCase.spec.ts",
+      "line": 21,
+      "title": "snakeCase.ok.basic should handle leading and trailing whitespace",
+      "status": "test",
+      "bodyHash": "d2d923f2970a68ab",
+      "literals": [
+        "    leading and trailing whitespace    ",
+        "leading_and_trailing_whitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "snakeCase",
+          "from": "src/string/snakeCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.numbers-split",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.numbers-split",
+      "file": "src/string/snakeCase.spec.ts",
+      "line": 25,
+      "title": "snakeCase.ok.numbers-split should handle special characters correctly",
+      "status": "test",
+      "bodyHash": "48a51d2c9a50f69c",
+      "literals": [
+        "special@characters!",
+        "special_characters"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "snakeCase",
+          "from": "src/string/snakeCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.basic",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/snakeCase.spec.ts",
+      "line": 29,
+      "title": "snakeCase.ok.basic should handle strings that are already in snake_case",
+      "status": "test",
+      "bodyHash": "981ff98e55838db6",
+      "literals": [
+        "snake_case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "snakeCase",
+          "from": "src/string/snakeCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.basic",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/snakeCase.spec.ts",
+      "line": 33,
+      "title": "snakeCase.ok.basic should work with an empty string",
+      "status": "test",
+      "bodyHash": "f4e509a79013a4c2",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "snakeCase",
+          "from": "src/string/snakeCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "snakeCase.ok.basic",
+      "unitId": "snakeCase",
+      "guaranteeId": "ok.basic",
+      "file": "src/string/snakeCase.spec.ts",
+      "line": 37,
+      "title": "snakeCase.ok.basic should work with screaming snake case",
+      "status": "test",
+      "bodyHash": "e39ee91f4eb56cbb",
+      "literals": [
+        "FOO_BAR",
+        "foo_bar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "snakeCase",
+          "from": "src/string/snakeCase.ts",
+          "literals": [
+            "_"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.capitalized-words",
+      "unitId": "startCase",
+      "guaranteeId": "ok.capitalized-words",
+      "file": "src/string/startCase.spec.ts",
+      "line": 5,
+      "title": "startCase.ok.capitalized-words should capitalize each word",
+      "status": "test",
+      "bodyHash": "5bd23b528d452a24",
+      "literals": [
+        "--foo-bar--",
+        "Foo Bar",
+        "fooBar",
+        "__FOO_BAR__"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.from-camel-pascal",
+      "unitId": "startCase",
+      "guaranteeId": "ok.from-camel-pascal",
+      "file": "src/string/startCase.spec.ts",
+      "line": 11,
+      "title": "startCase.ok.from-camel-pascal should handle compound words",
+      "status": "test",
+      "bodyHash": "0d968d83e63a4f48",
+      "literals": [
+        "createElement",
+        "Create Element",
+        "iPhone",
+        "I Phone",
+        "XMLHttpRequest",
+        "Xml Http Request"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.delimiters-trimmed",
+      "unitId": "startCase",
+      "guaranteeId": "ok.delimiters-trimmed",
+      "file": "src/string/startCase.spec.ts",
+      "line": 17,
+      "title": "startCase.ok.delimiters-trimmed should handle various delimiters",
+      "status": "test",
+      "bodyHash": "0cb408e178da41c7",
+      "literals": [
+        "_abc_123_def",
+        "Abc 123 Def",
+        "__abc__123__def__",
+        "ABC-DEF",
+        "Abc Def",
+        "ABC DEF"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.only-delimiters-empty",
+      "unitId": "startCase",
+      "guaranteeId": "ok.only-delimiters-empty",
+      "file": "src/string/startCase.spec.ts",
+      "line": 24,
+      "title": "startCase.ok.only-delimiters-empty should handle empty strings",
+      "status": "test",
+      "bodyHash": "8296488b284ea34e",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.only-delimiters-empty",
+      "unitId": "startCase",
+      "guaranteeId": "ok.only-delimiters-empty",
+      "file": "src/string/startCase.spec.ts",
+      "line": 28,
+      "title": "startCase.ok.only-delimiters-empty should handle strings with only delimiters",
+      "status": "test",
+      "bodyHash": "ddf3ca5017842ffd",
+      "literals": [
+        "_-_-_-_"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.acronym-and-numbers",
+      "unitId": "startCase",
+      "guaranteeId": "ok.acronym-and-numbers",
+      "file": "src/string/startCase.spec.ts",
+      "line": 32,
+      "title": "startCase.ok.acronym-and-numbers should work with numbers",
+      "status": "test",
+      "bodyHash": "b9a74a063ed94270",
+      "literals": [
+        "12abc 12ABC",
+        "12 Abc 12 Abc"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.acronym-and-numbers",
+      "unitId": "startCase",
+      "guaranteeId": "ok.acronym-and-numbers",
+      "file": "src/string/startCase.spec.ts",
+      "line": 36,
+      "title": "startCase.ok.acronym-and-numbers should handle consecutive uppercase letters",
+      "status": "test",
+      "bodyHash": "614118f866f0a5f6",
+      "literals": [
+        "ABC",
+        "Abc",
+        "ABCdef",
+        "Ab Cdef"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.acronym-and-numbers",
+      "unitId": "startCase",
+      "guaranteeId": "ok.acronym-and-numbers",
+      "file": "src/string/startCase.spec.ts",
+      "line": 41,
+      "title": "startCase.ok.acronym-and-numbers should handle combinations of numbers and letters",
+      "status": "test",
+      "bodyHash": "a2b69f6c73d768e2",
+      "literals": [
+        "123ABC",
+        "123 Abc",
+        "a1B2c3",
+        "A 1 B 2 C 3"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.capitalized-words",
+      "unitId": "startCase",
+      "guaranteeId": "ok.capitalized-words",
+      "file": "src/string/startCase.spec.ts",
+      "line": 46,
+      "title": "startCase.ok.capitalized-words should handle special characters",
+      "status": "test",
+      "bodyHash": "3cc791f00e525203",
+      "literals": [
+        "foo@bar",
+        "Foo Bar",
+        "test*case",
+        "Test Case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.capitalized-words",
+      "unitId": "startCase",
+      "guaranteeId": "ok.capitalized-words",
+      "file": "src/string/startCase.spec.ts",
+      "line": 51,
+      "title": "startCase.ok.capitalized-words should handle long strings",
+      "status": "test",
+      "bodyHash": "72632f9f77b51206",
+      "literals": [
+        "thisIsAVeryLongStringWithManyWordsAndNumbers123",
+        "This Is A Very Long String With Many Words And Numbers 123"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.capitalized-words",
+      "unitId": "startCase",
+      "guaranteeId": "ok.capitalized-words",
+      "file": "src/string/startCase.spec.ts",
+      "line": 57,
+      "title": "startCase.ok.capitalized-words should handle whitespace characters",
+      "status": "test",
+      "bodyHash": "10d902b8c9f9fc51",
+      "literals": [
+        "  foo  bar  ",
+        "Foo Bar",
+        "\tfoo\nbar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.capitalized-words",
+      "unitId": "startCase",
+      "guaranteeId": "ok.capitalized-words",
+      "file": "src/string/startCase.spec.ts",
+      "line": 62,
+      "title": "startCase.ok.capitalized-words should convert the non-first characters to lowercase",
+      "status": "test",
+      "bodyHash": "52a9b7c40d09adfb",
+      "literals": [
+        "FOO BAR",
+        "Foo Bar",
+        "FOO BAR BAZ",
+        "Foo Bar Baz"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "startCase.ok.capitalized-words",
+      "unitId": "startCase",
+      "guaranteeId": "ok.capitalized-words",
+      "file": "src/string/startCase.spec.ts",
+      "line": 67,
+      "title": "startCase.ok.capitalized-words should correctly handle accented letters",
+      "status": "test",
+      "bodyHash": "047a7143f0af12e2",
+      "literals": [
+        "lunedì 18 set",
+        "Lunedì 18 Set"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "startCase",
+          "from": "src/string/startCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.single-char",
+      "unitId": "trim",
+      "guaranteeId": "ok.single-char",
+      "file": "src/string/trim.spec.ts",
+      "line": 5,
+      "title": "trim.ok.single-char should return the string without the double quotes",
+      "status": "test",
+      "bodyHash": "b9d729fa37c889b8",
+      "literals": [
+        "\"hello, world!\"",
+        "\"",
+        "hello, world!"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.default-whitespace",
+      "unitId": "trim",
+      "guaranteeId": "ok.default-whitespace",
+      "file": "src/string/trim.spec.ts",
+      "line": 9,
+      "title": "trim.ok.default-whitespace should return the string without special characters",
+      "status": "test",
+      "bodyHash": "3f592b9652744daa",
+      "literals": [
+        "!@#$%^&*wow%#$",
+        "!",
+        "@",
+        "#",
+        "$",
+        "%",
+        "^",
+        "&",
+        "*",
+        "wow"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        8
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.default-whitespace",
+      "unitId": "trim",
+      "guaranteeId": "ok.default-whitespace",
+      "file": "src/string/trim.spec.ts",
+      "line": 13,
+      "title": "trim.ok.default-whitespace should return the string unchanged when no matching characters are found",
+      "status": "test",
+      "bodyHash": "726446f105962782",
+      "literals": [
+        "hello",
+        "x"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.single-char",
+      "unitId": "trim",
+      "guaranteeId": "ok.single-char",
+      "file": "src/string/trim.spec.ts",
+      "line": 17,
+      "title": "trim.ok.single-char should remove all occurrences of a single character",
+      "status": "test",
+      "bodyHash": "d8d861d8e4e91774",
+      "literals": [
+        "banana",
+        "a",
+        "banan"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.array-chars",
+      "unitId": "trim",
+      "guaranteeId": "ok.array-chars",
+      "file": "src/string/trim.spec.ts",
+      "line": 21,
+      "title": "trim.ok.array-chars should remove all occurrences of multiple characters",
+      "status": "test",
+      "bodyHash": "5bf42f87b2950b80",
+      "literals": [
+        "abracadabra",
+        "a",
+        "b",
+        "racadabr"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.default-whitespace",
+      "unitId": "trim",
+      "guaranteeId": "ok.default-whitespace",
+      "file": "src/string/trim.spec.ts",
+      "line": 25,
+      "title": "trim.ok.default-whitespace should handle an empty string",
+      "status": "test",
+      "bodyHash": "9c2ac0cf743553f8",
+      "literals": [
+        "a"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.chars-and-space",
+      "unitId": "trim",
+      "guaranteeId": "ok.chars-and-space",
+      "file": "src/string/trim.spec.ts",
+      "line": 29,
+      "title": "trim.ok.chars-and-space should remove spaces when specified",
+      "status": "test",
+      "bodyHash": "613f8b6b7d819d9c",
+      "literals": [
+        "hello world",
+        " "
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.default-whitespace",
+      "unitId": "trim",
+      "guaranteeId": "ok.default-whitespace",
+      "file": "src/string/trim.spec.ts",
+      "line": 33,
+      "title": "trim.ok.default-whitespace should handle a case where the string is already trimmed",
+      "status": "test",
+      "bodyHash": "29abe0892f12fff6",
+      "literals": [
+        "alreadyTrimmed",
+        "x"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.default-whitespace",
+      "unitId": "trim",
+      "guaranteeId": "ok.default-whitespace",
+      "file": "src/string/trim.spec.ts",
+      "line": 37,
+      "title": "trim.ok.default-whitespace should return an empty string when all characters are removed",
+      "status": "test",
+      "bodyHash": "3411230a3839fac5",
+      "literals": [
+        "aaaaa",
+        "a"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.default-whitespace",
+      "unitId": "trim",
+      "guaranteeId": "ok.default-whitespace",
+      "file": "src/string/trim.spec.ts",
+      "line": 41,
+      "title": "trim.ok.default-whitespace should remove numbers from a string",
+      "status": "test",
+      "bodyHash": "26d02277ab61ed42",
+      "literals": [
+        "123abc456",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "abc"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        6
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "trim.ok.default-whitespace",
+      "unitId": "trim",
+      "guaranteeId": "ok.default-whitespace",
+      "file": "src/string/trim.spec.ts",
+      "line": 45,
+      "title": "trim.ok.default-whitespace should trim the string without giving the second parameter, which defaults to whitespace",
+      "status": "test",
+      "bodyHash": "1eed4b19284e5261",
+      "literals": [
+        "  hello world  ",
+        "hello world"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "trim",
+          "from": "src/string/trim.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unescape.ok.tags-restored",
+      "unitId": "unescape",
+      "guaranteeId": "ok.tags-restored",
+      "file": "src/string/unescape.spec.ts",
+      "line": 12,
+      "title": "unescape.ok.tags-restored should unescape entities in order",
+      "status": "test",
+      "bodyHash": "d74b23cf7924ec89",
+      "literals": [
+        "&amp;lt;",
+        "&lt;"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "unescape",
+          "from": "src/string/unescape.ts",
+          "literals": [
+            "'"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unescape.ok.tags-restored",
+      "unitId": "unescape",
+      "guaranteeId": "ok.tags-restored",
+      "file": "src/string/unescape.spec.ts",
+      "line": 16,
+      "title": "unescape.ok.tags-restored should unescape the proper entities",
+      "status": "test",
+      "bodyHash": "5d7b06ced71280f3",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "unescape",
+          "from": "src/string/unescape.ts",
+          "literals": [
+            "'"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unescape.ok.tags-restored",
+      "unitId": "unescape",
+      "guaranteeId": "ok.tags-restored",
+      "file": "src/string/unescape.spec.ts",
+      "line": 20,
+      "title": "unescape.ok.tags-restored should handle strings with nothing to unescape",
+      "status": "test",
+      "bodyHash": "8b4d33c4bcd34fb7",
+      "literals": [
+        "abc"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "unescape",
+          "from": "src/string/unescape.ts",
+          "literals": [
+            "'"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unescape.ok.tags-restored",
+      "unitId": "unescape",
+      "guaranteeId": "ok.tags-restored",
+      "file": "src/string/unescape.spec.ts",
+      "line": 24,
+      "title": "unescape.ok.tags-restored should unescape the same characters escaped by `_.escape`",
+      "status": "test",
+      "bodyHash": "ac654b22023933d3",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "unescape",
+          "from": "src/string/unescape.ts",
+          "literals": [
+            "'"
+          ]
+        },
+        {
+          "name": "escape",
+          "from": "src/string/escape.ts",
+          "literals": []
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unescape.ok.tags-restored",
+      "unitId": "unescape",
+      "guaranteeId": "ok.tags-restored",
+      "file": "src/string/unescape.spec.ts",
+      "line": 28,
+      "title": "unescape.ok.tags-restored should handle leading zeros in html entities",
+      "status": "test",
+      "bodyHash": "0cda4a2b10b77f3b",
+      "literals": [
+        "&#39;",
+        "'",
+        "&#039;",
+        "&#000039;"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "unescape",
+          "from": "src/string/unescape.ts",
+          "literals": [
+            "'"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "unescape.ok.tags-restored",
+      "unitId": "unescape",
+      "guaranteeId": "ok.tags-restored",
+      "file": "src/string/unescape.spec.ts",
+      "line": 35,
+      "title": "unescape.ok.tags-restored should not unescape the \"${}\" entity",
+      "status": "test",
+      "bodyHash": "7a186fcebc83955a",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "unescape",
+          "from": "src/string/unescape.ts",
+          "literals": [
+            "'"
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "upperCase.ok.upper-with-spaces",
+      "unitId": "upperCase",
+      "guaranteeId": "ok.upper-with-spaces",
+      "file": "src/string/upperCase.spec.ts",
+      "line": 5,
+      "title": "upperCase.ok.upper-with-spaces should change camel case to upper case",
+      "status": "test",
+      "bodyHash": "d8c5eb05b770ce51",
+      "literals": [
+        "camelCase",
+        "CAMEL CASE"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "upperCase",
+          "from": "src/string/upperCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "upperCase.ok.upper-with-spaces",
+      "unitId": "upperCase",
+      "guaranteeId": "ok.upper-with-spaces",
+      "file": "src/string/upperCase.spec.ts",
+      "line": 9,
+      "title": "upperCase.ok.upper-with-spaces should change space to space",
+      "status": "test",
+      "bodyHash": "4336f99be48a74bb",
+      "literals": [
+        "some whitespace",
+        "SOME WHITESPACE"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "upperCase",
+          "from": "src/string/upperCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "upperCase.ok.kebab",
+      "unitId": "upperCase",
+      "guaranteeId": "ok.kebab",
+      "file": "src/string/upperCase.spec.ts",
+      "line": 13,
+      "title": "upperCase.ok.kebab should change hyphen to space",
+      "status": "test",
+      "bodyHash": "5dbe3ecaf56465af",
+      "literals": [
+        "hyphen-text",
+        "HYPHEN TEXT"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "upperCase",
+          "from": "src/string/upperCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "upperCase.ok.acronym-split",
+      "unitId": "upperCase",
+      "guaranteeId": "ok.acronym-split",
+      "file": "src/string/upperCase.spec.ts",
+      "line": 17,
+      "title": "upperCase.ok.acronym-split should change Acronyms to small letter",
+      "status": "test",
+      "bodyHash": "fafb94abded7f08f",
+      "literals": [
+        "HTTPRequest",
+        "HTTP REQUEST"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "upperCase",
+          "from": "src/string/upperCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "upperCase.ok.upper-with-spaces",
+      "unitId": "upperCase",
+      "guaranteeId": "ok.upper-with-spaces",
+      "file": "src/string/upperCase.spec.ts",
+      "line": 21,
+      "title": "upperCase.ok.upper-with-spaces should handle leading and trailing whitespace",
+      "status": "test",
+      "bodyHash": "1d4ae8fbde642f3d",
+      "literals": [
+        "    leading and trailing whitespace    ",
+        "LEADING AND TRAILING WHITESPACE"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "upperCase",
+          "from": "src/string/upperCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "upperCase.ok.upper-with-spaces",
+      "unitId": "upperCase",
+      "guaranteeId": "ok.upper-with-spaces",
+      "file": "src/string/upperCase.spec.ts",
+      "line": 25,
+      "title": "upperCase.ok.upper-with-spaces should handle special characters correctly",
+      "status": "test",
+      "bodyHash": "062ffe937cd18c0d",
+      "literals": [
+        "special@characters!",
+        "SPECIAL CHARACTERS"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "upperCase",
+          "from": "src/string/upperCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "upperCase.ok.upper-with-spaces",
+      "unitId": "upperCase",
+      "guaranteeId": "ok.upper-with-spaces",
+      "file": "src/string/upperCase.spec.ts",
+      "line": 29,
+      "title": "upperCase.ok.upper-with-spaces should handle strings that are already in upper case",
+      "status": "test",
+      "bodyHash": "ca2472aa2219d305",
+      "literals": [
+        "upper_case",
+        "UPPER CASE"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "upperCase",
+          "from": "src/string/upperCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "upperCase.ok.upper-with-spaces",
+      "unitId": "upperCase",
+      "guaranteeId": "ok.upper-with-spaces",
+      "file": "src/string/upperCase.spec.ts",
+      "line": 33,
+      "title": "upperCase.ok.upper-with-spaces should work with an empty string",
+      "status": "test",
+      "bodyHash": "6c611e9b98a872ea",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "upperCase",
+          "from": "src/string/upperCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "upperCase.ok.upper-with-spaces",
+      "unitId": "upperCase",
+      "guaranteeId": "ok.upper-with-spaces",
+      "file": "src/string/upperCase.spec.ts",
+      "line": 37,
+      "title": "upperCase.ok.upper-with-spaces should work with screaming snake case",
+      "status": "test",
+      "bodyHash": "af4de30dda045360",
+      "literals": [
+        "FOO_BAR",
+        "FOO BAR"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "upperCase",
+          "from": "src/string/upperCase.ts",
+          "literals": [
+            " "
+          ]
+        }
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 5,
+      "title": "words.ok.punctuation-split splits a simple ASCII comma-separated string into words",
+      "status": "test",
+      "bodyHash": "4dcf833a443e18df",
+      "literals": [
+        "fred, barney, & pebbles",
+        "fred",
+        "barney",
+        "pebbles"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 10,
+      "title": "words.ok.punctuation-split returns an empty array when input is an empty string",
+      "status": "test",
+      "bodyHash": "3b8d5cf5e0eb2501",
+      "literals": [],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        0
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 15,
+      "title": "words.ok.punctuation-split splits a space-separated string into individual words",
+      "status": "test",
+      "bodyHash": "19ff9a059acf150e",
+      "literals": [
+        "split these words",
+        "split",
+        "these",
+        "words"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.camel-acronym-emoji",
+      "unitId": "words",
+      "guaranteeId": "ok.camel-acronym-emoji",
+      "file": "src/string/words.spec.ts",
+      "line": 20,
+      "title": "words.ok.camel-acronym-emoji splits Unicode emojis and special characters as separate words",
+      "status": "test",
+      "bodyHash": "866fbc41dfdf23ad",
+      "literals": [
+        "example🚀with✨emojis💡and🔍special🌟characters",
+        "example",
+        "🚀",
+        "with",
+        "✨",
+        "emojis",
+        "💡",
+        "and",
+        "🔍",
+        "special",
+        "🌟",
+        "characters"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        11
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.camel-acronym-emoji",
+      "unitId": "words",
+      "guaranteeId": "ok.camel-acronym-emoji",
+      "file": "src/string/words.spec.ts",
+      "line": 25,
+      "title": "words.ok.camel-acronym-emoji should match camelCase",
+      "status": "test",
+      "bodyHash": "68a2af8f71163d4a",
+      "literals": [
+        "camelCase",
+        "camel",
+        "Case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.camel-acronym-emoji",
+      "unitId": "words",
+      "guaranteeId": "ok.camel-acronym-emoji",
+      "file": "src/string/words.spec.ts",
+      "line": 31,
+      "title": "words.ok.camel-acronym-emoji should match snake_case",
+      "status": "test",
+      "bodyHash": "a6e0a693db08961c",
+      "literals": [
+        "snake_case",
+        "snake",
+        "case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 37,
+      "title": "words.ok.punctuation-split should match kebab-case",
+      "status": "test",
+      "bodyHash": "6542060661ca0318",
+      "literals": [
+        "kebab-case",
+        "kebab",
+        "case"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 43,
+      "title": "words.ok.punctuation-split should handle mixed formats",
+      "status": "test",
+      "bodyHash": "88c200e45b674b07",
+      "literals": [
+        "camelCase_snake_case-kebabCase",
+        "camel",
+        "Case",
+        "snake",
+        "case",
+        "kebab"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        6
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.camel-acronym-emoji",
+      "unitId": "words",
+      "guaranteeId": "ok.camel-acronym-emoji",
+      "file": "src/string/words.spec.ts",
+      "line": 49,
+      "title": "words.ok.camel-acronym-emoji should match acronyms",
+      "status": "test",
+      "bodyHash": "ac75fd2d04ca8134",
+      "literals": [
+        "HTTPRequest",
+        "HTTP",
+        "Request"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 55,
+      "title": "words.ok.punctuation-split should match special characters",
+      "status": "test",
+      "bodyHash": "e31b0ce9c6bf5d15",
+      "literals": [
+        "special_characters@123",
+        "special",
+        "characters",
+        "123"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 61,
+      "title": "words.ok.punctuation-split should handle leading and trailing whitespace",
+      "status": "test",
+      "bodyHash": "d8868edbea2eafef",
+      "literals": [
+        "  leading_and_trailing_whitespace  ",
+        "leading",
+        "and",
+        "trailing",
+        "whitespace"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        4
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 67,
+      "title": "words.ok.punctuation-split should handle underscores",
+      "status": "test",
+      "bodyHash": "7bf39e5b367cd45e",
+      "literals": [
+        "underscore_case_example",
+        "underscore",
+        "case",
+        "example"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 73,
+      "title": "words.ok.punctuation-split should handle single character words",
+      "status": "test",
+      "bodyHash": "2fe71735110e64c9",
+      "literals": [
+        "aB",
+        "a",
+        "B"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.punctuation-split",
+      "unitId": "words",
+      "guaranteeId": "ok.punctuation-split",
+      "file": "src/string/words.spec.ts",
+      "line": 79,
+      "title": "words.ok.punctuation-split should work with hyphens",
+      "status": "test",
+      "bodyHash": "328f0b83357808ea",
+      "literals": [
+        "--FOO-BAR--",
+        "FOO",
+        "BAR"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        2
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.unicode-and-numbers",
+      "unitId": "words",
+      "guaranteeId": "ok.unicode-and-numbers",
+      "file": "src/string/words.spec.ts",
+      "line": 83,
+      "title": "words.ok.unicode-and-numbers should work with numbers",
+      "status": "test",
+      "bodyHash": "469989ae9b174a7a",
+      "literals": [
+        "foo2bar",
+        "foo",
+        "2",
+        "bar"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.camel-acronym-emoji",
+      "unitId": "words",
+      "guaranteeId": "ok.camel-acronym-emoji",
+      "file": "src/string/words.spec.ts",
+      "line": 87,
+      "title": "words.ok.camel-acronym-emoji should match emojis",
+      "status": "test",
+      "bodyHash": "1203aa7c7cc0a89d",
+      "literals": [
+        "camelCaseHTTPRequest🚀",
+        "camel",
+        "Case",
+        "HTTP",
+        "Request",
+        "🚀"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        5
+      ],
+      "requirementIds": []
+    },
+    {
+      "key": "words.ok.unicode-and-numbers",
+      "unitId": "words",
+      "guaranteeId": "ok.unicode-and-numbers",
+      "file": "src/string/words.spec.ts",
+      "line": 91,
+      "title": "words.ok.unicode-and-numbers should match accented letters",
+      "status": "test",
+      "bodyHash": "2664c217d64e0967",
+      "literals": [
+        "Lunedì 18 Set",
+        "Lunedì",
+        "18",
+        "Set"
+      ],
+      "keys": [],
+      "iterates": [],
+      "builds": [
+        {
+          "name": "words",
+          "from": "src/string/words.ts",
+          "literals": []
+        }
+      ],
+      "lengths": [
+        3
+      ],
+      "requirementIds": []
+    }
+  ],
+  "findings": [
+    {
+      "rule": "guarantee-no-test",
+      "message": "camelCase.ok.mixed-case-kept has no test naming it",
+      "file": "src/string/camelCase.ts",
+      "line": 21,
+      "unit": "camelCase",
+      "guarantee": "camelCase.ok.mixed-case-kept",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "capitalize.ok.only-first-word has no test naming it",
+      "file": "src/string/capitalize.ts",
+      "line": 16,
+      "unit": "capitalize",
+      "guarantee": "capitalize.ok.only-first-word",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "deburr.ok.other-languages has no test naming it",
+      "file": "src/string/deburr.ts",
+      "line": 60,
+      "unit": "deburr",
+      "guarantee": "deburr.ok.other-languages",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "escape.ok.ampersand-escaped has no test naming it",
+      "file": "src/string/escape.ts",
+      "line": 22,
+      "unit": "escape",
+      "guarantee": "escape.ok.ampersand-escaped",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "escape.ok.double-quote-escaped has no test naming it",
+      "file": "src/string/escape.ts",
+      "line": 23,
+      "unit": "escape",
+      "guarantee": "escape.ok.double-quote-escaped",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "escape.ok.single-quote-escaped has no test naming it",
+      "file": "src/string/escape.ts",
+      "line": 24,
+      "unit": "escape",
+      "guarantee": "escape.ok.single-quote-escaped",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "escapeRegExp.ok.parentheses-escaped has no test naming it",
+      "file": "src/string/escapeRegExp.ts",
+      "line": 12,
+      "unit": "escapeRegExp",
+      "guarantee": "escapeRegExp.ok.parentheses-escaped",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "escapeRegExp.ok.brackets-escaped has no test naming it",
+      "file": "src/string/escapeRegExp.ts",
+      "line": 13,
+      "unit": "escapeRegExp",
+      "guarantee": "escapeRegExp.ok.brackets-escaped",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "escapeRegExp.ok.at-sign-not-escaped has no test naming it",
+      "file": "src/string/escapeRegExp.ts",
+      "line": 14,
+      "unit": "escapeRegExp",
+      "guarantee": "escapeRegExp.ok.at-sign-not-escaped",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "pad.ok.right-gets-extra has no test naming it",
+      "file": "src/string/pad.ts",
+      "line": 19,
+      "unit": "pad",
+      "guarantee": "pad.ok.right-gets-extra",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "pascalCase.ok.mixed-separators has no test naming it",
+      "file": "src/string/pascalCase.ts",
+      "line": 20,
+      "unit": "pascalCase",
+      "guarantee": "pascalCase.ok.mixed-separators",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "reverseString.ok.case-kept has no test naming it",
+      "file": "src/string/reverseString.ts",
+      "line": 14,
+      "unit": "reverseString",
+      "guarantee": "reverseString.ok.case-kept",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "reverseString.ok.emoji-intact has no test naming it",
+      "file": "src/string/reverseString.ts",
+      "line": 15,
+      "unit": "reverseString",
+      "guarantee": "reverseString.ok.emoji-intact",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "snakeCase.ok.mixed-separators has no test naming it",
+      "file": "src/string/snakeCase.ts",
+      "line": 22,
+      "unit": "snakeCase",
+      "guarantee": "snakeCase.ok.mixed-separators",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "startCase.ok.hyphen-underscore has no test naming it",
+      "file": "src/string/startCase.ts",
+      "line": 17,
+      "unit": "startCase",
+      "guarantee": "startCase.ok.hyphen-underscore",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "trim.ok.array-chars-both-ends has no test naming it",
+      "file": "src/string/trim.ts",
+      "line": 18,
+      "unit": "trim",
+      "guarantee": "trim.ok.array-chars-both-ends",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "trim.err.multi-char-string has no test naming it",
+      "file": "src/string/trim.ts",
+      "line": 20,
+      "unit": "trim",
+      "guarantee": "trim.err.multi-char-string",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "unescape.ok.double-quote-restored has no test naming it",
+      "file": "src/string/unescape.ts",
+      "line": 22,
+      "unit": "unescape",
+      "guarantee": "unescape.ok.double-quote-restored",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "unescape.ok.single-quote-restored has no test naming it",
+      "file": "src/string/unescape.ts",
+      "line": 23,
+      "unit": "unescape",
+      "guarantee": "unescape.ok.single-quote-restored",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "unescape.ok.ampersand-restored has no test naming it",
+      "file": "src/string/unescape.ts",
+      "line": 24,
+      "unit": "unescape",
+      "guarantee": "unescape.ok.ampersand-restored",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "unescape.ok.mixed-entities has no test naming it",
+      "file": "src/string/unescape.ts",
+      "line": 25,
+      "unit": "unescape",
+      "guarantee": "unescape.ok.mixed-entities",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "upperCase.ok.snake-and-email has no test naming it",
+      "file": "src/string/upperCase.ts",
+      "line": 19,
+      "unit": "upperCase",
+      "guarantee": "upperCase.ok.snake-and-email",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "words.ok.identifier-styles has no test naming it",
+      "file": "src/string/words.ts",
+      "line": 40,
+      "unit": "words",
+      "guarantee": "words.ok.identifier-styles",
+      "severity": "fail"
+    },
+    {
+      "rule": "guarantee-no-test",
+      "message": "words.ok.complex has no test naming it",
+      "file": "src/string/words.ts",
+      "line": 41,
+      "unit": "words",
+      "guarantee": "words.ok.complex",
+      "severity": "fail"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"128\" in `code < 0x80`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 77,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"563\" in `code <= 0x233`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 111,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"7680\" in `code >= 0x1e00`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 111,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"7929\" in `code <= 0x1ef9`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 111,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to match \"8490\" in `code === 0x212a`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 111,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to match \"8491\" in `code === 0x212b`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 111,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"768\" in `code >= 0x300`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 117,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"879\" in `code <= 0x36f`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 117,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"8400\" in `code >= 0x20d0`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 119,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"8447\" in `code <= 0x20ff`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 119,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"65056\" in `code >= 0xfe20`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 121,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"65071\" in `code <= 0xfe2f`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right",
+      "file": "src/string/deburr.ts",
+      "line": 121,
+      "unit": "deburr",
+      "severity": "warn"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
+      "file": "src/string/escapeRegExp.ts",
+      "line": 14,
+      "severity": "warn"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
+      "file": "src/string/escapeRegExp.ts",
+      "line": 14,
+      "severity": "warn"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
+      "file": "src/string/pascalCase.ts",
+      "line": 21,
+      "severity": "warn"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
+      "file": "src/string/snakeCase.ts",
+      "line": 23,
+      "severity": "warn"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
+      "file": "src/string/trim.ts",
+      "line": 17,
+      "severity": "warn"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
+      "file": "src/string/trim.ts",
+      "line": 17,
+      "severity": "warn"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
+      "file": "src/string/trim.ts",
+      "line": 17,
+      "severity": "warn"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
+      "file": "src/string/trim.ts",
+      "line": 17,
+      "severity": "warn"
+    },
+    {
+      "rule": "tsdoc-syntax",
+      "message": "The \"@\" character looks like part of a TSDoc tag; use a backslash to escape it",
+      "file": "src/string/trim.ts",
+      "line": 17,
+      "severity": "warn"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "deburr commits to boundary \"192\" in `code >= 0xc0`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/string/deburr.ts",
+      "line": 111,
+      "unit": "deburr",
+      "severity": "info"
+    },
+    {
+      "rule": "decision-unspecified",
+      "message": "pad commits to constant \"2\" in `(length - str.length) / 2`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
+      "file": "src/string/pad.ts",
+      "line": 22,
+      "unit": "pad",
+      "severity": "info"
+    }
+  ],
+  "summary": {
+    "units": 17,
+    "unitsWithoutGuarantee": 0,
+    "guarantees": 75,
+    "guaranteesWithoutTest": 24,
+    "tests": 152,
+    "orphanTests": 0,
+    "unlinkedTests": 4965,
+    "findings": {
+      "fail": 24,
+      "warn": 21,
+      "info": 2
+    }
+  }
+}

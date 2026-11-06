@@ -1,0 +1,157 @@
+[
+  {
+    "id": "value-1",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "node-env-switch",
+    "reason": "with NODE_ENV=production the development-only branch now runs (debug flags or labels are set, or a development error is thrown); observable only in production",
+    "expressedBy": [
+      "7"
+    ]
+  },
+  {
+    "id": "value-3",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "expressedBy": null,
+    "reason": "the refresh counter is only read as a dependency; its initial value is never observed"
+  },
+  {
+    "id": "value-4",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "node-env-switch",
+    "reason": "with NODE_ENV=production the development-only branch now runs (debug flags or labels are set, or a development error is thrown); observable only in production",
+    "expressedBy": [
+      "33"
+    ]
+  },
+  {
+    "id": "value-6",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "expressedBy": null,
+    "reason": "the refresh counter still changes on every refresh, which is all that triggers recomputation"
+  },
+  {
+    "id": "value-7",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "node-env-switch",
+    "reason": "with NODE_ENV=production the development-only branch now runs (debug flags or labels are set, or a development error is thrown); observable only in production",
+    "expressedBy": [
+      "52"
+    ]
+  },
+  {
+    "id": "value-8",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "node-env-switch",
+    "reason": "with NODE_ENV=production the development-only branch now runs (debug flags or labels are set, or a development error is thrown); observable only in production",
+    "expressedBy": [
+      "90"
+    ]
+  },
+  {
+    "id": "value-10",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "unsubscribing no longer removes the storage event listener, so storage events keep reaching the atom",
+    "expressedBy": [
+      "170"
+    ]
+  },
+  {
+    "id": "value-11",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "node-env-switch",
+    "reason": "with NODE_ENV=production the development-only branch now runs (debug flags or labels are set, or a development error is thrown); observable only in production",
+    "expressedBy": [
+      "179"
+    ]
+  },
+  {
+    "id": "value-12",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "node-env-switch",
+    "reason": "with NODE_ENV=production RESET gets the description \"RESET\" instead of \"\"; observable only in production. The Stryker mutant on this line changes the other literal (\"\")",
+    "expressedBy": null
+  },
+  {
+    "id": "value-13",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "RESET.description becomes \"RESET_x\"",
+    "expressedBy": null
+  },
+  {
+    "id": "value-18",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "node-env-switch",
+    "reason": "with NODE_ENV=production the development-only branch now runs (debug flags or labels are set, or a development error is thrown); observable only in production",
+    "expressedBy": [
+      "311"
+    ]
+  },
+  {
+    "id": "value-21",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "a remove action also drops the first element of the array",
+    "expressedBy": null
+  },
+  {
+    "id": "value-28",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "a move before the first item (index2 = 0) does nothing",
+    "expressedBy": [
+      "351"
+    ]
+  },
+  {
+    "id": "value-32",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "a move to an earlier position drops the element after the moved one",
+    "expressedBy": null
+  },
+  {
+    "id": "value-33",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "expressedBy": null,
+    "reason": "the refresh counter is only read as a dependency; its initial value is never observed"
+  },
+  {
+    "id": "value-34",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "expressedBy": null,
+    "reason": "the refresh counter still changes on every refresh, which is all that triggers recomputation"
+  },
+  {
+    "id": "value-35",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "node-env-switch",
+    "reason": "with NODE_ENV=production the development-only branch now runs (debug flags or labels are set, or a development error is thrown); observable only in production",
+    "expressedBy": [
+      "396"
+    ]
+  },
+  {
+    "id": "value-36",
+    "status": "Survived",
+    "verdict": "real",
+    "category": "node-env-switch",
+    "reason": "with NODE_ENV=production the development-only branch now runs (debug flags or labels are set, or a development error is thrown); observable only in production",
+    "expressedBy": [
+      "453"
+    ]
+  }
+]

@@ -1,0 +1,54 @@
+specgate check (advisory): 6 units, 26 guarantees, 36 linked tests
+  fail 8 · warn 40 · info 0
+  ❌ [guarantee-no-test] packages/@mantine/hooks/src/use-counter/use-counter.ts:28 useCounter.ok.set has no test naming it
+  ❌ [guarantee-no-test] packages/@mantine/hooks/src/use-counter/use-counter.ts:29 useCounter.ok.reset has no test naming it
+  ❌ [guarantee-no-test] packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts:18 useDisclosure.ok.initial has no test naming it
+  ❌ [guarantee-no-test] packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts:21 useDisclosure.ok.no-change has no test naming it
+  ❌ [guarantee-no-test] packages/@mantine/hooks/src/use-os/use-os.ts:82 useOs.ok.values has no test naming it
+  ❌ [guarantee-no-test] packages/@mantine/hooks/src/use-os/use-os.ts:83 useOs.ok.undetermined has no test naming it
+  ❌ [guarantee-no-test] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:59 usePagination.ok.defaults has no test naming it
+  ❌ [guarantee-no-test] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:60 usePagination.ok.navigation has no test naming it
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-counter/use-counter.ts:4 useCounter: ObjectLiteral mutant in DEFAULT_OPTIONS: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-counter/use-counter.ts:5 useCounter: `min: -Infinity` removed from `DEFAULT_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-counter/use-counter.ts:5 useCounter: `max: Infinity` removed from `DEFAULT_OPTIONS` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-counter/use-counter.ts:38 useCounter: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-counter/use-counter.ts:43 useCounter: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-counter/use-counter.ts:46 useCounter: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-counter/use-counter.ts:50 useCounter: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts:24 useDisclosure: BooleanLiteral mutant: `true` is not run by any test
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts:37 useDisclosure: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-disclosure/use-disclosure.ts:47 useDisclosure: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:77 usePagination: ArithmeticOperator mutant: `_endValue - _startValue - 1` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:77 usePagination: ArithmeticOperator mutant: `_endValue + _startValue` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:77 usePagination: `_endValue - _startValue + 1`: 1 → 2 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:89 usePagination: EqualityOperator mutant: `pageNumber <= _startValue` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:91 usePagination: EqualityOperator mutant: `pageNumber >= _endValue` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:97 usePagination: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:100 usePagination: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:101 usePagination: ArithmeticOperator mutant: `activePage + 1` is not run by any test
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:101 usePagination: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:101 usePagination: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:101 usePagination: `activePage - 1`: 1 → 2 is not run by any test
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:102 usePagination: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:103 usePagination: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106 usePagination: ArithmeticOperator mutant (the constant "3"): `siblings * 2 - 3` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106 usePagination: ArithmeticOperator mutant (the constant "3"): `siblings * 2 + 3 - boundaries * 2` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106 usePagination: ArithmeticOperator mutant (the constant "3"): `siblings / 2` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106 usePagination: ArithmeticOperator mutant (the constant "3"): `boundaries / 2` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106 usePagination: `siblings * 2 + 3`: 3 → 4 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:106 usePagination: `boundaries * 2`: 2 → 3 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:107 usePagination: EqualityOperator mutant: `totalPageNumbers > _total` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:111 usePagination: ArithmeticOperator mutant: `_startValue + boundaries + 1` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:111 usePagination: ArithmeticOperator mutant: `_startValue - boundaries` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:111 usePagination: `_startValue + boundaries - 1`: 1 → 2 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:112 usePagination: ArithmeticOperator mutant: `_endValue + boundaries` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:114 usePagination: EqualityOperator mutant: `leftSiblingIndex >= _startValue + boundaries + 1` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:114 usePagination: ArithmeticOperator mutant: `_startValue + boundaries - 1` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:114 usePagination: ArithmeticOperator mutant: `_startValue - boundaries` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:115 usePagination: `boundaries + 1`: 1 → 2 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-pagination/use-pagination.ts:122 usePagination: ArithmeticOperator mutant: `_endValue + (boundaries - 1)` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/@mantine/hooks/src/use-queue/use-queue.ts:35 useQueue: ArrayDeclaration mutant: `["Stryker was here"]` is not run by any test
+
+wrote <work-0001>/mantine-hooks/.specgate-regression/report.json
+      <work-0001>/mantine-hooks/.specgate-regression/summary.md
+      <work-0001>/mantine-hooks/.specgate-regression/report.sarif

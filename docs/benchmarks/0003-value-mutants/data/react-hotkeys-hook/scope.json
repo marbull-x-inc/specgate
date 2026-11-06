@@ -1,0 +1,23 @@
+{
+  "files": [
+    "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+    "packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts",
+    "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+    "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts"
+  ],
+  "operations": ["useHotkeys", "isHotkeyPressed", "useRecordHotkeys", "HotkeysProvider", "useHotkeysContext"],
+  "docs": [
+    "packages/documentation/docs/api/use-hotkeys.mdx",
+    "packages/documentation/docs/api/is-hotkey-pressed.mdx",
+    "packages/documentation/docs/api/use-record-hotkeys.mdx",
+    "packages/documentation/docs/documentation/useHotkeys/basic-usage.mdx",
+    "packages/documentation/docs/documentation/useHotkeys/disable-hotkeys.mdx",
+    "packages/documentation/docs/documentation/useHotkeys/ignore-layouts.mdx",
+    "packages/documentation/docs/documentation/useHotkeys/scoping-hotkeys.mdx",
+    "packages/documentation/docs/documentation/is-hotkey-pressed.mdx",
+    "packages/documentation/docs/documentation/use-record-hotkeys.mdx",
+    "packages/documentation/docs/documentation/hotkeys-provider.mdx"
+  ],
+  "group": "the public exports of react-hotkeys-hook (useHotkeys, isHotkeyPressed, useRecordHotkeys, HotkeysProvider, useHotkeysContext)",
+  "why": "The API pages list every option with its default and the modifier, sequence and scope rules with concrete values. Internal helpers in parseHotkeys.ts and validators.ts are not documented as public API, so they are out of scope."
+}

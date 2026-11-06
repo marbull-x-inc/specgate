@@ -1,0 +1,253 @@
+[
+  {
+    "id": "value-4",
+    "verdict": "real",
+    "reason": "the default windowMs becomes 61000 instead of the documented 60000 (one minute)",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-5",
+    "verdict": "real",
+    "reason": "the default windowMs becomes 60060 instead of the documented 60000",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-7",
+    "verdict": "real",
+    "reason": "the default response message changes",
+    "expressedBy": [
+      "78"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-28",
+    "verdict": "equivalent",
+    "reason": "the initial subnet is used only for IPv4 addresses, which ipKeyGenerator returns unchanged; for IPv6 it is overwritten by config.ipv6Subnet",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-29",
+    "verdict": "real",
+    "reason": "the default ipv6Subnet becomes 57 instead of the documented 56, so IPv6 clients are grouped by /57",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-30",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the debug namespace changes, so DEBUG=express-rate-limit no longer enables the logs",
+    "expressedBy": [
+      "203"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-31",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "205"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-32",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "207"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-33",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "216"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-38",
+    "verdict": "real",
+    "reason": "the handler no longer waits for an error event on the response, so a response that errors is not counted as failed",
+    "expressedBy": [
+      "244"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-39",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "246"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-40",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "248"
+    ],
+    "status": "Survived",
+    "finalStatus": "Killed",
+    "note": "green in an earlier measurement, Killed in the final one although the change cannot fail a test; not counted (most likely a test that failed under load)"
+  },
+  {
+    "id": "value-41",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "253"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-42",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "256"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-43",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "258"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-44",
+    "verdict": "equivalent",
+    "reason": "totalHits is always overwritten by the store result, or the request returns or throws first",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-45",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text logged through config.logger.error when the store fails changes",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-47",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "288"
+    ],
+    "status": "NoCoverage"
+  },
+  {
+    "id": "value-49",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-51",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-53",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-55",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "328"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-56",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "330"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-57",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-58",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "364"
+    ],
+    "status": "Survived"
+  },
+  {
+    "id": "value-59",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-60",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": null,
+    "status": "Survived"
+  },
+  {
+    "id": "value-61",
+    "verdict": "real",
+    "category": "log-message",
+    "reason": "the text of a debug() log line changes; visible only with DEBUG enabled",
+    "expressedBy": [
+      "402"
+    ],
+    "status": "Survived"
+  }
+]

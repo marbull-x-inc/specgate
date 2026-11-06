@@ -1,0 +1,114 @@
+[
+  {
+    "id": "value-3",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "without FOCUS_OUT, a focusout event no longer counts as a blur",
+    "expressedBy": null
+  },
+  {
+    "id": "value-4",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "a focusout event (event.type \"focusout\") no longer counts as a blur",
+    "expressedBy": null
+  },
+  {
+    "id": "value-7",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the form-level validate option receives eventType undefined instead of \"submit\" on submit",
+    "expressedBy": null
+  },
+  {
+    "id": "value-8",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the form-level validate option receives eventType \"submit_x\" on submit",
+    "expressedBy": null
+  },
+  {
+    "id": "value-9",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the form-level validate option receives eventType undefined instead of \"trigger\" on trigger()",
+    "expressedBy": null
+  },
+  {
+    "id": "value-10",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the form-level validate option receives eventType \"trigger_x\" on trigger()",
+    "expressedBy": null
+  },
+  {
+    "id": "value-11",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the form-level validate option receives eventType undefined instead of \"valid\"",
+    "expressedBy": null
+  },
+  {
+    "id": "value-12",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the form-level validate option receives eventType \"valid_x\"",
+    "expressedBy": null
+  },
+  {
+    "id": "value-41",
+    "status": "Survived",
+    "verdict": "equivalent",
+    "reason": "the callback result is only tested for truthiness; 2 is as truthy as 1",
+    "expressedBy": null
+  },
+  {
+    "id": "value-44",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "when a rerender drops a reValidateMode passed earlier, it is no longer reset to its default",
+    "expressedBy": null
+  },
+  {
+    "id": "value-45",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "when a rerender drops a shouldFocusError passed earlier, it is no longer reset to its default",
+    "expressedBy": null
+  },
+  {
+    "id": "value-47",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "when a rerender drops a criteriaMode passed earlier, it is no longer reset to its default",
+    "expressedBy": null
+  },
+  {
+    "id": "value-48",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "when a rerender drops a delayError passed earlier, it is no longer reset to its default",
+    "expressedBy": null
+  },
+  {
+    "id": "value-49",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "when a rerender drops a shouldUnregister passed earlier, it is no longer reset to its default",
+    "expressedBy": null
+  },
+  {
+    "id": "value-50",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "when a rerender drops a shouldUseNativeValidation passed earlier, it is no longer reset to its default",
+    "expressedBy": null
+  },
+  {
+    "id": "value-51",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "when a rerender drops a context passed earlier, it is no longer reset to its default",
+    "expressedBy": null
+  }
+]

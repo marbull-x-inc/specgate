@@ -1,0 +1,554 @@
+{
+  "summary": {
+    "projectsRan": 10,
+    "C1": {
+      "projectsWithRealHoleNotExpressed": 6,
+      "projects": [
+        "cron-parser",
+        "jotai",
+        "react-hook-form",
+        "react-hotkeys-hook",
+        "express-rate-limit",
+        "cac"
+      ],
+      "needMoreThan": 5,
+      "holds": true,
+      "excludingCategories": {
+        "projects": 6,
+        "names": [
+          "cron-parser",
+          "jotai",
+          "react-hook-form",
+          "react-hotkeys-hook",
+          "express-rate-limit",
+          "cac"
+        ]
+      }
+    },
+    "C2": {
+      "green": 111,
+      "reviewed": 111,
+      "real": 98,
+      "equivalent": 13,
+      "share": 0.8828828828828829,
+      "holds": true,
+      "excludingCategories": {
+        "real": 67,
+        "equivalent": 13,
+        "share": 0.8375
+      }
+    },
+    "C3": {
+      "strykerSeconds": 1261.9899999999998,
+      "runnerSeconds": 612.85,
+      "ratio": 0.48562191459520293,
+      "holds": true
+    },
+    "totals": {
+      "valueMutants": 379,
+      "realNotExpressed": 37,
+      "holeSitesNotExpressed": 30,
+      "namedByGuarantee": 26
+    }
+  },
+  "projects": [
+    {
+      "name": "es-toolkit",
+      "ran": true,
+      "valueMutants": 113,
+      "kinds": {
+        "number": 25,
+        "string": 20,
+        "element": 58,
+        "entry": 10
+      },
+      "status": {
+        "Killed": 108,
+        "Survived": 5
+      },
+      "green": 5,
+      "reviewed": 5,
+      "real": 1,
+      "equivalent": 4,
+      "realNotExpressed": 0,
+      "holeSites": 1,
+      "holeSitesNotExpressed": 0,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "logMessage": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "loopLimit": {
+          "real": 0,
+          "notExpressed": 0
+        }
+      },
+      "namedByGuarantee": 0,
+      "strykerCounts": {
+        "Killed": 281,
+        "Survived": 7,
+        "Timeout": 18
+      },
+      "strykerSurvivedOrNoCoverage": 7,
+      "seconds": {
+        "stryker": 61.92,
+        "runner": 42.73,
+        "mutants": 1.9
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 5,
+      "valueFindingsWithUnit": 5
+    },
+    {
+      "name": "defu",
+      "ran": true,
+      "valueMutants": 3,
+      "kinds": {
+        "string": 3
+      },
+      "status": {
+        "NoCoverage": 1,
+        "Survived": 2
+      },
+      "green": 3,
+      "reviewed": 3,
+      "real": 3,
+      "equivalent": 0,
+      "realNotExpressed": 0,
+      "holeSites": 2,
+      "holeSitesNotExpressed": 0,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "logMessage": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "loopLimit": {
+          "real": 0,
+          "notExpressed": 0
+        }
+      },
+      "namedByGuarantee": 0,
+      "strykerCounts": {
+        "NoCoverage": 1,
+        "Killed": 50,
+        "Timeout": 3,
+        "Survived": 13
+      },
+      "strykerSurvivedOrNoCoverage": 14,
+      "seconds": {
+        "stryker": 5.91,
+        "runner": 1.77,
+        "mutants": 0.48
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 3,
+      "valueFindingsWithUnit": 3
+    },
+    {
+      "name": "valibot",
+      "ran": true,
+      "valueMutants": 51,
+      "kinds": {
+        "string": 48,
+        "number": 3
+      },
+      "status": {
+        "Killed": 38,
+        "Survived": 13
+      },
+      "green": 13,
+      "reviewed": 13,
+      "real": 13,
+      "equivalent": 0,
+      "realNotExpressed": 0,
+      "holeSites": 13,
+      "holeSitesNotExpressed": 0,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "logMessage": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "loopLimit": {
+          "real": 0,
+          "notExpressed": 0
+        }
+      },
+      "namedByGuarantee": 11,
+      "strykerCounts": {
+        "Killed": 233,
+        "Survived": 15
+      },
+      "strykerSurvivedOrNoCoverage": 15,
+      "seconds": {
+        "stryker": 88.52,
+        "runner": 42.26,
+        "mutants": 1.66
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 13,
+      "valueFindingsWithUnit": 13
+    },
+    {
+      "name": "cron-parser",
+      "ran": true,
+      "valueMutants": 20,
+      "kinds": {
+        "string": 6,
+        "number": 14
+      },
+      "status": {
+        "Survived": 10,
+        "Killed": 9,
+        "Timeout": 1
+      },
+      "green": 10,
+      "reviewed": 10,
+      "real": 8,
+      "equivalent": 2,
+      "realNotExpressed": 3,
+      "holeSites": 8,
+      "holeSitesNotExpressed": 3,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "logMessage": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "loopLimit": {
+          "real": 2,
+          "notExpressed": 2
+        }
+      },
+      "namedByGuarantee": 5,
+      "strykerCounts": {
+        "NoCoverage": 8,
+        "Killed": 900,
+        "Survived": 107,
+        "Timeout": 116
+      },
+      "strykerSurvivedOrNoCoverage": 115,
+      "seconds": {
+        "stryker": 97.57,
+        "runner": 25.18,
+        "mutants": 0.77
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 10,
+      "valueFindingsWithUnit": 10
+    },
+    {
+      "name": "neverthrow",
+      "ran": true,
+      "valueMutants": 0,
+      "kinds": {},
+      "status": {},
+      "green": 0,
+      "reviewed": 0,
+      "real": 0,
+      "equivalent": 0,
+      "realNotExpressed": 0,
+      "holeSites": 0,
+      "holeSitesNotExpressed": 0,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "logMessage": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "loopLimit": {
+          "real": 0,
+          "notExpressed": 0
+        }
+      },
+      "namedByGuarantee": 0,
+      "strykerCounts": {
+        "NoCoverage": 4,
+        "Killed": 59,
+        "Survived": 1
+      },
+      "strykerSurvivedOrNoCoverage": 5,
+      "seconds": {
+        "stryker": 8.17,
+        "runner": 1,
+        "mutants": 0.55
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 0,
+      "valueFindingsWithUnit": 0
+    },
+    {
+      "name": "jotai",
+      "ran": true,
+      "valueMutants": 36,
+      "kinds": {
+        "string": 16,
+        "number": 20
+      },
+      "status": {
+        "Survived": 18,
+        "Killed": 18
+      },
+      "green": 18,
+      "reviewed": 18,
+      "real": 14,
+      "equivalent": 4,
+      "realNotExpressed": 4,
+      "holeSites": 13,
+      "holeSitesNotExpressed": 3,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 9,
+          "notExpressed": 1
+        },
+        "logMessage": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "loopLimit": {
+          "real": 0,
+          "notExpressed": 0
+        }
+      },
+      "namedByGuarantee": 2,
+      "strykerCounts": {
+        "NoCoverage": 2,
+        "Timeout": 13,
+        "Killed": 343,
+        "Survived": 97,
+        "RuntimeError": 1
+      },
+      "strykerSurvivedOrNoCoverage": 99,
+      "seconds": {
+        "stryker": 120.97,
+        "runner": 18.51,
+        "mutants": 0.86
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 18,
+      "valueFindingsWithUnit": 18
+    },
+    {
+      "name": "react-hook-form",
+      "ran": true,
+      "valueMutants": 53,
+      "kinds": {
+        "entry": 33,
+        "string": 15,
+        "number": 5
+      },
+      "status": {
+        "Killed": 37,
+        "Survived": 16
+      },
+      "green": 16,
+      "reviewed": 16,
+      "real": 15,
+      "equivalent": 1,
+      "realNotExpressed": 15,
+      "holeSites": 11,
+      "holeSitesNotExpressed": 11,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "logMessage": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "loopLimit": {
+          "real": 0,
+          "notExpressed": 0
+        }
+      },
+      "namedByGuarantee": 2,
+      "strykerCounts": {
+        "NoCoverage": 2,
+        "Killed": 245,
+        "Survived": 94,
+        "Timeout": 364,
+        "RuntimeError": 4
+      },
+      "strykerSurvivedOrNoCoverage": 96,
+      "seconds": {
+        "stryker": 599.18,
+        "runner": 342.14,
+        "mutants": 1.43
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 16,
+      "valueFindingsWithUnit": 16
+    },
+    {
+      "name": "react-hotkeys-hook",
+      "ran": true,
+      "valueMutants": 20,
+      "kinds": {
+        "entry": 5,
+        "string": 13,
+        "number": 2
+      },
+      "status": {
+        "Survived": 7,
+        "Killed": 13
+      },
+      "green": 7,
+      "reviewed": 7,
+      "real": 7,
+      "equivalent": 0,
+      "realNotExpressed": 4,
+      "holeSites": 6,
+      "holeSitesNotExpressed": 3,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "logMessage": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "loopLimit": {
+          "real": 0,
+          "notExpressed": 0
+        }
+      },
+      "namedByGuarantee": 3,
+      "strykerCounts": {
+        "NoCoverage": 20,
+        "Killed": 288,
+        "Survived": 100,
+        "RuntimeError": 6
+      },
+      "strykerSurvivedOrNoCoverage": 120,
+      "seconds": {
+        "stryker": 202.97,
+        "runner": 60.67,
+        "mutants": 0.61
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 7,
+      "valueFindingsWithUnit": 7
+    },
+    {
+      "name": "express-rate-limit",
+      "ran": true,
+      "valueMutants": 61,
+      "kinds": {
+        "string": 36,
+        "number": 25
+      },
+      "status": {
+        "Killed": 34,
+        "Survived": 26,
+        "NoCoverage": 1
+      },
+      "green": 27,
+      "reviewed": 27,
+      "real": 25,
+      "equivalent": 2,
+      "realNotExpressed": 10,
+      "holeSites": 24,
+      "holeSitesNotExpressed": 9,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "logMessage": {
+          "real": 20,
+          "notExpressed": 7
+        },
+        "loopLimit": {
+          "real": 0,
+          "notExpressed": 0
+        }
+      },
+      "namedByGuarantee": 1,
+      "strykerCounts": {
+        "NoCoverage": 12,
+        "Timeout": 53,
+        "Killed": 253,
+        "Survived": 74,
+        "RuntimeError": 1
+      },
+      "strykerSurvivedOrNoCoverage": 86,
+      "seconds": {
+        "stryker": 66.54,
+        "runner": 72.08,
+        "mutants": 0.86
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 27,
+      "valueFindingsWithUnit": 27
+    },
+    {
+      "name": "cac",
+      "ran": true,
+      "valueMutants": 22,
+      "kinds": {
+        "string": 9,
+        "number": 13
+      },
+      "status": {
+        "NoCoverage": 6,
+        "Survived": 6,
+        "Killed": 10
+      },
+      "green": 12,
+      "reviewed": 12,
+      "real": 12,
+      "equivalent": 0,
+      "realNotExpressed": 1,
+      "holeSites": 8,
+      "holeSitesNotExpressed": 1,
+      "categories": {
+        "nodeEnvSwitch": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "logMessage": {
+          "real": 0,
+          "notExpressed": 0
+        },
+        "loopLimit": {
+          "real": 0,
+          "notExpressed": 0
+        }
+      },
+      "namedByGuarantee": 2,
+      "strykerCounts": {
+        "NoCoverage": 180,
+        "Survived": 75,
+        "Killed": 144
+      },
+      "strykerSurvivedOrNoCoverage": 255,
+      "seconds": {
+        "stryker": 10.24,
+        "runner": 6.51,
+        "mutants": 0.67
+      },
+      "runnerConcurrency": 15,
+      "valueFindings": 9,
+      "valueFindingsWithUnit": 9
+    }
+  ]
+}

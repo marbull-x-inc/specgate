@@ -1,0 +1,7 @@
+{
+  "files": ["source/rate-limit.ts", "source/ip-key-generator.ts", "source/time-constants.ts"],
+  "operations": ["rateLimit", "ipKeyGenerator", "SECOND", "MINUTE", "HOUR", "DAY"],
+  "docs": ["docs/reference/configuration.mdx", "docs/reference/helpers.mdx", "docs/reference/request-api.mdx"],
+  "group": "Configuration reference (option defaults), Helpers, and the Time constants subsection",
+  "why": "The configuration docs state many concrete defaults (window, limit, message, status code, headers, property name); the helper doc states the ipKeyGenerator default subnet and IPv4 handling; the time constants are the documented millisecond units."
+}

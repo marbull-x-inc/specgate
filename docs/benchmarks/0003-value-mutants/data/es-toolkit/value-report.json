@@ -1,0 +1,3983 @@
+{
+  "schemaVersion": "2",
+  "thresholds": {
+    "high": 80,
+    "low": 60
+  },
+  "projectRoot": "<work>/es-toolkit",
+  "files": {
+    "src/string/camelCase.ts": {
+      "language": "typescript",
+      "source": "import { capitalize } from './capitalize.ts';\nimport { words as getWords } from './words.ts';\n\n/**\n * Converts a string to camel case.\n *\n * Camel case is the naming convention in which the first word is written in lowercase and\n * each subsequent word begins with a capital letter, concatenated without any separator characters.\n *\n * @param str - The string that is to be changed to camel case.\n * @returns The converted string to camel case.\n *\n * @example\n * const convertedStr1 = camelCase('camelCase') // returns 'camelCase'\n * const convertedStr2 = camelCase('some whitespace') // returns 'someWhitespace'\n * const convertedStr3 = camelCase('hyphen-text') // returns 'hyphenText'\n * const convertedStr4 = camelCase('HTTPRequest') // returns 'httpRequest'\n * const convertedStr5 = camelCase('Keep unicode 😅') // returns 'keepUnicode😅'\n * @guarantee ok.words-joined \"hello world\" gives \"helloWorld\" and \"some-hyphen-text\" gives \"someHyphenText\"\n * @guarantee ok.from-other-cases \"CONSTANT_CASE\" gives \"constantCase\" and \"PascalCase\" gives \"pascalCase\"\n * @guarantee ok.mixed-case-kept \"mixed   SpAcE\" gives \"mixedSpAcE\"\n * @guarantee ok.unicode-kept \"keep unicode 😅\" gives \"keepUnicode😅\" and \"한글-테스트\" gives \"한글테스트\"\n */\nexport function camelCase(str: string): string {\n  const words = getWords(str);\n\n  if (words.length === 0) {\n    return '';\n  }\n\n  const [first, ...rest] = words;\n\n  return `${first.toLowerCase()}${rest.map(word => capitalize(word)).join('')}`;\n}\n",
+      "mutants": [
+        {
+          "id": "value-1",
+          "mutatorName": "Value",
+          "replacement": "`words.length === 0`: 0 → 1",
+          "description": "`words.length === 0`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 27,
+              "column": 24
+            },
+            "end": {
+              "line": 27,
+              "column": 25
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "626",
+            "627",
+            "628",
+            "629",
+            "630",
+            "633",
+            "634",
+            "635",
+            "636",
+            "637",
+            "638",
+            "639",
+            "642",
+            "643",
+            "644",
+            "645",
+            "646",
+            "647",
+            "648",
+            "649",
+            "650"
+          ],
+          "duration": 1675
+        }
+      ]
+    },
+    "src/string/capitalize.ts": {
+      "language": "typescript",
+      "source": "/**\n * Converts the first character of string to upper case and the remaining to lower case.\n *\n * @template T - Literal type of the string.\n * @param str - The string to be converted to uppercase.\n * @returns The capitalized string.\n *\n * @example\n * const result = capitalize('fred') // returns 'Fred'\n * const result2 = capitalize('FRED') // returns 'Fred'\n */\n\n/**\n * @guarantee ok.first-upper-rest-lower \"hello\" gives \"Hello\", \"WORLD\" gives \"World\" and \"javaScript\" gives \"Javascript\"\n * @guarantee ok.short-strings \"\" gives \"\", \"a\" gives \"A\" and \"A\" gives \"A\"\n * @guarantee ok.only-first-word \"welcome to our website\" gives \"Welcome to our website\"\n */\nexport function capitalize<T extends string>(str: T): Capitalize<T> {\n  return (str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()) as Capitalize<T>;\n}\n\ntype Capitalize<T extends string> = T extends `${infer F}${infer R}` ? `${Uppercase<F>}${Lowercase<R>}` : T;\n",
+      "mutants": [
+        {
+          "id": "value-2",
+          "mutatorName": "Value",
+          "replacement": "`str.charAt(0)`: 0 → 1",
+          "description": "`str.charAt(0)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 19,
+              "column": 22
+            },
+            "end": {
+              "line": 19,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "512",
+            "513",
+            "514",
+            "515",
+            "516",
+            "517",
+            "518",
+            "520",
+            "521",
+            "609",
+            "610",
+            "611",
+            "612",
+            "615",
+            "616",
+            "617",
+            "618",
+            "619",
+            "620",
+            "626",
+            "627",
+            "628",
+            "629",
+            "630",
+            "633",
+            "634",
+            "635",
+            "636",
+            "638",
+            "639",
+            "642",
+            "643",
+            "644",
+            "645",
+            "646",
+            "647",
+            "649",
+            "650",
+            "696",
+            "697",
+            "698",
+            "699",
+            "700",
+            "701",
+            "703",
+            "704",
+            "705",
+            "706",
+            "707",
+            "708",
+            "709",
+            "710",
+            "711",
+            "712",
+            "713"
+          ],
+          "duration": 2452
+        },
+        {
+          "id": "value-3",
+          "mutatorName": "Value",
+          "replacement": "`str.slice(1)`: 1 → 2",
+          "description": "`str.slice(1)`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 19,
+              "column": 51
+            },
+            "end": {
+              "line": 19,
+              "column": 52
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "512",
+            "513",
+            "514",
+            "515",
+            "516",
+            "517",
+            "518",
+            "520",
+            "521",
+            "609",
+            "610",
+            "611",
+            "612",
+            "615",
+            "616",
+            "617",
+            "618",
+            "619",
+            "620",
+            "626",
+            "627",
+            "628",
+            "629",
+            "630",
+            "633",
+            "634",
+            "635",
+            "636",
+            "638",
+            "639",
+            "642",
+            "643",
+            "644",
+            "645",
+            "646",
+            "647",
+            "649",
+            "650",
+            "696",
+            "697",
+            "698",
+            "699",
+            "700",
+            "701",
+            "703",
+            "704",
+            "705",
+            "706",
+            "707",
+            "708",
+            "709",
+            "710",
+            "711",
+            "712",
+            "713"
+          ],
+          "duration": 2462
+        }
+      ]
+    },
+    "src/string/constantCase.ts": {
+      "language": "typescript",
+      "source": "import { words as getWords } from './words.ts';\n\n/**\n * Converts a string to constant case.\n *\n * Constant case is a naming convention where each word is written in uppercase letters and separated by an underscore (`_`). For example, `CONSTANT_CASE`.\n *\n * @param str - The string that is to be changed to constant case.\n * @returns The converted string to constant case.\n *\n * @example\n * const convertedStr1 = constantCase('camelCase') // returns 'CAMEL_CASE'\n * const convertedStr2 = constantCase('some whitespace') // returns 'SOME_WHITESPACE'\n * const convertedStr3 = constantCase('hyphen-text') // returns 'HYPHEN_TEXT'\n * const convertedStr4 = constantCase('HTTPRequest') // returns 'HTTP_REQUEST'\n */\n\n/**\n * @guarantee ok.upper-with-underscores \"hello world\" gives \"HELLO_WORLD\" and \"some-kebab-case\" gives \"SOME_KEBAB_CASE\"\n * @guarantee ok.from-camel-pascal-snake \"camelCase\" gives \"CAMEL_CASE\", \"PascalCase\" gives \"PASCAL_CASE\" and \"snake_case\" gives \"SNAKE_CASE\"\n * @guarantee ok.acronym-word \"HTTP Request\" gives \"HTTP_REQUEST\"\n * @guarantee ok.extra-spaces-dropped \"  multiple   spaces  \" gives \"MULTIPLE_SPACES\"\n */\nexport function constantCase(str: string): string {\n  const words = getWords(str);\n  return words.map(word => word.toUpperCase()).join('_');\n}\n",
+      "mutants": [
+        {
+          "id": "value-4",
+          "mutatorName": "Value",
+          "replacement": "`words.map(word => word.toUpperCase()).j…`: '_' → '__x'",
+          "description": "`words.map(word => word.toUpperCase()).j…`: '_' → '__x'",
+          "location": {
+            "start": {
+              "line": 26,
+              "column": 53
+            },
+            "end": {
+              "line": 26,
+              "column": 56
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "402",
+            "403",
+            "404",
+            "405",
+            "408",
+            "409",
+            "410",
+            "411",
+            "412",
+            "413",
+            "579",
+            "580",
+            "581",
+            "582",
+            "583",
+            "584",
+            "585",
+            "586",
+            "587"
+          ],
+          "duration": 1893
+        }
+      ]
+    },
+    "src/string/deburr.ts": {
+      "language": "typescript",
+      "source": "const deburrMap = new Map<string, string>([\n  ['Æ', 'Ae'],\n  ['Ð', 'D'],\n  ['Ø', 'O'],\n  ['Þ', 'Th'],\n  ['ß', 'ss'],\n  ['æ', 'ae'],\n  ['ð', 'd'],\n  ['ø', 'o'],\n  ['þ', 'th'],\n  ['Đ', 'D'],\n  ['đ', 'd'],\n  ['Ħ', 'H'],\n  ['ħ', 'h'],\n  ['ı', 'i'],\n  ['Ĳ', 'IJ'],\n  ['ĳ', 'ij'],\n  ['ĸ', 'k'],\n  ['Ŀ', 'L'],\n  ['ŀ', 'l'],\n  ['Ł', 'L'],\n  ['ł', 'l'],\n  ['ŉ', \"'n\"],\n  ['Ŋ', 'N'],\n  ['ŋ', 'n'],\n  ['Œ', 'Oe'],\n  ['œ', 'oe'],\n  ['Ŧ', 'T'],\n  ['ŧ', 't'],\n  ['ſ', 's'],\n]);\n\n/**\n * Converts a string by replacing special characters and diacritical marks with their ASCII equivalents.\n * For example, \"Crème brûlée\" becomes \"Creme brulee\".\n *\n * Only Latin letters are converted. Letters of other scripts, such as Hangul, Cyrillic, or Greek,\n * are kept as they are, even if they carry diacritical marks.\n *\n * @param str - The input string to be deburred.\n * @returns The deburred string with special characters replaced by their ASCII equivalents.\n *\n * @example\n * // Basic usage:\n * deburr('Æthelred') // returns 'Aethelred'\n *\n * @example\n * // Handling diacritical marks:\n * deburr('München') // returns 'Munchen'\n *\n * @example\n * // Special characters:\n * deburr('Crème brûlée') // returns 'Creme brulee'\n *\n * @example\n * // Letters of other scripts are kept as they are:\n * deburr('한국어') // returns '한국어'\n * deburr('йогурт') // returns 'йогурт'\n * @guarantee ok.accents-removed \"café\" gives \"cafe\", \"résumé\" gives \"resume\", \"naïve\" gives \"naive\" and \"Zürich\" gives \"Zurich\"\n * @guarantee ok.other-languages \"München\" gives \"Munchen\", \"Crème brûlée\" gives \"Creme brulee\" and \"mañana\" gives \"manana\"\n * @guarantee ok.non-latin-kept \"한국어\" gives \"한국어\" and \"йогурт\" gives \"йогурт\"\n * @guarantee ok.mixed-scripts \"Café Москва 한국어\" gives \"Cafe Москва 한국어\"\n */\nexport function deburr(str: string): string {\n  let result = '';\n\n  for (let index = 0; index < str.length; index++) {\n    result += deburrChar(str[index]);\n  }\n\n  return result;\n}\n\nfunction deburrChar(char: string): string {\n  const code = char.charCodeAt(0);\n\n  if (code < 0x80) {\n    return char;\n  }\n\n  if (isCombiningMark(code)) {\n    return '';\n  }\n\n  const deburred = deburrMap.get(char);\n\n  if (deburred != null) {\n    return deburred;\n  }\n\n  // Only Latin letters with diacritical marks are decomposed. They live in the Latin-1 Supplement,\n  // Latin Extended-A, Latin Extended-B, and Latin Extended Additional blocks, and the Kelvin and Angstrom signs.\n  // Other letters, such as Hangul syllables or Cyrillic letters, are kept as they are.\n  if (!isLatinLetter(code)) {\n    return char;\n  }\n\n  const decomposed = char.normalize('NFD');\n  let result = '';\n\n  for (let index = 0; index < decomposed.length; index++) {\n    if (!isCombiningMark(decomposed.charCodeAt(index))) {\n      result += deburrMap.get(decomposed[index]) ?? decomposed[index];\n    }\n  }\n\n  return result;\n}\n\nfunction isLatinLetter(code: number): boolean {\n  return (code >= 0xc0 && code <= 0x233) || (code >= 0x1e00 && code <= 0x1ef9) || code === 0x212a || code === 0x212b;\n}\n\nfunction isCombiningMark(code: number): boolean {\n  return (\n    // Combining Diacritical Marks\n    (code >= 0x300 && code <= 0x36f) ||\n    // Combining Diacritical Marks for Symbols\n    (code >= 0x20d0 && code <= 0x20ff) ||\n    // Combining Half Marks\n    (code >= 0xfe20 && code <= 0xfe2f)\n  );\n}\n",
+      "mutants": [
+        {
+          "id": "value-5",
+          "mutatorName": "Value",
+          "replacement": "`'Æ'` removed from the list `['Æ', 'Ae']`",
+          "description": "`'Æ'` removed from the list `['Æ', 'Ae']`",
+          "location": {
+            "start": {
+              "line": 2,
+              "column": 4
+            },
+            "end": {
+              "line": 2,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1833
+        },
+        {
+          "id": "value-6",
+          "mutatorName": "Value",
+          "replacement": "`'Ae'` removed from the list `['Æ', 'Ae']`",
+          "description": "`'Ae'` removed from the list `['Æ', 'Ae']`",
+          "location": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2082
+        },
+        {
+          "id": "value-7",
+          "mutatorName": "Value",
+          "replacement": "`'Ð'` removed from the list `['Ð', 'D']`",
+          "description": "`'Ð'` removed from the list `['Ð', 'D']`",
+          "location": {
+            "start": {
+              "line": 3,
+              "column": 4
+            },
+            "end": {
+              "line": 3,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2155
+        },
+        {
+          "id": "value-8",
+          "mutatorName": "Value",
+          "replacement": "`'D'` removed from the list `['Ð', 'D']`",
+          "description": "`'D'` removed from the list `['Ð', 'D']`",
+          "location": {
+            "start": {
+              "line": 3,
+              "column": 7
+            },
+            "end": {
+              "line": 3,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2181
+        },
+        {
+          "id": "value-9",
+          "mutatorName": "Value",
+          "replacement": "`'Ø'` removed from the list `['Ø', 'O']`",
+          "description": "`'Ø'` removed from the list `['Ø', 'O']`",
+          "location": {
+            "start": {
+              "line": 4,
+              "column": 4
+            },
+            "end": {
+              "line": 4,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2219
+        },
+        {
+          "id": "value-10",
+          "mutatorName": "Value",
+          "replacement": "`'O'` removed from the list `['Ø', 'O']`",
+          "description": "`'O'` removed from the list `['Ø', 'O']`",
+          "location": {
+            "start": {
+              "line": 4,
+              "column": 7
+            },
+            "end": {
+              "line": 4,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2125
+        },
+        {
+          "id": "value-11",
+          "mutatorName": "Value",
+          "replacement": "`'Þ'` removed from the list `['Þ', 'Th']`",
+          "description": "`'Þ'` removed from the list `['Þ', 'Th']`",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 4
+            },
+            "end": {
+              "line": 5,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2242
+        },
+        {
+          "id": "value-12",
+          "mutatorName": "Value",
+          "replacement": "`'Th'` removed from the list `['Þ', 'Th']`",
+          "description": "`'Th'` removed from the list `['Þ', 'Th']`",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 7
+            },
+            "end": {
+              "line": 5,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2282
+        },
+        {
+          "id": "value-13",
+          "mutatorName": "Value",
+          "replacement": "`'ß'` removed from the list `['ß', 'ss']`",
+          "description": "`'ß'` removed from the list `['ß', 'ss']`",
+          "location": {
+            "start": {
+              "line": 6,
+              "column": 4
+            },
+            "end": {
+              "line": 6,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2341
+        },
+        {
+          "id": "value-14",
+          "mutatorName": "Value",
+          "replacement": "`'ss'` removed from the list `['ß', 'ss']`",
+          "description": "`'ss'` removed from the list `['ß', 'ss']`",
+          "location": {
+            "start": {
+              "line": 6,
+              "column": 7
+            },
+            "end": {
+              "line": 6,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2362
+        },
+        {
+          "id": "value-15",
+          "mutatorName": "Value",
+          "replacement": "`'æ'` removed from the list `['æ', 'ae']`",
+          "description": "`'æ'` removed from the list `['æ', 'ae']`",
+          "location": {
+            "start": {
+              "line": 7,
+              "column": 4
+            },
+            "end": {
+              "line": 7,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 2395
+        },
+        {
+          "id": "value-16",
+          "mutatorName": "Value",
+          "replacement": "`'ae'` removed from the list `['æ', 'ae']`",
+          "description": "`'ae'` removed from the list `['æ', 'ae']`",
+          "location": {
+            "start": {
+              "line": 7,
+              "column": 7
+            },
+            "end": {
+              "line": 7,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1497
+        },
+        {
+          "id": "value-17",
+          "mutatorName": "Value",
+          "replacement": "`'ð'` removed from the list `['ð', 'd']`",
+          "description": "`'ð'` removed from the list `['ð', 'd']`",
+          "location": {
+            "start": {
+              "line": 8,
+              "column": 4
+            },
+            "end": {
+              "line": 8,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1537
+        },
+        {
+          "id": "value-18",
+          "mutatorName": "Value",
+          "replacement": "`'d'` removed from the list `['ð', 'd']`",
+          "description": "`'d'` removed from the list `['ð', 'd']`",
+          "location": {
+            "start": {
+              "line": 8,
+              "column": 7
+            },
+            "end": {
+              "line": 8,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1368
+        },
+        {
+          "id": "value-19",
+          "mutatorName": "Value",
+          "replacement": "`'ø'` removed from the list `['ø', 'o']`",
+          "description": "`'ø'` removed from the list `['ø', 'o']`",
+          "location": {
+            "start": {
+              "line": 9,
+              "column": 4
+            },
+            "end": {
+              "line": 9,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1110
+        },
+        {
+          "id": "value-20",
+          "mutatorName": "Value",
+          "replacement": "`'o'` removed from the list `['ø', 'o']`",
+          "description": "`'o'` removed from the list `['ø', 'o']`",
+          "location": {
+            "start": {
+              "line": 9,
+              "column": 7
+            },
+            "end": {
+              "line": 9,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1160
+        },
+        {
+          "id": "value-21",
+          "mutatorName": "Value",
+          "replacement": "`'þ'` removed from the list `['þ', 'th']`",
+          "description": "`'þ'` removed from the list `['þ', 'th']`",
+          "location": {
+            "start": {
+              "line": 10,
+              "column": 4
+            },
+            "end": {
+              "line": 10,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1260
+        },
+        {
+          "id": "value-22",
+          "mutatorName": "Value",
+          "replacement": "`'th'` removed from the list `['þ', 'th']`",
+          "description": "`'th'` removed from the list `['þ', 'th']`",
+          "location": {
+            "start": {
+              "line": 10,
+              "column": 7
+            },
+            "end": {
+              "line": 10,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1251
+        },
+        {
+          "id": "value-23",
+          "mutatorName": "Value",
+          "replacement": "`'Đ'` removed from the list `['Đ', 'D']`",
+          "description": "`'Đ'` removed from the list `['Đ', 'D']`",
+          "location": {
+            "start": {
+              "line": 11,
+              "column": 4
+            },
+            "end": {
+              "line": 11,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 695
+        },
+        {
+          "id": "value-24",
+          "mutatorName": "Value",
+          "replacement": "`'D'` removed from the list `['Đ', 'D']`",
+          "description": "`'D'` removed from the list `['Đ', 'D']`",
+          "location": {
+            "start": {
+              "line": 11,
+              "column": 7
+            },
+            "end": {
+              "line": 11,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1220
+        },
+        {
+          "id": "value-25",
+          "mutatorName": "Value",
+          "replacement": "`'đ'` removed from the list `['đ', 'd']`",
+          "description": "`'đ'` removed from the list `['đ', 'd']`",
+          "location": {
+            "start": {
+              "line": 12,
+              "column": 4
+            },
+            "end": {
+              "line": 12,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1347
+        },
+        {
+          "id": "value-26",
+          "mutatorName": "Value",
+          "replacement": "`'d'` removed from the list `['đ', 'd']`",
+          "description": "`'d'` removed from the list `['đ', 'd']`",
+          "location": {
+            "start": {
+              "line": 12,
+              "column": 7
+            },
+            "end": {
+              "line": 12,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1296
+        },
+        {
+          "id": "value-27",
+          "mutatorName": "Value",
+          "replacement": "`'Ħ'` removed from the list `['Ħ', 'H']`",
+          "description": "`'Ħ'` removed from the list `['Ħ', 'H']`",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 4
+            },
+            "end": {
+              "line": 13,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1370
+        },
+        {
+          "id": "value-28",
+          "mutatorName": "Value",
+          "replacement": "`'H'` removed from the list `['Ħ', 'H']`",
+          "description": "`'H'` removed from the list `['Ħ', 'H']`",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 7
+            },
+            "end": {
+              "line": 13,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1322
+        },
+        {
+          "id": "value-29",
+          "mutatorName": "Value",
+          "replacement": "`'ħ'` removed from the list `['ħ', 'h']`",
+          "description": "`'ħ'` removed from the list `['ħ', 'h']`",
+          "location": {
+            "start": {
+              "line": 14,
+              "column": 4
+            },
+            "end": {
+              "line": 14,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1147
+        },
+        {
+          "id": "value-30",
+          "mutatorName": "Value",
+          "replacement": "`'h'` removed from the list `['ħ', 'h']`",
+          "description": "`'h'` removed from the list `['ħ', 'h']`",
+          "location": {
+            "start": {
+              "line": 14,
+              "column": 7
+            },
+            "end": {
+              "line": 14,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1219
+        },
+        {
+          "id": "value-31",
+          "mutatorName": "Value",
+          "replacement": "`'ı'` removed from the list `['ı', 'i']`",
+          "description": "`'ı'` removed from the list `['ı', 'i']`",
+          "location": {
+            "start": {
+              "line": 15,
+              "column": 4
+            },
+            "end": {
+              "line": 15,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1380
+        },
+        {
+          "id": "value-32",
+          "mutatorName": "Value",
+          "replacement": "`'i'` removed from the list `['ı', 'i']`",
+          "description": "`'i'` removed from the list `['ı', 'i']`",
+          "location": {
+            "start": {
+              "line": 15,
+              "column": 7
+            },
+            "end": {
+              "line": 15,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1365
+        },
+        {
+          "id": "value-33",
+          "mutatorName": "Value",
+          "replacement": "`'Ĳ'` removed from the list `['Ĳ', 'IJ']`",
+          "description": "`'Ĳ'` removed from the list `['Ĳ', 'IJ']`",
+          "location": {
+            "start": {
+              "line": 16,
+              "column": 4
+            },
+            "end": {
+              "line": 16,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1405
+        },
+        {
+          "id": "value-34",
+          "mutatorName": "Value",
+          "replacement": "`'IJ'` removed from the list `['Ĳ', 'IJ']`",
+          "description": "`'IJ'` removed from the list `['Ĳ', 'IJ']`",
+          "location": {
+            "start": {
+              "line": 16,
+              "column": 7
+            },
+            "end": {
+              "line": 16,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1384
+        },
+        {
+          "id": "value-35",
+          "mutatorName": "Value",
+          "replacement": "`'ĳ'` removed from the list `['ĳ', 'ij']`",
+          "description": "`'ĳ'` removed from the list `['ĳ', 'ij']`",
+          "location": {
+            "start": {
+              "line": 17,
+              "column": 4
+            },
+            "end": {
+              "line": 17,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1393
+        },
+        {
+          "id": "value-36",
+          "mutatorName": "Value",
+          "replacement": "`'ij'` removed from the list `['ĳ', 'ij']`",
+          "description": "`'ij'` removed from the list `['ĳ', 'ij']`",
+          "location": {
+            "start": {
+              "line": 17,
+              "column": 7
+            },
+            "end": {
+              "line": 17,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1360
+        },
+        {
+          "id": "value-37",
+          "mutatorName": "Value",
+          "replacement": "`'ĸ'` removed from the list `['ĸ', 'k']`",
+          "description": "`'ĸ'` removed from the list `['ĸ', 'k']`",
+          "location": {
+            "start": {
+              "line": 18,
+              "column": 4
+            },
+            "end": {
+              "line": 18,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1322
+        },
+        {
+          "id": "value-38",
+          "mutatorName": "Value",
+          "replacement": "`'k'` removed from the list `['ĸ', 'k']`",
+          "description": "`'k'` removed from the list `['ĸ', 'k']`",
+          "location": {
+            "start": {
+              "line": 18,
+              "column": 7
+            },
+            "end": {
+              "line": 18,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1398
+        },
+        {
+          "id": "value-39",
+          "mutatorName": "Value",
+          "replacement": "`'Ŀ'` removed from the list `['Ŀ', 'L']`",
+          "description": "`'Ŀ'` removed from the list `['Ŀ', 'L']`",
+          "location": {
+            "start": {
+              "line": 19,
+              "column": 4
+            },
+            "end": {
+              "line": 19,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 736
+        },
+        {
+          "id": "value-40",
+          "mutatorName": "Value",
+          "replacement": "`'L'` removed from the list `['Ŀ', 'L']`",
+          "description": "`'L'` removed from the list `['Ŀ', 'L']`",
+          "location": {
+            "start": {
+              "line": 19,
+              "column": 7
+            },
+            "end": {
+              "line": 19,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1263
+        },
+        {
+          "id": "value-41",
+          "mutatorName": "Value",
+          "replacement": "`'ŀ'` removed from the list `['ŀ', 'l']`",
+          "description": "`'ŀ'` removed from the list `['ŀ', 'l']`",
+          "location": {
+            "start": {
+              "line": 20,
+              "column": 4
+            },
+            "end": {
+              "line": 20,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1298
+        },
+        {
+          "id": "value-42",
+          "mutatorName": "Value",
+          "replacement": "`'l'` removed from the list `['ŀ', 'l']`",
+          "description": "`'l'` removed from the list `['ŀ', 'l']`",
+          "location": {
+            "start": {
+              "line": 20,
+              "column": 7
+            },
+            "end": {
+              "line": 20,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1243
+        },
+        {
+          "id": "value-43",
+          "mutatorName": "Value",
+          "replacement": "`'Ł'` removed from the list `['Ł', 'L']`",
+          "description": "`'Ł'` removed from the list `['Ł', 'L']`",
+          "location": {
+            "start": {
+              "line": 21,
+              "column": 4
+            },
+            "end": {
+              "line": 21,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1240
+        },
+        {
+          "id": "value-44",
+          "mutatorName": "Value",
+          "replacement": "`'L'` removed from the list `['Ł', 'L']`",
+          "description": "`'L'` removed from the list `['Ł', 'L']`",
+          "location": {
+            "start": {
+              "line": 21,
+              "column": 7
+            },
+            "end": {
+              "line": 21,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1366
+        },
+        {
+          "id": "value-45",
+          "mutatorName": "Value",
+          "replacement": "`'ł'` removed from the list `['ł', 'l']`",
+          "description": "`'ł'` removed from the list `['ł', 'l']`",
+          "location": {
+            "start": {
+              "line": 22,
+              "column": 4
+            },
+            "end": {
+              "line": 22,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1173
+        },
+        {
+          "id": "value-46",
+          "mutatorName": "Value",
+          "replacement": "`'l'` removed from the list `['ł', 'l']`",
+          "description": "`'l'` removed from the list `['ł', 'l']`",
+          "location": {
+            "start": {
+              "line": 22,
+              "column": 7
+            },
+            "end": {
+              "line": 22,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1478
+        },
+        {
+          "id": "value-47",
+          "mutatorName": "Value",
+          "replacement": "`'ŉ'` removed from the list `['ŉ', \"'n\"]`",
+          "description": "`'ŉ'` removed from the list `['ŉ', \"'n\"]`",
+          "location": {
+            "start": {
+              "line": 23,
+              "column": 4
+            },
+            "end": {
+              "line": 23,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1330
+        },
+        {
+          "id": "value-48",
+          "mutatorName": "Value",
+          "replacement": "`\"'n\"` removed from the list `['ŉ', \"'n\"]`",
+          "description": "`\"'n\"` removed from the list `['ŉ', \"'n\"]`",
+          "location": {
+            "start": {
+              "line": 23,
+              "column": 7
+            },
+            "end": {
+              "line": 23,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1143
+        },
+        {
+          "id": "value-49",
+          "mutatorName": "Value",
+          "replacement": "`'Ŋ'` removed from the list `['Ŋ', 'N']`",
+          "description": "`'Ŋ'` removed from the list `['Ŋ', 'N']`",
+          "location": {
+            "start": {
+              "line": 24,
+              "column": 4
+            },
+            "end": {
+              "line": 24,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1333
+        },
+        {
+          "id": "value-50",
+          "mutatorName": "Value",
+          "replacement": "`'N'` removed from the list `['Ŋ', 'N']`",
+          "description": "`'N'` removed from the list `['Ŋ', 'N']`",
+          "location": {
+            "start": {
+              "line": 24,
+              "column": 7
+            },
+            "end": {
+              "line": 24,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1259
+        },
+        {
+          "id": "value-51",
+          "mutatorName": "Value",
+          "replacement": "`'ŋ'` removed from the list `['ŋ', 'n']`",
+          "description": "`'ŋ'` removed from the list `['ŋ', 'n']`",
+          "location": {
+            "start": {
+              "line": 25,
+              "column": 4
+            },
+            "end": {
+              "line": 25,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1324
+        },
+        {
+          "id": "value-52",
+          "mutatorName": "Value",
+          "replacement": "`'n'` removed from the list `['ŋ', 'n']`",
+          "description": "`'n'` removed from the list `['ŋ', 'n']`",
+          "location": {
+            "start": {
+              "line": 25,
+              "column": 7
+            },
+            "end": {
+              "line": 25,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1290
+        },
+        {
+          "id": "value-53",
+          "mutatorName": "Value",
+          "replacement": "`'Œ'` removed from the list `['Œ', 'Oe']`",
+          "description": "`'Œ'` removed from the list `['Œ', 'Oe']`",
+          "location": {
+            "start": {
+              "line": 26,
+              "column": 4
+            },
+            "end": {
+              "line": 26,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1246
+        },
+        {
+          "id": "value-54",
+          "mutatorName": "Value",
+          "replacement": "`'Oe'` removed from the list `['Œ', 'Oe']`",
+          "description": "`'Oe'` removed from the list `['Œ', 'Oe']`",
+          "location": {
+            "start": {
+              "line": 26,
+              "column": 7
+            },
+            "end": {
+              "line": 26,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1356
+        },
+        {
+          "id": "value-55",
+          "mutatorName": "Value",
+          "replacement": "`'œ'` removed from the list `['œ', 'oe']`",
+          "description": "`'œ'` removed from the list `['œ', 'oe']`",
+          "location": {
+            "start": {
+              "line": 27,
+              "column": 4
+            },
+            "end": {
+              "line": 27,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1306
+        },
+        {
+          "id": "value-56",
+          "mutatorName": "Value",
+          "replacement": "`'oe'` removed from the list `['œ', 'oe']`",
+          "description": "`'oe'` removed from the list `['œ', 'oe']`",
+          "location": {
+            "start": {
+              "line": 27,
+              "column": 7
+            },
+            "end": {
+              "line": 27,
+              "column": 13
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1260
+        },
+        {
+          "id": "value-57",
+          "mutatorName": "Value",
+          "replacement": "`'Ŧ'` removed from the list `['Ŧ', 'T']`",
+          "description": "`'Ŧ'` removed from the list `['Ŧ', 'T']`",
+          "location": {
+            "start": {
+              "line": 28,
+              "column": 4
+            },
+            "end": {
+              "line": 28,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1309
+        },
+        {
+          "id": "value-58",
+          "mutatorName": "Value",
+          "replacement": "`'T'` removed from the list `['Ŧ', 'T']`",
+          "description": "`'T'` removed from the list `['Ŧ', 'T']`",
+          "location": {
+            "start": {
+              "line": 28,
+              "column": 7
+            },
+            "end": {
+              "line": 28,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1397
+        },
+        {
+          "id": "value-59",
+          "mutatorName": "Value",
+          "replacement": "`'ŧ'` removed from the list `['ŧ', 't']`",
+          "description": "`'ŧ'` removed from the list `['ŧ', 't']`",
+          "location": {
+            "start": {
+              "line": 29,
+              "column": 4
+            },
+            "end": {
+              "line": 29,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1270
+        },
+        {
+          "id": "value-60",
+          "mutatorName": "Value",
+          "replacement": "`'t'` removed from the list `['ŧ', 't']`",
+          "description": "`'t'` removed from the list `['ŧ', 't']`",
+          "location": {
+            "start": {
+              "line": 29,
+              "column": 7
+            },
+            "end": {
+              "line": 29,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1547
+        },
+        {
+          "id": "value-61",
+          "mutatorName": "Value",
+          "replacement": "`'ſ'` removed from the list `['ſ', 's']`",
+          "description": "`'ſ'` removed from the list `['ſ', 's']`",
+          "location": {
+            "start": {
+              "line": 30,
+              "column": 4
+            },
+            "end": {
+              "line": 30,
+              "column": 9
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1430
+        },
+        {
+          "id": "value-62",
+          "mutatorName": "Value",
+          "replacement": "`'s'` removed from the list `['ſ', 's']`",
+          "description": "`'s'` removed from the list `['ſ', 's']`",
+          "location": {
+            "start": {
+              "line": 30,
+              "column": 7
+            },
+            "end": {
+              "line": 30,
+              "column": 12
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1431
+        },
+        {
+          "id": "value-63",
+          "mutatorName": "Value",
+          "replacement": "`index` 0 → 1",
+          "description": "`index` 0 → 1",
+          "location": {
+            "start": {
+              "line": 67,
+              "column": 20
+            },
+            "end": {
+              "line": 67,
+              "column": 21
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [],
+          "duration": 1404
+        },
+        {
+          "id": "value-64",
+          "mutatorName": "Value",
+          "replacement": "`char.charCodeAt(0)`: 0 → 1",
+          "description": "`char.charCodeAt(0)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 75,
+              "column": 32
+            },
+            "end": {
+              "line": 75,
+              "column": 33
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1337
+        },
+        {
+          "id": "value-65",
+          "mutatorName": "Value",
+          "replacement": "`code < 0x80`: 0x80 → 129",
+          "description": "`code < 0x80`: 0x80 → 129",
+          "location": {
+            "start": {
+              "line": 77,
+              "column": 14
+            },
+            "end": {
+              "line": 77,
+              "column": 18
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1281
+        },
+        {
+          "id": "value-66",
+          "mutatorName": "Value",
+          "replacement": "`char.normalize('NFD')`: 'NFD' → 'NFD_x'",
+          "description": "`char.normalize('NFD')`: 'NFD' → 'NFD_x'",
+          "location": {
+            "start": {
+              "line": 98,
+              "column": 37
+            },
+            "end": {
+              "line": 98,
+              "column": 42
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1257
+        },
+        {
+          "id": "value-67",
+          "mutatorName": "Value",
+          "replacement": "`index` 0 → 1",
+          "description": "`index` 0 → 1",
+          "location": {
+            "start": {
+              "line": 101,
+              "column": 20
+            },
+            "end": {
+              "line": 101,
+              "column": 21
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "109",
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1180
+        },
+        {
+          "id": "value-68",
+          "mutatorName": "Value",
+          "replacement": "`code >= 0xc0`: 0xc0 → 193",
+          "description": "`code >= 0xc0`: 0xc0 → 193",
+          "location": {
+            "start": {
+              "line": 111,
+              "column": 19
+            },
+            "end": {
+              "line": 111,
+              "column": 23
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "114",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1225
+        },
+        {
+          "id": "value-69",
+          "mutatorName": "Value",
+          "replacement": "`code <= 0x233`: 0x233 → 564",
+          "description": "`code <= 0x233`: 0x233 → 564",
+          "location": {
+            "start": {
+              "line": 111,
+              "column": 35
+            },
+            "end": {
+              "line": 111,
+              "column": 40
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "114",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1382
+        },
+        {
+          "id": "value-70",
+          "mutatorName": "Value",
+          "replacement": "`code >= 0x1e00`: 0x1e00 → 7681",
+          "description": "`code >= 0x1e00`: 0x1e00 → 7681",
+          "location": {
+            "start": {
+              "line": 111,
+              "column": 54
+            },
+            "end": {
+              "line": 111,
+              "column": 60
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "114",
+            "116",
+            "117",
+            "118",
+            "119",
+            "120",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1330
+        },
+        {
+          "id": "value-71",
+          "mutatorName": "Value",
+          "replacement": "`code <= 0x1ef9`: 0x1ef9 → 7930",
+          "description": "`code <= 0x1ef9`: 0x1ef9 → 7930",
+          "location": {
+            "start": {
+              "line": 111,
+              "column": 72
+            },
+            "end": {
+              "line": 111,
+              "column": 78
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "114",
+            "116",
+            "117",
+            "119",
+            "120",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1278
+        },
+        {
+          "id": "value-72",
+          "mutatorName": "Value",
+          "replacement": "`code === 0x212a`: 0x212a → 8491",
+          "description": "`code === 0x212a`: 0x212a → 8491",
+          "location": {
+            "start": {
+              "line": 111,
+              "column": 92
+            },
+            "end": {
+              "line": 111,
+              "column": 98
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "114",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1293
+        },
+        {
+          "id": "value-73",
+          "mutatorName": "Value",
+          "replacement": "`code === 0x212b`: 0x212b → 8492",
+          "description": "`code === 0x212b`: 0x212b → 8492",
+          "location": {
+            "start": {
+              "line": 111,
+              "column": 111
+            },
+            "end": {
+              "line": 111,
+              "column": 117
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "114",
+            "116",
+            "117",
+            "118",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1258
+        },
+        {
+          "id": "value-74",
+          "mutatorName": "Value",
+          "replacement": "`code >= 0x300`: 0x300 → 769",
+          "description": "`code >= 0x300`: 0x300 → 769",
+          "location": {
+            "start": {
+              "line": 117,
+              "column": 14
+            },
+            "end": {
+              "line": 117,
+              "column": 19
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1323
+        },
+        {
+          "id": "value-75",
+          "mutatorName": "Value",
+          "replacement": "`code <= 0x36f`: 0x36f → 880",
+          "description": "`code <= 0x36f`: 0x36f → 880",
+          "location": {
+            "start": {
+              "line": 117,
+              "column": 31
+            },
+            "end": {
+              "line": 117,
+              "column": 36
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 1190
+        },
+        {
+          "id": "value-76",
+          "mutatorName": "Value",
+          "replacement": "`code >= 0x20d0`: 0x20d0 → 8401",
+          "description": "`code >= 0x20d0`: 0x20d0 → 8401",
+          "location": {
+            "start": {
+              "line": 119,
+              "column": 14
+            },
+            "end": {
+              "line": 119,
+              "column": 20
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 933
+        },
+        {
+          "id": "value-77",
+          "mutatorName": "Value",
+          "replacement": "`code <= 0x20ff`: 0x20ff → 8448",
+          "description": "`code <= 0x20ff`: 0x20ff → 8448",
+          "location": {
+            "start": {
+              "line": 119,
+              "column": 32
+            },
+            "end": {
+              "line": 119,
+              "column": 38
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 896
+        },
+        {
+          "id": "value-78",
+          "mutatorName": "Value",
+          "replacement": "`code >= 0xfe20`: 0xfe20 → 65057",
+          "description": "`code >= 0xfe20`: 0xfe20 → 65057",
+          "location": {
+            "start": {
+              "line": 121,
+              "column": 14
+            },
+            "end": {
+              "line": 121,
+              "column": 20
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "112",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117",
+            "119",
+            "121",
+            "122",
+            "123"
+          ],
+          "duration": 882
+        },
+        {
+          "id": "value-79",
+          "mutatorName": "Value",
+          "replacement": "`code <= 0xfe2f`: 0xfe2f → 65072",
+          "description": "`code <= 0xfe2f`: 0xfe2f → 65072",
+          "location": {
+            "start": {
+              "line": 121,
+              "column": 32
+            },
+            "end": {
+              "line": 121,
+              "column": 38
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "112",
+            "113",
+            "114"
+          ],
+          "duration": 851
+        }
+      ]
+    },
+    "src/string/escape.ts": {
+      "language": "typescript",
+      "source": "const htmlEscapes: Record<string, string> = {\n  '&': '&amp;',\n  '<': '&lt;',\n  '>': '&gt;',\n  '\"': '&quot;',\n  \"'\": '&#39;',\n};\n\n/**\n * Converts the characters \"&\", \"<\", \">\", '\"', and \"'\" in `str` to their corresponding HTML entities.\n * For example, \"<\" becomes \"&lt;\".\n *\n * @param str  The string to escape.\n * @returns Returns the escaped string.\n *\n * @example\n * escape('This is a <div> element.'); // returns 'This is a &lt;div&gt; element.'\n * escape('This is a \"quote\"'); // returns 'This is a &quot;quote&quot;'\n * escape(\"This is a 'quote'\"); // returns 'This is a &#39;quote&#39;'\n * escape('This is a & symbol'); // returns 'This is a &amp; symbol'\n * @guarantee ok.tags-escaped \"<div>Hello World</div>\" gives \"&lt;div&gt;Hello World&lt;/div&gt;\"\n * @guarantee ok.ampersand-escaped \"Tom & Jerry\" gives \"Tom &amp; Jerry\"\n * @guarantee ok.double-quote-escaped \"\\\"Hello\\\"\" (the word Hello in double quotes) gives \"&quot;Hello&quot;\"\n * @guarantee ok.single-quote-escaped the word Hello in single quotes gives the word Hello surrounded by \"&#39;\" on both sides\n */\nexport function escape(str: string): string {\n  return str.replace(/[&<>\"']/g, match => htmlEscapes[match]);\n}\n",
+      "mutants": [
+        {
+          "id": "value-80",
+          "mutatorName": "Value",
+          "replacement": "`'&': '&amp;'` removed from `htmlEscapes`",
+          "description": "`'&': '&amp;'` removed from `htmlEscapes`",
+          "location": {
+            "start": {
+              "line": 2,
+              "column": 3
+            },
+            "end": {
+              "line": 3,
+              "column": 3
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 3646
+        },
+        {
+          "id": "value-81",
+          "mutatorName": "Value",
+          "replacement": "`&` in `htmlEscapes` '&amp;' → '&amp;_x'",
+          "description": "`&` in `htmlEscapes` '&amp;' → '&amp;_x'",
+          "location": {
+            "start": {
+              "line": 2,
+              "column": 8
+            },
+            "end": {
+              "line": 2,
+              "column": 15
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 3678
+        },
+        {
+          "id": "value-82",
+          "mutatorName": "Value",
+          "replacement": "`'<': '&lt;'` removed from `htmlEscapes`",
+          "description": "`'<': '&lt;'` removed from `htmlEscapes`",
+          "location": {
+            "start": {
+              "line": 3,
+              "column": 3
+            },
+            "end": {
+              "line": 4,
+              "column": 3
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 3677
+        },
+        {
+          "id": "value-83",
+          "mutatorName": "Value",
+          "replacement": "`<` in `htmlEscapes` '&lt;' → '&lt;_x'",
+          "description": "`<` in `htmlEscapes` '&lt;' → '&lt;_x'",
+          "location": {
+            "start": {
+              "line": 3,
+              "column": 8
+            },
+            "end": {
+              "line": 3,
+              "column": 14
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 5020
+        },
+        {
+          "id": "value-84",
+          "mutatorName": "Value",
+          "replacement": "`'>': '&gt;'` removed from `htmlEscapes`",
+          "description": "`'>': '&gt;'` removed from `htmlEscapes`",
+          "location": {
+            "start": {
+              "line": 4,
+              "column": 3
+            },
+            "end": {
+              "line": 5,
+              "column": 3
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 3454
+        },
+        {
+          "id": "value-85",
+          "mutatorName": "Value",
+          "replacement": "`>` in `htmlEscapes` '&gt;' → '&gt;_x'",
+          "description": "`>` in `htmlEscapes` '&gt;' → '&gt;_x'",
+          "location": {
+            "start": {
+              "line": 4,
+              "column": 8
+            },
+            "end": {
+              "line": 4,
+              "column": 14
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 4764
+        },
+        {
+          "id": "value-86",
+          "mutatorName": "Value",
+          "replacement": "`'\"': '&quot;'` removed from `htmlEscapes`",
+          "description": "`'\"': '&quot;'` removed from `htmlEscapes`",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3
+            },
+            "end": {
+              "line": 6,
+              "column": 3
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 3429
+        },
+        {
+          "id": "value-87",
+          "mutatorName": "Value",
+          "replacement": "`\"` in `htmlEscapes` '&quot;' → '&quot;_x'",
+          "description": "`\"` in `htmlEscapes` '&quot;' → '&quot;_x'",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 8
+            },
+            "end": {
+              "line": 5,
+              "column": 16
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 3428
+        },
+        {
+          "id": "value-88",
+          "mutatorName": "Value",
+          "replacement": "`\"'\": '&#39;'` removed from `htmlEscapes`",
+          "description": "`\"'\": '&#39;'` removed from `htmlEscapes`",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 16
+            },
+            "end": {
+              "line": 6,
+              "column": 15
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 3478
+        },
+        {
+          "id": "value-89",
+          "mutatorName": "Value",
+          "replacement": "`'` in `htmlEscapes` '&#39;' → '&#39;_x'",
+          "description": "`'` in `htmlEscapes` '&#39;' → '&#39;_x'",
+          "location": {
+            "start": {
+              "line": 6,
+              "column": 8
+            },
+            "end": {
+              "line": 6,
+              "column": 15
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "14",
+            "15",
+            "18",
+            "27",
+            "29",
+            "343",
+            "346",
+            "40",
+            "464",
+            "465",
+            "466",
+            "467",
+            "468",
+            "469",
+            "531",
+            "532",
+            "533",
+            "534",
+            "535",
+            "564",
+            "654"
+          ],
+          "duration": 3425
+        }
+      ]
+    },
+    "src/string/escapeRegExp.ts": {
+      "language": "typescript",
+      "source": "/**\n * Escapes the RegExp special characters \"^\", \"$\", \"\\\\\", \".\", \"*\", \"+\", \"?\", \"(\", \")\", \"[\", \"]\", \"{\", \"}\", and \"|\" in `str`.\n *\n * @param str The string to escape.\n * @returns Returns the escaped string.\n *\n * @example\n * import { escapeRegExp } from 'es-toolkit/string';\n *\n * escapeRegExp('[es-toolkit](https://es-toolkit.dev/)'); // returns '\\[es-toolkit\\]\\(https://es-toolkit\\.dev/\\)'\n * @guarantee ok.dot-escaped \"Hello.\" gives \"Hello\" followed by one backslash and a dot\n * @guarantee ok.parentheses-escaped \"(test)\" gives \"test\" wrapped in an escaped opening parenthesis and an escaped closing parenthesis, each preceded by one backslash\n * @guarantee ok.brackets-escaped \"[abc]\" gives \"abc\" wrapped in an escaped opening bracket and an escaped closing bracket, each preceded by one backslash\n * @guarantee ok.at-sign-not-escaped \"user@domain.com\" gives \"user@domain\" followed by one backslash and \".com\"\n */\nexport function escapeRegExp(str: string): string {\n  return str.replace(/[\\\\^$.*+?()[\\]{}|]/g, '\\\\$&');\n}\n",
+      "mutants": [
+        {
+          "id": "value-90",
+          "mutatorName": "Value",
+          "replacement": "`str.replace(/[\\\\^$.*+?()[\\]{}|]/g, '\\\\$…`: '\\\\$&' → '\\\\$&_x'",
+          "description": "`str.replace(/[\\\\^$.*+?()[\\]{}|]/g, '\\\\$…`: '\\\\$&' → '\\\\$&_x'",
+          "location": {
+            "start": {
+              "line": 17,
+              "column": 45
+            },
+            "end": {
+              "line": 17,
+              "column": 51
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "543",
+            "544",
+            "545",
+            "607",
+            "608"
+          ],
+          "duration": 1934
+        }
+      ]
+    },
+    "src/string/kebabCase.ts": {
+      "language": "typescript",
+      "source": "import { words as getWords } from './words.ts';\n\n/**\n * Converts a string to kebab case.\n *\n * Kebab case is the naming convention in which each word is written in lowercase and separated by a dash (-) character.\n *\n * @param str - The string that is to be changed to kebab case.\n * @returns The converted string to kebab case.\n *\n * @example\n * const convertedStr1 = kebabCase('camelCase') // returns 'camel-case'\n * const convertedStr2 = kebabCase('some whitespace') // returns 'some-whitespace'\n * const convertedStr3 = kebabCase('hyphen-text') // returns 'hyphen-text'\n * const convertedStr4 = kebabCase('HTTPRequest') // returns 'http-request'\n */\n\n/**\n * @guarantee ok.camel-to-kebab \"camelCase\" gives \"camel-case\"\n * @guarantee ok.whitespace-to-dash \"some whitespace\" gives \"some-whitespace\"\n * @guarantee ok.kebab-unchanged \"hyphen-text\" gives \"hyphen-text\"\n * @guarantee ok.acronym-split \"HTTPRequest\" gives \"http-request\"\n */\nexport function kebabCase(str: string): string {\n  const words = getWords(str);\n  return words.map(word => word.toLowerCase()).join('-');\n}\n",
+      "mutants": [
+        {
+          "id": "value-91",
+          "mutatorName": "Value",
+          "replacement": "`words.map(word => word.toLowerCase()).j…`: '-' → '-_x'",
+          "description": "`words.map(word => word.toLowerCase()).j…`: '-' → '-_x'",
+          "location": {
+            "start": {
+              "line": 26,
+              "column": 53
+            },
+            "end": {
+              "line": 26,
+              "column": 56
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "306",
+            "307",
+            "308",
+            "309",
+            "312",
+            "313",
+            "314",
+            "315",
+            "316",
+            "317",
+            "546",
+            "547",
+            "548",
+            "549",
+            "550",
+            "551",
+            "552",
+            "553",
+            "554",
+            "555",
+            "556"
+          ],
+          "duration": 1473
+        }
+      ]
+    },
+    "src/string/lowerCase.ts": {
+      "language": "typescript",
+      "source": "import { words as getWords } from './words.ts';\n\n/**\n * Converts a string to lower case.\n *\n * Lower case is the naming convention in which each word is written in lowercase and separated by an space ( ) character.\n *\n * @param str - The string that is to be changed to lower case.\n * @returns The converted string to lower case.\n *\n * @example\n * const convertedStr1 = lowerCase('camelCase') // returns 'camel case'\n * const convertedStr2 = lowerCase('some whitespace') // returns 'some whitespace'\n * const convertedStr3 = lowerCase('hyphen-text') // returns 'hyphen text'\n * const convertedStr4 = lowerCase('HTTPRequest') // returns 'http request'\n * @guarantee ok.lower-with-spaces \"Hello World\" gives \"hello world\" and \"camelCase\" gives \"camel case\"\n * @guarantee ok.from-other-cases \"some-kebab-case\" gives \"some kebab case\", \"PascalCase\" gives \"pascal case\" and \"SCREAMING_SNAKE_CASE\" gives \"screaming snake case\"\n * @guarantee ok.acronym-split \"HTTPSConnection\" gives \"https connection\"\n * @guarantee ok.mixed-separators \"user_profile-settings\" gives \"user profile settings\" and \"  mixed   CASE   text  \" gives \"mixed case text\"\n */\nexport function lowerCase(str: string): string {\n  const words = getWords(str);\n  return words.map(word => word.toLowerCase()).join(' ');\n}\n",
+      "mutants": [
+        {
+          "id": "value-92",
+          "mutatorName": "Value",
+          "replacement": "`words.map(word => word.toLowerCase()).j…`: ' ' → ' _x'",
+          "description": "`words.map(word => word.toLowerCase()).j…`: ' ' → ' _x'",
+          "location": {
+            "start": {
+              "line": 23,
+              "column": 53
+            },
+            "end": {
+              "line": 23,
+              "column": 56
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "503",
+            "504",
+            "505",
+            "506",
+            "507",
+            "508",
+            "509",
+            "510",
+            "511"
+          ],
+          "duration": 1432
+        }
+      ]
+    },
+    "src/string/pad.ts": {
+      "language": "typescript",
+      "source": "/**\n * Pads string on the left and right sides if it's shorter than length. Padding characters are truncated if they can't be evenly divided by length.\n * If the length is less than or equal to the original string's length, or if the padding character is an empty string, the original string is returned unchanged.\n *\n * @param str - The string to pad.\n * @param [length] - The length of the resulting string once padded.\n * @param [chars] - The character(s) to use for padding.\n * @returns The padded string, or the original string if padding is not required.\n *\n * @example\n * const result1 = pad('abc', 8);         // result will be '  abc   '\n * const result2 = pad('abc', 8, '_-');   // result will be '_-abc_-_'\n * const result3 = pad('abc', 3);         // result will be 'abc'\n * const result4 = pad('abc', 2);         // result will be 'abc'\n *\n * @guarantee ok.default-chars-space \"abc\" padded to `length` 8 without `chars` gives \"abc\" with two spaces on the left and three spaces on the right\n * @guarantee ok.custom-chars \"abc\" padded to `length` 8 with `chars` \"_-\" gives \"_-abc_-_\"\n * @guarantee ok.longer-or-equal-unchanged \"abc\" with `length` 3 gives \"abc\" and \"abcdef\" with `length` 3 gives \"abcdef\"\n * @guarantee ok.right-gets-extra \"abc\" padded to `length` 9 with `chars` \"123\" gives \"123abc123\" and to `length` 10 gives \"123abc1231\"\n */\nexport function pad(str: string, length: number, chars = ' '): string {\n  return str.padStart(Math.floor((length - str.length) / 2) + str.length, chars).padEnd(length, chars);\n}\n",
+      "mutants": [
+        {
+          "id": "value-93",
+          "mutatorName": "Value",
+          "replacement": "the default `chars` ' ' → ' _x'",
+          "description": "the default `chars` ' ' → ' _x'",
+          "location": {
+            "start": {
+              "line": 21,
+              "column": 58
+            },
+            "end": {
+              "line": 21,
+              "column": 61
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "536",
+            "538",
+            "539",
+            "540",
+            "541",
+            "542"
+          ],
+          "duration": 1380
+        },
+        {
+          "id": "value-94",
+          "mutatorName": "Value",
+          "replacement": "`(length - str.length) / 2`: 2 → 3",
+          "description": "`(length - str.length) / 2`: 2 → 3",
+          "location": {
+            "start": {
+              "line": 22,
+              "column": 58
+            },
+            "end": {
+              "line": 22,
+              "column": 59
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "536",
+            "537",
+            "538",
+            "539",
+            "540",
+            "541",
+            "542"
+          ],
+          "duration": 1349
+        }
+      ]
+    },
+    "src/string/snakeCase.ts": {
+      "language": "typescript",
+      "source": "import { words as getWords } from './words.ts';\n\n/**\n * Converts a string to snake case.\n *\n * Snake case is the naming convention in which each word is written in lowercase and separated by an underscore (_) character.\n *\n * @param str - The string that is to be changed to snake case.\n * @returns The converted string to snake case.\n *\n * @example\n * const convertedStr1 = snakeCase('camelCase') // returns 'camel_case'\n * const convertedStr2 = snakeCase('some whitespace') // returns 'some_whitespace'\n * const convertedStr3 = snakeCase('hyphen-text') // returns 'hyphen_text'\n * const convertedStr4 = snakeCase('HTTPRequest') // returns 'http_request'\n */\n\n/**\n * @guarantee ok.basic \"camelCase\" gives \"camel_case\" and \"some whitespace\" gives \"some_whitespace\"\n * @guarantee ok.hyphen-pascal \"hyphen-text\" gives \"hyphen_text\" and \"PascalCase\" gives \"pascal_case\"\n * @guarantee ok.consecutive-uppercase \"HTTPRequest\" gives \"http_request\" and \"XMLHttpRequest\" gives \"xml_http_request\"\n * @guarantee ok.mixed-separators \"camelCase-with_mixed.separators\" gives \"camel_case_with_mixed_separators\"\n * @guarantee ok.numbers-split \"version2.1.0\" gives \"version_2_1_0\" and \"user@email.com\" gives \"user_email_com\"\n */\nexport function snakeCase(str: string): string {\n  const words = getWords(str);\n  return words.map(word => word.toLowerCase()).join('_');\n}\n",
+      "mutants": [
+        {
+          "id": "value-95",
+          "mutatorName": "Value",
+          "replacement": "`words.map(word => word.toLowerCase()).j…`: '_' → '__x'",
+          "description": "`words.map(word => word.toLowerCase()).j…`: '_' → '__x'",
+          "location": {
+            "start": {
+              "line": 27,
+              "column": 53
+            },
+            "end": {
+              "line": 27,
+              "column": 56
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "588",
+            "589",
+            "590",
+            "591",
+            "594",
+            "595",
+            "596",
+            "597",
+            "598",
+            "599",
+            "687",
+            "688",
+            "689",
+            "690",
+            "691",
+            "692",
+            "693",
+            "694",
+            "695"
+          ],
+          "duration": 2321
+        }
+      ]
+    },
+    "src/string/startCase.ts": {
+      "language": "typescript",
+      "source": "import { words as getWords } from './words.ts';\n\n/**\n * Converts the first character of each word in a string to uppercase and the remaining characters to lowercase.\n *\n * Start case is the naming convention in which each word is written with an initial capital letter.\n * @param str - The string to convert.\n * @returns The converted string.\n *\n * @example\n * const result1 = startCase('hello world');  // result will be 'Hello World'\n * const result2 = startCase('HELLO WORLD');  // result will be 'Hello World'\n * const result3 = startCase('hello-world');  // result will be 'Hello World'\n * const result4 = startCase('hello_world');  // result will be 'Hello World'\n * @guarantee ok.capitalized-words \"hello world\" gives \"Hello World\" and \"HELLO WORLD\" gives \"Hello World\"\n * @guarantee ok.from-camel-pascal \"fooBar\" gives \"Foo Bar\" and \"PascalCase\" gives \"Pascal Case\"\n * @guarantee ok.hyphen-underscore \"hello-world\" gives \"Hello World\" and \"hello_world\" gives \"Hello World\"\n * @guarantee ok.delimiters-trimmed \"--foo-bar--\" gives \"Foo Bar\" and \"__FOO_BAR__\" gives \"Foo Bar\"\n * @guarantee ok.acronym-and-numbers \"XMLHttpRequest\" gives \"Xml Http Request\", \"_abc_123_def\" gives \"Abc 123 Def\" and \"12abc 12ABC\" gives \"12 Abc 12 Abc\"\n * @guarantee ok.only-delimiters-empty \"_-_-_-_\" gives \"\"\n */\nexport function startCase(str: string): string {\n  const words = getWords(str.trim());\n  let result = '';\n  for (let i = 0; i < words.length; i++) {\n    const word = words[i];\n    if (result) {\n      result += ' ';\n    }\n\n    result += word[0].toUpperCase() + word.slice(1).toLowerCase();\n  }\n  return result;\n}\n",
+      "mutants": [
+        {
+          "id": "value-96",
+          "mutatorName": "Value",
+          "replacement": "`i` 0 → 1",
+          "description": "`i` 0 → 1",
+          "location": {
+            "start": {
+              "line": 25,
+              "column": 16
+            },
+            "end": {
+              "line": 25,
+              "column": 17
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "663",
+            "664",
+            "665",
+            "666",
+            "667",
+            "668",
+            "669",
+            "670",
+            "671",
+            "672",
+            "673",
+            "674",
+            "675"
+          ],
+          "duration": 2228
+        },
+        {
+          "id": "value-97",
+          "mutatorName": "Value",
+          "replacement": "`result += ' '`: ' ' → ' _x'",
+          "description": "`result += ' '`: ' ' → ' _x'",
+          "location": {
+            "start": {
+              "line": 28,
+              "column": 17
+            },
+            "end": {
+              "line": 28,
+              "column": 20
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "663",
+            "664",
+            "665",
+            "668",
+            "669",
+            "670",
+            "671",
+            "672",
+            "673",
+            "674",
+            "675"
+          ],
+          "duration": 2169
+        },
+        {
+          "id": "value-98",
+          "mutatorName": "Value",
+          "replacement": "`word[0]`: 0 → 1",
+          "description": "`word[0]`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 31,
+              "column": 20
+            },
+            "end": {
+              "line": 31,
+              "column": 21
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "663",
+            "664",
+            "665",
+            "668",
+            "669",
+            "670",
+            "671",
+            "672",
+            "673",
+            "674",
+            "675"
+          ],
+          "duration": 2174
+        },
+        {
+          "id": "value-99",
+          "mutatorName": "Value",
+          "replacement": "`word.slice(1)`: 1 → 2",
+          "description": "`word.slice(1)`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 31,
+              "column": 50
+            },
+            "end": {
+              "line": 31,
+              "column": 51
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "663",
+            "664",
+            "665",
+            "668",
+            "669",
+            "670",
+            "671",
+            "672",
+            "673",
+            "674",
+            "675"
+          ],
+          "duration": 1895
+        }
+      ]
+    },
+    "src/string/unescape.ts": {
+      "language": "typescript",
+      "source": "const htmlUnescapes: Record<string, string> = {\n  '&amp;': '&',\n  '&lt;': '<',\n  '&gt;': '>',\n  '&quot;': '\"',\n  '&#39;': \"'\",\n};\n\n/**\n * Converts the HTML entities `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `str` to their corresponding characters.\n * It is the inverse of `escape`.\n *\n * @param str The string to unescape.\n * @returns Returns the unescaped string.\n *\n * @example\n * unescape('This is a &lt;div&gt; element.'); // returns 'This is a <div> element.'\n * unescape('This is a &quot;quote&quot;'); // returns 'This is a \"quote\"'\n * unescape('This is a &#39;quote&#39;'); // returns 'This is a 'quote''\n * unescape('This is a &amp; symbol'); // returns 'This is a & symbol'\n * @guarantee ok.tags-restored \"This is a &lt;div&gt; element.\" gives \"This is a <div> element.\"\n * @guarantee ok.double-quote-restored \"This is a &quot;quote&quot;\" gives \"This is a \\\"quote\\\"\" (with plain double quotes)\n * @guarantee ok.single-quote-restored \"&#39;\" is converted to a plain single quote\n * @guarantee ok.ampersand-restored \"This is a &amp; symbol\" gives \"This is a & symbol\"\n * @guarantee ok.mixed-entities \"&quot;Hello &amp; Welcome&quot; &lt;says the &gt; user\" gives \"\\\"Hello & Welcome\\\" <says the > user\"\n */\nexport function unescape(str: string): string {\n  return str.replace(/&(?:amp|lt|gt|quot|#(0+)?39);/g, match => htmlUnescapes[match] || \"'\");\n}\n",
+      "mutants": [
+        {
+          "id": "value-100",
+          "mutatorName": "Value",
+          "replacement": "`'&amp;': '&'` removed from `htmlUnescapes`",
+          "description": "`'&amp;': '&'` removed from `htmlUnescapes`",
+          "location": {
+            "start": {
+              "line": 2,
+              "column": 3
+            },
+            "end": {
+              "line": 3,
+              "column": 3
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 3129
+        },
+        {
+          "id": "value-101",
+          "mutatorName": "Value",
+          "replacement": "`&amp;` in `htmlUnescapes` '&' → '&_x'",
+          "description": "`&amp;` in `htmlUnescapes` '&' → '&_x'",
+          "location": {
+            "start": {
+              "line": 2,
+              "column": 12
+            },
+            "end": {
+              "line": 2,
+              "column": 15
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 3000
+        },
+        {
+          "id": "value-102",
+          "mutatorName": "Value",
+          "replacement": "`'&lt;': '<'` removed from `htmlUnescapes`",
+          "description": "`'&lt;': '<'` removed from `htmlUnescapes`",
+          "location": {
+            "start": {
+              "line": 3,
+              "column": 3
+            },
+            "end": {
+              "line": 4,
+              "column": 3
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 3812
+        },
+        {
+          "id": "value-103",
+          "mutatorName": "Value",
+          "replacement": "`&lt;` in `htmlUnescapes` '<' → '<_x'",
+          "description": "`&lt;` in `htmlUnescapes` '<' → '<_x'",
+          "location": {
+            "start": {
+              "line": 3,
+              "column": 11
+            },
+            "end": {
+              "line": 3,
+              "column": 14
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 3032
+        },
+        {
+          "id": "value-104",
+          "mutatorName": "Value",
+          "replacement": "`'&gt;': '>'` removed from `htmlUnescapes`",
+          "description": "`'&gt;': '>'` removed from `htmlUnescapes`",
+          "location": {
+            "start": {
+              "line": 4,
+              "column": 3
+            },
+            "end": {
+              "line": 5,
+              "column": 3
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 3124
+        },
+        {
+          "id": "value-105",
+          "mutatorName": "Value",
+          "replacement": "`&gt;` in `htmlUnescapes` '>' → '>_x'",
+          "description": "`&gt;` in `htmlUnescapes` '>' → '>_x'",
+          "location": {
+            "start": {
+              "line": 4,
+              "column": 11
+            },
+            "end": {
+              "line": 4,
+              "column": 14
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 3113
+        },
+        {
+          "id": "value-106",
+          "mutatorName": "Value",
+          "replacement": "`'&quot;': '\"'` removed from `htmlUnescapes`",
+          "description": "`'&quot;': '\"'` removed from `htmlUnescapes`",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3
+            },
+            "end": {
+              "line": 6,
+              "column": 3
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 3087
+        },
+        {
+          "id": "value-107",
+          "mutatorName": "Value",
+          "replacement": "`&quot;` in `htmlUnescapes` '\"' → '\"_x'",
+          "description": "`&quot;` in `htmlUnescapes` '\"' → '\"_x'",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 13
+            },
+            "end": {
+              "line": 5,
+              "column": 16
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 3046
+        },
+        {
+          "id": "value-108",
+          "mutatorName": "Value",
+          "replacement": "`'&#39;': \"'\"` removed from `htmlUnescapes`",
+          "description": "`'&#39;': \"'\"` removed from `htmlUnescapes`",
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 16
+            },
+            "end": {
+              "line": 6,
+              "column": 15
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 3165
+        },
+        {
+          "id": "value-109",
+          "mutatorName": "Value",
+          "replacement": "`&#39;` in `htmlUnescapes` \"'\" → \"'_x\"",
+          "description": "`&#39;` in `htmlUnescapes` \"'\" → \"'_x\"",
+          "location": {
+            "start": {
+              "line": 6,
+              "column": 12
+            },
+            "end": {
+              "line": 6,
+              "column": 15
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "467",
+            "533",
+            "561",
+            "562",
+            "563",
+            "564",
+            "565",
+            "566",
+            "567",
+            "568",
+            "651",
+            "652",
+            "653",
+            "654",
+            "655",
+            "656",
+            "657"
+          ],
+          "duration": 2445
+        },
+        {
+          "id": "value-110",
+          "mutatorName": "Value",
+          "replacement": "`htmlUnescapes[match] || \"'\"`: \"'\" → \"'_x\"",
+          "description": "`htmlUnescapes[match] || \"'\"`: \"'\" → \"'_x\"",
+          "location": {
+            "start": {
+              "line": 28,
+              "column": 89
+            },
+            "end": {
+              "line": 28,
+              "column": 92
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "565",
+            "655"
+          ],
+          "duration": 1893
+        }
+      ]
+    },
+    "src/string/upperCase.ts": {
+      "language": "typescript",
+      "source": "import { words as getWords } from './words.ts';\n\n/**\n * Converts a string to upper case.\n *\n * Upper case is the naming convention in which each word is written in uppercase and separated by an space ( ) character.\n *\n * @param str - The string that is to be changed to upper case.\n * @returns The converted string to upper case.\n *\n * @example\n * const convertedStr1 = upperCase('camelCase') // returns 'CAMEL CASE'\n * const convertedStr2 = upperCase('some whitespace') // returns 'SOME WHITESPACE'\n * const convertedStr3 = upperCase('hyphen-text') // returns 'HYPHEN TEXT'\n * const convertedStr4 = upperCase('HTTPRequest') // returns 'HTTP REQUEST'\n * @guarantee ok.upper-with-spaces \"camelCase\" gives \"CAMEL CASE\" and \"some whitespace\" gives \"SOME WHITESPACE\"\n * @guarantee ok.kebab \"hyphen-text\" gives \"HYPHEN TEXT\"\n * @guarantee ok.acronym-split \"HTTPSRequest\" gives \"HTTPS REQUEST\"\n * @guarantee ok.snake-and-email \"user_name\" gives \"USER NAME\" and \"email-address\" gives \"EMAIL ADDRESS\"\n */\nexport function upperCase(str: string): string {\n  const words = getWords(str);\n\n  let result = '';\n\n  for (let i = 0; i < words.length; i++) {\n    result += words[i].toUpperCase();\n    if (i < words.length - 1) {\n      result += ' ';\n    }\n  }\n\n  return result;\n}\n",
+      "mutants": [
+        {
+          "id": "value-111",
+          "mutatorName": "Value",
+          "replacement": "`i` 0 → 1",
+          "description": "`i` 0 → 1",
+          "location": {
+            "start": {
+              "line": 26,
+              "column": 16
+            },
+            "end": {
+              "line": 26,
+              "column": 17
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "678",
+            "679",
+            "680",
+            "681",
+            "682",
+            "683",
+            "684",
+            "685",
+            "686"
+          ],
+          "duration": 1294
+        },
+        {
+          "id": "value-112",
+          "mutatorName": "Value",
+          "replacement": "`words.length - 1`: 1 → 2",
+          "description": "`words.length - 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 28,
+              "column": 28
+            },
+            "end": {
+              "line": 28,
+              "column": 29
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "678",
+            "679",
+            "680",
+            "681",
+            "682",
+            "683",
+            "684",
+            "686"
+          ],
+          "duration": 1325
+        },
+        {
+          "id": "value-113",
+          "mutatorName": "Value",
+          "replacement": "`result += ' '`: ' ' → ' _x'",
+          "description": "`result += ' '`: ' ' → ' _x'",
+          "location": {
+            "start": {
+              "line": 29,
+              "column": 17
+            },
+            "end": {
+              "line": 29,
+              "column": 20
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "678",
+            "679",
+            "680",
+            "681",
+            "682",
+            "683",
+            "684",
+            "686"
+          ],
+          "duration": 758
+        }
+      ]
+    }
+  }
+}

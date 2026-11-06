@@ -1,0 +1,1221 @@
+{
+  "schemaVersion": "2",
+  "thresholds": {
+    "high": 80,
+    "low": 60
+  },
+  "projectRoot": "<work-0001>/scule",
+  "files": {
+    "src/index.ts": {
+      "language": "typescript",
+      "source": "import type {\n  CamelCase,\n  KebabCase,\n  PascalCase,\n  SnakeCase,\n  SplitByCase,\n  CaseOptions,\n  TrainCase,\n  FlatCase,\n} from \"./types\";\n\nconst NUMBER_CHAR_RE = /\\d/;\nconst STR_SPLITTERS = [\"-\", \"_\", \"/\", \".\"] as const;\n\nexport function isUppercase(char = \"\"): boolean | undefined {\n  if (NUMBER_CHAR_RE.test(char)) {\n    return undefined;\n  }\n  return char !== char.toLowerCase();\n}\n\n/**\n * @guarantee ok.default-splitters without `splitters`, splits `str` at each of \"-\", \"_\", \"/\" and \".\" and leaves the splitters out of the result\n * @guarantee ok.case-change splits where the case changes from lower to upper or from upper to lower, and keeps the case of each part\n * @guarantee ok.numbers digits are not a case change\n * @guarantee ok.custom-splitters with `splitters`, splits at those characters instead of the defaults\n */\nexport function splitByCase<T extends string>(str: T): SplitByCase<T>;\nexport function splitByCase<\n  T extends string,\n  Separator extends readonly string[],\n>(str: T, separators: Separator): SplitByCase<T, Separator[number]>;\nexport function splitByCase<\n  T extends string,\n  Separator extends readonly string[],\n>(str: T, separators?: Separator) {\n  const splitters = separators ?? STR_SPLITTERS;\n  const parts: string[] = [];\n\n  if (!str || typeof str !== \"string\") {\n    return parts as SplitByCase<T, Separator[number]>;\n  }\n\n  let buff = \"\";\n\n  let previousUpper: boolean | undefined;\n  let previousSplitter: boolean | undefined;\n\n  for (const char of str) {\n    // Splitter\n    const isSplitter = (splitters as unknown as string).includes(char);\n    if (isSplitter === true) {\n      parts.push(buff);\n      buff = \"\";\n      previousUpper = undefined;\n      continue;\n    }\n\n    const isUpper = isUppercase(char);\n    if (previousSplitter === false) {\n      // Case rising edge\n      if (previousUpper === false && isUpper === true) {\n        parts.push(buff);\n        buff = char;\n        previousUpper = isUpper;\n        continue;\n      }\n      // Case falling edge\n      if (previousUpper === true && isUpper === false && buff.length > 1) {\n        const lastChar = buff.at(-1);\n        parts.push(buff.slice(0, Math.max(0, buff.length - 1)));\n        buff = lastChar + char;\n        previousUpper = isUpper;\n        continue;\n      }\n    }\n\n    // Normal char\n    buff += char;\n    previousUpper = isUpper;\n    previousSplitter = isSplitter;\n  }\n\n  parts.push(buff);\n\n  return parts as SplitByCase<T, Separator[number]>;\n}\n\n/**\n * @guarantee ok.first returns `str` with its first character in upper case and the rest unchanged (\"hello world!\" gives \"Hello world!\")\n */\nexport function upperFirst<S extends string>(str: S): Capitalize<S> {\n  return (str ? str[0].toUpperCase() + str.slice(1) : \"\") as Capitalize<S>;\n}\n\n/**\n * @guarantee ok.first returns `str` with its first character in lower case and the rest unchanged (\"Hello world!\" gives \"hello world!\")\n */\nexport function lowerFirst<S extends string>(str: S): Uncapitalize<S> {\n  return (str ? str[0].toLowerCase() + str.slice(1) : \"\") as Uncapitalize<S>;\n}\n\n/**\n * @guarantee ok.join splits `str` like `splitByCase` and joins the parts with the first letter of each in upper case (\"foo-bar_baz\" gives \"FooBarBaz\")\n * @guarantee ok.preserve an uppercase letter followed by other uppercase letters is kept (\"FooBAR\" keeps \"BAR\")\n * @guarantee ok.normalize with `normalize` true, each part has only its first letter in upper case\n */\nexport function pascalCase(): \"\";\nexport function pascalCase<\n  T extends string | readonly string[],\n  UserCaseOptions extends CaseOptions = CaseOptions,\n>(str: T, opts?: CaseOptions): PascalCase<T, UserCaseOptions[\"normalize\"]>;\nexport function pascalCase<\n  T extends string | readonly string[],\n  UserCaseOptions extends CaseOptions = CaseOptions,\n>(str?: T, opts?: UserCaseOptions) {\n  return str\n    ? ((Array.isArray(str) ? str : splitByCase(str as string))\n        .map((p) => upperFirst(opts?.normalize ? p.toLowerCase() : p))\n        .join(\"\") as PascalCase<T, UserCaseOptions[\"normalize\"]>)\n    : \"\";\n}\n\n/**\n * @guarantee ok.join splits `str` and joins the parts by camelCase: the first part starts in lower case, every later part in upper case (\"foo-bar_baz\" gives \"fooBarBaz\")\n * @guarantee ok.normalize with `normalize` true, each part has only its first letter in upper case before the first letter of the result is lowered\n */\nexport function camelCase(): \"\";\nexport function camelCase<\n  T extends string | readonly string[],\n  UserCaseOptions extends CaseOptions = CaseOptions,\n>(str: T, opts?: UserCaseOptions): CamelCase<T, UserCaseOptions[\"normalize\"]>;\nexport function camelCase<\n  T extends string | readonly string[],\n  UserCaseOptions extends CaseOptions = CaseOptions,\n>(str?: T, opts?: UserCaseOptions) {\n  return lowerFirst(pascalCase(str || \"\", opts)) as CamelCase<\n    T,\n    UserCaseOptions[\"normalize\"]\n  >;\n}\n\n/**\n * @guarantee ok.join splits `str` and joins the parts in lower case with \"-\" (\"fooBar_Baz\" gives \"foo-bar-baz\")\n * @guarantee ok.lower the case of the input is not preserved\n */\nexport function kebabCase(): \"\";\nexport function kebabCase<T extends string | readonly string[]>(\n  str: T,\n): KebabCase<T>;\nexport function kebabCase<\n  T extends string | readonly string[],\n  Joiner extends string,\n>(str: T, joiner: Joiner): KebabCase<T, Joiner>;\nexport function kebabCase<\n  T extends string | readonly string[],\n  Joiner extends string,\n>(str?: T, joiner?: Joiner) {\n  return str\n    ? ((Array.isArray(str) ? str : splitByCase(str as string))\n        .map((p) => p.toLowerCase())\n        .join(joiner ?? \"-\") as KebabCase<T, Joiner>)\n    : \"\";\n}\n\n/**\n * @guarantee ok.join splits `str` and joins the parts in lower case with \"_\" (\"foo-barBaz\" gives \"foo_bar_baz\")\n */\nexport function snakeCase(): \"\";\nexport function snakeCase<T extends string | readonly string[]>(\n  str: T,\n): SnakeCase<T>;\nexport function snakeCase<T extends string | readonly string[]>(str?: T) {\n  return kebabCase(str || \"\", \"_\") as SnakeCase<T>;\n}\n\n/**\n * @guarantee ok.join splits `str` and joins the parts in lower case with no separator (\"foo-barBaz\" gives \"foobarbaz\")\n */\nexport function flatCase(): \"\";\nexport function flatCase<T extends string | readonly string[]>(\n  str: T,\n): FlatCase<T>;\nexport function flatCase<T extends string | readonly string[]>(str?: T) {\n  return kebabCase(str || \"\", \"\") as FlatCase<T>;\n}\n\n/**\n * @guarantee ok.join splits `str` and joins the parts with \"-\", each starting in upper case (\"FooBARb\" gives \"Foo-Ba-Rb\")\n * @guarantee ok.preserve an uppercase letter followed by other uppercase letters is kept (\"WWWAuthenticate\" gives \"WWW-Authenticate\")\n * @guarantee ok.normalize with `normalize` true, each part has only its first letter in upper case\n */\nexport function trainCase(): \"\";\nexport function trainCase<\n  T extends string | readonly string[],\n  UserCaseOptions extends CaseOptions = CaseOptions,\n>(str: T, opts?: UserCaseOptions): TrainCase<T, UserCaseOptions[\"normalize\"]>;\nexport function trainCase<\n  T extends string | readonly string[],\n  UserCaseOptions extends CaseOptions = CaseOptions,\n>(str?: T, opts?: UserCaseOptions) {\n  return (Array.isArray(str) ? str : splitByCase(str as string))\n    .filter(Boolean)\n    .map((p) => upperFirst(opts?.normalize ? p.toLowerCase() : p))\n    .join(\"-\") as TrainCase<T, UserCaseOptions[\"normalize\"]>;\n}\n\nconst titleCaseExceptions =\n  /^(a|an|and|as|at|but|by|for|if|in|is|nor|of|on|or|the|to|with)$/i;\n\n/**\n * @guarantee ok.join splits `str` and joins the parts with a space, each capitalised (\"this-IS-aTitle\" gives \"This is a Title\")\n * @guarantee ok.minor-words minor words such as \"a\", \"for\" and \"to\" stay in lower case\n */\nexport function titleCase(): \"\";\nexport function titleCase<\n  T extends string | readonly string[],\n  UserCaseOptions extends CaseOptions = CaseOptions,\n>(\n  str: T,\n  opts?: UserCaseOptions,\n): TrainCase<T, UserCaseOptions[\"normalize\"], \" \">;\nexport function titleCase<\n  T extends string | readonly string[],\n  UserCaseOptions extends CaseOptions = CaseOptions,\n>(str?: T, opts?: UserCaseOptions) {\n  return (Array.isArray(str) ? str : splitByCase(str as string))\n    .filter(Boolean)\n    .map((p) =>\n      titleCaseExceptions.test(p)\n        ? p.toLowerCase()\n        : upperFirst(opts?.normalize ? p.toLowerCase() : p),\n    )\n    .join(\" \") as TrainCase<T, UserCaseOptions[\"normalize\"]>;\n}\n\nexport * from \"./types\";\n",
+      "mutants": [
+        {
+          "id": "value-1",
+          "mutatorName": "Value",
+          "replacement": "`\"-\"` removed from `STR_SPLITTERS`",
+          "description": "`\"-\"` removed from `STR_SPLITTERS`",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 24
+            },
+            "end": {
+              "line": 13,
+              "column": 29
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "11",
+            "12",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "2",
+            "20",
+            "21",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "3",
+            "30",
+            "31",
+            "38",
+            "39",
+            "4",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "5",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "57",
+            "58",
+            "59",
+            "6",
+            "60",
+            "61",
+            "62",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 3627
+        },
+        {
+          "id": "value-2",
+          "mutatorName": "Value",
+          "replacement": "`\"_\"` removed from `STR_SPLITTERS`",
+          "description": "`\"_\"` removed from `STR_SPLITTERS`",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 29
+            },
+            "end": {
+              "line": 13,
+              "column": 34
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "11",
+            "12",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "2",
+            "20",
+            "21",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "3",
+            "30",
+            "31",
+            "38",
+            "39",
+            "4",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "5",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "57",
+            "58",
+            "59",
+            "6",
+            "60",
+            "61",
+            "62",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 3353
+        },
+        {
+          "id": "value-3",
+          "mutatorName": "Value",
+          "replacement": "`\"/\"` removed from `STR_SPLITTERS`",
+          "description": "`\"/\"` removed from `STR_SPLITTERS`",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 34
+            },
+            "end": {
+              "line": 13,
+              "column": 39
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "11",
+            "12",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "2",
+            "20",
+            "21",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "3",
+            "30",
+            "31",
+            "38",
+            "39",
+            "4",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "5",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "57",
+            "58",
+            "59",
+            "6",
+            "60",
+            "61",
+            "62",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 3164
+        },
+        {
+          "id": "value-4",
+          "mutatorName": "Value",
+          "replacement": "`\".\"` removed from `STR_SPLITTERS`",
+          "description": "`\".\"` removed from `STR_SPLITTERS`",
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 37
+            },
+            "end": {
+              "line": 13,
+              "column": 42
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "11",
+            "12",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "2",
+            "20",
+            "21",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "3",
+            "30",
+            "31",
+            "38",
+            "39",
+            "4",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "5",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "57",
+            "58",
+            "59",
+            "6",
+            "60",
+            "61",
+            "62",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 3004
+        },
+        {
+          "id": "value-5",
+          "mutatorName": "Value",
+          "replacement": "`buff.length > 1`: 1 → 2",
+          "description": "`buff.length > 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 69,
+              "column": 72
+            },
+            "end": {
+              "line": 69,
+              "column": 73
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "53",
+            "54",
+            "55",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62"
+          ],
+          "duration": 3630
+        },
+        {
+          "id": "value-6",
+          "mutatorName": "Value",
+          "replacement": "`buff.at(-1)`: -1 → -2",
+          "description": "`buff.at(-1)`: -1 → -2",
+          "location": {
+            "start": {
+              "line": 70,
+              "column": 35
+            },
+            "end": {
+              "line": 70,
+              "column": 36
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "4",
+            "9",
+            "10",
+            "11",
+            "16",
+            "28",
+            "47",
+            "59"
+          ],
+          "duration": 3493
+        },
+        {
+          "id": "value-7",
+          "mutatorName": "Value",
+          "replacement": "`buff.slice(0, Math.max(0, buff.length -…`: 0 → 1",
+          "description": "`buff.slice(0, Math.max(0, buff.length -…`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 71,
+              "column": 31
+            },
+            "end": {
+              "line": 71,
+              "column": 32
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "4",
+            "9",
+            "10",
+            "11",
+            "16",
+            "28",
+            "47",
+            "59"
+          ],
+          "duration": 3588
+        },
+        {
+          "id": "value-8",
+          "mutatorName": "Value",
+          "replacement": "`Math.max(0, buff.length - 1)`: 0 → 1",
+          "description": "`Math.max(0, buff.length - 1)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 71,
+              "column": 43
+            },
+            "end": {
+              "line": 71,
+              "column": 44
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "4",
+            "9",
+            "10",
+            "11",
+            "16",
+            "28",
+            "47",
+            "59"
+          ],
+          "duration": 2902
+        },
+        {
+          "id": "value-9",
+          "mutatorName": "Value",
+          "replacement": "`buff.length - 1`: 1 → 2",
+          "description": "`buff.length - 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 71,
+              "column": 60
+            },
+            "end": {
+              "line": 71,
+              "column": 61
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "4",
+            "9",
+            "10",
+            "11",
+            "16",
+            "28",
+            "47",
+            "59"
+          ],
+          "duration": 3582
+        },
+        {
+          "id": "value-10",
+          "mutatorName": "Value",
+          "replacement": "`str[0]`: 0 → 1",
+          "description": "`str[0]`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 93,
+              "column": 21
+            },
+            "end": {
+              "line": 93,
+              "column": 22
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "32",
+            "33",
+            "34",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3763
+        },
+        {
+          "id": "value-11",
+          "mutatorName": "Value",
+          "replacement": "`str.slice(1)`: 1 → 2",
+          "description": "`str.slice(1)`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 93,
+              "column": 50
+            },
+            "end": {
+              "line": 93,
+              "column": 51
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "32",
+            "33",
+            "34",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3552
+        },
+        {
+          "id": "value-12",
+          "mutatorName": "Value",
+          "replacement": "`str[0]`: 0 → 1",
+          "description": "`str[0]`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 100,
+              "column": 21
+            },
+            "end": {
+              "line": 100,
+              "column": 22
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "20",
+            "21",
+            "35",
+            "36",
+            "37"
+          ],
+          "duration": 3754
+        },
+        {
+          "id": "value-13",
+          "mutatorName": "Value",
+          "replacement": "`str.slice(1)`: 1 → 2",
+          "description": "`str.slice(1)`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 100,
+              "column": 50
+            },
+            "end": {
+              "line": 100,
+              "column": 51
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "20",
+            "21",
+            "35",
+            "36",
+            "37"
+          ],
+          "duration": 3815
+        },
+        {
+          "id": "value-14",
+          "mutatorName": "Value",
+          "replacement": "`joiner ?? \"-\"`: \"-\" → \"-_x\"",
+          "description": "`joiner ?? \"-\"`: \"-\" → \"-_x\"",
+          "location": {
+            "start": {
+              "line": 162,
+              "column": 25
+            },
+            "end": {
+              "line": 162,
+              "column": 28
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62"
+          ],
+          "duration": 3737
+        },
+        {
+          "id": "value-15",
+          "mutatorName": "Value",
+          "replacement": "`kebabCase(str || \"\", \"_\")`: \"_\" → \"__x\"",
+          "description": "`kebabCase(str || \"\", \"_\")`: \"_\" → \"__x\"",
+          "location": {
+            "start": {
+              "line": 174,
+              "column": 31
+            },
+            "end": {
+              "line": 174,
+              "column": 34
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "30",
+            "31"
+          ],
+          "duration": 3865
+        },
+        {
+          "id": "value-16",
+          "mutatorName": "Value",
+          "replacement": "`(Array.isArray(str) ? str : splitByCase…`: \"-\" → \"-_x\"",
+          "description": "`(Array.isArray(str) ? str : splitByCase…`: \"-\" → \"-_x\"",
+          "location": {
+            "start": {
+              "line": 205,
+              "column": 11
+            },
+            "end": {
+              "line": 205,
+              "column": 14
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50"
+          ],
+          "duration": 2783
+        },
+        {
+          "id": "value-17",
+          "mutatorName": "Value",
+          "replacement": "`a` removed from `titleCaseExceptions`",
+          "description": "`a` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 6
+            },
+            "end": {
+              "line": 209,
+              "column": 8
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 2977
+        },
+        {
+          "id": "value-18",
+          "mutatorName": "Value",
+          "replacement": "`an` removed from `titleCaseExceptions`",
+          "description": "`an` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 8
+            },
+            "end": {
+              "line": 209,
+              "column": 11
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 2564
+        },
+        {
+          "id": "value-19",
+          "mutatorName": "Value",
+          "replacement": "`and` removed from `titleCaseExceptions`",
+          "description": "`and` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 11
+            },
+            "end": {
+              "line": 209,
+              "column": 15
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3392
+        },
+        {
+          "id": "value-20",
+          "mutatorName": "Value",
+          "replacement": "`as` removed from `titleCaseExceptions`",
+          "description": "`as` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 15
+            },
+            "end": {
+              "line": 209,
+              "column": 18
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3225
+        },
+        {
+          "id": "value-21",
+          "mutatorName": "Value",
+          "replacement": "`at` removed from `titleCaseExceptions`",
+          "description": "`at` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 18
+            },
+            "end": {
+              "line": 209,
+              "column": 21
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 2846
+        },
+        {
+          "id": "value-22",
+          "mutatorName": "Value",
+          "replacement": "`but` removed from `titleCaseExceptions`",
+          "description": "`but` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 21
+            },
+            "end": {
+              "line": 209,
+              "column": 25
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 2881
+        },
+        {
+          "id": "value-23",
+          "mutatorName": "Value",
+          "replacement": "`by` removed from `titleCaseExceptions`",
+          "description": "`by` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 25
+            },
+            "end": {
+              "line": 209,
+              "column": 28
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3045
+        },
+        {
+          "id": "value-24",
+          "mutatorName": "Value",
+          "replacement": "`for` removed from `titleCaseExceptions`",
+          "description": "`for` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 28
+            },
+            "end": {
+              "line": 209,
+              "column": 32
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3147
+        },
+        {
+          "id": "value-25",
+          "mutatorName": "Value",
+          "replacement": "`if` removed from `titleCaseExceptions`",
+          "description": "`if` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 32
+            },
+            "end": {
+              "line": 209,
+              "column": 35
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 2867
+        },
+        {
+          "id": "value-26",
+          "mutatorName": "Value",
+          "replacement": "`in` removed from `titleCaseExceptions`",
+          "description": "`in` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 35
+            },
+            "end": {
+              "line": 209,
+              "column": 38
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3234
+        },
+        {
+          "id": "value-27",
+          "mutatorName": "Value",
+          "replacement": "`is` removed from `titleCaseExceptions`",
+          "description": "`is` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 38
+            },
+            "end": {
+              "line": 209,
+              "column": 41
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3109
+        },
+        {
+          "id": "value-28",
+          "mutatorName": "Value",
+          "replacement": "`nor` removed from `titleCaseExceptions`",
+          "description": "`nor` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 41
+            },
+            "end": {
+              "line": 209,
+              "column": 45
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3109
+        },
+        {
+          "id": "value-29",
+          "mutatorName": "Value",
+          "replacement": "`of` removed from `titleCaseExceptions`",
+          "description": "`of` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 45
+            },
+            "end": {
+              "line": 209,
+              "column": 48
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3094
+        },
+        {
+          "id": "value-30",
+          "mutatorName": "Value",
+          "replacement": "`on` removed from `titleCaseExceptions`",
+          "description": "`on` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 48
+            },
+            "end": {
+              "line": 209,
+              "column": 51
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 3102
+        },
+        {
+          "id": "value-31",
+          "mutatorName": "Value",
+          "replacement": "`or` removed from `titleCaseExceptions`",
+          "description": "`or` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 51
+            },
+            "end": {
+              "line": 209,
+              "column": 54
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 2156
+        },
+        {
+          "id": "value-32",
+          "mutatorName": "Value",
+          "replacement": "`the` removed from `titleCaseExceptions`",
+          "description": "`the` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 54
+            },
+            "end": {
+              "line": 209,
+              "column": 58
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 2096
+        },
+        {
+          "id": "value-33",
+          "mutatorName": "Value",
+          "replacement": "`to` removed from `titleCaseExceptions`",
+          "description": "`to` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 58
+            },
+            "end": {
+              "line": 209,
+              "column": 61
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 1878
+        },
+        {
+          "id": "value-34",
+          "mutatorName": "Value",
+          "replacement": "`with` removed from `titleCaseExceptions`",
+          "description": "`with` removed from `titleCaseExceptions`",
+          "location": {
+            "start": {
+              "line": 209,
+              "column": 60
+            },
+            "end": {
+              "line": 209,
+              "column": 65
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 1482
+        },
+        {
+          "id": "value-35",
+          "mutatorName": "Value",
+          "replacement": "`(Array.isArray(str) ? str : splitByCase…`: \" \" → \" _x\"",
+          "description": "`(Array.isArray(str) ? str : splitByCase…`: \" \" → \" _x\"",
+          "location": {
+            "start": {
+              "line": 234,
+              "column": 11
+            },
+            "end": {
+              "line": 234,
+              "column": 14
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ],
+          "duration": 1430
+        }
+      ]
+    }
+  }
+}

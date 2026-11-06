@@ -1,0 +1,124 @@
+[
+  {
+    "file": "src/index.ts",
+    "symbol": "cac",
+    "tags": [
+      "@guarantee ok.program-name `cac(name)` creates a CLI instance, and the optional `name` is the program name displayed in the help and version messages",
+      "@guarantee ok.default-name when `name` is not set, the program name is the basename of `argv[1]`"
+    ]
+  },
+  {
+    "file": "src/cac.ts",
+    "symbol": "CAC#command",
+    "tags": [
+      "@guarantee ok.creates-command creates and returns a command instance for `name` and `description`",
+      "@guarantee ok.required-arguments in a command name, angled brackets indicate required arguments and square brackets indicate optional arguments (\"deploy <folder>\" requires `folder`, \"build [project]\" makes `project` optional)",
+      "@guarantee ok.variadic only the last argument can be variadic, written with \"...\" at the start of its name (\"build <entry> [...otherFiles]\"), and then it is passed as an array",
+      "@guarantee ok.default-command a command name with no name and only brackets (\"[...files]\") is the default command, used when no other command is matched",
+      "@guarantee ok.config-allow-unknown-options `config.allowUnknownOptions` allows unknown options in this command",
+      "@guarantee ok.config-ignore-default `config.ignoreOptionDefaultValue` leaves the default value of an option out of the parsed options and only displays it in the help message"
+    ]
+  },
+  {
+    "file": "src/cac.ts",
+    "symbol": "CAC#option",
+    "tags": [
+      "@guarantee ok.global-option adds a global option",
+      "@guarantee ok.config-default `config.default` is the default value of the option (`--type <type>` with `default: \"node\"` defaults `type` to \"node\")",
+      "@guarantee ok.config-type-array when `config.type` is `[]`, the option value is an array, and a conversion function such as `[String]` is invoked on the option value",
+      "@guarantee ok.camel-case an option in kebab-case is mapped to camelCase, so `--clear-screen` and `--clearScreen` both map to `options.clearScreen`",
+      "@guarantee ok.option-brackets in an option name, angled brackets indicate that a string or number value is required and square brackets indicate that the value can also be `true`",
+      "@guarantee ok.negated-option with `--no-config` and `--config <path>`, the default value of `config` is `true` and the flag `--no-config` sets it to `false`",
+      "@guarantee ok.repeated-option an option given once gives a single value (\"--include project-a\" gives `{ include: \"project-a\" }`) and given twice gives an array (`{ include: [\"project-a\", \"project-b\"] }`)"
+    ]
+  },
+  {
+    "file": "src/cac.ts",
+    "symbol": "CAC#parse",
+    "tags": [
+      "@guarantee ok.parsed-argv returns an object with `args`, an array of strings, and `options`, an object of the parsed options",
+      "@guarantee ok.default-argv `argv` is `process.argv` by default",
+      "@guarantee ok.available-after-parse after the call, `cli.rawArgs`, `cli.args`, `cli.options` and `cli.matchedCommand` are available",
+      "@guarantee ok.run-false with `{ run: false }` it parses the arguments without running the command, which can then be run with `runMatchedCommand`"
+    ]
+  },
+  {
+    "file": "src/cac.ts",
+    "symbol": "CAC#version",
+    "tags": [
+      "@guarantee ok.default-flags outputs the version number when the `-v` or `--version` flag appears, because `customFlags` is \"-v, --version\" by default",
+      "@guarantee ok.custom-flags `customFlags` replaces the flags that output the version number",
+      "@guarantee ok.in-help the version number is also used in the help message"
+    ]
+  },
+  {
+    "file": "src/cac.ts",
+    "symbol": "CAC#help",
+    "tags": [
+      "@guarantee ok.help-flags outputs the help message when the `-h` or `--help` flag appears",
+      "@guarantee ok.callback the optional `callback` receives the help sections, each with an optional `title` and a `body`, so the help text can be post-processed before it is displayed"
+    ]
+  },
+  {
+    "file": "src/cac.ts",
+    "symbol": "CAC#outputHelp",
+    "tags": ["@guarantee ok.output outputs the help message"]
+  },
+  {
+    "file": "src/cac.ts",
+    "symbol": "CAC#usage",
+    "tags": ["@guarantee ok.global-usage adds a global usage text, which is not used by sub-commands"]
+  },
+  {
+    "file": "src/cac.ts",
+    "symbol": "CAC#runMatchedCommand",
+    "tags": [
+      "@guarantee ok.run runs the matched command after `parse` was called with `{ run: false }`, and its result can be awaited when the command action returns a Promise"
+    ]
+  },
+  {
+    "file": "src/command.ts",
+    "symbol": "Command#option",
+    "tags": [
+      "@guarantee ok.command-option adds the option to this specific command, like `cli.option` does for the CLI (\"-r, --recursive\" on \"rm <dir>\" gives `options.recursive`)",
+      "@guarantee ok.dash-camel-case `--clear-screen` and `--clearScreen` are both mapped to `options.clearScreen`"
+    ]
+  },
+  {
+    "file": "src/command.ts",
+    "symbol": "Command#action",
+    "tags": [
+      "@guarantee ok.callback-args uses the callback as the command action when the command matches the user inputs, called with the parsed CLI args first and the parsed CLI options last",
+      "@guarantee ok.variadic-last-arg the last argument is an array when it is a variadic argument"
+    ]
+  },
+  {
+    "file": "src/command.ts",
+    "symbol": "Command#alias",
+    "tags": [
+      "@guarantee ok.alias adds an alias name to this command",
+      "@guarantee err.alias-brackets the alias `name` cannot contain brackets"
+    ]
+  },
+  {
+    "file": "src/command.ts",
+    "symbol": "Command#allowUnknownOptions",
+    "tags": [
+      "@guarantee ok.allow allows unknown options in this command",
+      "@guarantee ok.default-error by default an error is logged when unknown options are used"
+    ]
+  },
+  {
+    "file": "src/command.ts",
+    "symbol": "Command#example",
+    "tags": [
+      "@guarantee ok.shown-in-help adds an example which is displayed at the end of the help message",
+      "@guarantee ok.example-type `example` is either a string or a function that takes the command name and returns a string"
+    ]
+  },
+  {
+    "file": "src/command.ts",
+    "symbol": "Command#usage",
+    "tags": ["@guarantee ok.command-usage adds a usage text for this command"]
+  }
+]

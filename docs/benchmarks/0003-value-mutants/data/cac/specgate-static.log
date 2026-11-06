@@ -1,0 +1,62 @@
+specgate check (advisory): 28 units, 38 guarantees, 12 linked tests
+  fail 45 · warn 10 · info 1
+  ❌ [guarantee-no-test] src/cac.ts:67 CAC#usage.ok.global-usage has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:76 CAC#command.ok.creates-command has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:78 CAC#command.ok.variadic has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:79 CAC#command.ok.default-command has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:80 CAC#command.ok.config-allow-unknown-options has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:81 CAC#command.ok.config-ignore-default has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:98 CAC#option.ok.global-option has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:99 CAC#option.ok.config-default has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:101 CAC#option.ok.camel-case has no test naming it
+  ❌ [identifier-unresolved] src/cac.ts:101 CAC#option.ok.camel-case: "camelCase" is not a parameter, declared port, entity or public operation
+  ❌ [guarantee-no-test] src/cac.ts:102 CAC#option.ok.option-brackets has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:104 CAC#option.ok.repeated-option has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:114 CAC#help.ok.help-flags has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:115 CAC#help.ok.callback has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:127 CAC#version.ok.default-flags has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:128 CAC#version.ok.custom-flags has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:129 CAC#version.ok.in-help has no test naming it
+  ❌ [operation-no-guarantee] src/cac.ts:142 CAC#example has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/cac.ts:152 CAC#outputHelp.ok.output has no test naming it
+  ❌ [operation-no-guarantee] src/cac.ts:166 CAC#outputVersion has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/cac.ts:186 CAC#unsetMatchedCommand has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] src/cac.ts:195 CAC#parse.ok.available-after-parse has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:196 CAC#parse.ok.run-false has no test naming it
+  ❌ [guarantee-no-test] src/cac.ts:367 CAC#runMatchedCommand.ok.run has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:69 Command#usage.ok.command-usage has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:77 Command#allowUnknownOptions.ok.allow has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:78 Command#allowUnknownOptions.ok.default-error has no test naming it
+  ❌ [operation-no-guarantee] src/command.ts:85 Command#ignoreOptionDefaultValue has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/command.ts:90 Command#version has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] src/command.ts:97 Command#example.ok.shown-in-help has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:98 Command#example.ok.example-type has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:120 Command#alias.ok.alias has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:121 Command#alias.err.alias-brackets has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:129 Command#action.ok.callback-args has no test naming it
+  ❌ [guarantee-no-test] src/command.ts:130 Command#action.ok.variadic-last-arg has no test naming it
+  ❌ [operation-no-guarantee] src/command.ts:141 Command#isMatched has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/command.ts:157 Command#hasOption has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/command.ts:164 Command#outputHelp has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/command.ts:271 Command#outputVersion has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/command.ts:279 Command#checkRequiredArgs has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] src/command.ts:294 Command#checkUnknownOptions has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/command.ts:315 Command#checkOptionValue has no guarantee (doc without @guarantee / @throws)
+  ❌ [operation-no-guarantee] src/command.ts:335 Command#checkUnusedArgs has no guarantee (doc without @guarantee / @throws)
+  ❌ [guarantee-no-test] src/index.ts:6 cac.ok.program-name has no test naming it
+  ❌ [guarantee-no-test] src/index.ts:7 cac.ok.default-name has no test naming it
+  ⚠️ [uses-mismatch] src/cac.ts:69 CAC#usage calls ports not declared in @uses/@modifies: GlobalCommand
+  ⚠️ [uses-mismatch] src/cac.ts:83 CAC#command calls ports not declared in @uses/@modifies: Command[]
+  ⚠️ [uses-mismatch] src/cac.ts:106 CAC#option calls ports not declared in @uses/@modifies: GlobalCommand
+  ⚠️ [uses-mismatch] src/cac.ts:117 CAC#help calls ports not declared in @uses/@modifies: GlobalCommand
+  ⚠️ [uses-mismatch] src/cac.ts:131 CAC#version calls ports not declared in @uses/@modifies: GlobalCommand
+  ⚠️ [uses-mismatch] src/cac.ts:154 CAC#outputHelp calls ports not declared in @uses/@modifies: Command, GlobalCommand
+  ⚠️ [decision-unspecified] src/cac.ts:353 CAC#parse commits to match "_" in `key !== '_'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
+  ⚠️ [uses-mismatch] src/command.ts:100 Command#example calls ports not declared in @uses/@modifies: CommandExample[]
+  ⚠️ [uses-mismatch] src/command.ts:113 Command#option calls ports not declared in @uses/@modifies: Option[]
+  ⚠️ [uses-mismatch] src/command.ts:123 Command#alias calls ports not declared in @uses/@modifies: string[]
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work>/cac/.specgate-static/report.json
+      <work>/cac/.specgate-static/summary.md
+      <work>/cac/.specgate-static/report.sarif

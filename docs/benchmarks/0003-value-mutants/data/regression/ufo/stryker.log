@@ -1,0 +1,747 @@
+[32m07:56:02 (62047) INFO ProjectReader[39m Found 2 of 45 file(s) to be mutated.
+Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[32m07:56:02 (62047) INFO Instrumenter[39m Instrumented 2 source file(s) with 228 mutant(s)
+[32m07:56:02 (62047) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m07:56:03 (62047) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m07:56:04 (62047) INFO DryRunExecutor[39m Initial test run succeeded. Ran 465 tests in 1 second (net 58.742973000000916 ms, overhead 1327.2570269999992 ms).
+
+All tests
+  base.test.ts
+    ✘ withBase "/" + "/" [line 35] (covered 0)
+    ✘ withBase "/foo" + "" [line 35] (covered 0)
+    ✘ withBase "/foo/" + "/" [line 35] (covered 0)
+    ✘ withBase "/foo" + "/bar" [line 35] (covered 0)
+    ✘ withBase "/base/" + "/base" [line 35] (covered 0)
+    ✘ withBase "/base" + "/base/" [line 35] (covered 0)
+    ✘ withBase "/base" + "/base/a" [line 35] (covered 0)
+    ✘ withBase "/base/" + "/base/a" [line 35] (covered 0)
+    ✘ withBase "/base/" + "https://test.com" [line 35] (covered 0)
+    ✘ withBase "/" + "https://test.com" [line 35] (covered 0)
+    ✘ withBase "/admin/" + "/admin-dashboard" [line 35] (covered 0)
+    ✘ withBase "/admin/" + "/admin/admin-dashboard" [line 35] (covered 0)
+    ✘ withBase "/admin" + "/admin-dashboard" [line 35] (covered 0)
+    ✘ withBase "/admin/" + "/admin/dashboard" [line 35] (covered 0)
+    ✘ withoutBase "/"-"/" [line 73] (covered 0)
+    ✘ withoutBase "/"-"/foo" [line 73] (covered 0)
+    ✘ withoutBase "/"-"/foo/" [line 73] (covered 0)
+    ✘ withoutBase "/bar"-"/foo" [line 73] (covered 0)
+    ✘ withoutBase "/base"-"/base/" [line 73] (covered 0)
+    ✘ withoutBase "/base/"-"/base" [line 73] (covered 0)
+    ✘ withoutBase "/base/a"-"/base" [line 73] (covered 0)
+    ✘ withoutBase "/base/a"-"/base/" [line 73] (covered 0)
+    ✘ withoutBase "/base/a"-"/base/a/" [line 73] (covered 0)
+    ✘ withoutBase "/test/"-"/" [line 73] (covered 0)
+    ✘ withoutBase "/?test"-"/" [line 73] (covered 0)
+    ✘ withoutBase "/api?test"-"/api" [line 73] (covered 0)
+    ✘ withoutBase "https://test.com"-"/base/" [line 73] (covered 0)
+    ✘ withoutBase "https://test.com"-"/" [line 73] (covered 0)
+    ✘ withoutBase "/admin-dashboard"-"/admin/" [line 73] (covered 0)
+    ✘ withoutBase "/admin/admin-dashboard"-"/admin/" [line 73] (covered 0)
+    ✘ withoutBase "/admin-dashboard"-"/admin" [line 73] (covered 0)
+    ✘ withoutBase "/admin/dashboard"-"/admin/" [line 73] (covered 0)
+    ✘ withoutBase "/legacy//evil.com"-"/legacy" [line 73] (covered 0)
+    ✘ withoutBase "/legacy//evil.com"-"/legacy/" [line 73] (covered 0)
+    ✘ withoutBase "/legacy///evil.com"-"/legacy" [line 73] (covered 0)
+    ✘ withoutBase "/legacy//"-"/legacy" [line 73] (covered 0)
+  double-slash.test.ts
+    ✘ cleanDoubleSlashes //foo//bar// [line 14] (covered 0)
+    ✘ cleanDoubleSlashes http://foo.com// [line 14] (covered 0)
+    ✘ cleanDoubleSlashes http://foo.com/bar//foo/ [line 14] (covered 0)
+    ✘ cleanDoubleSlashes http://example.com/analyze//http://localhost:3000// [line 14] (covered 0)
+    ✘ cleanDoubleSlashes no input [line 19] (covered 0)
+  encoding.test.ts
+    ✘ encode https://www.example.com/path/to/file.html [line 58] (covered 0)
+    ✘ encode https://www.example.com/path/to/file.html?foo=bar [line 58] (covered 0)
+    ✘ encode https://www.example.com/path/to/file.html?foo=bar&baz=qux [line 58] (covered 0)
+    ✘ encode https://www.example.com/path/to/file.html#section1 [line 58] (covered 0)
+    ✘ encode https://www.example.com/path/to/file.html#section1&section2 [line 58] (covered 0)
+    ✘ encode https://www.example.com/My Path/File.html [line 58] (covered 0)
+    ✘ encode https://www.example.com/file.html?foo=bar|baz [line 58] (covered 0)
+    ✘ encode https://www.example.com/file.html#section1|section2 [line 58] (covered 0)
+    ✘ encode https://www.example.com/file.html?foo=bar&baz=qux|quux [line 58] (covered 0)
+    ✘ encode https://www.example.com/file.html#section1&section2|section3 [line 58] (covered 0)
+    ✘ encodeHash [line 78] (covered 0)
+    ✘ encodeHash hello [line 78] (covered 0)
+    ✘ encodeHash {}^ [line 78] (covered 0)
+    ✘ encodeHash !@#$%&*()-_=+[]{};:'",.<>/?`~ [line 78] (covered 0)
+    ✘ encodeHash +=& [line 78] (covered 0)
+    ✘ encodeHash abc{def}ghi^jkl [line 78] (covered 0)
+    ✘ encodeQueryValue hello world [line 103] (covered 0)
+    ✘ encodeQueryValue hello+world [line 103] (covered 0)
+    ✘ encodeQueryValue key=value [line 103] (covered 0)
+    ✘ encodeQueryValue true [line 103] (covered 0)
+    ✘ encodeQueryValue 42 [line 103] (covered 0)
+    ✘ encodeQueryValue a=1&b=2 [line 103] (covered 0)
+    ✘ encodeQueryValue apple,banana,cherry [line 103] (covered 0)
+    ✘ encodeQueryValue !@#$%^&*()_+{}[]|\:;<>,./? [line 103] (covered 0)
+    ✘ encodeQueryKey key [line 118] (covered 0)
+    ✘ encodeQueryKey key=value [line 118] (covered 0)
+    ✘ encodeQueryKey 123 [line 118] (covered 0)
+    ✘ encodeQueryKey =value [line 118] (covered 0)
+    ✘ encodePath path/to/resource [line 139] (covered 0)
+    ✘ encodePath /path/to/resource [line 139] (covered 0)
+    ✘ encodePath path?query=value [line 139] (covered 0)
+    ✘ encodePath path#hash [line 139] (covered 0)
+    ✘ encodePath path&param=value [line 139] (covered 0)
+    ✘ encodePath path+to+resource [line 139] (covered 0)
+    ✘ encodePath path/to/resource/ [line 139] (covered 0)
+    ✘ encodePath path/to/re source [line 139] (covered 0)
+    ✘ encodePath p@th [line 139] (covered 0)
+    ✘ encodePath path/to/resource/file.txt [line 139] (covered 0)
+    ✘ encodeParam hello world [line 160] (covered 0)
+    ✘ encodeParam a/b [line 160] (covered 0)
+    ✘ encodeParam 1+2=3 [line 160] (covered 0)
+    ✘ encodeParam áéíóú [line 160] (covered 0)
+    ✘ encodeParam !@#$%^&*()_-+=[]{}\|;:'",.<>/? [line 160] (covered 0)
+    ✘ encodeParam 123 [line 160] (covered 0)
+    ✘ encodeParam true [line 160] (covered 0)
+    ✘ decode %7B%7D%5E [line 188] (covered 0)
+    ✘ decode %2B%3D%26 [line 188] (covered 0)
+    ✘ decode !%40%23%24%25%26%2A%28%29-_%3D%2B%5B%5D%7B%7D%3B%3A%27%22%2C.%3C%3E%2F%3F%60%7C%5C%22 [line 188] (covered 0)
+    ✘ decode hello%20world [line 188] (covered 0)
+    ✘ decode %3Fkey%3Dvalue%26anotherKey%3DanotherValue [line 188] (covered 0)
+    ✘ decode http%3A%2F%2Fexample.com%2Fpage%3Fid%3D123%23details [line 188] (covered 0)
+    ✘ decode foo%2Bbar%2Bbaz [line 188] (covered 0)
+    ✘ decodeQueryKey key [line 205] (covered 0)
+    ✘ decodeQueryKey key%3Dvalue [line 205] (covered 0)
+    ✘ decodeQueryKey 123 [line 205] (covered 0)
+    ✘ decodeQueryKey %3Dvalue [line 205] (covered 0)
+    ✘ decodeQueryKey key+with+space [line 205] (covered 0)
+    ✘ decodeQueryKey key%2bwith%2bplus [line 205] (covered 0)
+  is-same.test.ts
+    ✘ isSamePath /foo == /foo [line 15] (covered 0)
+    ✘ isSamePath /foo == /foo/ [line 15] (covered 0)
+    ✘ isSamePath / == [line 15] (covered 0)
+    ✘ isSamePath /%D1%82%D0%B5%D1%81%D1%82 == /тест [line 15] (covered 0)
+    ✘ isSamePath /foo != /bar [line 21] (covered 0)
+  join.test.ts
+    ✘ joinURL joinURL() === "" [line 31] (covered 0)
+    ✘ joinURL joinURL("/") === "/" [line 31] (covered 0)
+    ✘ joinURL joinURL(, "./") === "./" [line 31] (covered 0)
+    ✘ joinURL joinURL("./", "a") === "./a" [line 31] (covered 0)
+    ✘ joinURL joinURL("./a", "./b") === "./a/b" [line 31] (covered 0)
+    ✘ joinURL joinURL("/a") === "/a" [line 31] (covered 0)
+    ✘ joinURL joinURL("a", "b") === "a/b" [line 31] (covered 0)
+    ✘ joinURL joinURL("/", "/b") === "/b" [line 31] (covered 0)
+    ✘ joinURL joinURL("a", "b/", "c") === "a/b/c" [line 31] (covered 0)
+    ✘ joinURL joinURL("a", "b/", "/c") === "a/b/c" [line 31] (covered 0)
+    ✘ joinURL joinURL("/", "./") === "/" [line 31] (covered 0)
+    ✘ joinURL joinURL("/", "./foo") === "/foo" [line 31] (covered 0)
+    ✘ joinURL joinURL("/", "./foo/") === "/foo/" [line 31] (covered 0)
+    ✘ joinURL joinURL("/", "./foo", "bar") === "/foo/bar" [line 31] (covered 0)
+    ✘ joinURL joinURL("https://google.com/", "./foo", "/bar") === "https://google.com/foo/bar" [line 31] (covered 0)
+    ✘ joinURL joinURL("//google.com/", "./foo", "/bar") === "//google.com/foo/bar" [line 31] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL() === "" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/") === "/" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL(, "./") === "./" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("./", "a") === "./a" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("./a", "./b") === "./a/b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/a") === "/a" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("a", "b") === "a/b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/", "/b") === "/b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("a", "b/", "c") === "a/b/c" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("a", "b/", "/c") === "a/b/c" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/", "./") === "/" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/", "./foo") === "/foo" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/", "./foo/") === "/foo/" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/", "./foo", "bar") === "/foo/bar" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("https://google.com/", "./foo", "/bar") === "https://google.com/foo/bar" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("//google.com/", "./foo", "/bar") === "//google.com/foo/bar" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/a", "../b") === "/b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/a/b/c", "../../d") === "/a/d" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/a", "../../d") === "/d" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/a", ".././../d") === "/d" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/a", "../../../d") === "../d" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("/a/b", "../../../d") === "/d" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("../a", "../b") === "b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("../a", "./../b") === "b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("../a", "./../../b") === "../b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("../a", "../../../b") === "../../b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("../a", "../../../../b") === "../../../b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("../a/", "../b") === "b" [line 60] (covered 0)
+    ✘ joinRelativeURL joinRelativeURL("https://google.com/", "../foo") === "https://google.com/foo" [line 60] (covered 0)
+  normalize.test.ts
+    ✓ normalizeURL http://foo.com [line 87] (killed 21)
+    ✓ normalizeURL http://foo.com/bar [line 87] (killed 3)
+    ~ normalizeURL proto://path/to [line 87] (covered 109)
+    ✓ normalizeURL /bar [line 87] (killed 2)
+    ~ normalizeURL bar [line 87] (covered 77)
+    ~ normalizeURL ./ [line 87] (covered 77)
+    ~ normalizeURL . [line 87] (covered 77)
+    ~ normalizeURL [line 87] (covered 78)
+    ~ normalizeURL ./foo [line 87] (covered 77)
+    ✓ normalizeURL .#hash [line 87] (killed 2)
+    ✓ normalizeURL .?foo=123 [line 87] (killed 18)
+    ~ normalizeURL ./?foo=123#hash [line 87] (covered 112)
+    ~ normalizeURL /test?query=123#hash [line 87] (covered 112)
+    ~ normalizeURL test?query=123#hash [line 87] (covered 112)
+    ~ normalizeURL /%c [line 87] (covered 77)
+    ~ normalizeURL /% [line 87] (covered 77)
+    ~ normalizeURL /test%2Bfile.txt [line 87] (covered 77)
+    ~ normalizeURL http://foo.com/test?query=123#hash [line 87] (covered 144)
+    ~ normalizeURL http://localhost:3000 [line 87] (covered 111)
+    ✓ normalizeURL http://my_email%40gmail.com:password@www.my_site.com [line 87] (killed 6)
+    ~ normalizeURL /test?query=123,123#hash, test [line 87] (covered 112)
+    ~ normalizeURL http://test.com/%C3%B6?foo=تست [line 87] (covered 146)
+    ~ normalizeURL /http:/ [line 87] (covered 77)
+    ~ normalizeURL http://[2001:db8:85a3:8d3:1319:8a2e:370:7348]/ [line 87] (covered 109)
+    ~ normalizeURL http://localhost/?redirect=http:%2F%2Fgoogle.com?q=test [line 87] (covered 146)
+    ~ normalizeURL http://localhost/?email=some+v1@email.com [line 87] (covered 146)
+    ~ normalizeURL http://localhost/?email=some%2Bv1%40email.com [line 87] (covered 146)
+    ~ normalizeURL http://localhost/abc/deg%2F%2Ftest?email=some+v1@email.com [line 87] (covered 146)
+    ~ normalizeURL http://localhost/abc/deg%2f%3f%26?email=some+v1@email.com&foo=bar [line 87] (covered 146)
+    ~ normalizeURL http://example.com/foo\bar [line 87] (covered 109)
+    ~ normalizeURL  http://google.com [line 87] (covered 111)
+    ~ normalizeURL http://foo.com/blah_blah [line 93] (covered 109)
+    ~ normalizeURL http://foo.com/blah_blah/ [line 93] (covered 109)
+    ~ normalizeURL http://foo.com/blah_blah_(wikipedia) [line 93] (covered 109)
+    ~ normalizeURL http://foo.com/blah_blah_(wikipedia)_(again) [line 93] (covered 109)
+    ~ normalizeURL http://www.example.com/wpstyle/?p=364 [line 93] (covered 146)
+    ✓ normalizeURL https://www.example.com/foo/?bar=baz&inga=42&quux [line 93] (killed 1)
+    ~ normalizeURL http://✪df.ws/123 [line 93] (covered 109)
+    ~ normalizeURL http://userid:password@example.com:8080 [line 93] (covered 113)
+    ~ normalizeURL http://userid:password@example.com:8080/ [line 93] (covered 111)
+    ~ normalizeURL http://userid@example.com [line 93] (covered 113)
+    ~ normalizeURL http://userid@example.com/ [line 93] (covered 111)
+    ~ normalizeURL http://userid@example.com:8080 [line 93] (covered 113)
+    ~ normalizeURL http://userid@example.com:8080/ [line 93] (covered 111)
+    ~ normalizeURL http://userid:password@example.com [line 93] (covered 113)
+    ~ normalizeURL http://userid:password@example.com/ [line 93] (covered 111)
+    ~ normalizeURL http://142.42.1.1/ [line 93] (covered 109)
+    ~ normalizeURL http://142.42.1.1:8080/ [line 93] (covered 109)
+    ~ normalizeURL http://➡.ws/䨹 [line 93] (covered 109)
+    ~ normalizeURL http://⌘.ws [line 93] (covered 111)
+    ~ normalizeURL http://⌘.ws/ [line 93] (covered 109)
+    ~ normalizeURL http://foo.com/blah_(wikipedia)#cite-1 [line 93] (covered 107)
+    ~ normalizeURL http://foo.com/blah_(wikipedia)_blah#cite-1 [line 93] (covered 107)
+    ~ normalizeURL http://foo.com/unicode_(✪)_in_parens [line 93] (covered 109)
+    ~ normalizeURL http://foo.com/(something)?after=parens [line 93] (covered 146)
+    ~ normalizeURL http://☺.damowmow.com/ [line 93] (covered 109)
+    ~ normalizeURL http://code.google.com/events/#&product=browser [line 93] (covered 107)
+    ~ normalizeURL http://j.mp [line 93] (covered 111)
+    ~ normalizeURL ftp://foo.bar/baz [line 93] (covered 109)
+    ~ normalizeURL http://مثال.إختبار [line 93] (covered 111)
+    ~ normalizeURL http://例子.测试 [line 93] (covered 111)
+    ~ normalizeURL http://उदाहरण.परीक्षा [line 93] (covered 111)
+    ~ normalizeURL http://1337.net [line 93] (covered 111)
+    ~ normalizeURL http://a.b-c.de [line 93] (covered 111)
+    ~ normalizeURL http://223.255.255.254 [line 93] (covered 111)
+  parse.test.ts
+    ✓ parseURL parseURL.ok.full //test [line 180] (killed 23)
+    ✓ parseURL parseURL.ok.full https://test.com [line 180] (killed 5)
+    ✓ parseURL parseURL.ok.full http://test.com?foo=bar [line 180] (killed 4)
+    ✓ parseURL parseURL.ok.full /test [line 180] (killed 2)
+    ✓ parseURL parseURL.ok.full file:///home/user [line 180] (killed 1)
+    ✓ parseURL parseURL.ok.full file:///C:/home/user [line 180] (killed 6)
+    ✓ parseURL parseURL.ok.full https://test.com/t:est [line 180] (killed 1)
+    ✓ parseURL parseURL.ok.full https://host.name\@foo.bar/meme3.php?url=http://0.0.0.0/2.svg [line 180] (killed 1)
+    ✓ parseURL parseURL.ok.full javascript:alert('hello') [line 180] (killed 11)
+    ✓ parseURL parseURL.ok.full  javascrIpt:alert('hello') [line 180] (killed 1)
+    ~ parseURL parseURL.ok.full https://domain.test:3000#owo [line 180] (covered 57)
+    ~ parseURL parseURL.ok.full Https://domain.test:3000#owo [line 180] (covered 57)
+    ~ parseURL parseURL.ok.full data:image/png;base64,aaa//bbbbbb/ccc [line 180] (covered 16)
+    ~ parseURL parseURL.ok.full blob:https://video_url [line 180] (covered 16)
+    ~ parseURL parseURL.ok.full  https://invalid.com [line 180] (covered 59)
+    ~ parseURL parseURL.ok.full  javascript:alert('hello') [line 180] (covered 16)
+    ✓ parseHost parseHost.ok.split localhost:3000 [line 193] (killed 7)
+    ✓ parseHost parseHost.ok.split google.com [line 193] (killed 2)
+    ✓ parseFilename parseFilename.ok.last-segment works [line 285] (killed 5)
+    ~ parseFilename parseFilename.ok.strict /path/to/filename.ext,false [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict /path/to/.hidden-file,false [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict /path/to/dir/,false [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict .,false [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict /,false [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict ,false [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext,false [line 290] (covered 60)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext?query=true,false [line 290] (covered 59)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext#hash,false [line 290] (covered 59)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext?query=true#hash,false [line 290] (covered 58)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext/?query=true#hash,false [line 290] (covered 58)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/dir/,false [line 290] (covered 60)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/dir/?query=true#hash,false [line 290] (covered 58)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/dir/#hash,false [line 290] (covered 59)
+    ~ parseFilename parseFilename.ok.strict http://example.com,false [line 290] (covered 61)
+    ~ parseFilename parseFilename.ok.strict ftp://example.com/path/to/filename.ext,false [line 290] (covered 60)
+    ~ parseFilename parseFilename.ok.strict file:///path/to/filename.ext,false [line 290] (covered 64)
+    ✓ parseFilename parseFilename.ok.strict /path/to/filename.ext,true [line 290] (killed 4)
+    ~ parseFilename parseFilename.ok.strict /path/to/.hidden-file,true [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict /path/to/dir/,true [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict .,true [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict /,true [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict ,true [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext,true [line 290] (covered 60)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext?query=true,true [line 290] (covered 59)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext#hash,true [line 290] (covered 59)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext?query=true#hash,true [line 290] (covered 58)
+    ✓ parseFilename parseFilename.ok.strict http://example.com/path/to/filename.ext/?query=true#hash,true [line 290] (killed 1)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/dir/,true [line 290] (covered 60)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/dir/?query=true#hash,true [line 290] (covered 58)
+    ~ parseFilename parseFilename.ok.strict http://example.com/path/to/dir/#hash,true [line 290] (covered 59)
+    ~ parseFilename parseFilename.ok.strict http://example.com,true [line 290] (covered 61)
+    ~ parseFilename parseFilename.ok.strict ftp://example.com/path/to/filename.ext,true [line 290] (covered 60)
+    ~ parseFilename parseFilename.ok.strict file:///path/to/filename.ext,true [line 290] (covered 64)
+    ~ parseFilename parseFilename.ok.strict /path/to/filename.ext/,true [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict /path/to/dir/../filename.ext,true [line 290] (covered 30)
+    ~ parseFilename parseFilename.ok.strict /path/to/dir/../filename.ext/,true [line 290] (covered 30)
+  query.test.ts
+    ✓ withQuery  with {} [line 69] (killed 3)
+    ~ withQuery / with {} [line 69] (covered 77)
+    ✓ withQuery ?test with {} [line 69] (killed 7)
+    ✓ withQuery /?test with {} [line 69] (killed 7)
+    ✓ withQuery /?test with {"foo":"0"} [line 69] (killed 1)
+    ✓ withQuery /?test with {"foo":0} [line 69] (killed 5)
+    ~ withQuery /?test with {"foo":1} [line 69] (covered 117)
+    ~ withQuery /?foo=1 with {"foo":2} [line 69] (covered 112)
+    ✓ withQuery /?foo=1 with {"foo":true,"bar":false} [line 69] (killed 3)
+    ~ withQuery /?foo=1 with {} [line 69] (covered 95)
+    ✓ withQuery /?foo=1 with {"foo":null} [line 69] (killed 1)
+    ~ withQuery / with {"email":"some email.com"} [line 69] (covered 99)
+    ~ withQuery / with {"key with space":"spaced value"} [line 69] (covered 99)
+    ~ withQuery / with {"str":"&","str2":"%26"} [line 69] (covered 99)
+    ~ withQuery /?x=1,2,3 with {"y":"1,2,3"} [line 69] (covered 114)
+    ~ withQuery http://a.com?v=1 with {"x":2} [line 69] (covered 148)
+    ~ withQuery / with {"json":"{\"test\":[\"content\"]}"} [line 69] (covered 99)
+    ✓ withQuery / with {"param":["3",""]} [line 69] (killed 5)
+    ~ withQuery / with {"param":["","3"]} [line 69] (covered 102)
+    ~ withQuery / with {"param":{"a":{"nested":{"object":123}}}} [line 69] (covered 99)
+    ~ withQuery / with {"param":{"a":[{"obj":1},{"obj":2}]}} [line 69] (covered 99)
+    ~ withQuery / with {"param":{"a":[{"obj":[1,2,3]}]}} [line 69] (covered 99)
+    ✓ withQuery / with {"a":"X","b[]":[],"c":"Y"} [line 69] (killed 1)
+    ✘ filterQuery /foo filter "bar" [line 84] (covered 0)
+    ~ filterQuery /foo?bar=1 filter "bar" [line 84] (covered 92)
+    ~ filterQuery /foo?bar=1&baz=2 filter "bar" [line 84] (covered 114)
+    ~ getQuery http://foo.com/foo?test=123&unicode=%E5%A5%BD [line 107] (covered 93)
+    ✓ getQuery http://foo.com/?param=3&param= [line 107] (killed 2)
+    ~ getQuery http://foo.com/?param=&param=3 [line 107] (covered 98)
+    ~ getQuery http://foo.com/?param= [line 107] (covered 94)
+    ✓ getQuery http://foo.com/?param=&param=2&param=3 [line 107] (killed 3)
+    ~ getQuery http://foo.com/?param=%7B%22a%22:%5B%7B%22obj%22:%5B1,2,3%5D%7D%5D%7D [line 107] (covered 93)
+    ~ getQuery http://foo.com/?toString=foo [line 107] (covered 93)
+  resolve.test.ts
+    ✘ resolveURL [] -> '' [line 15] (covered 0)
+    ✘ resolveURL [ '/' ] -> '/' [line 15] (covered 0)
+    ✘ resolveURL [ '/a' ] -> '/a' [line 15] (covered 0)
+    ~ resolveURL [ 'a', 'b' ] -> 'a/b' [line 15] (covered 51)
+    ~ resolveURL [ 'a', 'b/', 'c' ] -> 'a/b/c' [line 15] (covered 51)
+    ~ resolveURL [ 'a', 'b/', '/c' ] -> 'a/b/c' [line 15] (covered 51)
+    ~ resolveURL [ '/a?foo=bar#123', 'b/', 'c/' ] -> '/a/b/c/?foo=bar#123' [line 15] (covered 53)
+    ~ resolveURL [ 'http://foo.com', 'a' ] -> 'http://foo.com/a' [line 15] (covered 85)
+    ✓ resolveURL [ 'a?x=1', 'b?y=2&y=3&z=4' ] -> 'a/b?x=1&y=2&y=3&z=4' [line 15] (killed 5)
+    ✘ resolveURL invalid URL (null) [line 19] (covered 0)
+    ✘ resolveURL invalid URL (array) [line 25] (covered 0)
+    ✘ resolveURL no arguments [line 31] (covered 0)
+  trailing-slash.test.ts
+    ✘ withTrailingSlash, queryParams: false [line 16] (covered 0)
+    ✘ withTrailingSlash, queryParams: false bar [line 16] (covered 0)
+    ✘ withTrailingSlash, queryParams: false bar#abc [line 16] (covered 0)
+    ✘ withTrailingSlash, queryParams: false bar/ [line 16] (covered 0)
+    ✘ withTrailingSlash, queryParams: false foo?123 [line 16] (covered 0)
+    ✘ withTrailingSlash, queryParams: false foo/?123 [line 16] (covered 0)
+    ✘ withTrailingSlash, queryParams: false foo/?123#abc [line 16] (covered 0)
+    ✘ withTrailingSlash, queryParams: false falsy value [line 21] (covered 0)
+    ✘ withTrailingSlash, queryParams: true [line 40] (covered 0)
+    ✘ withTrailingSlash, queryParams: true bar [line 40] (covered 0)
+    ✘ withTrailingSlash, queryParams: true bar/ [line 40] (covered 0)
+    ✘ withTrailingSlash, queryParams: true foo?123 [line 40] (covered 0)
+    ✘ withTrailingSlash, queryParams: true foo/?123 [line 40] (covered 0)
+    ✘ withTrailingSlash, queryParams: true foo?123#abc [line 40] (covered 0)
+    ✘ withTrailingSlash, queryParams: true /#abc [line 40] (covered 0)
+    ✘ withTrailingSlash, queryParams: true #abc [line 40] (covered 0)
+    ✘ withTrailingSlash, queryParams: true # [line 40] (covered 0)
+    ✘ withTrailingSlash, queryParams: true falsy value [line 45] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false / [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false bar [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false bar#abc [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false bar/#abc [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false foo?123 [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false foo/?123 [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false foo/?123#abc [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false foo/?k=v [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false foo/?k=/ [line 65] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: false falsy value [line 70] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true / [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true bar [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true bar/ [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true bar#abc [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true bar/#abc [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true foo?123 [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true foo/?123 [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true foo/?123#abc [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true foo/?k=123 [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true foo?k=/ [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true foo/?k=/ [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true foo/?k=/&x=y#abc [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true /a/#abc [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true /#abc [line 95] (covered 0)
+    ✘ withoutTrailingSlash, queryParams: true falsy value [line 100] (covered 0)
+  url.test.ts
+    ✓ $URL getters [line 5] (killed 10)
+    ~ $URL append [line 36] (covered 123)
+    ~ $URL throws error if appending with another url with protocol [line 49] (covered 78)
+    ✘ $URL constructor errors null throw [line 71] (covered 0)
+    ✘ $URL constructor errors 123 throw [line 71] (covered 0)
+    ✘ $URL constructor errors [object Object] throw [line 71] (covered 0)
+  utilities.test.ts
+    ✘ hasProtocol // [line 51] (covered 0)
+    ✘ hasProtocol /// [line 51] (covered 0)
+    ✘ hasProtocol C:/test [line 51] (covered 0)
+    ✘ hasProtocol /test [line 51] (covered 0)
+    ✘ hasProtocol custom:/ [line 51] (covered 0)
+    ✘ hasProtocol https:// [line 51] (covered 0)
+    ✘ hasProtocol https://test.com [line 51] (covered 0)
+    ✘ hasProtocol file:///home/user [line 51] (covered 0)
+    ✘ hasProtocol https:\/foo.com [line 51] (covered 0)
+    ✘ hasProtocol tel: [line 51] (covered 0)
+    ✘ hasProtocol javascript:alert(true) [line 51] (covered 0)
+    ✘ hasProtocol  javascript:alert(true) [line 51] (covered 0)
+    ✘ hasProtocol  javascript:alert(true) [line 51] (covered 0)
+    ✘ hasProtocol  https:// [line 51] (covered 0)
+    ✘ hasProtocol tel:123456 [line 51] (covered 0)
+    ✘ hasProtocol mailto:support@example.com [line 51] (covered 0)
+    ✘ hasProtocol //test.com [line 51] (covered 0)
+    ✘ hasProtocol ///test.com [line 51] (covered 0)
+    ✘ hasProtocol /	//test.com [line 51] (covered 0)
+    ✘ hasProtocol /\/test.com [line 51] (covered 0)
+    ✘ hasProtocol /\localhost// [line 51] (covered 0)
+    ✘ isScriptProtocol blob: [line 73] (covered 0)
+    ✘ isScriptProtocol data: [line 73] (covered 0)
+    ✘ isScriptProtocol javascript: [line 73] (covered 0)
+    ✘ isScriptProtocol javaScript: [line 73] (covered 0)
+    ✘ isScriptProtocol vbscript: [line 73] (covered 0)
+    ✘ isScriptProtocol  vbscript: [line 73] (covered 0)
+    ✘ isRelative / [line 88] (covered 0)
+    ✘ isRelative .// [line 88] (covered 0)
+    ✘ isRelative ../test [line 88] (covered 0)
+    ✘ isRelative https:// [line 88] (covered 0)
+    ✓ stringifyParsedURL stringifyParsedURL.ok.roundtrip .#hash [line 128] (killed 4)
+    ✓ stringifyParsedURL stringifyParsedURL.ok.roundtrip .?foo=123 [line 128] (killed 3)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip ./?foo=123#hash [line 128] (covered 37)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip /test?query=123#hash [line 128] (covered 37)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip test?query=123#hash [line 128] (covered 37)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip /%c [line 128] (covered 37)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip /% [line 128] (covered 37)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip //test.com [line 128] (covered 37)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip http://foo.com/test?query=123#hash [line 128] (covered 37)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip http://localhost:3000 [line 128] (covered 37)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip http://my_email%40gmail.com:password@www.my_site.com [line 128] (covered 37)
+    ~ stringifyParsedURL stringifyParsedURL.ok.roundtrip /test?query=123,123#hash, test [line 128] (covered 37)
+    ✓ stringifyParsedURL stringifyParsedURL.ok.roundtrip [object Object] [line 128] (killed 3)
+    ✘ withHttp https://example.com [line 151] (covered 0)
+    ✘ withHttp ftp://example.com/test?foo [line 151] (covered 0)
+    ✘ withHttp https://foo.com/test?query=123#hash [line 151] (covered 0)
+    ✘ withHttp file:///home/user [line 151] (covered 0)
+    ✘ withHttp foo.bar.com [line 151] (covered 0)
+    ✘ withHttps http://example.com [line 173] (covered 0)
+    ✘ withHttps ftp://example.com/test?foo [line 173] (covered 0)
+    ✘ withHttps http://foo.com/test?query=123#hash [line 173] (covered 0)
+    ✘ withHttps file:///home/user [line 173] (covered 0)
+    ✘ withHttps foo.bar.com [line 173] (covered 0)
+    ✘ withProtocol example.com [line 230] (covered 0)
+    ✘ withProtocol //example.com [line 230] (covered 0)
+    ✘ withProtocol ://example.com [line 230] (covered 0)
+    ✘ withProtocol http://example.com [line 230] (covered 0)
+    ✘ withProtocol https://example.com [line 230] (covered 0)
+    ✘ withProtocol ftp://example.com/test?foo [line 230] (covered 0)
+    ✘ withProtocol http://foo.com/test?query=123#hash [line 230] (covered 0)
+    ✘ withProtocol file:///home/user [line 230] (covered 0)
+    ✘ withProtocol tel:1234567890 [line 230] (covered 0)
+    ✘ withProtocol tel://+1234567890 [line 230] (covered 0)
+    ✘ withoutProtocol http://example.com [line 253] (covered 0)
+    ✘ withoutProtocol https://example.com [line 253] (covered 0)
+    ✘ withoutProtocol ftp://example.com/test?foo [line 253] (covered 0)
+    ✘ withoutProtocol http://foo.com/test?query=123#hash [line 253] (covered 0)
+    ✘ withoutProtocol file:///home/user [line 253] (covered 0)
+    ✘ withoutProtocol tel:1234567890 [line 253] (covered 0)
+    ✘ withoutProtocol mailto:support@example.com [line 253] (covered 0)
+    ✘ withoutProtocol skype:1234567890 [line 253] (covered 0)
+    ✘ withoutProtocol callto://+1234567890 [line 253] (covered 0)
+    ✘ isEqual /foo == /foo/ [line 271] (covered 0)
+    ✘ isEqual foo == /foo [line 271] (covered 0)
+    ✘ isEqual foo == /foo/ [line 271] (covered 0)
+    ✘ isEqual /foo%20bar/ == /foo bar [line 271] (covered 0)
+    ✘ isEqual foo == /foo {"leadingSlash":true} [line 271] (covered 0)
+    ✘ isEqual foo == foo/ {"trailingSlash":true} [line 271] (covered 0)
+    ✘ isEqual /foo%20bar/ == /foo bar {"encoding":true} [line 271] (covered 0)
+    ✓ withFragment "https://example.com" + "foo" [line 315] (killed 4)
+    ~ withFragment "https://example.com#bar" + "foo" [line 315] (covered 82)
+    ✘ withFragment "https://example.com" + "" [line 315] (covered 0)
+    ~ withFragment "https://example.com#bar" + "0" [line 315] (covered 82)
+    ~ withFragment "https://example.com#bar" + "foo bar" [line 315] (covered 82)
+    ~ withFragment "https://example.com#bar" + "foo/bar" [line 315] (covered 82)
+    ✓ withFragment "https://example.com?foo=bar" + "baz" [line 315] (killed 1)
+    ~ withoutFragment https://example.com#foo [line 346] (covered 83)
+    ~ withoutFragment https://example.com [line 346] (covered 85)
+    ~ withoutFragment /foo#bar [line 346] (covered 50)
+    ~ withoutFragment /foo/#bar [line 346] (covered 50)
+    ~ withoutFragment /foo?bar#baz [line 346] (covered 52)
+    ✓ withoutHost https://example.com [line 377] (killed 1)
+    ~ withoutHost ?foo=123#hash [line 377] (covered 26)
+    ~ withoutHost ? [line 377] (covered 27)
+    ~ withoutHost https://example.com/test?foo=123#hash [line 377] (covered 56)
+    ~ withoutHost http://localhost:8000/media/search/movie?query=drive [line 377] (covered 57)
+
+[NoCoverage] StringLiteral
+src/parse.ts:54:34
+-   export function parseURL(input = "", defaultProto?: string): ParsedURL {
++   export function parseURL(input = "Stryker was here!", defaultProto?: string): ParsedURL {
+
+[NoCoverage] StringLiteral
+src/parse.ts:59:34
+-       const [, _proto, _pathname = ""] = _specialProtoMatch;
++       const [, _proto, _pathname = "Stryker was here!"] = _specialProtoMatch;
+
+[NoCoverage] ArithmeticOperator
+src/parse.ts:72:36
+-       return defaultProto ? parseURL(defaultProto + input) : parsePath(input);
++       return defaultProto ? parseURL(defaultProto - input) : parsePath(input);
+
+[NoCoverage] StringLiteral
+src/parse.ts:75:47
+-     const [, protocol = "", auth, hostAndPath = ""] =
++     const [, protocol = "", auth, hostAndPath = "Stryker was here!"] =
+
+[NoCoverage] ArrayDeclaration
+src/parse.ts:78:62
+-         .match(/^[\s\0]*([\w+.-]{2,}:)?\/\/([^/@]+@)?(.*)/) || [];
++         .match(/^[\s\0]*([\w+.-]{2,}:)?\/\/([^/@]+@)?(.*)/) || ["Stryker was here"];
+
+[NoCoverage] StringLiteral
+src/parse.ts:81:17
+-     let [, host = "", path = ""] = hostAndPath.match(/([^#/?]*)(.*)?/) || [];
++     let [, host = "Stryker was here!", path = ""] = hostAndPath.match(/([^#/?]*)(.*)?/) || [];
+
+[NoCoverage] ArrayDeclaration
+src/parse.ts:81:73
+-     let [, host = "", path = ""] = hostAndPath.match(/([^#/?]*)(.*)?/) || [];
++     let [, host = "", path = ""] = hostAndPath.match(/([^#/?]*)(.*)?/) || ["Stryker was here"];
+
+[NoCoverage] StringLiteral
+src/parse.ts:116:35
+-   export function parsePath(input = ""): ParsedPath {
++   export function parsePath(input = "Stryker was here!"): ParsedPath {
+
+[NoCoverage] StringLiteral
+src/parse.ts:117:21
+-     const [pathname = "", search = "", hash = ""] = (
++     const [pathname = "Stryker was here!", search = "", hash = ""] = (
+
+[NoCoverage] ArrayDeclaration
+src/parse.ts:118:48
+-       input.match(/([^#?]*)(\?[^#]*)?(#.*)?/) || []
++       input.match(/([^#?]*)(\?[^#]*)?(#.*)?/) || ["Stryker was here"]
+
+[NoCoverage] StringLiteral
+src/parse.ts:138:35
+-   export function parseAuth(input = ""): ParsedAuth {
++   export function parseAuth(input = "Stryker was here!"): ParsedAuth {
+
+[NoCoverage] StringLiteral
+src/parse.ts:163:35
+-   export function parseHost(input = ""): ParsedHost {
++   export function parseHost(input = "Stryker was here!"): ParsedHost {
+
+[NoCoverage] ArrayDeclaration
+src/parse.ts:164:64
+-     const [hostname, port] = (input.match(/([^/:]*):?(\d+)?/) || []).splice(1);
++     const [hostname, port] = (input.match(/([^/:]*):?(\d+)?/) || ["Stryker was here"]).splice(1);
+
+[NoCoverage] StringLiteral
+src/parse.ts:199:29
+-         ? (parsed.protocol || "") + "//"
++         ? (parsed.protocol || "Stryker was here!") + "//"
+
+[NoCoverage] StringLiteral
+src/parse.ts:230:11
+-     input = "",
++     input = "Stryker was here!",
+
+[Survived] Regex
+src/parse.ts:56:5
+-       /^[\s\0]*(blob:|data:|javascript:|vbscript:)(.*)/i,
++       /[\s\0]*(blob:|data:|javascript:|vbscript:)(.*)/i,
+Tests ran:
+    withFragment "https://example.com" + "foo"
+    withFragment "https://example.com#bar" + "foo"
+    withFragment "https://example.com#bar" + "0"
+  and 173 more tests!
+
+
+[Survived] Regex
+src/parse.ts:56:5
+-       /^[\s\0]*(blob:|data:|javascript:|vbscript:)(.*)/i,
++       /^[\S\0]*(blob:|data:|javascript:|vbscript:)(.*)/i,
+Tests ran:
+    withFragment "https://example.com" + "foo"
+    withFragment "https://example.com#bar" + "foo"
+    withFragment "https://example.com#bar" + "0"
+  and 173 more tests!
+
+
+[Survived] Regex
+src/parse.ts:78:14
+-         .match(/^[\s\0]*([\w+.-]{2,}:)?\/\/([^/@]+@)?(.*)/) || [];
++         .match(/[\s\0]*([\w+.-]{2,}:)?\/\/([^/@]+@)?(.*)/) || [];
+Tests ran:
+    withFragment "https://example.com" + "foo"
+    withFragment "https://example.com#bar" + "foo"
+    withFragment "https://example.com#bar" + "0"
+  and 101 more tests!
+
+
+[Survived] Regex
+src/parse.ts:81:52
+-     let [, host = "", path = ""] = hostAndPath.match(/([^#/?]*)(.*)?/) || [];
++     let [, host = "", path = ""] = hostAndPath.match(/([^#/?]*)(.*)/) || [];
+Tests ran:
+    withFragment "https://example.com" + "foo"
+    withFragment "https://example.com#bar" + "foo"
+    withFragment "https://example.com#bar" + "0"
+  and 101 more tests!
+
+
+[Survived] BooleanLiteral
+src/parse.ts:96:25
+-       [protocolRelative]: !protocol,
++       [protocolRelative]: protocol,
+Tests ran:
+    withFragment "https://example.com" + "foo"
+    withFragment "https://example.com#bar" + "foo"
+    withFragment "https://example.com#bar" + "0"
+  and 101 more tests!
+
+
+[Survived] StringLiteral
+src/parse.ts:4:37
+-   const protocolRelative = Symbol.for("ufo:protocolRelative");
++   const protocolRelative = Symbol.for("");
+Ran all tests for this mutant.
+
+[NoCoverage] StringLiteral
+src/query.ts:51:22
+-     parametersString = "",
++     parametersString = "Stryker was here!",
+
+[NoCoverage] BlockStatement
+src/query.ts:65:55
+-       if (key === "__proto__" || key === "constructor") {
+-         continue;
+-       }
++       if (key === "__proto__" || key === "constructor") {}
+
+[Survived] ConditionalExpression
+src/query.ts:56:7
+-     if (parametersString[0] === "?") {
++     if (true) {
+Tests ran:
+    normalizeURL http://foo.com
+    normalizeURL http://foo.com/bar
+    normalizeURL proto://path/to
+  and 98 more tests!
+
+
+[Survived] ArrayDeclaration
+src/query.ts:60:51
+-       const s = parameter.match(/([^=]+)=?(.*)/) || [];
++       const s = parameter.match(/([^=]+)=?(.*)/) || ["Stryker was here"];
+Tests ran:
+    normalizeURL http://foo.com
+    normalizeURL http://foo.com/bar
+    normalizeURL proto://path/to
+  and 60 more tests!
+
+
+[Survived] StringLiteral
+src/query.ts:65:17
+-       if (key === "__proto__" || key === "constructor") {
++       if (key === "" || key === "constructor") {
+Tests ran:
+    normalizeURL .?foo=123
+    normalizeURL ./?foo=123#hash
+    normalizeURL /test?query=123#hash
+  and 35 more tests!
+
+
+[Survived] LogicalOperator
+src/query.ts:65:9
+-       if (key === "__proto__" || key === "constructor") {
++       if (key === "__proto__" && key === "constructor") {
+Tests ran:
+    normalizeURL .?foo=123
+    normalizeURL ./?foo=123#hash
+    normalizeURL /test?query=123#hash
+  and 35 more tests!
+
+
+[Survived] ConditionalExpression
+src/query.ts:65:9
+-       if (key === "__proto__" || key === "constructor") {
++       if (false || key === "constructor") {
+Tests ran:
+    normalizeURL .?foo=123
+    normalizeURL ./?foo=123#hash
+    normalizeURL /test?query=123#hash
+  and 35 more tests!
+
+
+[Survived] EqualityOperator
+src/query.ts:61:9
+-       if (s.length < 2) {
++       if (s.length <= 2) {
+Tests ran:
+    normalizeURL http://foo.com
+    normalizeURL http://foo.com/bar
+    normalizeURL proto://path/to
+  and 98 more tests!
+
+
+[Survived] ConditionalExpression
+src/query.ts:65:9
+-       if (key === "__proto__" || key === "constructor") {
++       if (false) {
+Tests ran:
+    normalizeURL .?foo=123
+    normalizeURL ./?foo=123#hash
+    normalizeURL /test?query=123#hash
+  and 35 more tests!
+
+
+[Survived] StringLiteral
+src/query.ts:65:40
+-       if (key === "__proto__" || key === "constructor") {
++       if (key === "__proto__" || key === "") {
+Tests ran:
+    normalizeURL .?foo=123
+    normalizeURL ./?foo=123#hash
+    normalizeURL /test?query=123#hash
+  and 35 more tests!
+
+
+[Survived] ConditionalExpression
+src/query.ts:65:32
+-       if (key === "__proto__" || key === "constructor") {
++       if (key === "__proto__" || false) {
+Tests ran:
+    normalizeURL .?foo=123
+    normalizeURL ./?foo=123#hash
+    normalizeURL /test?query=123#hash
+  and 35 more tests!
+
+
+Ran 13.59 tests per mutant on average.
+----------|------------------|----------|-----------|------------|----------|----------|
+          | % Mutation score |          |           |            |          |          |
+File      |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+----------|--------|---------|----------|-----------|------------|----------|----------|
+All files |  85.96 |   92.89 |      196 |         0 |         15 |       17 |        0 |
+ parse.ts |  86.00 |   95.56 |      129 |         0 |          6 |       15 |        0 |
+ query.ts |  85.90 |   88.16 |       67 |         0 |          9 |        2 |        0 |
+----------|--------|---------|----------|-----------|------------|----------|----------|
+[32m07:56:13 (62047) INFO JsonReporter[39m Your report can be found at: file://<work-0001>/ufo/reports/mutation/mutation.json
+[32m07:56:13 (62047) INFO MutationTestExecutor[39m Done in 11 seconds.
+real 12.66
+user 82.42
+sys 12.13

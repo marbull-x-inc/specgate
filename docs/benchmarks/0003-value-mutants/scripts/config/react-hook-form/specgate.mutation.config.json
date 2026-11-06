@@ -1,0 +1,28 @@
+{
+  "surface": {
+    "include": [
+      "src/useForm.ts",
+      "src/useFieldArray.ts",
+      "src/useWatch.ts",
+      "src/useController.ts",
+      "src/useFormContext.tsx"
+    ],
+    "mode": "exported"
+  },
+  "tests": {
+    "include": ["src/**/*.test.ts", "src/**/*.test.tsx"],
+    "adapter": "jest"
+  },
+  "tsdoc": {
+    "jsdoc": true
+  },
+  "provenance": {
+    "enabled": false
+  },
+  "output": {
+    "dir": ".specgate-mutation"
+  },
+  "mutation": {
+    "report": ["reports/mutation/mutation.json", "reports/value/value.json"]
+  }
+}

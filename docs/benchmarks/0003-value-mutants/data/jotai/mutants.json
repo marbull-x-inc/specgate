@@ -1,0 +1,1556 @@
+{
+  "schemaVersion": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "files": {
+    "src/vanilla/utils/constants.ts": {
+      "sha256": "5d9e199c4e7b73b88233808ae3adfec5ba9b49bbc0957d6f2dda6dc4f91b585c"
+    },
+    "src/vanilla/utils/splitAtom.ts": {
+      "sha256": "2f82d9e4abdb6fa5cbd5cb0bf1b17ffd2ff1585bde5184111dd39293cd7a1c00"
+    },
+    "src/vanilla/utils/atomWithDefault.ts": {
+      "sha256": "64ca17468dd38bc241dfe1381bec7033bfd8e0e21390b00c0dde26399b64d46e"
+    },
+    "src/vanilla/utils/atomWithStorage.ts": {
+      "sha256": "360fd443215eee505bbd51c999c2aa30f5a8ce8d09708172a1499556fea8b98b"
+    },
+    "src/vanilla/utils/unwrap.ts": {
+      "sha256": "9c5cfbcf77ad4b6cd8fdb772a55bd372797662e6d2c9fab440768ada664ae5d2"
+    },
+    "src/vanilla/utils/atomWithRefresh.ts": {
+      "sha256": "772064a5b38c87917f36d7b3e868dc6c99e6bc0b52f3f66e52d2d5cf28aba8a3"
+    },
+    "src/vanilla/utils/atomWithLazy.ts": {
+      "sha256": "d205e82495de0b1112adaea7158308a675dd8fbed973423061acd574d80541c6"
+    }
+  },
+  "mutants": [
+    {
+      "id": "value-1",
+      "unit": "atomWithDefault",
+      "file": "src/vanilla/utils/atomWithDefault.ts",
+      "line": 25,
+      "column": 32,
+      "endLine": 25,
+      "endColumn": 44,
+      "start": 1129,
+      "end": 1141,
+      "kind": "string",
+      "original": "'production'",
+      "replacement": "'production_x'",
+      "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "production"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithDefault.ts",
+          "line": 19,
+          "endLine": 47,
+          "callers": []
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+        "tests/vanilla/utils/atomWithDefault.test.ts"
+      ]
+    },
+    {
+      "id": "value-2",
+      "unit": "atomWithLazy",
+      "file": "src/vanilla/utils/atomWithLazy.ts",
+      "line": 14,
+      "column": 28,
+      "endLine": 14,
+      "endColumn": 34,
+      "start": 731,
+      "end": 737,
+      "kind": "string",
+      "original": "'init'",
+      "replacement": "'init_x'",
+      "description": "`Object.defineProperty(a, 'init', { get(…`: 'init' → 'init_x'",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithLazy.ts",
+          "line": 9,
+          "endLine": 20,
+          "callers": []
+        }
+      ],
+      "tests": [
+        "tests/vanilla/utils/atomWithLazy.test.ts"
+      ]
+    },
+    {
+      "id": "value-3",
+      "unit": "atomWithRefresh",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 32,
+      "column": 28,
+      "endLine": 32,
+      "endColumn": 29,
+      "start": 996,
+      "end": 997,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`atom(0)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithRefresh.ts",
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
+      ]
+    },
+    {
+      "id": "value-4",
+      "unit": "atomWithRefresh",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 33,
+      "column": 32,
+      "endLine": 33,
+      "endColumn": 44,
+      "start": 1030,
+      "end": 1042,
+      "kind": "string",
+      "original": "'production'",
+      "replacement": "'production_x'",
+      "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "production"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithRefresh.ts",
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
+      ]
+    },
+    {
+      "id": "value-5",
+      "unit": "atomWithRefresh",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 42,
+      "column": 27,
+      "endLine": 42,
+      "endColumn": 28,
+      "start": 1257,
+      "end": 1258,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`args.length === 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithRefresh.ts",
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
+      ]
+    },
+    {
+      "id": "value-6",
+      "unit": "atomWithRefresh",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 43,
+      "column": 37,
+      "endLine": 43,
+      "endColumn": 38,
+      "start": 1298,
+      "end": 1299,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`c + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithRefresh.ts",
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
+      ]
+    },
+    {
+      "id": "value-7",
+      "unit": "atomWithRefresh",
+      "file": "src/vanilla/utils/atomWithRefresh.ts",
+      "line": 46,
+      "column": 43,
+      "endLine": 46,
+      "endColumn": 55,
+      "start": 1409,
+      "end": 1421,
+      "kind": "string",
+      "original": "'production'",
+      "replacement": "'production_x'",
+      "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithRefresh.ts",
+          "line": 28,
+          "endLine": 51,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 19,
+              "endLine": 22
+            },
+            {
+              "file": "src/vanilla/utils/atomWithRefresh.ts",
+              "line": 24,
+              "endLine": 26
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithRefresh.test.tsx",
+        "tests/vanilla/utils/atomWithRefresh.test.ts"
+      ]
+    },
+    {
+      "id": "value-8",
+      "unit": "createJSONStorage",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 111,
+      "column": 36,
+      "endLine": 111,
+      "endColumn": 48,
+      "start": 3587,
+      "end": 3599,
+      "kind": "string",
+      "original": "'production'",
+      "replacement": "'production_x'",
+      "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithStorage.ts",
+          "line": 105,
+          "endLine": 197,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 93,
+              "endLine": 93
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 95,
+              "endLine": 98
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 100,
+              "endLine": 103
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 227,
+              "endLine": 278,
+              "callers": [
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 209,
+                  "endLine": 218
+                },
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 220,
+                  "endLine": 225
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx"
+      ]
+    },
+    {
+      "id": "value-9",
+      "unit": "createJSONStorage",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 186,
+      "column": 31,
+      "endLine": 186,
+      "endColumn": 40,
+      "start": 5620,
+      "end": 5629,
+      "kind": "string",
+      "original": "'storage'",
+      "replacement": "'storage_x'",
+      "description": "`window.addEventListener('storage', stor…`: 'storage' → 'storage_x'",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithStorage.ts",
+          "line": 105,
+          "endLine": 197,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 93,
+              "endLine": 93
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 95,
+              "endLine": 98
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 100,
+              "endLine": 103
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 227,
+              "endLine": 278,
+              "callers": [
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 209,
+                  "endLine": 218
+                },
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 220,
+                  "endLine": 225
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx"
+      ]
+    },
+    {
+      "id": "value-10",
+      "unit": "createJSONStorage",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 188,
+      "column": 36,
+      "endLine": 188,
+      "endColumn": 45,
+      "start": 5709,
+      "end": 5718,
+      "kind": "string",
+      "original": "'storage'",
+      "replacement": "'storage_x'",
+      "description": "`window.removeEventListener('storage', s…`: 'storage' → 'storage_x'",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithStorage.ts",
+          "line": 105,
+          "endLine": 197,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 93,
+              "endLine": 93
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 95,
+              "endLine": 98
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 100,
+              "endLine": 103
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 227,
+              "endLine": 278,
+              "callers": [
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 209,
+                  "endLine": 218
+                },
+                {
+                  "file": "src/vanilla/utils/atomWithStorage.ts",
+                  "line": 220,
+                  "endLine": 225
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx"
+      ]
+    },
+    {
+      "id": "value-11",
+      "unit": "atomWithStorage",
+      "file": "src/vanilla/utils/atomWithStorage.ts",
+      "line": 242,
+      "column": 32,
+      "endLine": 242,
+      "endColumn": 44,
+      "start": 7689,
+      "end": 7701,
+      "kind": "string",
+      "original": "'production'",
+      "replacement": "'production_x'",
+      "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "production"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/vanilla/utils/atomWithStorage.ts",
+          "line": 227,
+          "endLine": 278,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 209,
+              "endLine": 218
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 220,
+              "endLine": 225
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx"
+      ]
+    },
+    {
+      "id": "value-12",
+      "unit": "atomWithDefault",
+      "file": "src/vanilla/utils/constants.ts",
+      "line": 6,
+      "column": 28,
+      "endLine": 6,
+      "endColumn": 40,
+      "start": 291,
+      "end": 303,
+      "kind": "string",
+      "original": "'production'",
+      "replacement": "'production_x'",
+      "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+      "readers": [
+        {
+          "file": "src/react/utils/useResetAtom.ts",
+          "line": 13,
+          "endLine": 20,
+          "callers": []
+        },
+        {
+          "file": "src/vanilla/utils/atomWithDefault.ts",
+          "line": 19,
+          "endLine": 47,
+          "callers": []
+        },
+        {
+          "file": "src/vanilla/utils/atomWithReset.ts",
+          "line": 18,
+          "endLine": 35,
+          "callers": []
+        },
+        {
+          "file": "src/vanilla/utils/atomWithStorage.ts",
+          "line": 227,
+          "endLine": 278,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 209,
+              "endLine": 218
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 220,
+              "endLine": 225
+            }
+          ]
+        }
+      ],
+      "names": [
+        "RESET"
+      ],
+      "tests": [
+        "tests/react/utils/useResetAtom.test.tsx",
+        "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+        "tests/vanilla/utils/atomWithDefault.test.ts",
+        "tests/vanilla/utils/atomWithReset.test.ts"
+      ]
+    },
+    {
+      "id": "value-13",
+      "unit": "atomWithDefault",
+      "file": "src/vanilla/utils/constants.ts",
+      "line": 6,
+      "column": 43,
+      "endLine": 6,
+      "endColumn": 50,
+      "start": 306,
+      "end": 313,
+      "kind": "string",
+      "original": "'RESET'",
+      "replacement": "'RESET_x'",
+      "description": "`process.env.NODE_ENV !== 'production' ?…`: 'RESET' → 'RESET_x'",
+      "readers": [
+        {
+          "file": "src/react/utils/useResetAtom.ts",
+          "line": 13,
+          "endLine": 20,
+          "callers": []
+        },
+        {
+          "file": "src/vanilla/utils/atomWithDefault.ts",
+          "line": 19,
+          "endLine": 47,
+          "callers": []
+        },
+        {
+          "file": "src/vanilla/utils/atomWithReset.ts",
+          "line": 18,
+          "endLine": 35,
+          "callers": []
+        },
+        {
+          "file": "src/vanilla/utils/atomWithStorage.ts",
+          "line": 227,
+          "endLine": 278,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 209,
+              "endLine": 218
+            },
+            {
+              "file": "src/vanilla/utils/atomWithStorage.ts",
+              "line": 220,
+              "endLine": 225
+            }
+          ]
+        }
+      ],
+      "names": [
+        "RESET"
+      ],
+      "tests": [
+        "tests/react/utils/useResetAtom.test.tsx",
+        "tests/react/vanilla-utils/atomWithDefault.test.tsx",
+        "tests/react/vanilla-utils/atomWithStorage.test.tsx",
+        "tests/vanilla/utils/atomWithDefault.test.ts",
+        "tests/vanilla/utils/atomWithReset.test.ts"
+      ]
+    },
+    {
+      "id": "value-14",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 94,
+      "column": 25,
+      "endLine": 94,
+      "endColumn": 26,
+      "start": 3345,
+      "end": 3346,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`index < 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-15",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 113,
+      "column": 25,
+      "endLine": 113,
+      "endColumn": 26,
+      "start": 4125,
+      "end": 4126,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`index < 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-16",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 121,
+      "column": 30,
+      "endLine": 121,
+      "endColumn": 31,
+      "start": 4524,
+      "end": 4525,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`arr.slice(0, index)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-17",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 123,
+      "column": 38,
+      "endLine": 123,
+      "endColumn": 39,
+      "start": 4598,
+      "end": 4599,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`index + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-18",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 151,
+      "column": 36,
+      "endLine": 151,
+      "endColumn": 48,
+      "start": 5418,
+      "end": 5430,
+      "kind": "string",
+      "original": "'production'",
+      "replacement": "'production_x'",
+      "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "production"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-19",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 162,
+      "column": 22,
+      "endLine": 162,
+      "endColumn": 30,
+      "start": 5803,
+      "end": 5811,
+      "kind": "string",
+      "original": "'remove'",
+      "replacement": "'remove_x'",
+      "description": "`case 'remove': { const index = get(spli…`: 'remove' → 'remove_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "remove"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-20",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 164,
+      "column": 32,
+      "endLine": 164,
+      "endColumn": 33,
+      "start": 5917,
+      "end": 5918,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`index >= 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-21",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 167,
+      "column": 36,
+      "endLine": 167,
+      "endColumn": 37,
+      "start": 6077,
+      "end": 6078,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`arr.slice(0, index)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-22",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 168,
+      "column": 44,
+      "endLine": 168,
+      "endColumn": 45,
+      "start": 6131,
+      "end": 6132,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`index + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-23",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 173,
+      "column": 22,
+      "endLine": 173,
+      "endColumn": 30,
+      "start": 6241,
+      "end": 6249,
+      "kind": "string",
+      "original": "'insert'",
+      "replacement": "'insert_x'",
+      "description": "`case 'insert': { const index = action.b…`: 'insert' → 'insert_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "insert"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-24",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 177,
+      "column": 32,
+      "endLine": 177,
+      "endColumn": 33,
+      "start": 6440,
+      "end": 6441,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`index >= 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-25",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 180,
+      "column": 36,
+      "endLine": 180,
+      "endColumn": 37,
+      "start": 6600,
+      "end": 6601,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`arr.slice(0, index)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-26",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 187,
+      "column": 22,
+      "endLine": 187,
+      "endColumn": 28,
+      "start": 6796,
+      "end": 6802,
+      "kind": "string",
+      "original": "'move'",
+      "replacement": "'move_x'",
+      "description": "`case 'move': { const index1 = get(split…`: 'move' → 'move_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "move"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-27",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 192,
+      "column": 33,
+      "endLine": 192,
+      "endColumn": 34,
+      "start": 7067,
+      "end": 7068,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`index1 >= 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-28",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 192,
+      "column": 48,
+      "endLine": 192,
+      "endColumn": 49,
+      "start": 7082,
+      "end": 7083,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`index2 >= 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-29",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 196,
+      "column": 38,
+      "endLine": 196,
+      "endColumn": 39,
+      "start": 7289,
+      "end": 7290,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`arr.slice(0, index1)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-30",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 197,
+      "column": 47,
+      "endLine": 197,
+      "endColumn": 48,
+      "start": 7347,
+      "end": 7348,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`index1 + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-31",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 203,
+      "column": 38,
+      "endLine": 203,
+      "endColumn": 39,
+      "start": 7611,
+      "end": 7612,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`arr.slice(0, index2)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-32",
+      "unit": "splitAtom",
+      "file": "src/vanilla/utils/splitAtom.ts",
+      "line": 206,
+      "column": 47,
+      "endLine": 206,
+      "endColumn": 48,
+      "start": 7761,
+      "end": 7762,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`index1 + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/splitAtom.ts",
+          "line": 56,
+          "endLine": 221,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 46,
+              "endLine": 49
+            },
+            {
+              "file": "src/vanilla/utils/splitAtom.ts",
+              "line": 51,
+              "endLine": 54
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/react/vanilla-utils/splitAtom.test.tsx"
+      ]
+    },
+    {
+      "id": "value-33",
+      "unit": "unwrap",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 56,
+      "column": 32,
+      "endLine": 56,
+      "endColumn": 33,
+      "start": 2434,
+      "end": 2435,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`atom(0)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/unwrap.ts",
+          "line": 40,
+          "endLine": 144,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 22,
+              "endLine": 24
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 26,
+              "endLine": 29
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 31,
+              "endLine": 33
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 35,
+              "endLine": 38
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/vanilla/utils/types.test.tsx",
+        "tests/vanilla/utils/unwrap.test.ts"
+      ]
+    },
+    {
+      "id": "value-34",
+      "unit": "unwrap",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 60,
+      "column": 51,
+      "endLine": 60,
+      "endColumn": 52,
+      "start": 2658,
+      "end": 2659,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`c + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/unwrap.ts",
+          "line": 40,
+          "endLine": 144,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 22,
+              "endLine": 24
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 26,
+              "endLine": 29
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 31,
+              "endLine": 33
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 35,
+              "endLine": 38
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/vanilla/utils/types.test.tsx",
+        "tests/vanilla/utils/unwrap.test.ts"
+      ]
+    },
+    {
+      "id": "value-35",
+      "unit": "unwrap",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 64,
+      "column": 36,
+      "endLine": 64,
+      "endColumn": 48,
+      "start": 2717,
+      "end": 2729,
+      "kind": "string",
+      "original": "'production'",
+      "replacement": "'production_x'",
+      "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+      "decision": {
+        "kind": "match",
+        "values": [
+          "production"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/vanilla/utils/unwrap.ts",
+          "line": 40,
+          "endLine": 144,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 22,
+              "endLine": 24
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 26,
+              "endLine": 29
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 31,
+              "endLine": 33
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 35,
+              "endLine": 38
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/vanilla/utils/types.test.tsx",
+        "tests/vanilla/utils/unwrap.test.ts"
+      ]
+    },
+    {
+      "id": "value-36",
+      "unit": "unwrap",
+      "file": "src/vanilla/utils/unwrap.ts",
+      "line": 121,
+      "column": 36,
+      "endLine": 121,
+      "endColumn": 48,
+      "start": 4611,
+      "end": 4623,
+      "kind": "string",
+      "original": "'production'",
+      "replacement": "'production_x'",
+      "description": "`process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'",
+      "readers": [
+        {
+          "file": "src/vanilla/utils/unwrap.ts",
+          "line": 40,
+          "endLine": 144,
+          "callers": [
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 22,
+              "endLine": 24
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 26,
+              "endLine": 29
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 31,
+              "endLine": 33
+            },
+            {
+              "file": "src/vanilla/utils/unwrap.ts",
+              "line": 35,
+              "endLine": 38
+            }
+          ]
+        }
+      ],
+      "tests": [
+        "tests/vanilla/utils/types.test.tsx",
+        "tests/vanilla/utils/unwrap.test.ts"
+      ]
+    }
+  ]
+}

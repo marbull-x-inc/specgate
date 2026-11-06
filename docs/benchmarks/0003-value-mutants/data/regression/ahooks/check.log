@@ -1,0 +1,13 @@
+specgate check (advisory): 3 units, 11 guarantees, 7 linked tests
+  fail 4 · warn 3 · info 0
+  ❌ [guarantee-no-test] packages/hooks/src/useCounter/index.ts:33 useCounter.ok.inc has no test naming it
+  ❌ [guarantee-no-test] packages/hooks/src/useCounter/index.ts:35 useCounter.ok.set has no test naming it
+  ❌ [guarantee-no-test] packages/hooks/src/useCounter/index.ts:36 useCounter.ok.reset has no test naming it
+  ❌ [guarantee-no-test] packages/hooks/src/useToggle/index.ts:13 useToggle.ok.set has no test naming it
+  ⚠️ [mutant-survived] packages/hooks/src/useBoolean/index.ts:27 useBoolean: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/hooks/src/useCounter/index.ts:38 useCounter: the default `initialValue` 0 → 1 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/hooks/src/useCounter/index.ts:62 useCounter: the default `delta` 1 → 2 survived; no linked test fails when the code changes like this
+
+wrote <work-0001>/ahooks/.specgate-regression/report.json
+      <work-0001>/ahooks/.specgate-regression/summary.md
+      <work-0001>/ahooks/.specgate-regression/report.sarif

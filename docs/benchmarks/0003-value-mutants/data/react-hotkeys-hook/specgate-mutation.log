@@ -1,0 +1,129 @@
+specgate check (advisory): 8 units, 20 guarantees, 140 linked tests
+  fail 5 · warn 117 · info 1
+  ❌ [operation-no-guarantee] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:50 isReadonlyArray has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:56 isHotkeyPressed.ok.key-forms has no test naming it
+  ❌ [operation-no-guarantee] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:65 pushToCurrentlyPressedKeys has no guarantee (no doc comment)
+  ❌ [operation-no-guarantee] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:86 removeFromCurrentlyPressedKeys has no guarantee (no doc comment)
+  ❌ [guarantee-no-test] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:6 useRecordHotkeys.ok.use-key-true has no test naming it
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:16 HotkeysProvider: ArrayDeclaration mutant in HotkeysContext: `["Stryker was here"]` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:16 HotkeysProvider: `hotkeys: []` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:17 HotkeysProvider: ArrayDeclaration mutant in HotkeysContext: `["Stryker was here"]` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:18 HotkeysProvider: `toggleScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:19 HotkeysProvider: `enableScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:19 HotkeysProvider: `disableScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:50 HotkeysProvider: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:56 HotkeysProvider: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:61 HotkeysProvider: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:61 HotkeysProvider: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:63 HotkeysProvider: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:63 HotkeysProvider: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:63 HotkeysProvider: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:63 HotkeysProvider: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:63 HotkeysProvider: `prev.includes('*')`: '*' → '*_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:64 HotkeysProvider: ArrayDeclaration mutant: `[]` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:69 HotkeysProvider: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:73 HotkeysProvider: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:76 HotkeysProvider: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:77 HotkeysProvider: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:66 pushToCurrentlyPressedKeys: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:73 pushToCurrentlyPressedKeys: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:73 pushToCurrentlyPressedKeys: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:73 pushToCurrentlyPressedKeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:74 pushToCurrentlyPressedKeys: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:75 pushToCurrentlyPressedKeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:75 pushToCurrentlyPressedKeys: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:76 pushToCurrentlyPressedKeys: MethodExpression mutant: `key.toUpperCase()` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:87 removeFromCurrentlyPressedKeys: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:94 removeFromCurrentlyPressedKeys: BlockStatement mutant (the match "meta"): `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:94 removeFromCurrentlyPressedKeys: ConditionalExpression mutant (the match "meta"): `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:94 removeFromCurrentlyPressedKeys: StringLiteral mutant (the match "meta"): `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:95 removeFromCurrentlyPressedKeys: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:17 useHotkeys: BlockStatement mutant in a helper it calls: `{}` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:18 useHotkeys: CallExpression mutant in a helper it calls: `;` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:19 useHotkeys: CallExpression mutant in a helper it calls: `;` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:20 useHotkeys: CallExpression mutant in a helper it calls: `;` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:23 useHotkeys: ConditionalExpression mutant in useSafeLayoutEffect: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:23 useHotkeys: ConditionalExpression mutant in useSafeLayoutEffect: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:23 useHotkeys: EqualityOperator mutant in useSafeLayoutEffect: `typeof window === 'undefined'` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:23 useHotkeys: StringLiteral mutant in useSafeLayoutEffect: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:57 useHotkeys: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:58 useHotkeys: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:60 useHotkeys: BooleanLiteral mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:75 useHotkeys: LogicalOperator mutant: `_deps && []` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:75 useHotkeys: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:78 useHotkeys: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:98 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:112 useHotkeys: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:112 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:116 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:116 useHotkeys: LogicalOperator mutant: `(rootNode instanceof Document || rootNode instanceof Shadow…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:116 useHotkeys: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:116 useHotkeys: LogicalOperator mutant: `rootNode instanceof Document || rootNode instanceof ShadowR…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:116 useHotkeys: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:116 useHotkeys: LogicalOperator mutant: `rootNode instanceof Document && rootNode instanceof ShadowR…` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:117 useHotkeys: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:117 useHotkeys: EqualityOperator mutant: `rootNode.activeElement === ref` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:118 useHotkeys: BooleanLiteral mutant: `ref.contains(rootNode.activeElement)` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:119 useHotkeys: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:120 useHotkeys: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:125 useHotkeys: BooleanLiteral mutant: `memoisedOptions?.enableOnContentEditable` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:125 useHotkeys: OptionalChaining mutant: `memoisedOptions.enableOnContentEditable` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:125 useHotkeys: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:125 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:125 useHotkeys: OptionalChaining mutant: `(e.target as HTMLElement).isContentEditable` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:150 useHotkeys: `memoisedOptions?.sequenceTimeoutMs ?? 1…`: 1000 → 1001 survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:161 useHotkeys: OptionalChaining mutant: `hotkey.keys[recordedKeys.length - 1]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:163 useHotkeys: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:164 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:164 useHotkeys: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:164 useHotkeys: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:165 useHotkeys: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:171 useHotkeys: OptionalChaining mutant: `hotkey.keys.length` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:174 useHotkeys: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:174 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:174 useHotkeys: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:175 useHotkeys: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:178 useHotkeys: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:189 useHotkeys: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:189 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:202 useHotkeys: BooleanLiteral mutant: `isKeyUp` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:202 useHotkeys: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:202 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:211 useHotkeys: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:211 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:216 useHotkeys: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:218 useHotkeys: OptionalChaining mutant: `memoisedOptions.keydown` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:218 useHotkeys: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:224 useHotkeys: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:224 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:229 useHotkeys: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:234 useHotkeys: BooleanLiteral mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:238 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:238 useHotkeys: LogicalOperator mutant: `ref && _options?.document` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:262 useHotkeys: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:262 useHotkeys: `domNode.removeEventListener('keyup', ha…`: 'keyup' → 'keyup_x' survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:281 useHotkeys: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:282 useHotkeys: BlockStatement mutant: `{}` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:282 useHotkeys: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:282 useHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useHotkeys.ts:283 useHotkeys: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:12 useRecordHotkeys: BooleanLiteral mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:12 useRecordHotkeys: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:18 useRecordHotkeys: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:22 useRecordHotkeys: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:22 useRecordHotkeys: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:35 useRecordHotkeys: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:36 useRecordHotkeys: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:46 useRecordHotkeys: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:51 useRecordHotkeys: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:56 useRecordHotkeys: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:58 useRecordHotkeys: BlockStatement mutant: `{}` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:59 useRecordHotkeys: CallExpression mutant: `;` is not run by any test
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:60 useRecordHotkeys: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:63 useRecordHotkeys: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:63 useRecordHotkeys: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
+
+wrote <work>/react-hotkeys-hook/.specgate-mutation/report.json
+      <work>/react-hotkeys-hook/.specgate-mutation/summary.md
+      <work>/react-hotkeys-hook/.specgate-mutation/report.sarif
