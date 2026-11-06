@@ -41,7 +41,7 @@ echo "== specgate mutants"
 
 echo "== runner (concurrency $runners)"
 (cd "$dir" && /usr/bin/time -p node "$repo/scripts/value-mutants/run.ts" --mutants .specgate/mutants.json \
-  --stryker "$cwd/reports/mutation/mutation.json" --command "cd '$cwd' && $test" \
+  --stryker "$cwd/reports/mutation/mutation.json" --cwd "$cwd" --command "$test" \
   --out reports/value/value.json --concurrency "$runners") > "$data/runner.log" 2>&1
 echo "runner exit $?"
 

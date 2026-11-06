@@ -23,7 +23,14 @@
       "kind": "string",
       "original": "'-h, --help'",
       "replacement": "'-h, --help_x'",
-      "description": "`this.globalCommand.option('-h, --help',…`: '-h, --help' → '-h, --help_x'"
+      "description": "`this.globalCommand.option('-h, --help',…`: '-h, --help' → '-h, --help_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 117,
+          "endLine": 122
+        }
+      ]
     },
     {
       "id": "value-2",
@@ -38,7 +45,14 @@
       "kind": "string",
       "original": "'Display this message'",
       "replacement": "'Display this message_x'",
-      "description": "`this.globalCommand.option('-h, --help',…`: 'Display this message' → 'Display this message_x'"
+      "description": "`this.globalCommand.option('-h, --help',…`: 'Display this message' → 'Display this message_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 117,
+          "endLine": 122
+        }
+      ]
     },
     {
       "id": "value-3",
@@ -53,7 +67,14 @@
       "kind": "string",
       "original": "'-v, --version'",
       "replacement": "'-v, --version_x'",
-      "description": "the default `customFlags` '-v, --version' → '-v, --version_x'"
+      "description": "the default `customFlags` '-v, --version' → '-v, --version_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 131,
+          "endLine": 135
+        }
+      ]
     },
     {
       "id": "value-4",
@@ -68,7 +89,24 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`argv[1]`: 1 → 2"
+      "description": "`argv[1]`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-5",
@@ -83,7 +121,24 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`argv[1]`: 1 → 2"
+      "description": "`argv[1]`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-6",
@@ -98,7 +153,24 @@
       "kind": "string",
       "original": "'cli'",
       "replacement": "'cli_x'",
-      "description": "`argv[1] ? getFileName(argv[1]) : 'cli'`: 'cli' → 'cli_x'"
+      "description": "`argv[1] ? getFileName(argv[1]) : 'cli'`: 'cli' → 'cli_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-7",
@@ -113,7 +185,24 @@
       "kind": "number",
       "original": "2",
       "replacement": "3",
-      "description": "`argv.slice(2)`: 2 → 3"
+      "description": "`argv.slice(2)`: 2 → 3",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-8",
@@ -128,7 +217,24 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`parsed.args[0]`: 0 → 1"
+      "description": "`parsed.args[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-9",
@@ -143,7 +249,24 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`parsed.args.slice(1)`: 1 → 2"
+      "description": "`parsed.args.slice(1)`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-10",
@@ -158,7 +281,24 @@
       "kind": "number",
       "original": "2",
       "replacement": "3",
-      "description": "`argv.slice(2)`: 2 → 3"
+      "description": "`argv.slice(2)`: 2 → 3",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-11",
@@ -173,7 +313,24 @@
       "kind": "string",
       "original": "'command:!'",
       "replacement": "'command:!_x'",
-      "description": "`new CustomEvent('command:!', { detail: …`: 'command:!' → 'command:!_x'"
+      "description": "`new CustomEvent('command:!', { detail: …`: 'command:!' → 'command:!_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-12",
@@ -188,7 +345,24 @@
       "kind": "number",
       "original": "2",
       "replacement": "3",
-      "description": "`argv.slice(2)`: 2 → 3"
+      "description": "`argv.slice(2)`: 2 → 3",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-13",
@@ -203,7 +377,24 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`this.args[0]`: 0 → 1"
+      "description": "`this.args[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-14",
@@ -218,7 +409,24 @@
       "kind": "string",
       "original": "'command:*'",
       "replacement": "'command:*_x'",
-      "description": "`new CustomEvent('command:*', { detail: …`: 'command:*' → 'command:*_x'"
+      "description": "`new CustomEvent('command:*', { detail: …`: 'command:*' → 'command:*_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-15",
@@ -233,7 +441,24 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`this.args[0]`: 0 → 1"
+      "description": "`this.args[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-16",
@@ -248,7 +473,24 @@
       "kind": "string",
       "original": "'--'",
       "replacement": "'--_x'",
-      "description": "`argv.indexOf('--')`: '--' → '--_x'"
+      "description": "`argv.indexOf('--')`: '--' → '--_x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-17",
@@ -263,7 +505,24 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`doubleDashesIndex !== -1`: -1 → -2"
+      "description": "`doubleDashesIndex !== -1`: -1 → -2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-18",
@@ -278,7 +537,24 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`doubleDashesIndex + 1`: 1 → 2"
+      "description": "`doubleDashesIndex + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-19",
@@ -293,7 +569,24 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`argv.slice(0, doubleDashesIndex)`: 0 → 1"
+      "description": "`argv.slice(0, doubleDashesIndex)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-20",
@@ -308,7 +601,24 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`cliOption.config.type[0]`: 0 → 1"
+      "description": "`cliOption.config.type[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-21",
@@ -329,7 +639,24 @@
         "values": [
           "_"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     },
     {
       "id": "value-22",
@@ -344,7 +671,24 @@
       "kind": "string",
       "original": "'.'",
       "replacement": "'._x'",
-      "description": "`key.split('.')`: '.' → '._x'"
+      "description": "`key.split('.')`: '.' → '._x'",
+      "readers": [
+        {
+          "file": "src/cac.ts",
+          "line": 170,
+          "endLine": 184
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 198,
+          "endLine": 286
+        },
+        {
+          "file": "src/cac.ts",
+          "line": 288,
+          "endLine": 364
+        }
+      ]
     }
   ]
 }

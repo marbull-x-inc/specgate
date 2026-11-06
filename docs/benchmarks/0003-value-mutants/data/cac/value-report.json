@@ -28,7 +28,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 123
+          "duration": 31
         },
         {
           "id": "value-2",
@@ -48,7 +48,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 147
+          "duration": 38
         },
         {
           "id": "value-3",
@@ -68,7 +68,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 167
+          "duration": 48
         },
         {
           "id": "value-4",
@@ -99,7 +99,7 @@
             "18",
             "19"
           ],
-          "duration": 4373
+          "duration": 2767
         },
         {
           "id": "value-5",
@@ -130,7 +130,7 @@
             "18",
             "19"
           ],
-          "duration": 4508
+          "duration": 2754
         },
         {
           "id": "value-6",
@@ -150,7 +150,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 191
+          "duration": 62
         },
         {
           "id": "value-7",
@@ -175,7 +175,7 @@
             "11",
             "20"
           ],
-          "duration": 4554
+          "duration": 2684
         },
         {
           "id": "value-8",
@@ -200,7 +200,7 @@
             "11",
             "20"
           ],
-          "duration": 4815
+          "duration": 2695
         },
         {
           "id": "value-9",
@@ -225,7 +225,7 @@
             "11",
             "20"
           ],
-          "duration": 4747
+          "duration": 2692
         },
         {
           "id": "value-10",
@@ -245,7 +245,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 179
+          "duration": 72
         },
         {
           "id": "value-11",
@@ -265,7 +265,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 261
+          "duration": 100
         },
         {
           "id": "value-12",
@@ -294,7 +294,7 @@
             "18",
             "19"
           ],
-          "duration": 4492
+          "duration": 2654
         },
         {
           "id": "value-13",
@@ -324,7 +324,7 @@
             "19",
             "20"
           ],
-          "duration": 4484
+          "duration": 2713
         },
         {
           "id": "value-14",
@@ -345,7 +345,7 @@
           "coveredBy": [
             "4"
           ],
-          "duration": 4624
+          "duration": 2806
         },
         {
           "id": "value-15",
@@ -366,7 +366,7 @@
           "coveredBy": [
             "4"
           ],
-          "duration": 4778
+          "duration": 2669
         },
         {
           "id": "value-16",
@@ -399,7 +399,7 @@
             "19",
             "20"
           ],
-          "duration": 4865
+          "duration": 2821
         },
         {
           "id": "value-17",
@@ -432,7 +432,7 @@
             "19",
             "20"
           ],
-          "duration": 4884
+          "duration": 2872
         },
         {
           "id": "value-18",
@@ -454,7 +454,7 @@
           "coveredBy": [
             "4"
           ],
-          "duration": 4670
+          "duration": 2880
         },
         {
           "id": "value-19",
@@ -476,7 +476,7 @@
           "coveredBy": [
             "4"
           ],
-          "duration": 4627
+          "duration": 2868
         },
         {
           "id": "value-20",
@@ -499,7 +499,7 @@
             "8",
             "9"
           ],
-          "duration": 4729
+          "duration": 2923
         },
         {
           "id": "value-21",
@@ -532,7 +532,7 @@
             "19",
             "20"
           ],
-          "duration": 4664
+          "duration": 2815
         },
         {
           "id": "value-22",
@@ -561,7 +561,7 @@
             "18",
             "19"
           ],
-          "duration": 1740
+          "duration": 1195
         }
       ]
     }

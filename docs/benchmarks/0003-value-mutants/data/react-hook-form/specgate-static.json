@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-05T22:42:02.216Z",
+  "generatedAt": "2026-11-06T00:12:37.693Z",
   "root": "<work>/react-hook-form",
   "revision": "7e65ad5271daf8db8b123fdd0f8edad9d2b4416f",
   "configHash": "f9c83ea58fd9a170",
@@ -636,17 +636,7 @@
       "portCalls": [],
       "operationCalls": [],
       "envInputs": [],
-      "decisions": [
-        {
-          "kind": "output",
-          "expression": "'defaultValues'",
-          "line": 132,
-          "values": [
-            "defaultValues"
-          ],
-          "names": []
-        }
-      ],
+      "decisions": [],
       "constantRanges": [
         {
           "name": "FORM_ERROR_TYPE",
@@ -53638,14 +53628,6 @@
       "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
       "file": "package.json",
       "severity": "info"
-    },
-    {
-      "rule": "decision-unspecified",
-      "message": "useForm commits to output \"defaultValues\" in `'defaultValues'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
-      "file": "src/useForm.ts",
-      "line": 132,
-      "unit": "useForm",
-      "severity": "info"
     }
   ],
   "summary": {
@@ -53659,7 +53641,7 @@
     "findings": {
       "fail": 4,
       "warn": 0,
-      "info": 2
+      "info": 1
     }
   }
 }

@@ -1,4 +1,4 @@
-baseline run 5929 ms; timeout 30000 ms
+baseline run 5967 ms; timeout 30000 ms
 value-1 Killed     src/constants.ts:2 `BLUR: 'blur'` removed from `EVENTS`
 value-2 Killed     src/constants.ts:2 `BLUR` in `EVENTS` 'blur' → 'blur_x'
 value-3 Survived   src/constants.ts:3 `FOCUS_OUT: 'focusout'` removed from `EVENTS`
@@ -29,9 +29,20 @@ value-40 Killed     src/useFieldArray.ts:369 `data.slice(0, updatedFieldArrayVal
 value-24 Killed     src/constants.ts:40 `ROOT_ERROR_TYPE` 'root' → 'root_x'
 value-41 Survived   src/useFieldArray.ts:500 `return 1;`: 1 → 2
 value-42 Killed     src/useFieldArray.ts:546 `arrayName + '.'`: '.' → '._x'
+value-43 Killed     src/useForm.ts:20 `mode: defaultOptions.mode` removed from `RESET_OPTIONS`
 value-25 Killed     src/logic/createFormControl.ts:136 `submitCount: 0` removed from `DEFAULT_FORM_STATE`
+value-44 Survived   src/useForm.ts:21 `reValidateMode: defaultOptions.reValidateMode` removed from `RESET_OPTIONS`
+value-45 Survived   src/useForm.ts:22 `shouldFocusError: defaultOptions.shouldFocusError` removed from `RESET_OPTIONS`
+value-47 Survived   src/useForm.ts:24 `criteriaMode: undefined` removed from `RESET_OPTIONS`
+value-46 Killed     src/useForm.ts:23 `resolver: undefined` removed from `RESET_OPTIONS`
 value-26 Killed     src/logic/createFormControl.ts:136 `submitCount` in `DEFAULT_FORM_STATE` 0 → 1
+value-48 Survived   src/useForm.ts:25 `delayError: undefined` removed from `RESET_OPTIONS`
+value-49 Survived   src/useForm.ts:26 `shouldUnregister: undefined` removed from `RESET_OPTIONS`
+value-51 Survived   src/useForm.ts:28 `context: undefined` removed from `RESET_OPTIONS`
+value-52 Killed     src/useForm.ts:29 `progressive: undefined` removed from `RESET_OPTIONS`
+value-50 Killed     src/useForm.ts:27 `shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS`
 value-27 Killed     src/logic/createFormControl.ts:137 `isDirty: false` removed from `DEFAULT_FORM_STATE`
+value-53 Killed     src/useForm.ts:29 `resetOptions: undefined` removed from `RESET_OPTIONS`
 value-28 Killed     src/logic/createFormControl.ts:138 `isReady: false` removed from `DEFAULT_FORM_STATE`
 value-29 Killed     src/logic/createFormControl.ts:139 `isValidating: false` removed from `DEFAULT_FORM_STATE`
 value-30 Killed     src/logic/createFormControl.ts:140 `isSubmitted: false` removed from `DEFAULT_FORM_STATE`
@@ -41,22 +52,11 @@ value-33 Timeout    src/logic/createFormControl.ts:143 `isValid: false` removed 
 value-34 Killed     src/logic/createFormControl.ts:144 `touchedFields: {}` removed from `DEFAULT_FORM_STATE`
 value-35 Timeout    src/logic/createFormControl.ts:145 `dirtyFields: {}` removed from `DEFAULT_FORM_STATE`
 value-36 Killed     src/logic/createFormControl.ts:145 `validatingFields: {}` removed from `DEFAULT_FORM_STATE`
-value-43 Killed     src/useForm.ts:20 `mode: defaultOptions.mode` removed from `RESET_OPTIONS`
-value-44 Survived   src/useForm.ts:21 `reValidateMode: defaultOptions.reValidateMode` removed from `RESET_OPTIONS`
-value-45 Survived   src/useForm.ts:22 `shouldFocusError: defaultOptions.shouldFocusError` removed from `RESET_OPTIONS`
-value-46 Killed     src/useForm.ts:23 `resolver: undefined` removed from `RESET_OPTIONS`
-value-47 Survived   src/useForm.ts:24 `criteriaMode: undefined` removed from `RESET_OPTIONS`
-value-48 Survived   src/useForm.ts:25 `delayError: undefined` removed from `RESET_OPTIONS`
-value-49 Survived   src/useForm.ts:26 `shouldUnregister: undefined` removed from `RESET_OPTIONS`
-value-50 Survived   src/useForm.ts:27 `shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS`
-value-51 Survived   src/useForm.ts:28 `context: undefined` removed from `RESET_OPTIONS`
-value-52 Killed     src/useForm.ts:29 `progressive: undefined` removed from `RESET_OPTIONS`
-value-53 Killed     src/useForm.ts:29 `resetOptions: undefined` removed from `RESET_OPTIONS`
 value-21 Timeout    (rerun alone) src/constants.ts:14
 value-33 Timeout    (rerun alone) src/logic/createFormControl.ts:143
 value-35 Timeout    (rerun alone) src/logic/createFormControl.ts:145
-value-mutants: 53 mutant(s): 34 Killed, 16 Survived, 3 Timeout; 475421 ms (baseline run 5929 ms)
+value-mutants: 53 mutant(s): 35 Killed, 15 Survived, 3 Timeout; 717547 ms (baseline run 5967 ms)
 wrote <work>/react-hook-form/reports/value/value.json
-real 475.56
-user 1984.77
-sys 859.74
+real 717.65
+user 1979.22
+sys 783.77

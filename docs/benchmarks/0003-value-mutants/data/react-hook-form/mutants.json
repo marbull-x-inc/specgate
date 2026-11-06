@@ -32,7 +32,22 @@
       "kind": "entry",
       "original": "BLUR: 'blur',\n  ",
       "replacement": "",
-      "description": "`BLUR: 'blur'` removed from `EVENTS`"
+      "description": "`BLUR: 'blur'` removed from `EVENTS`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-2",
@@ -47,7 +62,22 @@
       "kind": "string",
       "original": "'blur'",
       "replacement": "'blur_x'",
-      "description": "`BLUR` in `EVENTS` 'blur' → 'blur_x'"
+      "description": "`BLUR` in `EVENTS` 'blur' → 'blur_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-3",
@@ -62,7 +92,22 @@
       "kind": "entry",
       "original": "FOCUS_OUT: 'focusout',\n  ",
       "replacement": "",
-      "description": "`FOCUS_OUT: 'focusout'` removed from `EVENTS`"
+      "description": "`FOCUS_OUT: 'focusout'` removed from `EVENTS`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-4",
@@ -77,7 +122,22 @@
       "kind": "string",
       "original": "'focusout'",
       "replacement": "'focusout_x'",
-      "description": "`FOCUS_OUT` in `EVENTS` 'focusout' → 'focusout_x'"
+      "description": "`FOCUS_OUT` in `EVENTS` 'focusout' → 'focusout_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-5",
@@ -92,7 +152,22 @@
       "kind": "entry",
       "original": "CHANGE: 'change',\n  ",
       "replacement": "",
-      "description": "`CHANGE: 'change'` removed from `EVENTS`"
+      "description": "`CHANGE: 'change'` removed from `EVENTS`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-6",
@@ -107,7 +182,22 @@
       "kind": "string",
       "original": "'change'",
       "replacement": "'change_x'",
-      "description": "`CHANGE` in `EVENTS` 'change' → 'change_x'"
+      "description": "`CHANGE` in `EVENTS` 'change' → 'change_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-7",
@@ -122,7 +212,22 @@
       "kind": "entry",
       "original": "SUBMIT: 'submit',\n  ",
       "replacement": "",
-      "description": "`SUBMIT: 'submit'` removed from `EVENTS`"
+      "description": "`SUBMIT: 'submit'` removed from `EVENTS`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-8",
@@ -137,7 +242,22 @@
       "kind": "string",
       "original": "'submit'",
       "replacement": "'submit_x'",
-      "description": "`SUBMIT` in `EVENTS` 'submit' → 'submit_x'"
+      "description": "`SUBMIT` in `EVENTS` 'submit' → 'submit_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-9",
@@ -152,7 +272,22 @@
       "kind": "entry",
       "original": "TRIGGER: 'trigger',\n  ",
       "replacement": "",
-      "description": "`TRIGGER: 'trigger'` removed from `EVENTS`"
+      "description": "`TRIGGER: 'trigger'` removed from `EVENTS`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-10",
@@ -167,7 +302,22 @@
       "kind": "string",
       "original": "'trigger'",
       "replacement": "'trigger_x'",
-      "description": "`TRIGGER` in `EVENTS` 'trigger' → 'trigger_x'"
+      "description": "`TRIGGER` in `EVENTS` 'trigger' → 'trigger_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-11",
@@ -182,7 +332,22 @@
       "kind": "entry",
       "original": ",\n  VALID: 'valid'",
       "replacement": "",
-      "description": "`VALID: 'valid'` removed from `EVENTS`"
+      "description": "`VALID: 'valid'` removed from `EVENTS`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-12",
@@ -197,7 +362,22 @@
       "kind": "string",
       "original": "'valid'",
       "replacement": "'valid_x'",
-      "description": "`VALID` in `EVENTS` 'valid' → 'valid_x'"
+      "description": "`VALID` in `EVENTS` 'valid' → 'valid_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useController.ts",
+          "line": 47,
+          "endLine": 309
+        }
+      ],
+      "names": [
+        "EVENTS"
+      ]
     },
     {
       "id": "value-13",
@@ -212,7 +392,60 @@
       "kind": "entry",
       "original": "onBlur: 'onBlur',\n  ",
       "replacement": "",
-      "description": "`onBlur: 'onBlur'` removed from `VALIDATION_MODE`"
+      "description": "`onBlur: 'onBlur'` removed from `VALIDATION_MODE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-14",
@@ -227,7 +460,60 @@
       "kind": "string",
       "original": "'onBlur'",
       "replacement": "'onBlur_x'",
-      "description": "`onBlur` in `VALIDATION_MODE` 'onBlur' → 'onBlur_x'"
+      "description": "`onBlur` in `VALIDATION_MODE` 'onBlur' → 'onBlur_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-15",
@@ -242,7 +528,60 @@
       "kind": "entry",
       "original": "onChange: 'onChange',\n  ",
       "replacement": "",
-      "description": "`onChange: 'onChange'` removed from `VALIDATION_MODE`"
+      "description": "`onChange: 'onChange'` removed from `VALIDATION_MODE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-16",
@@ -257,7 +596,60 @@
       "kind": "string",
       "original": "'onChange'",
       "replacement": "'onChange_x'",
-      "description": "`onChange` in `VALIDATION_MODE` 'onChange' → 'onChange_x'"
+      "description": "`onChange` in `VALIDATION_MODE` 'onChange' → 'onChange_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-17",
@@ -272,7 +664,60 @@
       "kind": "entry",
       "original": "onSubmit: 'onSubmit',\n  ",
       "replacement": "",
-      "description": "`onSubmit: 'onSubmit'` removed from `VALIDATION_MODE`"
+      "description": "`onSubmit: 'onSubmit'` removed from `VALIDATION_MODE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-18",
@@ -287,7 +732,60 @@
       "kind": "string",
       "original": "'onSubmit'",
       "replacement": "'onSubmit_x'",
-      "description": "`onSubmit` in `VALIDATION_MODE` 'onSubmit' → 'onSubmit_x'"
+      "description": "`onSubmit` in `VALIDATION_MODE` 'onSubmit' → 'onSubmit_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-19",
@@ -302,7 +800,60 @@
       "kind": "entry",
       "original": "onTouched: 'onTouched',\n  ",
       "replacement": "",
-      "description": "`onTouched: 'onTouched'` removed from `VALIDATION_MODE`"
+      "description": "`onTouched: 'onTouched'` removed from `VALIDATION_MODE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-20",
@@ -317,7 +868,60 @@
       "kind": "string",
       "original": "'onTouched'",
       "replacement": "'onTouched_x'",
-      "description": "`onTouched` in `VALIDATION_MODE` 'onTouched' → 'onTouched_x'"
+      "description": "`onTouched` in `VALIDATION_MODE` 'onTouched' → 'onTouched_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-21",
@@ -332,7 +936,60 @@
       "kind": "entry",
       "original": ",\n  all: 'all'",
       "replacement": "",
-      "description": "`all: 'all'` removed from `VALIDATION_MODE`"
+      "description": "`all: 'all'` removed from `VALIDATION_MODE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-22",
@@ -347,7 +1004,60 @@
       "kind": "string",
       "original": "'all'",
       "replacement": "'all_x'",
-      "description": "`all` in `VALIDATION_MODE` 'all' → 'all_x'"
+      "description": "`all` in `VALIDATION_MODE` 'all' → 'all_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/getProxyFormState.ts",
+          "line": 4,
+          "endLine": 32
+        },
+        {
+          "file": "src/logic/getValidationModes.ts",
+          "line": 4,
+          "endLine": 10
+        },
+        {
+          "file": "src/logic/shouldRenderFormState.ts",
+          "line": 9,
+          "endLine": 28
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "VALIDATION_MODE"
+      ],
+      "tests": [
+        "src/__tests__/logic/getValidationModes.test.ts",
+        "src/__tests__/useFieldArray/append.test.tsx",
+        "src/__tests__/useFieldArray/insert.test.tsx",
+        "src/__tests__/useFieldArray/move.test.tsx",
+        "src/__tests__/useFieldArray/prepend.test.tsx",
+        "src/__tests__/useFieldArray/remove.test.tsx",
+        "src/__tests__/useFieldArray/replace.test.tsx",
+        "src/__tests__/useFieldArray/swap.test.tsx",
+        "src/__tests__/useFieldArray/update.test.tsx",
+        "src/__tests__/useForm.test.tsx",
+        "src/__tests__/useForm/formState.test.tsx",
+        "src/__tests__/useForm/handleSubmit.test.tsx",
+        "src/__tests__/useForm/register.test.tsx",
+        "src/__tests__/useForm/setValue.test.tsx",
+        "src/__tests__/useForm/trigger.test.tsx",
+        "src/__tests__/utils/validationModeChecker.test.ts"
+      ]
     },
     {
       "id": "value-23",
@@ -362,7 +1072,22 @@
       "kind": "string",
       "original": "'form'",
       "replacement": "'form_x'",
-      "description": "`FORM_ERROR_TYPE` 'form' → 'form_x'"
+      "description": "`FORM_ERROR_TYPE` 'form' → 'form_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "FORM_ERROR_TYPE"
+      ]
     },
     {
       "id": "value-24",
@@ -377,7 +1102,27 @@
       "kind": "string",
       "original": "'root'",
       "replacement": "'root_x'",
-      "description": "`ROOT_ERROR_TYPE` 'root' → 'root_x'"
+      "description": "`ROOT_ERROR_TYPE` 'root' → 'root_x'",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/logic/updateFieldArrayRootError.ts",
+          "line": 11,
+          "endLine": 25
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        }
+      ],
+      "names": [
+        "ROOT_ERROR_TYPE"
+      ]
     },
     {
       "id": "value-25",
@@ -392,7 +1137,22 @@
       "kind": "entry",
       "original": "submitCount: 0,\n  ",
       "replacement": "",
-      "description": "`submitCount: 0` removed from `DEFAULT_FORM_STATE`"
+      "description": "`submitCount: 0` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-26",
@@ -407,7 +1167,22 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`submitCount` in `DEFAULT_FORM_STATE` 0 → 1"
+      "description": "`submitCount` in `DEFAULT_FORM_STATE` 0 → 1",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-27",
@@ -422,7 +1197,22 @@
       "kind": "entry",
       "original": "isDirty: false,\n  ",
       "replacement": "",
-      "description": "`isDirty: false` removed from `DEFAULT_FORM_STATE`"
+      "description": "`isDirty: false` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-28",
@@ -437,7 +1227,22 @@
       "kind": "entry",
       "original": "isReady: false,\n  ",
       "replacement": "",
-      "description": "`isReady: false` removed from `DEFAULT_FORM_STATE`"
+      "description": "`isReady: false` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-29",
@@ -452,7 +1257,22 @@
       "kind": "entry",
       "original": "isValidating: false,\n  ",
       "replacement": "",
-      "description": "`isValidating: false` removed from `DEFAULT_FORM_STATE`"
+      "description": "`isValidating: false` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-30",
@@ -467,7 +1287,22 @@
       "kind": "entry",
       "original": "isSubmitted: false,\n  ",
       "replacement": "",
-      "description": "`isSubmitted: false` removed from `DEFAULT_FORM_STATE`"
+      "description": "`isSubmitted: false` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-31",
@@ -482,7 +1317,22 @@
       "kind": "entry",
       "original": "isSubmitting: false,\n  ",
       "replacement": "",
-      "description": "`isSubmitting: false` removed from `DEFAULT_FORM_STATE`"
+      "description": "`isSubmitting: false` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-32",
@@ -497,7 +1347,22 @@
       "kind": "entry",
       "original": "isSubmitSuccessful: false,\n  ",
       "replacement": "",
-      "description": "`isSubmitSuccessful: false` removed from `DEFAULT_FORM_STATE`"
+      "description": "`isSubmitSuccessful: false` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-33",
@@ -512,7 +1377,22 @@
       "kind": "entry",
       "original": "isValid: false,\n  ",
       "replacement": "",
-      "description": "`isValid: false` removed from `DEFAULT_FORM_STATE`"
+      "description": "`isValid: false` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-34",
@@ -527,7 +1407,22 @@
       "kind": "entry",
       "original": "touchedFields: {},\n  ",
       "replacement": "",
-      "description": "`touchedFields: {}` removed from `DEFAULT_FORM_STATE`"
+      "description": "`touchedFields: {}` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-35",
@@ -542,7 +1437,22 @@
       "kind": "entry",
       "original": "dirtyFields: {},\n  ",
       "replacement": "",
-      "description": "`dirtyFields: {}` removed from `DEFAULT_FORM_STATE`"
+      "description": "`dirtyFields: {}` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-36",
@@ -557,7 +1467,22 @@
       "kind": "entry",
       "original": ",\n  validatingFields: {}",
       "replacement": "",
-      "description": "`validatingFields: {}` removed from `DEFAULT_FORM_STATE`"
+      "description": "`validatingFields: {}` removed from `DEFAULT_FORM_STATE`",
+      "readers": [
+        {
+          "file": "src/logic/createFormControl.ts",
+          "line": 149,
+          "endLine": 2613
+        },
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "DEFAULT_FORM_STATE"
+      ]
     },
     {
       "id": "value-37",
@@ -572,7 +1497,24 @@
       "kind": "string",
       "original": "'id'",
       "replacement": "'id_x'",
-      "description": "the default `keyName` 'id' → 'id_x'"
+      "description": "the default `keyName` 'id' → 'id_x'",
+      "readers": [
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 93,
+          "endLine": 93
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 528,
+          "endLine": 533
+        }
+      ]
     },
     {
       "id": "value-38",
@@ -587,7 +1529,24 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`updatedFieldArrayValues.length - 1`: 1 → 2"
+      "description": "`updatedFieldArrayValues.length - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 93,
+          "endLine": 93
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 528,
+          "endLine": 533
+        }
+      ]
     },
     {
       "id": "value-39",
@@ -602,7 +1561,24 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`getFocusFieldName(name, 0, options)`: 0 → 1"
+      "description": "`getFocusFieldName(name, 0, options)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 93,
+          "endLine": 93
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 528,
+          "endLine": 533
+        }
+      ]
     },
     {
       "id": "value-40",
@@ -617,7 +1593,24 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`data.slice(0, updatedFieldArrayValues.l…`: 0 → 1"
+      "description": "`data.slice(0, updatedFieldArrayValues.l…`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 93,
+          "endLine": 93
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 528,
+          "endLine": 533
+        }
+      ]
     },
     {
       "id": "value-41",
@@ -632,7 +1625,24 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`return 1;`: 1 → 2"
+      "description": "`return 1;`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 93,
+          "endLine": 93
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 528,
+          "endLine": 533
+        }
+      ]
     },
     {
       "id": "value-42",
@@ -647,7 +1657,24 @@
       "kind": "string",
       "original": "'.'",
       "replacement": "'._x'",
-      "description": "`arrayName + '.'`: '.' → '._x'"
+      "description": "`arrayName + '.'`: '.' → '._x'",
+      "readers": [
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 66,
+          "endLine": 587
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 93,
+          "endLine": 93
+        },
+        {
+          "file": "src/useFieldArray.ts",
+          "line": 528,
+          "endLine": 533
+        }
+      ]
     },
     {
       "id": "value-43",
@@ -662,7 +1689,17 @@
       "kind": "entry",
       "original": "mode: defaultOptions.mode,\n  ",
       "replacement": "",
-      "description": "`mode: defaultOptions.mode` removed from `RESET_OPTIONS`"
+      "description": "`mode: defaultOptions.mode` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-44",
@@ -677,7 +1714,17 @@
       "kind": "entry",
       "original": "reValidateMode: defaultOptions.reValidateMode,\n  ",
       "replacement": "",
-      "description": "`reValidateMode: defaultOptions.reValidateMode` removed from `RESET_OPTIONS`"
+      "description": "`reValidateMode: defaultOptions.reValidateMode` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-45",
@@ -692,7 +1739,17 @@
       "kind": "entry",
       "original": "shouldFocusError: defaultOptions.shouldFocusError,\n  ",
       "replacement": "",
-      "description": "`shouldFocusError: defaultOptions.shouldFocusError` removed from `RESET_OPTIONS`"
+      "description": "`shouldFocusError: defaultOptions.shouldFocusError` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-46",
@@ -707,7 +1764,17 @@
       "kind": "entry",
       "original": "resolver: undefined,\n  ",
       "replacement": "",
-      "description": "`resolver: undefined` removed from `RESET_OPTIONS`"
+      "description": "`resolver: undefined` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-47",
@@ -722,7 +1789,17 @@
       "kind": "entry",
       "original": "criteriaMode: undefined,\n  ",
       "replacement": "",
-      "description": "`criteriaMode: undefined` removed from `RESET_OPTIONS`"
+      "description": "`criteriaMode: undefined` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-48",
@@ -737,7 +1814,17 @@
       "kind": "entry",
       "original": "delayError: undefined,\n  ",
       "replacement": "",
-      "description": "`delayError: undefined` removed from `RESET_OPTIONS`"
+      "description": "`delayError: undefined` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-49",
@@ -752,7 +1839,17 @@
       "kind": "entry",
       "original": "shouldUnregister: undefined,\n  ",
       "replacement": "",
-      "description": "`shouldUnregister: undefined` removed from `RESET_OPTIONS`"
+      "description": "`shouldUnregister: undefined` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-50",
@@ -767,7 +1864,17 @@
       "kind": "entry",
       "original": "shouldUseNativeValidation: undefined,\n  ",
       "replacement": "",
-      "description": "`shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS`"
+      "description": "`shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-51",
@@ -782,7 +1889,17 @@
       "kind": "entry",
       "original": "context: undefined,\n  ",
       "replacement": "",
-      "description": "`context: undefined` removed from `RESET_OPTIONS`"
+      "description": "`context: undefined` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-52",
@@ -797,7 +1914,17 @@
       "kind": "entry",
       "original": "progressive: undefined,\n  ",
       "replacement": "",
-      "description": "`progressive: undefined` removed from `RESET_OPTIONS`"
+      "description": "`progressive: undefined` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     },
     {
       "id": "value-53",
@@ -812,7 +1939,17 @@
       "kind": "entry",
       "original": ",\n  resetOptions: undefined",
       "replacement": "",
-      "description": "`resetOptions: undefined` removed from `RESET_OPTIONS`"
+      "description": "`resetOptions: undefined` removed from `RESET_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/useForm.ts",
+          "line": 55,
+          "endLine": 260
+        }
+      ],
+      "names": [
+        "RESET_OPTIONS"
+      ]
     }
   ]
 }

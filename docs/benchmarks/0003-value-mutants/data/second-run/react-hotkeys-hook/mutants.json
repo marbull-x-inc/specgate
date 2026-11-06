@@ -1,0 +1,638 @@
+{
+  "schemaVersion": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "files": {
+    "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx": {
+      "sha256": "fec8983c3166881f35e4e5906635c9f51a7d784d154f6fafa3f06c7f31f244b7"
+    },
+    "packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts": {
+      "sha256": "fa6015de5ca9def73c1f67132a49ce558493ba940256dc84e541f09c87fe05a2"
+    },
+    "packages/react-hotkeys-hook/src/lib/useHotkeys.ts": {
+      "sha256": "07e7d61d4924a9db15ab8ec8a49782ddfe99d8ca6c522d7b36a5943adce9dff1"
+    },
+    "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts": {
+      "sha256": "7e0dd975c46fd0c604c565fcd0328bad042da507ef3d9e20ce9fa86baf96ace0"
+    }
+  },
+  "mutants": [
+    {
+      "id": "value-1",
+      "unit": "HotkeysProvider",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 16,
+      "column": 3,
+      "endLine": 17,
+      "endColumn": 3,
+      "start": 625,
+      "end": 640,
+      "kind": "entry",
+      "original": "hotkeys: [],\n  ",
+      "replacement": "",
+      "description": "`hotkeys: []` removed from `HotkeysContext`",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 26,
+          "endLine": 28
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 39,
+          "endLine": 88
+        }
+      ],
+      "names": [
+        "HotkeysContext"
+      ]
+    },
+    {
+      "id": "value-2",
+      "unit": "HotkeysProvider",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 17,
+      "column": 3,
+      "endLine": 18,
+      "endColumn": 3,
+      "start": 640,
+      "end": 767,
+      "kind": "entry",
+      "original": "activeScopes: [], // This array has to be empty instead of containing '*' as default, to check if the provider is set or not\n  ",
+      "replacement": "",
+      "description": "`activeScopes: []` removed from `HotkeysContext`",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 26,
+          "endLine": 28
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 39,
+          "endLine": 88
+        }
+      ],
+      "names": [
+        "HotkeysContext"
+      ]
+    },
+    {
+      "id": "value-3",
+      "unit": "HotkeysProvider",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 18,
+      "column": 3,
+      "endLine": 19,
+      "endColumn": 3,
+      "start": 767,
+      "end": 792,
+      "kind": "entry",
+      "original": "toggleScope: () => {},\n  ",
+      "replacement": "",
+      "description": "`toggleScope: () => {}` removed from `HotkeysContext`",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 26,
+          "endLine": 28
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 39,
+          "endLine": 88
+        }
+      ],
+      "names": [
+        "HotkeysContext"
+      ]
+    },
+    {
+      "id": "value-4",
+      "unit": "HotkeysProvider",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 19,
+      "column": 3,
+      "endLine": 20,
+      "endColumn": 3,
+      "start": 792,
+      "end": 817,
+      "kind": "entry",
+      "original": "enableScope: () => {},\n  ",
+      "replacement": "",
+      "description": "`enableScope: () => {}` removed from `HotkeysContext`",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 26,
+          "endLine": 28
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 39,
+          "endLine": 88
+        }
+      ],
+      "names": [
+        "HotkeysContext"
+      ]
+    },
+    {
+      "id": "value-5",
+      "unit": "HotkeysProvider",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 19,
+      "column": 24,
+      "endLine": 20,
+      "endColumn": 25,
+      "start": 813,
+      "end": 839,
+      "kind": "entry",
+      "original": ",\n  disableScope: () => {}",
+      "replacement": "",
+      "description": "`disableScope: () => {}` removed from `HotkeysContext`",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 26,
+          "endLine": 28
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 39,
+          "endLine": 88
+        }
+      ],
+      "names": [
+        "HotkeysContext"
+      ]
+    },
+    {
+      "id": "value-6",
+      "unit": "HotkeysProvider",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 39,
+      "column": 60,
+      "endLine": 39,
+      "endColumn": 63,
+      "start": 1555,
+      "end": 1558,
+      "kind": "string",
+      "original": "'*'",
+      "replacement": "'*_x'",
+      "description": "`['*']`: '*' → '*_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 39,
+          "endLine": 88
+        }
+      ]
+    },
+    {
+      "id": "value-7",
+      "unit": "HotkeysProvider",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 45,
+      "column": 25,
+      "endLine": 45,
+      "endColumn": 28,
+      "start": 1860,
+      "end": 1863,
+      "kind": "string",
+      "original": "'*'",
+      "replacement": "'*_x'",
+      "description": "`prev.includes('*')`: '*' → '*_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 39,
+          "endLine": 88
+        }
+      ]
+    },
+    {
+      "id": "value-8",
+      "unit": "HotkeysProvider",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 63,
+      "column": 27,
+      "endLine": 63,
+      "endColumn": 30,
+      "start": 2342,
+      "end": 2345,
+      "kind": "string",
+      "original": "'*'",
+      "replacement": "'*_x'",
+      "description": "`prev.includes('*')`: '*' → '*_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+          "line": 39,
+          "endLine": 88
+        }
+      ]
+    },
+    {
+      "id": "value-9",
+      "unit": "isHotkeyPressed",
+      "file": "packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts",
+      "line": 59,
+      "column": 78,
+      "endLine": 59,
+      "endColumn": 81,
+      "start": 1910,
+      "end": 1913,
+      "kind": "string",
+      "original": "','",
+      "replacement": "',_x'",
+      "description": "the default `delimiter` ',' → ',_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts",
+          "line": 59,
+          "endLine": 63
+        }
+      ]
+    },
+    {
+      "id": "value-10",
+      "unit": "useHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 130,
+      "column": 55,
+      "endLine": 130,
+      "endColumn": 58,
+      "start": 6247,
+      "end": 6250,
+      "kind": "string",
+      "original": "'+'",
+      "replacement": "'+_x'",
+      "description": "`memoisedOptions?.splitKey ?? '+'`: '+' → '+_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 17,
+          "endLine": 21
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 27,
+          "endLine": 36
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 48,
+          "endLine": 289
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 105,
+          "endLine": 208
+        }
+      ]
+    },
+    {
+      "id": "value-11",
+      "unit": "useHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 130,
+      "column": 113,
+      "endLine": 130,
+      "endColumn": 116,
+      "start": 6305,
+      "end": 6308,
+      "kind": "string",
+      "original": "'>'",
+      "replacement": "'>_x'",
+      "description": "`memoisedOptions?.sequenceSplitKey ?? '>'`: '>' → '>_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 17,
+          "endLine": 21
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 27,
+          "endLine": 36
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 48,
+          "endLine": 289
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 105,
+          "endLine": 208
+        }
+      ]
+    },
+    {
+      "id": "value-12",
+      "unit": "useHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 150,
+      "column": 52,
+      "endLine": 150,
+      "endColumn": 56,
+      "start": 7016,
+      "end": 7020,
+      "kind": "number",
+      "original": "1000",
+      "replacement": "1001",
+      "description": "`memoisedOptions?.sequenceTimeoutMs ?? 1…`: 1000 → 1001",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 17,
+          "endLine": 21
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 27,
+          "endLine": 36
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 48,
+          "endLine": 289
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 105,
+          "endLine": 208
+        }
+      ]
+    },
+    {
+      "id": "value-13",
+      "unit": "useHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 161,
+      "column": 67,
+      "endLine": 161,
+      "endColumn": 68,
+      "start": 7346,
+      "end": 7347,
+      "kind": "number",
+      "original": "1",
+      "replacement": "2",
+      "description": "`recordedKeys.length - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 17,
+          "endLine": 21
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 27,
+          "endLine": 36
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 48,
+          "endLine": 289
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 105,
+          "endLine": 208
+        }
+      ]
+    },
+    {
+      "id": "value-14",
+      "unit": "useHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 183,
+      "column": 35,
+      "endLine": 183,
+      "endColumn": 38,
+      "start": 7994,
+      "end": 7997,
+      "kind": "string",
+      "original": "'*'",
+      "replacement": "'*_x'",
+      "description": "`hotkey.keys?.includes('*')`: '*' → '*_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 17,
+          "endLine": 21
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 27,
+          "endLine": 36
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 48,
+          "endLine": 289
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 105,
+          "endLine": 208
+        }
+      ]
+    },
+    {
+      "id": "value-15",
+      "unit": "useHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 241,
+      "column": 30,
+      "endLine": 241,
+      "endColumn": 37,
+      "start": 9445,
+      "end": 9452,
+      "kind": "string",
+      "original": "'keyup'",
+      "replacement": "'keyup_x'",
+      "description": "`domNode.addEventListener('keyup', handl…`: 'keyup' → 'keyup_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 17,
+          "endLine": 21
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 27,
+          "endLine": 36
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 48,
+          "endLine": 289
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 105,
+          "endLine": 208
+        }
+      ]
+    },
+    {
+      "id": "value-16",
+      "unit": "useHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 243,
+      "column": 30,
+      "endLine": 243,
+      "endColumn": 39,
+      "start": 9559,
+      "end": 9568,
+      "kind": "string",
+      "original": "'keydown'",
+      "replacement": "'keydown_x'",
+      "description": "`domNode.addEventListener('keydown', han…`: 'keydown' → 'keydown_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 17,
+          "endLine": 21
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 27,
+          "endLine": 36
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 48,
+          "endLine": 289
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 105,
+          "endLine": 208
+        }
+      ]
+    },
+    {
+      "id": "value-17",
+      "unit": "useHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 262,
+      "column": 35,
+      "endLine": 262,
+      "endColumn": 42,
+      "start": 10108,
+      "end": 10115,
+      "kind": "string",
+      "original": "'keyup'",
+      "replacement": "'keyup_x'",
+      "description": "`domNode.removeEventListener('keyup', ha…`: 'keyup' → 'keyup_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 17,
+          "endLine": 21
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 27,
+          "endLine": 36
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 48,
+          "endLine": 289
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 105,
+          "endLine": 208
+        }
+      ]
+    },
+    {
+      "id": "value-18",
+      "unit": "useHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 264,
+      "column": 35,
+      "endLine": 264,
+      "endColumn": 44,
+      "start": 10229,
+      "end": 10238,
+      "kind": "string",
+      "original": "'keydown'",
+      "replacement": "'keydown_x'",
+      "description": "`domNode.removeEventListener('keydown', …`: 'keydown' → 'keydown_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 17,
+          "endLine": 21
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 27,
+          "endLine": 36
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 48,
+          "endLine": 289
+        },
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+          "line": 105,
+          "endLine": 208
+        }
+      ]
+    },
+    {
+      "id": "value-19",
+      "unit": "useRecordHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts",
+      "line": 64,
+      "column": 33,
+      "endLine": 64,
+      "endColumn": 42,
+      "start": 2381,
+      "end": 2390,
+      "kind": "string",
+      "original": "'keydown'",
+      "replacement": "'keydown_x'",
+      "description": "`document.addEventListener('keydown', ha…`: 'keydown' → 'keydown_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts",
+          "line": 12,
+          "endLine": 73
+        }
+      ]
+    },
+    {
+      "id": "value-20",
+      "unit": "useRecordHotkeys",
+      "file": "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts",
+      "line": 67,
+      "column": 38,
+      "endLine": 67,
+      "endColumn": 47,
+      "start": 2460,
+      "end": 2469,
+      "kind": "string",
+      "original": "'keydown'",
+      "replacement": "'keydown_x'",
+      "description": "`document.removeEventListener('keydown',…`: 'keydown' → 'keydown_x'",
+      "readers": [
+        {
+          "file": "packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts",
+          "line": 12,
+          "endLine": 73
+        }
+      ]
+    }
+  ]
+}

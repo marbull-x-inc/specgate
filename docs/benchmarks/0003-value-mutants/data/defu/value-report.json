@@ -28,7 +28,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 9
+          "duration": 8
         },
         {
           "id": "value-2",
@@ -67,7 +67,7 @@
             "19",
             "20"
           ],
-          "duration": 878
+          "duration": 845
         },
         {
           "id": "value-3",
@@ -106,7 +106,7 @@
             "19",
             "20"
           ],
-          "duration": 874
+          "duration": 841
         }
       ]
     }

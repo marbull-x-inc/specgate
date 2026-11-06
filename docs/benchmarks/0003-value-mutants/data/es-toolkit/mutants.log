@@ -1,5 +1,5 @@
 mutants: 113 value change(s) in 13 file(s) (25 number, 20 string, 58 element, 10 entry)
 wrote <work>/es-toolkit/.specgate/mutants.json
-real 2.53
-user 6.19
-sys 0.43
+real 1.91
+user 4.75
+sys 0.33

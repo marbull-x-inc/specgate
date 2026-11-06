@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-05T22:07:47.452Z",
+  "generatedAt": "2026-11-06T00:25:36.050Z",
   "root": "<work>/react-hotkeys-hook",
   "revision": "0798c4eb1cedb1f868b7570d8e0cc163c5a01b51",
   "configHash": "bb4fdcd4e1b010af",
@@ -66,8 +66,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 3,
-        "survived": 6,
+        "killed": 7,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -139,8 +139,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 42,
-        "survived": 17,
+        "killed": 46,
+        "survived": 13,
         "noCoverage": 2,
         "ignored": 0
       }
@@ -5291,21 +5291,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "HotkeysProvider: `hotkeys: []` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
-      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
-      "line": 16,
-      "unit": "HotkeysProvider",
-      "mutant": {
-        "id": "2:value-1",
-        "mutator": "Value",
-        "replacement": "`hotkeys: []` removed from `HotkeysContext`",
-        "status": "Survived",
-        "line": 16
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "HotkeysProvider: ArrayDeclaration mutant in HotkeysContext: `[\"Stryker was here\"]` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
       "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
       "line": 17,
@@ -5316,51 +5301,6 @@
         "replacement": "[\"Stryker was here\"]",
         "status": "Survived",
         "line": 17
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "HotkeysProvider: `toggleScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
-      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
-      "line": 18,
-      "unit": "HotkeysProvider",
-      "mutant": {
-        "id": "2:value-3",
-        "mutator": "Value",
-        "replacement": "`toggleScope: () => {}` removed from `HotkeysContext`",
-        "status": "Survived",
-        "line": 18
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "HotkeysProvider: `enableScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
-      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
-      "line": 19,
-      "unit": "HotkeysProvider",
-      "mutant": {
-        "id": "2:value-4",
-        "mutator": "Value",
-        "replacement": "`enableScope: () => {}` removed from `HotkeysContext`",
-        "status": "Survived",
-        "line": 19
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
-      "message": "HotkeysProvider: `disableScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
-      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
-      "line": 19,
-      "unit": "HotkeysProvider",
-      "mutant": {
-        "id": "2:value-5",
-        "mutator": "Value",
-        "replacement": "`disableScope: () => {}` removed from `HotkeysContext`",
-        "status": "Survived",
-        "line": 19
       },
       "severity": "warn"
     },
@@ -7001,7 +6941,7 @@
     "unlinkedTests": 4,
     "findings": {
       "fail": 5,
-      "warn": 114,
+      "warn": 110,
       "info": 1
     },
     "mutantsUnmapped": 43

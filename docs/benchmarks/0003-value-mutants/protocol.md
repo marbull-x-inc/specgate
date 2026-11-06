@@ -290,3 +290,18 @@ The runner step (with `specgate mutants`) is repeated on the ten projects with t
 of the first measurement (`SKIP_STRYKER=1`); Stryker's times stay as measured. Any value mutant
 whose status moves from detected to green between the two measurements is listed in the report:
 it would mean the selection left out a test that kills it.
+
+### 11. Runner fix: test files relative to the command's directory; selections checked unchanged (2026-11-06, after deviation 10)
+
+Comparing the first and second measurements found five value mutants that were `Survived` in the
+first and `Killed` in the second (react-hotkeys-hook 4, react-hook-form 1). Run alone against the
+whole suite, all five survive. The cause: where the test command runs in a subdirectory (valibot
+in `library`, react-hotkeys-hook in `packages/react-hotkeys-hook`), the runner passed the selected
+test files relative to the repository root; vitest found none, exited 1, and the runner read
+that as `Killed`. This affects **both** earlier measurements of those two projects (valibot's 51
+and react-hotkeys-hook's 16 `Killed`), so their earlier runner results are not valid. In
+react-hook-form, the second measurement's selection included files that fail when run together
+without any change. The runner now takes `--cwd` and passes test files relative to it, and runs
+each distinct selection once without any change: a selection that fails falls back to the whole
+suite. The runner step is repeated on all ten projects (third measurement); the report's numbers
+come from it, with the first measurement kept beside them (`data/first-run/`).

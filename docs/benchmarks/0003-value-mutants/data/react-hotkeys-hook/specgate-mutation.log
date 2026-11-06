@@ -1,16 +1,12 @@
 specgate check (advisory): 8 units, 20 guarantees, 140 linked tests
-  fail 5 · warn 114 · info 1
+  fail 5 · warn 110 · info 1
   ❌ [operation-no-guarantee] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:50 isReadonlyArray has no guarantee (no doc comment)
   ❌ [guarantee-no-test] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:56 isHotkeyPressed.ok.key-forms has no test naming it
   ❌ [operation-no-guarantee] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:65 pushToCurrentlyPressedKeys has no guarantee (no doc comment)
   ❌ [operation-no-guarantee] packages/react-hotkeys-hook/src/lib/isHotkeyPressed.ts:86 removeFromCurrentlyPressedKeys has no guarantee (no doc comment)
   ❌ [guarantee-no-test] packages/react-hotkeys-hook/src/lib/useRecordHotkeys.ts:6 useRecordHotkeys.ok.use-key-true has no test naming it
   ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:16 HotkeysProvider: ArrayDeclaration mutant in HotkeysContext: `["Stryker was here"]` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
-  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:16 HotkeysProvider: `hotkeys: []` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
   ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:17 HotkeysProvider: ArrayDeclaration mutant in HotkeysContext: `["Stryker was here"]` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
-  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:18 HotkeysProvider: `toggleScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
-  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:19 HotkeysProvider: `enableScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
-  ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:19 HotkeysProvider: `disableScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext
   ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:50 HotkeysProvider: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:56 HotkeysProvider: ArrayDeclaration mutant: `["Stryker was here"]` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx:61 HotkeysProvider: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this

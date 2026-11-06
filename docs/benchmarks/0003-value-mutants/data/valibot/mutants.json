@@ -71,7 +71,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/bytes/bytes.ts",
+          "line": 74,
+          "endLine": 126
+        }
+      ]
     },
     {
       "id": "value-2",
@@ -92,7 +99,14 @@
         "values": [
           "bytes"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/bytes/bytes.ts",
+          "line": 74,
+          "endLine": 126
+        }
+      ]
     },
     {
       "id": "value-3",
@@ -107,7 +121,14 @@
       "kind": "string",
       "original": "'bytes'",
       "replacement": "'bytes_x'",
-      "description": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'"
+      "description": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/bytes/bytes.ts",
+          "line": 74,
+          "endLine": 126
+        }
+      ]
     },
     {
       "id": "value-4",
@@ -128,7 +149,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/empty/empty.ts",
+          "line": 65,
+          "endLine": 102
+        }
+      ]
     },
     {
       "id": "value-5",
@@ -149,7 +177,14 @@
         "values": [
           "empty"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/empty/empty.ts",
+          "line": 65,
+          "endLine": 102
+        }
+      ]
     },
     {
       "id": "value-6",
@@ -170,7 +205,14 @@
         "values": [
           "0"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/empty/empty.ts",
+          "line": 65,
+          "endLine": 102
+        }
+      ]
     },
     {
       "id": "value-7",
@@ -185,7 +227,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`dataset.value.length > 0`: 0 → 1"
+      "description": "`dataset.value.length > 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "library/src/actions/empty/empty.ts",
+          "line": 65,
+          "endLine": 102
+        }
+      ]
     },
     {
       "id": "value-8",
@@ -200,7 +249,14 @@
       "kind": "string",
       "original": "'length'",
       "replacement": "'length_x'",
-      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/empty/empty.ts",
+          "line": 65,
+          "endLine": 102
+        }
+      ]
     },
     {
       "id": "value-9",
@@ -221,7 +277,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/gtValue/gtValue.ts",
+          "line": 73,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-10",
@@ -242,7 +305,14 @@
         "values": [
           "gt_value"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/gtValue/gtValue.ts",
+          "line": 73,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-11",
@@ -257,7 +327,14 @@
       "kind": "string",
       "original": "'value'",
       "replacement": "'value_x'",
-      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/gtValue/gtValue.ts",
+          "line": 73,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-12",
@@ -278,7 +355,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/length/length.ts",
+          "line": 78,
+          "endLine": 128
+        }
+      ]
     },
     {
       "id": "value-13",
@@ -299,7 +383,14 @@
         "values": [
           "length"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/length/length.ts",
+          "line": 78,
+          "endLine": 128
+        }
+      ]
     },
     {
       "id": "value-14",
@@ -314,7 +405,14 @@
       "kind": "string",
       "original": "'length'",
       "replacement": "'length_x'",
-      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/length/length.ts",
+          "line": 78,
+          "endLine": 128
+        }
+      ]
     },
     {
       "id": "value-15",
@@ -335,7 +433,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/ltValue/ltValue.ts",
+          "line": 73,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-16",
@@ -356,7 +461,14 @@
         "values": [
           "lt_value"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/ltValue/ltValue.ts",
+          "line": 73,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-17",
@@ -371,7 +483,14 @@
       "kind": "string",
       "original": "'value'",
       "replacement": "'value_x'",
-      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/ltValue/ltValue.ts",
+          "line": 73,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-18",
@@ -392,7 +511,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/maxLength/maxLength.ts",
+          "line": 80,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-19",
@@ -413,7 +539,14 @@
         "values": [
           "max_length"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/maxLength/maxLength.ts",
+          "line": 80,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-20",
@@ -428,7 +561,14 @@
       "kind": "string",
       "original": "'length'",
       "replacement": "'length_x'",
-      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/maxLength/maxLength.ts",
+          "line": 80,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-21",
@@ -449,7 +589,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/maxValue/maxValue.ts",
+          "line": 75,
+          "endLine": 132
+        }
+      ]
     },
     {
       "id": "value-22",
@@ -470,7 +617,14 @@
         "values": [
           "max_value"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/maxValue/maxValue.ts",
+          "line": 75,
+          "endLine": 132
+        }
+      ]
     },
     {
       "id": "value-23",
@@ -485,7 +639,14 @@
       "kind": "string",
       "original": "'value'",
       "replacement": "'value_x'",
-      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/maxValue/maxValue.ts",
+          "line": 75,
+          "endLine": 132
+        }
+      ]
     },
     {
       "id": "value-24",
@@ -506,7 +667,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/minBytes/minBytes.ts",
+          "line": 78,
+          "endLine": 131
+        }
+      ]
     },
     {
       "id": "value-25",
@@ -527,7 +695,14 @@
         "values": [
           "min_bytes"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/minBytes/minBytes.ts",
+          "line": 78,
+          "endLine": 131
+        }
+      ]
     },
     {
       "id": "value-26",
@@ -542,7 +717,14 @@
       "kind": "string",
       "original": "'bytes'",
       "replacement": "'bytes_x'",
-      "description": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'"
+      "description": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/minBytes/minBytes.ts",
+          "line": 78,
+          "endLine": 131
+        }
+      ]
     },
     {
       "id": "value-27",
@@ -563,7 +745,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/minLength/minLength.ts",
+          "line": 80,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-28",
@@ -584,7 +773,14 @@
         "values": [
           "min_length"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/minLength/minLength.ts",
+          "line": 80,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-29",
@@ -599,7 +795,14 @@
       "kind": "string",
       "original": "'length'",
       "replacement": "'length_x'",
-      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/minLength/minLength.ts",
+          "line": 80,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-30",
@@ -620,7 +823,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/minValue/minValue.ts",
+          "line": 75,
+          "endLine": 132
+        }
+      ]
     },
     {
       "id": "value-31",
@@ -641,7 +851,14 @@
         "values": [
           "min_value"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/minValue/minValue.ts",
+          "line": 75,
+          "endLine": 132
+        }
+      ]
     },
     {
       "id": "value-32",
@@ -656,7 +873,14 @@
       "kind": "string",
       "original": "'value'",
       "replacement": "'value_x'",
-      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/minValue/minValue.ts",
+          "line": 75,
+          "endLine": 132
+        }
+      ]
     },
     {
       "id": "value-33",
@@ -677,7 +901,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/multipleOf/multipleOf.ts",
+          "line": 87,
+          "endLine": 167
+        }
+      ]
     },
     {
       "id": "value-34",
@@ -698,7 +929,14 @@
         "values": [
           "multiple_of"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/multipleOf/multipleOf.ts",
+          "line": 87,
+          "endLine": 167
+        }
+      ]
     },
     {
       "id": "value-35",
@@ -713,7 +951,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`dataset.value % this.requirement != 0`: 0 → 1"
+      "description": "`dataset.value % this.requirement != 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "library/src/actions/multipleOf/multipleOf.ts",
+          "line": 87,
+          "endLine": 167
+        }
+      ]
     },
     {
       "id": "value-36",
@@ -728,7 +973,14 @@
       "kind": "string",
       "original": "'multiple'",
       "replacement": "'multiple_x'",
-      "description": "`_addIssue(this, 'multiple', dataset, co…`: 'multiple' → 'multiple_x'"
+      "description": "`_addIssue(this, 'multiple', dataset, co…`: 'multiple' → 'multiple_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/multipleOf/multipleOf.ts",
+          "line": 87,
+          "endLine": 167
+        }
+      ]
     },
     {
       "id": "value-37",
@@ -749,7 +1001,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+          "line": 65,
+          "endLine": 105
+        }
+      ]
     },
     {
       "id": "value-38",
@@ -770,7 +1029,14 @@
         "values": [
           "non_empty"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+          "line": 65,
+          "endLine": 105
+        }
+      ]
     },
     {
       "id": "value-39",
@@ -791,7 +1057,14 @@
         "values": [
           "!0"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+          "line": 65,
+          "endLine": 105
+        }
+      ]
     },
     {
       "id": "value-40",
@@ -806,7 +1079,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`dataset.value.length === 0`: 0 → 1"
+      "description": "`dataset.value.length === 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+          "line": 65,
+          "endLine": 105
+        }
+      ]
     },
     {
       "id": "value-41",
@@ -821,7 +1101,14 @@
       "kind": "string",
       "original": "'length'",
       "replacement": "'length_x'",
-      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+          "line": 65,
+          "endLine": 105
+        }
+      ]
     },
     {
       "id": "value-42",
@@ -836,7 +1123,14 @@
       "kind": "string",
       "original": "'0'",
       "replacement": "'0_x'",
-      "description": "`received` '0' → '0_x'"
+      "description": "`received` '0' → '0_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+          "line": 65,
+          "endLine": 105
+        }
+      ]
     },
     {
       "id": "value-43",
@@ -857,7 +1151,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/notLength/notLength.ts",
+          "line": 80,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-44",
@@ -878,7 +1179,14 @@
         "values": [
           "not_length"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/notLength/notLength.ts",
+          "line": 80,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-45",
@@ -893,7 +1201,14 @@
       "kind": "string",
       "original": "'length'",
       "replacement": "'length_x'",
-      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/notLength/notLength.ts",
+          "line": 80,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-46",
@@ -914,7 +1229,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/notValue/notValue.ts",
+          "line": 75,
+          "endLine": 131
+        }
+      ]
     },
     {
       "id": "value-47",
@@ -935,7 +1257,14 @@
         "values": [
           "not_value"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/notValue/notValue.ts",
+          "line": 75,
+          "endLine": 131
+        }
+      ]
     },
     {
       "id": "value-48",
@@ -950,7 +1279,14 @@
       "kind": "string",
       "original": "'value'",
       "replacement": "'value_x'",
-      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/notValue/notValue.ts",
+          "line": 75,
+          "endLine": 131
+        }
+      ]
     },
     {
       "id": "value-49",
@@ -971,7 +1307,14 @@
         "values": [
           "validation"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/value/value.ts",
+          "line": 74,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-50",
@@ -992,7 +1335,14 @@
         "values": [
           "value"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "library/src/actions/value/value.ts",
+          "line": 74,
+          "endLine": 130
+        }
+      ]
     },
     {
       "id": "value-51",
@@ -1007,7 +1357,14 @@
       "kind": "string",
       "original": "'value'",
       "replacement": "'value_x'",
-      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'",
+      "readers": [
+        {
+          "file": "library/src/actions/value/value.ts",
+          "line": 74,
+          "endLine": 130
+        }
+      ]
     }
   ]
 }

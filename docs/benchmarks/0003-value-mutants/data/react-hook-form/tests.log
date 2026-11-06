@@ -3,5 +3,5 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
 Test Suites: 128 passed, 128 total
 Tests:       1820 passed, 1820 total
 Snapshots:   26 passed, 26 total
-Time:        6.705 s
+Time:        6.459 s
 Ran all test suites.

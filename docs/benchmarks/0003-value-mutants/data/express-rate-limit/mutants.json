@@ -26,7 +26,17 @@
       "kind": "string",
       "original": "'::/96'",
       "replacement": "'::/96_x'",
-      "description": "`new Address6('::/96')`: '::/96' → '::/96_x'"
+      "description": "`new Address6('::/96')`: '::/96' → '::/96_x'",
+      "readers": [
+        {
+          "file": "source/ip-key-generator.ts",
+          "line": 28,
+          "endLine": 64
+        }
+      ],
+      "names": [
+        "ipv4CompatibleSubnet"
+      ]
     },
     {
       "id": "value-2",
@@ -41,7 +51,14 @@
       "kind": "number",
       "original": "56",
       "replacement": "57",
-      "description": "the default `ipv6Subnet` 56 → 57"
+      "description": "the default `ipv6Subnet` 56 → 57",
+      "readers": [
+        {
+          "file": "source/ip-key-generator.ts",
+          "line": 28,
+          "endLine": 64
+        }
+      ]
     },
     {
       "id": "value-3",
@@ -56,7 +73,44 @@
       "kind": "string",
       "original": "'draft-6'",
       "replacement": "'draft-6_x'",
-      "description": "`standardHeaders = 'draft-6'`: 'draft-6' → 'draft-6_x'"
+      "description": "`standardHeaders = 'draft-6'`: 'draft-6' → 'draft-6_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-4",
@@ -77,7 +131,44 @@
         "values": [
           "60"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-5",
@@ -98,7 +189,44 @@
         "values": [
           "1000"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-6",
@@ -113,7 +241,44 @@
       "kind": "number",
       "original": "5",
       "replacement": "6",
-      "description": "`passedOptions.max ?? 5`: 5 → 6"
+      "description": "`passedOptions.max ?? 5`: 5 → 6",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-7",
@@ -128,7 +293,44 @@
       "kind": "string",
       "original": "'Too many requests, please try again later.'",
       "replacement": "'Too many requests, please try again later._x'",
-      "description": "`message` 'Too many requests, please try again later.' → 'Too many requests, please try again later._x'"
+      "description": "`message` 'Too many requests, please try again later.' → 'Too many requests, please try again later._x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-8",
@@ -143,7 +345,44 @@
       "kind": "number",
       "original": "429",
       "replacement": "430",
-      "description": "`statusCode` 429 → 430"
+      "description": "`statusCode` 429 → 430",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-9",
@@ -158,7 +397,44 @@
       "kind": "number",
       "original": "1000",
       "replacement": "1001",
-      "description": "`config.windowMs / 1000`: 1000 → 1001"
+      "description": "`config.windowMs / 1000`: 1000 → 1001",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-10",
@@ -173,7 +449,44 @@
       "kind": "number",
       "original": "1000",
       "replacement": "1001",
-      "description": "`1000 * 60`: 1000 → 1001"
+      "description": "`1000 * 60`: 1000 → 1001",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-11",
@@ -188,7 +501,44 @@
       "kind": "number",
       "original": "60",
       "replacement": "61",
-      "description": "`1000 * 60`: 60 → 61"
+      "description": "`1000 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-12",
@@ -203,7 +553,44 @@
       "kind": "number",
       "original": "1000",
       "replacement": "1001",
-      "description": "`1000 * 60`: 1000 → 1001"
+      "description": "`1000 * 60`: 1000 → 1001",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-13",
@@ -218,7 +605,44 @@
       "kind": "number",
       "original": "60",
       "replacement": "61",
-      "description": "`1000 * 60`: 60 → 61"
+      "description": "`1000 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-14",
@@ -233,7 +657,44 @@
       "kind": "number",
       "original": "60",
       "replacement": "61",
-      "description": "`1000 * 60 * 60`: 60 → 61"
+      "description": "`1000 * 60 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-15",
@@ -248,7 +709,44 @@
       "kind": "number",
       "original": "1000",
       "replacement": "1001",
-      "description": "`1000 * 60`: 1000 → 1001"
+      "description": "`1000 * 60`: 1000 → 1001",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-16",
@@ -263,7 +761,44 @@
       "kind": "number",
       "original": "60",
       "replacement": "61",
-      "description": "`1000 * 60`: 60 → 61"
+      "description": "`1000 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-17",
@@ -278,7 +813,44 @@
       "kind": "number",
       "original": "60",
       "replacement": "61",
-      "description": "`1000 * 60 * 60`: 60 → 61"
+      "description": "`1000 * 60 * 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-18",
@@ -299,7 +871,44 @@
         "values": [
           "24"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-19",
@@ -320,7 +929,44 @@
         "values": [
           "60"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-20",
@@ -335,7 +981,44 @@
       "kind": "number",
       "original": "60",
       "replacement": "61",
-      "description": "`minutes < 60`: 60 → 61"
+      "description": "`minutes < 60`: 60 → 61",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-21",
@@ -356,7 +1039,44 @@
         "values": [
           "24"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-22",
@@ -371,7 +1091,44 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`hours > 1`: 1 → 2"
+      "description": "`hours > 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-23",
@@ -386,7 +1143,44 @@
       "kind": "string",
       "original": "'s'",
       "replacement": "'s_x'",
-      "description": "`hours > 1 ? 's' : ''`: 's' → 's_x'"
+      "description": "`hours > 1 ? 's' : ''`: 's' → 's_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-24",
@@ -401,7 +1195,44 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`days > 1`: 1 → 2"
+      "description": "`days > 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-25",
@@ -416,7 +1247,44 @@
       "kind": "string",
       "original": "'s'",
       "replacement": "'s_x'",
-      "description": "`days > 1 ? 's' : ''`: 's' → 's_x'"
+      "description": "`days > 1 ? 's' : ''`: 's' → 's_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-26",
@@ -431,7 +1299,44 @@
       "kind": "string",
       "original": "'rateLimit'",
       "replacement": "'rateLimit_x'",
-      "description": "`requestPropertyName` 'rateLimit' → 'rateLimit_x'"
+      "description": "`requestPropertyName` 'rateLimit' → 'rateLimit_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-27",
@@ -452,7 +1357,44 @@
         "values": [
           "400"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-28",
@@ -467,7 +1409,44 @@
       "kind": "number",
       "original": "56",
       "replacement": "57",
-      "description": "`subnet` 56 → 57"
+      "description": "`subnet` 56 → 57",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-29",
@@ -482,7 +1461,44 @@
       "kind": "number",
       "original": "56",
       "replacement": "57",
-      "description": "`ipv6Subnet` 56 → 57"
+      "description": "`ipv6Subnet` 56 → 57",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-30",
@@ -497,7 +1513,44 @@
       "kind": "string",
       "original": "'express-rate-limit'",
       "replacement": "'express-rate-limit_x'",
-      "description": "`createDebugLogger('express-rate-limit')`: 'express-rate-limit' → 'express-rate-limit_x'"
+      "description": "`createDebugLogger('express-rate-limit')`: 'express-rate-limit' → 'express-rate-limit_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-31",
@@ -512,7 +1565,44 @@
       "kind": "string",
       "original": "'creating new rate limiter with %o'",
       "replacement": "'creating new rate limiter with %o_x'",
-      "description": "`debug('creating new rate limiter with %…`: 'creating new rate limiter with %o' → 'creating new rate limiter with %o_x'"
+      "description": "`debug('creating new rate limiter with %…`: 'creating new rate limiter with %o' → 'creating new rate limiter with %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-32",
@@ -527,7 +1617,44 @@
       "kind": "string",
       "original": "'set %s to %o'",
       "replacement": "'set %s to %o_x'",
-      "description": "`debug('set %s to %o', key, val)`: 'set %s to %o' → 'set %s to %o_x'"
+      "description": "`debug('set %s to %o', key, val)`: 'set %s to %o' → 'set %s to %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-33",
@@ -542,7 +1669,44 @@
       "kind": "string",
       "original": "'executing init for store'",
       "replacement": "'executing init for store_x'",
-      "description": "`debug('executing init for store')`: 'executing init for store' → 'executing init for store_x'"
+      "description": "`debug('executing init for store')`: 'executing init for store' → 'executing init for store_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-34",
@@ -563,7 +1727,44 @@
         "values": [
           "express-rate-limit: async error during store initialization."
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-35",
@@ -578,7 +1779,44 @@
       "kind": "string",
       "original": "'express-rate-limit: error during store initialization.'",
       "replacement": "'express-rate-limit: error during store initialization._x'",
-      "description": "`config.logger.error( error, 'express-ra…`: 'express-rate-limit: error during store initializ… → 'express-rate-limit: error during store initializ…"
+      "description": "`config.logger.error( error, 'express-ra…`: 'express-rate-limit: error during store initializ… → 'express-rate-limit: error during store initializ…",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-36",
@@ -599,7 +1837,44 @@
         "values": [
           "close"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-37",
@@ -620,7 +1895,44 @@
         "values": [
           "finish"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-38",
@@ -641,7 +1953,44 @@
         "values": [
           "error"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-39",
@@ -656,7 +2005,44 @@
       "kind": "string",
       "original": "'requested %o'",
       "replacement": "'requested %o_x'",
-      "description": "`debug('requested %o', request.originalU…`: 'requested %o' → 'requested %o_x'"
+      "description": "`debug('requested %o', request.originalU…`: 'requested %o' → 'requested %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-40",
@@ -671,7 +2057,44 @@
       "kind": "string",
       "original": "'request from ip %o'",
       "replacement": "'request from ip %o_x'",
-      "description": "`debug('request from ip %o', request.ip)`: 'request from ip %o' → 'request from ip %o_x'"
+      "description": "`debug('request from ip %o', request.ip)`: 'request from ip %o' → 'request from ip %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-41",
@@ -686,7 +2109,44 @@
       "kind": "string",
       "original": "'skipping request'",
       "replacement": "'skipping request_x'",
-      "description": "`debug('skipping request')`: 'skipping request' → 'skipping request_x'"
+      "description": "`debug('skipping request')`: 'skipping request' → 'skipping request_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-42",
@@ -701,7 +2161,44 @@
       "kind": "string",
       "original": "'computed key %o'",
       "replacement": "'computed key %o_x'",
-      "description": "`debug('computed key %o', key)`: 'computed key %o' → 'computed key %o_x'"
+      "description": "`debug('computed key %o', key)`: 'computed key %o' → 'computed key %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-43",
@@ -716,7 +2213,44 @@
       "kind": "string",
       "original": "'incrementing count'",
       "replacement": "'incrementing count_x'",
-      "description": "`debug('incrementing count')`: 'incrementing count' → 'incrementing count_x'"
+      "description": "`debug('incrementing count')`: 'incrementing count' → 'incrementing count_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-44",
@@ -731,7 +2265,44 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`totalHits` 0 → 1"
+      "description": "`totalHits` 0 → 1",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-45",
@@ -746,7 +2317,44 @@
       "kind": "string",
       "original": "'express-rate-limit: error from store, allowing request without rate-limiting.'",
       "replacement": "'express-rate-limit: error from store, allowing request without rate-limiting._x'",
-      "description": "`config.logger.error( error, 'express-ra…`: 'express-rate-limit: error from store, allowing r… → 'express-rate-limit: error from store, allowing r…"
+      "description": "`config.logger.error( error, 'express-ra…`: 'express-rate-limit: error from store, allowing r… → 'express-rate-limit: error from store, allowing r…",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-46",
@@ -761,7 +2369,44 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`Math.max(limit - totalHits, 0)`: 0 → 1"
+      "description": "`Math.max(limit - totalHits, 0)`: 0 → 1",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-47",
@@ -776,7 +2421,44 @@
       "kind": "string",
       "original": "'set request.%s.%s to be %o'",
       "replacement": "'set request.%s.%s to be %o_x'",
-      "description": "`debug( 'set request.%s.%s to be %o', co…`: 'set request.%s.%s to be %o' → 'set request.%s.%s to be %o_x'"
+      "description": "`debug( 'set request.%s.%s to be %o', co…`: 'set request.%s.%s to be %o' → 'set request.%s.%s to be %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-48",
@@ -791,7 +2473,44 @@
       "kind": "string",
       "original": "'current'",
       "replacement": "'current_x'",
-      "description": "`Object.defineProperty(info, 'current', …`: 'current' → 'current_x'"
+      "description": "`Object.defineProperty(info, 'current', …`: 'current' → 'current_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-49",
@@ -806,7 +2525,44 @@
       "kind": "string",
       "original": "'set legacy headers'",
       "replacement": "'set legacy headers_x'",
-      "description": "`debug('set legacy headers')`: 'set legacy headers' → 'set legacy headers_x'"
+      "description": "`debug('set legacy headers')`: 'set legacy headers' → 'set legacy headers_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-50",
@@ -827,7 +2583,44 @@
         "values": [
           "draft-6"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-51",
@@ -842,7 +2635,44 @@
       "kind": "string",
       "original": "'set ietf draft 6 headers'",
       "replacement": "'set ietf draft 6 headers_x'",
-      "description": "`debug('set ietf draft 6 headers')`: 'set ietf draft 6 headers' → 'set ietf draft 6 headers_x'"
+      "description": "`debug('set ietf draft 6 headers')`: 'set ietf draft 6 headers' → 'set ietf draft 6 headers_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-52",
@@ -863,7 +2693,44 @@
         "values": [
           "draft-7"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-53",
@@ -878,7 +2745,44 @@
       "kind": "string",
       "original": "'set ietf draft 7 headers'",
       "replacement": "'set ietf draft 7 headers_x'",
-      "description": "`debug('set ietf draft 7 headers')`: 'set ietf draft 7 headers' → 'set ietf draft 7 headers_x'"
+      "description": "`debug('set ietf draft 7 headers')`: 'set ietf draft 7 headers' → 'set ietf draft 7 headers_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-54",
@@ -899,7 +2803,44 @@
         "values": [
           "draft-8"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-55",
@@ -914,7 +2855,44 @@
       "kind": "string",
       "original": "'set ietf draft 8 headers'",
       "replacement": "'set ietf draft 8 headers_x'",
-      "description": "`debug('set ietf draft 8 headers')`: 'set ietf draft 8 headers' → 'set ietf draft 8 headers_x'"
+      "description": "`debug('set ietf draft 8 headers')`: 'set ietf draft 8 headers' → 'set ietf draft 8 headers_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-56",
@@ -929,7 +2907,44 @@
       "kind": "string",
       "original": "'set name to %o'",
       "replacement": "'set name to %o_x'",
-      "description": "`debug('set name to %o', name)`: 'set name to %o' → 'set name to %o_x'"
+      "description": "`debug('set name to %o', name)`: 'set name to %o' → 'set name to %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-57",
@@ -944,7 +2959,44 @@
       "kind": "string",
       "original": "'decrementing count'",
       "replacement": "'decrementing count_x'",
-      "description": "`debug('decrementing count')`: 'decrementing count' → 'decrementing count_x'"
+      "description": "`debug('decrementing count')`: 'decrementing count' → 'decrementing count_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-58",
@@ -959,7 +3011,44 @@
       "kind": "string",
       "original": "'computed requestWasSuccessful as %o'",
       "replacement": "'computed requestWasSuccessful as %o_x'",
-      "description": "`debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'"
+      "description": "`debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-59",
@@ -974,7 +3063,44 @@
       "kind": "string",
       "original": "'computed requestWasSuccessful as %o'",
       "replacement": "'computed requestWasSuccessful as %o_x'",
-      "description": "`debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'"
+      "description": "`debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-60",
@@ -989,7 +3115,44 @@
       "kind": "string",
       "original": "'limit exceeded'",
       "replacement": "'limit exceeded_x'",
-      "description": "`debug('limit exceeded')`: 'limit exceeded' → 'limit exceeded_x'"
+      "description": "`debug('limit exceeded')`: 'limit exceeded' → 'limit exceeded_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     },
     {
       "id": "value-61",
@@ -1004,7 +3167,44 @@
       "kind": "string",
       "original": "'set retry-after header'",
       "replacement": "'set retry-after header_x'",
-      "description": "`debug('set retry-after header')`: 'set retry-after header' → 'set retry-after header_x'"
+      "description": "`debug('set retry-after header')`: 'set retry-after header' → 'set retry-after header_x'",
+      "readers": [
+        {
+          "file": "source/rate-limit.ts",
+          "line": 41,
+          "endLine": 45
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 54,
+          "endLine": 96
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 140,
+          "endLine": 147
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 156,
+          "endLine": 315
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 328,
+          "endLine": 335
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 355,
+          "endLine": 651
+        },
+        {
+          "file": "source/rate-limit.ts",
+          "line": 556,
+          "endLine": 570
+        }
+      ]
     }
   ]
 }

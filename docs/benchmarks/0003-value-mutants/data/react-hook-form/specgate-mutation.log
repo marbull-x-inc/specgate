@@ -1,5 +1,5 @@
 specgate check (advisory): 6 units, 33 guarantees, 1213 linked tests
-  fail 4 · warn 111 · info 2
+  fail 4 · warn 110 · info 1
   ❌ [guarantee-no-test] src/useFormContext.tsx:24 useFormContext.ok.returns-methods has no test naming it
   ❌ [guarantee-no-test] src/useFormContext.tsx:26 useFormContext.err.no-provider has no test naming it
   ❌ [operation-no-guarantee] src/useFormContext.tsx:52 FormProvider has no guarantee (doc without @guarantee / @throws)
@@ -109,14 +109,12 @@ specgate check (advisory): 6 units, 33 guarantees, 1213 linked tests
   ⚠️ [mutant-survived] src/useForm.ts:24 useForm: `criteriaMode: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useForm.ts:25 useForm: `delayError: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useForm.ts:26 useForm: `shouldUnregister: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] src/useForm.ts:27 useForm: `shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useForm.ts:28 useForm: `context: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useWatch.ts:217 useWatch: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useWatch.ts:250 useWatch: ArrayDeclaration mutant: `[]` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useWatch.ts:252 useWatch: ArrowFunction mutant: `() => undefined` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/useWatch.ts:266 useWatch: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
-  ℹ️ [decision-unspecified] src/useForm.ts:132 useForm commits to output "defaultValues" in `'defaultValues'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
 
 wrote <work>/react-hook-form/.specgate-mutation/report.json
       <work>/react-hook-form/.specgate-mutation/summary.md

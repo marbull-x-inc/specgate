@@ -1,42 +1,42 @@
-baseline run 15348 ms; timeout 76740 ms
-value-7 Survived   src/vanilla/utils/atomWithRefresh.ts:46 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
+baseline run 10338 ms; timeout 51690 ms
 value-2 Killed     src/vanilla/utils/atomWithLazy.ts:14 `Object.defineProperty(a, 'init', { get(…`: 'init' → 'init_x'
-value-5 Killed     src/vanilla/utils/atomWithRefresh.ts:42 `args.length === 0`: 0 → 1
 value-3 Survived   src/vanilla/utils/atomWithRefresh.ts:32 `atom(0)`: 0 → 1
+value-5 Killed     src/vanilla/utils/atomWithRefresh.ts:42 `args.length === 0`: 0 → 1
+value-7 Survived   src/vanilla/utils/atomWithRefresh.ts:46 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
 value-4 Survived   src/vanilla/utils/atomWithRefresh.ts:33 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
-value-14 Killed     src/vanilla/utils/splitAtom.ts:94 `index < 0`: 0 → 1
 value-6 Survived   src/vanilla/utils/atomWithRefresh.ts:43 `c + 1`: 1 → 2
-value-1 Survived   src/vanilla/utils/atomWithDefault.ts:25 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
+value-14 Killed     src/vanilla/utils/splitAtom.ts:94 `index < 0`: 0 → 1
 value-15 Killed     src/vanilla/utils/splitAtom.ts:113 `index < 0`: 0 → 1
-value-11 Survived   src/vanilla/utils/atomWithStorage.ts:242 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
 value-10 Survived   src/vanilla/utils/atomWithStorage.ts:188 `window.removeEventListener('storage', s…`: 'storage' → 'storage_x'
-value-8 Survived   src/vanilla/utils/atomWithStorage.ts:111 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
+value-13 Survived   src/vanilla/utils/constants.ts:6 `process.env.NODE_ENV !== 'production' ?…`: 'RESET' → 'RESET_x'
 value-9 Killed     src/vanilla/utils/atomWithStorage.ts:186 `window.addEventListener('storage', stor…`: 'storage' → 'storage_x'
+value-1 Survived   src/vanilla/utils/atomWithDefault.ts:25 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
+value-8 Survived   src/vanilla/utils/atomWithStorage.ts:111 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
+value-11 Survived   src/vanilla/utils/atomWithStorage.ts:242 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
+value-12 Survived   src/vanilla/utils/constants.ts:6 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
 value-17 Killed     src/vanilla/utils/splitAtom.ts:123 `index + 1`: 1 → 2
+value-20 Killed     src/vanilla/utils/splitAtom.ts:164 `index >= 0`: 0 → 1
 value-16 Killed     src/vanilla/utils/splitAtom.ts:121 `arr.slice(0, index)`: 0 → 1
 value-18 Survived   src/vanilla/utils/splitAtom.ts:151 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
-value-19 Killed     src/vanilla/utils/splitAtom.ts:162 `case 'remove': { const index = get(spli…`: 'remove' → 'remove_x'
-value-22 Killed     src/vanilla/utils/splitAtom.ts:168 `index + 1`: 1 → 2
-value-23 Killed     src/vanilla/utils/splitAtom.ts:173 `case 'insert': { const index = action.b…`: 'insert' → 'insert_x'
 value-21 Survived   src/vanilla/utils/splitAtom.ts:167 `arr.slice(0, index)`: 0 → 1
+value-19 Killed     src/vanilla/utils/splitAtom.ts:162 `case 'remove': { const index = get(spli…`: 'remove' → 'remove_x'
+value-23 Killed     src/vanilla/utils/splitAtom.ts:173 `case 'insert': { const index = action.b…`: 'insert' → 'insert_x'
 value-24 Killed     src/vanilla/utils/splitAtom.ts:177 `index >= 0`: 0 → 1
-value-20 Killed     src/vanilla/utils/splitAtom.ts:164 `index >= 0`: 0 → 1
+value-26 Killed     src/vanilla/utils/splitAtom.ts:187 `case 'move': { const index1 = get(split…`: 'move' → 'move_x'
+value-22 Killed     src/vanilla/utils/splitAtom.ts:168 `index + 1`: 1 → 2
 value-28 Survived   src/vanilla/utils/splitAtom.ts:192 `index2 >= 0`: 0 → 1
 value-27 Killed     src/vanilla/utils/splitAtom.ts:192 `index1 >= 0`: 0 → 1
 value-25 Killed     src/vanilla/utils/splitAtom.ts:180 `arr.slice(0, index)`: 0 → 1
-value-26 Killed     src/vanilla/utils/splitAtom.ts:187 `case 'move': { const index1 = get(split…`: 'move' → 'move_x'
-value-12 Survived   src/vanilla/utils/constants.ts:6 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
 value-29 Killed     src/vanilla/utils/splitAtom.ts:196 `arr.slice(0, index1)`: 0 → 1
 value-30 Killed     src/vanilla/utils/splitAtom.ts:197 `index1 + 1`: 1 → 2
 value-33 Survived   src/vanilla/utils/unwrap.ts:56 `atom(0)`: 0 → 1
-value-32 Survived   src/vanilla/utils/splitAtom.ts:206 `index1 + 1`: 1 → 2
-value-36 Survived   src/vanilla/utils/unwrap.ts:121 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
 value-34 Survived   src/vanilla/utils/unwrap.ts:60 `c + 1`: 1 → 2
 value-35 Survived   src/vanilla/utils/unwrap.ts:64 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
+value-36 Survived   src/vanilla/utils/unwrap.ts:121 `process.env.NODE_ENV !== 'production'`: 'production' → 'production_x'
 value-31 Killed     src/vanilla/utils/splitAtom.ts:203 `arr.slice(0, index2)`: 0 → 1
-value-13 Survived   src/vanilla/utils/constants.ts:6 `process.env.NODE_ENV !== 'production' ?…`: 'RESET' → 'RESET_x'
-value-mutants: 36 mutant(s): 18 Survived, 18 Killed; 67710 ms (baseline run 15348 ms)
+value-32 Survived   src/vanilla/utils/splitAtom.ts:206 `index1 + 1`: 1 → 2
+value-mutants: 36 mutant(s): 18 Survived, 18 Killed; 27731 ms (baseline run 10338 ms)
 wrote <work>/jotai/reports/value/value.json
-real 68.00
-user 265.50
-sys 97.92
+real 27.82
+user 183.73
+sys 78.50

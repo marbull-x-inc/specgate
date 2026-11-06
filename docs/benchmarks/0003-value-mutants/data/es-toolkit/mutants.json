@@ -59,7 +59,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`words.length === 0`: 0 → 1"
+      "description": "`words.length === 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/string/camelCase.ts",
+          "line": 24,
+          "endLine": 34
+        }
+      ]
     },
     {
       "id": "value-2",
@@ -74,7 +81,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`str.charAt(0)`: 0 → 1"
+      "description": "`str.charAt(0)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/string/capitalize.ts",
+          "line": 18,
+          "endLine": 20
+        }
+      ]
     },
     {
       "id": "value-3",
@@ -89,7 +103,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`str.slice(1)`: 1 → 2"
+      "description": "`str.slice(1)`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/string/capitalize.ts",
+          "line": 18,
+          "endLine": 20
+        }
+      ]
     },
     {
       "id": "value-4",
@@ -104,7 +125,14 @@
       "kind": "string",
       "original": "'_'",
       "replacement": "'__x'",
-      "description": "`words.map(word => word.toUpperCase()).j…`: '_' → '__x'"
+      "description": "`words.map(word => word.toUpperCase()).j…`: '_' → '__x'",
+      "readers": [
+        {
+          "file": "src/string/constantCase.ts",
+          "line": 24,
+          "endLine": 27
+        }
+      ]
     },
     {
       "id": "value-5",
@@ -119,7 +147,17 @@
       "kind": "element",
       "original": "'Æ', ",
       "replacement": "",
-      "description": "`'Æ'` removed from the list `['Æ', 'Ae']`"
+      "description": "`'Æ'` removed from the list `['Æ', 'Ae']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-6",
@@ -134,7 +172,17 @@
       "kind": "element",
       "original": ", 'Ae'",
       "replacement": "",
-      "description": "`'Ae'` removed from the list `['Æ', 'Ae']`"
+      "description": "`'Ae'` removed from the list `['Æ', 'Ae']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-7",
@@ -149,7 +197,17 @@
       "kind": "element",
       "original": "'Ð', ",
       "replacement": "",
-      "description": "`'Ð'` removed from the list `['Ð', 'D']`"
+      "description": "`'Ð'` removed from the list `['Ð', 'D']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-8",
@@ -164,7 +222,17 @@
       "kind": "element",
       "original": ", 'D'",
       "replacement": "",
-      "description": "`'D'` removed from the list `['Ð', 'D']`"
+      "description": "`'D'` removed from the list `['Ð', 'D']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-9",
@@ -179,7 +247,17 @@
       "kind": "element",
       "original": "'Ø', ",
       "replacement": "",
-      "description": "`'Ø'` removed from the list `['Ø', 'O']`"
+      "description": "`'Ø'` removed from the list `['Ø', 'O']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-10",
@@ -194,7 +272,17 @@
       "kind": "element",
       "original": ", 'O'",
       "replacement": "",
-      "description": "`'O'` removed from the list `['Ø', 'O']`"
+      "description": "`'O'` removed from the list `['Ø', 'O']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-11",
@@ -209,7 +297,17 @@
       "kind": "element",
       "original": "'Þ', ",
       "replacement": "",
-      "description": "`'Þ'` removed from the list `['Þ', 'Th']`"
+      "description": "`'Þ'` removed from the list `['Þ', 'Th']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-12",
@@ -224,7 +322,17 @@
       "kind": "element",
       "original": ", 'Th'",
       "replacement": "",
-      "description": "`'Th'` removed from the list `['Þ', 'Th']`"
+      "description": "`'Th'` removed from the list `['Þ', 'Th']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-13",
@@ -239,7 +347,17 @@
       "kind": "element",
       "original": "'ß', ",
       "replacement": "",
-      "description": "`'ß'` removed from the list `['ß', 'ss']`"
+      "description": "`'ß'` removed from the list `['ß', 'ss']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-14",
@@ -254,7 +372,17 @@
       "kind": "element",
       "original": ", 'ss'",
       "replacement": "",
-      "description": "`'ss'` removed from the list `['ß', 'ss']`"
+      "description": "`'ss'` removed from the list `['ß', 'ss']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-15",
@@ -269,7 +397,17 @@
       "kind": "element",
       "original": "'æ', ",
       "replacement": "",
-      "description": "`'æ'` removed from the list `['æ', 'ae']`"
+      "description": "`'æ'` removed from the list `['æ', 'ae']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-16",
@@ -284,7 +422,17 @@
       "kind": "element",
       "original": ", 'ae'",
       "replacement": "",
-      "description": "`'ae'` removed from the list `['æ', 'ae']`"
+      "description": "`'ae'` removed from the list `['æ', 'ae']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-17",
@@ -299,7 +447,17 @@
       "kind": "element",
       "original": "'ð', ",
       "replacement": "",
-      "description": "`'ð'` removed from the list `['ð', 'd']`"
+      "description": "`'ð'` removed from the list `['ð', 'd']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-18",
@@ -314,7 +472,17 @@
       "kind": "element",
       "original": ", 'd'",
       "replacement": "",
-      "description": "`'d'` removed from the list `['ð', 'd']`"
+      "description": "`'d'` removed from the list `['ð', 'd']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-19",
@@ -329,7 +497,17 @@
       "kind": "element",
       "original": "'ø', ",
       "replacement": "",
-      "description": "`'ø'` removed from the list `['ø', 'o']`"
+      "description": "`'ø'` removed from the list `['ø', 'o']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-20",
@@ -344,7 +522,17 @@
       "kind": "element",
       "original": ", 'o'",
       "replacement": "",
-      "description": "`'o'` removed from the list `['ø', 'o']`"
+      "description": "`'o'` removed from the list `['ø', 'o']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-21",
@@ -359,7 +547,17 @@
       "kind": "element",
       "original": "'þ', ",
       "replacement": "",
-      "description": "`'þ'` removed from the list `['þ', 'th']`"
+      "description": "`'þ'` removed from the list `['þ', 'th']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-22",
@@ -374,7 +572,17 @@
       "kind": "element",
       "original": ", 'th'",
       "replacement": "",
-      "description": "`'th'` removed from the list `['þ', 'th']`"
+      "description": "`'th'` removed from the list `['þ', 'th']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-23",
@@ -389,7 +597,17 @@
       "kind": "element",
       "original": "'Đ', ",
       "replacement": "",
-      "description": "`'Đ'` removed from the list `['Đ', 'D']`"
+      "description": "`'Đ'` removed from the list `['Đ', 'D']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-24",
@@ -404,7 +622,17 @@
       "kind": "element",
       "original": ", 'D'",
       "replacement": "",
-      "description": "`'D'` removed from the list `['Đ', 'D']`"
+      "description": "`'D'` removed from the list `['Đ', 'D']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-25",
@@ -419,7 +647,17 @@
       "kind": "element",
       "original": "'đ', ",
       "replacement": "",
-      "description": "`'đ'` removed from the list `['đ', 'd']`"
+      "description": "`'đ'` removed from the list `['đ', 'd']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-26",
@@ -434,7 +672,17 @@
       "kind": "element",
       "original": ", 'd'",
       "replacement": "",
-      "description": "`'d'` removed from the list `['đ', 'd']`"
+      "description": "`'d'` removed from the list `['đ', 'd']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-27",
@@ -449,7 +697,17 @@
       "kind": "element",
       "original": "'Ħ', ",
       "replacement": "",
-      "description": "`'Ħ'` removed from the list `['Ħ', 'H']`"
+      "description": "`'Ħ'` removed from the list `['Ħ', 'H']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-28",
@@ -464,7 +722,17 @@
       "kind": "element",
       "original": ", 'H'",
       "replacement": "",
-      "description": "`'H'` removed from the list `['Ħ', 'H']`"
+      "description": "`'H'` removed from the list `['Ħ', 'H']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-29",
@@ -479,7 +747,17 @@
       "kind": "element",
       "original": "'ħ', ",
       "replacement": "",
-      "description": "`'ħ'` removed from the list `['ħ', 'h']`"
+      "description": "`'ħ'` removed from the list `['ħ', 'h']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-30",
@@ -494,7 +772,17 @@
       "kind": "element",
       "original": ", 'h'",
       "replacement": "",
-      "description": "`'h'` removed from the list `['ħ', 'h']`"
+      "description": "`'h'` removed from the list `['ħ', 'h']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-31",
@@ -509,7 +797,17 @@
       "kind": "element",
       "original": "'ı', ",
       "replacement": "",
-      "description": "`'ı'` removed from the list `['ı', 'i']`"
+      "description": "`'ı'` removed from the list `['ı', 'i']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-32",
@@ -524,7 +822,17 @@
       "kind": "element",
       "original": ", 'i'",
       "replacement": "",
-      "description": "`'i'` removed from the list `['ı', 'i']`"
+      "description": "`'i'` removed from the list `['ı', 'i']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-33",
@@ -539,7 +847,17 @@
       "kind": "element",
       "original": "'Ĳ', ",
       "replacement": "",
-      "description": "`'Ĳ'` removed from the list `['Ĳ', 'IJ']`"
+      "description": "`'Ĳ'` removed from the list `['Ĳ', 'IJ']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-34",
@@ -554,7 +872,17 @@
       "kind": "element",
       "original": ", 'IJ'",
       "replacement": "",
-      "description": "`'IJ'` removed from the list `['Ĳ', 'IJ']`"
+      "description": "`'IJ'` removed from the list `['Ĳ', 'IJ']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-35",
@@ -569,7 +897,17 @@
       "kind": "element",
       "original": "'ĳ', ",
       "replacement": "",
-      "description": "`'ĳ'` removed from the list `['ĳ', 'ij']`"
+      "description": "`'ĳ'` removed from the list `['ĳ', 'ij']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-36",
@@ -584,7 +922,17 @@
       "kind": "element",
       "original": ", 'ij'",
       "replacement": "",
-      "description": "`'ij'` removed from the list `['ĳ', 'ij']`"
+      "description": "`'ij'` removed from the list `['ĳ', 'ij']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-37",
@@ -599,7 +947,17 @@
       "kind": "element",
       "original": "'ĸ', ",
       "replacement": "",
-      "description": "`'ĸ'` removed from the list `['ĸ', 'k']`"
+      "description": "`'ĸ'` removed from the list `['ĸ', 'k']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-38",
@@ -614,7 +972,17 @@
       "kind": "element",
       "original": ", 'k'",
       "replacement": "",
-      "description": "`'k'` removed from the list `['ĸ', 'k']`"
+      "description": "`'k'` removed from the list `['ĸ', 'k']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-39",
@@ -629,7 +997,17 @@
       "kind": "element",
       "original": "'Ŀ', ",
       "replacement": "",
-      "description": "`'Ŀ'` removed from the list `['Ŀ', 'L']`"
+      "description": "`'Ŀ'` removed from the list `['Ŀ', 'L']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-40",
@@ -644,7 +1022,17 @@
       "kind": "element",
       "original": ", 'L'",
       "replacement": "",
-      "description": "`'L'` removed from the list `['Ŀ', 'L']`"
+      "description": "`'L'` removed from the list `['Ŀ', 'L']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-41",
@@ -659,7 +1047,17 @@
       "kind": "element",
       "original": "'ŀ', ",
       "replacement": "",
-      "description": "`'ŀ'` removed from the list `['ŀ', 'l']`"
+      "description": "`'ŀ'` removed from the list `['ŀ', 'l']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-42",
@@ -674,7 +1072,17 @@
       "kind": "element",
       "original": ", 'l'",
       "replacement": "",
-      "description": "`'l'` removed from the list `['ŀ', 'l']`"
+      "description": "`'l'` removed from the list `['ŀ', 'l']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-43",
@@ -689,7 +1097,17 @@
       "kind": "element",
       "original": "'Ł', ",
       "replacement": "",
-      "description": "`'Ł'` removed from the list `['Ł', 'L']`"
+      "description": "`'Ł'` removed from the list `['Ł', 'L']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-44",
@@ -704,7 +1122,17 @@
       "kind": "element",
       "original": ", 'L'",
       "replacement": "",
-      "description": "`'L'` removed from the list `['Ł', 'L']`"
+      "description": "`'L'` removed from the list `['Ł', 'L']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-45",
@@ -719,7 +1147,17 @@
       "kind": "element",
       "original": "'ł', ",
       "replacement": "",
-      "description": "`'ł'` removed from the list `['ł', 'l']`"
+      "description": "`'ł'` removed from the list `['ł', 'l']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-46",
@@ -734,7 +1172,17 @@
       "kind": "element",
       "original": ", 'l'",
       "replacement": "",
-      "description": "`'l'` removed from the list `['ł', 'l']`"
+      "description": "`'l'` removed from the list `['ł', 'l']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-47",
@@ -749,7 +1197,17 @@
       "kind": "element",
       "original": "'ŉ', ",
       "replacement": "",
-      "description": "`'ŉ'` removed from the list `['ŉ', \"'n\"]`"
+      "description": "`'ŉ'` removed from the list `['ŉ', \"'n\"]`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-48",
@@ -764,7 +1222,17 @@
       "kind": "element",
       "original": ", \"'n\"",
       "replacement": "",
-      "description": "`\"'n\"` removed from the list `['ŉ', \"'n\"]`"
+      "description": "`\"'n\"` removed from the list `['ŉ', \"'n\"]`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-49",
@@ -779,7 +1247,17 @@
       "kind": "element",
       "original": "'Ŋ', ",
       "replacement": "",
-      "description": "`'Ŋ'` removed from the list `['Ŋ', 'N']`"
+      "description": "`'Ŋ'` removed from the list `['Ŋ', 'N']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-50",
@@ -794,7 +1272,17 @@
       "kind": "element",
       "original": ", 'N'",
       "replacement": "",
-      "description": "`'N'` removed from the list `['Ŋ', 'N']`"
+      "description": "`'N'` removed from the list `['Ŋ', 'N']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-51",
@@ -809,7 +1297,17 @@
       "kind": "element",
       "original": "'ŋ', ",
       "replacement": "",
-      "description": "`'ŋ'` removed from the list `['ŋ', 'n']`"
+      "description": "`'ŋ'` removed from the list `['ŋ', 'n']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-52",
@@ -824,7 +1322,17 @@
       "kind": "element",
       "original": ", 'n'",
       "replacement": "",
-      "description": "`'n'` removed from the list `['ŋ', 'n']`"
+      "description": "`'n'` removed from the list `['ŋ', 'n']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-53",
@@ -839,7 +1347,17 @@
       "kind": "element",
       "original": "'Œ', ",
       "replacement": "",
-      "description": "`'Œ'` removed from the list `['Œ', 'Oe']`"
+      "description": "`'Œ'` removed from the list `['Œ', 'Oe']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-54",
@@ -854,7 +1372,17 @@
       "kind": "element",
       "original": ", 'Oe'",
       "replacement": "",
-      "description": "`'Oe'` removed from the list `['Œ', 'Oe']`"
+      "description": "`'Oe'` removed from the list `['Œ', 'Oe']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-55",
@@ -869,7 +1397,17 @@
       "kind": "element",
       "original": "'œ', ",
       "replacement": "",
-      "description": "`'œ'` removed from the list `['œ', 'oe']`"
+      "description": "`'œ'` removed from the list `['œ', 'oe']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-56",
@@ -884,7 +1422,17 @@
       "kind": "element",
       "original": ", 'oe'",
       "replacement": "",
-      "description": "`'oe'` removed from the list `['œ', 'oe']`"
+      "description": "`'oe'` removed from the list `['œ', 'oe']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-57",
@@ -899,7 +1447,17 @@
       "kind": "element",
       "original": "'Ŧ', ",
       "replacement": "",
-      "description": "`'Ŧ'` removed from the list `['Ŧ', 'T']`"
+      "description": "`'Ŧ'` removed from the list `['Ŧ', 'T']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-58",
@@ -914,7 +1472,17 @@
       "kind": "element",
       "original": ", 'T'",
       "replacement": "",
-      "description": "`'T'` removed from the list `['Ŧ', 'T']`"
+      "description": "`'T'` removed from the list `['Ŧ', 'T']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-59",
@@ -929,7 +1497,17 @@
       "kind": "element",
       "original": "'ŧ', ",
       "replacement": "",
-      "description": "`'ŧ'` removed from the list `['ŧ', 't']`"
+      "description": "`'ŧ'` removed from the list `['ŧ', 't']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-60",
@@ -944,7 +1522,17 @@
       "kind": "element",
       "original": ", 't'",
       "replacement": "",
-      "description": "`'t'` removed from the list `['ŧ', 't']`"
+      "description": "`'t'` removed from the list `['ŧ', 't']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-61",
@@ -959,7 +1547,17 @@
       "kind": "element",
       "original": "'ſ', ",
       "replacement": "",
-      "description": "`'ſ'` removed from the list `['ſ', 's']`"
+      "description": "`'ſ'` removed from the list `['ſ', 's']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-62",
@@ -974,7 +1572,17 @@
       "kind": "element",
       "original": ", 's'",
       "replacement": "",
-      "description": "`'s'` removed from the list `['ſ', 's']`"
+      "description": "`'s'` removed from the list `['ſ', 's']`",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        }
+      ],
+      "names": [
+        "deburrMap"
+      ]
     },
     {
       "id": "value-63",
@@ -989,7 +1597,29 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`index` 0 → 1"
+      "description": "`index` 0 → 1",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-64",
@@ -1004,7 +1634,29 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`char.charCodeAt(0)`: 0 → 1"
+      "description": "`char.charCodeAt(0)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-65",
@@ -1025,7 +1677,29 @@
         "values": [
           "128"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-66",
@@ -1040,7 +1714,29 @@
       "kind": "string",
       "original": "'NFD'",
       "replacement": "'NFD_x'",
-      "description": "`char.normalize('NFD')`: 'NFD' → 'NFD_x'"
+      "description": "`char.normalize('NFD')`: 'NFD' → 'NFD_x'",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-67",
@@ -1055,7 +1751,29 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`index` 0 → 1"
+      "description": "`index` 0 → 1",
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-68",
@@ -1076,7 +1794,29 @@
         "values": [
           "192"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-69",
@@ -1097,7 +1837,29 @@
         "values": [
           "563"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-70",
@@ -1118,7 +1880,29 @@
         "values": [
           "7680"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-71",
@@ -1139,7 +1923,29 @@
         "values": [
           "7929"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-72",
@@ -1160,7 +1966,29 @@
         "values": [
           "8490"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-73",
@@ -1181,7 +2009,29 @@
         "values": [
           "8491"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-74",
@@ -1202,7 +2052,29 @@
         "values": [
           "768"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-75",
@@ -1223,7 +2095,29 @@
         "values": [
           "879"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-76",
@@ -1244,7 +2138,29 @@
         "values": [
           "8400"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-77",
@@ -1265,7 +2181,29 @@
         "values": [
           "8447"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-78",
@@ -1286,7 +2224,29 @@
         "values": [
           "65056"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-79",
@@ -1307,7 +2267,29 @@
         "values": [
           "65071"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/deburr.ts",
+          "line": 64,
+          "endLine": 72
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 74,
+          "endLine": 108
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 110,
+          "endLine": 112
+        },
+        {
+          "file": "src/string/deburr.ts",
+          "line": 114,
+          "endLine": 123
+        }
+      ]
     },
     {
       "id": "value-80",
@@ -1322,7 +2304,17 @@
       "kind": "entry",
       "original": "'&': '&amp;',\n  ",
       "replacement": "",
-      "description": "`'&': '&amp;'` removed from `htmlEscapes`"
+      "description": "`'&': '&amp;'` removed from `htmlEscapes`",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-81",
@@ -1337,7 +2329,17 @@
       "kind": "string",
       "original": "'&amp;'",
       "replacement": "'&amp;_x'",
-      "description": "`&` in `htmlEscapes` '&amp;' → '&amp;_x'"
+      "description": "`&` in `htmlEscapes` '&amp;' → '&amp;_x'",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-82",
@@ -1352,7 +2354,17 @@
       "kind": "entry",
       "original": "'<': '&lt;',\n  ",
       "replacement": "",
-      "description": "`'<': '&lt;'` removed from `htmlEscapes`"
+      "description": "`'<': '&lt;'` removed from `htmlEscapes`",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-83",
@@ -1367,7 +2379,17 @@
       "kind": "string",
       "original": "'&lt;'",
       "replacement": "'&lt;_x'",
-      "description": "`<` in `htmlEscapes` '&lt;' → '&lt;_x'"
+      "description": "`<` in `htmlEscapes` '&lt;' → '&lt;_x'",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-84",
@@ -1382,7 +2404,17 @@
       "kind": "entry",
       "original": "'>': '&gt;',\n  ",
       "replacement": "",
-      "description": "`'>': '&gt;'` removed from `htmlEscapes`"
+      "description": "`'>': '&gt;'` removed from `htmlEscapes`",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-85",
@@ -1397,7 +2429,17 @@
       "kind": "string",
       "original": "'&gt;'",
       "replacement": "'&gt;_x'",
-      "description": "`>` in `htmlEscapes` '&gt;' → '&gt;_x'"
+      "description": "`>` in `htmlEscapes` '&gt;' → '&gt;_x'",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-86",
@@ -1412,7 +2454,17 @@
       "kind": "entry",
       "original": "'\"': '&quot;',\n  ",
       "replacement": "",
-      "description": "`'\"': '&quot;'` removed from `htmlEscapes`"
+      "description": "`'\"': '&quot;'` removed from `htmlEscapes`",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-87",
@@ -1427,7 +2479,17 @@
       "kind": "string",
       "original": "'&quot;'",
       "replacement": "'&quot;_x'",
-      "description": "`\"` in `htmlEscapes` '&quot;' → '&quot;_x'"
+      "description": "`\"` in `htmlEscapes` '&quot;' → '&quot;_x'",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-88",
@@ -1442,7 +2504,17 @@
       "kind": "entry",
       "original": ",\n  \"'\": '&#39;'",
       "replacement": "",
-      "description": "`\"'\": '&#39;'` removed from `htmlEscapes`"
+      "description": "`\"'\": '&#39;'` removed from `htmlEscapes`",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-89",
@@ -1457,7 +2529,17 @@
       "kind": "string",
       "original": "'&#39;'",
       "replacement": "'&#39;_x'",
-      "description": "`'` in `htmlEscapes` '&#39;' → '&#39;_x'"
+      "description": "`'` in `htmlEscapes` '&#39;' → '&#39;_x'",
+      "readers": [
+        {
+          "file": "src/string/escape.ts",
+          "line": 26,
+          "endLine": 28
+        }
+      ],
+      "names": [
+        "htmlEscapes"
+      ]
     },
     {
       "id": "value-90",
@@ -1472,7 +2554,14 @@
       "kind": "string",
       "original": "'\\\\$&'",
       "replacement": "'\\\\$&_x'",
-      "description": "`str.replace(/[\\\\^$.*+?()[\\]{}|]/g, '\\\\$…`: '\\\\$&' → '\\\\$&_x'"
+      "description": "`str.replace(/[\\\\^$.*+?()[\\]{}|]/g, '\\\\$…`: '\\\\$&' → '\\\\$&_x'",
+      "readers": [
+        {
+          "file": "src/string/escapeRegExp.ts",
+          "line": 16,
+          "endLine": 18
+        }
+      ]
     },
     {
       "id": "value-91",
@@ -1487,7 +2576,14 @@
       "kind": "string",
       "original": "'-'",
       "replacement": "'-_x'",
-      "description": "`words.map(word => word.toLowerCase()).j…`: '-' → '-_x'"
+      "description": "`words.map(word => word.toLowerCase()).j…`: '-' → '-_x'",
+      "readers": [
+        {
+          "file": "src/string/kebabCase.ts",
+          "line": 24,
+          "endLine": 27
+        }
+      ]
     },
     {
       "id": "value-92",
@@ -1502,7 +2598,14 @@
       "kind": "string",
       "original": "' '",
       "replacement": "' _x'",
-      "description": "`words.map(word => word.toLowerCase()).j…`: ' ' → ' _x'"
+      "description": "`words.map(word => word.toLowerCase()).j…`: ' ' → ' _x'",
+      "readers": [
+        {
+          "file": "src/string/lowerCase.ts",
+          "line": 21,
+          "endLine": 24
+        }
+      ]
     },
     {
       "id": "value-93",
@@ -1517,7 +2620,14 @@
       "kind": "string",
       "original": "' '",
       "replacement": "' _x'",
-      "description": "the default `chars` ' ' → ' _x'"
+      "description": "the default `chars` ' ' → ' _x'",
+      "readers": [
+        {
+          "file": "src/string/pad.ts",
+          "line": 21,
+          "endLine": 23
+        }
+      ]
     },
     {
       "id": "value-94",
@@ -1538,7 +2648,14 @@
         "values": [
           "2"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/string/pad.ts",
+          "line": 21,
+          "endLine": 23
+        }
+      ]
     },
     {
       "id": "value-95",
@@ -1553,7 +2670,14 @@
       "kind": "string",
       "original": "'_'",
       "replacement": "'__x'",
-      "description": "`words.map(word => word.toLowerCase()).j…`: '_' → '__x'"
+      "description": "`words.map(word => word.toLowerCase()).j…`: '_' → '__x'",
+      "readers": [
+        {
+          "file": "src/string/snakeCase.ts",
+          "line": 25,
+          "endLine": 28
+        }
+      ]
     },
     {
       "id": "value-96",
@@ -1568,7 +2692,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`i` 0 → 1"
+      "description": "`i` 0 → 1",
+      "readers": [
+        {
+          "file": "src/string/startCase.ts",
+          "line": 22,
+          "endLine": 34
+        }
+      ]
     },
     {
       "id": "value-97",
@@ -1583,7 +2714,14 @@
       "kind": "string",
       "original": "' '",
       "replacement": "' _x'",
-      "description": "`result += ' '`: ' ' → ' _x'"
+      "description": "`result += ' '`: ' ' → ' _x'",
+      "readers": [
+        {
+          "file": "src/string/startCase.ts",
+          "line": 22,
+          "endLine": 34
+        }
+      ]
     },
     {
       "id": "value-98",
@@ -1598,7 +2736,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`word[0]`: 0 → 1"
+      "description": "`word[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/string/startCase.ts",
+          "line": 22,
+          "endLine": 34
+        }
+      ]
     },
     {
       "id": "value-99",
@@ -1613,7 +2758,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`word.slice(1)`: 1 → 2"
+      "description": "`word.slice(1)`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/string/startCase.ts",
+          "line": 22,
+          "endLine": 34
+        }
+      ]
     },
     {
       "id": "value-100",
@@ -1628,7 +2780,17 @@
       "kind": "entry",
       "original": "'&amp;': '&',\n  ",
       "replacement": "",
-      "description": "`'&amp;': '&'` removed from `htmlUnescapes`"
+      "description": "`'&amp;': '&'` removed from `htmlUnescapes`",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-101",
@@ -1643,7 +2805,17 @@
       "kind": "string",
       "original": "'&'",
       "replacement": "'&_x'",
-      "description": "`&amp;` in `htmlUnescapes` '&' → '&_x'"
+      "description": "`&amp;` in `htmlUnescapes` '&' → '&_x'",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-102",
@@ -1658,7 +2830,17 @@
       "kind": "entry",
       "original": "'&lt;': '<',\n  ",
       "replacement": "",
-      "description": "`'&lt;': '<'` removed from `htmlUnescapes`"
+      "description": "`'&lt;': '<'` removed from `htmlUnescapes`",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-103",
@@ -1673,7 +2855,17 @@
       "kind": "string",
       "original": "'<'",
       "replacement": "'<_x'",
-      "description": "`&lt;` in `htmlUnescapes` '<' → '<_x'"
+      "description": "`&lt;` in `htmlUnescapes` '<' → '<_x'",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-104",
@@ -1688,7 +2880,17 @@
       "kind": "entry",
       "original": "'&gt;': '>',\n  ",
       "replacement": "",
-      "description": "`'&gt;': '>'` removed from `htmlUnescapes`"
+      "description": "`'&gt;': '>'` removed from `htmlUnescapes`",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-105",
@@ -1703,7 +2905,17 @@
       "kind": "string",
       "original": "'>'",
       "replacement": "'>_x'",
-      "description": "`&gt;` in `htmlUnescapes` '>' → '>_x'"
+      "description": "`&gt;` in `htmlUnescapes` '>' → '>_x'",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-106",
@@ -1718,7 +2930,17 @@
       "kind": "entry",
       "original": "'&quot;': '\"',\n  ",
       "replacement": "",
-      "description": "`'&quot;': '\"'` removed from `htmlUnescapes`"
+      "description": "`'&quot;': '\"'` removed from `htmlUnescapes`",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-107",
@@ -1733,7 +2955,17 @@
       "kind": "string",
       "original": "'\"'",
       "replacement": "'\"_x'",
-      "description": "`&quot;` in `htmlUnescapes` '\"' → '\"_x'"
+      "description": "`&quot;` in `htmlUnescapes` '\"' → '\"_x'",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-108",
@@ -1748,7 +2980,17 @@
       "kind": "entry",
       "original": ",\n  '&#39;': \"'\"",
       "replacement": "",
-      "description": "`'&#39;': \"'\"` removed from `htmlUnescapes`"
+      "description": "`'&#39;': \"'\"` removed from `htmlUnescapes`",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-109",
@@ -1763,7 +3005,17 @@
       "kind": "string",
       "original": "\"'\"",
       "replacement": "\"'_x\"",
-      "description": "`&#39;` in `htmlUnescapes` \"'\" → \"'_x\""
+      "description": "`&#39;` in `htmlUnescapes` \"'\" → \"'_x\"",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ],
+      "names": [
+        "htmlUnescapes"
+      ]
     },
     {
       "id": "value-110",
@@ -1778,7 +3030,14 @@
       "kind": "string",
       "original": "\"'\"",
       "replacement": "\"'_x\"",
-      "description": "`htmlUnescapes[match] || \"'\"`: \"'\" → \"'_x\""
+      "description": "`htmlUnescapes[match] || \"'\"`: \"'\" → \"'_x\"",
+      "readers": [
+        {
+          "file": "src/string/unescape.ts",
+          "line": 27,
+          "endLine": 29
+        }
+      ]
     },
     {
       "id": "value-111",
@@ -1793,7 +3052,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`i` 0 → 1"
+      "description": "`i` 0 → 1",
+      "readers": [
+        {
+          "file": "src/string/upperCase.ts",
+          "line": 21,
+          "endLine": 34
+        }
+      ]
     },
     {
       "id": "value-112",
@@ -1808,7 +3074,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`words.length - 1`: 1 → 2"
+      "description": "`words.length - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/string/upperCase.ts",
+          "line": 21,
+          "endLine": 34
+        }
+      ]
     },
     {
       "id": "value-113",
@@ -1823,7 +3096,14 @@
       "kind": "string",
       "original": "' '",
       "replacement": "' _x'",
-      "description": "`result += ' '`: ' ' → ' _x'"
+      "description": "`result += ' '`: ' ' → ' _x'",
+      "readers": [
+        {
+          "file": "src/string/upperCase.ts",
+          "line": 21,
+          "endLine": 34
+        }
+      ]
     }
   ]
 }

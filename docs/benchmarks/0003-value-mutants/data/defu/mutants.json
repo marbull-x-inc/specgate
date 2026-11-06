@@ -23,7 +23,19 @@
       "kind": "string",
       "original": "\".\"",
       "replacement": "\"._x\"",
-      "description": "the default `namespace` \".\" → \"._x\""
+      "description": "the default `namespace` \".\" → \"._x\"",
+      "readers": [
+        {
+          "file": "src/defu.ts",
+          "line": 5,
+          "endLine": 42
+        },
+        {
+          "file": "src/defu.ts",
+          "line": 49,
+          "endLine": 53
+        }
+      ]
     },
     {
       "id": "value-2",
@@ -44,7 +56,19 @@
         "values": [
           "__proto__"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/defu.ts",
+          "line": 5,
+          "endLine": 42
+        },
+        {
+          "file": "src/defu.ts",
+          "line": 49,
+          "endLine": 53
+        }
+      ]
     },
     {
       "id": "value-3",
@@ -65,7 +89,19 @@
         "values": [
           "constructor"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/defu.ts",
+          "line": 5,
+          "endLine": 42
+        },
+        {
+          "file": "src/defu.ts",
+          "line": 49,
+          "endLine": 53
+        }
+      ]
     }
   ]
 }

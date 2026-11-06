@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-05T22:50:01.699Z",
+  "generatedAt": "2026-11-06T00:24:38.719Z",
   "root": "<work>/react-hook-form",
   "revision": "7e65ad5271daf8db8b123fdd0f8edad9d2b4416f",
   "configHash": "3e248fdaf7ef2625",
@@ -648,17 +648,7 @@
       "portCalls": [],
       "operationCalls": [],
       "envInputs": [],
-      "decisions": [
-        {
-          "kind": "output",
-          "expression": "'defaultValues'",
-          "line": 132,
-          "values": [
-            "defaultValues"
-          ],
-          "names": []
-        }
-      ],
+      "decisions": [],
       "constantRanges": [
         {
           "name": "FORM_ERROR_TYPE",
@@ -1610,8 +1600,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 187,
-        "survived": 7,
+        "killed": 188,
+        "survived": 6,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -55246,21 +55236,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "useForm: `shouldUseNativeValidation: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
-      "file": "src/useForm.ts",
-      "line": 27,
-      "unit": "useForm",
-      "mutant": {
-        "id": "2:value-50",
-        "mutator": "Value",
-        "replacement": "`shouldUseNativeValidation: undefined` removed from `RESET_…",
-        "status": "Survived",
-        "line": 27
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "useForm: `context: undefined` removed from `RESET_OPTIONS` survived; no linked test fails when the code changes like this",
       "file": "src/useForm.ts",
       "line": 28,
@@ -55339,14 +55314,6 @@
       "message": "package.json#exports \".\" points only to build output; map it to its source module with surface.entries to write guarantees on it",
       "file": "package.json",
       "severity": "info"
-    },
-    {
-      "rule": "decision-unspecified",
-      "message": "useForm commits to output \"defaultValues\" in `'defaultValues'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)",
-      "file": "src/useForm.ts",
-      "line": 132,
-      "unit": "useForm",
-      "severity": "info"
     }
   ],
   "summary": {
@@ -55359,8 +55326,8 @@
     "unlinkedTests": 427,
     "findings": {
       "fail": 4,
-      "warn": 111,
-      "info": 2
+      "warn": 110,
+      "info": 1
     },
     "mutantsUnmapped": 1
   }

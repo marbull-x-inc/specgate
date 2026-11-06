@@ -1,28 +1,28 @@
-baseline run 1428 ms; timeout 30000 ms
+baseline run 1034 ms; timeout 30000 ms
 value-1 NoCoverage src/cac.ts:118 `this.globalCommand.option('-h, --help',…`: '-h, --help' → '-h, --help_x'
 value-2 NoCoverage src/cac.ts:118 `this.globalCommand.option('-h, --help',…`: 'Display this message' → 'Display this message_x'
 value-3 NoCoverage src/cac.ts:131 the default `customFlags` '-v, --version' → '-v, --version_x'
 value-6 NoCoverage src/cac.ts:219 `argv[1] ? getFileName(argv[1]) : 'cli'`: 'cli' → 'cli_x'
 value-10 NoCoverage src/cac.ts:247 `argv.slice(2)`: 2 → 3
 value-11 NoCoverage src/cac.ts:249 `new CustomEvent('command:!', { detail: …`: 'command:!' → 'command:!_x'
-value-4 Survived   src/cac.ts:219 `argv[1]`: 1 → 2
-value-5 Survived   src/cac.ts:219 `argv[1]`: 1 → 2
-value-13 Survived   src/cac.ts:281 `this.args[0]`: 0 → 1
 value-12 Killed     src/cac.ts:255 `argv.slice(2)`: 2 → 3
 value-7 Killed     src/cac.ts:226 `argv.slice(2)`: 2 → 3
-value-14 Survived   src/cac.ts:282 `new CustomEvent('command:*', { detail: …`: 'command:*' → 'command:*_x'
-value-9 Killed     src/cac.ts:233 `parsed.args.slice(1)`: 1 → 2
-value-18 Killed     src/cac.ts:303 `doubleDashesIndex + 1`: 1 → 2
-value-19 Killed     src/cac.ts:304 `argv.slice(0, doubleDashesIndex)`: 0 → 1
-value-8 Killed     src/cac.ts:228 `parsed.args[0]`: 0 → 1
 value-15 Survived   src/cac.ts:282 `this.args[0]`: 0 → 1
-value-20 Survived   src/cac.ts:347 `cliOption.config.type[0]`: 0 → 1
-value-21 Killed     src/cac.ts:353 `key !== '_'`: '_' → '__x'
+value-8 Killed     src/cac.ts:228 `parsed.args[0]`: 0 → 1
+value-9 Killed     src/cac.ts:233 `parsed.args.slice(1)`: 1 → 2
+value-13 Survived   src/cac.ts:281 `this.args[0]`: 0 → 1
+value-5 Survived   src/cac.ts:219 `argv[1]`: 1 → 2
+value-4 Survived   src/cac.ts:219 `argv[1]`: 1 → 2
+value-14 Survived   src/cac.ts:282 `new CustomEvent('command:*', { detail: …`: 'command:*' → 'command:*_x'
 value-16 Killed     src/cac.ts:301 `argv.indexOf('--')`: '--' → '--_x'
 value-17 Killed     src/cac.ts:302 `doubleDashesIndex !== -1`: -1 → -2
+value-18 Killed     src/cac.ts:303 `doubleDashesIndex + 1`: 1 → 2
+value-21 Killed     src/cac.ts:353 `key !== '_'`: '_' → '__x'
+value-19 Killed     src/cac.ts:304 `argv.slice(0, doubleDashesIndex)`: 0 → 1
+value-20 Survived   src/cac.ts:347 `cliOption.config.type[0]`: 0 → 1
 value-22 Killed     src/cac.ts:354 `key.split('.')`: '.' → '._x'
-value-mutants: 22 mutant(s): 6 NoCoverage, 6 Survived, 10 Killed; 7913 ms (baseline run 1428 ms)
+value-mutants: 22 mutant(s): 6 NoCoverage, 6 Survived, 10 Killed; 5211 ms (baseline run 1034 ms)
 wrote <work>/cac/reports/value/value.json
-real 8.02
-user 46.72
-sys 9.98
+real 5.28
+user 32.37
+sys 6.78

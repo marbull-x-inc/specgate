@@ -1,5 +1,5 @@
 mutants: 20 value change(s) in 3 file(s) (6 string, 14 number)
 wrote <work>/cron-parser/.specgate/mutants.json
-real 0.69
-user 2.10
-sys 0.12
+real 1.59
+user 4.57
+sys 0.26

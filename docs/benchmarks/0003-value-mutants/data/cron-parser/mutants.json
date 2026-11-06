@@ -29,7 +29,21 @@
       "kind": "string",
       "original": "'Out of the time span range'",
       "replacement": "'Out of the time span range_x'",
-      "description": "`TIME_SPAN_OUT_OF_BOUNDS_ERROR_MESSAGE` 'Out of the time span range' → 'Out of the time span range_x'"
+      "description": "`TIME_SPAN_OUT_OF_BOUNDS_ERROR_MESSAGE` 'Out of the time span range' → 'Out of the time span range_x'",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        }
+      ],
+      "names": [
+        "TIME_SPAN_OUT_OF_BOUNDS_ERROR_MESSAGE"
+      ],
+      "tests": [
+        "tests/CronExpression.test.ts",
+        "tests/CronExpressionParser.test.ts"
+      ]
     },
     {
       "id": "value-2",
@@ -44,7 +58,20 @@
       "kind": "string",
       "original": "'Invalid expression, loop limit exceeded'",
       "replacement": "'Invalid expression, loop limit exceeded_x'",
-      "description": "`LOOPS_LIMIT_EXCEEDED_ERROR_MESSAGE` 'Invalid expression, loop limit exceeded' → 'Invalid expression, loop limit exceeded_x'"
+      "description": "`LOOPS_LIMIT_EXCEEDED_ERROR_MESSAGE` 'Invalid expression, loop limit exceeded' → 'Invalid expression, loop limit exceeded_x'",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ],
+      "names": [
+        "LOOPS_LIMIT_EXCEEDED_ERROR_MESSAGE"
+      ],
+      "tests": [
+        "tests/CronExpression.test.ts"
+      ]
     },
     {
       "id": "value-3",
@@ -65,7 +92,17 @@
         "values": [
           "10000"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ],
+      "names": [
+        "LOOP_LIMIT"
+      ]
     },
     {
       "id": "value-4",
@@ -80,7 +117,54 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`values.length - 1`: 1 → 2"
+      "description": "`values.length - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-5",
@@ -95,7 +179,54 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`reverse ? values.length - 1 : 0`: 0 → 1"
+      "description": "`reverse ? values.length - 1 : 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-6",
@@ -110,7 +241,54 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`currentDate.getMonth() + 1`: 1 → 2"
+      "description": "`currentDate.getMonth() + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-7",
@@ -125,7 +303,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`limit >= 0`: 0 → 1"
+      "description": "`limit >= 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 297,
+          "endLine": 317
+        }
+      ]
     },
     {
       "id": "value-8",
@@ -140,7 +325,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`i` 0 → 1"
+      "description": "`i` 0 → 1",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 297,
+          "endLine": 317
+        }
+      ]
     },
     {
       "id": "value-9",
@@ -155,7 +347,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`i` 0 → 1"
+      "description": "`i` 0 → 1",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 297,
+          "endLine": 317
+        }
+      ]
     },
     {
       "id": "value-10",
@@ -170,7 +369,54 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`skipped + 1`: 1 → 2"
+      "description": "`skipped + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-11",
@@ -191,7 +437,54 @@
         "values": [
           "24"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-12",
@@ -206,7 +499,54 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`i` 0 → 1"
+      "description": "`i` 0 → 1",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-13",
@@ -221,7 +561,54 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`currentDate.getMilliseconds() > 0`: 0 → 1"
+      "description": "`currentDate.getMilliseconds() > 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-14",
@@ -236,7 +623,54 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`currentDate.setMilliseconds(0)`: 0 → 1"
+      "description": "`currentDate.setMilliseconds(0)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-15",
@@ -251,7 +685,54 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`stepCount` 0 → 1"
+      "description": "`stepCount` 0 → 1",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-16",
@@ -266,7 +747,54 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`currentDate.getMonth() + 1`: 1 → 2"
+      "description": "`currentDate.getMonth() + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/CronExpression.ts",
+          "line": 112,
+          "endLine": 114
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 127,
+          "endLine": 143
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 154,
+          "endLine": 167
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 179,
+          "endLine": 196
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 237,
+          "endLine": 239
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 392,
+          "endLine": 427
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 437,
+          "endLine": 494
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 504,
+          "endLine": 516
+        },
+        {
+          "file": "src/CronExpression.ts",
+          "line": 525,
+          "endLine": 574
+        }
+      ]
     },
     {
       "id": "value-17",
@@ -287,7 +815,14 @@
         "values": [
           "*"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/CronExpressionParser.ts",
+          "line": 113,
+          "endLine": 178
+        }
+      ]
     },
     {
       "id": "value-18",
@@ -308,7 +843,14 @@
         "values": [
           "*"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/CronExpressionParser.ts",
+          "line": 113,
+          "endLine": 178
+        }
+      ]
     },
     {
       "id": "value-19",
@@ -323,7 +865,14 @@
       "kind": "string",
       "original": "'utf8'",
       "replacement": "'utf8_x'",
-      "description": "`readFile(filePath, 'utf8')`: 'utf8' → 'utf8_x'"
+      "description": "`readFile(filePath, 'utf8')`: 'utf8' → 'utf8_x'",
+      "readers": [
+        {
+          "file": "src/CronFileParser.ts",
+          "line": 21,
+          "endLine": 26
+        }
+      ]
     },
     {
       "id": "value-20",
@@ -338,7 +887,14 @@
       "kind": "string",
       "original": "'utf8'",
       "replacement": "'utf8_x'",
-      "description": "`readFileSync(filePath, 'utf8')`: 'utf8' → 'utf8_x'"
+      "description": "`readFileSync(filePath, 'utf8')`: 'utf8' → 'utf8_x'",
+      "readers": [
+        {
+          "file": "src/CronFileParser.ts",
+          "line": 35,
+          "endLine": 40
+        }
+      ]
     }
   ]
 }
