@@ -26,7 +26,11 @@
             }
           },
           "status": "Survived",
-          "duration": 8894
+          "coveredBy": [
+            "2",
+            "3"
+          ],
+          "duration": 1925
         },
         {
           "id": "value-2",
@@ -49,7 +53,7 @@
             "2",
             "3"
           ],
-          "duration": 1999
+          "duration": 1921
         },
         {
           "id": "value-3",
@@ -71,7 +75,7 @@
             "2",
             "3"
           ],
-          "duration": 1930
+          "duration": 1921
         }
       ]
     }

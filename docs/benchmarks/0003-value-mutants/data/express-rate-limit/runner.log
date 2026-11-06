@@ -1,67 +1,67 @@
-baseline run 1938 ms; timeout 30000 ms
+baseline run 2138 ms; timeout 30000 ms
 value-3 Killed     source/rate-limit.ts:202 `standardHeaders = 'draft-6'`: 'draft-6' → 'draft-6_x'
 value-10 Killed     source/rate-limit.ts:218 `1000 * 60`: 1000 → 1001
 value-11 Killed     source/rate-limit.ts:218 `1000 * 60`: 60 → 61
-value-14 Killed     source/rate-limit.ts:219 `1000 * 60 * 60`: 60 → 61
-value-12 Killed     source/rate-limit.ts:219 `1000 * 60`: 1000 → 1001
-value-15 Killed     source/rate-limit.ts:220 `1000 * 60`: 1000 → 1001
 value-9 Killed     source/rate-limit.ts:217 `config.windowMs / 1000`: 1000 → 1001
+value-14 Killed     source/rate-limit.ts:219 `1000 * 60 * 60`: 60 → 61
+value-15 Killed     source/rate-limit.ts:220 `1000 * 60`: 1000 → 1001
 value-13 Killed     source/rate-limit.ts:219 `1000 * 60`: 60 → 61
-value-6 Killed     source/rate-limit.ts:208 `passedOptions.max ?? 5`: 5 → 6
+value-12 Killed     source/rate-limit.ts:219 `1000 * 60`: 1000 → 1001
 value-2 Killed     source/ip-key-generator.ts:28 the default `ipv6Subnet` 56 → 57
-value-8 Killed     source/rate-limit.ts:210 `statusCode` 429 → 430
-value-4 Survived   source/rate-limit.ts:207 `60 * 1000`: 60 → 61
 value-5 Survived   source/rate-limit.ts:207 `60 * 1000`: 1000 → 1001
+value-4 Survived   source/rate-limit.ts:207 `60 * 1000`: 60 → 61
+value-6 Killed     source/rate-limit.ts:208 `passedOptions.max ?? 5`: 5 → 6
 value-7 Survived   source/rate-limit.ts:209 `message` 'Too many requests, please try again later.' → 'Too many requests, please try again later._x'
+value-8 Killed     source/rate-limit.ts:210 `statusCode` 429 → 430
 value-1 Killed     source/ip-key-generator.ts:7 `new Address6('::/96')`: '::/96' → '::/96_x'
-value-23 Killed     source/rate-limit.ts:224 `hours > 1 ? 's' : ''`: 's' → 's_x'
-value-21 Killed     source/rate-limit.ts:224 `hours < 24`: 24 → 25
-value-18 Killed     source/rate-limit.ts:220 `1000 * 60 * 60 * 24`: 24 → 25
-value-20 Killed     source/rate-limit.ts:223 `minutes < 60`: 60 → 61
 value-16 Killed     source/rate-limit.ts:220 `1000 * 60`: 60 → 61
+value-20 Killed     source/rate-limit.ts:223 `minutes < 60`: 60 → 61
 value-17 Killed     source/rate-limit.ts:220 `1000 * 60 * 60`: 60 → 61
+value-18 Killed     source/rate-limit.ts:220 `1000 * 60 * 60 * 24`: 24 → 25
 value-19 Killed     source/rate-limit.ts:222 `seconds < 60`: 60 → 61
+value-21 Killed     source/rate-limit.ts:224 `hours < 24`: 24 → 25
+value-23 Killed     source/rate-limit.ts:224 `hours > 1 ? 's' : ''`: 's' → 's_x'
 value-22 Killed     source/rate-limit.ts:224 `hours > 1`: 1 → 2
 value-24 Killed     source/rate-limit.ts:225 `days > 1`: 1 → 2
 value-25 Killed     source/rate-limit.ts:225 `days > 1 ? 's' : ''`: 's' → 's_x'
-value-27 Killed     source/rate-limit.ts:233 `response.statusCode < 400`: 400 → 401
-value-28 Survived   source/rate-limit.ts:248 `subnet` 56 → 57
-value-26 Killed     source/rate-limit.ts:229 `requestPropertyName` 'rateLimit' → 'rateLimit_x'
 value-29 Survived   source/rate-limit.ts:264 `ipv6Subnet` 56 → 57
+value-26 Killed     source/rate-limit.ts:229 `requestPropertyName` 'rateLimit' → 'rateLimit_x'
 value-30 Survived   source/rate-limit.ts:363 `createDebugLogger('express-rate-limit')`: 'express-rate-limit' → 'express-rate-limit_x'
-value-35 Killed     source/rate-limit.ts:394 `config.logger.error( error, 'express-ra…`: 'express-rate-limit: error during store initializ… → 'express-rate-limit: error during store initializ…
-value-34 Killed     source/rate-limit.ts:387 `config.logger.error( error, 'express-ra…`: 'express-rate-limit: async error during store ini… → 'express-rate-limit: async error during store ini…
-value-47 NoCoverage source/rate-limit.ts:490 `debug( 'set request.%s.%s to be %o', co…`: 'set request.%s.%s to be %o' → 'set request.%s.%s to be %o_x'
-value-37 Killed     source/rate-limit.ts:410 `response.once('finish', resolve)`: 'finish' → 'finish_x'
-value-36 Killed     source/rate-limit.ts:406 `response.once('close', resolve)`: 'close' → 'close_x'
-value-38 Survived   source/rate-limit.ts:414 `response.once('error', resolve)`: 'error' → 'error_x'
-value-32 Survived   source/rate-limit.ts:368 `debug('set %s to %o', key, val)`: 'set %s to %o' → 'set %s to %o_x'
-value-33 Survived   source/rate-limit.ts:377 `debug('executing init for store')`: 'executing init for store' → 'executing init for store_x'
 value-31 Survived   source/rate-limit.ts:364 `debug('creating new rate limiter with %…`: 'creating new rate limiter with %o' → 'creating new rate limiter with %o_x'
+value-32 Survived   source/rate-limit.ts:368 `debug('set %s to %o', key, val)`: 'set %s to %o' → 'set %s to %o_x'
+value-33 Killed     source/rate-limit.ts:377 `debug('executing init for store')`: 'executing init for store' → 'executing init for store_x'
+value-27 Killed     source/rate-limit.ts:233 `response.statusCode < 400`: 400 → 401
+value-47 NoCoverage source/rate-limit.ts:490 `debug( 'set request.%s.%s to be %o', co…`: 'set request.%s.%s to be %o' → 'set request.%s.%s to be %o_x'
+value-41 Survived   source/rate-limit.ts:422 `debug('skipping request')`: 'skipping request' → 'skipping request_x'
+value-37 Killed     source/rate-limit.ts:410 `response.once('finish', resolve)`: 'finish' → 'finish_x'
+value-38 Survived   source/rate-limit.ts:414 `response.once('error', resolve)`: 'error' → 'error_x'
+value-34 Killed     source/rate-limit.ts:387 `config.logger.error( error, 'express-ra…`: 'express-rate-limit: async error during store ini… → 'express-rate-limit: async error during store ini…
+value-35 Killed     source/rate-limit.ts:394 `config.logger.error( error, 'express-ra…`: 'express-rate-limit: error during store initializ… → 'express-rate-limit: error during store initializ…
+value-36 Killed     source/rate-limit.ts:406 `response.once('close', resolve)`: 'close' → 'close_x'
+value-42 Survived   source/rate-limit.ts:432 `debug('computed key %o', key)`: 'computed key %o' → 'computed key %o_x'
 value-39 Survived   source/rate-limit.ts:416 `debug('requested %o', request.originalU…`: 'requested %o' → 'requested %o_x'
 value-40 Survived   source/rate-limit.ts:417 `debug('request from ip %o', request.ip)`: 'request from ip %o' → 'request from ip %o_x'
-value-41 Survived   source/rate-limit.ts:422 `debug('skipping request')`: 'skipping request' → 'skipping request_x'
+value-28 Survived   source/rate-limit.ts:248 `subnet` 56 → 57
 value-43 Survived   source/rate-limit.ts:435 `debug('incrementing count')`: 'incrementing count' → 'incrementing count_x'
-value-44 Survived   source/rate-limit.ts:436 `totalHits` 0 → 1
-value-42 Survived   source/rate-limit.ts:432 `debug('computed key %o', key)`: 'computed key %o' → 'computed key %o_x'
 value-45 Survived   source/rate-limit.ts:453 `config.logger.error( error, 'express-ra…`: 'express-rate-limit: error from store, allowing r… → 'express-rate-limit: error from store, allowing r…
-value-50 Killed     source/rate-limit.ts:518 `case 'draft-6': { debug('set ietf draft…`: 'draft-6' → 'draft-6_x'
+value-44 Survived   source/rate-limit.ts:436 `totalHits` 0 → 1
+value-46 Killed     source/rate-limit.ts:480 `Math.max(limit - totalHits, 0)`: 0 → 1
 value-51 Survived   source/rate-limit.ts:519 `debug('set ietf draft 6 headers')`: 'set ietf draft 6 headers' → 'set ietf draft 6 headers_x'
-value-53 Survived   source/rate-limit.ts:525 `debug('set ietf draft 7 headers')`: 'set ietf draft 7 headers' → 'set ietf draft 7 headers_x'
+value-50 Killed     source/rate-limit.ts:518 `case 'draft-6': { debug('set ietf draft…`: 'draft-6' → 'draft-6_x'
 value-52 Killed     source/rate-limit.ts:524 `case 'draft-7': { debug('set ietf draft…`: 'draft-7' → 'draft-7_x'
+value-53 Survived   source/rate-limit.ts:525 `debug('set ietf draft 7 headers')`: 'set ietf draft 7 headers' → 'set ietf draft 7 headers_x'
 value-54 Killed     source/rate-limit.ts:531 `case 'draft-8': { const retrieveName = …`: 'draft-8' → 'draft-8_x'
 value-55 Survived   source/rate-limit.ts:538 `debug('set ietf draft 8 headers')`: 'set ietf draft 8 headers' → 'set ietf draft 8 headers_x'
 value-56 Survived   source/rate-limit.ts:539 `debug('set name to %o', name)`: 'set name to %o' → 'set name to %o_x'
-value-46 Killed     source/rate-limit.ts:480 `Math.max(limit - totalHits, 0)`: 0 → 1
 value-48 Killed     source/rate-limit.ts:499 `Object.defineProperty(info, 'current', …`: 'current' → 'current_x'
 value-49 Survived   source/rate-limit.ts:510 `debug('set legacy headers')`: 'set legacy headers' → 'set legacy headers_x'
+value-58 Survived   source/rate-limit.ts:579 `debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'
 value-57 Survived   source/rate-limit.ts:566 `debug('decrementing count')`: 'decrementing count' → 'decrementing count_x'
 value-59 Survived   source/rate-limit.ts:608 `debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'
-value-58 Survived   source/rate-limit.ts:579 `debug('computed requestWasSuccessful as…`: 'computed requestWasSuccessful as %o' → 'computed requestWasSuccessful as %o_x'
 value-60 Survived   source/rate-limit.ts:618 `debug('limit exceeded')`: 'limit exceeded' → 'limit exceeded_x'
 value-61 Survived   source/rate-limit.ts:620 `debug('set retry-after header')`: 'set retry-after header' → 'set retry-after header_x'
-value-mutants: 61 mutant(s): 33 Killed, 27 Survived, 1 NoCoverage; 44364 ms (baseline run 1938 ms)
+value-mutants: 61 mutant(s): 34 Killed, 26 Survived, 1 NoCoverage; 58049 ms (baseline run 2138 ms)
 wrote <work>/express-rate-limit/reports/value/value.json
-real 44.44
-user 469.85
-sys 74.41
+real 58.12
+user 581.77
+sys 90.95

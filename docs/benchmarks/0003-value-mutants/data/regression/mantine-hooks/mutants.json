@@ -35,7 +35,17 @@
       "kind": "entry",
       "original": "min: -Infinity,\n  ",
       "replacement": "",
-      "description": "`min: -Infinity` removed from `DEFAULT_OPTIONS`"
+      "description": "`min: -Infinity` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "line": 31,
+          "endLine": 54
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-2",
@@ -50,7 +60,17 @@
       "kind": "entry",
       "original": ",\n  max: Infinity",
       "replacement": "",
-      "description": "`max: Infinity` removed from `DEFAULT_OPTIONS`"
+      "description": "`max: Infinity` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "line": 31,
+          "endLine": 54
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-3",
@@ -65,7 +85,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "the default `initialValue` 0 → 1"
+      "description": "the default `initialValue` 0 → 1",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "line": 31,
+          "endLine": 54
+        }
+      ]
     },
     {
       "id": "value-4",
@@ -80,7 +107,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "the default `_step` 1 → 2"
+      "description": "the default `_step` 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-counter/use-counter.ts",
+          "line": 31,
+          "endLine": 54
+        }
+      ]
     },
     {
       "id": "value-5",
@@ -101,7 +135,49 @@
         "values": [
           "undetermined"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 48,
+          "endLine": 75
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 85,
+          "endLine": 97
+        }
+      ]
     },
     {
       "id": "value-6",
@@ -122,7 +198,49 @@
         "values": [
           "ios"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 48,
+          "endLine": 75
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 85,
+          "endLine": 97
+        }
+      ]
     },
     {
       "id": "value-7",
@@ -143,7 +261,49 @@
         "values": [
           "macos"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 48,
+          "endLine": 75
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 85,
+          "endLine": 97
+        }
+      ]
     },
     {
       "id": "value-8",
@@ -164,7 +324,49 @@
         "values": [
           "windows"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 48,
+          "endLine": 75
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 85,
+          "endLine": 97
+        }
+      ]
     },
     {
       "id": "value-9",
@@ -185,7 +387,49 @@
         "values": [
           "android"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 48,
+          "endLine": 75
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 85,
+          "endLine": 97
+        }
+      ]
     },
     {
       "id": "value-10",
@@ -206,7 +450,49 @@
         "values": [
           "chromeos"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 48,
+          "endLine": 75
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 85,
+          "endLine": 97
+        }
+      ]
     },
     {
       "id": "value-11",
@@ -227,7 +513,49 @@
         "values": [
           "linux"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 48,
+          "endLine": 75
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 85,
+          "endLine": 97
+        }
+      ]
     },
     {
       "id": "value-12",
@@ -242,7 +570,49 @@
       "kind": "string",
       "original": "'undetermined'",
       "replacement": "'undetermined_x'",
-      "description": "`return 'undetermined';`: 'undetermined' → 'undetermined_x'"
+      "description": "`return 'undetermined';`: 'undetermined' → 'undetermined_x'",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 48,
+          "endLine": 75
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 85,
+          "endLine": 97
+        }
+      ]
     },
     {
       "id": "value-13",
@@ -257,7 +627,49 @@
       "kind": "string",
       "original": "'undetermined'",
       "replacement": "'undetermined_x'",
-      "description": "`options.getValueInEffect ? 'undetermine…`: 'undetermined' → 'undetermined_x'"
+      "description": "`options.getValueInEffect ? 'undetermine…`: 'undetermined' → 'undetermined_x'",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 13,
+          "endLine": 17
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 19,
+          "endLine": 23
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 25,
+          "endLine": 29
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 31,
+          "endLine": 35
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 37,
+          "endLine": 41
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 43,
+          "endLine": 46
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 48,
+          "endLine": 75
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-os/use-os.ts",
+          "line": 85,
+          "endLine": 97
+        }
+      ]
     },
     {
       "id": "value-14",
@@ -272,7 +684,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`end - start + 1`: 1 → 2"
+      "description": "`end - start + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-15",
@@ -287,7 +711,17 @@
       "kind": "string",
       "original": "'dots'",
       "replacement": "'dots_x'",
-      "description": "`DOTS` 'dots' → 'dots_x'"
+      "description": "`DOTS` 'dots' → 'dots_x'",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ],
+      "names": [
+        "DOTS"
+      ]
     },
     {
       "id": "value-16",
@@ -302,7 +736,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "the default `siblings` 1 → 2"
+      "description": "the default `siblings` 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-17",
@@ -317,7 +763,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "the default `boundaries` 1 → 2"
+      "description": "the default `boundaries` 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-18",
@@ -332,7 +790,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "the default `startValue` 1 → 2"
+      "description": "the default `startValue` 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-19",
@@ -347,7 +817,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`Math.max(Math.trunc(startValue), 1)`: 1 → 2"
+      "description": "`Math.max(Math.trunc(startValue), 1)`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-20",
@@ -362,7 +844,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`_endValue - _startValue + 1`: 1 → 2"
+      "description": "`_endValue - _startValue + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-21",
@@ -377,7 +871,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`activePage + 1`: 1 → 2"
+      "description": "`activePage + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-22",
@@ -392,7 +898,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`activePage - 1`: 1 → 2"
+      "description": "`activePage - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-23",
@@ -413,7 +931,19 @@
         "values": [
           "2"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-24",
@@ -434,7 +964,19 @@
         "values": [
           "3"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-25",
@@ -455,7 +997,19 @@
         "values": [
           "2"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-26",
@@ -470,7 +1024,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`_startValue + boundaries - 1`: 1 → 2"
+      "description": "`_startValue + boundaries - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-27",
@@ -485,7 +1051,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`_startValue + boundaries + 1`: 1 → 2"
+      "description": "`_startValue + boundaries + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-28",
@@ -500,7 +1078,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`boundaries + 1`: 1 → 2"
+      "description": "`boundaries + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-29",
@@ -515,7 +1105,19 @@
       "kind": "number",
       "original": "2",
       "replacement": "3",
-      "description": "`siblings * 2`: 2 → 3"
+      "description": "`siblings * 2`: 2 → 3",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-30",
@@ -530,7 +1132,19 @@
       "kind": "number",
       "original": "2",
       "replacement": "3",
-      "description": "`siblings * 2 + boundaries + 2`: 2 → 3"
+      "description": "`siblings * 2 + boundaries + 2`: 2 → 3",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-31",
@@ -545,7 +1159,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`_startValue + leftItemCount - 1`: 1 → 2"
+      "description": "`_startValue + leftItemCount - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-32",
@@ -560,7 +1186,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`boundaries - 1`: 1 → 2"
+      "description": "`boundaries - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-33",
@@ -575,7 +1213,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`boundaries + 1`: 1 → 2"
+      "description": "`boundaries + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-34",
@@ -590,7 +1240,19 @@
       "kind": "number",
       "original": "2",
       "replacement": "3",
-      "description": "`2 * siblings`: 2 → 3"
+      "description": "`2 * siblings`: 2 → 3",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-35",
@@ -605,7 +1267,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`_startValue + boundaries - 1`: 1 → 2"
+      "description": "`_startValue + boundaries - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-36",
@@ -620,7 +1294,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`_startValue + boundaries - 1`: 1 → 2"
+      "description": "`_startValue + boundaries - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-37",
@@ -635,7 +1321,19 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`_endValue - boundaries + 1`: 1 → 2"
+      "description": "`_endValue - boundaries + 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 4,
+          "endLine": 7
+        },
+        {
+          "file": "packages/@mantine/hooks/src/use-pagination/use-pagination.ts",
+          "line": 66,
+          "endLine": 153
+        }
+      ]
     },
     {
       "id": "value-38",
@@ -650,7 +1348,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`initialValues.slice(0, limit)`: 0 → 1"
+      "description": "`initialValues.slice(0, limit)`: 0 → 1",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "line": 34,
+          "endLine": 72
+        }
+      ]
     },
     {
       "id": "value-39",
@@ -665,7 +1370,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`results.slice(0, limit)`: 0 → 1"
+      "description": "`results.slice(0, limit)`: 0 → 1",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "line": 34,
+          "endLine": 72
+        }
+      ]
     },
     {
       "id": "value-40",
@@ -680,7 +1392,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`results.slice(0, limit)`: 0 → 1"
+      "description": "`results.slice(0, limit)`: 0 → 1",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-queue/use-queue.ts",
+          "line": 34,
+          "endLine": 72
+        }
+      ]
     },
     {
       "id": "value-41",
@@ -695,7 +1414,14 @@
       "kind": "element",
       "original": "false, ",
       "replacement": "",
-      "description": "`false` removed from the list `[false, true]`"
+      "description": "`false` removed from the list `[false, true]`",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "line": 12,
+          "endLine": 23
+        }
+      ]
     },
     {
       "id": "value-42",
@@ -710,7 +1436,14 @@
       "kind": "element",
       "original": ", true",
       "replacement": "",
-      "description": "`true` removed from the list `[false, true]`"
+      "description": "`true` removed from the list `[false, true]`",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "line": 12,
+          "endLine": 23
+        }
+      ]
     },
     {
       "id": "value-43",
@@ -725,7 +1458,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`state[0]`: 0 → 1"
+      "description": "`state[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "line": 12,
+          "endLine": 23
+        }
+      ]
     },
     {
       "id": "value-44",
@@ -740,7 +1480,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`state.slice(0, index)`: 0 → 1"
+      "description": "`state.slice(0, index)`: 0 → 1",
+      "readers": [
+        {
+          "file": "packages/@mantine/hooks/src/use-toggle/use-toggle.ts",
+          "line": 12,
+          "endLine": 23
+        }
+      ]
     }
   ]
 }

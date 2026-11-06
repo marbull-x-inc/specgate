@@ -1,5 +1,5 @@
 mutants: 2 value change(s) in 1 file(s) (2 number)
 wrote <work-0001>/zustand/.specgate/mutants.json
-real 1.09
-user 3.22
-sys 0.15
+real 0.79
+user 2.13
+sys 0.11

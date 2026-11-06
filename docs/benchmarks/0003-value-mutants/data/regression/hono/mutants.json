@@ -32,7 +32,17 @@
       "kind": "string",
       "original": "'Payload Too Large'",
       "replacement": "'Payload Too Large_x'",
-      "description": "`ERROR_MESSAGE` 'Payload Too Large' → 'Payload Too Large_x'"
+      "description": "`ERROR_MESSAGE` 'Payload Too Large' → 'Payload Too Large_x'",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ],
+      "names": [
+        "ERROR_MESSAGE"
+      ]
     },
     {
       "id": "value-2",
@@ -47,7 +57,14 @@
       "kind": "number",
       "original": "413",
       "replacement": "414",
-      "description": "`status` 413 → 414"
+      "description": "`status` 413 → 414",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ]
     },
     {
       "id": "value-3",
@@ -62,7 +79,14 @@
       "kind": "number",
       "original": "413",
       "replacement": "414",
-      "description": "`new HTTPException(413, { res })`: 413 → 414"
+      "description": "`new HTTPException(413, { res })`: 413 → 414",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ]
     },
     {
       "id": "value-4",
@@ -77,7 +101,14 @@
       "kind": "string",
       "original": "'transfer-encoding'",
       "replacement": "'transfer-encoding_x'",
-      "description": "`c.req.raw.headers.has('transfer-encodin…`: 'transfer-encoding' → 'transfer-encoding_x'"
+      "description": "`c.req.raw.headers.has('transfer-encodin…`: 'transfer-encoding' → 'transfer-encoding_x'",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ]
     },
     {
       "id": "value-5",
@@ -92,7 +123,14 @@
       "kind": "string",
       "original": "'content-length'",
       "replacement": "'content-length_x'",
-      "description": "`c.req.raw.headers.has('content-length')`: 'content-length' → 'content-length_x'"
+      "description": "`c.req.raw.headers.has('content-length')`: 'content-length' → 'content-length_x'",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ]
     },
     {
       "id": "value-6",
@@ -107,7 +145,14 @@
       "kind": "string",
       "original": "'content-length'",
       "replacement": "'content-length_x'",
-      "description": "`c.req.raw.headers.get('content-length')`: 'content-length' → 'content-length_x'"
+      "description": "`c.req.raw.headers.get('content-length')`: 'content-length' → 'content-length_x'",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ]
     },
     {
       "id": "value-7",
@@ -122,7 +167,14 @@
       "kind": "string",
       "original": "'0'",
       "replacement": "'0_x'",
-      "description": "`c.req.raw.headers.get('content-length')…`: '0' → '0_x'"
+      "description": "`c.req.raw.headers.get('content-length')…`: '0' → '0_x'",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ]
     },
     {
       "id": "value-8",
@@ -137,7 +189,14 @@
       "kind": "number",
       "original": "10",
       "replacement": "11",
-      "description": "`parseInt(c.req.raw.headers.get('content…`: 10 → 11"
+      "description": "`parseInt(c.req.raw.headers.get('content…`: 10 → 11",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ]
     },
     {
       "id": "value-9",
@@ -152,7 +211,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`size` 0 → 1"
+      "description": "`size` 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ]
     },
     {
       "id": "value-10",
@@ -167,7 +233,14 @@
       "kind": "string",
       "original": "'half'",
       "replacement": "'half_x'",
-      "description": "`duplex` 'half' → 'half_x'"
+      "description": "`duplex` 'half' → 'half_x'",
+      "readers": [
+        {
+          "file": "src/middleware/body-limit/index.ts",
+          "line": 53,
+          "endLine": 114
+        }
+      ]
     },
     {
       "id": "value-11",
@@ -182,7 +255,19 @@
       "kind": "string",
       "original": "'*'",
       "replacement": "'*_x'",
-      "description": "`origin` '*' → '*_x'"
+      "description": "`origin` '*' → '*_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-12",
@@ -197,7 +282,19 @@
       "kind": "element",
       "original": "'GET', ",
       "replacement": "",
-      "description": "`'GET'` removed from `allowMethods`"
+      "description": "`'GET'` removed from `allowMethods`",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-13",
@@ -212,7 +309,19 @@
       "kind": "element",
       "original": "'HEAD', ",
       "replacement": "",
-      "description": "`'HEAD'` removed from `allowMethods`"
+      "description": "`'HEAD'` removed from `allowMethods`",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-14",
@@ -227,7 +336,19 @@
       "kind": "element",
       "original": "'PUT', ",
       "replacement": "",
-      "description": "`'PUT'` removed from `allowMethods`"
+      "description": "`'PUT'` removed from `allowMethods`",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-15",
@@ -242,7 +363,19 @@
       "kind": "element",
       "original": "'POST', ",
       "replacement": "",
-      "description": "`'POST'` removed from `allowMethods`"
+      "description": "`'POST'` removed from `allowMethods`",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-16",
@@ -257,7 +390,19 @@
       "kind": "element",
       "original": "'DELETE', ",
       "replacement": "",
-      "description": "`'DELETE'` removed from `allowMethods`"
+      "description": "`'DELETE'` removed from `allowMethods`",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-17",
@@ -272,7 +417,19 @@
       "kind": "element",
       "original": "'PATCH', ",
       "replacement": "",
-      "description": "`'PATCH'` removed from `allowMethods`"
+      "description": "`'PATCH'` removed from `allowMethods`",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-18",
@@ -287,7 +444,19 @@
       "kind": "element",
       "original": ", 'QUERY'",
       "replacement": "",
-      "description": "`'QUERY'` removed from `allowMethods`"
+      "description": "`'QUERY'` removed from `allowMethods`",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-19",
@@ -302,7 +471,19 @@
       "kind": "string",
       "original": "','",
       "replacement": "',_x'",
-      "description": "`opts.exposeHeaders.join(',')`: ',' → ',_x'"
+      "description": "`opts.exposeHeaders.join(',')`: ',' → ',_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-20",
@@ -317,7 +498,19 @@
       "kind": "string",
       "original": "','",
       "replacement": "',_x'",
-      "description": "`opts.allowHeaders.join(',')`: ',' → ',_x'"
+      "description": "`opts.allowHeaders.join(',')`: ',' → ',_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-21",
@@ -338,7 +531,19 @@
         "values": [
           "*"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-22",
@@ -353,7 +558,19 @@
       "kind": "string",
       "original": "','",
       "replacement": "',_x'",
-      "description": "`(await optsAllowMethods(origin, c)).joi…`: ',' → ',_x'"
+      "description": "`(await optsAllowMethods(origin, c)).joi…`: ',' → ',_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-23",
@@ -368,7 +585,19 @@
       "kind": "string",
       "original": "','",
       "replacement": "',_x'",
-      "description": "`optsAllowMethods.join(',')`: ',' → ',_x'"
+      "description": "`optsAllowMethods.join(',')`: ',' → ',_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-24",
@@ -383,7 +612,19 @@
       "kind": "string",
       "original": "'origin'",
       "replacement": "'origin_x'",
-      "description": "`c.req.header('origin')`: 'origin' → 'origin_x'"
+      "description": "`c.req.header('origin')`: 'origin' → 'origin_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-25",
@@ -398,7 +639,19 @@
       "kind": "string",
       "original": "'Access-Control-Allow-Origin'",
       "replacement": "'Access-Control-Allow-Origin_x'",
-      "description": "`set('Access-Control-Allow-Origin', allo…`: 'Access-Control-Allow-Origin' → 'Access-Control-Allow-Origin_x'"
+      "description": "`set('Access-Control-Allow-Origin', allo…`: 'Access-Control-Allow-Origin' → 'Access-Control-Allow-Origin_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-26",
@@ -413,7 +666,19 @@
       "kind": "string",
       "original": "'Access-Control-Allow-Credentials'",
       "replacement": "'Access-Control-Allow-Credentials_x'",
-      "description": "`set('Access-Control-Allow-Credentials',…`: 'Access-Control-Allow-Credentials' → 'Access-Control-Allow-Credentials_x'"
+      "description": "`set('Access-Control-Allow-Credentials',…`: 'Access-Control-Allow-Credentials' → 'Access-Control-Allow-Credentials_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-27",
@@ -428,7 +693,19 @@
       "kind": "string",
       "original": "'true'",
       "replacement": "'true_x'",
-      "description": "`set('Access-Control-Allow-Credentials',…`: 'true' → 'true_x'"
+      "description": "`set('Access-Control-Allow-Credentials',…`: 'true' → 'true_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-28",
@@ -443,7 +720,19 @@
       "kind": "string",
       "original": "'Access-Control-Expose-Headers'",
       "replacement": "'Access-Control-Expose-Headers_x'",
-      "description": "`set('Access-Control-Expose-Headers', ex…`: 'Access-Control-Expose-Headers' → 'Access-Control-Expose-Headers_x'"
+      "description": "`set('Access-Control-Expose-Headers', ex…`: 'Access-Control-Expose-Headers' → 'Access-Control-Expose-Headers_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-29",
@@ -464,7 +753,19 @@
         "values": [
           "OPTIONS"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-30",
@@ -485,7 +786,19 @@
         "values": [
           "*"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-31",
@@ -500,7 +813,19 @@
       "kind": "string",
       "original": "'Vary'",
       "replacement": "'Vary_x'",
-      "description": "`c.res.headers.append('Vary', 'Origin')`: 'Vary' → 'Vary_x'"
+      "description": "`c.res.headers.append('Vary', 'Origin')`: 'Vary' → 'Vary_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-32",
@@ -515,7 +840,19 @@
       "kind": "string",
       "original": "'Origin'",
       "replacement": "'Origin_x'",
-      "description": "`c.res.headers.append('Vary', 'Origin')`: 'Origin' → 'Origin_x'"
+      "description": "`c.res.headers.append('Vary', 'Origin')`: 'Origin' → 'Origin_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-33",
@@ -530,7 +867,19 @@
       "kind": "string",
       "original": "'Access-Control-Max-Age'",
       "replacement": "'Access-Control-Max-Age_x'",
-      "description": "`set('Access-Control-Max-Age', opts.maxA…`: 'Access-Control-Max-Age' → 'Access-Control-Max-Age_x'"
+      "description": "`set('Access-Control-Max-Age', opts.maxA…`: 'Access-Control-Max-Age' → 'Access-Control-Max-Age_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-34",
@@ -545,7 +894,19 @@
       "kind": "string",
       "original": "'origin'",
       "replacement": "'origin_x'",
-      "description": "`c.req.header('origin')`: 'origin' → 'origin_x'"
+      "description": "`c.req.header('origin')`: 'origin' → 'origin_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-35",
@@ -560,7 +921,19 @@
       "kind": "string",
       "original": "'Access-Control-Allow-Methods'",
       "replacement": "'Access-Control-Allow-Methods_x'",
-      "description": "`set('Access-Control-Allow-Methods', all…`: 'Access-Control-Allow-Methods' → 'Access-Control-Allow-Methods_x'"
+      "description": "`set('Access-Control-Allow-Methods', all…`: 'Access-Control-Allow-Methods' → 'Access-Control-Allow-Methods_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-36",
@@ -575,7 +948,19 @@
       "kind": "string",
       "original": "'Access-Control-Request-Headers'",
       "replacement": "'Access-Control-Request-Headers_x'",
-      "description": "`c.req.header('Access-Control-Request-He…`: 'Access-Control-Request-Headers' → 'Access-Control-Request-Headers_x'"
+      "description": "`c.req.header('Access-Control-Request-He…`: 'Access-Control-Request-Headers' → 'Access-Control-Request-Headers_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-37",
@@ -590,7 +975,19 @@
       "kind": "string",
       "original": "','",
       "replacement": "',_x'",
-      "description": "`requestHeaders .split(',')`: ',' → ',_x'"
+      "description": "`requestHeaders .split(',')`: ',' → ',_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-38",
@@ -605,7 +1002,19 @@
       "kind": "string",
       "original": "','",
       "replacement": "',_x'",
-      "description": "`requestHeaders .split(',') .map((h) => …`: ',' → ',_x'"
+      "description": "`requestHeaders .split(',') .map((h) => …`: ',' → ',_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-39",
@@ -620,7 +1029,19 @@
       "kind": "string",
       "original": "'Access-Control-Allow-Headers'",
       "replacement": "'Access-Control-Allow-Headers_x'",
-      "description": "`set('Access-Control-Allow-Headers', hea…`: 'Access-Control-Allow-Headers' → 'Access-Control-Allow-Headers_x'"
+      "description": "`set('Access-Control-Allow-Headers', hea…`: 'Access-Control-Allow-Headers' → 'Access-Control-Allow-Headers_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-40",
@@ -635,7 +1056,19 @@
       "kind": "string",
       "original": "'Vary'",
       "replacement": "'Vary_x'",
-      "description": "`c.res.headers.append('Vary', 'Access-Co…`: 'Vary' → 'Vary_x'"
+      "description": "`c.res.headers.append('Vary', 'Access-Co…`: 'Vary' → 'Vary_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-41",
@@ -650,7 +1083,19 @@
       "kind": "string",
       "original": "'Access-Control-Request-Headers'",
       "replacement": "'Access-Control-Request-Headers_x'",
-      "description": "`c.res.headers.append('Vary', 'Access-Co…`: 'Access-Control-Request-Headers' → 'Access-Control-Request-Headers_x'"
+      "description": "`c.res.headers.append('Vary', 'Access-Co…`: 'Access-Control-Request-Headers' → 'Access-Control-Request-Headers_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-42",
@@ -665,7 +1110,19 @@
       "kind": "string",
       "original": "'Content-Length'",
       "replacement": "'Content-Length_x'",
-      "description": "`c.res.headers.delete('Content-Length')`: 'Content-Length' → 'Content-Length_x'"
+      "description": "`c.res.headers.delete('Content-Length')`: 'Content-Length' → 'Content-Length_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-43",
@@ -680,7 +1137,19 @@
       "kind": "string",
       "original": "'Content-Type'",
       "replacement": "'Content-Type_x'",
-      "description": "`c.res.headers.delete('Content-Type')`: 'Content-Type' → 'Content-Type_x'"
+      "description": "`c.res.headers.delete('Content-Type')`: 'Content-Type' → 'Content-Type_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-44",
@@ -695,7 +1164,19 @@
       "kind": "number",
       "original": "204",
       "replacement": "205",
-      "description": "`status` 204 → 205"
+      "description": "`status` 204 → 205",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-45",
@@ -716,7 +1197,19 @@
         "values": [
           "No Content"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-46",
@@ -731,7 +1224,19 @@
       "kind": "string",
       "original": "'*'",
       "replacement": "'*_x'",
-      "description": "`opts.origin !== '*'`: '*' → '*_x'"
+      "description": "`opts.origin !== '*'`: '*' → '*_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-47",
@@ -746,7 +1251,19 @@
       "kind": "string",
       "original": "'Vary'",
       "replacement": "'Vary_x'",
-      "description": "`c.header('Vary', 'Origin', { append: tr…`: 'Vary' → 'Vary_x'"
+      "description": "`c.header('Vary', 'Origin', { append: tr…`: 'Vary' → 'Vary_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-48",
@@ -761,7 +1278,19 @@
       "kind": "string",
       "original": "'Origin'",
       "replacement": "'Origin_x'",
-      "description": "`c.header('Vary', 'Origin', { append: tr…`: 'Origin' → 'Origin_x'"
+      "description": "`c.header('Vary', 'Origin', { append: tr…`: 'Origin' → 'Origin_x'",
+      "readers": [
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 73,
+          "endLine": 174
+        },
+        {
+          "file": "src/middleware/cors/index.ts",
+          "line": 111,
+          "endLine": 113
+        }
+      ]
     },
     {
       "id": "value-49",
@@ -776,7 +1305,14 @@
       "kind": "number",
       "original": "255",
       "replacement": "256",
-      "description": "the default `limitLength` 255 → 256"
+      "description": "the default `limitLength` 255 → 256",
+      "readers": [
+        {
+          "file": "src/middleware/request-id/request-id.ts",
+          "line": 45,
+          "endLine": 63
+        }
+      ]
     },
     {
       "id": "value-50",
@@ -791,7 +1327,14 @@
       "kind": "string",
       "original": "'X-Request-Id'",
       "replacement": "'X-Request-Id_x'",
-      "description": "the default `headerName` 'X-Request-Id' → 'X-Request-Id_x'"
+      "description": "the default `headerName` 'X-Request-Id' → 'X-Request-Id_x'",
+      "readers": [
+        {
+          "file": "src/middleware/request-id/request-id.ts",
+          "line": 45,
+          "endLine": 63
+        }
+      ]
     },
     {
       "id": "value-51",
@@ -806,7 +1349,14 @@
       "kind": "string",
       "original": "'requestId'",
       "replacement": "'requestId_x'",
-      "description": "`c.set('requestId', reqId)`: 'requestId' → 'requestId_x'"
+      "description": "`c.set('requestId', reqId)`: 'requestId' → 'requestId_x'",
+      "readers": [
+        {
+          "file": "src/middleware/request-id/request-id.ts",
+          "line": 45,
+          "endLine": 63
+        }
+      ]
     },
     {
       "id": "value-52",
@@ -821,7 +1371,17 @@
       "kind": "entry",
       "original": "crossOriginEmbedderPolicy: ['Cross-Origin-Embedder-Policy', 'require-corp'],\n  ",
       "replacement": "",
-      "description": "`crossOriginEmbedderPolicy: ['Cross-Origin-Embedde…` removed from `HEADERS_MAP`"
+      "description": "`crossOriginEmbedderPolicy: ['Cross-Origin-Embedde…` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-53",
@@ -836,7 +1396,17 @@
       "kind": "element",
       "original": "'Cross-Origin-Embedder-Policy', ",
       "replacement": "",
-      "description": "`'Cross-Origin-Embedder-Policy'` removed from `crossOriginEmbedderPolicy`"
+      "description": "`'Cross-Origin-Embedder-Policy'` removed from `crossOriginEmbedderPolicy`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-54",
@@ -851,7 +1421,17 @@
       "kind": "element",
       "original": ", 'require-corp'",
       "replacement": "",
-      "description": "`'require-corp'` removed from `crossOriginEmbedderPolicy`"
+      "description": "`'require-corp'` removed from `crossOriginEmbedderPolicy`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-55",
@@ -866,7 +1446,17 @@
       "kind": "entry",
       "original": "crossOriginResourcePolicy: ['Cross-Origin-Resource-Policy', 'same-origin'],\n  ",
       "replacement": "",
-      "description": "`crossOriginResourcePolicy: ['Cross-Origin-Resourc…` removed from `HEADERS_MAP`"
+      "description": "`crossOriginResourcePolicy: ['Cross-Origin-Resourc…` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-56",
@@ -881,7 +1471,17 @@
       "kind": "element",
       "original": "'Cross-Origin-Resource-Policy', ",
       "replacement": "",
-      "description": "`'Cross-Origin-Resource-Policy'` removed from `crossOriginResourcePolicy`"
+      "description": "`'Cross-Origin-Resource-Policy'` removed from `crossOriginResourcePolicy`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-57",
@@ -896,7 +1496,17 @@
       "kind": "element",
       "original": ", 'same-origin'",
       "replacement": "",
-      "description": "`'same-origin'` removed from `crossOriginResourcePolicy`"
+      "description": "`'same-origin'` removed from `crossOriginResourcePolicy`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-58",
@@ -911,7 +1521,17 @@
       "kind": "entry",
       "original": "crossOriginOpenerPolicy: ['Cross-Origin-Opener-Policy', 'same-origin'],\n  ",
       "replacement": "",
-      "description": "`crossOriginOpenerPolicy: ['Cross-Origin-Opener-Po…` removed from `HEADERS_MAP`"
+      "description": "`crossOriginOpenerPolicy: ['Cross-Origin-Opener-Po…` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-59",
@@ -926,7 +1546,17 @@
       "kind": "element",
       "original": "'Cross-Origin-Opener-Policy', ",
       "replacement": "",
-      "description": "`'Cross-Origin-Opener-Policy'` removed from `crossOriginOpenerPolicy`"
+      "description": "`'Cross-Origin-Opener-Policy'` removed from `crossOriginOpenerPolicy`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-60",
@@ -941,7 +1571,17 @@
       "kind": "element",
       "original": ", 'same-origin'",
       "replacement": "",
-      "description": "`'same-origin'` removed from `crossOriginOpenerPolicy`"
+      "description": "`'same-origin'` removed from `crossOriginOpenerPolicy`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-61",
@@ -956,7 +1596,17 @@
       "kind": "entry",
       "original": "originAgentCluster: ['Origin-Agent-Cluster', '?1'],\n  ",
       "replacement": "",
-      "description": "`originAgentCluster: ['Origin-Agent-Cluster', '?1']` removed from `HEADERS_MAP`"
+      "description": "`originAgentCluster: ['Origin-Agent-Cluster', '?1']` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-62",
@@ -971,7 +1621,17 @@
       "kind": "element",
       "original": "'Origin-Agent-Cluster', ",
       "replacement": "",
-      "description": "`'Origin-Agent-Cluster'` removed from `originAgentCluster`"
+      "description": "`'Origin-Agent-Cluster'` removed from `originAgentCluster`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-63",
@@ -986,7 +1646,17 @@
       "kind": "element",
       "original": ", '?1'",
       "replacement": "",
-      "description": "`'?1'` removed from `originAgentCluster`"
+      "description": "`'?1'` removed from `originAgentCluster`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-64",
@@ -1001,7 +1671,17 @@
       "kind": "entry",
       "original": "referrerPolicy: ['Referrer-Policy', 'no-referrer'],\n  ",
       "replacement": "",
-      "description": "`referrerPolicy: ['Referrer-Policy', 'no-referrer']` removed from `HEADERS_MAP`"
+      "description": "`referrerPolicy: ['Referrer-Policy', 'no-referrer']` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-65",
@@ -1016,7 +1696,17 @@
       "kind": "element",
       "original": "'Referrer-Policy', ",
       "replacement": "",
-      "description": "`'Referrer-Policy'` removed from `referrerPolicy`"
+      "description": "`'Referrer-Policy'` removed from `referrerPolicy`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-66",
@@ -1031,7 +1721,17 @@
       "kind": "element",
       "original": ", 'no-referrer'",
       "replacement": "",
-      "description": "`'no-referrer'` removed from `referrerPolicy`"
+      "description": "`'no-referrer'` removed from `referrerPolicy`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-67",
@@ -1046,7 +1746,17 @@
       "kind": "entry",
       "original": "strictTransportSecurity: ['Strict-Transport-Security', 'max-age=15552000; includeSubDomains'],\n  ",
       "replacement": "",
-      "description": "`strictTransportSecurity: ['Strict-Transport-Secur…` removed from `HEADERS_MAP`"
+      "description": "`strictTransportSecurity: ['Strict-Transport-Secur…` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-68",
@@ -1061,7 +1771,17 @@
       "kind": "element",
       "original": "'Strict-Transport-Security', ",
       "replacement": "",
-      "description": "`'Strict-Transport-Security'` removed from `strictTransportSecurity`"
+      "description": "`'Strict-Transport-Security'` removed from `strictTransportSecurity`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-69",
@@ -1076,7 +1796,17 @@
       "kind": "element",
       "original": ", 'max-age=15552000; includeSubDomains'",
       "replacement": "",
-      "description": "`'max-age=15552000; includeSubDomains'` removed from `strictTransportSecurity`"
+      "description": "`'max-age=15552000; includeSubDomains'` removed from `strictTransportSecurity`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-70",
@@ -1091,7 +1821,17 @@
       "kind": "entry",
       "original": "xContentTypeOptions: ['X-Content-Type-Options', 'nosniff'],\n  ",
       "replacement": "",
-      "description": "`xContentTypeOptions: ['X-Content-Type-Options', '…` removed from `HEADERS_MAP`"
+      "description": "`xContentTypeOptions: ['X-Content-Type-Options', '…` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-71",
@@ -1106,7 +1846,17 @@
       "kind": "element",
       "original": "'X-Content-Type-Options', ",
       "replacement": "",
-      "description": "`'X-Content-Type-Options'` removed from `xContentTypeOptions`"
+      "description": "`'X-Content-Type-Options'` removed from `xContentTypeOptions`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-72",
@@ -1121,7 +1871,17 @@
       "kind": "element",
       "original": ", 'nosniff'",
       "replacement": "",
-      "description": "`'nosniff'` removed from `xContentTypeOptions`"
+      "description": "`'nosniff'` removed from `xContentTypeOptions`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-73",
@@ -1136,7 +1896,17 @@
       "kind": "entry",
       "original": "xDnsPrefetchControl: ['X-DNS-Prefetch-Control', 'off'],\n  ",
       "replacement": "",
-      "description": "`xDnsPrefetchControl: ['X-DNS-Prefetch-Control', '…` removed from `HEADERS_MAP`"
+      "description": "`xDnsPrefetchControl: ['X-DNS-Prefetch-Control', '…` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-74",
@@ -1151,7 +1921,17 @@
       "kind": "element",
       "original": "'X-DNS-Prefetch-Control', ",
       "replacement": "",
-      "description": "`'X-DNS-Prefetch-Control'` removed from `xDnsPrefetchControl`"
+      "description": "`'X-DNS-Prefetch-Control'` removed from `xDnsPrefetchControl`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-75",
@@ -1166,7 +1946,17 @@
       "kind": "element",
       "original": ", 'off'",
       "replacement": "",
-      "description": "`'off'` removed from `xDnsPrefetchControl`"
+      "description": "`'off'` removed from `xDnsPrefetchControl`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-76",
@@ -1181,7 +1971,17 @@
       "kind": "entry",
       "original": "xDownloadOptions: ['X-Download-Options', 'noopen'],\n  ",
       "replacement": "",
-      "description": "`xDownloadOptions: ['X-Download-Options', 'noopen']` removed from `HEADERS_MAP`"
+      "description": "`xDownloadOptions: ['X-Download-Options', 'noopen']` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-77",
@@ -1196,7 +1996,17 @@
       "kind": "element",
       "original": "'X-Download-Options', ",
       "replacement": "",
-      "description": "`'X-Download-Options'` removed from `xDownloadOptions`"
+      "description": "`'X-Download-Options'` removed from `xDownloadOptions`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-78",
@@ -1211,7 +2021,17 @@
       "kind": "element",
       "original": ", 'noopen'",
       "replacement": "",
-      "description": "`'noopen'` removed from `xDownloadOptions`"
+      "description": "`'noopen'` removed from `xDownloadOptions`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-79",
@@ -1226,7 +2046,17 @@
       "kind": "entry",
       "original": "xFrameOptions: ['X-Frame-Options', 'SAMEORIGIN'],\n  ",
       "replacement": "",
-      "description": "`xFrameOptions: ['X-Frame-Options', 'SAMEORIGIN']` removed from `HEADERS_MAP`"
+      "description": "`xFrameOptions: ['X-Frame-Options', 'SAMEORIGIN']` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-80",
@@ -1241,7 +2071,17 @@
       "kind": "element",
       "original": "'X-Frame-Options', ",
       "replacement": "",
-      "description": "`'X-Frame-Options'` removed from `xFrameOptions`"
+      "description": "`'X-Frame-Options'` removed from `xFrameOptions`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-81",
@@ -1256,7 +2096,17 @@
       "kind": "element",
       "original": ", 'SAMEORIGIN'",
       "replacement": "",
-      "description": "`'SAMEORIGIN'` removed from `xFrameOptions`"
+      "description": "`'SAMEORIGIN'` removed from `xFrameOptions`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-82",
@@ -1271,7 +2121,17 @@
       "kind": "entry",
       "original": "xPermittedCrossDomainPolicies: ['X-Permitted-Cross-Domain-Policies', 'none'],\n  ",
       "replacement": "",
-      "description": "`xPermittedCrossDomainPolicies: ['X-Permitted-Cros…` removed from `HEADERS_MAP`"
+      "description": "`xPermittedCrossDomainPolicies: ['X-Permitted-Cros…` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-83",
@@ -1286,7 +2146,17 @@
       "kind": "element",
       "original": "'X-Permitted-Cross-Domain-Policies', ",
       "replacement": "",
-      "description": "`'X-Permitted-Cross-Domain-Policies'` removed from `xPermittedCrossDomainPolicies`"
+      "description": "`'X-Permitted-Cross-Domain-Policies'` removed from `xPermittedCrossDomainPolicies`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-84",
@@ -1301,7 +2171,17 @@
       "kind": "element",
       "original": ", 'none'",
       "replacement": "",
-      "description": "`'none'` removed from `xPermittedCrossDomainPolicies`"
+      "description": "`'none'` removed from `xPermittedCrossDomainPolicies`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-85",
@@ -1316,7 +2196,17 @@
       "kind": "entry",
       "original": ",\n  xXssProtection: ['X-XSS-Protection', '0']",
       "replacement": "",
-      "description": "`xXssProtection: ['X-XSS-Protection', '0']` removed from `HEADERS_MAP`"
+      "description": "`xXssProtection: ['X-XSS-Protection', '0']` removed from `HEADERS_MAP`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-86",
@@ -1331,7 +2221,17 @@
       "kind": "element",
       "original": "'X-XSS-Protection', ",
       "replacement": "",
-      "description": "`'X-XSS-Protection'` removed from `xXssProtection`"
+      "description": "`'X-XSS-Protection'` removed from `xXssProtection`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-87",
@@ -1346,7 +2246,17 @@
       "kind": "element",
       "original": ", '0'",
       "replacement": "",
-      "description": "`'0'` removed from `xXssProtection`"
+      "description": "`'0'` removed from `xXssProtection`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        }
+      ],
+      "names": [
+        "HEADERS_MAP"
+      ]
     },
     {
       "id": "value-88",
@@ -1361,7 +2271,17 @@
       "kind": "entry",
       "original": "crossOriginEmbedderPolicy: false,\n  ",
       "replacement": "",
-      "description": "`crossOriginEmbedderPolicy: false` removed from `DEFAULT_OPTIONS`"
+      "description": "`crossOriginEmbedderPolicy: false` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-89",
@@ -1376,7 +2296,17 @@
       "kind": "entry",
       "original": "crossOriginResourcePolicy: true,\n  ",
       "replacement": "",
-      "description": "`crossOriginResourcePolicy: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`crossOriginResourcePolicy: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-90",
@@ -1391,7 +2321,17 @@
       "kind": "entry",
       "original": "crossOriginOpenerPolicy: true,\n  ",
       "replacement": "",
-      "description": "`crossOriginOpenerPolicy: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`crossOriginOpenerPolicy: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-91",
@@ -1406,7 +2346,17 @@
       "kind": "entry",
       "original": "originAgentCluster: true,\n  ",
       "replacement": "",
-      "description": "`originAgentCluster: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`originAgentCluster: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-92",
@@ -1421,7 +2371,17 @@
       "kind": "entry",
       "original": "referrerPolicy: true,\n  ",
       "replacement": "",
-      "description": "`referrerPolicy: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`referrerPolicy: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-93",
@@ -1436,7 +2396,17 @@
       "kind": "entry",
       "original": "strictTransportSecurity: true,\n  ",
       "replacement": "",
-      "description": "`strictTransportSecurity: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`strictTransportSecurity: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-94",
@@ -1451,7 +2421,17 @@
       "kind": "entry",
       "original": "xContentTypeOptions: true,\n  ",
       "replacement": "",
-      "description": "`xContentTypeOptions: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`xContentTypeOptions: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-95",
@@ -1466,7 +2446,17 @@
       "kind": "entry",
       "original": "xDnsPrefetchControl: true,\n  ",
       "replacement": "",
-      "description": "`xDnsPrefetchControl: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`xDnsPrefetchControl: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-96",
@@ -1481,7 +2471,17 @@
       "kind": "entry",
       "original": "xDownloadOptions: true,\n  ",
       "replacement": "",
-      "description": "`xDownloadOptions: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`xDownloadOptions: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-97",
@@ -1496,7 +2496,17 @@
       "kind": "entry",
       "original": "xFrameOptions: true,\n  ",
       "replacement": "",
-      "description": "`xFrameOptions: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`xFrameOptions: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-98",
@@ -1511,7 +2521,17 @@
       "kind": "entry",
       "original": "xPermittedCrossDomainPolicies: true,\n  ",
       "replacement": "",
-      "description": "`xPermittedCrossDomainPolicies: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`xPermittedCrossDomainPolicies: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-99",
@@ -1526,7 +2546,17 @@
       "kind": "entry",
       "original": "xXssProtection: true,\n  ",
       "replacement": "",
-      "description": "`xXssProtection: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`xXssProtection: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-100",
@@ -1541,7 +2571,17 @@
       "kind": "entry",
       "original": "removePoweredBy: true,\n  ",
       "replacement": "",
-      "description": "`removePoweredBy: true` removed from `DEFAULT_OPTIONS`"
+      "description": "`removePoweredBy: true` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-101",
@@ -1556,7 +2596,17 @@
       "kind": "entry",
       "original": ",\n  permissionsPolicy: {}",
       "replacement": "",
-      "description": "`permissionsPolicy: {}` removed from `DEFAULT_OPTIONS`"
+      "description": "`permissionsPolicy: {}` removed from `DEFAULT_OPTIONS`",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        }
+      ],
+      "names": [
+        "DEFAULT_OPTIONS"
+      ]
     },
     {
       "id": "value-102",
@@ -1571,7 +2621,19 @@
       "kind": "number",
       "original": "16",
       "replacement": "17",
-      "description": "`new Uint8Array(16)`: 16 → 17"
+      "description": "`new Uint8Array(16)`: 16 → 17",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 131,
+          "endLine": 135
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 140,
+          "endLine": 148
+        }
+      ]
     },
     {
       "id": "value-103",
@@ -1586,7 +2648,19 @@
       "kind": "string",
       "original": "'secureHeadersNonce'",
       "replacement": "'secureHeadersNonce_x'",
-      "description": "`key` 'secureHeadersNonce' → 'secureHeadersNonce_x'"
+      "description": "`key` 'secureHeadersNonce' → 'secureHeadersNonce_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 131,
+          "endLine": 135
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 140,
+          "endLine": 148
+        }
+      ]
     },
     {
       "id": "value-104",
@@ -1601,7 +2675,49 @@
       "kind": "string",
       "original": "'Content-Security-Policy'",
       "replacement": "'Content-Security-Policy_x'",
-      "description": "`getCSPDirectives( options.contentSecuri…`: 'Content-Security-Policy' → 'Content-Security-Policy_x'"
+      "description": "`getCSPDirectives( options.contentSecuri…`: 'Content-Security-Policy' → 'Content-Security-Policy_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-105",
@@ -1616,7 +2732,49 @@
       "kind": "string",
       "original": "'Content-Security-Policy'",
       "replacement": "'Content-Security-Policy_x'",
-      "description": "`['Content-Security-Policy', value as st…`: 'Content-Security-Policy' → 'Content-Security-Policy_x'"
+      "description": "`['Content-Security-Policy', value as st…`: 'Content-Security-Policy' → 'Content-Security-Policy_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-106",
@@ -1631,7 +2789,49 @@
       "kind": "string",
       "original": "'Content-Security-Policy-Report-Only'",
       "replacement": "'Content-Security-Policy-Report-Only_x'",
-      "description": "`getCSPDirectives( options.contentSecuri…`: 'Content-Security-Policy-Report-Only' → 'Content-Security-Policy-Report-Only_x'"
+      "description": "`getCSPDirectives( options.contentSecuri…`: 'Content-Security-Policy-Report-Only' → 'Content-Security-Policy-Report-Only_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-107",
@@ -1646,7 +2846,49 @@
       "kind": "string",
       "original": "'Content-Security-Policy-Report-Only'",
       "replacement": "'Content-Security-Policy-Report-Only_x'",
-      "description": "`['Content-Security-Policy-Report-Only',…`: 'Content-Security-Policy-Report-Only' → 'Content-Security-Policy-Report-Only_x'"
+      "description": "`['Content-Security-Policy-Report-Only',…`: 'Content-Security-Policy-Report-Only' → 'Content-Security-Policy-Report-Only_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-108",
@@ -1661,7 +2903,49 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`Object.keys(options.permissionsPolicy).…`: 0 → 1"
+      "description": "`Object.keys(options.permissionsPolicy).…`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-109",
@@ -1676,7 +2960,49 @@
       "kind": "string",
       "original": "'Permissions-Policy'",
       "replacement": "'Permissions-Policy_x'",
-      "description": "`[ 'Permissions-Policy', getPermissionsP…`: 'Permissions-Policy' → 'Permissions-Policy_x'"
+      "description": "`[ 'Permissions-Policy', getPermissionsP…`: 'Permissions-Policy' → 'Permissions-Policy_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-110",
@@ -1691,7 +3017,49 @@
       "kind": "string",
       "original": "'Reporting-Endpoints'",
       "replacement": "'Reporting-Endpoints_x'",
-      "description": "`['Reporting-Endpoints', getReportingEnd…`: 'Reporting-Endpoints' → 'Reporting-Endpoints_x'"
+      "description": "`['Reporting-Endpoints', getReportingEnd…`: 'Reporting-Endpoints' → 'Reporting-Endpoints_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-111",
@@ -1706,7 +3074,49 @@
       "kind": "string",
       "original": "'Report-To'",
       "replacement": "'Report-To_x'",
-      "description": "`['Report-To', getReportToOptions(option…`: 'Report-To' → 'Report-To_x'"
+      "description": "`['Report-To', getReportToOptions(option…`: 'Report-To' → 'Report-To_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-112",
@@ -1721,7 +3131,49 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`callbacks.length === 0`: 0 → 1"
+      "description": "`callbacks.length === 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-113",
@@ -1736,7 +3188,49 @@
       "kind": "string",
       "original": "'X-Powered-By'",
       "replacement": "'X-Powered-By_x'",
-      "description": "`ctx.res.headers.delete('X-Powered-By')`: 'X-Powered-By' → 'X-Powered-By_x'"
+      "description": "`ctx.res.headers.delete('X-Powered-By')`: 'X-Powered-By' → 'X-Powered-By_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-114",
@@ -1751,7 +3245,49 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`defaultValue[0]`: 0 → 1"
+      "description": "`defaultValue[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-115",
@@ -1767,12 +3303,48 @@
       "original": "2",
       "replacement": "3",
       "description": "`i * 2`: 2 → 3",
-      "decision": {
-        "kind": "constant",
-        "values": [
-          "2"
-        ]
-      }
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-116",
@@ -1788,12 +3360,48 @@
       "original": "2",
       "replacement": "3",
       "description": "`i * 2 + 2`: 2 → 3",
-      "decision": {
-        "kind": "constant",
-        "values": [
-          "2"
-        ]
-      }
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-117",
@@ -1808,7 +3416,49 @@
       "kind": "string",
       "original": "'-'",
       "replacement": "'-_x'",
-      "description": "`'-' + match.toLowerCase()`: '-' → '-_x'"
+      "description": "`'-' + match.toLowerCase()`: '-' → '-_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-118",
@@ -1823,7 +3473,49 @@
       "kind": "string",
       "original": "' '",
       "replacement": "' _x'",
-      "description": "`[' ', value]`: ' ' → ' _x'"
+      "description": "`[' ', value]`: ' ' → ' _x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-119",
@@ -1838,7 +3530,49 @@
       "kind": "string",
       "original": "'; '",
       "replacement": "'; _x'",
-      "description": "`resultValues.push( directive.replace(/[…`: '; ' → '; _x'"
+      "description": "`resultValues.push( directive.replace(/[…`: '; ' → '; _x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-120",
@@ -1853,7 +3587,49 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`callbacks.length === 0`: 0 → 1"
+      "description": "`callbacks.length === 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-121",
@@ -1868,7 +3644,49 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`values[0]`: 0 → 1"
+      "description": "`values[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-122",
@@ -1883,7 +3701,49 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`values[1]`: 1 → 2"
+      "description": "`values[1]`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-123",
@@ -1898,7 +3758,49 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`values[0]`: 0 → 1"
+      "description": "`values[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-124",
@@ -1913,7 +3815,49 @@
       "kind": "string",
       "original": "'*'",
       "replacement": "'*_x'",
-      "description": "`value ? '*' : '()'`: '*' → '*_x'"
+      "description": "`value ? '*' : '()'`: '*' → '*_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-125",
@@ -1928,7 +3872,49 @@
       "kind": "string",
       "original": "'()'",
       "replacement": "'()_x'",
-      "description": "`value ? '*' : '()'`: '()' → '()_x'"
+      "description": "`value ? '*' : '()'`: '()' → '()_x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-126",
@@ -1943,7 +3929,49 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`value.length === 0`: 0 → 1"
+      "description": "`value.length === 0`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-127",
@@ -1958,7 +3986,49 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`value.length === 1`: 1 → 2"
+      "description": "`value.length === 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-128",
@@ -1973,7 +4043,49 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`value[0]`: 0 → 1"
+      "description": "`value[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-129",
@@ -1994,7 +4106,49 @@
         "values": [
           "*"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-130",
@@ -2009,7 +4163,49 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`value.length === 1`: 1 → 2"
+      "description": "`value.length === 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-131",
@@ -2024,7 +4220,49 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`value[0]`: 0 → 1"
+      "description": "`value[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-132",
@@ -2045,7 +4283,49 @@
         "values": [
           "none"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-133",
@@ -2060,7 +4340,58 @@
       "kind": "element",
       "original": "'self', ",
       "replacement": "",
-      "description": "`'self'` removed from the list `['self', 'src']`"
+      "description": "`'self'` removed from the list `['self', 'src']`",
+      "decision": {
+        "kind": "member",
+        "values": [
+          "self"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ],
+      "names": [
+        "inline list at line 326"
+      ]
     },
     {
       "id": "value-134",
@@ -2075,7 +4406,58 @@
       "kind": "element",
       "original": ", 'src'",
       "replacement": "",
-      "description": "`'src'` removed from the list `['self', 'src']`"
+      "description": "`'src'` removed from the list `['self', 'src']`",
+      "decision": {
+        "kind": "member",
+        "values": [
+          "src"
+        ]
+      },
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ],
+      "names": [
+        "inline list at line 326"
+      ]
     },
     {
       "id": "value-135",
@@ -2090,7 +4472,49 @@
       "kind": "string",
       "original": "' '",
       "replacement": "' _x'",
-      "description": "`allowlist.join(' ')`: ' ' → ' _x'"
+      "description": "`allowlist.join(' ')`: ' ' → ' _x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-136",
@@ -2105,7 +4529,49 @@
       "kind": "string",
       "original": "', '",
       "replacement": "', _x'",
-      "description": "`Object.entries(policy) .map(([directive…`: ', ' → ', _x'"
+      "description": "`Object.entries(policy) .map(([directive…`: ', ' → ', _x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-137",
@@ -2121,12 +4587,48 @@
       "original": "'$1-$2'",
       "replacement": "'$1-$2_x'",
       "description": "`str.replace(/([a-z\\d])([A-Z])/g, '$1-$2…`: '$1-$2' → '$1-$2_x'",
-      "decision": {
-        "kind": "output",
-        "values": [
-          "$1-$2"
-        ]
-      }
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-138",
@@ -2141,7 +4643,49 @@
       "kind": "string",
       "original": "', '",
       "replacement": "', _x'",
-      "description": "`reportingEndpoints.map((endpoint) => `$…`: ', ' → ', _x'"
+      "description": "`reportingEndpoints.map((endpoint) => `$…`: ', ' → ', _x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     },
     {
       "id": "value-139",
@@ -2156,7 +4700,49 @@
       "kind": "string",
       "original": "', '",
       "replacement": "', _x'",
-      "description": "`reportTo.map((option) => JSON.stringify…`: ', ' → ', _x'"
+      "description": "`reportTo.map((option) => JSON.stringify…`: ', ' → ', _x'",
+      "readers": [
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 192,
+          "endLine": 248
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 250,
+          "endLine": 257
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 259,
+          "endLine": 305
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 307,
+          "endLine": 334
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 336,
+          "endLine": 338
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 340,
+          "endLine": 344
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 346,
+          "endLine": 348
+        },
+        {
+          "file": "src/middleware/secure-headers/secure-headers.ts",
+          "line": 350,
+          "endLine": 354
+        }
+      ]
     }
   ]
 }

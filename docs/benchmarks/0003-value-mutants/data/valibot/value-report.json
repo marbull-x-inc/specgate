@@ -34,7 +34,7 @@
             "370",
             "371"
           ],
-          "duration": 2925
+          "duration": 4546
         },
         {
           "id": "value-2",
@@ -60,7 +60,7 @@
             "370",
             "371"
           ],
-          "duration": 2738
+          "duration": 4534
         },
         {
           "id": "value-3",
@@ -77,13 +77,12 @@
               "column": 34
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "370",
             "371"
           ],
-          "duration": 2993
+          "duration": 4456
         }
       ]
     },
@@ -115,7 +114,7 @@
             "283",
             "284"
           ],
-          "duration": 2953
+          "duration": 4754
         },
         {
           "id": "value-5",
@@ -141,7 +140,7 @@
             "283",
             "284"
           ],
-          "duration": 3064
+          "duration": 4632
         },
         {
           "id": "value-6",
@@ -167,7 +166,7 @@
             "283",
             "284"
           ],
-          "duration": 2801
+          "duration": 4569
         },
         {
           "id": "value-7",
@@ -193,7 +192,7 @@
             "283",
             "284"
           ],
-          "duration": 2762
+          "duration": 4764
         },
         {
           "id": "value-8",
@@ -210,13 +209,12 @@
               "column": 33
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "283",
             "284"
           ],
-          "duration": 2654
+          "duration": 4761
         }
       ]
     },
@@ -267,7 +265,7 @@
             "22",
             "23"
           ],
-          "duration": 3570
+          "duration": 4832
         },
         {
           "id": "value-10",
@@ -312,7 +310,7 @@
             "22",
             "23"
           ],
-          "duration": 3663
+          "duration": 4705
         },
         {
           "id": "value-11",
@@ -329,8 +327,7 @@
               "column": 32
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "14",
             "15",
@@ -343,7 +340,7 @@
             "22",
             "23"
           ],
-          "duration": 3483
+          "duration": 4639
         }
       ]
     },
@@ -375,7 +372,7 @@
             "152",
             "153"
           ],
-          "duration": 3585
+          "duration": 4478
         },
         {
           "id": "value-13",
@@ -401,7 +398,7 @@
             "152",
             "153"
           ],
-          "duration": 3906
+          "duration": 4507
         },
         {
           "id": "value-14",
@@ -418,13 +415,12 @@
               "column": 33
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "152",
             "153"
           ],
-          "duration": 4007
+          "duration": 4525
         }
       ]
     },
@@ -475,7 +471,7 @@
             "96",
             "97"
           ],
-          "duration": 3024
+          "duration": 4733
         },
         {
           "id": "value-16",
@@ -520,7 +516,7 @@
             "96",
             "97"
           ],
-          "duration": 4270
+          "duration": 3544
         },
         {
           "id": "value-17",
@@ -537,8 +533,7 @@
               "column": 32
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "88",
             "89",
@@ -551,7 +546,7 @@
             "96",
             "97"
           ],
-          "duration": 4009
+          "duration": 3446
         }
       ]
     },
@@ -586,7 +581,7 @@
             "394",
             "395"
           ],
-          "duration": 4203
+          "duration": 19161
         },
         {
           "id": "value-19",
@@ -615,7 +610,7 @@
             "394",
             "395"
           ],
-          "duration": 4510
+          "duration": 19513
         },
         {
           "id": "value-20",
@@ -641,7 +636,7 @@
             "394",
             "395"
           ],
-          "duration": 4177
+          "duration": 19308
         }
       ]
     },
@@ -692,7 +687,7 @@
             "144",
             "145"
           ],
-          "duration": 4264
+          "duration": 5820
         },
         {
           "id": "value-22",
@@ -737,7 +732,7 @@
             "144",
             "145"
           ],
-          "duration": 4611
+          "duration": 5792
         },
         {
           "id": "value-23",
@@ -754,8 +749,7 @@
               "column": 32
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "136",
             "137",
@@ -768,7 +762,7 @@
             "144",
             "145"
           ],
-          "duration": 4312
+          "duration": 5657
         }
       ]
     },
@@ -800,7 +794,7 @@
             "438",
             "439"
           ],
-          "duration": 4575
+          "duration": 5680
         },
         {
           "id": "value-25",
@@ -826,7 +820,7 @@
             "438",
             "439"
           ],
-          "duration": 4342
+          "duration": 5664
         },
         {
           "id": "value-26",
@@ -843,13 +837,12 @@
               "column": 34
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "438",
             "439"
           ],
-          "duration": 3951
+          "duration": 5621
         }
       ]
     },
@@ -911,7 +904,7 @@
             "501",
             "502"
           ],
-          "duration": 4156
+          "duration": 21167
         },
         {
           "id": "value-28",
@@ -967,7 +960,7 @@
             "501",
             "502"
           ],
-          "duration": 4278
+          "duration": 20860
         },
         {
           "id": "value-29",
@@ -1014,7 +1007,7 @@
             "478",
             "502"
           ],
-          "duration": 4878
+          "duration": 20989
         }
       ]
     },
@@ -1067,7 +1060,7 @@
             "330",
             "331"
           ],
-          "duration": 4367
+          "duration": 18869
         },
         {
           "id": "value-31",
@@ -1114,7 +1107,7 @@
             "330",
             "331"
           ],
-          "duration": 3729
+          "duration": 16049
         },
         {
           "id": "value-32",
@@ -1131,8 +1124,7 @@
               "column": 32
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "112",
             "113",
@@ -1149,7 +1141,7 @@
             "274",
             "331"
           ],
-          "duration": 3894
+          "duration": 15491
         }
       ]
     },
@@ -1186,7 +1178,7 @@
             "255",
             "256"
           ],
-          "duration": 4260
+          "duration": 12560
         },
         {
           "id": "value-34",
@@ -1217,7 +1209,7 @@
             "255",
             "256"
           ],
-          "duration": 4124
+          "duration": 12952
         },
         {
           "id": "value-35",
@@ -1245,7 +1237,7 @@
             "255",
             "256"
           ],
-          "duration": 4251
+          "duration": 12644
         },
         {
           "id": "value-36",
@@ -1262,15 +1254,14 @@
               "column": 35
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "253",
             "254",
             "255",
             "256"
           ],
-          "duration": 4282
+          "duration": 12449
         }
       ]
     },
@@ -1302,7 +1293,7 @@
             "486",
             "487"
           ],
-          "duration": 4248
+          "duration": 12998
         },
         {
           "id": "value-38",
@@ -1328,7 +1319,7 @@
             "486",
             "487"
           ],
-          "duration": 4100
+          "duration": 12524
         },
         {
           "id": "value-39",
@@ -1354,7 +1345,7 @@
             "486",
             "487"
           ],
-          "duration": 4161
+          "duration": 3509
         },
         {
           "id": "value-40",
@@ -1380,7 +1371,7 @@
             "486",
             "487"
           ],
-          "duration": 4060
+          "duration": 3444
         },
         {
           "id": "value-41",
@@ -1397,13 +1388,12 @@
               "column": 33
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "486",
             "487"
           ],
-          "duration": 4050
+          "duration": 3427
         },
         {
           "id": "value-42",
@@ -1426,7 +1416,7 @@
             "486",
             "487"
           ],
-          "duration": 4032
+          "duration": 3333
         }
       ]
     },
@@ -1458,7 +1448,7 @@
             "347",
             "348"
           ],
-          "duration": 3936
+          "duration": 5785
         },
         {
           "id": "value-44",
@@ -1484,7 +1474,7 @@
             "347",
             "348"
           ],
-          "duration": 3439
+          "duration": 5644
         },
         {
           "id": "value-45",
@@ -1501,13 +1491,12 @@
               "column": 33
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "347",
             "348"
           ],
-          "duration": 3146
+          "duration": 5497
         }
       ]
     },
@@ -1559,7 +1548,7 @@
             "47",
             "48"
           ],
-          "duration": 2136
+          "duration": 5522
         },
         {
           "id": "value-47",
@@ -1605,7 +1594,7 @@
             "47",
             "48"
           ],
-          "duration": 1805
+          "duration": 5503
         },
         {
           "id": "value-48",
@@ -1622,8 +1611,7 @@
               "column": 32
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "38",
             "39",
@@ -1637,7 +1625,7 @@
             "47",
             "48"
           ],
-          "duration": 1581
+          "duration": 5285
         }
       ]
     },
@@ -1689,7 +1677,7 @@
             "72",
             "73"
           ],
-          "duration": 1547
+          "duration": 5250
         },
         {
           "id": "value-50",
@@ -1735,7 +1723,7 @@
             "72",
             "73"
           ],
-          "duration": 1518
+          "duration": 5177
         },
         {
           "id": "value-51",
@@ -1752,8 +1740,7 @@
               "column": 32
             }
           },
-          "status": "Killed",
-          "statusReason": "exit 1",
+          "status": "Survived",
           "coveredBy": [
             "64",
             "65",
@@ -1766,7 +1753,7 @@
             "72",
             "73"
           ],
-          "duration": 1384
+          "duration": 3563
         }
       ]
     }

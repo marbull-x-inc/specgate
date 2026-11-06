@@ -1,10 +1,9 @@
 specgate check (advisory): 9 units, 16 guarantees, 5 linked tests
-  fail 12 · warn 38 · info 1
+  fail 11 · warn 38 · info 1
   ❌ [guarantee-no-test] src/parse.ts:51 parseURL.ok.no-protocol has no test naming it
   ❌ [guarantee-no-test] src/parse.ts:52 parseURL.ok.default-proto has no test naming it
   ❌ [guarantee-no-test] src/parse.ts:114 parsePath.ok.split has no test naming it
   ❌ [guarantee-no-test] src/parse.ts:136 parseAuth.ok.split has no test naming it
-  ❌ [identifier-unresolved] src/parse.ts:187 stringifyParsedURL.ok.roundtrip: "parseURL" is not a parameter, declared port, entity or public operation
   ❌ [guarantee-no-test] src/query.ts:46 parseQuery.ok.pairs has no test naming it
   ❌ [guarantee-no-test] src/query.ts:47 parseQuery.ok.leading-question has no test naming it
   ❌ [guarantee-no-test] src/query.ts:48 parseQuery.ok.repeated has no test naming it

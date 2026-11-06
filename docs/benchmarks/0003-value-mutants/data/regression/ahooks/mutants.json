@@ -23,7 +23,24 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "the default `initialValue` 0 → 1"
+      "description": "the default `initialValue` 0 → 1",
+      "readers": [
+        {
+          "file": "packages/hooks/src/useCounter/index.ts",
+          "line": 19,
+          "endLine": 29
+        },
+        {
+          "file": "packages/hooks/src/useCounter/index.ts",
+          "line": 38,
+          "endLine": 83
+        },
+        {
+          "file": "packages/hooks/src/useCounter/index.ts",
+          "line": 48,
+          "endLine": 56
+        }
+      ]
     },
     {
       "id": "value-2",
@@ -38,7 +55,24 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "the default `delta` 1 → 2"
+      "description": "the default `delta` 1 → 2",
+      "readers": [
+        {
+          "file": "packages/hooks/src/useCounter/index.ts",
+          "line": 19,
+          "endLine": 29
+        },
+        {
+          "file": "packages/hooks/src/useCounter/index.ts",
+          "line": 38,
+          "endLine": 83
+        },
+        {
+          "file": "packages/hooks/src/useCounter/index.ts",
+          "line": 48,
+          "endLine": 56
+        }
+      ]
     },
     {
       "id": "value-3",
@@ -53,7 +87,24 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "the default `delta` 1 → 2"
+      "description": "the default `delta` 1 → 2",
+      "readers": [
+        {
+          "file": "packages/hooks/src/useCounter/index.ts",
+          "line": 19,
+          "endLine": 29
+        },
+        {
+          "file": "packages/hooks/src/useCounter/index.ts",
+          "line": 38,
+          "endLine": 83
+        },
+        {
+          "file": "packages/hooks/src/useCounter/index.ts",
+          "line": 48,
+          "endLine": 56
+        }
+      ]
     }
   ]
 }

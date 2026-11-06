@@ -13,10 +13,12 @@ for p in "${@:-scule ufo zustand mantine-hooks ahooks hono}"; do
   cwd=.; test="npx vitest run"
   case "$p" in
     mantine-hooks) test="npx jest --watchman=false packages/@mantine/hooks" ;;
-    ahooks) cwd=packages/hooks ;;
+    ahooks) cwd=packages/hooks; test="npx vitest run --project ahooks" ;;
     hono) test="npx vitest run --config vitest.stryker.config.ts" ;;
   esac
   dir="$work/$p"; data="$out/$p"; mkdir -p "$data"
+  # Where the test command runs: 0001 ran ahooks' tests from the root (--project ahooks).
+  runcwd="$cwd"; [ "$p" = ahooks ] && runcwd=.
   echo "### $p $(date +%T)"
   git -C "$repo" show "$branch:docs/benchmarks/0001-oss/scripts/config/$p/stryker.config.json" > "$dir/$cwd/stryker.config.json"
   [ "$p" = hono ] && git -C "$repo" show "$branch:docs/benchmarks/0001-oss/scripts/config/hono/vitest.stryker.config.ts" > "$dir/vitest.stryker.config.ts"
@@ -27,12 +29,16 @@ for p in "${@:-scule ufo zustand mantine-hooks ahooks hono}"; do
     c.output = { dir: '.specgate-regression' };
     c.mutation = { report: ['$cwd/reports/mutation/mutation.json'.replace(/^\.\//, ''), 'reports/value/value.json'] };
     require('fs').writeFileSync('$dir/specgate.regression.config.json', JSON.stringify(c, null, 2));"
-  (cd "$dir/$cwd" && /usr/bin/time -p npx stryker run stryker.config.json) > "$data/stryker.log" 2>&1 < /dev/null
-  echo "stryker exit $?"
+  if [ -n "${SKIP_STRYKER:-}" ] && [ -f "$dir/$cwd/reports/mutation/mutation.json" ]; then
+    echo "stryker skipped"
+  else
+    (cd "$dir/$cwd" && /usr/bin/time -p npx stryker run stryker.config.json) > "$data/stryker.log" 2>&1 < /dev/null
+    echo "stryker exit $?"
+  fi
   runners=$(grep -oE "Creating [0-9]+ test runner" "$data/stryker.log" | grep -oE "[0-9]+" | head -1)
   (cd "$dir" && /usr/bin/time -p "${specgate[@]}" mutants --config specgate.0001.config.json --out .specgate) > "$data/mutants.log" 2>&1
   (cd "$dir" && /usr/bin/time -p node "$repo/scripts/value-mutants/run.ts" --mutants .specgate/mutants.json \
-    --stryker "$cwd/reports/mutation/mutation.json" --command "cd '$cwd' && $test" \
+    --stryker "$cwd/reports/mutation/mutation.json" --cwd "$runcwd" --command "$test" \
     --out reports/value/value.json --concurrency "${runners:-1}") > "$data/runner.log" 2>&1 < /dev/null
   echo "runner exit $?"
   (cd "$dir" && "${specgate[@]}" check --config specgate.regression.config.json --no-provenance > "$data/check.log" 2>&1)

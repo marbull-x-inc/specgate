@@ -1,5 +1,5 @@
 specgate check (advisory): 11 units, 20 guarantees, 11 linked tests
-  fail 11 · warn 28 · info 1
+  fail 10 · warn 24 · info 1
   ❌ [operation-no-guarantee] src/index.ts:15 isUppercase has no guarantee (no doc comment)
   ❌ [guarantee-no-test] src/index.ts:23 splitByCase.ok.default-splitters has no test naming it
   ❌ [guarantee-no-test] src/index.ts:25 splitByCase.ok.numbers has no test naming it
@@ -7,7 +7,6 @@ specgate check (advisory): 11 units, 20 guarantees, 11 linked tests
   ❌ [guarantee-no-test] src/index.ts:104 pascalCase.ok.join has no test naming it
   ❌ [guarantee-no-test] src/index.ts:105 pascalCase.ok.preserve has no test naming it
   ❌ [guarantee-no-test] src/index.ts:125 camelCase.ok.join has no test naming it
-  ❌ [identifier-unresolved] src/index.ts:125 camelCase.ok.join: "camelCase" is not a parameter, declared port, entity or public operation
   ❌ [guarantee-no-test] src/index.ts:145 kebabCase.ok.lower has no test naming it
   ❌ [guarantee-no-test] src/index.ts:189 trainCase.ok.join has no test naming it
   ❌ [guarantee-no-test] src/index.ts:213 titleCase.ok.minor-words has no test naming it
@@ -18,9 +17,6 @@ specgate check (advisory): 11 units, 20 guarantees, 11 linked tests
   ⚠️ [mutant-survived] src/index.ts:40 splitByCase: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/index.ts:60 splitByCase: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/index.ts:71 splitByCase: `Math.max(0, buff.length - 1)`: 0 → 1 survived; no linked test fails when the code changes like this
-  ⚠️ [decision-untested] src/index.ts:120 pascalCase commits to output "normalize" and the contract names it, but no linked test writes it; camelCase.ok.normalize builds its input with camelCase from the unit's own module, so the value changes with the implementation. Write it as a literal
-  ⚠️ [decision-untested] src/index.ts:139 camelCase commits to output "normalize" and the contract names it, but no linked test uses it; a test cannot fail when it changes
-  ⚠️ [decision-untested] src/index.ts:205 trainCase commits to output "normalize" and the contract names it, but no linked test uses it; a test cannot fail when it changes
   ⚠️ [mutant-survived] src/index.ts:209 titleCase: Regex mutant in titleCaseExceptions: `/^(a|an|and|as|at|but|by|for|if|in|is|nor|of|on|or|the|to|w…` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/index.ts:209 titleCase: `an` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/index.ts:209 titleCase: `and` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
@@ -38,7 +34,6 @@ specgate check (advisory): 11 units, 20 guarantees, 11 linked tests
   ⚠️ [mutant-survived] src/index.ts:209 titleCase: `the` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/index.ts:209 titleCase: `to` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/index.ts:209 titleCase: `with` removed from `titleCaseExceptions` survived; no linked test fails when the code changes like this
-  ⚠️ [decision-unspecified] src/index.ts:234 titleCase commits to output "normalize" in `"normalize"`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
   ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
 
 wrote <work-0001>/scule/.specgate-regression/report.json

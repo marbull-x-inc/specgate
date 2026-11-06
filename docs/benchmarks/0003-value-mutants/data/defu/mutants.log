@@ -1,5 +1,5 @@
 mutants: 3 value change(s) in 1 file(s) (3 string)
 wrote <work>/defu/.specgate/mutants.json
-real 0.86
-user 2.72
-sys 0.13
+real 0.48
+user 1.54
+sys 0.07

@@ -1,41 +1,41 @@
-baseline run 1165 ms; timeout 30000 ms
-value-6 Killed     src/index.ts:70 `buff.at(-1)`: -1 → -2
+baseline run 614 ms; timeout 30000 ms
 value-8 Survived   src/index.ts:71 `Math.max(0, buff.length - 1)`: 0 → 1
-value-7 Killed     src/index.ts:71 `buff.slice(0, Math.max(0, buff.length -…`: 0 → 1
-value-5 Killed     src/index.ts:69 `buff.length > 1`: 1 → 2
-value-11 Killed     src/index.ts:93 `str.slice(1)`: 1 → 2
-value-14 Killed     src/index.ts:162 `joiner ?? "-"`: "-" → "-_x"
-value-15 Killed     src/index.ts:174 `kebabCase(str || "", "_")`: "_" → "__x"
-value-1 Killed     src/index.ts:13 `"-"` removed from `STR_SPLITTERS`
-value-12 Killed     src/index.ts:100 `str[0]`: 0 → 1
-value-13 Killed     src/index.ts:100 `str.slice(1)`: 1 → 2
-value-9 Killed     src/index.ts:71 `buff.length - 1`: 1 → 2
-value-10 Killed     src/index.ts:93 `str[0]`: 0 → 1
-value-16 Killed     src/index.ts:205 `(Array.isArray(str) ? str : splitByCase…`: "-" → "-_x"
-value-2 Killed     src/index.ts:13 `"_"` removed from `STR_SPLITTERS`
-value-3 Killed     src/index.ts:13 `"/"` removed from `STR_SPLITTERS`
 value-4 Survived   src/index.ts:13 `"."` removed from `STR_SPLITTERS`
-value-17 Killed     src/index.ts:209 `a` removed from `titleCaseExceptions`
+value-3 Killed     src/index.ts:13 `"/"` removed from `STR_SPLITTERS`
+value-2 Killed     src/index.ts:13 `"_"` removed from `STR_SPLITTERS`
+value-6 Killed     src/index.ts:70 `buff.at(-1)`: -1 → -2
+value-11 Killed     src/index.ts:93 `str.slice(1)`: 1 → 2
+value-9 Killed     src/index.ts:71 `buff.length - 1`: 1 → 2
+value-7 Killed     src/index.ts:71 `buff.slice(0, Math.max(0, buff.length -…`: 0 → 1
+value-1 Killed     src/index.ts:13 `"-"` removed from `STR_SPLITTERS`
+value-5 Killed     src/index.ts:69 `buff.length > 1`: 1 → 2
+value-14 Killed     src/index.ts:162 `joiner ?? "-"`: "-" → "-_x"
+value-12 Killed     src/index.ts:100 `str[0]`: 0 → 1
+value-10 Killed     src/index.ts:93 `str[0]`: 0 → 1
+value-13 Killed     src/index.ts:100 `str.slice(1)`: 1 → 2
+value-15 Killed     src/index.ts:174 `kebabCase(str || "", "_")`: "_" → "__x"
+value-16 Killed     src/index.ts:205 `(Array.isArray(str) ? str : splitByCase…`: "-" → "-_x"
 value-18 Survived   src/index.ts:209 `an` removed from `titleCaseExceptions`
-value-19 Survived   src/index.ts:209 `and` removed from `titleCaseExceptions`
-value-20 Survived   src/index.ts:209 `as` removed from `titleCaseExceptions`
+value-17 Killed     src/index.ts:209 `a` removed from `titleCaseExceptions`
 value-21 Survived   src/index.ts:209 `at` removed from `titleCaseExceptions`
-value-35 Killed     src/index.ts:234 `(Array.isArray(str) ? str : splitByCase…`: " " → " _x"
 value-22 Survived   src/index.ts:209 `but` removed from `titleCaseExceptions`
-value-23 Survived   src/index.ts:209 `by` removed from `titleCaseExceptions`
-value-24 Survived   src/index.ts:209 `for` removed from `titleCaseExceptions`
 value-25 Survived   src/index.ts:209 `if` removed from `titleCaseExceptions`
-value-26 Survived   src/index.ts:209 `in` removed from `titleCaseExceptions`
+value-23 Survived   src/index.ts:209 `by` removed from `titleCaseExceptions`
+value-20 Survived   src/index.ts:209 `as` removed from `titleCaseExceptions`
+value-19 Survived   src/index.ts:209 `and` removed from `titleCaseExceptions`
+value-24 Survived   src/index.ts:209 `for` removed from `titleCaseExceptions`
 value-27 Killed     src/index.ts:209 `is` removed from `titleCaseExceptions`
 value-28 Survived   src/index.ts:209 `nor` removed from `titleCaseExceptions`
 value-29 Survived   src/index.ts:209 `of` removed from `titleCaseExceptions`
 value-30 Survived   src/index.ts:209 `on` removed from `titleCaseExceptions`
-value-31 Survived   src/index.ts:209 `or` removed from `titleCaseExceptions`
+value-26 Survived   src/index.ts:209 `in` removed from `titleCaseExceptions`
 value-32 Survived   src/index.ts:209 `the` removed from `titleCaseExceptions`
+value-31 Survived   src/index.ts:209 `or` removed from `titleCaseExceptions`
 value-33 Survived   src/index.ts:209 `to` removed from `titleCaseExceptions`
 value-34 Survived   src/index.ts:209 `with` removed from `titleCaseExceptions`
-value-mutants: 35 mutant(s): 17 Killed, 18 Survived; 26996 ms (baseline run 1165 ms)
+value-35 Killed     src/index.ts:234 `(Array.isArray(str) ? str : splitByCase…`: " " → " _x"
+value-mutants: 35 mutant(s): 17 Killed, 18 Survived; 8656 ms (baseline run 614 ms)
 wrote <work-0001>/scule/reports/value/value.json
-real 27.10
-user 92.97
-sys 21.11
+real 8.72
+user 73.15
+sys 17.58

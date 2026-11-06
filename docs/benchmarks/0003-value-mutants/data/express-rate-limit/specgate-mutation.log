@@ -1,5 +1,5 @@
 specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
-  fail 12 · warn 114 · info 14
+  fail 12 · warn 113 · info 14
   ❌ [identifier-unresolved] source/ip-key-generator.ts:23 ipKeyGenerator.ok.ipv4-unchanged: "IPv4" is not a parameter, declared port, entity or public operation
   ❌ [identifier-unresolved] source/ip-key-generator.ts:24 ipKeyGenerator.ok.default-ipv6-subnet-56: "IPv6" is not a parameter, declared port, entity or public operation
   ❌ [identifier-unresolved] source/ip-key-generator.ts:25 ipKeyGenerator.ok.ipv6-subnet-false: "IPv6" is not a parameter, declared port, entity or public operation
@@ -74,7 +74,6 @@ specgate check (advisory): 2 units, 12 guarantees, 89 linked tests
   ⚠️ [mutant-survived] source/rate-limit.ts:373 rateLimit: CallExpression mutant: `;` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:376 rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:377 rateLimit: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
-  ⚠️ [mutant-survived] source/rate-limit.ts:377 rateLimit: `debug('executing init for store')`: 'executing init for store' → 'executing init for store_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] source/rate-limit.ts:409 rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [decision-unspecified] source/rate-limit.ts:410 rateLimit commits to output "finish" in `'finish'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
   ⚠️ [mutant-survived] source/rate-limit.ts:413 rateLimit: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this

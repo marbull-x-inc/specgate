@@ -1,21 +1,34 @@
 specgate check (advisory): 15 units, 37 guarantees, 220 linked tests
-  fail 1 · warn 15 · info 28
+  fail 1 · warn 28 · info 28
   ❌ [guarantee-no-test] library/src/actions/value/value.ts:72 value.ok.type-unchanged has no test naming it
   ⚠️ [mutant-survived] library/src/actions/bytes/bytes.ts:115 bytes: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/bytes/bytes.ts:118 bytes: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/bytes/bytes.ts:118 bytes: `_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/empty/empty.ts:95 empty: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/empty/empty.ts:95 empty: `_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/gtValue/gtValue.ts:120 gtValue: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/gtValue/gtValue.ts:120 gtValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/length/length.ts:121 length: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/length/length.ts:121 length: `_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/ltValue/ltValue.ts:120 ltValue: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/ltValue/ltValue.ts:120 ltValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/maxValue/maxValue.ts:122 maxValue: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/maxValue/maxValue.ts:122 maxValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/minBytes/minBytes.ts:120 minBytes: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/minBytes/minBytes.ts:123 minBytes: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/minBytes/minBytes.ts:123 minBytes: `_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/minValue/minValue.ts:122 minValue: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/minValue/minValue.ts:122 minValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/multipleOf/multipleOf.ts:162 multipleOf: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/multipleOf/multipleOf.ts:162 multipleOf: `_addIssue(this, 'multiple', dataset, co…`: 'multiple' → 'multiple_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/nonEmpty/nonEmpty.ts:98 nonEmpty: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/nonEmpty/nonEmpty.ts:98 nonEmpty: `_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/notLength/notLength.ts:123 notLength: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/notLength/notLength.ts:123 notLength: `_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/notValue/notValue.ts:121 notValue: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/notValue/notValue.ts:121 notValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] library/src/actions/value/value.ts:120 value: StringLiteral mutant: `""` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] library/src/actions/value/value.ts:120 value: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this
   ℹ️ [decision-unspecified] library/src/actions/bytes/bytes.ts:107 bytes commits to output "validation" in `'validation'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
   ℹ️ [decision-unspecified] library/src/actions/empty/empty.ts:87 empty commits to output "validation" in `'validation'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
   ℹ️ [decision-unspecified] library/src/actions/empty/empty.ts:91 empty commits to output "0" in `'0'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)

@@ -26,7 +26,10 @@
       "kind": "string",
       "original": "\"ufo:protocolRelative\"",
       "replacement": "\"ufo:protocolRelative_x\"",
-      "description": "`Symbol.for(\"ufo:protocolRelative\")`: \"ufo:protocolRelative\" → \"ufo:protocolRelative_x\""
+      "description": "`Symbol.for(\"ufo:protocolRelative\")`: \"ufo:protocolRelative\" → \"ufo:protocolRelative_x\"",
+      "names": [
+        "protocolRelative"
+      ]
     },
     {
       "id": "value-2",
@@ -41,7 +44,14 @@
       "kind": "string",
       "original": "\"/\"",
       "replacement": "\"/_x\"",
-      "description": "`input .replace(/\\\\/g, \"/\")`: \"/\" → \"/_x\""
+      "description": "`input .replace(/\\\\/g, \"/\")`: \"/\" → \"/_x\"",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 54,
+          "endLine": 98
+        }
+      ]
     },
     {
       "id": "value-3",
@@ -62,7 +72,14 @@
         "values": [
           "file:"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 54,
+          "endLine": 98
+        }
+      ]
     },
     {
       "id": "value-4",
@@ -77,7 +94,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`auth.slice(0, Math.max(0, auth.length -…`: 0 → 1"
+      "description": "`auth.slice(0, Math.max(0, auth.length -…`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 54,
+          "endLine": 98
+        }
+      ]
     },
     {
       "id": "value-5",
@@ -92,7 +116,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`Math.max(0, auth.length - 1)`: 0 → 1"
+      "description": "`Math.max(0, auth.length - 1)`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 54,
+          "endLine": 98
+        }
+      ]
     },
     {
       "id": "value-6",
@@ -107,7 +138,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`auth.length - 1`: 1 → 2"
+      "description": "`auth.length - 1`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 54,
+          "endLine": 98
+        }
+      ]
     },
     {
       "id": "value-7",
@@ -122,7 +160,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`( input.match(/([^#?]*)(\\?[^#]*)?(#.*)?…`: 1 → 2"
+      "description": "`( input.match(/([^#?]*)(\\?[^#]*)?(#.*)?…`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 116,
+          "endLine": 126
+        }
+      ]
     },
     {
       "id": "value-8",
@@ -137,7 +182,14 @@
       "kind": "string",
       "original": "\":\"",
       "replacement": "\":_x\"",
-      "description": "`input.split(\":\")`: \":\" → \":_x\""
+      "description": "`input.split(\":\")`: \":\" → \":_x\"",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 138,
+          "endLine": 144
+        }
+      ]
     },
     {
       "id": "value-9",
@@ -152,7 +204,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`(input.match(/([^/:]*):?(\\d+)?/) || [])…`: 1 → 2"
+      "description": "`(input.match(/([^/:]*):?(\\d+)?/) || [])…`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 163,
+          "endLine": 169
+        }
+      ]
     },
     {
       "id": "value-10",
@@ -167,7 +226,14 @@
       "kind": "string",
       "original": "\"?\"",
       "replacement": "\"?_x\"",
-      "description": "`parsed.search.startsWith(\"?\")`: \"?\" → \"?_x\""
+      "description": "`parsed.search.startsWith(\"?\")`: \"?\" → \"?_x\"",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 189,
+          "endLine": 202
+        }
+      ]
     },
     {
       "id": "value-11",
@@ -182,7 +248,14 @@
       "kind": "string",
       "original": "\"?\"",
       "replacement": "\"?_x\"",
-      "description": "`parsed.search.startsWith(\"?\") ? \"\" : \"?\"`: \"?\" → \"?_x\""
+      "description": "`parsed.search.startsWith(\"?\") ? \"\" : \"?\"`: \"?\" → \"?_x\"",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 189,
+          "endLine": 202
+        }
+      ]
     },
     {
       "id": "value-12",
@@ -197,7 +270,14 @@
       "kind": "string",
       "original": "\"@\"",
       "replacement": "\"@_x\"",
-      "description": "`parsed.auth + \"@\"`: \"@\" → \"@_x\""
+      "description": "`parsed.auth + \"@\"`: \"@\" → \"@_x\"",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 189,
+          "endLine": 202
+        }
+      ]
     },
     {
       "id": "value-13",
@@ -212,7 +292,14 @@
       "kind": "string",
       "original": "\"//\"",
       "replacement": "\"//_x\"",
-      "description": "`(parsed.protocol || \"\") + \"//\"`: \"//\" → \"//_x\""
+      "description": "`(parsed.protocol || \"\") + \"//\"`: \"//\" → \"//_x\"",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 189,
+          "endLine": 202
+        }
+      ]
     },
     {
       "id": "value-14",
@@ -227,7 +314,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`matches[1]`: 1 → 2"
+      "description": "`matches[1]`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/parse.ts",
+          "line": 229,
+          "endLine": 238
+        }
+      ]
     },
     {
       "id": "value-15",
@@ -242,7 +336,14 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`parametersString[0]`: 0 → 1"
+      "description": "`parametersString[0]`: 0 → 1",
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 50,
+          "endLine": 78
+        }
+      ]
     },
     {
       "id": "value-16",
@@ -263,7 +364,14 @@
         "values": [
           "?"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 50,
+          "endLine": 78
+        }
+      ]
     },
     {
       "id": "value-17",
@@ -278,7 +386,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`parametersString.slice(1)`: 1 → 2"
+      "description": "`parametersString.slice(1)`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 50,
+          "endLine": 78
+        }
+      ]
     },
     {
       "id": "value-18",
@@ -293,7 +408,14 @@
       "kind": "string",
       "original": "\"&\"",
       "replacement": "\"&_x\"",
-      "description": "`parametersString.split(\"&\")`: \"&\" → \"&_x\""
+      "description": "`parametersString.split(\"&\")`: \"&\" → \"&_x\"",
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 50,
+          "endLine": 78
+        }
+      ]
     },
     {
       "id": "value-19",
@@ -314,7 +436,14 @@
         "values": [
           "2"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 50,
+          "endLine": 78
+        }
+      ]
     },
     {
       "id": "value-20",
@@ -329,7 +458,14 @@
       "kind": "number",
       "original": "1",
       "replacement": "2",
-      "description": "`s[1]`: 1 → 2"
+      "description": "`s[1]`: 1 → 2",
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 50,
+          "endLine": 78
+        }
+      ]
     },
     {
       "id": "value-21",
@@ -350,7 +486,14 @@
         "values": [
           "__proto__"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 50,
+          "endLine": 78
+        }
+      ]
     },
     {
       "id": "value-22",
@@ -371,7 +514,14 @@
         "values": [
           "constructor"
         ]
-      }
+      },
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 50,
+          "endLine": 78
+        }
+      ]
     },
     {
       "id": "value-23",
@@ -386,7 +536,14 @@
       "kind": "number",
       "original": "2",
       "replacement": "3",
-      "description": "`s[2]`: 2 → 3"
+      "description": "`s[2]`: 2 → 3",
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 50,
+          "endLine": 78
+        }
+      ]
     },
     {
       "id": "value-24",
@@ -401,7 +558,14 @@
       "kind": "string",
       "original": "\"&\"",
       "replacement": "\"&_x\"",
-      "description": "`value .map( (_value: QueryValue) => `${…`: \"&\" → \"&_x\""
+      "description": "`value .map( (_value: QueryValue) => `${…`: \"&\" → \"&_x\"",
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 99,
+          "endLine": 120
+        }
+      ]
     },
     {
       "id": "value-25",
@@ -416,7 +580,14 @@
       "kind": "string",
       "original": "\"&\"",
       "replacement": "\"&_x\"",
-      "description": "`Object.keys(query) .filter((k) => query…`: \"&\" → \"&_x\""
+      "description": "`Object.keys(query) .filter((k) => query…`: \"&\" → \"&_x\"",
+      "readers": [
+        {
+          "file": "src/query.ts",
+          "line": 139,
+          "endLine": 145
+        }
+      ]
     }
   ]
 }

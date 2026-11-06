@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-06T00:25:36.050Z",
+  "generatedAt": "2026-11-06T00:48:11.816Z",
   "root": "<work>/react-hotkeys-hook",
   "revision": "0798c4eb1cedb1f868b7570d8e0cc163c5a01b51",
   "configHash": "bb4fdcd4e1b010af",
@@ -66,8 +66,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 7,
-        "survived": 2,
+        "killed": 3,
+        "survived": 6,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -139,8 +139,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 46,
-        "survived": 13,
+        "killed": 41,
+        "survived": 18,
         "noCoverage": 2,
         "ignored": 0
       }
@@ -708,8 +708,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 183,
-        "survived": 54,
+        "killed": 181,
+        "survived": 56,
         "noCoverage": 13,
         "ignored": 0
       }
@@ -5291,6 +5291,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "HotkeysProvider: `hotkeys: []` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 16,
+      "unit": "HotkeysProvider",
+      "mutant": {
+        "id": "2:value-1",
+        "mutator": "Value",
+        "replacement": "`hotkeys: []` removed from `HotkeysContext`",
+        "status": "Survived",
+        "line": 16
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "HotkeysProvider: ArrayDeclaration mutant in HotkeysContext: `[\"Stryker was here\"]` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
       "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
       "line": 17,
@@ -5301,6 +5316,51 @@
         "replacement": "[\"Stryker was here\"]",
         "status": "Survived",
         "line": 17
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "HotkeysProvider: `toggleScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 18,
+      "unit": "HotkeysProvider",
+      "mutant": {
+        "id": "2:value-3",
+        "mutator": "Value",
+        "replacement": "`toggleScope: () => {}` removed from `HotkeysContext`",
+        "status": "Survived",
+        "line": 18
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "HotkeysProvider: `enableScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 19,
+      "unit": "HotkeysProvider",
+      "mutant": {
+        "id": "2:value-4",
+        "mutator": "Value",
+        "replacement": "`enableScope: () => {}` removed from `HotkeysContext`",
+        "status": "Survived",
+        "line": 19
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "HotkeysProvider: `disableScope: () => {}` removed from `HotkeysContext` survived; no linked test fails when the code changes like this; also reached from useHotkeysContext",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 19,
+      "unit": "HotkeysProvider",
+      "mutant": {
+        "id": "2:value-5",
+        "mutator": "Value",
+        "replacement": "`disableScope: () => {}` removed from `HotkeysContext`",
+        "status": "Survived",
+        "line": 19
       },
       "severity": "warn"
     },
@@ -5419,6 +5479,21 @@
         "id": "1:40",
         "mutator": "ConditionalExpression",
         "replacement": "false",
+        "status": "Survived",
+        "line": 63
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "HotkeysProvider: `prev.includes('*')`: '*' → '*_x' survived; no linked test fails when the code changes like this",
+      "file": "packages/react-hotkeys-hook/src/lib/HotkeysProvider.tsx",
+      "line": 63,
+      "unit": "HotkeysProvider",
+      "mutant": {
+        "id": "2:value-8",
+        "mutator": "Value",
+        "replacement": "`prev.includes('*')`: '*' → '*_x'",
         "status": "Survived",
         "line": 63
       },
@@ -6191,6 +6266,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "useHotkeys: `memoisedOptions?.sequenceTimeoutMs ?? 1…`: 1000 → 1001 survived; no linked test fails when the code changes like this",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 150,
+      "unit": "useHotkeys",
+      "mutant": {
+        "id": "2:value-12",
+        "mutator": "Value",
+        "replacement": "`memoisedOptions?.sequenceTimeoutMs ?? 1…`: 1000 → 1001",
+        "status": "Survived",
+        "line": 150
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "useHotkeys: OptionalChaining mutant: `hotkey.keys[recordedKeys.length - 1]` survived; no linked test fails when the code changes like this",
       "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
       "line": 161,
@@ -6626,6 +6716,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "useHotkeys: `domNode.removeEventListener('keyup', ha…`: 'keyup' → 'keyup_x' survived; no linked test fails when the code changes like this",
+      "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
+      "line": 262,
+      "unit": "useHotkeys",
+      "mutant": {
+        "id": "2:value-17",
+        "mutator": "Value",
+        "replacement": "`domNode.removeEventListener('keyup', ha…`: 'keyup' → 'keyu…",
+        "status": "Survived",
+        "line": 262
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "useHotkeys: ArrayDeclaration mutant: `[\"Stryker was here\"]` survived; no linked test fails when the code changes like this",
       "file": "packages/react-hotkeys-hook/src/lib/useHotkeys.ts",
       "line": 281,
@@ -6941,7 +7046,7 @@
     "unlinkedTests": 4,
     "findings": {
       "fail": 5,
-      "warn": 110,
+      "warn": 117,
       "info": 1
     },
     "mutantsUnmapped": 43

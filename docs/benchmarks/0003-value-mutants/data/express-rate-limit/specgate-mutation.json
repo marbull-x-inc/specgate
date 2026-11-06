@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-06T00:26:25.190Z",
+  "generatedAt": "2026-11-06T00:49:14.829Z",
   "root": "<work>/express-rate-limit",
   "revision": "b0d0c1f7cfaf44b8c73d6f82cbff0ce09bb3dffb",
   "configHash": "8ad07df10f4c021c",
@@ -518,8 +518,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 324,
-        "survived": 98,
+        "killed": 325,
+        "survived": 97,
         "noCoverage": 13,
         "ignored": 0
       }
@@ -4706,21 +4706,6 @@
     },
     {
       "rule": "mutant-survived",
-      "message": "rateLimit: `debug('executing init for store')`: 'executing init for store' → 'executing init for store_x' survived; no linked test fails when the code changes like this",
-      "file": "source/rate-limit.ts",
-      "line": 377,
-      "unit": "rateLimit",
-      "mutant": {
-        "id": "2:value-33",
-        "mutator": "Value",
-        "replacement": "`debug('executing init for store')`: 'executing init for st…",
-        "status": "Survived",
-        "line": 377
-      },
-      "severity": "warn"
-    },
-    {
-      "rule": "mutant-survived",
       "message": "rateLimit: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this",
       "file": "source/rate-limit.ts",
       "line": 409,
@@ -5591,7 +5576,7 @@
     "unlinkedTests": 83,
     "findings": {
       "fail": 12,
-      "warn": 114,
+      "warn": 113,
       "info": 14
     },
     "mutantsUnmapped": 3

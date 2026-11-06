@@ -1,5 +1,5 @@
 mutants: 35 value change(s) in 1 file(s) (4 element, 9 number, 4 string, 18 alternative)
 wrote <work-0001>/scule/.specgate/mutants.json
-real 0.81
-user 2.49
-sys 0.12
+real 0.58
+user 1.61
+sys 0.08

@@ -1,5 +1,5 @@
 specgate check (advisory): 5 units, 28 guarantees, 72 linked tests
-  fail 6 · warn 56 · info 81
+  fail 6 · warn 54 · info 80
   ❌ [guarantee-no-test] src/middleware/cors/index.ts:68 cors.ok.headers has no test naming it
   ❌ [guarantee-no-test] src/middleware/cors/index.ts:69 cors.ok.max-age has no test naming it
   ❌ [guarantee-no-test] src/middleware/cors/index.ts:70 cors.ok.credentials has no test naming it
@@ -45,7 +45,6 @@ specgate check (advisory): 5 units, 28 guarantees, 72 linked tests
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:230 secureHeaders: ConditionalExpression mutant: `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:238 secureHeaders: ConditionalExpression mutant: `false` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:244 secureHeaders: OptionalChaining mutant: `options.removePoweredBy` survived; no linked test fails when the code changes like this
-  ⚠️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:271 secureHeaders commits to constant "2" in `i * 2 + 2`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:279 secureHeaders: Regex mutant in a helper it calls: `/[A-Z](?![a-z])|[A-Z]/g` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:279 secureHeaders: Regex mutant in a helper it calls: `/[A-Z]+(?=[a-z])|[A-Z]/g` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:279 secureHeaders: Regex mutant in a helper it calls: `/[A-Z]+(?![^a-z])|[A-Z]/g` survived; no linked test fails when the code changes like this
@@ -58,8 +57,7 @@ specgate check (advisory): 5 units, 28 guarantees, 72 linked tests
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:320 secureHeaders: ConditionalExpression mutant in a helper it calls (the match "*"): `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:323 secureHeaders: ConditionalExpression mutant in a helper it calls (the match "none"): `true` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:330 secureHeaders: StringLiteral mutant in a helper it calls: `"Stryker was here!"` is not run by any test
-  ⚠️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:337 secureHeaders commits to output "$1-$2" in `'$1-$2'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right
-  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:337 secureHeaders: Regex mutant in a helper it calls (the output "$1-$2"): `/([a-z\D])([A-Z])/g` survived; no linked test fails when the code changes like this
+  ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:337 secureHeaders: Regex mutant in a helper it calls: `/([a-z\D])([A-Z])/g` survived; no linked test fails when the code changes like this
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:341 secureHeaders: ArrayDeclaration mutant in a helper it calls: `["Stryker was here"]` is not run by any test
   ⚠️ [mutant-survived] src/middleware/secure-headers/secure-headers.ts:346 secureHeaders: ArrayDeclaration mutant in a helper it calls: `["Stryker was here"]` is not run by any test
   ℹ️ [entry-unmapped] package.json package.json#exports "." points only to build output; map it to its source module with surface.entries to write guarantees on it
@@ -141,8 +139,7 @@ specgate check (advisory): 5 units, 28 guarantees, 72 linked tests
   ℹ️ [decision-unspecified] src/middleware/cors/index.ts:128 cors commits to match "OPTIONS" in `c.req.method === 'OPTIONS'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
   ℹ️ [decision-unspecified] src/middleware/cors/index.ts:163 cors commits to output "No Content" in `'No Content'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
   ℹ️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:320 secureHeaders commits to match "*" in `value[0] === '*'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
-  ℹ️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:326 secureHeaders commits to output "self" in `'self'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
-  ℹ️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:326 secureHeaders commits to output "src" in `'src'`, but no guarantee or example names it; a test written from the contract cannot tell whether it is right (a linked test uses it)
+  ℹ️ [decision-unspecified] src/middleware/secure-headers/secure-headers.ts:326 secureHeaders commits to the members of inline list at line 326 ("self", "src") in `['self', 'src'].includes(item)`, but no guarantee or example names inline list at line 326 or its members; a test written from the contract cannot tell whether the list is right (a linked test uses them)
 
 wrote <work-0001>/hono/.specgate-regression/report.json
       <work-0001>/hono/.specgate-regression/summary.md

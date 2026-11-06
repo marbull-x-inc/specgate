@@ -26,7 +26,14 @@
             }
           },
           "status": "Survived",
-          "duration": 4082
+          "coveredBy": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29"
+          ],
+          "duration": 14253
         },
         {
           "id": "value-2",
@@ -44,7 +51,14 @@
             }
           },
           "status": "Survived",
-          "duration": 4275
+          "coveredBy": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29"
+          ],
+          "duration": 2378
         },
         {
           "id": "value-3",
@@ -63,7 +77,14 @@
           },
           "status": "Killed",
           "statusReason": "exit 1",
-          "duration": 4090
+          "coveredBy": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29"
+          ],
+          "duration": 2563
         },
         {
           "id": "value-4",
@@ -89,7 +110,7 @@
             "28",
             "29"
           ],
-          "duration": 4109
+          "duration": 2610
         }
       ]
     },
@@ -115,7 +136,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 6
+          "duration": 5
         },
         {
           "id": "value-6",
@@ -135,7 +156,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 6
+          "duration": 5
         },
         {
           "id": "value-7",
@@ -155,7 +176,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 7
+          "duration": 5
         },
         {
           "id": "value-8",
@@ -175,7 +196,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 7
+          "duration": 5
         },
         {
           "id": "value-9",
@@ -195,7 +216,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 10
+          "duration": 5
         },
         {
           "id": "value-10",
@@ -215,7 +236,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 13
+          "duration": 5
         },
         {
           "id": "value-11",
@@ -235,7 +256,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 16
+          "duration": 5
         },
         {
           "id": "value-12",
@@ -255,7 +276,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 16
+          "duration": 5
         },
         {
           "id": "value-13",
@@ -275,7 +296,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 19
+          "duration": 5
         }
       ]
     },
@@ -313,7 +334,7 @@
             "9",
             "10"
           ],
-          "duration": 3860
+          "duration": 12070
         },
         {
           "id": "value-15",
@@ -332,7 +353,20 @@
           },
           "status": "Killed",
           "statusReason": "exit 1",
-          "duration": 95818
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 2668
         },
         {
           "id": "value-16",
@@ -351,7 +385,20 @@
           },
           "status": "Killed",
           "statusReason": "exit 1",
-          "duration": 99490
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 2633
         },
         {
           "id": "value-17",
@@ -370,7 +417,20 @@
           },
           "status": "Killed",
           "statusReason": "exit 1",
-          "duration": 103681
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 34885
         },
         {
           "id": "value-18",
@@ -389,7 +449,20 @@
           },
           "status": "Killed",
           "statusReason": "exit 1",
-          "duration": 107585
+          "coveredBy": [
+            "0",
+            "1",
+            "10",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 2453
         },
         {
           "id": "value-19",
@@ -421,7 +494,7 @@
             "9",
             "10"
           ],
-          "duration": 3810
+          "duration": 2482
         },
         {
           "id": "value-20",
@@ -452,7 +525,7 @@
             "9",
             "10"
           ],
-          "duration": 4399
+          "duration": 2462
         },
         {
           "id": "value-21",
@@ -476,7 +549,7 @@
             "4",
             "5"
           ],
-          "duration": 3925
+          "duration": 2525
         },
         {
           "id": "value-22",
@@ -496,7 +569,7 @@
           "status": "NoCoverage",
           "statusReason": "no test covers the site",
           "coveredBy": [],
-          "duration": 7
+          "duration": 0
         },
         {
           "id": "value-23",
@@ -513,7 +586,8 @@
               "column": 42
             }
           },
-          "status": "Survived",
+          "status": "Killed",
+          "statusReason": "exit 1",
           "coveredBy": [
             "0",
             "1",
@@ -527,7 +601,7 @@
             "9",
             "10"
           ],
-          "duration": 3922
+          "duration": 3116
         },
         {
           "id": "value-24",
@@ -558,7 +632,7 @@
             "9",
             "10"
           ],
-          "duration": 3784
+          "duration": 2678
         },
         {
           "id": "value-25",
@@ -589,7 +663,7 @@
             "9",
             "10"
           ],
-          "duration": 3267
+          "duration": 2573
         },
         {
           "id": "value-26",
@@ -619,7 +693,7 @@
             "8",
             "10"
           ],
-          "duration": 3653
+          "duration": 27671
         },
         {
           "id": "value-27",
@@ -650,7 +724,7 @@
             "8",
             "10"
           ],
-          "duration": 3685
+          "duration": 2621
         },
         {
           "id": "value-28",
@@ -680,7 +754,7 @@
             "8",
             "10"
           ],
-          "duration": 3398
+          "duration": 26462
         },
         {
           "id": "value-29",
@@ -706,7 +780,7 @@
             "8",
             "10"
           ],
-          "duration": 3257
+          "duration": 25588
         },
         {
           "id": "value-30",
@@ -732,7 +806,7 @@
             "8",
             "10"
           ],
-          "duration": 3316
+          "duration": 25669
         },
         {
           "id": "value-31",
@@ -758,7 +832,7 @@
             "8",
             "10"
           ],
-          "duration": 3362
+          "duration": 25674
         },
         {
           "id": "value-32",
@@ -784,7 +858,7 @@
             "8",
             "10"
           ],
-          "duration": 3732
+          "duration": 25909
         },
         {
           "id": "value-33",
@@ -811,7 +885,7 @@
             "7",
             "10"
           ],
-          "duration": 3553
+          "duration": 25801
         },
         {
           "id": "value-34",
@@ -838,7 +912,7 @@
             "7",
             "10"
           ],
-          "duration": 3317
+          "duration": 25753
         },
         {
           "id": "value-35",
@@ -865,7 +939,7 @@
             "7",
             "10"
           ],
-          "duration": 3829
+          "duration": 25826
         },
         {
           "id": "value-36",
@@ -892,7 +966,7 @@
             "5",
             "10"
           ],
-          "duration": 3315
+          "duration": 25844
         },
         {
           "id": "value-37",
@@ -919,7 +993,7 @@
             "5",
             "10"
           ],
-          "duration": 3591
+          "duration": 25848
         }
       ]
     },
@@ -943,18 +1017,8 @@
             }
           },
           "status": "Killed",
-          "statusReason": "exit 1",
-          "coveredBy": [
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18"
-          ],
-          "duration": 3131
+          "statusReason": "the selected tests fail without the change; the whole suite ran",
+          "duration": 35939
         },
         {
           "id": "value-39",
@@ -972,12 +1036,8 @@
             }
           },
           "status": "Killed",
-          "statusReason": "exit 1",
-          "coveredBy": [
-            "13",
-            "14"
-          ],
-          "duration": 3206
+          "statusReason": "the selected tests fail without the change; the whole suite ran",
+          "duration": 38471
         },
         {
           "id": "value-40",
@@ -995,13 +1055,8 @@
             }
           },
           "status": "Killed",
-          "statusReason": "exit 1",
-          "coveredBy": [
-            "15",
-            "16",
-            "17"
-          ],
-          "duration": 3924
+          "statusReason": "the selected tests fail without the change; the whole suite ran",
+          "duration": 40900
         }
       ]
     },
@@ -1026,7 +1081,15 @@
           },
           "status": "Killed",
           "statusReason": "exit 1",
-          "duration": 50016
+          "coveredBy": [
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35"
+          ],
+          "duration": 32703
         },
         {
           "id": "value-42",
@@ -1045,7 +1108,15 @@
           },
           "status": "Killed",
           "statusReason": "exit 1",
-          "duration": 54677
+          "coveredBy": [
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35"
+          ],
+          "duration": 28169
         },
         {
           "id": "value-43",
@@ -1071,7 +1142,7 @@
             "34",
             "35"
           ],
-          "duration": 3192
+          "duration": 11336
         },
         {
           "id": "value-44",
@@ -1097,7 +1168,7 @@
             "34",
             "35"
           ],
-          "duration": 3425
+          "duration": 11157
         }
       ]
     }

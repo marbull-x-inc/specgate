@@ -1,10 +1,10 @@
 
  RUN  v4.1.6 <work>/defu
 
-✔ isPlainObject (1.021625ms)
+✔ isPlainObject (0.665417ms)
 
  Test Files  2 passed (2)
       Tests  23 passed (23)
-   Start at  09:08:34
-   Duration  173ms (transform 80ms, setup 0ms, import 116ms, tests 8ms, environment 0ms)
+   Start at  09:34:57
+   Duration  134ms (transform 62ms, setup 0ms, import 90ms, tests 5ms, environment 0ms)
 

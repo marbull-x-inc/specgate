@@ -1,109 +1,109 @@
-baseline run 10152 ms; timeout 50760 ms
-value-5 Killed     src/string/deburr.ts:2 `'Æ'` removed from the list `['Æ', 'Ae']`
-value-1 Killed     src/string/camelCase.ts:27 `words.length === 0`: 0 → 1
-value-7 Killed     src/string/deburr.ts:3 `'Ð'` removed from the list `['Ð', 'D']`
-value-10 Killed     src/string/deburr.ts:4 `'O'` removed from the list `['Ø', 'O']`
+baseline run 8722 ms; timeout 43610 ms
 value-4 Killed     src/string/constantCase.ts:26 `words.map(word => word.toUpperCase()).j…`: '_' → '__x'
+value-8 Killed     src/string/deburr.ts:3 `'D'` removed from the list `['Ð', 'D']`
+value-1 Killed     src/string/camelCase.ts:27 `words.length === 0`: 0 → 1
+value-5 Killed     src/string/deburr.ts:2 `'Æ'` removed from the list `['Æ', 'Ae']`
 value-9 Killed     src/string/deburr.ts:4 `'Ø'` removed from the list `['Ø', 'O']`
 value-11 Killed     src/string/deburr.ts:5 `'Þ'` removed from the list `['Þ', 'Th']`
 value-6 Killed     src/string/deburr.ts:2 `'Ae'` removed from the list `['Æ', 'Ae']`
-value-8 Killed     src/string/deburr.ts:3 `'D'` removed from the list `['Ð', 'D']`
-value-13 Killed     src/string/deburr.ts:6 `'ß'` removed from the list `['ß', 'ss']`
-value-2 Killed     src/string/capitalize.ts:19 `str.charAt(0)`: 0 → 1
+value-10 Killed     src/string/deburr.ts:4 `'O'` removed from the list `['Ø', 'O']`
+value-7 Killed     src/string/deburr.ts:3 `'Ð'` removed from the list `['Ð', 'D']`
 value-12 Killed     src/string/deburr.ts:5 `'Th'` removed from the list `['Þ', 'Th']`
 value-14 Killed     src/string/deburr.ts:6 `'ss'` removed from the list `['ß', 'ss']`
+value-13 Killed     src/string/deburr.ts:6 `'ß'` removed from the list `['ß', 'ss']`
 value-15 Killed     src/string/deburr.ts:7 `'æ'` removed from the list `['æ', 'ae']`
+value-2 Killed     src/string/capitalize.ts:19 `str.charAt(0)`: 0 → 1
 value-3 Killed     src/string/capitalize.ts:19 `str.slice(1)`: 1 → 2
-value-16 Killed     src/string/deburr.ts:7 `'ae'` removed from the list `['æ', 'ae']`
+value-20 Killed     src/string/deburr.ts:9 `'o'` removed from the list `['ø', 'o']`
 value-17 Killed     src/string/deburr.ts:8 `'ð'` removed from the list `['ð', 'd']`
-value-19 Killed     src/string/deburr.ts:9 `'ø'` removed from the list `['ø', 'o']`
-value-21 Killed     src/string/deburr.ts:10 `'þ'` removed from the list `['þ', 'th']`
 value-18 Killed     src/string/deburr.ts:8 `'d'` removed from the list `['ð', 'd']`
 value-22 Killed     src/string/deburr.ts:10 `'th'` removed from the list `['þ', 'th']`
-value-25 Killed     src/string/deburr.ts:12 `'đ'` removed from the list `['đ', 'd']`
-value-24 Killed     src/string/deburr.ts:11 `'D'` removed from the list `['Đ', 'D']`
-value-20 Killed     src/string/deburr.ts:9 `'o'` removed from the list `['ø', 'o']`
-value-23 Killed     src/string/deburr.ts:11 `'Đ'` removed from the list `['Đ', 'D']`
 value-26 Killed     src/string/deburr.ts:12 `'d'` removed from the list `['đ', 'd']`
-value-27 Killed     src/string/deburr.ts:13 `'Ħ'` removed from the list `['Ħ', 'H']`
+value-16 Killed     src/string/deburr.ts:7 `'ae'` removed from the list `['æ', 'ae']`
+value-19 Killed     src/string/deburr.ts:9 `'ø'` removed from the list `['ø', 'o']`
+value-21 Killed     src/string/deburr.ts:10 `'þ'` removed from the list `['þ', 'th']`
+value-23 Killed     src/string/deburr.ts:11 `'Đ'` removed from the list `['Đ', 'D']`
 value-28 Killed     src/string/deburr.ts:13 `'H'` removed from the list `['Ħ', 'H']`
-value-29 Killed     src/string/deburr.ts:14 `'ħ'` removed from the list `['ħ', 'h']`
+value-27 Killed     src/string/deburr.ts:13 `'Ħ'` removed from the list `['Ħ', 'H']`
+value-24 Killed     src/string/deburr.ts:11 `'D'` removed from the list `['Đ', 'D']`
+value-25 Killed     src/string/deburr.ts:12 `'đ'` removed from the list `['đ', 'd']`
 value-30 Killed     src/string/deburr.ts:14 `'h'` removed from the list `['ħ', 'h']`
-value-31 Killed     src/string/deburr.ts:15 `'ı'` removed from the list `['ı', 'i']`
-value-32 Killed     src/string/deburr.ts:15 `'i'` removed from the list `['ı', 'i']`
-value-33 Killed     src/string/deburr.ts:16 `'Ĳ'` removed from the list `['Ĳ', 'IJ']`
-value-36 Killed     src/string/deburr.ts:17 `'ij'` removed from the list `['ĳ', 'ij']`
+value-29 Killed     src/string/deburr.ts:14 `'ħ'` removed from the list `['ħ', 'h']`
 value-35 Killed     src/string/deburr.ts:17 `'ĳ'` removed from the list `['ĳ', 'ij']`
+value-31 Killed     src/string/deburr.ts:15 `'ı'` removed from the list `['ı', 'i']`
+value-33 Killed     src/string/deburr.ts:16 `'Ĳ'` removed from the list `['Ĳ', 'IJ']`
 value-34 Killed     src/string/deburr.ts:16 `'IJ'` removed from the list `['Ĳ', 'IJ']`
-value-38 Killed     src/string/deburr.ts:18 `'k'` removed from the list `['ĸ', 'k']`
+value-32 Killed     src/string/deburr.ts:15 `'i'` removed from the list `['ı', 'i']`
 value-37 Killed     src/string/deburr.ts:18 `'ĸ'` removed from the list `['ĸ', 'k']`
+value-36 Killed     src/string/deburr.ts:17 `'ij'` removed from the list `['ĳ', 'ij']`
+value-38 Killed     src/string/deburr.ts:18 `'k'` removed from the list `['ĸ', 'k']`
 value-39 Killed     src/string/deburr.ts:19 `'Ŀ'` removed from the list `['Ŀ', 'L']`
+value-42 Killed     src/string/deburr.ts:20 `'l'` removed from the list `['ŀ', 'l']`
 value-40 Killed     src/string/deburr.ts:19 `'L'` removed from the list `['Ŀ', 'L']`
 value-41 Killed     src/string/deburr.ts:20 `'ŀ'` removed from the list `['ŀ', 'l']`
-value-42 Killed     src/string/deburr.ts:20 `'l'` removed from the list `['ŀ', 'l']`
 value-43 Killed     src/string/deburr.ts:21 `'Ł'` removed from the list `['Ł', 'L']`
 value-44 Killed     src/string/deburr.ts:21 `'L'` removed from the list `['Ł', 'L']`
+value-52 Killed     src/string/deburr.ts:25 `'n'` removed from the list `['ŋ', 'n']`
+value-51 Killed     src/string/deburr.ts:25 `'ŋ'` removed from the list `['ŋ', 'n']`
 value-45 Killed     src/string/deburr.ts:22 `'ł'` removed from the list `['ł', 'l']`
 value-46 Killed     src/string/deburr.ts:22 `'l'` removed from the list `['ł', 'l']`
-value-48 Killed     src/string/deburr.ts:23 `"'n"` removed from the list `['ŉ', "'n"]`
 value-47 Killed     src/string/deburr.ts:23 `'ŉ'` removed from the list `['ŉ', "'n"]`
-value-50 Killed     src/string/deburr.ts:24 `'N'` removed from the list `['Ŋ', 'N']`
-value-51 Killed     src/string/deburr.ts:25 `'ŋ'` removed from the list `['ŋ', 'n']`
 value-49 Killed     src/string/deburr.ts:24 `'Ŋ'` removed from the list `['Ŋ', 'N']`
+value-50 Killed     src/string/deburr.ts:24 `'N'` removed from the list `['Ŋ', 'N']`
+value-48 Killed     src/string/deburr.ts:23 `"'n"` removed from the list `['ŉ', "'n"]`
 value-53 Killed     src/string/deburr.ts:26 `'Œ'` removed from the list `['Œ', 'Oe']`
+value-57 Killed     src/string/deburr.ts:28 `'Ŧ'` removed from the list `['Ŧ', 'T']`
 value-54 Killed     src/string/deburr.ts:26 `'Oe'` removed from the list `['Œ', 'Oe']`
 value-55 Killed     src/string/deburr.ts:27 `'œ'` removed from the list `['œ', 'oe']`
-value-52 Killed     src/string/deburr.ts:25 `'n'` removed from the list `['ŋ', 'n']`
 value-56 Killed     src/string/deburr.ts:27 `'oe'` removed from the list `['œ', 'oe']`
 value-58 Killed     src/string/deburr.ts:28 `'T'` removed from the list `['Ŧ', 'T']`
-value-57 Killed     src/string/deburr.ts:28 `'Ŧ'` removed from the list `['Ŧ', 'T']`
 value-59 Killed     src/string/deburr.ts:29 `'ŧ'` removed from the list `['ŧ', 't']`
-value-60 Killed     src/string/deburr.ts:29 `'t'` removed from the list `['ŧ', 't']`
 value-61 Killed     src/string/deburr.ts:30 `'ſ'` removed from the list `['ſ', 's']`
 value-62 Killed     src/string/deburr.ts:30 `'s'` removed from the list `['ſ', 's']`
+value-60 Killed     src/string/deburr.ts:29 `'t'` removed from the list `['ŧ', 't']`
 value-70 Survived   src/string/deburr.ts:111 `code >= 0x1e00`: 0x1e00 → 7681
 value-71 Survived   src/string/deburr.ts:111 `code <= 0x1ef9`: 0x1ef9 → 7930
 value-72 Killed     src/string/deburr.ts:111 `code === 0x212a`: 0x212a → 8491
 value-73 Killed     src/string/deburr.ts:111 `code === 0x212b`: 0x212b → 8492
 value-77 Killed     src/string/deburr.ts:119 `code <= 0x20ff`: 0x20ff → 8448
 value-79 Killed     src/string/deburr.ts:121 `code <= 0xfe2f`: 0xfe2f → 65072
-value-80 Killed     src/string/escape.ts:2 `'&': '&amp;'` removed from `htmlEscapes`
-value-81 Killed     src/string/escape.ts:2 `&` in `htmlEscapes` '&amp;' → '&amp;_x'
-value-82 Killed     src/string/escape.ts:3 `'<': '&lt;'` removed from `htmlEscapes`
 value-83 Killed     src/string/escape.ts:3 `<` in `htmlEscapes` '&lt;' → '&lt;_x'
-value-85 Killed     src/string/escape.ts:4 `>` in `htmlEscapes` '&gt;' → '&gt;_x'
+value-82 Killed     src/string/escape.ts:3 `'<': '&lt;'` removed from `htmlEscapes`
+value-81 Killed     src/string/escape.ts:2 `&` in `htmlEscapes` '&amp;' → '&amp;_x'
+value-80 Killed     src/string/escape.ts:2 `'&': '&amp;'` removed from `htmlEscapes`
+value-63 Killed     src/string/deburr.ts:67 `index` 0 → 1
 value-84 Killed     src/string/escape.ts:4 `'>': '&gt;'` removed from `htmlEscapes`
-value-86 Killed     src/string/escape.ts:5 `'"': '&quot;'` removed from `htmlEscapes`
+value-85 Killed     src/string/escape.ts:4 `>` in `htmlEscapes` '&gt;' → '&gt;_x'
 value-87 Killed     src/string/escape.ts:5 `"` in `htmlEscapes` '&quot;' → '&quot;_x'
+value-86 Killed     src/string/escape.ts:5 `'"': '&quot;'` removed from `htmlEscapes`
+value-92 Killed     src/string/lowerCase.ts:23 `words.map(word => word.toLowerCase()).j…`: ' ' → ' _x'
 value-91 Killed     src/string/kebabCase.ts:26 `words.map(word => word.toLowerCase()).j…`: '-' → '-_x'
 value-90 Killed     src/string/escapeRegExp.ts:17 `str.replace(/[\\^$.*+?()[\]{}|]/g, '\\$…`: '\\$&' → '\\$&_x'
-value-93 Killed     src/string/pad.ts:21 the default `chars` ' ' → ' _x'
-value-92 Killed     src/string/lowerCase.ts:23 `words.map(word => word.toLowerCase()).j…`: ' ' → ' _x'
-value-63 Killed     src/string/deburr.ts:67 `index` 0 → 1
-value-88 Killed     src/string/escape.ts:5 `"'": '&#39;'` removed from `htmlEscapes`
 value-89 Killed     src/string/escape.ts:6 `'` in `htmlEscapes` '&#39;' → '&#39;_x'
-value-95 Killed     src/string/snakeCase.ts:27 `words.map(word => word.toLowerCase()).j…`: '_' → '__x'
+value-88 Killed     src/string/escape.ts:5 `"'": '&#39;'` removed from `htmlEscapes`
+value-93 Killed     src/string/pad.ts:21 the default `chars` ' ' → ' _x'
 value-94 Killed     src/string/pad.ts:22 `(length - str.length) / 2`: 2 → 3
+value-95 Killed     src/string/snakeCase.ts:27 `words.map(word => word.toLowerCase()).j…`: '_' → '__x'
 value-96 Killed     src/string/startCase.ts:25 `i` 0 → 1
 value-97 Killed     src/string/startCase.ts:28 `result += ' '`: ' ' → ' _x'
 value-98 Killed     src/string/startCase.ts:31 `word[0]`: 0 → 1
 value-99 Killed     src/string/startCase.ts:31 `word.slice(1)`: 1 → 2
-value-100 Killed     src/string/unescape.ts:2 `'&amp;': '&'` removed from `htmlUnescapes`
+value-64 Killed     src/string/deburr.ts:75 `char.charCodeAt(0)`: 0 → 1
 value-101 Killed     src/string/unescape.ts:2 `&amp;` in `htmlUnescapes` '&' → '&_x'
-value-102 Killed     src/string/unescape.ts:3 `'&lt;': '<'` removed from `htmlUnescapes`
-value-103 Killed     src/string/unescape.ts:3 `&lt;` in `htmlUnescapes` '<' → '<_x'
 value-104 Killed     src/string/unescape.ts:4 `'&gt;': '>'` removed from `htmlUnescapes`
+value-102 Killed     src/string/unescape.ts:3 `'&lt;': '<'` removed from `htmlUnescapes`
+value-100 Killed     src/string/unescape.ts:2 `'&amp;': '&'` removed from `htmlUnescapes`
+value-103 Killed     src/string/unescape.ts:3 `&lt;` in `htmlUnescapes` '<' → '<_x'
+value-110 Killed     src/string/unescape.ts:28 `htmlUnescapes[match] || "'"`: "'" → "'_x"
 value-105 Killed     src/string/unescape.ts:4 `&gt;` in `htmlUnescapes` '>' → '>_x'
 value-106 Killed     src/string/unescape.ts:5 `'&quot;': '"'` removed from `htmlUnescapes`
-value-107 Killed     src/string/unescape.ts:5 `&quot;` in `htmlUnescapes` '"' → '"_x'
 value-108 Survived   src/string/unescape.ts:5 `'&#39;': "'"` removed from `htmlUnescapes`
 value-109 Killed     src/string/unescape.ts:6 `&#39;` in `htmlUnescapes` "'" → "'_x"
-value-111 Killed     src/string/upperCase.ts:26 `i` 0 → 1
-value-110 Killed     src/string/unescape.ts:28 `htmlUnescapes[match] || "'"`: "'" → "'_x"
+value-107 Killed     src/string/unescape.ts:5 `&quot;` in `htmlUnescapes` '"' → '"_x'
 value-112 Killed     src/string/upperCase.ts:28 `words.length - 1`: 1 → 2
+value-111 Killed     src/string/upperCase.ts:26 `i` 0 → 1
 value-113 Killed     src/string/upperCase.ts:29 `result += ' '`: ' ' → ' _x'
-value-64 Killed     src/string/deburr.ts:75 `char.charCodeAt(0)`: 0 → 1
-value-65 Survived   src/string/deburr.ts:77 `code < 0x80`: 0x80 → 129
+value-65 Killed     src/string/deburr.ts:77 `code < 0x80`: 0x80 → 129
 value-66 Killed     src/string/deburr.ts:98 `char.normalize('NFD')`: 'NFD' → 'NFD_x'
 value-67 Killed     src/string/deburr.ts:101 `index` 0 → 1
 value-68 Killed     src/string/deburr.ts:111 `code >= 0xc0`: 0xc0 → 193
@@ -112,8 +112,8 @@ value-74 Killed     src/string/deburr.ts:117 `code >= 0x300`: 0x300 → 769
 value-75 Killed     src/string/deburr.ts:117 `code <= 0x36f`: 0x36f → 880
 value-76 Killed     src/string/deburr.ts:119 `code >= 0x20d0`: 0x20d0 → 8401
 value-78 Killed     src/string/deburr.ts:121 `code >= 0xfe20`: 0xfe20 → 65057
-value-mutants: 113 mutant(s): 108 Killed, 5 Survived; 178687 ms (baseline run 10152 ms)
+value-mutants: 113 mutant(s): 109 Killed, 4 Survived; 151352 ms (baseline run 8722 ms)
 wrote <work>/es-toolkit/reports/value/value.json
-real 178.76
-user 1369.49
-sys 368.22
+real 151.43
+user 1196.67
+sys 327.74

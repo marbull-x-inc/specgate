@@ -28,5 +28,30 @@
     "verdict": "real",
     "reason": "without a HotkeysProvider, useHotkeysContext().disableScope is undefined, so calling it throws a TypeError instead of doing nothing",
     "expressedBy": null
+  },
+  {
+    "id": "value-8",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "enabling a scope while the wildcard scope \"*\" is active no longer replaces it",
+    "expressedBy": [
+      "41"
+    ]
+  },
+  {
+    "id": "value-12",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "the default sequence timeout becomes 1001 ms instead of 1000 ms",
+    "expressedBy": null
+  },
+  {
+    "id": "value-17",
+    "status": "Survived",
+    "verdict": "real",
+    "reason": "cleanup no longer removes the keyup listener, so a stale handler keeps receiving keyup events",
+    "expressedBy": [
+      "379"
+    ]
   }
 ]

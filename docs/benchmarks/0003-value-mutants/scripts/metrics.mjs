@@ -32,7 +32,13 @@ for (const name of Object.keys(PROJECTS)) {
   }
   const value = read(join(d, "value-report.json"));
   const list = read(join(d, "mutants.json"));
-  const verdicts = existsSync(join(d, "verdicts.json")) ? read(join(d, "verdicts.json")) : [];
+  const finalStatus = {};
+  for (const f of Object.values(read(join(d, "value-report.json")).files))
+    for (const m of f.mutants) finalStatus[m.id] = m.status;
+  // Verdicts of the mutants green in the final measurement only.
+  const verdicts = (existsSync(join(d, "verdicts.json")) ? read(join(d, "verdicts.json")) : []).filter(
+    (v) => finalStatus[v.id] === "Survived" || finalStatus[v.id] === "NoCoverage",
+  );
   const timings = read(join(d, "timings.json"));
   const stryker = read(join(d, "mutation-summary.json")).counts;
   const report = read(join(d, "specgate-mutation.json"));

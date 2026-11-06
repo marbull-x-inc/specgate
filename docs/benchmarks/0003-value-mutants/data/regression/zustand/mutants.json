@@ -23,7 +23,34 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`version` 0 → 1"
+      "description": "`version` 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 162,
+          "endLine": 189
+        },
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 191,
+          "endLine": 380
+        },
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 225,
+          "endLine": 231
+        },
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 257,
+          "endLine": 339
+        },
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 418,
+          "endLine": 418
+        }
+      ]
     },
     {
       "id": "value-2",
@@ -38,7 +65,34 @@
       "kind": "number",
       "original": "0",
       "replacement": "1",
-      "description": "`hydrationVersion` 0 → 1"
+      "description": "`hydrationVersion` 0 → 1",
+      "readers": [
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 162,
+          "endLine": 189
+        },
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 191,
+          "endLine": 380
+        },
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 225,
+          "endLine": 231
+        },
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 257,
+          "endLine": 339
+        },
+        {
+          "file": "src/middleware/persist.ts",
+          "line": 418,
+          "endLine": 418
+        }
+      ]
     }
   ]
 }

@@ -5,7 +5,7 @@
     "name": "specgate",
     "version": "0.5.3"
   },
-  "generatedAt": "2026-11-06T00:09:37.563Z",
+  "generatedAt": "2026-11-06T00:35:58.345Z",
   "root": "<work>/valibot",
   "revision": "d72f76fcf70ccfa0a5ca341b80da1d440ac60b11",
   "configHash": "124bb3dfdb7bf187",
@@ -106,8 +106,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 18,
-        "survived": 2,
+        "killed": 17,
+        "survived": 3,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -222,8 +222,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 21,
-        "survived": 1,
+        "killed": 20,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -345,8 +345,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 20,
-        "survived": 1,
+        "killed": 19,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -458,8 +458,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 18,
-        "survived": 1,
+        "killed": 17,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -581,8 +581,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 20,
-        "survived": 1,
+        "killed": 19,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -817,8 +817,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 20,
-        "survived": 1,
+        "killed": 19,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -918,8 +918,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 19,
-        "survived": 2,
+        "killed": 18,
+        "survived": 3,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -1160,8 +1160,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 20,
-        "survived": 1,
+        "killed": 19,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -1263,8 +1263,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 18,
-        "survived": 1,
+        "killed": 17,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -1379,8 +1379,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 21,
-        "survived": 1,
+        "killed": 20,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -1492,8 +1492,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 18,
-        "survived": 1,
+        "killed": 17,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -1616,8 +1616,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 16,
-        "survived": 1,
+        "killed": 15,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -1751,8 +1751,8 @@
       "examples": [],
       "hasDoc": true,
       "mutation": {
-        "killed": 15,
-        "survived": 1,
+        "killed": 14,
+        "survived": 2,
         "noCoverage": 0,
         "ignored": 0
       }
@@ -12613,6 +12613,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "bytes: `_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/bytes/bytes.ts",
+      "line": 118,
+      "unit": "bytes",
+      "mutant": {
+        "id": "2:value-3",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'byte…",
+        "status": "Survived",
+        "line": 118
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "empty: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
       "file": "library/src/actions/empty/empty.ts",
       "line": 95,
@@ -12621,6 +12636,21 @@
         "id": "1:33",
         "mutator": "StringLiteral",
         "replacement": "\"\"",
+        "status": "Survived",
+        "line": 95
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "empty: `_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/empty/empty.ts",
+      "line": 95,
+      "unit": "empty",
+      "mutant": {
+        "id": "2:value-8",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'len…",
         "status": "Survived",
         "line": 95
       },
@@ -12643,6 +12673,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "gtValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/gtValue/gtValue.ts",
+      "line": 120,
+      "unit": "gtValue",
+      "mutant": {
+        "id": "2:value-11",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'valu…",
+        "status": "Survived",
+        "line": 120
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "length: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
       "file": "library/src/actions/length/length.ts",
       "line": 121,
@@ -12651,6 +12696,21 @@
         "id": "1:69",
         "mutator": "StringLiteral",
         "replacement": "\"\"",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "length: `_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/length/length.ts",
+      "line": 121,
+      "unit": "length",
+      "mutant": {
+        "id": "2:value-14",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'len…",
         "status": "Survived",
         "line": 121
       },
@@ -12673,6 +12733,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "ltValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/ltValue/ltValue.ts",
+      "line": 120,
+      "unit": "ltValue",
+      "mutant": {
+        "id": "2:value-17",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'valu…",
+        "status": "Survived",
+        "line": 120
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "maxValue: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
       "file": "library/src/actions/maxValue/maxValue.ts",
       "line": 122,
@@ -12681,6 +12756,21 @@
         "id": "1:126",
         "mutator": "StringLiteral",
         "replacement": "\"\"",
+        "status": "Survived",
+        "line": 122
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "maxValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/maxValue/maxValue.ts",
+      "line": 122,
+      "unit": "maxValue",
+      "mutant": {
+        "id": "2:value-23",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'valu…",
         "status": "Survived",
         "line": 122
       },
@@ -12718,6 +12808,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "minBytes: `_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/minBytes/minBytes.ts",
+      "line": 123,
+      "unit": "minBytes",
+      "mutant": {
+        "id": "2:value-26",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'byte…",
+        "status": "Survived",
+        "line": 123
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "minValue: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
       "file": "library/src/actions/minValue/minValue.ts",
       "line": 122,
@@ -12726,6 +12831,21 @@
         "id": "1:182",
         "mutator": "StringLiteral",
         "replacement": "\"\"",
+        "status": "Survived",
+        "line": 122
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "minValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/minValue/minValue.ts",
+      "line": 122,
+      "unit": "minValue",
+      "mutant": {
+        "id": "2:value-32",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'valu…",
         "status": "Survived",
         "line": 122
       },
@@ -12748,6 +12868,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "multipleOf: `_addIssue(this, 'multiple', dataset, co…`: 'multiple' → 'multiple_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/multipleOf/multipleOf.ts",
+      "line": 162,
+      "unit": "multipleOf",
+      "mutant": {
+        "id": "2:value-36",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'multiple', dataset, co…`: 'multiple' → 'm…",
+        "status": "Survived",
+        "line": 162
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "nonEmpty: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
       "file": "library/src/actions/nonEmpty/nonEmpty.ts",
       "line": 98,
@@ -12756,6 +12891,21 @@
         "id": "1:214",
         "mutator": "StringLiteral",
         "replacement": "\"\"",
+        "status": "Survived",
+        "line": 98
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "nonEmpty: `_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+      "line": 98,
+      "unit": "nonEmpty",
+      "mutant": {
+        "id": "2:value-41",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'len…",
         "status": "Survived",
         "line": 98
       },
@@ -12778,6 +12928,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "notLength: `_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/notLength/notLength.ts",
+      "line": 123,
+      "unit": "notLength",
+      "mutant": {
+        "id": "2:value-45",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'len…",
+        "status": "Survived",
+        "line": 123
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "notValue: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
       "file": "library/src/actions/notValue/notValue.ts",
       "line": 121,
@@ -12793,6 +12958,21 @@
     },
     {
       "rule": "mutant-survived",
+      "message": "notValue: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/notValue/notValue.ts",
+      "line": 121,
+      "unit": "notValue",
+      "mutant": {
+        "id": "2:value-48",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'valu…",
+        "status": "Survived",
+        "line": 121
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
       "message": "value: StringLiteral mutant: `\"\"` survived; no linked test fails when the code changes like this",
       "file": "library/src/actions/value/value.ts",
       "line": 120,
@@ -12801,6 +12981,21 @@
         "id": "1:261",
         "mutator": "StringLiteral",
         "replacement": "\"\"",
+        "status": "Survived",
+        "line": 120
+      },
+      "severity": "warn"
+    },
+    {
+      "rule": "mutant-survived",
+      "message": "value: `_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x' survived; no linked test fails when the code changes like this",
+      "file": "library/src/actions/value/value.ts",
+      "line": 120,
+      "unit": "value",
+      "mutant": {
+        "id": "2:value-51",
+        "mutator": "Value",
+        "replacement": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'valu…",
         "status": "Survived",
         "line": 120
       },
@@ -13041,7 +13236,7 @@
     "unlinkedTests": 2965,
     "findings": {
       "fail": 1,
-      "warn": 15,
+      "warn": 28,
       "info": 28
     },
     "mutantsUnmapped": 0

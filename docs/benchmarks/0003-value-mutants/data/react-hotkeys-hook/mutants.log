@@ -1,5 +1,5 @@
 mutants: 20 value change(s) in 4 file(s) (5 entry, 13 string, 2 number)
 wrote <work>/react-hotkeys-hook/.specgate/mutants.json
 real 0.54
-user 1.66
-sys 0.07
+user 1.69
+sys 0.06

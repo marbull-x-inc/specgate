@@ -2,28 +2,33 @@
 [1m[30m[46m RUN [49m[39m[22m [36mv5.0.2 [39m[90m<work>/jotai[39m
 
 [90mstdout[2m | tests/vanilla/internals.test.tsx[2m > [22m[2minternals[2m > [22m[2meach store.get causes full scan of atom dependencies when state unchanged (performance)
-[22m[39mstore.get: 74.201ms
-store.get (cached): 0.137ms
+[22m[39mstore.get: 57.049ms
+store.get (cached): 0.091ms
 
-[90mstderr[2m | tests/react/async2.test.tsx[2m > [22m[2mwrite to async atom twice[2m > [22m[2mwait Promise.resolve()
-[22m[39mAn update to Component inside a test was not wrapped in act(...).
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/optimization.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 82[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/onmount.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[32m 129[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/items.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 128[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/abortable.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 353[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/error.test.tsx [2m([22m[2m14 tests[22m[2m)[22m[33m 389[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/store.test.tsx [2m([22m[2m69 tests[22m[2m)[22m[33m 480[2mms[22m[39m
+   [33m[2m✓[22m[39m surfaces a stack overflow for a graph too deep to read synchronously[33m 352[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/memoryleaks.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 541[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/dependency.test.tsx [2m([22m[2m21 tests[22m[2m)[22m[33m 541[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/basic.test.tsx [2m([22m[2m27 tests[22m[2m)[22m[33m 546[2mms[22m[39m
+[90mstderr[2m | tests/react/vanilla-utils/atomWithObservable.test.tsx[2m > [22m[2mwritable count state without initial value
+[22m[39mError: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
+    at trackUsedThenable [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:6353:35[90m)[39m
+    at useThenable [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8248:18[90m)[39m
+    at Object.use [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8268:55[90m)[39m
+    at process.env.NODE_ENV.exports.use [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react@19.3.0/node_modules/[4mreact[24m/cjs/react.development.js:1240:34[90m)[39m
+    at useAtomValue [90m(<work>/jotai/[39msrc/react/useAtomValue.ts:73:12[90m)[39m
+    at CounterValue [90m(<work>/jotai/[39mtests/react/vanilla-utils/atomWithObservable.test.tsx:154:19[90m)[39m
+    at Object.react_stack_bottom_frame [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:28571:20[90m)[39m
+    at renderWithHooks [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8030:22[90m)[39m
+    at updateFunctionComponent [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:10569:19[90m)[39m
+    at beginWork [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:12205:18[90m)[39m
 
-When testing, code that causes React state updates should be wrapped into act(...):
-
-act(() => {
-  /* fire events that update state */
-});
-/* assert on the output */
-
-This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
-
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/async2.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[32m 198[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/abortable.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 198[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/error.test.tsx [2m([22m[2m14 tests[22m[2m)[22m[32m 238[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/store.test.tsx [2m([22m[2m69 tests[22m[2m)[22m[32m 288[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/basic.test.tsx [2m([22m[2m27 tests[22m[2m)[22m[33m 391[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithReducer.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 75[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/memoryleaks.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 458[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/useHydrateAtoms.test.tsx [2m([22m[2m8 tests[22m[2m)[22m[33m 328[2mms[22m[39m
 [90mstderr[2m | tests/react/vanilla-utils/atomWithStorage.test.tsx[2m > [22m[2matomWithStorage (async)[2m > [22m[2matomWithStorage.ok.async-storage async count
 [22m[39mA suspended resource finished loading inside a test, but the event was not wrapped in act(...).
 
@@ -46,37 +51,14 @@ act(() => {
 
 This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
 
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/dependency.test.tsx [2m([22m[2m21 tests[22m[2m)[22m[33m 511[2mms[22m[39m
-[90mstderr[2m | tests/react/vanilla-utils/atomWithObservable.test.tsx[2m > [22m[2mwritable count state without initial value
-[22m[39mError: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
-    at trackUsedThenable [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:6353:35[90m)[39m
-    at useThenable [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8248:18[90m)[39m
-    at Object.use [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8268:55[90m)[39m
-    at process.env.NODE_ENV.exports.use [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react@19.3.0/node_modules/[4mreact[24m/cjs/react.development.js:1240:34[90m)[39m
-    at useAtomValue [90m(<work>/jotai/[39msrc/react/useAtomValue.ts:73:12[90m)[39m
-    at CounterValue [90m(<work>/jotai/[39mtests/react/vanilla-utils/atomWithObservable.test.tsx:154:19[90m)[39m
-    at Object.react_stack_bottom_frame [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:28571:20[90m)[39m
-    at renderWithHooks [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:8030:22[90m)[39m
-    at updateFunctionComponent [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:10569:19[90m)[39m
-    at beginWork [90m(<work>/jotai/[39mnode_modules/[4m.pnpm[24m/react-dom@19.3.0_react@19.3.0/node_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:12205:18[90m)[39m
-
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithRefresh.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 244[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/freezeAtom.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[32m 288[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/async.test.tsx [2m([22m[2m25 tests[22m[2m)[22m[33m 762[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithObservable.test.tsx [2m([22m[2m27 tests[22m[2m)[22m[33m 624[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithStorage.test.tsx [2m([22m[2m25 tests[22m[2m)[22m[33m 716[2mms[22m[39m
-   [32m✓[39m atomWithStorage (with browser storage) [2m(2)[22m
-     [33m[2m✓[22m[39m atomWithStorage.ok.default-storage should recompute dependents' state after onMount (#2098)[33m 351[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithDefault.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 770[2mms[22m[39m
-   [33m[2m✓[22m[39m atomWithDefault.ok.overwritten-detaches can be set synchronously by passing value[33m 302[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/internals.test.tsx [2m([22m[2m17 tests[22m[2m)[22m[33m 1238[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/async.test.tsx [2m([22m[2m25 tests[22m[2m)[22m[33m 746[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithDefault.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 652[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithObservable.test.tsx [2m([22m[2m27 tests[22m[2m)[22m[33m 628[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithStorage.test.tsx [2m([22m[2m25 tests[22m[2m)[22m[33m 864[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/internals.test.tsx [2m([22m[2m17 tests[22m[2m)[22m[33m 1141[2mms[22m[39m
    [32m✓[39m internals [2m(11)[22m
      [32m✓[39m deep dependency graphs [2m(4)[22m
-       [33m[2m✓[22m[39m does not poison the atom state after a stack overflow[33m 902[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/optimization.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 144[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/splitAtom.test.tsx [2m([22m[2m9 tests[22m[2m)[22m[32m 153[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/items.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 128[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/useAtomValueRawSync.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 148[2mms[22m[39m
+       [33m[2m✓[22m[39m does not poison the atom state after a stack overflow[33m 819[2mms[22m[39m
 [90mstderr[2m | tests/react/useAtomValue.test.tsx[2m > [22m[2museAtomValue with error throwing atom
 [22m[39mError: fail
     at Object.read [90m(<work>/jotai/[39mtests/react/useAtomValue.test.tsx:90:11[90m)[39m
@@ -98,38 +80,54 @@ The above error occurred in the <ErrorComponent> component.
 React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
 
 
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/useAtomValue.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 143[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/unwrap.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 87[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/useSetAtom.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 135[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/selectAtom.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 186[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/useHydrateAtoms.test.tsx [2m([22m[2m8 tests[22m[2m)[22m[32m 133[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/useResetAtom.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 177[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/useReducerAtom.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 258[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/useAtomValueRaw.test.tsx [2m([22m[2m8 tests[22m[2m)[22m[32m 253[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/transition.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 259[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/onmount.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[33m 440[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/provider.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 217[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/effect.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 23[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/dependency.test.tsx [2m([22m[2m17 tests[22m[2m)[22m[32m 48[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/storedev.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/useAtomValue.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 153[2mms[22m[39m
+[90mstderr[2m | tests/react/async2.test.tsx[2m > [22m[2mwrite to async atom twice[2m > [22m[2mwait Promise.resolve()
+[22m[39mAn update to Component inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/useSetAtom.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 56[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/async2.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[32m 232[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithRefresh.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 146[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/useResetAtom.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 115[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/useAtomValueRawSync.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 88[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/useAtomValueRaw.test.tsx [2m([22m[2m8 tests[22m[2m)[22m[32m 254[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/transition.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 266[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/freezeAtom.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[32m 212[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/useReducerAtom.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 241[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/selectAtom.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 185[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/atomWithReducer.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 184[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/vanilla-utils/splitAtom.test.tsx [2m([22m[2m9 tests[22m[2m)[22m[32m 258[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/provider.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 65[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/useAtomCallback.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 114[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/storedev.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/dependency.test.tsx [2m([22m[2m17 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/unwrap.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 68[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/derive.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/atomWithDefault.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 8[2mms[22m[39m
  [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/basic.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 12[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/atomWithDefault.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/atomWithLazy.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/effect.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 17[2mms[22m[39m
  [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/atomWithReset.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/derive.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 10[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/types.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/useAtomCallback.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 64[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/types.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
  [32m✓[39m [30m[46m jotai [49m[39m tests/react/types.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 4[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/atomWithLazy.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
- [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/types.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
  [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/atomWithRefresh.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/utils/types.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/vanilla/types.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[46m jotai [49m[39m tests/react/utils/types.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 2[2mms[22m[39m
 
 [2m Test Files [22m [1m[32m44 passed[39m[22m[90m (44)[39m
 [2m      Tests [22m [1m[32m412 passed[39m[22m[90m (412)[39m
-[2m   Start at [22m 09:11:46
-[2m   Duration [22m 10.66s[2m (environment 69%, setup 14%, tests 7%, transform 7%, import 2%, worker 1%)[22m
+[2m   Start at [22m 09:38:11
+[2m   Duration [22m 10.10s[2m (environment 71%, setup 14%, tests 8%, transform 4%, import 2%, worker 1%)[22m
 
-[2mEnvironment [22m [30m[46m jotai [49m[39m [33mjsdom was created 44 times[39m[2m · 99.30s total, 69% of tracked time[22m
+[2mEnvironment [22m [30m[46m jotai [49m[39m [33mjsdom was created 44 times[39m[2m · 93.78s total, 71% of tracked time[22m
 [2m            [22m [2mcreate it once per worker with [22m[33mpool: 'vmThreads'[39m[2m (keeps per-file isolation) or [22m[33misolate: false[39m[2m (shares it across files)[22m
 [2m            [22m [2mlearn more: https://vitest.dev/guide/improving-performance#test-environments[22m
 

@@ -4,6 +4,6 @@
 
  Test Files  719 passed (719)
       Tests  5219 passed | 2 skipped (5221)
-   Start at  09:05:19
-   Duration  9.20s (transform 17.15s, setup 0ms, import 47.86s, tests 17.48s, environment 528ms)
+   Start at  09:32:10
+   Duration  8.52s (transform 17.33s, setup 0ms, import 44.52s, tests 17.20s, environment 471ms)
 
