@@ -8,6 +8,7 @@
       "!schema",
       "!node_modules",
       "!dist",
+      "!**/dist",
       "!docs/benchmarks/*/data",
       "!docs/benchmarks/*/protocol.md",
       "!docs/benchmarks/*/projects.md"

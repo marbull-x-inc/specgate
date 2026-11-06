@@ -42,7 +42,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && tsc -p packages/specgate-mutate/tsconfig.build.json",
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "example:refresh": "bun run scripts/refresh-example-output.ts",
     "format": "biome format --write .",

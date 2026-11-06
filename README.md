@@ -274,19 +274,20 @@ group. Those are the values a contract states (a default of `0`, a status `413`,
 splitters). `specgate mutants` lists one such change per value site in the code that units with
 guarantees own (their lines, the helpers they reach, the constants and collections they read),
 skipping type positions, imports, `typeof` checks, thrown messages and property keys. specgate
-still runs no test: a runner outside the package applies each change, runs the tests and writes a
-mutation-testing-report-schema report with `mutatorName: "Value"`. This repository has one in
-`scripts/value-mutants/run.ts`. With Stryker's report it runs only the test files that cover the
+still runs no test: a separate package, `@marbull-x-inc/specgate-mutate`
+([packages/specgate-mutate](packages/specgate-mutate)), applies each change, runs the tests and
+writes a mutation-testing-report-schema report with `mutatorName: "Value"`. With Stryker's report it runs only the test files that cover the
 changed line (`coveredBy`), or, for a module-level constant, the code that reads it (`readers` in
 `mutants.json`); when nothing tells which tests run a site, it runs the whole command.
 
 ```bash
 npx stryker run --reporters json                       # reports/mutation/mutation.json
-npx specgate mutants                                   # .specgate/mutants.json
-node scripts/value-mutants/run.ts --command "npx vitest run {files}" \
-  --stryker reports/mutation/mutation.json --out reports/mutation/value.json
-npx specgate check  # mutation: { report: ["reports/mutation/mutation.json", "reports/mutation/value.json"] }
+npx specgate-mutate --command "npx vitest run --bail=1 {files}"
+# = specgate mutants, the runner, then specgate check with
+#   mutation: { report: ["reports/mutation/mutation.json", "reports/mutation/value.json"] }
 ```
+
+`specgate-mutate list` and `specgate-mutate run` run the first two steps on their own.
 
 `mutant-survived` names a value change in contract terms (``useCounter: the default
 `initialValue` 0 → 1 survived``), and an equivalent one is accepted with
