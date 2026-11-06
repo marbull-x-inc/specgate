@@ -300,8 +300,10 @@ in `library`, react-hotkeys-hook in `packages/react-hotkeys-hook`), the runner p
 test files relative to the repository root; vitest found none, exited 1, and the runner read
 that as `Killed`. This affects **both** earlier measurements of those two projects (valibot's 51
 and react-hotkeys-hook's 16 `Killed`), so their earlier runner results are not valid. In
-react-hook-form, the second measurement's selection included files that fail when run together
-without any change. The runner now takes `--cwd` and passes test files relative to it, and runs
+react-hook-form, the selected tests pass without any change (1419 tests), and the one kill did not
+reproduce when the mutant was run alone against the whole suite: most likely a test that failed
+under the load of fifteen parallel jest runs. That is a limit of the runner (and of Stryker), not
+fixed here; the third measurement shows whether it recurs. The runner now takes `--cwd` and passes test files relative to it, and runs
 each distinct selection once without any change: a selection that fails falls back to the whole
 suite. The runner step is repeated on all ten projects (third measurement); the report's numbers
 come from it, with the first measurement kept beside them (`data/first-run/`).
