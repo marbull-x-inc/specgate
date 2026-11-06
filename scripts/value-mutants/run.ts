@@ -50,6 +50,12 @@ export interface ValueMutant {
   original: string;
   replacement: string;
   description: string;
+  /** The code of the units that own the site (specgate mutants), for test selection */
+  readers?: Array<{ file: string; line: number; endLine: number }>;
+  /** Constants or collections the site is written in */
+  names?: string[];
+  /** Test files that reference the site's constant directly */
+  tests?: string[];
 }
 
 export interface ValueMutantList {
@@ -139,8 +145,16 @@ function before(a: { line: number; column: number }, b: { line: number; column: 
 }
 
 /**
- * The tests that can reach a site: those covering the innermost Stryker mutant whose location
- * contains it. A test that reaches the site entered that mutant's code, so this is a superset.
+ * The tests that can reach a site.
+ *
+ * 1. Those covering the innermost Stryker mutant whose location contains it: a test that reaches
+ *    the site entered that mutant's code.
+ * 2. When there is none, or it is static (module-level code, which Stryker does not track per
+ *    test): those covering the code that reads the site (`readers`, every function of the program
+ *    that references its constant), plus the test files that reference the constant directly
+ *    (`tests`). Each reader must lie in a file of the Stryker report and hold a non-static mutant
+ *    with coverage, or nothing is known about who runs it.
+ * 3. Otherwise, all tests.
  */
 export function selectTests(m: ValueMutant, coverage: StrykerCoverage | undefined): Selection {
   if (!coverage) return { all: true };
@@ -150,15 +164,38 @@ export function selectTests(m: ValueMutant, coverage: StrykerCoverage | undefine
     .filter((s) => before(s.start, start) && before(end, s.end))
     .sort((a, b) => a.end.line - a.start.line - (b.end.line - b.start.line) || a.end.column - b.end.column);
   const inner = containing[0];
-  if (!inner || inner.static || inner.coveredBy === undefined) return { all: true };
-  if (inner.coveredBy.length === 0) return { none: true };
+  if (inner && !inner.static && inner.coveredBy !== undefined) {
+    if (inner.coveredBy.length === 0) return { none: true };
+    return filesOf(inner.coveredBy, coverage) ?? { all: true };
+  }
+  if (!m.readers || m.readers.length === 0) return { all: true };
+  const tests = new Set<string>();
+  for (const r of m.readers) {
+    const inReader = (coverage.mutants.get(r.file) ?? []).filter(
+      (s) => !s.static && s.coveredBy !== undefined && s.start.line >= r.line && s.end.line <= r.endLine,
+    );
+    if (inReader.length === 0) return { all: true };
+    for (const s of inReader) for (const id of s.coveredBy ?? []) tests.add(id);
+  }
+  const byTests = filesOf([...tests].sort(), coverage);
+  if (!byTests) return { all: true };
+  const files = [...new Set([...byTests.files, ...(m.tests ?? [])])].sort();
+  if (files.length === 0) return { none: true };
+  return { files, tests: byTests.tests };
+}
+
+/** The test files of these test ids, or `undefined` when one has no file in the report. */
+function filesOf(
+  tests: readonly string[],
+  coverage: StrykerCoverage,
+): { files: string[]; tests: string[] } | undefined {
   const files = new Set<string>();
-  for (const id of inner.coveredBy) {
+  for (const id of tests) {
     const f = coverage.testFile.get(id);
-    if (f === undefined) return { all: true };
+    if (f === undefined) return undefined;
     files.add(f);
   }
-  return { files: [...files].sort(), tests: inner.coveredBy };
+  return { files: [...files].sort(), tests: [...tests] };
 }
 
 /** The command with `{files}` replaced (or the files appended). An empty list runs everything. */
