@@ -8,7 +8,7 @@ import { type ExtractedUnit, extractSurface } from "./extract/surface.ts";
 import { extractTests } from "./extract/tests/index.ts";
 import { createTsdocParser } from "./extract/tsdoc-parser.ts";
 import { isReport, type Report, type Unit } from "./ir/schema.ts";
-import { valueConfirmation } from "./mutants/index.ts";
+import { valueMeasurement } from "./mutants/index.ts";
 import { countMutants, mapMutants, outcomeOf, readMutationReports, reportPaths } from "./mutation/report.ts";
 import { attachProvenance } from "./provenance/git.ts";
 import { readRevision } from "./provenance/revision.ts";
@@ -140,13 +140,13 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
   if (mutation && "mapped" in mutation.result)
     for (const [unit, counts] of countMutants(mutation.result.mapped)) unit.mutation = counts;
   // A value mutant the tests caught confirms the decision on its value (#61).
-  const caughtValues =
+  const measuredValues =
     mutationRead && "mutants" in mutationRead
       ? mutationRead.mutants.filter(
           (m) => m.mutator === VALUE_MUTATOR && outcomeOf(m.status, config.mutation.detected) === "killed",
         )
       : [];
-  const decisionConfirmed = caughtValues.length > 0 ? valueConfirmation(caughtValues, host, config.root) : undefined;
+  const decisionMeasured = measuredValues.length > 0 ? valueMeasurement(measuredValues, host, config.root) : undefined;
   // A gap in the mapping is shown, not silent (#53).
   const mutantsUnmapped =
     mutationRead && "mutants" in mutationRead && mutation && "mapped" in mutation.result
@@ -175,7 +175,7 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
       unmappedEntries: entries.filter((e) => e.source === undefined).map((e) => e.subpath),
       truncatedCollections: surface.truncatedCollections,
       ...(mutation ? { mutation } : {}),
-      ...(decisionConfirmed ? { decisionConfirmed } : {}),
+      ...(decisionMeasured ? { decisionMeasured } : {}),
     }),
     options.accepted === false ? new Set() : readAccepted(config),
   );

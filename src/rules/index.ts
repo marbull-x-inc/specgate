@@ -31,7 +31,7 @@ export interface RuleContext {
   /** The default baseline came from another revision or config (see `baseline-stale`). */
   baselineStale?: { baseline: string; current: string };
   /** Whether a loaded value report confirms a decision (#61); absent when none is loaded. */
-  decisionConfirmed?: (unit: Unit, decision: Decision) => boolean;
+  decisionMeasured?: (unit: Unit, decision: Decision) => boolean;
   /** The mutation report (`mutation.report`), mapped to units; absent when none is configured. */
   mutation?: Omit<MutationRuleInput, "linkedTests">;
 }
@@ -194,7 +194,7 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
       stated: (unit) => unit.guarantees.some((g) => g.id !== placeholder && g.id !== ""),
       truncatedCollections: ctx.truncatedCollections ?? [],
       collectionLimit: ctx.config.decisions.collectionLimit,
-      ...(ctx.decisionConfirmed ? { confirmed: ctx.decisionConfirmed } : {}),
+      ...(ctx.decisionMeasured ? { measured: ctx.decisionMeasured } : {}),
     },
     emit,
   );

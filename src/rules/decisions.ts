@@ -27,7 +27,7 @@ export interface DecisionRuleInput {
    * Whether a value report confirms the decision: a test failed when its value changed (#61).
    * A confirmed decision gives neither `decision-unspecified` nor `decision-untested`.
    */
-  confirmed?: (unit: Unit, decision: Decision) => boolean;
+  measured?: (unit: Unit, decision: Decision) => boolean;
 }
 
 export type DecisionRuleId =
@@ -95,7 +95,7 @@ export function evaluateDecisionRules(
   // Reports read from disk before `keys` existed have none.
   const keysOf = (id: string): string[] => linkedTests(id).flatMap((t) => t.keys ?? []);
   const lengthsOf = (id: string): number[] => linkedTests(id).flatMap((t) => t.lengths ?? []);
-  const confirmed = input.confirmed ?? (() => false);
+  const measured = input.measured ?? (() => false);
   const ignored = (d: Decision): boolean =>
     d.values.some((v) => input.ignore.has(v)) || d.names.some((n) => input.ignore.has(n));
 
@@ -144,7 +144,7 @@ export function evaluateDecisionRules(
     // Unnamed members are reported per collection, not per element.
     const unnamedMembers = new Map<string, { decisions: Decision[]; allUsed: boolean }>();
     for (const d of unit.decisions) {
-      if (ignored(d) || confirmed(unit, d)) continue;
+      if (ignored(d) || measured(unit, d)) continue;
       const used =
         d.kind === "member" ? memberUsed(d) : valueUsed(d, literals, keys, lengths) || quantityUnitUsed(d, ownLiterals);
       if (!decisionMentioned(d, corpus, input.ignore)) {

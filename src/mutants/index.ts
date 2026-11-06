@@ -434,7 +434,7 @@ interface KilledValue {
  * (stale) matches nothing and confirms nothing.
  * @param caught - The report's `Value` mutants whose status counts as detected.
  */
-export function valueConfirmation(
+export function valueMeasurement(
   caught: readonly Mutant[],
   host: ProgramHost,
   root: string,
