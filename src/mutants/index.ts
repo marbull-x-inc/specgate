@@ -50,7 +50,7 @@ export interface ValueMutant {
    * file. A test that observes the change runs some of this code, so a runner can select tests
    * by what covers it when nothing covers the site itself (a module-level constant).
    */
-  readers?: Array<{ file: string; line: number; endLine: number }>;
+  readers?: Reader[];
   /** Names of the module-level constants or collections the site is written in */
   names?: string[];
   /** Test files that reference the site's module-level constant directly */
@@ -158,8 +158,11 @@ export function listValueMutants(
       // A site in a module-level constant runs at import; the code that reads the constant is what
       // a test exercises. Every reference in the program counts, not only the units with guarantees.
       const constant = moduleConstDeclaration(site.at);
-      const refs = constant ? references(constant) : undefined;
-      const readers = refs ? refs.readers : readersOf(containing);
+      const refs = constant ? references.ofConstant(constant) : undefined;
+      const fn = constant ? undefined : outermostFunction(site.at);
+      const ofFn = fn ? references.ofFunction(fn, sf) : undefined;
+      const readers = refs ? refs.readers : ofFn ? [ofFn.reader] : readersOf(containing);
+      const siteTests = refs?.tests ?? ofFn?.tests ?? [];
       const names = [...new Set(containing.flatMap((r) => (r.name !== undefined ? [r.name] : [])))].sort();
       mutants.push({
         unit: owner.unit.id,
@@ -177,7 +180,7 @@ export function listValueMutants(
         ...(decision ? { decision: { kind: decision.kind, values: decision.values } } : {}),
         ...(readers ? { readers } : {}),
         ...(names.length > 0 ? { names } : {}),
-        ...(refs && refs.tests.length > 0 ? { tests: refs.tests } : {}),
+        ...(siteTests.length > 0 ? { tests: siteTests } : {}),
       });
     }
     if (any) files[file] = { sha256: sha256(text) };
@@ -191,24 +194,44 @@ export function listValueMutants(
   };
 }
 
+/** A function that reads a site, and, when they can be traced, the functions that call it. */
+export interface Reader {
+  file: string;
+  line: number;
+  endLine: number;
+  /**
+   * The outermost functions that reference this one by name (transitively, three levels). Absent
+   * when the function has no name to trace (a method, a callback) or some reference to it is not
+   * inside a function; a runner then cannot reach the tests that run it through its callers.
+   */
+  callers?: Reader[];
+}
+
 interface References {
-  /** Outermost functions that read the constant; `undefined` when some reference is not in one */
-  readers: NonNullable<ValueMutant["readers"]> | undefined;
+  /** Outermost functions that read the name; `undefined` when some reference is not in one */
+  readers: Reader[] | undefined;
   tests: string[];
 }
 
+const CALLER_DEPTH = 3;
+
 /**
- * Finds every place the program reads a module-level constant: the outermost function around
- * each reference (in any project file), and the test files that name it. A reference in another
- * module-level constant is followed into that constant's references (three levels); any other
- * reference outside a function (a module-level statement) leaves the readers unknown.
+ * Finds every place the program reads a declared name: the outermost function around each
+ * reference (in any project file), and the test files that name it. A reference in a
+ * module-level constant is followed into that constant's references; any other reference outside
+ * a function (a module-level statement) leaves the readers unknown. Each reader that is a named
+ * function gets its own callers the same way, so a runner can reach the tests of code that a
+ * coverage report does not cover.
  */
 function referenceFinder(
   host: ProgramHost,
   root: string,
   testFiles: ReadonlySet<string>,
-): (decl: ts.VariableDeclaration) => References {
-  const cache = new Map<ts.VariableDeclaration, References>();
+): {
+  ofConstant: (decl: ts.VariableDeclaration) => References;
+  ofFunction: (fn: ts.Node, sf: ts.SourceFile) => { reader: Reader; tests: string[] };
+} {
+  const cache = new Map<ts.Symbol, References>();
   const checker = host.checker;
   const symbolOf = (node: ts.Node): ts.Symbol | undefined => {
     const parent = node.parent;
@@ -219,29 +242,31 @@ function referenceFinder(
     if (sym && sym.flags & ts.SymbolFlags.Alias) sym = checker.getAliasedSymbol(sym);
     return sym;
   };
-  const find = (decl: ts.VariableDeclaration, depth: number): References => {
-    const cached = cache.get(decl);
+  const find = (name: ts.Identifier, owner: ts.Node, depth: number): References => {
+    const target = symbolOf(name);
+    if (!target) return { readers: undefined, tests: [] };
+    const cached = cache.get(target);
     if (cached) return cached;
-    const result: References = { readers: [], tests: [] };
-    cache.set(decl, result);
-    if (!ts.isIdentifier(decl.name)) return { readers: undefined, tests: [] };
-    const name = decl.name.text;
-    const target = symbolOf(decl.name);
-    const readers = new Map<string, { file: string; line: number; endLine: number }>();
+    // In progress: a cycle (mutually recursive helpers) sees "unknown", so a runner falls back.
+    const result: References = { readers: undefined, tests: [] };
+    cache.set(target, result);
+    const readers = new Map<string, Reader>();
+    const fnNodes = new Map<string, { fn: ts.Node; sf: ts.SourceFile }>();
     const tests = new Set<string>();
-    let complete = target !== undefined;
+    let complete = true;
     for (const sf of host.program.getSourceFiles()) {
-      if (sf.isDeclarationFile || /[\\/]node_modules[\\/]/.test(sf.fileName) || !sf.text.includes(name)) continue;
+      if (sf.isDeclarationFile || /[\\/]node_modules[\\/]/.test(sf.fileName) || !sf.text.includes(name.text)) continue;
       const file = relativeTo(root, sf.fileName);
       const visit = (node: ts.Node): void => {
         if (
           ts.isIdentifier(node) &&
-          node.text === name &&
-          node !== decl.name &&
+          node.text === name.text &&
+          node !== name &&
           !ts.isImportSpecifier(node.parent) &&
           !ts.isExportSpecifier(node.parent) &&
           !ts.isImportClause(node.parent) &&
           !inTypePosition(node) &&
+          !isWithin(node, owner) &&
           symbolOf(node) === target
         ) {
           if (testFiles.has(file)) tests.add(file);
@@ -249,10 +274,17 @@ function referenceFinder(
             const fn = outermostFunction(node);
             if (fn) {
               const line = lineOf(sf, fn.getStart(sf));
-              readers.set(`${file}:${line}`, { file, line, endLine: lineOf(sf, fn.getEnd()) });
+              const key = `${file}:${line}`;
+              if (!readers.has(key)) {
+                readers.set(key, { file, line, endLine: lineOf(sf, fn.getEnd()) });
+                fnNodes.set(key, { fn, sf });
+              }
             } else {
               const inner = moduleConstDeclaration(node);
-              const nested = inner && inner !== decl && depth < 3 ? find(inner, depth + 1) : undefined;
+              const nested =
+                inner && ts.isIdentifier(inner.name) && depth < CALLER_DEPTH
+                  ? find(inner.name, inner, depth + 1)
+                  : undefined;
               if (!nested?.readers) complete = false;
               else {
                 for (const r of nested.readers) readers.set(`${r.file}:${r.line}`, r);
@@ -265,13 +297,51 @@ function referenceFinder(
       };
       visit(sf);
     }
+    // Callers of each reader, so the tests that run it can be found when nothing covers it.
+    if (depth < CALLER_DEPTH)
+      for (const [key, { fn }] of fnNodes) {
+        const fnName = functionName(fn);
+        const reader = readers.get(key);
+        if (!fnName || !reader) continue;
+        const callers = find(fnName, fn, depth + 1);
+        if (callers.readers) reader.callers = callers.readers;
+        for (const t of callers.tests) tests.add(t);
+      }
     result.readers = complete
       ? [...readers.values()].sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line)
       : undefined;
     result.tests = [...tests].sort();
     return result;
   };
-  return (decl) => find(decl, 0);
+  return {
+    ofConstant: (decl) => (ts.isIdentifier(decl.name) ? find(decl.name, decl, 0) : { readers: undefined, tests: [] }),
+    // The function around a site, with its callers when it has a name to trace them by.
+    ofFunction: (fn, sf) => {
+      const reader: Reader = {
+        file: relativeTo(root, sf.fileName),
+        line: lineOf(sf, fn.getStart(sf)),
+        endLine: lineOf(sf, fn.getEnd()),
+      };
+      const name = functionName(fn);
+      if (!name) return { reader, tests: [] };
+      const callers = find(name, fn, 1);
+      return { reader: callers.readers ? { ...reader, callers: callers.readers } : reader, tests: callers.tests };
+    },
+  };
+}
+
+/** Whether `node` lies inside `owner` (a reference of a function to itself). */
+function isWithin(node: ts.Node, owner: ts.Node): boolean {
+  for (let cur: ts.Node | undefined = node; cur; cur = cur.parent) if (cur === owner) return true;
+  return false;
+}
+
+/** The name a function is called by: its declaration name, or the module-level `const` holding it. */
+function functionName(fn: ts.Node): ts.Identifier | undefined {
+  if ((ts.isFunctionDeclaration(fn) || ts.isFunctionExpression(fn)) && fn.name) return fn.name;
+  const p = fn.parent;
+  if (p && ts.isVariableDeclaration(p) && p.initializer === fn && ts.isIdentifier(p.name)) return p.name;
+  return undefined;
 }
 
 /** Under a type node (`typeof X`, `keyof typeof X`): names the constant's type, reads no value. */
@@ -307,9 +377,9 @@ function moduleConstDeclaration(node: ts.Node): ts.VariableDeclaration | undefin
 }
 
 /** The lines and helpers, in their own files, of every unit owning one of the regions. */
-function readersOf(regions: readonly Region[]): NonNullable<ValueMutant["readers"]> {
+function readersOf(regions: readonly Region[]): Reader[] {
   const seen = new Set<string>();
-  const out: NonNullable<ValueMutant["readers"]> = [];
+  const out: Reader[] = [];
   for (const unit of new Set(regions.map((r) => r.unit)))
     for (const r of [{ line: unit.line, endLine: unit.endLine }, ...(unit.helperRanges ?? [])]) {
       const key = `${unit.file}:${r.line}:${r.endLine}`;
