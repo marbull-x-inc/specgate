@@ -133,14 +133,19 @@ It reads the same config as `check` and runs the same extraction; it never runs 
 
 ### The runner
 
-The runner lives in `scripts/value-mutants/run.ts`, not in the package: it runs tests, which the
-package never does. It takes the list, a test command and, optionally, a Stryker report:
+The runner is a separate package, `@marbull-x-inc/specgate-mutate` (`packages/specgate-mutate`),
+not part of specgate's: it runs tests, which specgate never does. Its command
+`specgate-mutate` runs `specgate mutants`, the runner and `specgate check` in one go
+(`list` and `run` do the first two alone). The runner takes the list, a test command and,
+optionally, a Stryker report:
 
 ```bash
-node scripts/value-mutants/run.ts --mutants .specgate/mutants.json \
-  --command "npx vitest run" --stryker reports/mutation/mutation.json \
+npx specgate-mutate run --mutants .specgate/mutants.json \
+  --command "npx vitest run --bail=1 {files}" --stryker reports/mutation/mutation.json \
   --out reports/mutation/value.json
 ```
+
+(Benchmark 0003 ran it as `scripts/value-mutants/run.ts`, which now forwards to the package.)
 
 For each mutant it:
 
