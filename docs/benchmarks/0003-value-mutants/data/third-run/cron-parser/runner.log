@@ -1,0 +1,41 @@
+baseline run 2885 ms; timeout 30000 ms
+value-1 Timeout    src/CronExpression.ts:18 `TIME_SPAN_OUT_OF_BOUNDS_ERROR_MESSAGE` 'Out of the time span range' → 'Out of the time span range_x'
+value-2 Timeout    src/CronExpression.ts:23 `LOOPS_LIMIT_EXCEEDED_ERROR_MESSAGE` 'Invalid expression, loop limit exceeded' → 'Invalid expression, loop limit exceeded_x'
+value-3 Timeout    src/CronExpression.ts:28 `LOOP_LIMIT` 10000 → 10001
+value-5 Timeout    src/CronExpression.ts:113 `reverse ? values.length - 1 : 0`: 0 → 1
+value-6 Timeout    src/CronExpression.ts:129 `currentDate.getMonth() + 1`: 1 → 2
+value-13 Timeout    src/CronExpression.ts:530 `currentDate.getMilliseconds() > 0`: 0 → 1
+value-14 Timeout    src/CronExpression.ts:531 `currentDate.setMilliseconds(0)`: 0 → 1
+value-15 Timeout    src/CronExpression.ts:537 `stepCount` 0 → 1
+value-4 Timeout    src/CronExpression.ts:113 `values.length - 1`: 1 → 2
+value-7 Timeout    src/CronExpression.ts:299 `limit >= 0`: 0 → 1
+value-8 Timeout    src/CronExpression.ts:300 `i` 0 → 1
+value-9 Timeout    src/CronExpression.ts:308 `i` 0 → 1
+value-10 Timeout    src/CronExpression.ts:449 `skipped + 1`: 1 → 2
+value-11 Timeout    src/CronExpression.ts:449 `(skipped + 1) % 24`: 24 → 25
+value-12 Timeout    src/CronExpression.ts:482 `i` 0 → 1
+value-17 Survived   src/CronExpressionParser.ts:121 `rawFields.dayOfMonth === '*'`: '*' → '*_x'
+value-18 Killed     src/CronExpressionParser.ts:121 `rawFields.dayOfWeek === '*'`: '*' → '*_x'
+value-19 Killed     src/CronFileParser.ts:24 `readFile(filePath, 'utf8')`: 'utf8' → 'utf8_x'
+value-20 Killed     src/CronFileParser.ts:38 `readFileSync(filePath, 'utf8')`: 'utf8' → 'utf8_x'
+value-16 Killed     src/CronExpression.ts:541 `currentDate.getMonth() + 1`: 1 → 2
+value-1 Survived   (rerun alone) src/CronExpression.ts:18
+value-2 Survived   (rerun alone) src/CronExpression.ts:23
+value-3 Survived   (rerun alone) src/CronExpression.ts:28
+value-4 Survived   (rerun alone) src/CronExpression.ts:113
+value-5 Killed     (rerun alone) src/CronExpression.ts:113
+value-6 Survived   (rerun alone) src/CronExpression.ts:129
+value-7 Survived   (rerun alone) src/CronExpression.ts:299
+value-8 Killed     (rerun alone) src/CronExpression.ts:300
+value-9 Killed     (rerun alone) src/CronExpression.ts:308
+value-10 Timeout    (rerun alone) src/CronExpression.ts:449
+value-11 Survived   (rerun alone) src/CronExpression.ts:449
+value-12 Killed     (rerun alone) src/CronExpression.ts:482
+value-13 Survived   (rerun alone) src/CronExpression.ts:530
+value-14 Killed     (rerun alone) src/CronExpression.ts:531
+value-15 Survived   (rerun alone) src/CronExpression.ts:537
+value-mutants: 20 mutant(s): 10 Survived, 9 Killed, 1 Timeout; 119528 ms (baseline run 2885 ms)
+wrote <work>/cron-parser/reports/value/value.json
+real 119.69
+user 130.56
+sys 26.21

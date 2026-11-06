@@ -307,3 +307,17 @@ fixed here; the third measurement shows whether it recurs. The runner now takes 
 each distinct selection once without any change: a selection that fails falls back to the whole
 suite. The runner step is repeated on all ten projects (third measurement); the report's numbers
 come from it, with the first measurement kept beside them (`data/first-run/`).
+
+### 12. Shorter runner runs: callers of readers, Stryker-style timeouts, bail (2026-11-06, after the final measurement of deviation 11)
+
+Also post hoc, and only about time. After deviation 11, the remaining whole-suite runs were
+sites whose readers the Stryker report cannot place (react-hook-form: `createFormControl.ts` is
+not in `mutate`, 36 runs; es-toolkit: Stryker marks `deburr` static, 11 runs), and a `Timeout`
+waited a fixed 30 s twice (cron-parser). Three changes: `specgate mutants` lists the `callers` of
+each named reader (by name references, three levels) and the test files naming them, and the
+runner reaches such readers through their callers; the timeout of a run is its selection's
+unchanged run time × 1.5 + 5 s, as Stryker's; the test commands stop at the first failure
+(`vitest --bail=1`, `jest --bail`), as Stryker's runs do. Stryker's configs and reports are
+unchanged. The runner step is repeated on the ten projects (fourth measurement) and every
+status is compared with the third measurement's; a value mutant moving from detected to green
+would mean the selection left out a test that kills it, and is listed in the report.

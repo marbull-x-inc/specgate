@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "2",
+  "thresholds": {
+    "high": 80,
+    "low": 60
+  },
+  "projectRoot": "<work>/neverthrow",
+  "files": {}
+}

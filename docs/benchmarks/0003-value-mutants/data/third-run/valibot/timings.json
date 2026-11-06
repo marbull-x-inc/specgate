@@ -1,0 +1,6 @@
+{
+  "strykerSeconds": 88.52,
+  "mutantsSeconds": 1.32,
+  "runnerSeconds": 49.58,
+  "runnerConcurrency": 15
+}
