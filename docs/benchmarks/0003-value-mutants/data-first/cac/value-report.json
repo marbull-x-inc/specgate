@@ -1,0 +1,569 @@
+{
+  "schemaVersion": "2",
+  "thresholds": {
+    "high": 80,
+    "low": 60
+  },
+  "projectRoot": "<work>/cac",
+  "files": {
+    "src/cac.ts": {
+      "language": "typescript",
+      "source": "import mri from 'mri'\nimport {\n  Command,\n  GlobalCommand,\n  type CommandConfig,\n  type CommandExample,\n  type HelpCallback,\n} from './command.ts'\nimport { getRuntimeProcessArgs } from './runtime.ts'\nimport {\n  camelcaseOptionName,\n  getFileName,\n  getMriOptions,\n  setByType,\n  setDotProp,\n} from './utils.ts'\nimport type { OptionConfig } from './option.ts'\n\ninterface ParsedArgv {\n  args: ReadonlyArray<string>\n  options: {\n    [k: string]: any\n  }\n}\n\nexport class CAC extends EventTarget {\n  /** The program name to display in help and version message */\n  name: string\n  commands: Command[]\n  globalCommand: GlobalCommand\n  matchedCommand?: Command\n  matchedCommandName?: string\n  /**\n   * Raw CLI arguments\n   */\n  rawArgs: string[]\n  /**\n   * Parsed CLI arguments\n   */\n  args: ParsedArgv['args']\n  /**\n   * Parsed CLI options, camelCased\n   */\n  options: ParsedArgv['options']\n\n  showHelpOnExit?: boolean\n  showVersionOnExit?: boolean\n\n  /**\n   * @param name The program name to display in help and version message\n   */\n  constructor(name = '') {\n    super()\n    this.name = name\n    this.commands = []\n    this.rawArgs = []\n    this.args = []\n    this.options = {}\n    this.globalCommand = new GlobalCommand(this)\n    this.globalCommand.usage('<command> [options]')\n  }\n\n  /**\n   * Add a global usage text.\n   *\n   * This is not used by sub-commands.\n   * @guarantee ok.global-usage adds a global usage text, which is not used by sub-commands\n   */\n  usage(text: string): this {\n    this.globalCommand.usage(text)\n    return this\n  }\n\n  /**\n   * Add a sub-command\n   * @guarantee ok.creates-command creates and returns a command instance for `name` and `description`\n   * @guarantee ok.required-arguments in a command name, angled brackets indicate required arguments and square brackets indicate optional arguments (\"deploy <folder>\" requires `folder`, \"build [project]\" makes `project` optional)\n   * @guarantee ok.variadic only the last argument can be variadic, written with \"...\" at the start of its name (\"build <entry> [...otherFiles]\"), and then it is passed as an array\n   * @guarantee ok.default-command a command name with no name and only brackets (\"[...files]\") is the default command, used when no other command is matched\n   * @guarantee ok.config-allow-unknown-options `config.allowUnknownOptions` allows unknown options in this command\n   * @guarantee ok.config-ignore-default `config.ignoreOptionDefaultValue` leaves the default value of an option out of the parsed options and only displays it in the help message\n   */\n  command(\n    rawName: string,\n    description?: string,\n    config?: CommandConfig,\n  ): Command {\n    const command = new Command(rawName, description || '', config, this)\n    command.globalCommand = this.globalCommand\n    this.commands.push(command)\n    return command\n  }\n\n  /**\n   * Add a global CLI option.\n   *\n   * Which is also applied to sub-commands.\n   * @guarantee ok.global-option adds a global option\n   * @guarantee ok.config-default `config.default` is the default value of the option (`--type <type>` with `default: \"node\"` defaults `type` to \"node\")\n   * @guarantee ok.config-type-array when `config.type` is `[]`, the option value is an array, and a conversion function such as `[String]` is invoked on the option value\n   * @guarantee ok.camel-case an option in kebab-case is mapped to camelCase, so `--clear-screen` and `--clearScreen` both map to `options.clearScreen`\n   * @guarantee ok.option-brackets in an option name, angled brackets indicate that a string or number value is required and square brackets indicate that the value can also be `true`\n   * @guarantee ok.negated-option with `--no-config` and `--config <path>`, the default value of `config` is `true` and the flag `--no-config` sets it to `false`\n   * @guarantee ok.repeated-option an option given once gives a single value (\"--include project-a\" gives `{ include: \"project-a\" }`) and given twice gives an array (`{ include: [\"project-a\", \"project-b\"] }`)\n   */\n  option(rawName: string, description: string, config?: OptionConfig): this {\n    this.globalCommand.option(rawName, description, config)\n    return this\n  }\n\n  /**\n   * Show help message when `-h, --help` flags appear.\n   *\n   * @guarantee ok.help-flags outputs the help message when the `-h` or `--help` flag appears\n   * @guarantee ok.callback the optional `callback` receives the help sections, each with an optional `title` and a `body`, so the help text can be post-processed before it is displayed\n   */\n  help(callback?: HelpCallback): this {\n    this.globalCommand.option('-h, --help', 'Display this message')\n    this.globalCommand.helpCallback = callback\n    this.showHelpOnExit = true\n    return this\n  }\n\n  /**\n   * Show version number when `-v, --version` flags appear.\n   *\n   * @guarantee ok.default-flags outputs the version number when the `-v` or `--version` flag appears, because `customFlags` is \"-v, --version\" by default\n   * @guarantee ok.custom-flags `customFlags` replaces the flags that output the version number\n   * @guarantee ok.in-help the version number is also used in the help message\n   */\n  version(version: string, customFlags = '-v, --version'): this {\n    this.globalCommand.version(version, customFlags)\n    this.showVersionOnExit = true\n    return this\n  }\n\n  /**\n   * Add a global example.\n   *\n   * This example added here will not be used by sub-commands.\n   */\n  example(example: CommandExample): this {\n    this.globalCommand.example(example)\n    return this\n  }\n\n  /**\n   * Output the corresponding help message\n   * When a sub-command is matched, output the help message for the command\n   * Otherwise output the global one.\n   *\n   * @guarantee ok.output outputs the help message\n   */\n  outputHelp(): void {\n    if (this.matchedCommand) {\n      this.matchedCommand.outputHelp()\n    } else {\n      this.globalCommand.outputHelp()\n    }\n  }\n\n  /**\n   * Output the version number.\n   *\n   */\n  outputVersion(): void {\n    this.globalCommand.outputVersion()\n  }\n\n  private setParsedInfo(\n    { args, options }: ParsedArgv,\n    matchedCommand?: Command,\n    matchedCommandName?: string,\n  ) {\n    this.args = args\n    this.options = options\n    if (matchedCommand) {\n      this.matchedCommand = matchedCommand\n    }\n    if (matchedCommandName) {\n      this.matchedCommandName = matchedCommandName\n    }\n    return this\n  }\n\n  unsetMatchedCommand(): void {\n    this.matchedCommand = undefined\n    this.matchedCommandName = undefined\n  }\n\n  /**\n   * Parse argv\n   * @guarantee ok.parsed-argv returns an object with `args`, an array of strings, and `options`, an object of the parsed options\n   * @guarantee ok.default-argv `argv` is `process.argv` by default\n   * @guarantee ok.available-after-parse after the call, `cli.rawArgs`, `cli.args`, `cli.options` and `cli.matchedCommand` are available\n   * @guarantee ok.run-false with `{ run: false }` it parses the arguments without running the command, which can then be run with `runMatchedCommand`\n   */\n  parse(\n    argv?: string[],\n    {\n      run = true,\n    }: {\n      /** Whether to run the action for matched command */\n      run?: boolean | undefined\n    } = {},\n  ): ParsedArgv {\n    if (!argv) {\n      const runtimeProcessArgs = getRuntimeProcessArgs()\n      if (!runtimeProcessArgs) {\n        throw new Error(\n          'No argv provided and runtime process argv is not available.',\n        )\n      }\n      argv = runtimeProcessArgs\n    }\n\n    this.rawArgs = argv\n    if (!this.name) {\n      this.name = argv[1] ? getFileName(argv[1]) : 'cli'\n    }\n\n    let shouldParse = true\n\n    // Search sub-commands\n    for (const command of this.commands) {\n      const parsed = this.mri(argv.slice(2), command)\n\n      const commandName = parsed.args[0]\n      if (command.isMatched(commandName)) {\n        shouldParse = false\n        const parsedInfo = {\n          ...parsed,\n          args: parsed.args.slice(1),\n        }\n        this.setParsedInfo(parsedInfo, command, commandName)\n        this.dispatchEvent(\n          new CustomEvent(`command:${commandName}`, { detail: command }),\n        )\n      }\n    }\n\n    if (shouldParse) {\n      // Search the default command\n      for (const command of this.commands) {\n        if (command.isDefaultCommand) {\n          shouldParse = false\n          const parsed = this.mri(argv.slice(2), command)\n          this.setParsedInfo(parsed, command)\n          this.dispatchEvent(new CustomEvent('command:!', { detail: command }))\n        }\n      }\n    }\n\n    if (shouldParse) {\n      const parsed = this.mri(argv.slice(2))\n      this.setParsedInfo(parsed)\n    }\n\n    if (this.options.help && this.showHelpOnExit) {\n      this.outputHelp()\n      run = false\n      this.unsetMatchedCommand()\n    }\n\n    if (\n      this.options.version &&\n      this.showVersionOnExit &&\n      this.matchedCommandName == null\n    ) {\n      this.outputVersion()\n      run = false\n      this.unsetMatchedCommand()\n    }\n\n    const parsedArgv = { args: this.args, options: this.options }\n\n    if (run) {\n      this.runMatchedCommand()\n    }\n\n    if (!this.matchedCommand && this.args[0]) {\n      this.dispatchEvent(new CustomEvent('command:*', { detail: this.args[0] }))\n    }\n\n    return parsedArgv\n  }\n\n  private mri(\n    argv: string[],\n    /** Matched command */ command?: Command,\n  ): ParsedArgv {\n    // All added options\n    const cliOptions = [\n      ...this.globalCommand.options,\n      ...(command ? command.options : []),\n    ]\n    const mriOptions = getMriOptions(cliOptions)\n\n    // Extract everything after `--` since mri doesn't support it\n    let argsAfterDoubleDashes: string[] = []\n    const doubleDashesIndex = argv.indexOf('--')\n    if (doubleDashesIndex !== -1) {\n      argsAfterDoubleDashes = argv.slice(doubleDashesIndex + 1)\n      argv = argv.slice(0, doubleDashesIndex)\n    }\n\n    let parsed = mri(argv, mriOptions)\n    parsed = Object.keys(parsed).reduce(\n      (res, name) => {\n        return {\n          ...res,\n          [camelcaseOptionName(name)]: parsed[name],\n        }\n      },\n      { _: [] },\n    )\n\n    const args = parsed._\n\n    const options: { [k: string]: any } = {\n      '--': argsAfterDoubleDashes,\n    }\n\n    // Set option default value\n    const ignoreDefault =\n      command && command.config.ignoreOptionDefaultValue\n        ? command.config.ignoreOptionDefaultValue\n        : this.globalCommand.config.ignoreOptionDefaultValue\n\n    const transforms = Object.create(null)\n\n    for (const cliOption of cliOptions) {\n      if (!ignoreDefault && cliOption.config.default !== undefined) {\n        for (const name of cliOption.names) {\n          options[name] = cliOption.config.default\n        }\n      }\n\n      // If options type is defined\n      if (\n        Array.isArray(cliOption.config.type) &&\n        transforms[cliOption.name] === undefined\n      ) {\n        transforms[cliOption.name] = Object.create(null)\n\n        transforms[cliOption.name].shouldTransform = true\n        transforms[cliOption.name].transformFunction = cliOption.config.type[0]\n      }\n    }\n\n    // Set option values (support dot-nested property name)\n    for (const [key, value] of Object.entries(parsed)) {\n      if (key !== '_') {\n        const keys = key.split('.')\n        setDotProp(options, keys, value)\n        setByType(options, transforms)\n      }\n    }\n\n    return {\n      args,\n      options,\n    }\n  }\n\n  /**\n   * @guarantee ok.run runs the matched command after `parse` was called with `{ run: false }`, and its result can be awaited when the command action returns a Promise\n   */\n  runMatchedCommand(): any {\n    const { args, options, matchedCommand: command } = this\n\n    if (!command || !command.commandAction) return\n\n    command.checkUnknownOptions()\n\n    command.checkOptionValue()\n\n    command.checkRequiredArgs()\n\n    command.checkUnusedArgs()\n\n    const actionArgs: any[] = []\n    command.args.forEach((arg, index) => {\n      if (arg.variadic) {\n        actionArgs.push(args.slice(index))\n      } else {\n        actionArgs.push(args[index])\n      }\n    })\n    actionArgs.push(options)\n    return command.commandAction.apply(this, actionArgs)\n  }\n}\n",
+      "mutants": [
+        {
+          "id": "value-1",
+          "mutatorName": "Value",
+          "replacement": "`this.globalCommand.option('-h, --help',…`: '-h, --help' → '-h, --help_x'",
+          "description": "`this.globalCommand.option('-h, --help',…`: '-h, --help' → '-h, --help_x'",
+          "location": {
+            "start": {
+              "line": 118,
+              "column": 31
+            },
+            "end": {
+              "line": 118,
+              "column": 43
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 123
+        },
+        {
+          "id": "value-2",
+          "mutatorName": "Value",
+          "replacement": "`this.globalCommand.option('-h, --help',…`: 'Display this message' → 'Display this message_x'",
+          "description": "`this.globalCommand.option('-h, --help',…`: 'Display this message' → 'Display this message_x'",
+          "location": {
+            "start": {
+              "line": 118,
+              "column": 45
+            },
+            "end": {
+              "line": 118,
+              "column": 67
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 147
+        },
+        {
+          "id": "value-3",
+          "mutatorName": "Value",
+          "replacement": "the default `customFlags` '-v, --version' → '-v, --version_x'",
+          "description": "the default `customFlags` '-v, --version' → '-v, --version_x'",
+          "location": {
+            "start": {
+              "line": 131,
+              "column": 42
+            },
+            "end": {
+              "line": 131,
+              "column": 57
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 167
+        },
+        {
+          "id": "value-4",
+          "mutatorName": "Value",
+          "replacement": "`argv[1]`: 1 → 2",
+          "description": "`argv[1]`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 219,
+              "column": 24
+            },
+            "end": {
+              "line": 219,
+              "column": 25
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "18",
+            "19"
+          ],
+          "duration": 4373
+        },
+        {
+          "id": "value-5",
+          "mutatorName": "Value",
+          "replacement": "`argv[1]`: 1 → 2",
+          "description": "`argv[1]`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 219,
+              "column": 46
+            },
+            "end": {
+              "line": 219,
+              "column": 47
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "18",
+            "19"
+          ],
+          "duration": 4508
+        },
+        {
+          "id": "value-6",
+          "mutatorName": "Value",
+          "replacement": "`argv[1] ? getFileName(argv[1]) : 'cli'`: 'cli' → 'cli_x'",
+          "description": "`argv[1] ? getFileName(argv[1]) : 'cli'`: 'cli' → 'cli_x'",
+          "location": {
+            "start": {
+              "line": 219,
+              "column": 52
+            },
+            "end": {
+              "line": 219,
+              "column": 57
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 191
+        },
+        {
+          "id": "value-7",
+          "mutatorName": "Value",
+          "replacement": "`argv.slice(2)`: 2 → 3",
+          "description": "`argv.slice(2)`: 2 → 3",
+          "location": {
+            "start": {
+              "line": 226,
+              "column": 42
+            },
+            "end": {
+              "line": 226,
+              "column": 43
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "9",
+            "10",
+            "11",
+            "20"
+          ],
+          "duration": 4554
+        },
+        {
+          "id": "value-8",
+          "mutatorName": "Value",
+          "replacement": "`parsed.args[0]`: 0 → 1",
+          "description": "`parsed.args[0]`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 228,
+              "column": 39
+            },
+            "end": {
+              "line": 228,
+              "column": 40
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "9",
+            "10",
+            "11",
+            "20"
+          ],
+          "duration": 4815
+        },
+        {
+          "id": "value-9",
+          "mutatorName": "Value",
+          "replacement": "`parsed.args.slice(1)`: 1 → 2",
+          "description": "`parsed.args.slice(1)`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 233,
+              "column": 35
+            },
+            "end": {
+              "line": 233,
+              "column": 36
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "9",
+            "10",
+            "11",
+            "20"
+          ],
+          "duration": 4747
+        },
+        {
+          "id": "value-10",
+          "mutatorName": "Value",
+          "replacement": "`argv.slice(2)`: 2 → 3",
+          "description": "`argv.slice(2)`: 2 → 3",
+          "location": {
+            "start": {
+              "line": 247,
+              "column": 46
+            },
+            "end": {
+              "line": 247,
+              "column": 47
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 179
+        },
+        {
+          "id": "value-11",
+          "mutatorName": "Value",
+          "replacement": "`new CustomEvent('command:!', { detail: …`: 'command:!' → 'command:!_x'",
+          "description": "`new CustomEvent('command:!', { detail: …`: 'command:!' → 'command:!_x'",
+          "location": {
+            "start": {
+              "line": 249,
+              "column": 46
+            },
+            "end": {
+              "line": 249,
+              "column": 57
+            }
+          },
+          "status": "NoCoverage",
+          "statusReason": "no test covers the site",
+          "coveredBy": [],
+          "duration": 261
+        },
+        {
+          "id": "value-12",
+          "mutatorName": "Value",
+          "replacement": "`argv.slice(2)`: 2 → 3",
+          "description": "`argv.slice(2)`: 2 → 3",
+          "location": {
+            "start": {
+              "line": 255,
+              "column": 42
+            },
+            "end": {
+              "line": 255,
+              "column": 43
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "18",
+            "19"
+          ],
+          "duration": 4492
+        },
+        {
+          "id": "value-13",
+          "mutatorName": "Value",
+          "replacement": "`this.args[0]`: 0 → 1",
+          "description": "`this.args[0]`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 281,
+              "column": 43
+            },
+            "end": {
+              "line": 281,
+              "column": 44
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "18",
+            "19",
+            "20"
+          ],
+          "duration": 4484
+        },
+        {
+          "id": "value-14",
+          "mutatorName": "Value",
+          "replacement": "`new CustomEvent('command:*', { detail: …`: 'command:*' → 'command:*_x'",
+          "description": "`new CustomEvent('command:*', { detail: …`: 'command:*' → 'command:*_x'",
+          "location": {
+            "start": {
+              "line": 282,
+              "column": 42
+            },
+            "end": {
+              "line": 282,
+              "column": 53
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "4"
+          ],
+          "duration": 4624
+        },
+        {
+          "id": "value-15",
+          "mutatorName": "Value",
+          "replacement": "`this.args[0]`: 0 → 1",
+          "description": "`this.args[0]`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 282,
+              "column": 75
+            },
+            "end": {
+              "line": 282,
+              "column": 76
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "4"
+          ],
+          "duration": 4778
+        },
+        {
+          "id": "value-16",
+          "mutatorName": "Value",
+          "replacement": "`argv.indexOf('--')`: '--' → '--_x'",
+          "description": "`argv.indexOf('--')`: '--' → '--_x'",
+          "location": {
+            "start": {
+              "line": 301,
+              "column": 44
+            },
+            "end": {
+              "line": 301,
+              "column": 48
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "18",
+            "19",
+            "20"
+          ],
+          "duration": 4865
+        },
+        {
+          "id": "value-17",
+          "mutatorName": "Value",
+          "replacement": "`doubleDashesIndex !== -1`: -1 → -2",
+          "description": "`doubleDashesIndex !== -1`: -1 → -2",
+          "location": {
+            "start": {
+              "line": 302,
+              "column": 32
+            },
+            "end": {
+              "line": 302,
+              "column": 33
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "18",
+            "19",
+            "20"
+          ],
+          "duration": 4884
+        },
+        {
+          "id": "value-18",
+          "mutatorName": "Value",
+          "replacement": "`doubleDashesIndex + 1`: 1 → 2",
+          "description": "`doubleDashesIndex + 1`: 1 → 2",
+          "location": {
+            "start": {
+              "line": 303,
+              "column": 62
+            },
+            "end": {
+              "line": 303,
+              "column": 63
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "4"
+          ],
+          "duration": 4670
+        },
+        {
+          "id": "value-19",
+          "mutatorName": "Value",
+          "replacement": "`argv.slice(0, doubleDashesIndex)`: 0 → 1",
+          "description": "`argv.slice(0, doubleDashesIndex)`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 304,
+              "column": 25
+            },
+            "end": {
+              "line": 304,
+              "column": 26
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "4"
+          ],
+          "duration": 4627
+        },
+        {
+          "id": "value-20",
+          "mutatorName": "Value",
+          "replacement": "`cliOption.config.type[0]`: 0 → 1",
+          "description": "`cliOption.config.type[0]`: 0 → 1",
+          "location": {
+            "start": {
+              "line": 347,
+              "column": 78
+            },
+            "end": {
+              "line": 347,
+              "column": 79
+            }
+          },
+          "status": "Survived",
+          "coveredBy": [
+            "7",
+            "8",
+            "9"
+          ],
+          "duration": 4729
+        },
+        {
+          "id": "value-21",
+          "mutatorName": "Value",
+          "replacement": "`key !== '_'`: '_' → '__x'",
+          "description": "`key !== '_'`: '_' → '__x'",
+          "location": {
+            "start": {
+              "line": 353,
+              "column": 19
+            },
+            "end": {
+              "line": 353,
+              "column": 22
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "18",
+            "19",
+            "20"
+          ],
+          "duration": 4664
+        },
+        {
+          "id": "value-22",
+          "mutatorName": "Value",
+          "replacement": "`key.split('.')`: '.' → '._x'",
+          "description": "`key.split('.')`: '.' → '._x'",
+          "location": {
+            "start": {
+              "line": 354,
+              "column": 32
+            },
+            "end": {
+              "line": 354,
+              "column": 35
+            }
+          },
+          "status": "Killed",
+          "statusReason": "exit 1",
+          "coveredBy": [
+            "3",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "18",
+            "19"
+          ],
+          "duration": 1740
+        }
+      ]
+    }
+  }
+}

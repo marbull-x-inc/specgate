@@ -1,0 +1,1013 @@
+{
+  "schemaVersion": "1",
+  "tool": {
+    "name": "specgate",
+    "version": "0.5.3"
+  },
+  "files": {
+    "library/src/actions/bytes/bytes.ts": {
+      "sha256": "a960aa2ef0919e75f976376a741b189bf7de7cc33afc5b8d4307bbe0cde502e9"
+    },
+    "library/src/actions/empty/empty.ts": {
+      "sha256": "ceff092c140c185e94c62e09d21b319384aba14859541027c68d12702cebd099"
+    },
+    "library/src/actions/gtValue/gtValue.ts": {
+      "sha256": "3814cb3600f328f60f81bc48ac0a9bf014c865bc729b697fc0d5602ffd50fe03"
+    },
+    "library/src/actions/length/length.ts": {
+      "sha256": "be5a6bcb60667387b552ae035a2e239ab86bfeb48544578b5341c8c42264a350"
+    },
+    "library/src/actions/ltValue/ltValue.ts": {
+      "sha256": "cad20095f67f8c22e8763fb43c507e7e6ebd76c1b60338546ceb1a8562798784"
+    },
+    "library/src/actions/maxLength/maxLength.ts": {
+      "sha256": "de168bf9ce1cf1329d716e0a799edae2f0df6f76417caf4e6877e867a0f54389"
+    },
+    "library/src/actions/maxValue/maxValue.ts": {
+      "sha256": "866e44ecea78d6af4ac319e8614a7b54a42adb8e182a86aba960925b8ae11efe"
+    },
+    "library/src/actions/minBytes/minBytes.ts": {
+      "sha256": "6ad242b79dbc1efab890d13de9ace84d74f686f11a5e79729f6e0e3da557cb7c"
+    },
+    "library/src/actions/minLength/minLength.ts": {
+      "sha256": "cfb02c55d195dcf7f7c1c0063d112ee84d90893b1306343c75e8f371fa7fb9b7"
+    },
+    "library/src/actions/minValue/minValue.ts": {
+      "sha256": "1388898c708ba8581df278b7b863e8b4190a8232e0636d3ccf0a6c589288e0f9"
+    },
+    "library/src/actions/multipleOf/multipleOf.ts": {
+      "sha256": "f5d0939c397fe1146d33e5624ebb1bba011fd49711746db56978fd14c27d25f4"
+    },
+    "library/src/actions/nonEmpty/nonEmpty.ts": {
+      "sha256": "8b1d3abfb39411f63e305d42b8bc71e699858e9dc6c0fc12c84bc2fa31de20e6"
+    },
+    "library/src/actions/notLength/notLength.ts": {
+      "sha256": "67ede84aaf1be36c25d1d012aee879e51d22e59e6eae458412d51d844547f24c"
+    },
+    "library/src/actions/notValue/notValue.ts": {
+      "sha256": "0e8f0c59216aa2dd730d3cb6819e55031d022b2ffd63ed87a54d23a5fc0210c6"
+    },
+    "library/src/actions/value/value.ts": {
+      "sha256": "e5d371a9b8fd86f103d0f1246afbf8610a4f47064b6a66762eb5276757c09894"
+    }
+  },
+  "mutants": [
+    {
+      "id": "value-1",
+      "unit": "bytes",
+      "file": "library/src/actions/bytes/bytes.ts",
+      "line": 107,
+      "column": 11,
+      "endLine": 107,
+      "endColumn": 23,
+      "start": 2560,
+      "end": 2572,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-2",
+      "unit": "bytes",
+      "file": "library/src/actions/bytes/bytes.ts",
+      "line": 108,
+      "column": 11,
+      "endLine": 108,
+      "endColumn": 18,
+      "start": 2584,
+      "end": 2591,
+      "kind": "string",
+      "original": "'bytes'",
+      "replacement": "'bytes_x'",
+      "description": "`type` 'bytes' → 'bytes_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "bytes"
+        ]
+      }
+    },
+    {
+      "id": "value-3",
+      "unit": "bytes",
+      "file": "library/src/actions/bytes/bytes.ts",
+      "line": 118,
+      "column": 27,
+      "endLine": 118,
+      "endColumn": 34,
+      "start": 2873,
+      "end": 2880,
+      "kind": "string",
+      "original": "'bytes'",
+      "replacement": "'bytes_x'",
+      "description": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'"
+    },
+    {
+      "id": "value-4",
+      "unit": "empty",
+      "file": "library/src/actions/empty/empty.ts",
+      "line": 87,
+      "column": 11,
+      "endLine": 87,
+      "endColumn": 23,
+      "start": 2047,
+      "end": 2059,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-5",
+      "unit": "empty",
+      "file": "library/src/actions/empty/empty.ts",
+      "line": 88,
+      "column": 11,
+      "endLine": 88,
+      "endColumn": 18,
+      "start": 2071,
+      "end": 2078,
+      "kind": "string",
+      "original": "'empty'",
+      "replacement": "'empty_x'",
+      "description": "`type` 'empty' → 'empty_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "empty"
+        ]
+      }
+    },
+    {
+      "id": "value-6",
+      "unit": "empty",
+      "file": "library/src/actions/empty/empty.ts",
+      "line": 91,
+      "column": 14,
+      "endLine": 91,
+      "endColumn": 17,
+      "start": 2133,
+      "end": 2136,
+      "kind": "string",
+      "original": "'0'",
+      "replacement": "'0_x'",
+      "description": "`expects` '0' → '0_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "value-7",
+      "unit": "empty",
+      "file": "library/src/actions/empty/empty.ts",
+      "line": 94,
+      "column": 51,
+      "endLine": 94,
+      "endColumn": 52,
+      "start": 2231,
+      "end": 2232,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`dataset.value.length > 0`: 0 → 1"
+    },
+    {
+      "id": "value-8",
+      "unit": "empty",
+      "file": "library/src/actions/empty/empty.ts",
+      "line": 95,
+      "column": 25,
+      "endLine": 95,
+      "endColumn": 33,
+      "start": 2260,
+      "end": 2268,
+      "kind": "string",
+      "original": "'length'",
+      "replacement": "'length_x'",
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+    },
+    {
+      "id": "value-9",
+      "unit": "gtValue",
+      "file": "library/src/actions/gtValue/gtValue.ts",
+      "line": 107,
+      "column": 11,
+      "endLine": 107,
+      "endColumn": 23,
+      "start": 2639,
+      "end": 2651,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-10",
+      "unit": "gtValue",
+      "file": "library/src/actions/gtValue/gtValue.ts",
+      "line": 108,
+      "column": 11,
+      "endLine": 108,
+      "endColumn": 21,
+      "start": 2663,
+      "end": 2673,
+      "kind": "string",
+      "original": "'gt_value'",
+      "replacement": "'gt_value_x'",
+      "description": "`type` 'gt_value' → 'gt_value_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "gt_value"
+        ]
+      }
+    },
+    {
+      "id": "value-11",
+      "unit": "gtValue",
+      "file": "library/src/actions/gtValue/gtValue.ts",
+      "line": 120,
+      "column": 25,
+      "endLine": 120,
+      "endColumn": 32,
+      "start": 2992,
+      "end": 2999,
+      "kind": "string",
+      "original": "'value'",
+      "replacement": "'value_x'",
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+    },
+    {
+      "id": "value-12",
+      "unit": "length",
+      "file": "library/src/actions/length/length.ts",
+      "line": 112,
+      "column": 11,
+      "endLine": 112,
+      "endColumn": 23,
+      "start": 2689,
+      "end": 2701,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-13",
+      "unit": "length",
+      "file": "library/src/actions/length/length.ts",
+      "line": 113,
+      "column": 11,
+      "endLine": 113,
+      "endColumn": 19,
+      "start": 2713,
+      "end": 2721,
+      "kind": "string",
+      "original": "'length'",
+      "replacement": "'length_x'",
+      "description": "`type` 'length' → 'length_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "length"
+        ]
+      }
+    },
+    {
+      "id": "value-14",
+      "unit": "length",
+      "file": "library/src/actions/length/length.ts",
+      "line": 121,
+      "column": 25,
+      "endLine": 121,
+      "endColumn": 33,
+      "start": 2951,
+      "end": 2959,
+      "kind": "string",
+      "original": "'length'",
+      "replacement": "'length_x'",
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+    },
+    {
+      "id": "value-15",
+      "unit": "ltValue",
+      "file": "library/src/actions/ltValue/ltValue.ts",
+      "line": 107,
+      "column": 11,
+      "endLine": 107,
+      "endColumn": 23,
+      "start": 2597,
+      "end": 2609,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-16",
+      "unit": "ltValue",
+      "file": "library/src/actions/ltValue/ltValue.ts",
+      "line": 108,
+      "column": 11,
+      "endLine": 108,
+      "endColumn": 21,
+      "start": 2621,
+      "end": 2631,
+      "kind": "string",
+      "original": "'lt_value'",
+      "replacement": "'lt_value_x'",
+      "description": "`type` 'lt_value' → 'lt_value_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "lt_value"
+        ]
+      }
+    },
+    {
+      "id": "value-17",
+      "unit": "ltValue",
+      "file": "library/src/actions/ltValue/ltValue.ts",
+      "line": 120,
+      "column": 25,
+      "endLine": 120,
+      "endColumn": 32,
+      "start": 2950,
+      "end": 2957,
+      "kind": "string",
+      "original": "'value'",
+      "replacement": "'value_x'",
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+    },
+    {
+      "id": "value-18",
+      "unit": "maxLength",
+      "file": "library/src/actions/maxLength/maxLength.ts",
+      "line": 114,
+      "column": 11,
+      "endLine": 114,
+      "endColumn": 23,
+      "start": 2838,
+      "end": 2850,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-19",
+      "unit": "maxLength",
+      "file": "library/src/actions/maxLength/maxLength.ts",
+      "line": 115,
+      "column": 11,
+      "endLine": 115,
+      "endColumn": 23,
+      "start": 2862,
+      "end": 2874,
+      "kind": "string",
+      "original": "'max_length'",
+      "replacement": "'max_length_x'",
+      "description": "`type` 'max_length' → 'max_length_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "max_length"
+        ]
+      }
+    },
+    {
+      "id": "value-20",
+      "unit": "maxLength",
+      "file": "library/src/actions/maxLength/maxLength.ts",
+      "line": 123,
+      "column": 25,
+      "endLine": 123,
+      "endColumn": 33,
+      "start": 3107,
+      "end": 3115,
+      "kind": "string",
+      "original": "'length'",
+      "replacement": "'length_x'",
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+    },
+    {
+      "id": "value-21",
+      "unit": "maxValue",
+      "file": "library/src/actions/maxValue/maxValue.ts",
+      "line": 109,
+      "column": 11,
+      "endLine": 109,
+      "endColumn": 23,
+      "start": 2614,
+      "end": 2626,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-22",
+      "unit": "maxValue",
+      "file": "library/src/actions/maxValue/maxValue.ts",
+      "line": 110,
+      "column": 11,
+      "endLine": 110,
+      "endColumn": 22,
+      "start": 2638,
+      "end": 2649,
+      "kind": "string",
+      "original": "'max_value'",
+      "replacement": "'max_value_x'",
+      "description": "`type` 'max_value' → 'max_value_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "max_value"
+        ]
+      }
+    },
+    {
+      "id": "value-23",
+      "unit": "maxValue",
+      "file": "library/src/actions/maxValue/maxValue.ts",
+      "line": 122,
+      "column": 25,
+      "endLine": 122,
+      "endColumn": 32,
+      "start": 2971,
+      "end": 2978,
+      "kind": "string",
+      "original": "'value'",
+      "replacement": "'value_x'",
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+    },
+    {
+      "id": "value-24",
+      "unit": "minBytes",
+      "file": "library/src/actions/minBytes/minBytes.ts",
+      "line": 112,
+      "column": 11,
+      "endLine": 112,
+      "endColumn": 23,
+      "start": 2662,
+      "end": 2674,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-25",
+      "unit": "minBytes",
+      "file": "library/src/actions/minBytes/minBytes.ts",
+      "line": 113,
+      "column": 11,
+      "endLine": 113,
+      "endColumn": 22,
+      "start": 2686,
+      "end": 2697,
+      "kind": "string",
+      "original": "'min_bytes'",
+      "replacement": "'min_bytes_x'",
+      "description": "`type` 'min_bytes' → 'min_bytes_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "min_bytes"
+        ]
+      }
+    },
+    {
+      "id": "value-26",
+      "unit": "minBytes",
+      "file": "library/src/actions/minBytes/minBytes.ts",
+      "line": 123,
+      "column": 27,
+      "endLine": 123,
+      "endColumn": 34,
+      "start": 2982,
+      "end": 2989,
+      "kind": "string",
+      "original": "'bytes'",
+      "replacement": "'bytes_x'",
+      "description": "`_addIssue(this, 'bytes', dataset, confi…`: 'bytes' → 'bytes_x'"
+    },
+    {
+      "id": "value-27",
+      "unit": "minLength",
+      "file": "library/src/actions/minLength/minLength.ts",
+      "line": 114,
+      "column": 11,
+      "endLine": 114,
+      "endColumn": 23,
+      "start": 2877,
+      "end": 2889,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-28",
+      "unit": "minLength",
+      "file": "library/src/actions/minLength/minLength.ts",
+      "line": 115,
+      "column": 11,
+      "endLine": 115,
+      "endColumn": 23,
+      "start": 2901,
+      "end": 2913,
+      "kind": "string",
+      "original": "'min_length'",
+      "replacement": "'min_length_x'",
+      "description": "`type` 'min_length' → 'min_length_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "min_length"
+        ]
+      }
+    },
+    {
+      "id": "value-29",
+      "unit": "minLength",
+      "file": "library/src/actions/minLength/minLength.ts",
+      "line": 123,
+      "column": 25,
+      "endLine": 123,
+      "endColumn": 33,
+      "start": 3146,
+      "end": 3154,
+      "kind": "string",
+      "original": "'length'",
+      "replacement": "'length_x'",
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+    },
+    {
+      "id": "value-30",
+      "unit": "minValue",
+      "file": "library/src/actions/minValue/minValue.ts",
+      "line": 109,
+      "column": 11,
+      "endLine": 109,
+      "endColumn": 23,
+      "start": 2585,
+      "end": 2597,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-31",
+      "unit": "minValue",
+      "file": "library/src/actions/minValue/minValue.ts",
+      "line": 110,
+      "column": 11,
+      "endLine": 110,
+      "endColumn": 22,
+      "start": 2609,
+      "end": 2620,
+      "kind": "string",
+      "original": "'min_value'",
+      "replacement": "'min_value_x'",
+      "description": "`type` 'min_value' → 'min_value_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "min_value"
+        ]
+      }
+    },
+    {
+      "id": "value-32",
+      "unit": "minValue",
+      "file": "library/src/actions/minValue/minValue.ts",
+      "line": 122,
+      "column": 25,
+      "endLine": 122,
+      "endColumn": 32,
+      "start": 2942,
+      "end": 2949,
+      "kind": "string",
+      "original": "'value'",
+      "replacement": "'value_x'",
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+    },
+    {
+      "id": "value-33",
+      "unit": "multipleOf",
+      "file": "library/src/actions/multipleOf/multipleOf.ts",
+      "line": 152,
+      "column": 11,
+      "endLine": 152,
+      "endColumn": 23,
+      "start": 3603,
+      "end": 3615,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-34",
+      "unit": "multipleOf",
+      "file": "library/src/actions/multipleOf/multipleOf.ts",
+      "line": 153,
+      "column": 11,
+      "endLine": 153,
+      "endColumn": 24,
+      "start": 3627,
+      "end": 3640,
+      "kind": "string",
+      "original": "'multiple_of'",
+      "replacement": "'multiple_of_x'",
+      "description": "`type` 'multiple_of' → 'multiple_of_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "multiple_of"
+        ]
+      }
+    },
+    {
+      "id": "value-35",
+      "unit": "multipleOf",
+      "file": "library/src/actions/multipleOf/multipleOf.ts",
+      "line": 161,
+      "column": 64,
+      "endLine": 161,
+      "endColumn": 65,
+      "start": 3868,
+      "end": 3869,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`dataset.value % this.requirement != 0`: 0 → 1"
+    },
+    {
+      "id": "value-36",
+      "unit": "multipleOf",
+      "file": "library/src/actions/multipleOf/multipleOf.ts",
+      "line": 162,
+      "column": 25,
+      "endLine": 162,
+      "endColumn": 35,
+      "start": 3897,
+      "end": 3907,
+      "kind": "string",
+      "original": "'multiple'",
+      "replacement": "'multiple_x'",
+      "description": "`_addIssue(this, 'multiple', dataset, co…`: 'multiple' → 'multiple_x'"
+    },
+    {
+      "id": "value-37",
+      "unit": "nonEmpty",
+      "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+      "line": 90,
+      "column": 11,
+      "endLine": 90,
+      "endColumn": 23,
+      "start": 2132,
+      "end": 2144,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-38",
+      "unit": "nonEmpty",
+      "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+      "line": 91,
+      "column": 11,
+      "endLine": 91,
+      "endColumn": 22,
+      "start": 2156,
+      "end": 2167,
+      "kind": "string",
+      "original": "'non_empty'",
+      "replacement": "'non_empty_x'",
+      "description": "`type` 'non_empty' → 'non_empty_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "non_empty"
+        ]
+      }
+    },
+    {
+      "id": "value-39",
+      "unit": "nonEmpty",
+      "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+      "line": 94,
+      "column": 14,
+      "endLine": 94,
+      "endColumn": 18,
+      "start": 2225,
+      "end": 2229,
+      "kind": "string",
+      "original": "'!0'",
+      "replacement": "'!0_x'",
+      "description": "`expects` '!0' → '!0_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "!0"
+        ]
+      }
+    },
+    {
+      "id": "value-40",
+      "unit": "nonEmpty",
+      "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+      "line": 97,
+      "column": 53,
+      "endLine": 97,
+      "endColumn": 54,
+      "start": 2326,
+      "end": 2327,
+      "kind": "number",
+      "original": "0",
+      "replacement": "1",
+      "description": "`dataset.value.length === 0`: 0 → 1"
+    },
+    {
+      "id": "value-41",
+      "unit": "nonEmpty",
+      "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+      "line": 98,
+      "column": 25,
+      "endLine": 98,
+      "endColumn": 33,
+      "start": 2355,
+      "end": 2363,
+      "kind": "string",
+      "original": "'length'",
+      "replacement": "'length_x'",
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+    },
+    {
+      "id": "value-42",
+      "unit": "nonEmpty",
+      "file": "library/src/actions/nonEmpty/nonEmpty.ts",
+      "line": 99,
+      "column": 21,
+      "endLine": 99,
+      "endColumn": 24,
+      "start": 2404,
+      "end": 2407,
+      "kind": "string",
+      "original": "'0'",
+      "replacement": "'0_x'",
+      "description": "`received` '0' → '0_x'"
+    },
+    {
+      "id": "value-43",
+      "unit": "notLength",
+      "file": "library/src/actions/notLength/notLength.ts",
+      "line": 114,
+      "column": 11,
+      "endLine": 114,
+      "endColumn": 23,
+      "start": 2801,
+      "end": 2813,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-44",
+      "unit": "notLength",
+      "file": "library/src/actions/notLength/notLength.ts",
+      "line": 115,
+      "column": 11,
+      "endLine": 115,
+      "endColumn": 23,
+      "start": 2825,
+      "end": 2837,
+      "kind": "string",
+      "original": "'not_length'",
+      "replacement": "'not_length_x'",
+      "description": "`type` 'not_length' → 'not_length_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "not_length"
+        ]
+      }
+    },
+    {
+      "id": "value-45",
+      "unit": "notLength",
+      "file": "library/src/actions/notLength/notLength.ts",
+      "line": 123,
+      "column": 25,
+      "endLine": 123,
+      "endColumn": 33,
+      "start": 3071,
+      "end": 3079,
+      "kind": "string",
+      "original": "'length'",
+      "replacement": "'length_x'",
+      "description": "`_addIssue(this, 'length', dataset, conf…`: 'length' → 'length_x'"
+    },
+    {
+      "id": "value-46",
+      "unit": "notValue",
+      "file": "library/src/actions/notValue/notValue.ts",
+      "line": 109,
+      "column": 11,
+      "endLine": 109,
+      "endColumn": 23,
+      "start": 2622,
+      "end": 2634,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-47",
+      "unit": "notValue",
+      "file": "library/src/actions/notValue/notValue.ts",
+      "line": 110,
+      "column": 11,
+      "endLine": 110,
+      "endColumn": 22,
+      "start": 2646,
+      "end": 2657,
+      "kind": "string",
+      "original": "'not_value'",
+      "replacement": "'not_value_x'",
+      "description": "`type` 'not_value' → 'not_value_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "not_value"
+        ]
+      }
+    },
+    {
+      "id": "value-48",
+      "unit": "notValue",
+      "file": "library/src/actions/notValue/notValue.ts",
+      "line": 121,
+      "column": 25,
+      "endLine": 121,
+      "endColumn": 32,
+      "start": 2988,
+      "end": 2995,
+      "kind": "string",
+      "original": "'value'",
+      "replacement": "'value_x'",
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+    },
+    {
+      "id": "value-49",
+      "unit": "value",
+      "file": "library/src/actions/value/value.ts",
+      "line": 108,
+      "column": 11,
+      "endLine": 108,
+      "endColumn": 23,
+      "start": 2580,
+      "end": 2592,
+      "kind": "string",
+      "original": "'validation'",
+      "replacement": "'validation_x'",
+      "description": "`kind` 'validation' → 'validation_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "validation"
+        ]
+      }
+    },
+    {
+      "id": "value-50",
+      "unit": "value",
+      "file": "library/src/actions/value/value.ts",
+      "line": 109,
+      "column": 11,
+      "endLine": 109,
+      "endColumn": 18,
+      "start": 2604,
+      "end": 2611,
+      "kind": "string",
+      "original": "'value'",
+      "replacement": "'value_x'",
+      "description": "`type` 'value' → 'value_x'",
+      "decision": {
+        "kind": "output",
+        "values": [
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "value-51",
+      "unit": "value",
+      "file": "library/src/actions/value/value.ts",
+      "line": 120,
+      "column": 25,
+      "endLine": 120,
+      "endColumn": 32,
+      "start": 2928,
+      "end": 2935,
+      "kind": "string",
+      "original": "'value'",
+      "replacement": "'value_x'",
+      "description": "`_addIssue(this, 'value', dataset, confi…`: 'value' → 'value_x'"
+    }
+  ]
+}

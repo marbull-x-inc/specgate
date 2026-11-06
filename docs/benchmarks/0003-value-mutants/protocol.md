@@ -274,3 +274,19 @@ the changed line and ran the others, and 58 of 61 value mutants came back `Survi
 files now go before the flag (`npx jest {files} --watchman=false --testPathIgnorePatterns …`),
 and the runner's baseline run now expands `{files}` to nothing as well. express-rate-limit is run
 again; its earlier runner result is discarded. No other project's command has such a flag.
+
+### 10. Test selection for module-level sites, measured again after the first results (2026-11-06, after C3 failed)
+
+This is a change made **after** the results were known, so it is reported as a second measurement
+next to the pre-registered one, not in its place. In the first measurement, a value mutant in a
+module-level constant had no non-static Stryker mutant around it, so the runner ran the whole
+suite (89 of es-toolkit's 113). That is a gap in the runner, not in es-toolkit: lookup tables and
+default objects are ordinary code. `specgate mutants` now lists, per site, the code that reads it
+(`readers`: every function in the program that references the constant) and the test files that
+name it (`tests`); the runner selects the tests covering the non-static mutants in those readers,
+plus those test files, and still runs the whole suite when a reader is outside Stryker's report or
+holds no covered non-static mutant (design note 0004). Site selection and statuses are unchanged.
+The runner step (with `specgate mutants`) is repeated on the ten projects with the Stryker reports
+of the first measurement (`SKIP_STRYKER=1`); Stryker's times stay as measured. Any value mutant
+whose status moves from detected to green between the two measurements is listed in the report:
+it would mean the selection left out a test that kills it.
