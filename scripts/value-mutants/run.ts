@@ -198,17 +198,21 @@ export function selectTests(m: ValueMutant, coverage: StrykerCoverage | undefine
  * has none there (the reader is outside the report, or Stryker marked it static), the tests that
  * run each of its callers. `undefined` when that cannot be told.
  */
-function testsRunning(r: Reader, coverage: StrykerCoverage, depth: number): string[] | undefined {
+function testsRunning(r: Reader, coverage: StrykerCoverage, depth: number): Set<string> | undefined {
   const inReader = (coverage.mutants.get(r.file) ?? []).filter(
     (s) => !s.static && s.coveredBy !== undefined && s.start.line >= r.line && s.end.line <= r.endLine,
   );
-  if (inReader.length > 0) return inReader.flatMap((s) => s.coveredBy ?? []);
+  if (inReader.length > 0) {
+    const out = new Set<string>();
+    for (const s of inReader) for (const id of s.coveredBy ?? []) out.add(id);
+    return out;
+  }
   if (!r.callers || depth > 5) return undefined;
-  const out: string[] = [];
+  const out = new Set<string>();
   for (const c of r.callers) {
     const covered = testsRunning(c, coverage, depth + 1);
     if (!covered) return undefined;
-    out.push(...covered);
+    for (const id of covered) out.add(id);
   }
   return out;
 }
