@@ -171,6 +171,14 @@ with it as the unit, `"10 years"` for `case "years":`.
 | `listLimit` | `5`                                                     | Survivors listed in a per-unit finding (`findings: "unit"`).                                                                                                                                                                                                                                                                                                                                                                               |
 | `exclude`   | `[]`                                                    | Unit ids or file globs whose mutants are counted in `units[].mutation` but give no `mutant-survived` / `unit-not-executed`. Use it for code that tests outside this config exercise.                                                                                                                                                                                                                                                       |
 
+A value-mutant report (`mutatorName: "Value"`, written by a runner from `specgate mutants`) also
+confirms decisions: a decision whose value mutant the tests caught (a status in `detected`) gives
+neither `decision-unspecified` nor `decision-untested`, since a test failed when its value
+changed. A `member` is confirmed by the removal of its element, entry or regex alternative, any
+other decision by a change of each of its values on its own line. A report mutant is matched to
+today's sources by file, line, column and description, so a stale report confirms nothing. A
+survivor confirms nothing either; it is reported by `mutant-survived`.
+
 ## `resolve`
 
 | Option              | Default | Meaning                                                                                                                                                         |

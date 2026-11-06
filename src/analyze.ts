@@ -8,11 +8,13 @@ import { type ExtractedUnit, extractSurface } from "./extract/surface.ts";
 import { extractTests } from "./extract/tests/index.ts";
 import { createTsdocParser } from "./extract/tsdoc-parser.ts";
 import { isReport, type Report, type Unit } from "./ir/schema.ts";
-import { countMutants, mapMutants, readMutationReports, reportPaths } from "./mutation/report.ts";
+import { valueConfirmation } from "./mutants/index.ts";
+import { countMutants, mapMutants, outcomeOf, readMutationReports, reportPaths } from "./mutation/report.ts";
 import { attachProvenance } from "./provenance/git.ts";
 import { readRevision } from "./provenance/revision.ts";
 import { resolveReferences } from "./resolve/identifiers.ts";
 import { evaluateRules } from "./rules/index.ts";
+import { VALUE_MUTATOR } from "./rules/mutation.ts";
 import { sha256 } from "./util/hash.ts";
 import { expandGlobs, fileExists, globToRegExp } from "./util/paths.ts";
 
@@ -137,6 +139,14 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
         };
   if (mutation && "mapped" in mutation.result)
     for (const [unit, counts] of countMutants(mutation.result.mapped)) unit.mutation = counts;
+  // A value mutant the tests caught confirms the decision on its value (#61).
+  const caughtValues =
+    mutationRead && "mutants" in mutationRead
+      ? mutationRead.mutants.filter(
+          (m) => m.mutator === VALUE_MUTATOR && outcomeOf(m.status, config.mutation.detected) === "killed",
+        )
+      : [];
+  const decisionConfirmed = caughtValues.length > 0 ? valueConfirmation(caughtValues, host, config.root) : undefined;
   // A gap in the mapping is shown, not silent (#53).
   const mutantsUnmapped =
     mutationRead && "mutants" in mutationRead && mutation && "mapped" in mutation.result
@@ -165,6 +175,7 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
       unmappedEntries: entries.filter((e) => e.source === undefined).map((e) => e.subpath),
       truncatedCollections: surface.truncatedCollections,
       ...(mutation ? { mutation } : {}),
+      ...(decisionConfirmed ? { decisionConfirmed } : {}),
     }),
     options.accepted === false ? new Set() : readAccepted(config),
   );

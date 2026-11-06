@@ -39,7 +39,7 @@ export interface MutationDraft {
 
 const REPLACEMENT_LENGTH = 60;
 /** `mutatorName` of the value mutants a runner applies from `specgate mutants` (#60) */
-const VALUE_MUTATOR = "Value";
+export const VALUE_MUTATOR = "Value";
 const DEFAULT_LIST_LIMIT = 5;
 
 function shortened(text: string): string {
