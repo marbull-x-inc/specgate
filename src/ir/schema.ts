@@ -310,7 +310,7 @@ export interface Finding {
   accepted?: boolean;
   /** The reason an `@acceptFinding` tag gives; absent for the accepted-findings file. */
   acceptedReason?: string;
-  /** `mutant-survived`: the mutant the finding is about */
+  /** `mutant-survived` and `mutant-contradicts-guarantee`: the mutant the finding is about */
   mutant?: FindingMutant;
 }
 

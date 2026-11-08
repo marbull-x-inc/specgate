@@ -975,7 +975,7 @@
             "type": "string"
           },
           "mutant": {
-            "description": "mutant-survived: the mutant the finding is about",
+            "description": "mutant-survived and mutant-contradicts-guarantee: the mutant the finding is about",
             "type": "object",
             "properties": {
               "id": {

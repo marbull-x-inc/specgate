@@ -440,25 +440,8 @@ export function valueMeasurement(
   root: string,
 ): (unit: Unit, decision: Decision) => boolean {
   const byFile = new Map<string, MeasuredValue[]>();
-  const wanted = new Map<string, Mutant[]>();
-  for (const m of measured) if (m.column !== undefined) wanted.set(m.file, [...(wanted.get(m.file) ?? []), m]);
-  for (const [file, mutants] of wanted) {
-    const sf = host.program.getSourceFile(resolve(root, file));
-    if (!sf) continue;
-    const sites = new Map<string, Site>();
-    for (const site of sitesOf(sf)) {
-      const pos = sf.getLineAndCharacterOfPosition(site.start);
-      sites.set(`${pos.line + 1}:${pos.character + 1}`, site);
-    }
-    const out: MeasuredValue[] = [];
-    for (const m of mutants) {
-      const site = sites.get(`${m.line}:${m.column}`);
-      if (!site || site.value === undefined) continue;
-      if (m.description !== undefined && m.description !== site.description) continue;
-      out.push({ kind: site.kind, line: m.line, value: site.value });
-    }
-    byFile.set(file, out);
-  }
+  for (const [mutant, site] of matchedSites(measured, host, root))
+    byFile.set(mutant.file, [...(byFile.get(mutant.file) ?? []), site]);
   if (byFile.size === 0) return () => false;
   return (unit, d) => {
     if (d.kind === "member") {
@@ -478,6 +461,43 @@ export function valueMeasurement(
     );
     return d.values.length > 0 && d.values.every((v) => kills.some((k) => k.value === v));
   };
+}
+
+/**
+ * The value each `Value` mutant of a report changed (entries left out), matched to today's sources by file, line and
+ * column, and by its description when the report gives one. A mutant made from other sources
+ * (stale) matches no site and is left out.
+ */
+export function valueOriginals(mutants: readonly Mutant[], host: ProgramHost, root: string): Map<Mutant, string> {
+  const out = new Map<Mutant, string>();
+  // Removing an entry drops a key, not a value: a guarantee that says "status" in prose does not
+  // promise the key `status`.
+  for (const [mutant, site] of matchedSites(mutants, host, root))
+    if (site.kind !== "entry") out.set(mutant, site.value);
+  return out;
+}
+
+/** Each mutant of the list matched to the value site it changed. */
+function matchedSites(mutants: readonly Mutant[], host: ProgramHost, root: string): Map<Mutant, MeasuredValue> {
+  const wanted = new Map<string, Mutant[]>();
+  for (const m of mutants) if (m.column !== undefined) wanted.set(m.file, [...(wanted.get(m.file) ?? []), m]);
+  const out = new Map<Mutant, MeasuredValue>();
+  for (const [file, list] of wanted) {
+    const sf = host.program.getSourceFile(resolve(root, file));
+    if (!sf) continue;
+    const sites = new Map<string, Site>();
+    for (const site of sitesOf(sf)) {
+      const pos = sf.getLineAndCharacterOfPosition(site.start);
+      sites.set(`${pos.line + 1}:${pos.character + 1}`, site);
+    }
+    for (const m of list) {
+      const site = sites.get(`${m.line}:${m.column}`);
+      if (!site || site.value === undefined) continue;
+      if (m.description !== undefined && m.description !== site.description) continue;
+      out.set(m, { kind: site.kind, line: m.line, value: site.value });
+    }
+  }
+  return out;
 }
 
 /** Every value site of a module, before attribution. */

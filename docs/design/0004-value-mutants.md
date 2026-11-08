@@ -197,6 +197,11 @@ selected, `coveredBy` (Stryker's test ids).
   then, as in 0003, the other mutation rules do not run.
 - `mutant-survived` for a `Value` mutant says what changed in contract terms:
   ``useCounter: the default `initialValue` 0 → 1 survived; no linked test fails when the code changes like this``.
+- A survivor on a value a guarantee or `@example` of the unit names is
+  `mutant-contradicts-guarantee` (`fail`) instead (#62): the contract states the value and no
+  linked test holds it. The match is `decision-unspecified`'s, with two exceptions: a one-letter
+  value counts only quoted (the article "a" is not the string `"a"`), and an entry removal drops a
+  key, which prose naming the word does not promise.
 - An equivalent value mutant is accepted with
   `@acceptFinding mutant-survived Value:"the default \`initialValue\` 0 → 1" <reason>`, as
 Stryker's are, or with `check --accept-baseline`.

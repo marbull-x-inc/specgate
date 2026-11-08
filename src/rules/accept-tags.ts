@@ -9,7 +9,8 @@ import type { AcceptTag, Finding, Severity, Unit } from "../ir/schema.ts";
  * The accepted-findings file accepts by fingerprint, without a reason, and is rewritten
  * wholesale; `decisions.ignore` matches a value across the whole repository. A tag is scoped to
  * one unit and one rule. Its target is the value the finding quotes (`"iss"` or `iss` for
- * `match "iss"`), `Mutator` or `Mutator:"replacement"` for a `mutant-survived` finding, or `*`
+ * `match "iss"`), `Mutator` or `Mutator:"replacement"` for a `mutant-survived` or
+ * `mutant-contradicts-guarantee` finding, or `*`
  * for every finding of the rule on the unit. A matching finding becomes `info` with
  * `accepted: true` and `acceptedReason`. A tag that names an unknown rule or gives no target or
  * reason is `accept-tag-invalid`; a valid tag no finding matches any more is `accept-tag-unused`,
@@ -47,7 +48,7 @@ export function applyAcceptTags(
       }
       let used = false;
       out.forEach((f, i) => {
-        if (f.unit !== unit.id || f.rule !== tag.rule || !targets(tag, f)) return;
+        if (f.unit !== unit.id || !ruleMatches(tag.rule, f.rule) || !targets(tag, f)) return;
         used = true;
         out[i] = { ...f, severity: "info", accepted: true, acceptedReason: tag.reason };
       });
@@ -72,9 +73,18 @@ function unquoted(text: string): string {
   return text.length >= 2 && text.startsWith('"') && text.endsWith('"') ? text.slice(1, -1) : text;
 }
 
+/**
+ * A `mutant-survived` tag also accepts the mutant when it is reported as
+ * `mutant-contradicts-guarantee` (#62): both rules are about the same surviving mutant, and a tag
+ * written before the split keeps working.
+ */
+function ruleMatches(tagRule: string, findingRule: string): boolean {
+  return tagRule === findingRule || (tagRule === "mutant-survived" && findingRule === "mutant-contradicts-guarantee");
+}
+
 function targets(tag: AcceptTag, f: Finding): boolean {
   if (tag.target === "*") return true;
-  if (tag.rule === "mutant-survived") {
+  if (tag.rule === "mutant-survived" || tag.rule === "mutant-contradicts-guarantee") {
     if (!f.mutant) return false;
     const colon = tag.target.indexOf(":");
     const mutator = colon < 0 ? tag.target : tag.target.slice(0, colon);

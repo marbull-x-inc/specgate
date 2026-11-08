@@ -120,6 +120,7 @@ export default defineConfig({
 | `test-tautology`                                  | warn    | A linked test takes its cases from the collection the unit checks membership in, so removing an element cannot fail it                                                                    |
 | `decision-collection-truncated`                   | info    | A collection holds more elements than `decisions.collectionLimit`; the rest are not checked                                                                                               |
 | `mutant-survived`                                 | warn    | With `mutation.report`: a mutant no linked test failed on (Survived), or one no test ran in a unit the tests do run (NoCoverage). Names the decision on that line                         |
+| `mutant-contradicts-guarantee`                    | fail    | With `mutation.report`: a mutant survived on a value a guarantee or `@example` of the unit names (a `Value` mutant, or a `StringLiteral` on a decision). Names the guarantee              |
 | `unit-not-executed`                               | warn    | With `mutation.report`: a unit has linked tests, yet every mutant in it is NoCoverage (the tests stub it or call another implementation)                                                  |
 | `mutation-report-unreadable`                      | warn    | `mutation.report` is missing, not JSON, or not a mutation-testing-report-schema report; the mutation rules did not run                                                                    |
 | `accept-tag-invalid`                              | fail    | An `@acceptFinding` tag names an unknown rule, or gives no value or no reason                                                                                                             |
@@ -158,7 +159,8 @@ make the first run useful instead of red:
   ```
 
   `@acceptFinding <rule-id> <value> <reason>`: the value as the finding quotes it, `Mutator` or
-  `Mutator:"replacement"` for `mutant-survived`, or `*` for every finding of the rule on the
+  `Mutator:"replacement"` for `mutant-survived` (it also accepts the mutant reported as
+  `mutant-contradicts-guarantee`), or `*` for every finding of the rule on the
   unit. The matching finding becomes `info` with `accepted: true` and `acceptedReason` (in SARIF,
   an in-source suppression). A tag with an unknown rule or no reason is `accept-tag-invalid`; one
   that no longer matches a finding is `accept-tag-unused`. `--accept-baseline` does not record
@@ -293,6 +295,14 @@ npx specgate-mutate --command "npx vitest run --bail=1 {files}"
 `initialValue` 0 → 1 survived``), and an equivalent one is accepted with
 `@acceptFinding mutant-survived Value:"the default \`initialValue\` 0 → 1" <reason>`. The
 feature is on its branch until benchmark 0003 decides. Design: `docs/design/0004-value-mutants.md`.
+
+A survivor on a value the contract names is a broken promise rather than a gap in the tests, so
+it is reported as `mutant-contradicts-guarantee` (`fail`), naming the guarantee or example:
+``useCounter: `useCounter.ok.initial` names `0` ("starts at 0"), but the default `initialValue` 0 → 1 survived``.
+The value is the one a `Value` mutant changed, or the string a Stryker `StringLiteral` mutant
+changed in the decision on its line; the match is `decision-unspecified`'s, except that a
+one-letter value counts only when the text quotes it and an entry removal (a key) never counts.
+Other survivors stay `mutant-survived`, and `mutation.findings: "unit"` groups only those.
 
 ## The coding procedure specgate assumes
 
