@@ -230,7 +230,7 @@ export const zFinding = z.object({
       line: z.number().int(),
     })
     .optional()
-    .describe("mutant-survived: the mutant the finding is about"),
+    .describe("mutant-survived and mutant-contradicts-guarantee: the mutant the finding is about"),
 });
 export type Finding = z.infer<typeof zFinding>;
 

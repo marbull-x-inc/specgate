@@ -331,7 +331,7 @@ function keyPair(key: string): RegExp {
   return new RegExp(`(?:^|[?&;])${escapeRegExp(key)}=`);
 }
 
-function escapeRegExp(text: string): string {
+export function escapeRegExp(text: string): string {
   return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 

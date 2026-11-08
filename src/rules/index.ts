@@ -1,7 +1,8 @@
 import { type Config, RULE_IDS, type RuleId, severityOf } from "../config/schema.ts";
+import { decisionMentioned } from "../extract/decisions.ts";
 import type { Decision, Finding, Report, Severity, TestCase, Unit } from "../ir/schema.ts";
 import { applyAcceptTags } from "./accept-tags.ts";
-import { evaluateDecisionRules, linkedTestsIndex } from "./decisions.ts";
+import { escapeRegExp, evaluateDecisionRules, linkedTestsIndex } from "./decisions.ts";
 import { evaluateMutationRules, type MutationRuleInput } from "./mutation.ts";
 
 /**
@@ -200,7 +201,14 @@ export function evaluateRules(ctx: RuleContext): Finding[] {
   );
 
   if (ctx.mutation)
-    evaluateMutationRules({ ...ctx.mutation, linkedTests: linkedTestsIndex(ctx.tests, callersOf) }, emit);
+    evaluateMutationRules(
+      {
+        ...ctx.mutation,
+        linkedTests: linkedTestsIndex(ctx.tests, callersOf),
+        namedBy: (unit, value) => namingContract(unit, value, unitsById, callersOf, placeholder, ignoredDecisions),
+      },
+      emit,
+    );
 
   for (const t of ctx.tests) {
     if (!guaranteeKeys.has(t.key)) {
@@ -344,6 +352,45 @@ export const ALL_RULES: readonly RuleId[] = RULE_IDS;
  * those of every surface unit that reaches it (transitively). A test of `ms("1d")` pins the
  * decisions of the `parse` it delegates to, so a value named on the caller counts.
  */
+/**
+ * The first guarantee or example, of the unit or of a surface unit that reaches it, whose text
+ * names the value (the match `decision-unspecified` uses), in the order `contractCorpus` reads
+ * them. A value in `decisions.ignore` is named by nothing here, and a one-letter value only when
+ * the text quotes it.
+ */
+function namingContract(
+  unit: Unit,
+  value: string,
+  unitsById: ReadonlyMap<string, readonly Unit[]>,
+  callersOf: ReadonlyMap<string, string[]>,
+  placeholder: string,
+  ignore: ReadonlySet<string>,
+): { by: string; text: string } | undefined {
+  if (ignore.has(value)) return undefined;
+  const probe: Decision = { kind: "constant", values: [value], names: [], expression: value, line: 0 };
+  // A one-letter value ("a") is named only quoted or in code: in prose it is a word of the sentence.
+  const letter = /^\p{L}$/u.test(value);
+  const quoted = new RegExp(`[\`"'“‘]${escapeRegExp(value)}[\`"'”’]`, "u");
+  const names = (text: string): boolean => (letter ? quoted.test(text) : decisionMentioned(probe, text, new Set()));
+  const seen = new Set<string>();
+  const queue = [unit.id];
+  while (queue.length > 0) {
+    const id = queue.shift();
+    if (id === undefined || seen.has(id)) continue;
+    seen.add(id);
+    for (const u of unitsById.get(id) ?? []) {
+      for (const g of u.guarantees)
+        if (g.id !== placeholder && g.id !== "" && names(`${g.text} ${g.throws ?? ""}`))
+          return { by: `\`${g.key}\``, text: g.text };
+      for (const e of u.examples)
+        if (names(`${e.expression} ${e.expected}`))
+          return { by: `the example of ${u.id}`, text: `${e.expression} → ${e.expected}` };
+    }
+    queue.push(...(callersOf.get(id) ?? []));
+  }
+  return undefined;
+}
+
 function contractCorpus(
   unit: Unit,
   unitsById: ReadonlyMap<string, readonly Unit[]>,

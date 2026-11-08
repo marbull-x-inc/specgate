@@ -14,6 +14,7 @@ import { analyze, TOOL } from "../../src/analyze.ts";
 import { main } from "../../src/cli.ts";
 import { type ConfigInput, defineConfig, parseConfig } from "../../src/config/schema.ts";
 import { listValueMutants, type ValueMutantList } from "../../src/mutants/index.ts";
+import { renderStepSummary } from "../../src/report/index.ts";
 import { workDir } from "../helpers/paths.ts";
 
 function project(files: Record<string, string>): string {
@@ -502,7 +503,7 @@ describe("value report read back", () => {
     });
   }
 
-  test("#60 acceptance: check with both reports gives one mutant-survived per survivor, on its unit, in contract terms", async () => {
+  test("#60 acceptance: check with both reports gives one finding per survivor, on its unit, in contract terms", async () => {
     const dir = fixture();
     const list = await mutantsOf(dir);
     const { results } = await runValueMutants(list, { root: dir, command: `'${process.execPath}' test` });
@@ -511,14 +512,17 @@ describe("value report read back", () => {
     writeFileSync(join(dir, "reports/stryker.json"), strykerReport(VALUES));
     const config = configOf(dir, { mutation: { report: ["reports/stryker.json", "reports/value.json"] } });
     const { report } = await analyze(config, { provenance: false, baseline: null });
-    const survived = report.findings.filter((f) => f.rule === "mutant-survived");
+    // A survivor on a value the guarantee names (counter's 0) is a contradiction (#62), the rest survivors.
+    const survived = report.findings.filter(
+      (f) => f.rule === "mutant-survived" || f.rule === "mutant-contradicts-guarantee",
+    );
     const valueSurvivors = results.filter((r) => r.status === "Survived");
     expect(valueSurvivors).toHaveLength(10);
     expect(survived).toHaveLength(valueSurvivors.length + 1);
     expect(report.findings.filter((f) => f.rule === "mutation-report-unreadable")).toEqual([]);
-    expect(survived.map((f) => f.message)).toContain(
-      "counter: the default `initialValue` 0 → 1 survived; no linked test fails when the code changes like this",
-    );
+    expect(report.findings.filter((f) => f.rule === "mutant-contradicts-guarantee").map((f) => f.message)).toEqual([
+      'counter: `counter.ok.counts` names `0` ("starts at 0"), but the default `initialValue` 0 → 1 survived; no linked test fails when the value changes',
+    ]);
     expect(survived.map((f) => f.message)).toContain(
       'isKnown: `"an"` removed from `ARTICLES` survived; no linked test fails when the code changes like this',
     );
@@ -570,7 +574,8 @@ describe("value report read back", () => {
       provenance: false,
       baseline: null,
     });
-    const finding = report.findings.find((f) => f.rule === "mutant-survived");
+    // The guarantee names 0, so the survivor is a contradiction (#62); a mutant-survived tag still accepts it.
+    const finding = report.findings.find((f) => f.rule === "mutant-contradicts-guarantee");
     expect(finding).toMatchObject({ unit: "counter", severity: "info", accepted: true });
     expect(report.findings.filter((f) => f.rule === "accept-tag-unused")).toEqual([]);
   });
@@ -582,4 +587,141 @@ describe("value report read back", () => {
       "mutation.report must be a string or an array of strings",
     );
   });
+});
+
+describe("survivors on values the contract names (#62)", () => {
+  const PAGES = `export const LIMITS = { rows: 10, cols: 3 };
+
+/** @guarantee ok.rows returns the rows */
+export function rowsOf(): number {
+  return LIMITS.rows;
+}
+
+/** @guarantee ok.page shows 10 rows per page */
+export function pageSize(rows = 10, gap = 4): number {
+  return rows + gap;
+}
+
+/**
+ * @guarantee ok.format writes the report
+ * @example render("json") // => "{}"
+ */
+export function render(format: string): string {
+  if (format === "json") return "{}";
+  return "";
+}
+
+/** @guarantee ok.word a word, or "x" for none */
+export function word(w: string): string {
+  if (w === "a") return "a";
+  if (w === "x") return "x";
+  return w;
+}
+`;
+  const PAGE_TESTS = `import { expect, test } from "bun:test";
+import { pageSize, render, rowsOf, word } from "../src/pages";
+
+test("pageSize.ok.page", () => {
+  expect(pageSize()).toBeGreaterThan(0);
+});
+test("render.ok.format", () => {
+  expect(typeof render("csv")).toBe("string");
+});
+test("rowsOf.ok.rows", () => {
+  expect(rowsOf()).toBeGreaterThan(0);
+});
+test("word.ok.word", () => {
+  expect(typeof word("b")).toBe("string");
+});
+`;
+
+  /** Every value mutant of the fixture survives (`true` as the test command), plus Stryker's StringLiteral on `"json"`. */
+  async function checked(overrides: ConfigInput = {}) {
+    const dir = project({ "src/pages.ts": PAGES, "tests/pages.test.ts": PAGE_TESTS });
+    const list = await mutantsOf(dir);
+    const { results } = await runValueMutants(list, { root: dir, command: "true" });
+    const line = PAGES.split("\n").findIndex((l) => l.includes('format === "json"')) + 1;
+    const stryker = {
+      schemaVersion: "2",
+      thresholds: { high: 80, low: 60 },
+      files: {
+        "src/pages.ts": {
+          language: "typescript",
+          source: PAGES,
+          mutants: [
+            {
+              id: "s1",
+              mutatorName: "StringLiteral",
+              replacement: '""',
+              status: "Survived",
+              location: { start: { line, column: 18 }, end: { line, column: 24 } },
+            },
+          ],
+        },
+      },
+    };
+    mkdirSync(join(dir, "reports"), { recursive: true });
+    writeFileSync(join(dir, "reports/value.json"), JSON.stringify(toReport(results, dir)));
+    writeFileSync(join(dir, "reports/stryker.json"), JSON.stringify(stryker));
+    const config = configOf(dir, {
+      mutation: { report: ["reports/stryker.json", "reports/value.json"] },
+      ...overrides,
+    });
+    return (await analyze(config, { provenance: false, baseline: null })).report;
+  }
+
+  test("#62 acceptance: a named and an unnamed surviving value give one contradiction and one survivor", async () => {
+    const report = await checked();
+    const page = report.findings.filter((f) => f.unit === "pageSize" && f.rule.startsWith("mutant-"));
+    expect(page.map((f) => [f.rule, f.severity, f.message])).toEqual([
+      [
+        "mutant-contradicts-guarantee",
+        "fail",
+        'pageSize: `pageSize.ok.page` names `10` ("shows 10 rows per page"), but the default `rows` 10 → 11 survived; no linked test fails when the value changes',
+      ],
+      [
+        "mutant-survived",
+        "warn",
+        "pageSize: the default `gap` 4 → 5 survived; no linked test fails when the code changes like this",
+      ],
+    ]);
+    // Contradictions come first in the report, so the Step Summary lists them first.
+    const rules = report.findings.map((f) => f.rule);
+    expect(rules.indexOf("mutant-contradicts-guarantee")).toBeLessThan(rules.indexOf("mutant-survived"));
+    expect(renderStepSummary(report).indexOf("mutant-contradicts-guarantee")).toBeLessThan(
+      renderStepSummary(report).indexOf("mutant-survived"),
+    );
+  }, 60_000);
+
+  test("an @example names a string a Stryker StringLiteral mutant changed; one letter counts only quoted; an entry key never", async () => {
+    const report = await checked();
+    const contradictions = report.findings.filter((f) => f.rule === "mutant-contradicts-guarantee");
+    expect(contradictions.map((f) => [f.unit, f.mutant?.mutator])).toEqual(
+      expect.arrayContaining([
+        ["render", "StringLiteral"],
+        ["word", "Value"],
+      ]),
+    );
+    expect(contradictions.find((f) => f.unit === "render" && f.mutant?.mutator === "StringLiteral")?.message).toContain(
+      'the example of render names `json` ("render("json") → "{}"")',
+    );
+    // "a" in "a word" is the article; "x" is quoted.
+    const word = report.findings.filter((f) => f.unit === "word" && f.rule.startsWith("mutant-"));
+    expect(word.filter((f) => f.rule === "mutant-contradicts-guarantee").every((f) => f.message.includes("`x`"))).toBe(
+      true,
+    );
+    expect(word.some((f) => f.rule === "mutant-survived" && f.message.includes('"a" → "a_x"'))).toBe(true);
+    // Removing the entry `rows` drops a key; "returns the rows" does not promise it.
+    const rows = report.findings.filter((f) => f.unit === "rowsOf" && f.rule.startsWith("mutant-"));
+    expect(rows.find((f) => f.message.includes("removed from `LIMITS`"))?.rule).toBe("mutant-survived");
+  }, 60_000);
+
+  test('findings: "unit" groups the other survivors and keeps one finding per contradiction', async () => {
+    const report = await checked({
+      mutation: { report: ["reports/stryker.json", "reports/value.json"], findings: "unit" },
+    });
+    const page = report.findings.filter((f) => f.unit === "pageSize" && f.rule.startsWith("mutant-"));
+    expect(page.map((f) => f.rule)).toEqual(["mutant-contradicts-guarantee", "mutant-survived"]);
+    expect(page[1]?.message).toStartWith("pageSize: 1 mutant(s) the linked tests let through (1 survived)");
+  }, 60_000);
 });

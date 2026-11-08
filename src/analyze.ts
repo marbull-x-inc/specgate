@@ -8,8 +8,15 @@ import { type ExtractedUnit, extractSurface } from "./extract/surface.ts";
 import { extractTests } from "./extract/tests/index.ts";
 import { createTsdocParser } from "./extract/tsdoc-parser.ts";
 import { isReport, type Report, type Unit } from "./ir/schema.ts";
-import { valueMeasurement } from "./mutants/index.ts";
-import { countMutants, mapMutants, outcomeOf, readMutationReports, reportPaths } from "./mutation/report.ts";
+import { valueMeasurement, valueOriginals } from "./mutants/index.ts";
+import {
+  countMutants,
+  type Mutant,
+  mapMutants,
+  outcomeOf,
+  readMutationReports,
+  reportPaths,
+} from "./mutation/report.ts";
 import { attachProvenance } from "./provenance/git.ts";
 import { readRevision } from "./provenance/revision.ts";
 import { resolveReferences } from "./resolve/identifiers.ts";
@@ -148,6 +155,8 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
         )
       : [];
   const decisionMeasured = measuredValues.length > 0 ? valueMeasurement(measuredValues, host, config.root) : undefined;
+  // The value each value mutant changed, so a survivor on a value the contract names is told apart (#62).
+  const originals = measuredValues.length > 0 ? valueOriginals(measuredValues, host, config.root) : undefined;
   // A gap in the mapping is shown, not silent (#53).
   const mutantsUnmapped =
     mutationRead && "mutants" in mutationRead && mutation && "mapped" in mutation.result
@@ -175,7 +184,7 @@ export async function analyze(config: Config, options: AnalyzeOptions = {}): Pro
       surfaceFileCount: surfaceFiles.length,
       unmappedEntries: entries.filter((e) => e.source === undefined).map((e) => e.subpath),
       truncatedCollections: surface.truncatedCollections,
-      ...(mutation ? { mutation } : {}),
+      ...(mutation ? { mutation: originals ? { ...mutation, changedValue: valueOfMutant(originals) } : mutation } : {}),
       ...(decisionMeasured ? { decisionMeasured } : {}),
     }),
     options.accepted === false ? new Set() : readAccepted(config),
@@ -226,4 +235,9 @@ function unitMatcher(entries: readonly string[]): (unit: Unit) => boolean {
   const ids = new Set(entries);
   const globs = entries.map(globToRegExp);
   return (unit) => ids.has(unit.id) || globs.some((g) => g.test(unit.file));
+}
+
+/** The value a value mutant changed, from the sites matched in today's sources (#62). */
+function valueOfMutant(originals: ReadonlyMap<Mutant, string>): (mutant: Mutant) => string | undefined {
+  return (mutant) => originals.get(mutant);
 }

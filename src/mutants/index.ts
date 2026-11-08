@@ -463,6 +463,20 @@ export function valueMeasurement(
   };
 }
 
+/**
+ * The value each `Value` mutant of a report changed (entries left out), matched to today's sources by file, line and
+ * column, and by its description when the report gives one. A mutant made from other sources
+ * (stale) matches no site and is left out.
+ */
+export function valueOriginals(mutants: readonly Mutant[], host: ProgramHost, root: string): Map<Mutant, string> {
+  const out = new Map<Mutant, string>();
+  // Removing an entry drops a key, not a value: a guarantee that says "status" in prose does not
+  // promise the key `status`.
+  for (const [mutant, site] of matchedSites(mutants, host, root))
+    if (site.kind !== "entry") out.set(mutant, site.value);
+  return out;
+}
+
 /** Each mutant of the list matched to the value site it changed. */
 function matchedSites(mutants: readonly Mutant[], host: ProgramHost, root: string): Map<Mutant, MeasuredValue> {
   const wanted = new Map<string, Mutant[]>();
